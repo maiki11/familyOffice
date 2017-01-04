@@ -22,6 +22,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
         GIDSignIn.sharedInstance().uiDelegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

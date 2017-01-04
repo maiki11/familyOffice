@@ -14,7 +14,7 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
 
     var window: UIWindow?
-
+    let auth = AuthService.authService
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -38,9 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         let authentication = user.authentication
         let credential = FIRGoogleAuthProvider.credential(withIDToken: (authentication?.idToken)!,
                                                           accessToken: (authentication?.accessToken)!)
-        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-            print("Usuario autentificado con google")
-        }
+        auth.login(credential: credential)
     }
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
        
