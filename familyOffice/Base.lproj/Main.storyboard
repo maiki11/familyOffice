@@ -95,12 +95,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q7S-Dl-BYu" customClass="GIDSignInButton">
+                                <rect key="frame" x="67" y="348" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="emailTextfield" destination="dql-dz-wXP" id="Gs7-d4-t3a"/>
                         <outlet property="passwordTextfield" destination="amW-re-7K7" id="3PP-T2-kUn"/>
+                        <outlet property="signInButton" destination="Q7S-Dl-BYu" id="m65-5e-aka"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

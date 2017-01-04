@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import GoogleSignIn
 
-class ViewController: UIViewController{
+class ViewController: UIViewController, GIDSignInUIDelegate{
     
     let auth = AuthService.authService
 
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
+    @IBOutlet weak var signInButton: GIDSignInButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        GIDSignIn.sharedInstance().uiDelegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
 
