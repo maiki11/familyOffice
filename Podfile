@@ -8,7 +8,8 @@ target 'familyOffice' do
   # Pods for familyOffice
   pod 'Firebase/Core'
   pod 'Firebase/Database'
-  pod 'Firebase/Auth' 
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn' 
   target 'familyOfficeTests' do
     inherit! :search_paths
     # Pods for testing
