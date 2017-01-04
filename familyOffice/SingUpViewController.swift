@@ -20,10 +20,10 @@ class SingUpViewController: UIViewController {
     @IBOutlet weak var confirmPassTxtfield: UITextField!
     
     let ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 

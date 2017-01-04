@@ -8,13 +8,15 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseDatabase
 class AuthService {
-    static let authService = AuthService()
+    
+    public static let authService = AuthService()
     private init() { }
     
     //MARK: Shared Instance
     
-    public func login(email: String, password: String)->Bool{
+     func login(email: String, password: String)->Bool{
         var errorLogin : Bool = false
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
             if((error) != nil){
@@ -23,5 +25,19 @@ class AuthService {
             }
         }
         return errorLogin
-    }   
+    }
+    
+    func login(credential:FIRAuthCredential){
+        FIRAuth.auth()?.signIn(with: credential ) { (user, error) in
+            print("Usuario autentificado con google")
+            self.createAccount(user: user as AnyObject)
+        }
+    }
+    
+    func createAccount(user: AnyObject)   {
+        let ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
+        let userModel = ["name" : user.displayName!]
+        
+        ref.child("users").child(user.uid).setValue(userModel)
+    }
 }
