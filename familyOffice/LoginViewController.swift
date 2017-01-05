@@ -33,6 +33,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
         if(!(emailTextfield.text?.isEmpty)! && !(passwordTextfield.text?.isEmpty)!){
             if !auth.login(email: emailTextfield.text!, password: passwordTextfield.text!)  {
                 print("Log in")
+                gotoView(view: "TabBarControllerView")
             }else{
                 print("hubo un error")
             }
