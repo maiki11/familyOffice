@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-<device id="retina4_0" orientation="portrait">
-
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -21,23 +18,23 @@
                         <viewControllerLayoutGuide type="bottom" id="dyh-nC-2Cl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vyQ-ub-aBo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="cK4-IF-a0v">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Ivc-Oj-CS8">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="familyoffice" translatesAutoresizingMaskIntoConstraints="NO" id="1U1-9B-Lux">
-                                            <rect key="frame" x="28" y="220" width="319" height="70"/>
+                                            <rect key="frame" x="28" y="220" width="264" height="70"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="70" id="xs6-Ju-BBd"/>
                                             </constraints>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-1" translatesAutoresizingMaskIntoConstraints="NO" id="p2Q-UG-ygO">
-                                            <rect key="frame" x="55" y="20" width="264" height="230"/>
+                                            <rect key="frame" x="55" y="20" width="209" height="230"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="230" id="rIa-Vc-lh1"/>
                                             </constraints>
@@ -81,7 +78,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="signupButton:" destination="gkV-lX-uju" eventType="touchUpInside" id="mt1-zH-JvE"/>
+                                                <action selector="signUp:" destination="gkV-lX-uju" eventType="touchUpInside" id="MZR-Zz-gtQ"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -440,6 +437,7 @@
                 <tabBarController storyboardIdentifier="TabBarControllerView" automaticallyAdjustsScrollViewInsets="NO" id="4Yg-Q5-uxo" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="IpZ-i1-14a">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
@@ -456,14 +454,11 @@
         </scene>
     </scenes>
     <resources>
-
-        <image name="familyoffice" width="693" height="124"/>
-        <image name="logo-1" width="600" height="400"/>
-
         <image name="Group" width="29" height="29"/>
         <image name="Home" width="20" height="20"/>
         <image name="Setting" width="29" height="29"/>
         <image name="User" width="29" height="29"/>
-
+        <image name="familyoffice" width="693" height="124"/>
+        <image name="logo-1" width="600" height="400"/>
     </resources>
 </document>

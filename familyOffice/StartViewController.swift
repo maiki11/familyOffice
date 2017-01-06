@@ -81,6 +81,10 @@ class StartViewController: UIViewController {
     @IBAction func loginButton(_ sender: UIButton) {
         gotoView(view: "LoginView")
     }
+   
+    @IBAction func signUp(_ sender: UIButton) {
+        gotoView(view: "SignUpView")
+    }
     
     func gotoView(view:String )  {
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

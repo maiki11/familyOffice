@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
+<<<<<<< HEAD
    LastUpgradeVersion = "0700"
+=======
+   LastUpgradeVersion = "0820"
+>>>>>>> master
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -60,6 +64,18 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+<<<<<<< HEAD
+=======
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "210DB7BF12FBE439F95EC7CFD41E9E8E"
+            BuildableName = "Pods_familyOfficeTests.framework"
+            BlueprintName = "Pods-familyOfficeTests"
+            ReferencedContainer = "container:Pods.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+>>>>>>> master
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
