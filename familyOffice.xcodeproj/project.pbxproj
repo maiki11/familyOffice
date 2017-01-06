@@ -16,6 +16,7 @@
 		02382F2D1E1C210C0036FFC9 /* familyOfficeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02382F2C1E1C210C0036FFC9 /* familyOfficeUITests.swift */; };
 		02382F3B1E1C2E1D0036FFC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */; };
 		023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F9CEE1E1C39D300420217 /* AuthService.swift */; };
+		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
 		02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B876441E1C677C005E5473 /* SingUpViewController.swift */; };
 		02B8764B1E1C7941005E5473 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B8764A1E1C7941005E5473 /* user.swift */; };
 		0B865800BAEDBF5C9736A410 /* Pods_familyOfficeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BEF645D6ACC3C21FFD1530 /* Pods_familyOfficeUITests.framework */; };
@@ -57,6 +58,7 @@
 		02382F2E1E1C210C0036FFC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		023F9CEE1E1C39D300420217 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		02B876441E1C677C005E5473 /* SingUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		02B8764A1E1C7941005E5473 /* user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		18BEF645D6ACC3C21FFD1530 /* Pods_familyOfficeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_familyOfficeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,7 +186,11 @@
 			children = (
 				02382F0E1E1C210C0036FFC9 /* LoginViewController.swift */,
 				02B876441E1C677C005E5473 /* SingUpViewController.swift */,
+<<<<<<< HEAD
 				849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */,
+=======
+				02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */,
+>>>>>>> master
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -500,6 +506,7 @@
 				023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */,
 				02382F0F1E1C210C0036FFC9 /* LoginViewController.swift in Sources */,
 				02B8764B1E1C7941005E5473 /* user.swift in Sources */,
+				02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */,
 				02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */,
 				02382F0D1E1C210C0036FFC9 /* AppDelegate.swift in Sources */,
 				849C81C71E1D6D2F00FF3EE7 /* StartViewController.swift in Sources */,
