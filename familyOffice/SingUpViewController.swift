@@ -45,7 +45,7 @@ class SingUpViewController: UIViewController {
         }
     }
     @IBAction func handleBack(_ sender: UIButton) {
-        gotoView(view: "LoginView")
+        Utility.Instance().gotoView(view: "LoginView", context: self)
     }
     /*
     // MARK: - Navigation
@@ -61,13 +61,8 @@ class SingUpViewController: UIViewController {
                          "phone": self.phoneTxtfield.text!]
         
         self.ref.child("users").child(uid).setValue(userModel)
-        self.gotoView(view: "LoginView")
+        Utility.Instance().gotoView(view: "LoginView", context: self)
     }
     
-    func gotoView(view:String )  {
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let homeViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: view)
-        self.present(homeViewController, animated: true, completion: nil)
-    }
-
+    
 }

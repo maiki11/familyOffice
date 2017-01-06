@@ -19,6 +19,9 @@
 		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
 		02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B876441E1C677C005E5473 /* SingUpViewController.swift */; };
 		02B8764B1E1C7941005E5473 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B8764A1E1C7941005E5473 /* user.swift */; };
+		02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */; };
+		02BD2D191E1F130900A61A84 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2D181E1F130900A61A84 /* UserModel.swift */; };
+		02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2D1B1E1F16A700A61A84 /* Utility.swift */; };
 		0B865800BAEDBF5C9736A410 /* Pods_familyOfficeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BEF645D6ACC3C21FFD1530 /* Pods_familyOfficeUITests.framework */; };
 		567E4D54E8A68D2FE5C08EE6 /* Pods_familyOffice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0DB8FD178D3D2D96269556 /* Pods_familyOffice.framework */; };
 		DBC61BF3F1B28E8FA0CCC6AA /* Pods_familyOfficeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9F185A83D04F89C69B99A9 /* Pods_familyOfficeTests.framework */; };
@@ -60,6 +63,9 @@
 		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		02B876441E1C677C005E5473 /* SingUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		02B8764A1E1C7941005E5473 /* user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
+		02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		02BD2D181E1F130900A61A84 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		02BD2D1B1E1F16A700A61A84 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		18BEF645D6ACC3C21FFD1530 /* Pods_familyOfficeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_familyOfficeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B398DF9A9E6900C7EA64447 /* Pods-familyOfficeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-familyOfficeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-familyOfficeTests/Pods-familyOfficeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2D9F185A83D04F89C69B99A9 /* Pods_familyOfficeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_familyOfficeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,7 +172,9 @@
 		02B876461E1C717A005E5473 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				02BD2D1B1E1F16A700A61A84 /* Utility.swift */,
 				02B876491E1C792C005E5473 /* Structs */,
+				02BD2D181E1F130900A61A84 /* UserModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -185,6 +193,7 @@
 				02382F0E1E1C210C0036FFC9 /* LoginViewController.swift */,
 				02B876441E1C677C005E5473 /* SingUpViewController.swift */,
 				02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */,
+				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -499,9 +508,12 @@
 			files = (
 				023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */,
 				02382F0F1E1C210C0036FFC9 /* LoginViewController.swift in Sources */,
+				02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */,
+				02BD2D191E1F130900A61A84 /* UserModel.swift in Sources */,
 				02B8764B1E1C7941005E5473 /* user.swift in Sources */,
 				02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */,
 				02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */,
+				02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */,
 				02382F0D1E1C210C0036FFC9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
