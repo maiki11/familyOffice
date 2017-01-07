@@ -1,42 +1,31 @@
 //
-//  HomeViewController.swift
+//  ProfileViewController.swift
 //  familyOffice
 //
-//  Created by Leonardo Durazo on 05/01/17.
+//  Created by Leonardo Durazo on 06/01/17.
 //  Copyright © 2017 Leonardo Durazo. All rights reserved.
 //
 
 import UIKit
-import FirebaseDatabase
-import FirebaseAuth
 
-class HomeViewController: UIViewController {
-    
-    var ref: FIRDatabaseReference!
-    
+class ProfileViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
+
         // Do any additional setup after loading the view.
-        self.checkFamily()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-        
     }
     
-    func checkFamily(){
-        ref.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("families").observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            if !snapshot.exists() {
-                Utility.Instance().gotoView(view: "RegisterFamilyView", context: self) }
-            
-        }) { (error) in
-            print(error.localizedDescription)
-        }
+    @IBAction func handleLogout(_ sender: UIButton) {
+        AuthService.authService.logOut()
+        Utility.Instance().gotoView(view: "LoginView", context: self)
     }
+
     /*
     // MARK: - Navigation
 

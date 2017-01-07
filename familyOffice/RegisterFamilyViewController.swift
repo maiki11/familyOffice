@@ -7,16 +7,29 @@
 //
 
 import UIKit
+import Firebase
 
 class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var nameTxtField: UITextField!
     
     let imagePicker = UIImagePickerController()
+    var ref: FIRDatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         imagePicker.delegate = self
+        imageView.isUserInteractionEnabled = true
+        ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
+        
+        //Circle image
+        imageView.layer.borderWidth = 1
+        imageView.layer.masksToBounds = false
+        imageView.layer.borderColor = UIColor.black.cgColor
+        imageView.layer.cornerRadius = imageView.frame.height/2
+        imageView.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +39,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     
   
     @IBAction func loadImageButtonTapped(sender: UIButton) {
+        print(123)
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
@@ -36,7 +50,23 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         dismiss(animated: true, completion: nil)
     }
     
-    private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    @IBAction func openCameraButton(_ sender: UIButton) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    @IBAction func openPhotoLibraryButton(_ sender: UIButton) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.contentMode = .scaleAspectFit
             imageView.image = pickedImage
@@ -45,7 +75,17 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         dismiss(animated: true, completion: nil)
     }
     
-
+    @IBAction func handleAdd(_ sender: UIButton) {
+        
+        let family = ["name": nameTxtField.text! as String,
+                      "members": ["id": FIRAuth.auth()?.currentUser?.uid]] as [String : Any]
+        let key = ref.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
+        ref.child("families").child(key).setValue(family)
+        ref.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("families").setValue([ key: true])
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 
