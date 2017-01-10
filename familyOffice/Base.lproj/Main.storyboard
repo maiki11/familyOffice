@@ -10,8 +10,12 @@
 
 
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<<<<<<< HEAD
+    <device id="retina4_7" orientation="portrait">
+=======
 <device id="retina4_0" orientation="portrait">
 
+>>>>>>> master
         <adaptation id="fullscreen"/>
     </device>
 >>>>>>> maiki11
@@ -280,7 +284,7 @@
         <!--Home-->
         <scene sceneID="AtC-uM-FkL">
             <objects>
-                <viewController id="vtu-qR-ECs" sceneMemberID="viewController">
+                <viewController id="vtu-qR-ECs" customClass="HomeViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9GE-zD-wLJ"/>
                         <viewControllerLayoutGuide type="bottom" id="pdm-7Z-TPb"/>
@@ -337,7 +341,11 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tUv-Ry-jt7" id="9Mg-Y3-inP">
+<<<<<<< HEAD
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+=======
                                     <frame key="frameInset" width="375" height="43.5"/>
+>>>>>>> master
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zGk-XH-oNR">
@@ -369,7 +377,7 @@
         <!--Perfil-->
         <scene sceneID="emR-6h-NVu">
             <objects>
-                <viewController id="Wxb-dw-Dkc" sceneMemberID="viewController">
+                <viewController id="Wxb-dw-Dkc" customClass="ProfileViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yvX-No-rtf"/>
                         <viewControllerLayoutGuide type="bottom" id="2oN-Ca-qZS"/>
@@ -385,6 +393,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BjK-Ud-eoW">
+                                <rect key="frame" x="164" y="483" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Salir"/>
+                                <connections>
+                                    <action selector="handleLogout:" destination="Wxb-dw-Dkc" eventType="touchUpInside" id="9dd-kq-nlb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -414,6 +430,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FOz-8F-PWN">
+<<<<<<< HEAD
+                                <rect key="frame" x="125" y="160" width="125" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nombre de la Familia" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nnz-CF-goV">
+                                <rect key="frame" x="87" y="109" width="200" height="30"/>
+=======
                                 <frame key="frameInset" minX="71" minY="118" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -424,21 +447,55 @@
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nombre de la Familia" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nnz-CF-goV">
                                 <frame key="frameInset" minX="87" minY="264" width="200" height="30"/>
+>>>>>>> master
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djX-LK-wj4">
+                                <rect key="frame" x="87" y="293" width="57" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Galería"/>
+                                <connections>
+                                    <action selector="openPhotoLibraryButton:" destination="GLH-xv-Wxs" eventType="touchUpInside" id="WPZ-Zh-6eJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ry2-fx-VPK">
+                                <rect key="frame" x="230" y="293" width="57" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Camara"/>
+                                <connections>
+                                    <action selector="openCameraButton:" destination="GLH-xv-Wxs" eventType="touchUpInside" id="hWg-ju-DOD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baa-3n-qeF">
+                                <rect key="frame" x="164" y="374" width="55" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Agregar"/>
+                                <connections>
+                                    <action selector="handleAdd:" destination="GLH-xv-Wxs" eventType="touchUpInside" id="y9u-AR-6fh"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oLp-nR-WPY">
+                                <rect key="frame" x="177" y="212" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="activityILoad" destination="oLp-nR-WPY" id="9C2-bF-6tV"/>
+                        <outlet property="addButton" destination="baa-3n-qeF" id="Weu-Wv-VE1"/>
+                        <outlet property="cameraButton" destination="Ry2-fx-VPK" id="p1a-eM-ysv"/>
+                        <outlet property="galeryButton" destination="djX-LK-wj4" id="buW-lB-bjH"/>
                         <outlet property="imageView" destination="FOz-8F-PWN" id="zSa-Vj-Clk"/>
+                        <outlet property="nameTxtField" destination="nnz-CF-goV" id="oDI-XG-xO4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BZ9-Gi-cIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="33" y="687"/>
+            <point key="canvasLocation" x="74.400000000000006" y="739.88005997001505"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vq8-7X-P9a">

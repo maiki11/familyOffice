@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseDatabase
 
 
-class SingUpViewController: UIViewController {
+class SingUpViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var nameTxtfield: UITextField!
     @IBOutlet weak var emailTxtfield: UITextField!
@@ -25,6 +25,8 @@ class SingUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        self.confirmPassTxtfield.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,7 +47,7 @@ class SingUpViewController: UIViewController {
         }
     }
     @IBAction func handleBack(_ sender: UIButton) {
-        gotoView(view: "LoginView")
+        Utility.Instance().gotoView(view: "LoginView", context: self)
     }
     /*
     // MARK: - Navigation
@@ -61,13 +63,12 @@ class SingUpViewController: UIViewController {
                          "phone": self.phoneTxtfield.text!]
         
         self.ref.child("users").child(uid).setValue(userModel)
-        self.gotoView(view: "LoginView")
+        Utility.Instance().gotoView(view: "LoginView", context: self)
     }
     
-    func gotoView(view:String )  {
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let homeViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: view)
-        self.present(homeViewController, animated: true, completion: nil)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
-
+    
+    
 }
