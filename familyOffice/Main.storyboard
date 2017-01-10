@@ -265,7 +265,7 @@
         <!--Home-->
         <scene sceneID="AtC-uM-FkL">
             <objects>
-                <viewController id="vtu-qR-ECs" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeView" id="vtu-qR-ECs" customClass="HomeViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9GE-zD-wLJ"/>
                         <viewControllerLayoutGuide type="bottom" id="pdm-7Z-TPb"/>
@@ -406,32 +406,55 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FOz-8F-PWN">
-                                <rect key="frame" x="71" y="118" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baa-3n-qeF">
-                                <rect key="frame" x="160" y="340" width="55" height="30"/>
+                                <rect key="frame" x="164" y="351" width="55" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Agregar"/>
+                                <connections>
+                                    <action selector="handleAdd:" destination="GLH-xv-Wxs" eventType="touchUpInside" id="Khw-0i-wtf"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nombre de la Familia" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nnz-CF-goV">
-                                <rect key="frame" x="87" y="264" width="200" height="30"/>
+                                <rect key="frame" x="91" y="92" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEV-Rg-KR6">
+                                <rect key="frame" x="91" y="297" width="61" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Galeria"/>
+                                <connections>
+                                    <action selector="openPhotoLibraryButton:" destination="GLH-xv-Wxs" eventType="touchUpInside" id="zLs-ei-B5t"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0YU-0C-IAo">
+                                <rect key="frame" x="235" y="297" width="56" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Camera"/>
+                                <connections>
+                                    <action selector="openCameraButton:" destination="GLH-xv-Wxs" eventType="touchUpInside" id="txL-G4-25M"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FOz-8F-PWN">
+                                <rect key="frame" x="117" y="145" width="148" height="144"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="baa-3n-qeF" id="qB5-oQ-GSv"/>
+                        <outlet property="cameraButton" destination="0YU-0C-IAo" id="aP6-cP-cYI"/>
+                        <outlet property="galeryButton" destination="oEV-Rg-KR6" id="25k-eZ-4mT"/>
                         <outlet property="imageView" destination="FOz-8F-PWN" id="zSa-Vj-Clk"/>
+                        <outlet property="nameTxtField" destination="nnz-CF-goV" id="xkp-ut-IrB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BZ9-Gi-cIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="33" y="687"/>
+            <point key="canvasLocation" x="32.799999999999997" y="686.80659670164926"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vq8-7X-P9a">
