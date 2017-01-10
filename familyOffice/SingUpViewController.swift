@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseDatabase
 
 
-class SingUpViewController: UIViewController {
+class SingUpViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var nameTxtfield: UITextField!
     @IBOutlet weak var emailTxtfield: UITextField!
@@ -25,6 +25,8 @@ class SingUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        self.confirmPassTxtfield.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,6 +64,10 @@ class SingUpViewController: UIViewController {
         
         self.ref.child("users").child(uid).setValue(userModel)
         Utility.Instance().gotoView(view: "LoginView", context: self)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     

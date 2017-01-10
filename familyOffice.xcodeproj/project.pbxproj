@@ -168,6 +168,7 @@
 		023F9CED1E1C383000420217 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				02BD2D1B1E1F16A700A61A84 /* Utility.swift */,
 				023F9CEE1E1C39D300420217 /* AuthService.swift */,
 			);
 			name = Service;
@@ -177,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				022EC1D11E20078C0096A18B /* Family.swift */,
-				02BD2D1B1E1F16A700A61A84 /* Utility.swift */,
 				02BD2D181E1F130900A61A84 /* UserModel.swift */,
 				02B876491E1C792C005E5473 /* Structs */,
 			);

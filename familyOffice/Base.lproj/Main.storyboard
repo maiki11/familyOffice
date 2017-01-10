@@ -317,7 +317,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djX-LK-wj4">
-                                <rect key="frame" x="110" y="311" width="57" height="30"/>
+                                <rect key="frame" x="87" y="293" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Galería"/>
                                 <connections>
@@ -325,7 +325,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ry2-fx-VPK">
-                                <rect key="frame" x="216" y="311" width="57" height="30"/>
+                                <rect key="frame" x="230" y="293" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Camara"/>
                                 <connections>
@@ -333,17 +333,25 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baa-3n-qeF">
-                                <rect key="frame" x="160" y="376" width="55" height="30"/>
+                                <rect key="frame" x="164" y="374" width="55" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Agregar"/>
                                 <connections>
                                     <action selector="handleAdd:" destination="GLH-xv-Wxs" eventType="touchUpInside" id="y9u-AR-6fh"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oLp-nR-WPY">
+                                <rect key="frame" x="177" y="212" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="activityILoad" destination="oLp-nR-WPY" id="9C2-bF-6tV"/>
+                        <outlet property="addButton" destination="baa-3n-qeF" id="Weu-Wv-VE1"/>
+                        <outlet property="cameraButton" destination="Ry2-fx-VPK" id="p1a-eM-ysv"/>
+                        <outlet property="galeryButton" destination="djX-LK-wj4" id="buW-lB-bjH"/>
                         <outlet property="imageView" destination="FOz-8F-PWN" id="zSa-Vj-Clk"/>
                         <outlet property="nameTxtField" destination="nnz-CF-goV" id="oDI-XG-xO4"/>
                     </connections>
