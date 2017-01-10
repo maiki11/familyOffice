@@ -47,7 +47,17 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
     }
   
     @IBAction func handleSignUp(_ sender: UIButton) {
+<<<<<<< HEAD
         Utility.Instance().gotoView(view: "SignUpView", context: self)
+=======
+        gotoView(view: "SignUpView")
+        
+    }
+    func gotoView(view:String )  {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let homeViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: view)
+        self.present(homeViewController, animated: true, completion: nil)
+>>>>>>> master
     }
     
 }
