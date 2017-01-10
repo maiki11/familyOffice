@@ -17,11 +17,13 @@ class AuthService {
     //MARK: Shared Instance
     
      func login(email: String, password: String)->Bool{
-        var errorLogin : Bool = false
+        var errorLogin : Bool = true
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
             if((error) != nil){
                 errorLogin = true
                 print(error.debugDescription)
+            }else{
+                errorLogin = false  
             }
         }
         return errorLogin
@@ -33,6 +35,9 @@ class AuthService {
             self.createAccount(user: user as AnyObject)
         }
     }
+    func logOut(){
+        try! FIRAuth.auth()!.signOut()
+    }
     
     func createAccount(user: AnyObject)   {
         let ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
@@ -40,4 +45,6 @@ class AuthService {
         
         ref.child("users").child(user.uid).setValue(userModel)
     }
+    
+   
 }

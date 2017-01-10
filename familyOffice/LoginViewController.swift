@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleSignIn
+import FirebaseAuth
 
 class ViewController: UIViewController, GIDSignInUIDelegate{
     
@@ -19,6 +20,11 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            if (user != nil) {
+                Utility.Instance().gotoView(view: "TabBarControllerView", context: self)
+            }
+        }
         GIDSignIn.sharedInstance().uiDelegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -33,7 +39,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
         if(!(emailTextfield.text?.isEmpty)! && !(passwordTextfield.text?.isEmpty)!){
             if !auth.login(email: emailTextfield.text!, password: passwordTextfield.text!)  {
                 print("Log in")
-                gotoView(view: "TabBarControllerView")
+                Utility.Instance().gotoView(view: "TabBarControllerView", context: self)
             }else{
                 print("hubo un error")
             }
@@ -41,13 +47,11 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
     }
   
     @IBAction func handleSignUp(_ sender: UIButton) {
-        gotoView(view: "SignUpView")
+
+        Utility.Instance().gotoView(view: "SignUpView", context: self)
+
         
     }
-    func gotoView(view:String )  {
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let homeViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: view)
-        self.present(homeViewController, animated: true, completion: nil)
-    }
+    
 }
 
