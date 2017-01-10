@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func handleLogout(_ sender: UIButton) {
+    @IBAction func handleLogOut(_ sender: UIButton) {
         AuthService.authService.logOut()
         Utility.Instance().gotoView(view: "LoginView", context: self)
     }
