@@ -18,12 +18,14 @@
 		02382F2D1E1C210C0036FFC9 /* familyOfficeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02382F2C1E1C210C0036FFC9 /* familyOfficeUITests.swift */; };
 		02382F3B1E1C2E1D0036FFC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */; };
 		023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F9CEE1E1C39D300420217 /* AuthService.swift */; };
+		024C40201E29955C007408BE /* FamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C401F1E29955C007408BE /* FamilyViewController.swift */; };
+		024C40221E299FB5007408BE /* FamilyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C40211E299FB5007408BE /* FamilyTableViewCell.swift */; };
 		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
 		02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B876441E1C677C005E5473 /* SingUpViewController.swift */; };
-		02B8764B1E1C7941005E5473 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B8764A1E1C7941005E5473 /* user.swift */; };
 		02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */; };
 		02BD2D191E1F130900A61A84 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2D181E1F130900A61A84 /* UserModel.swift */; };
 		02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2D1B1E1F16A700A61A84 /* Utility.swift */; };
+		02DB30731E26A44F00A8FF1C /* FamilyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB30721E26A44F00A8FF1C /* FamilyService.swift */; };
 		0B865800BAEDBF5C9736A410 /* Pods_familyOfficeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BEF645D6ACC3C21FFD1530 /* Pods_familyOfficeUITests.framework */; };
 		567E4D54E8A68D2FE5C08EE6 /* Pods_familyOffice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0DB8FD178D3D2D96269556 /* Pods_familyOffice.framework */; };
 		8421167A1E28124600C6BD80 /* background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 842116791E28124600C6BD80 /* background.mp4 */; };
@@ -67,12 +69,14 @@
 		02382F2E1E1C210C0036FFC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		023F9CEE1E1C39D300420217 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		024C401F1E29955C007408BE /* FamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyViewController.swift; sourceTree = "<group>"; };
+		024C40211E299FB5007408BE /* FamilyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyTableViewCell.swift; sourceTree = "<group>"; };
 		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		02B876441E1C677C005E5473 /* SingUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
-		02B8764A1E1C7941005E5473 /* user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		02BD2D181E1F130900A61A84 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		02BD2D1B1E1F16A700A61A84 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		02DB30721E26A44F00A8FF1C /* FamilyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyService.swift; sourceTree = "<group>"; };
 		18BEF645D6ACC3C21FFD1530 /* Pods_familyOfficeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_familyOfficeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B398DF9A9E6900C7EA64447 /* Pods-familyOfficeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-familyOfficeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-familyOfficeTests/Pods-familyOfficeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2D9F185A83D04F89C69B99A9 /* Pods_familyOfficeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_familyOfficeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +182,7 @@
 			children = (
 				02BD2D1B1E1F16A700A61A84 /* Utility.swift */,
 				023F9CEE1E1C39D300420217 /* AuthService.swift */,
+				02DB30721E26A44F00A8FF1C /* FamilyService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -187,17 +192,8 @@
 			children = (
 				022EC1D11E20078C0096A18B /* Family.swift */,
 				02BD2D181E1F130900A61A84 /* UserModel.swift */,
-				02B876491E1C792C005E5473 /* Structs */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		02B876491E1C792C005E5473 /* Structs */ = {
-			isa = PBXGroup;
-			children = (
-				02B8764A1E1C7941005E5473 /* user.swift */,
-			);
-			name = Structs;
 			sourceTree = "<group>";
 		};
 		02F5E35A1E1C322500A9FBFA /* Controllers */ = {
@@ -209,6 +205,8 @@
 				02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */,
 				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
 				022D50FF1E2036390073F0EF /* ProfileViewController.swift */,
+				024C401F1E29955C007408BE /* FamilyViewController.swift */,
+				024C40211E299FB5007408BE /* FamilyTableViewCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -530,12 +528,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				024C40201E29955C007408BE /* FamilyViewController.swift in Sources */,
 				023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */,
 				02382F0F1E1C210C0036FFC9 /* LoginViewController.swift in Sources */,
 				02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */,
 				02BD2D191E1F130900A61A84 /* UserModel.swift in Sources */,
-				02B8764B1E1C7941005E5473 /* user.swift in Sources */,
 				022EC1D21E20078C0096A18B /* Family.swift in Sources */,
+				024C40221E299FB5007408BE /* FamilyTableViewCell.swift in Sources */,
+				02DB30731E26A44F00A8FF1C /* FamilyService.swift in Sources */,
 				022D51001E2036390073F0EF /* ProfileViewController.swift in Sources */,
 				02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */,
 				02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */,

@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct user {
-    let name: String?
-    let email: String?
-    let phone: Int?
-    let password: String?
-    let confirmPassword: String?
-    let uid: String?
+class user :NSObject {
+    let name: String? = nil
+    let email: String? = nil
+    let phone: Int? = nil
+    let password: String? = nil
+    let confirmPassword: String? = nil
+    let uid: String? = nil
 }

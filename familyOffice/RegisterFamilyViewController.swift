@@ -106,7 +106,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
                         
                         let family = ["name": self.nameTxtField.text! as String,
                                       "photoUrl": downloadURL as Any,
-                                      "members": ["id": FIRAuth.auth()?.currentUser?.uid]] as [String : Any]
+                                      "members": [ (FIRAuth.auth()?.currentUser?.uid)! : true] as [String : Bool]]
                         self.ref.child("families").child(key).setValue(family)
                         self.ref.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("families").setValue([ key: true])
                         Utility.Instance().gotoView(view: "TabBarControllerView", context: self.self)
