@@ -9,26 +9,31 @@
 import UIKit
 import GoogleSignIn
 import FirebaseAuth
+import AVFoundation
+//JVFloatLabeledText/JVFloatLabeledText.h"
+//#import "JVFloatLabeledText/JVFloatLabeledText.h"
+
 
 class ViewController: UIViewController, GIDSignInUIDelegate{
     
     let auth = AuthService.authService
-
+    @IBOutlet var background: UIImageView!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var signInButton: GIDSignInButton!
+    @IBOutlet var emailButton: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if (user != nil) {
                 Utility.Instance().gotoView(view: "TabBarControllerView", context: self)
             }
         }
         GIDSignIn.sharedInstance().uiDelegate = self
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

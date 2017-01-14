@@ -47,7 +47,7 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
         }
     }
     @IBAction func handleBack(_ sender: UIButton) {
-        Utility.Instance().gotoView(view: "LoginView", context: self)
+        Utility.Instance().gotoView(view: "StartView", context: self)
     }
     /*
     // MARK: - Navigation

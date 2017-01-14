@@ -10,7 +10,8 @@ target 'familyOffice' do
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
-  pod 'Firebase/Storage' 
+  pod 'Firebase/Storage'
+  pod 'JVFloatLabeledTextField' 
   target 'familyOfficeTests' do
     inherit! :search_paths
     # Pods for testing
