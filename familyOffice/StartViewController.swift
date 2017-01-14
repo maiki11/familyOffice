@@ -23,6 +23,7 @@ class StartViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        AuthService.authService.isAuth(view: self.self, name:"TabBarControllerView")
         super.viewDidLoad()
         
         //Loading video

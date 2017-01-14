@@ -9,9 +9,8 @@
 import UIKit
 import GoogleSignIn
 import FirebaseAuth
+import Firebase
 import AVFoundation
-//JVFloatLabeledText/JVFloatLabeledText.h"
-//#import "JVFloatLabeledText/JVFloatLabeledText.h"
 
 
 class ViewController: UIViewController, GIDSignInUIDelegate{
@@ -24,16 +23,12 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
     @IBOutlet var emailButton: UITextField!
     
     override func viewDidLoad() {
+        AuthService.authService.isAuth(view: self.self, name: "TabBarControllerView")
         super.viewDidLoad()
-        
-        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if (user != nil) {
-                Utility.Instance().gotoView(view: "TabBarControllerView", context: self)
-            }
-        }
         GIDSignIn.sharedInstance().uiDelegate = self
         
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -42,20 +37,15 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
 
     @IBAction func handleSignIn(_ sender: UIButton) {
         if(!(emailTextfield.text?.isEmpty)! && !(passwordTextfield.text?.isEmpty)!){
-            if !auth.login(email: emailTextfield.text!, password: passwordTextfield.text!)  {
-                print("Log in")
-                Utility.Instance().gotoView(view: "TabBarControllerView", context: self)
-            }else{
-                print("hubo un error")
-            }
-        }    
+            auth.login(email: emailTextfield.text!, password: passwordTextfield.text!)
+        }
     }
+    
+   
   
     @IBAction func handleSignUp(_ sender: UIButton) {
 
         Utility.Instance().gotoView(view: "SignUpView", context: self)
-
-        
     }
     
 }

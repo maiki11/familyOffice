@@ -9,11 +9,21 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
-    override func viewDidLoad() {
+    
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+        override func viewDidLoad() {
         super.viewDidLoad()
-
+        let profile = User.Instance().getData()
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
+        self.profileImage.clipsToBounds = true
+        self.nameLabel.text =  profile.name
+        self.profileImage.image = UIImage(data: profile.photo as Data)
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
     }
 
     override func didReceiveMemoryWarning() {
