@@ -9,6 +9,7 @@
 import UIKit
 import GoogleSignIn
 import FirebaseAuth
+import Firebase
 
 class ViewController: UIViewController, GIDSignInUIDelegate{
     
@@ -19,15 +20,14 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
     @IBOutlet weak var signInButton: GIDSignInButton!
     
     override func viewDidLoad() {
+        AuthService.authService.isAuth(view: self.self, name: "TabBarControllerView")
         super.viewDidLoad()
-        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if (user != nil) {
-                Utility.Instance().gotoView(view: "TabBarControllerView", context: self)
-            }
-        }
+        
         GIDSignIn.sharedInstance().uiDelegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+   
     
 
     override func didReceiveMemoryWarning() {
@@ -37,20 +37,15 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
 
     @IBAction func handleSignIn(_ sender: UIButton) {
         if(!(emailTextfield.text?.isEmpty)! && !(passwordTextfield.text?.isEmpty)!){
-            if !auth.login(email: emailTextfield.text!, password: passwordTextfield.text!)  {
-                print("Log in")
-                Utility.Instance().gotoView(view: "TabBarControllerView", context: self)
-            }else{
-                print("hubo un error")
-            }
-        }    
+            auth.login(email: emailTextfield.text!, password: passwordTextfield.text!)
+        }
     }
+    
+   
   
     @IBAction func handleSignUp(_ sender: UIButton) {
 
         Utility.Instance().gotoView(view: "SignUpView", context: self)
-
-        
     }
     
 }
