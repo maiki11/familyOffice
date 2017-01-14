@@ -32,13 +32,8 @@
                                     <constraint firstAttribute="height" constant="100" id="hfv-vk-ySX"/>
                                 </constraints>
                             </imageView>
-<<<<<<< HEAD
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jTx-ep-Zv5">
-                                <rect key="frame" x="58" y="349" width="100" height="35"/>
-=======
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jTx-ep-Zv5">
                                 <rect key="frame" x="58" y="349" width="120" height="35"/>
->>>>>>> master
                                 <color key="backgroundColor" red="0.95971299271263499" green="0.98519166598172614" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="9lr-JH-Xpx"/>
@@ -61,13 +56,8 @@
                                     <action selector="loginButton:" destination="gkV-lX-uju" eventType="touchUpInside" id="Q8f-a3-bXk"/>
                                 </connections>
                             </button>
-<<<<<<< HEAD
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RkE-0V-hLK">
-                                <rect key="frame" x="218" y="348" width="100" height="35"/>
-=======
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RkE-0V-hLK">
                                 <rect key="frame" x="218" y="348" width="120" height="35"/>
->>>>>>> master
                                 <color key="backgroundColor" red="0.96694400449274454" green="1" blue="0.99776733663188344" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="PWR-Vk-pb6"/>
@@ -443,23 +433,18 @@
                         <viewControllerLayoutGuide type="top" id="vRB-aB-Hdu"/>
                         <viewControllerLayoutGuide type="bottom" id="VO5-sa-Abf"/>
                     </layoutGuides>
-<<<<<<< HEAD
                     <view key="view" contentMode="scaleToFill" id="VdD-T2-Qt1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-=======
-                    <view key="view" contentMode="scaleToFill" id="Ggx-ah-pyH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
->>>>>>> master
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t84-0c-Yjr">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Familias" id="TbE-mc-l2w">
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="yK7-Zt-1ci">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GSi-ms-XG0">
-                                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                                <rect key="frame" x="311" y="7" width="83" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Agregar"/>
                                             </button>
@@ -468,7 +453,7 @@
                                 </items>
                             </navigationBar>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sQM-mg-m9L">
-                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -482,7 +467,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cxm-xQ-YHG" id="T5b-bo-P6u">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Family" translatesAutoresizingMaskIntoConstraints="NO" id="JA5-2B-3Lt">

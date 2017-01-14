@@ -9,14 +9,9 @@
 import UIKit
 import GoogleSignIn
 import FirebaseAuth
-<<<<<<< HEAD
 import Firebase
-=======
 import AVFoundation
-//JVFloatLabeledText/JVFloatLabeledText.h"
-//#import "JVFloatLabeledText/JVFloatLabeledText.h"
 
->>>>>>> master
 
 class ViewController: UIViewController, GIDSignInUIDelegate{
     
@@ -30,24 +25,10 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
     override func viewDidLoad() {
         AuthService.authService.isAuth(view: self.self, name: "TabBarControllerView")
         super.viewDidLoad()
-        
-<<<<<<< HEAD
-=======
-        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if (user != nil) {
-                Utility.Instance().gotoView(view: "TabBarControllerView", context: self)
-            }
-        }
->>>>>>> master
         GIDSignIn.sharedInstance().uiDelegate = self
         
     }
-<<<<<<< HEAD
-    
-   
-    
-=======
->>>>>>> master
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
