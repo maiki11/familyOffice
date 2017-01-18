@@ -1,27 +1,30 @@
 //
-//  FamilyTableViewCell.swift
+//  FamilyMemberTableViewCell.swift
 //  familyOffice
 //
-//  Created by Leonardo Durazo on 16/01/17.
+//  Created by Leonardo Durazo on 17/01/17.
 //  Copyright © 2017 Leonardo Durazo. All rights reserved.
 //
 
 import UIKit
 
-class FamilyTableViewCell: UITableViewCell {
-    @IBOutlet weak var imageFamily: UIImageView!
+class FamilyMemberTableViewCell: UITableViewCell {
+
+    
+    @IBOutlet weak var memberImage: UIImageView!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var members: UILabel!
+    @IBOutlet weak var phone: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.imageFamily.layer.cornerRadius = self.imageFamily.frame.size.width/2
-        self.imageFamily.clipsToBounds = true
+        self.memberImage.layer.cornerRadius = self.memberImage.frame.size.width/2
+        self.memberImage.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+
         // Configure the view for the selected state
     }
 

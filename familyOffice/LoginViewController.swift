@@ -13,7 +13,7 @@ import Firebase
 import AVFoundation
 
 
-class ViewController: UIViewController, GIDSignInUIDelegate{
+class ViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDelegate, UISearchBarDelegate{
     
     let auth = AuthService.authService
     @IBOutlet var background: UIImageView!
@@ -23,7 +23,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
     @IBOutlet var emailButton: UITextField!
     
     override func viewDidLoad() {
-        AuthService.authService.isAuth(view: self.self, name: "TabBarControllerView")
+        self.auth.isAuth(view: self.self, name: "TabBarControllerView")
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
         
@@ -46,6 +46,13 @@ class ViewController: UIViewController, GIDSignInUIDelegate{
     @IBAction func handleSignUp(_ sender: UIButton) {
 
         Utility.Instance().gotoView(view: "SignUpView", context: self)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
 }
