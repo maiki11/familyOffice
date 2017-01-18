@@ -40,7 +40,7 @@ class FamilyService {
                 let value = snapshot.value as? NSDictionary
                 let url = NSURL(string: value?["photoUrl"] as! String)
                 let data = NSData(contentsOf:url! as URL)
-                let model = Family(name: value!["name"] as! String, photoURL: url! , photo: UIImage(data: data as! Data)!)
+                let model = Family(name: value!["name"] as! String, photoURL: url! , photo: UIImage(data: data as! Data)!, active: false)
                 families.append(model)
                 print(model)
             })

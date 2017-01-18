@@ -73,6 +73,7 @@ class AuthService {
                         let xuserModel = ["name" : user.displayName!,
                                           "photoUrl": downloadURL] as [String : Any]
                         self.ref.child("users").child(user.uid).setValue(xuserModel)
+                        AuthService.authService.setData()
                     }
                     
                 }
@@ -83,10 +84,21 @@ class AuthService {
     }
     
     func isAuth(view: UIViewController, name: String)  {
+        self.ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if (user != nil) {
-                AuthService.authService.setData()
-                Utility.Instance().gotoView(view: name, context: view)
+                self.ref.child("users").child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    if !snapshot.exists() {
+                        self.createAccount(user: user as AnyObject)
+                        Utility.Instance().gotoView(view: name, context: view)
+                    }else{
+                        AuthService.authService.setData()
+                        Utility.Instance().gotoView(view: name, context: view)
+                    }
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
             }
         }
     }
@@ -105,7 +117,6 @@ class AuthService {
             } else {
                 data = UIImagePNGRepresentation(#imageLiteral(resourceName: "Profile"))! as NSData
             }
-            
             let xuser = usermodel(name: self.exist(field: "name", dictionary: value!), phone: self.exist(field: "phone", dictionary: value!), photo: data as! NSData, families: [])
            
             User.Instance().fillData(user: xuser)
