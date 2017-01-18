@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020A30931E2D59110024B1FB /* FamilyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A30921E2D59110024B1FB /* FamilyTableViewCell.swift */; };
+		020A30951E2DA4440024B1FB /* FamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A30941E2DA4440024B1FB /* FamilyViewController.swift */; };
 		0221722F1E1F5A75005BB62B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0221722E1E1F5A75005BB62B /* Main.storyboard */; };
 		022D51001E2036390073F0EF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022D50FF1E2036390073F0EF /* ProfileViewController.swift */; };
 		022EC1D21E20078C0096A18B /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EC1D11E20078C0096A18B /* Family.swift */; };
@@ -18,8 +20,8 @@
 		02382F2D1E1C210C0036FFC9 /* familyOfficeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02382F2C1E1C210C0036FFC9 /* familyOfficeUITests.swift */; };
 		02382F3B1E1C2E1D0036FFC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */; };
 		023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F9CEE1E1C39D300420217 /* AuthService.swift */; };
-		024C40201E29955C007408BE /* FamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C401F1E29955C007408BE /* FamilyViewController.swift */; };
-		024C40221E299FB5007408BE /* FamilyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C40211E299FB5007408BE /* FamilyTableViewCell.swift */; };
+		024909641E2D53B700CC6749 /* FamilyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024909631E2D53B700CC6749 /* FamilyTableViewController.swift */; };
+		0271DD4F1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */; };
 		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
 		02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B876441E1C677C005E5473 /* SingUpViewController.swift */; };
 		02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */; };
@@ -53,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		020A30921E2D59110024B1FB /* FamilyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyTableViewCell.swift; sourceTree = "<group>"; };
+		020A30941E2DA4440024B1FB /* FamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyViewController.swift; sourceTree = "<group>"; };
 		0221722E1E1F5A75005BB62B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		022D50FF1E2036390073F0EF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		022EC1D11E20078C0096A18B /* Family.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Family.swift; sourceTree = "<group>"; };
@@ -70,8 +74,8 @@
 		02382F2E1E1C210C0036FFC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		023F9CEE1E1C39D300420217 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		024C401F1E29955C007408BE /* FamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyViewController.swift; sourceTree = "<group>"; };
-		024C40211E299FB5007408BE /* FamilyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyTableViewCell.swift; sourceTree = "<group>"; };
+		024909631E2D53B700CC6749 /* FamilyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyTableViewController.swift; sourceTree = "<group>"; };
+		0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyMemberTableViewCell.swift; sourceTree = "<group>"; };
 		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		02B876441E1C677C005E5473 /* SingUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +193,15 @@
 			name = Service;
 			sourceTree = "<group>";
 		};
+		0271DD4D1E2EB147002C101B /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				020A30921E2D59110024B1FB /* FamilyTableViewCell.swift */,
+				0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */,
+			);
+			name = cells;
+			sourceTree = "<group>";
+		};
 		02B876461E1C717A005E5473 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,14 +215,15 @@
 		02F5E35A1E1C322500A9FBFA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0271DD4D1E2EB147002C101B /* cells */,
 				02382F0E1E1C210C0036FFC9 /* LoginViewController.swift */,
 				02B876441E1C677C005E5473 /* SingUpViewController.swift */,
 				849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */,
 				02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */,
 				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
 				022D50FF1E2036390073F0EF /* ProfileViewController.swift */,
-				024C401F1E29955C007408BE /* FamilyViewController.swift */,
-				024C40211E299FB5007408BE /* FamilyTableViewCell.swift */,
+				024909631E2D53B700CC6749 /* FamilyTableViewController.swift */,
+				020A30941E2DA4440024B1FB /* FamilyViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -531,15 +545,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				024C40201E29955C007408BE /* FamilyViewController.swift in Sources */,
 				023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */,
 				02382F0F1E1C210C0036FFC9 /* LoginViewController.swift in Sources */,
 				02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */,
 				02BD2D191E1F130900A61A84 /* UserModel.swift in Sources */,
 				8471A2521E2D8C5100EC9FD7 /* ConfigProfile.swift in Sources */,
 				022EC1D21E20078C0096A18B /* Family.swift in Sources */,
-				024C40221E299FB5007408BE /* FamilyTableViewCell.swift in Sources */,
+				0271DD4F1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift in Sources */,
+				024909641E2D53B700CC6749 /* FamilyTableViewController.swift in Sources */,
+				020A30951E2DA4440024B1FB /* FamilyViewController.swift in Sources */,
 				02DB30731E26A44F00A8FF1C /* FamilyService.swift in Sources */,
+				020A30931E2D59110024B1FB /* FamilyTableViewCell.swift in Sources */,
 				022D51001E2036390073F0EF /* ProfileViewController.swift in Sources */,
 				02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */,
 				02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */,

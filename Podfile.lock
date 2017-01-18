@@ -58,6 +58,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.7):
     - GTMSessionFetcher/Core (= 1.1.7)
   - JVFloatLabeledTextField (1.1.1)
+  - MGSwipeTableCell (1.5.6)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -66,6 +67,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - GoogleSignIn
   - JVFloatLabeledTextField
+  - MGSwipeTableCell
 
 SPEC CHECKSUMS:
   Firebase: b8134e285eb33201115bc688bc5d7f112923bc1f
@@ -83,7 +85,8 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
   JVFloatLabeledTextField: 0e5524b097f102036214dd8279edc8ecf08b5e18
+  MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
 
-PODFILE CHECKSUM: fd7e6dcc632367d401d4b9a6de0110edcf7b5374
+PODFILE CHECKSUM: 31075355d9a0adf91846081e0fcb88e9cef5ff58
 
 COCOAPODS: 1.1.1

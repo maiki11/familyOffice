@@ -15,11 +15,14 @@ class Family: NSObject {
     var name: String!
     var photoURL: NSURL!
     var photo: UIImage!
+    var active: Bool = false
+    var totalMembers : UInt = 0
     
-    init(name: String, photoURL: NSURL, photo: UIImage){
+    init(name: String, photoURL: NSURL, photo: UIImage, active: Bool){
         self.name = name
         self.photoURL = photoURL
         self.photo = photo
+        self.active = active
     }
     
     deinit {
