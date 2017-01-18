@@ -62,7 +62,7 @@ class AuthService {
         let data = NSData(contentsOf:url!! as URL)
         if let uploadData = UIImagePNGRepresentation(UIImage(data: data as! Data)!){
             
-            let uploadTask = storageRef.child("users").child(user.uid).child("images").child("\(imageName).png").put(uploadData, metadata: nil) { metadata, error in
+            let uploadTask = storageRef.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
                 if (error != nil) {
                     // Uh-oh, an error occurred!
                     print(error.debugDescription)
@@ -115,7 +115,7 @@ class AuthService {
                 url = (NSURL(string: (value?["photoUrl"] as? String)!) ?? nil)!
                 data = NSData(contentsOf:url as URL)
             } else {
-                data = UIImagePNGRepresentation(#imageLiteral(resourceName: "Profile"))! as NSData
+                data = UIImagePNGRepresentation(#imageLiteral(resourceName: "profile_default"))! as NSData
             }
             let xuser = usermodel(name: self.exist(field: "name", dictionary: value!), phone: self.exist(field: "phone", dictionary: value!), photo: data as! NSData, families: [])
            

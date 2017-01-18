@@ -14,7 +14,7 @@ class StartViewController: UIViewController {
 
     @IBOutlet var logo: UIImageView!
     @IBOutlet var titleLogo: UIImageView!
-    @IBOutlet var background: UIVisualEffectView!
+    //@IBOutlet var background: UIVisualEffectView!
     @IBOutlet var loginLayer: UIButton!
     @IBOutlet var signupLayer: UIButton!
     
