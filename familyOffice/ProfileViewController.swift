@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController{
         //self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         //self.profileImage.clipsToBounds = true
         self.userName.text =  profile.name
-        //self.profileImage.image = UIImage(data: profile.photo as Data)
+        self.profileImage.image = UIImage(data: profile.photo as Data)
         self.logOutButton.layer.borderColor = UIColor(red: 32.0/255, green: 53.0/255, blue:88.0/255, alpha: 1.0).cgColor
         
         

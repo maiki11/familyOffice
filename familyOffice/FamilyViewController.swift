@@ -2,14 +2,9 @@
 //  FamilyViewController.swift
 //  familyOffice
 //
-<<<<<<< HEAD
 //  Created by Miguel Reina y Leonardo Durazo on 13/01/17.
 //  Copyright © 2017 Miguel Reina y Leonardo Durazo. All rights reserved.
-=======
-//  Created by Leonardo Durazo on 16/01/17.
-//  Copyright © 2017 Leonardo Durazo. All rights reserved.
->>>>>>> master
-//
+
 
 import UIKit
 import Firebase
