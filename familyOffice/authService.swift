@@ -14,6 +14,8 @@ import FirebaseStorage
 import UIKit
 
 class AuthService {
+    
+    private let userNotification = NSNotification.Name("userNotification")
    
     var storageRef: FIRStorageReference!
     
@@ -25,19 +27,18 @@ class AuthService {
     //MARK: Shared Instance
     
     func login(email: String, password: String){
-        
-        FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
-            if((error) != nil){
+        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (_, error) in
+            if ((error) != nil) {
                 print(error.debugDescription)
             }
-        }
-        
+        })
     }
     
     func login(credential:FIRAuthCredential){
         self.ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
         FIRAuth.auth()?.signIn(with: credential ) { (user, error) in
             print("Usuario autentificado con google")
+            
             self.ref.child("users").child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 if !snapshot.exists() {

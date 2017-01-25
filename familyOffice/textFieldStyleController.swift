@@ -18,7 +18,7 @@ class textFieldStyleController: UITextField, UITextFieldDelegate {
         super.init(coder: aDecoder)
         setup()
         self.delegate=self;
-        border.borderColor = UIColor( red: 32.0/255, green: 53.0/255, blue:88.0/255, alpha: 1.0 ).cgColor
+        border.borderColor = UIColor( red: 255/255, green: 255.0/255, blue:255.0/255, alpha: 1.0 ).cgColor
         
         border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
         border.borderWidth = width
