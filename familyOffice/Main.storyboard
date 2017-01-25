@@ -206,15 +206,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUF-hB-grq">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Registro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puF-Wd-jav">
-                                        <rect key="frame" x="175" y="8" width="64" height="48"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="puF-Wd-jav" secondAttribute="height" multiplier="4:3" id="gER-F5-qRk"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1o-zm-gG7">
                                         <rect key="frame" x="8" y="17" width="46" height="30"/>
                                         <state key="normal" title="Atras"/>
@@ -226,9 +217,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="J1o-zm-gG7" secondAttribute="bottom" id="4N9-Hb-wSo"/>
-                                    <constraint firstItem="puF-Wd-jav" firstAttribute="centerX" secondItem="bUF-hB-grq" secondAttribute="centerX" id="INk-cT-9pw"/>
                                     <constraint firstItem="J1o-zm-gG7" firstAttribute="leading" secondItem="bUF-hB-grq" secondAttribute="leadingMargin" id="UG0-Uf-eXD"/>
-                                    <constraint firstAttribute="bottom" secondItem="puF-Wd-jav" secondAttribute="bottom" id="xIp-Ui-0hG"/>
                                     <constraint firstAttribute="width" secondItem="bUF-hB-grq" secondAttribute="height" multiplier="207:25" id="xhw-wM-wL7"/>
                                 </constraints>
                             </view>
