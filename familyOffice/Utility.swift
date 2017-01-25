@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import FirebaseAuth
-
+private var activityIndicatior:UIActivityIndicatorView = UIActivityIndicatorView()
 class Utility {
     
     private init(){
@@ -53,6 +53,25 @@ class Utility {
         return newImage!
     }
     
+    func disabledView(){
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
     
+    func enabledView(){
+        UIApplication.shared.endIgnoringInteractionEvents()
+    }
     
+    func loading(view:UIView){
+        //loading
+        activityIndicatior.center = view.center
+        activityIndicatior.hidesWhenStopped = true
+        activityIndicatior.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicatior)
+        activityIndicatior.startAnimating()
+    }
+    
+    func stopLoading(view: UIView){
+        
+        activityIndicatior.stopAnimating()
+    }
 }
