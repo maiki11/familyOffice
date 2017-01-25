@@ -14,36 +14,44 @@ class HomeViewController: UIViewController {
     
     var ref: FIRDatabaseReference!
     
+    @IBOutlet weak var familyImage: UIImageView!
+    @IBOutlet weak var familyName: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
+        self.familyImage.clipsToBounds = true
         ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
-        // Do any additional setup after loading the view.
-        self.checkFamily()
+        NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
+            
+            self.checkFamily()
+        }
+        
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        let family = User.Instance().getData().family
+        self.familyImage.image = family?.photo
+        self.familyName.text = family?.name ?? "No seleccionada"
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     func checkFamily(){
-        ref.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("families").observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            if !snapshot.exists() {
-                Utility.Instance().gotoView(view: "RegisterFamilyView", context: self) }
-            
-        }) { (error) in
-            print(error.localizedDescription)
+        print(FamilyService.instance.families.count)
+        
+        if(FamilyService.instance.families.count == 0){
+            Utility.Instance().gotoView(view: "RegisterFamilyView", context: self)
         }
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

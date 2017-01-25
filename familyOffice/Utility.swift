@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
 import FirebaseAuth
 private var activityIndicatior:UIActivityIndicatorView = UIActivityIndicatorView()
 class Utility {
@@ -15,9 +16,10 @@ class Utility {
     private init(){
     }
     public static func Instance() -> Utility {
-        return instance
+                return instance
     }
-    
+    var ref: FIRDatabaseReference! = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
+
     static let instance : Utility = Utility()
     var state = 0
     
@@ -57,6 +59,7 @@ class Utility {
         UIApplication.shared.beginIgnoringInteractionEvents()
     }
     
+
     func enabledView(){
         UIApplication.shared.endIgnoringInteractionEvents()
     }
@@ -73,5 +76,9 @@ class Utility {
     func stopLoading(view: UIView){
         
         activityIndicatior.stopAnimating()
+    }
+    func clearObservers(){
+        ref.removeAllObservers()
+
     }
 }
