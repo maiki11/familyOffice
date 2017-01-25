@@ -60,79 +60,8 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dKq-qN-fUv" secondAttribute="height" multiplier="335:47" id="vaC-iH-UY0"/>
                                 </constraints>
-<<<<<<< HEAD
+
                                 <color key="textColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-=======
-                                <fontDescription key="fontDescription" name="Farah" family="Farah" pointSize="16"/>
-                                <color key="tintColor" red="0.12151746839223998" green="0.39353981598984766" blue="0.26990277761518688" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Registrarse">
-                                    <color key="titleColor" red="0.1304505318403244" green="0.31865194439888" blue="0.21185307204723358" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="signUp:" destination="gkV-lX-uju" eventType="touchUpInside" id="MZR-Zz-gtQ"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="p2Q-UG-ygO" firstAttribute="top" secondItem="R3B-Sw-mGg" secondAttribute="bottom" constant="50" id="13O-an-V0L"/>
-                            <constraint firstItem="RkE-0V-hLK" firstAttribute="top" secondItem="1U1-9B-Lux" secondAttribute="bottom" constant="-2" id="4GE-nh-kZh"/>
-                            <constraint firstItem="RkE-0V-hLK" firstAttribute="centerX" secondItem="vyQ-ub-aBo" secondAttribute="centerX" constant="80" id="6eO-IS-JKh"/>
-                            <constraint firstItem="jTx-ep-Zv5" firstAttribute="top" secondItem="1U1-9B-Lux" secondAttribute="bottom" constant="-1" id="HFD-OM-Tg1"/>
-                            <constraint firstItem="p2Q-UG-ygO" firstAttribute="centerX" secondItem="vyQ-ub-aBo" secondAttribute="centerX" id="Iu7-Zi-6JH"/>
-                            <constraint firstItem="1U1-9B-Lux" firstAttribute="leading" secondItem="vyQ-ub-aBo" secondAttribute="leadingMargin" id="Pdt-9A-XA7"/>
-                            <constraint firstItem="1U1-9B-Lux" firstAttribute="centerX" secondItem="vyQ-ub-aBo" secondAttribute="centerX" id="R83-5u-sNS"/>
-                            <constraint firstItem="1U1-9B-Lux" firstAttribute="top" secondItem="p2Q-UG-ygO" secondAttribute="bottom" id="SRo-Ko-ZtC"/>
-                            <constraint firstItem="p2Q-UG-ygO" firstAttribute="leading" secondItem="vyQ-ub-aBo" secondAttribute="leadingMargin" id="Vv2-1x-v2V"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1U1-9B-Lux" secondAttribute="trailing" id="hB0-YX-A5e"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="p2Q-UG-ygO" secondAttribute="trailing" id="sOH-HO-qqq"/>
-                            <constraint firstItem="jTx-ep-Zv5" firstAttribute="centerX" secondItem="vyQ-ub-aBo" secondAttribute="centerX" constant="-80" id="xs8-qy-dBl"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="loginLayer" destination="jTx-ep-Zv5" id="NOh-JL-1rK"/>
-                        <outlet property="logo" destination="p2Q-UG-ygO" id="ll8-05-v2Z"/>
-                        <outlet property="signupLayer" destination="RkE-0V-hLK" id="PVb-Ax-rPn"/>
-                        <outlet property="titleLogo" destination="1U1-9B-Lux" id="gcW-oW-1za"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jke-H5-E5T" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-673.91304347826087" y="33.423913043478265"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController storyboardIdentifier="LoginView" id="BYZ-38-t0r" customClass="ViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" restorationIdentifier="LoginView" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_gray" translatesAutoresizingMaskIntoConstraints="NO" id="lVd-if-vxn">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="lVd-if-vxn" secondAttribute="height" multiplier="375:667" id="r8i-kB-jJf"/>
-                                </constraints>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dql-dz-wXP" customClass="textFieldStyleController" customModule="familyOffice" customModuleProvider="target">
-                                <rect key="frame" x="20" y="260" width="374" height="52.333333333333314"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="dql-dz-wXP" secondAttribute="height" multiplier="308:43" id="hfW-zN-gEe"/>
-                                </constraints>
-                                <color key="textColor" white="0.408935546875" alpha="1" colorSpace="calibratedWhite"/>
->>>>>>> Leonardo
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
@@ -156,7 +85,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-<<<<<<< HEAD
+
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-gR-T0q">
                                 <rect key="frame" x="99.333333333333343" y="591.33333333333337" width="216.66666666666666" height="29"/>
                                 <subviews>
@@ -179,10 +108,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AwA-sU-zu3" customClass="GIDSignInButton">
                                 <rect key="frame" x="40" y="532" width="334" height="69.333333333333371"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-=======
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="amW-re-7K7" customClass="textFieldStyleController" customModule="familyOffice" customModuleProvider="target">
-                                <rect key="frame" x="20" y="332.33333333333331" width="374" height="36.333333333333371"/>
->>>>>>> Leonardo
+
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="AwA-sU-zu3" secondAttribute="height" multiplier="24:5" id="wyg-Bj-yR3"/>
                                 </constraints>
@@ -217,45 +143,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-<<<<<<< HEAD
-=======
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q7S-Dl-BYu" customClass="GIDSignInButton">
-                                <rect key="frame" x="87" y="425" width="240" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivg-i4-PTh">
-                                <rect key="frame" x="184" y="377" width="46" height="30"/>
-                                <state key="normal" title="Entrar"/>
-                                <connections>
-                                    <action selector="handleSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mv9-ZJ-oXd"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="jFi-jh-rxK">
-                                <rect key="frame" x="38" y="60" width="338" height="180"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="jFi-jh-rxK" secondAttribute="height" multiplier="15:8" id="NhK-BB-IoA"/>
-                                </constraints>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bmr-Eh-k6Y">
-                                <rect key="frame" x="103" y="493" width="217" height="29"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCo-aU-cqy">
-                                        <rect key="frame" x="0.0" y="0.0" width="186.66666666666663" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vqd-SW-2Ie">
-                                        <rect key="frame" x="186.66666666666663" y="0.0" width="30" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="aquí"/>
-                                        <connections>
-                                            <action selector="handleSignUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DAS-PZ-GV2"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
->>>>>>> Leonardo
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

@@ -167,13 +167,17 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
         if(!(emailField.text?.isEmpty)! && !(passwordField.text?.isEmpty)!){
             utility.loading(view: self.view)
             utility.disabledView()
+            NotificationCenter.default.addObserver(forName: LOGINERROR, object: nil, queue: nil){_ in
+                let alert = UIAlertController(title: "Verifica tus datos", message: "Su correo electrónico y contraseña son incorrectas.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+                utility.enabledView()
+                utility.stopLoading(view: self.view)
+            }
             auth.login(email: emailField.text!, password: passwordField.text!)
-            let alert = UIAlertController(title: "Verifica tus datos", message: "Su correo electrónico y contraseña son incorrectas.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(okAction)
-            self.present(alert, animated: true, completion: nil)
-            utility.enabledView()
-            utility.stopLoading(view: self.view)
+            
+            
             
             
         }else{

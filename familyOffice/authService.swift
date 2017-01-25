@@ -11,13 +11,7 @@ import Firebase
 import UIKit
 
 class AuthService {
-<<<<<<< HEAD
-    
-    private let userNotification = NSNotification.Name("userNotification")
-   
-    var storageRef: FIRStorageReference!
-=======
->>>>>>> Leonardo
+
     
     public static let authService = AuthService()
     var storageRef: FIRStorageReference!
@@ -27,19 +21,14 @@ class AuthService {
     //MARK: Shared Instance
     
     func login(email: String, password: String){
-<<<<<<< HEAD
-        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (_, error) in
-            if ((error) != nil) {
-=======
+
         
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
-            
             if((error) != nil){
->>>>>>> Leonardo
                 print(error.debugDescription)
                 NotificationCenter.default.post(name: LOGINERROR, object: nil)
             }
-        })
+        }
     }
     
     func login(credential:FIRAuthCredential){
@@ -70,7 +59,7 @@ class AuthService {
         let url = user.photoURL
         let data = NSData(contentsOf:url!! as URL)
         if let uploadData = UIImagePNGRepresentation(UIImage(data: data as! Data)!){
-            _ = storageRef.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
+            storageRef.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
                 if (error != nil) {
                     // Uh-oh, an error occurred!
                     print(error.debugDescription)
@@ -95,6 +84,8 @@ class AuthService {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if (user != nil) {
                 if(!checkFamily){
+                    FamilyService.instance.getFamilies(completionHandler: { (_: [Family]?) in
+                    })
                     checkFamily = true
                 }
                 ref.child("users").child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in

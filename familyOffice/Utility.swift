@@ -59,7 +59,7 @@ class Utility {
         UIApplication.shared.beginIgnoringInteractionEvents()
     }
     
-<<<<<<< HEAD
+
     func enabledView(){
         UIApplication.shared.endIgnoringInteractionEvents()
     }
@@ -76,9 +76,9 @@ class Utility {
     func stopLoading(view: UIView){
         
         activityIndicatior.stopAnimating()
-=======
+    }
     func clearObservers(){
         ref.removeAllObservers()
->>>>>>> Leonardo
+
     }
 }
