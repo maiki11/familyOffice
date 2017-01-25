@@ -23,15 +23,15 @@ class HomeViewController: UIViewController {
         self.familyImage.clipsToBounds = true
         ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
-            let family = User.Instance().getData().family
-            self.familyImage.image = family?.photo
-            self.familyName.text = family?.name ?? "No seleccionada"
+            
             self.checkFamily()
         }
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        
+        let family = User.Instance().getData().family
+        self.familyImage.image = family?.photo
+        self.familyName.text = family?.name ?? "No seleccionada"
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

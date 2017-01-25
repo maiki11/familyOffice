@@ -11,7 +11,6 @@
 		022D51001E2036390073F0EF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022D50FF1E2036390073F0EF /* ProfileViewController.swift */; };
 		022EC1D21E20078C0096A18B /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EC1D11E20078C0096A18B /* Family.swift */; };
 		02382F0D1E1C210C0036FFC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02382F0C1E1C210C0036FFC9 /* AppDelegate.swift */; };
-		02382F0F1E1C210C0036FFC9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02382F0E1E1C210C0036FFC9 /* LoginViewController.swift */; };
 		02382F141E1C210C0036FFC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02382F131E1C210C0036FFC9 /* Assets.xcassets */; };
 		02382F171E1C210C0036FFC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02382F151E1C210C0036FFC9 /* LaunchScreen.storyboard */; };
 		02382F221E1C210C0036FFC9 /* familyOfficeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02382F211E1C210C0036FFC9 /* familyOfficeTests.swift */; };
@@ -61,7 +60,6 @@
 		022EC1D11E20078C0096A18B /* Family.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Family.swift; sourceTree = "<group>"; };
 		02382F091E1C210C0036FFC9 /* familyOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = familyOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02382F0C1E1C210C0036FFC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		02382F0E1E1C210C0036FFC9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		02382F131E1C210C0036FFC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02382F161E1C210C0036FFC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		02382F181E1C210C0036FFC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -227,7 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				0271DD4D1E2EB147002C101B /* cells */,
-				02382F0E1E1C210C0036FFC9 /* LoginViewController.swift */,
 				02B876441E1C677C005E5473 /* SingUpViewController.swift */,
 				849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */,
 				02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */,

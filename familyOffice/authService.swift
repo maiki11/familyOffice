@@ -11,6 +11,7 @@ import Firebase
 import UIKit
 
 class AuthService {
+
     
     public static let authService = AuthService()
     var storageRef: FIRStorageReference!
@@ -20,21 +21,21 @@ class AuthService {
     //MARK: Shared Instance
     
     func login(email: String, password: String){
+
         
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
-            
             if((error) != nil){
                 print(error.debugDescription)
                 NotificationCenter.default.post(name: LOGINERROR, object: nil)
             }
         }
-        
     }
     
     func login(credential:FIRAuthCredential){
         self.ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
         FIRAuth.auth()?.signIn(with: credential ) { (user, error) in
             print("Usuario autentificado con google")
+            
             self.ref.child("users").child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 if !snapshot.exists() {
@@ -58,7 +59,7 @@ class AuthService {
         let url = user.photoURL
         let data = NSData(contentsOf:url!! as URL)
         if let uploadData = UIImagePNGRepresentation(UIImage(data: data as! Data)!){
-            _ = storageRef.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
+            storageRef.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
                 if (error != nil) {
                     // Uh-oh, an error occurred!
                     print(error.debugDescription)
@@ -83,6 +84,8 @@ class AuthService {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if (user != nil) {
                 if(!checkFamily){
+                    FamilyService.instance.getFamilies(completionHandler: { (_: [Family]?) in
+                    })
                     checkFamily = true
                 }
                 ref.child("users").child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in

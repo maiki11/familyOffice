@@ -3,29 +3,42 @@
 //  familyOffice
 //
 //  Created by miguel reina on 04/01/17.
-//  Copyright © 2017 Leonardo Durazo. All rights reserved.
+//  Copyright © 2017 Miguel Reina y Leonardo Durazo. All rights reserved.
 //
 
 import UIKit
+import GoogleSignIn
+import FirebaseAuth
+import Firebase
 import AVFoundation
 import AVKit
 
-class StartViewController: UIViewController {
+private let auth = AuthService.authService
+private let utility = Utility.Instance()
+
+class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDelegate {
 
     @IBOutlet var logo: UIImageView!
     @IBOutlet var titleLogo: UIImageView!
-    //@IBOutlet var background: UIVisualEffectView!
-    @IBOutlet var loginLayer: UIButton!
-    @IBOutlet var signupLayer: UIButton!
+    @IBOutlet var googleSignUp: GIDSignInButton!
+    @IBOutlet var emailField: textFieldStyleController!
+    @IBOutlet var passwordField: textFieldStyleController!
+    @IBOutlet var loginButton: UIButton!
+    @IBOutlet var footer: UIStackView!
     
     var playerController = AVPlayerViewController()
     var player:AVPlayer?
     
     
-    override func viewDidLoad() {
-        AuthService.authService.isAuth(view: self.self, name:"TabBarControllerView")
-        super.viewDidLoad()
+    func webviewDidFinishLoad(_ : UIWebView){
+        utility.stopLoading(view: self.view)
         
+    }
+    
+    override func viewDidLoad() {
+        auth.isAuth(view: self.self, name:"TabBarControllerView")
+        super.viewDidLoad()
+        GIDSignIn.sharedInstance().uiDelegate = self
         //Loading video
         let videoString:String? = Bundle.main.path(forResource: "background", ofType: "mp4")
         if let url = videoString {
@@ -59,6 +72,10 @@ class StartViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        utility.enabledView()
+    }
+    
     func videoDidReachEnd() {
         
         //now use seek to make current playback time to the specified time in this case (O)
@@ -82,9 +99,6 @@ class StartViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        /*UIView.animate(withDuration: 1, delay: 0.0, options: <#T##UIViewAnimationOptions#>, animations: {
-            
-        }, completion: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)*/
     }
     
     func animateView(){
@@ -104,25 +118,42 @@ class StartViewController: UIViewController {
             self.titleLogo.alpha = 1
         }, completion: nil)
         
-        self.loginLayer.alpha = 0
+        self.emailField.alpha = 0
         UIView.animate(withDuration: 1.0, delay: 1.6, options: .curveEaseInOut, animations: {
-            self.loginLayer.transform = CGAffineTransform(translationX: 0, y: -20.0 )
-            self.loginLayer.alpha = 1
+            self.emailField.transform = CGAffineTransform(translationX: 0, y: -20.0 )
+            self.emailField.alpha = 1
         }, completion: nil)
         
-        self.signupLayer.alpha = 0
+        self.emailField.layer.borderColor = UIColor( red: 1/255, green: 255.0/255, blue:255.0/255, alpha: 1.0 ).cgColor
+        
+        self.passwordField.alpha = 0
+        UIView.animate(withDuration: 1.0, delay: 1.6, options: .curveEaseInOut, animations: {
+            self.passwordField.transform = CGAffineTransform(translationX: 0, y: -20.0 )
+            self.passwordField.alpha = 1
+        }, completion: nil)
+        
+        self.loginButton.alpha = 0
         UIView.animate(withDuration: 1.0, delay: 1.8, options: .curveEaseInOut, animations: {
-            self.signupLayer.transform = CGAffineTransform(translationX: 0, y: -20.0 )
-            self.signupLayer.alpha = 1
+            self.loginButton.transform = CGAffineTransform(translationX: 0, y: -20.0 )
+            self.loginButton.alpha = 1
         }, completion: nil)
         
-    }
-    
-    @IBAction func loginButton(_ sender: UIButton) {
-        gotoView(view: "LoginView")
+        self.googleSignUp.alpha = 0
+        UIView.animate(withDuration: 1.0, delay: 1.8, options: .curveEaseInOut, animations: {
+            self.googleSignUp.transform = CGAffineTransform(translationX: 0, y: -20.0 )
+            self.googleSignUp.alpha = 1
+        }, completion: nil)
+        
+        self.footer.alpha = 0
+        UIView.animate(withDuration: 1.0, delay: 2.4, options: .curveEaseInOut, animations: {
+            self.footer.alpha = 1
+        }, completion: nil)
+        
     }
    
     @IBAction func signUp(_ sender: UIButton) {
+        utility.loading(view: self.view)
+        UIApplication.shared.beginIgnoringInteractionEvents()
         gotoView(view: "SignUpView")
     }
     
@@ -131,5 +162,44 @@ class StartViewController: UIViewController {
         let homeViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: view)
         self.present(homeViewController, animated: true, completion: nil)
     }
+    //signin login
+    @IBAction func handleSignIn(_ sender: UIButton) {
+        if(!(emailField.text?.isEmpty)! && !(passwordField.text?.isEmpty)!){
+            utility.loading(view: self.view)
+            utility.disabledView()
+            NotificationCenter.default.addObserver(forName: LOGINERROR, object: nil, queue: nil){_ in
+                let alert = UIAlertController(title: "Verifica tus datos", message: "Su correo electrónico y contraseña son incorrectas.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+                utility.enabledView()
+                utility.stopLoading(view: self.view)
+            }
+            auth.login(email: emailField.text!, password: passwordField.text!)
+            
+            
+            
+            
+        }else{
+            let alert = UIAlertController(title: "Verifica tus datos", message: "Inserte un correo electrónico y una contraseña", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+            utility.stopLoading(view: self.view)
+        }
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    //change color status bar
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
 
 }

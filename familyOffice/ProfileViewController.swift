@@ -34,7 +34,7 @@ class ProfileViewController: UIViewController{
     
     @IBAction func logOut(_ sender: UIButton) {
         AuthService.authService.logOut()
-        Utility.Instance().gotoView(view: "LoginView", context: self)
+        Utility.Instance().gotoView(view: "StartView", context: self)
     }
 
     /*
