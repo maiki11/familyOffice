@@ -27,6 +27,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDelegate
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
         
+        
     }
 
 
@@ -38,6 +39,10 @@ class ViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDelegate
     @IBAction func handleSignIn(_ sender: UIButton) {
         if(!(emailTextfield.text?.isEmpty)! && !(passwordTextfield.text?.isEmpty)!){
             auth.login(email: emailTextfield.text!, password: passwordTextfield.text!)
+            NotificationCenter.default.addObserver(forName: LOGINERROR, object: nil, queue: nil){
+                notification in
+                print("Error")
+            }
         }
     }
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
 import FirebaseAuth
 
 class Utility {
@@ -15,9 +16,10 @@ class Utility {
     private init(){
     }
     public static func Instance() -> Utility {
-        return instance
+                return instance
     }
-    
+    var ref: FIRDatabaseReference! = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
+
     static let instance : Utility = Utility()
     var state = 0
     
@@ -54,5 +56,7 @@ class Utility {
     }
     
     
-    
+    func clearObservers(){
+        ref.removeAllObservers()
+    }
 }

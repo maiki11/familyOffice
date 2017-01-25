@@ -15,6 +15,7 @@ target 'familyOffice' do
   pod 'MGSwipeTableCell' 
   target 'familyOfficeTests' do
     inherit! :search_paths
+    pod 'Firebase'
     # Pods for testing
   end
 

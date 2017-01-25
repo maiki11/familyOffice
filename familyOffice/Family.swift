@@ -17,7 +17,10 @@ class Family: NSObject {
     var photo: UIImage!
     var active: Bool = false
     var totalMembers : UInt = 0
-    
+    var admin : String = ""
+    override init() {
+        
+    }
     init(name: String, photoURL: NSURL, photo: UIImage, active: Bool){
         self.name = name
         self.photoURL = photoURL

@@ -19,9 +19,7 @@ class ProfileViewController: UIViewController{
         //self.profileImage.clipsToBounds = true
         self.userName.text =  profile.name
         self.profileImage.image = UIImage(data: profile.photo as Data)
-        self.logOutButton.layer.borderColor = UIColor(red: 32.0/255, green: 53.0/255, blue:88.0/255, alpha: 1.0).cgColor
-        
-        
+        self.logOutButton.layer.borderColor = UIColor(red: 32.0/255, green: 53.0/255, blue:88.0/255, alpha: 1.0).cgColor 
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
