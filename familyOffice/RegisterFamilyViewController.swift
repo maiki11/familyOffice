@@ -84,38 +84,16 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
             imageView.contentMode = .scaleAspectFit
             imageView.image = Utility.Instance().resizeImage(image: cameraImage, targetSize: CGSize(width: 200.0, height: 200.0))
         }
-        
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func handleAdd(_ sender: UIButton) {
         
-        
         let key = ref.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
-        let imageName = NSUUID().uuidString
-        
-        if let uploadData = UIImagePNGRepresentation(imageView.image!){
-            
-            let uploadTask = storageRef.child(key).child("images").child("\(imageName).png").put(uploadData, metadata: nil) { metadata, error in
-                if (error != nil) {
-                    // Uh-oh, an error occurred!
-                    print(error.debugDescription)
-                } else {
-                    // Metadata contains file metadata such as size, content-type, and download URL.
-                    if let downloadURL = metadata?.downloadURL()?.absoluteString {
-                        
-                        let family = ["name": self.nameTxtField.text! as String,
-                                      "photoUrl": downloadURL as Any,
-                                      "members": [ (FIRAuth.auth()?.currentUser?.uid)! : true] as [String : Bool]]
-                        self.ref.child("families").child(key).setValue(family)
-                        self.ref.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("families").setValue([ key: true])
-                        Utility.Instance().gotoView(view: "TabBarControllerView", context: self.self)
-                    }
-                    
-                }
-            }
+        //Add validations
+        if(imageView.image != nil && nameTxtField.text != nil){
+             FamilyService.instance.createFamily(key: key, image: imageView.image!, name: nameTxtField.text!, view: self.self)
         }
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

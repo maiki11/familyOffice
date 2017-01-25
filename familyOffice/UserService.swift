@@ -8,12 +8,14 @@
 
 import Foundation
 import UIKit
+import Firebase
+
 struct usermodel {
     let name : String
     let phone: String
     let photo: NSData
     let families : [Family]
-    
+    let family : Family?
 }
 
 class User {
@@ -34,42 +36,54 @@ class User {
         userDefaults.set(user.photo, forKey: "photo")
         userDefaults.set(user.families, forKey: "families")
     }
+    func setFamily(family: Family, photoData: Data) -> Void {
+        userDefaults.setValue(family.id, forKeyPath: "familyId")
+        userDefaults.setValue(family.name, forKeyPath: "familyName")
+        userDefaults.setValue(photoData, forKeyPath: "familyPhoto")
+    }
     
     func getData() -> usermodel {
-        print(userDefaults)
+        let family = Family()
+        family.name = exist(field: "familyName")
+        family.id = exist(field: "familyId")
+        family.photo = UIImage(data: existData(field: "familyPhoto")!)
         let xuser = usermodel(
-            name: (exist(field: "name")! as? String)! , phone: (exist(field: "phone")! as? String)! , photo: (existData(field: "photo") as? NSData!)!, families: (existArray(field: "families") as! Array<Family>) )
-        print(xuser.name)
+            name: (exist(field: "name")! as String) , phone: (exist(field: "phone")! as String) , photo: (existData(field: "photo"))! as NSData, families: (existArray(field: "families") as! Array<Family>), family: family)
         return xuser
     }
-    func exist(field: String) -> String? {
+    
+    
+    func clearData() {
+        userDefaults.removeObject(forKey: "name")
+        userDefaults.removeObject(forKey: "photo")
+        userDefaults.removeObject(forKey: "phone")
+        userDefaults.removeObject(forKey: "families")
+        userDefaults.removeObject(forKey: "familyId")
+        userDefaults.removeObject(forKey: "familyName")
+        userDefaults.removeObject(forKey: "familyPhoto")
+    }
+    
+    private func exist(field: String) -> String? {
         if let value = userDefaults.string(forKey: field) {
             return value
         }else {
-           return " "
+            return ""
         }
     }
-    func existData(field: String) -> Data? {
+    private func existData(field: String) -> Data? {
         if let value = userDefaults.data(forKey: field) {
             return value
         }else {
             return UIImagePNGRepresentation(#imageLiteral(resourceName: "Profile2") )
         }
     }
-    func existArray(field: String) -> [Any] {
+    private func existArray(field: String) -> [Any] {
         if let value = userDefaults.array(forKey: field) {
             return value
         }else {
             return []
         }
     }
-    func clearData() {
-        userDefaults.removeObject(forKey: "name")
-        userDefaults.removeObject(forKey: "photo")
-        userDefaults.removeObject(forKey: "phone")
-        userDefaults.removeObject(forKey: "families")
-    }
-    
     
     
 }

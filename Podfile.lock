@@ -1,4 +1,6 @@
 PODS:
+  - Firebase (3.11.0):
+    - Firebase/Core (= 3.11.0)
   - Firebase/Auth (3.11.0):
     - Firebase/Core
     - FirebaseAuth (= 3.1.0)
@@ -61,6 +63,7 @@ PODS:
   - MGSwipeTableCell (1.5.6)
 
 DEPENDENCIES:
+  - Firebase
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -87,6 +90,6 @@ SPEC CHECKSUMS:
   JVFloatLabeledTextField: 0e5524b097f102036214dd8279edc8ecf08b5e18
   MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
 
-PODFILE CHECKSUM: 31075355d9a0adf91846081e0fcb88e9cef5ff58
+PODFILE CHECKSUM: c723c8b2bbc114ec1b73427bf85b6240fcc2f4b4
 
 COCOAPODS: 1.1.1
