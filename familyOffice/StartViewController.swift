@@ -176,10 +176,6 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
                 utility.stopLoading(view: self.view)
             }
             auth.login(email: emailField.text!, password: passwordField.text!)
-            
-            
-            
-            
         }else{
             let alert = UIAlertController(title: "Verifica tus datos", message: "Inserte un correo electrónico y una contraseña", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)

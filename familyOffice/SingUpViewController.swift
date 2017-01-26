@@ -9,22 +9,26 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import GoogleSignIn
 
+private let auth = AuthService.authService
 
-class SingUpViewController: UIViewController, UITextFieldDelegate {
+class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
 
     @IBOutlet weak var nameTxtfield: UITextField!
     @IBOutlet weak var emailTxtfield: UITextField!
     @IBOutlet weak var phoneTxtfield: UITextField!
     @IBOutlet weak var passwordTxtfield: UITextField!
     @IBOutlet weak var confirmPassTxtfield: UITextField!
+    @IBOutlet var googleSignUp: GIDSignInButton!
     
     let ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
   
     
     override func viewDidLoad() {
-        
+        auth.isAuth(view: self.self, name:"TabBarControllerView")
         super.viewDidLoad()
+        GIDSignIn.sharedInstance().uiDelegate = self
         // Do any additional setup after loading the view.
         
         self.confirmPassTxtfield.delegate = self
@@ -71,5 +75,8 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
+    @IBAction func googlePlusTouchUpInside(sender: AnyObject){
+        GIDSignIn.sharedInstance().signIn()
+    }
     
 }

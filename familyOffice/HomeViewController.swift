@@ -13,6 +13,7 @@ import FirebaseAuth
 class HomeViewController: UIViewController {
     
     var ref: FIRDatabaseReference!
+    var user: String = ""
     
     @IBOutlet weak var familyImage: UIImageView!
     @IBOutlet weak var familyName: UILabel!
@@ -25,6 +26,10 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
             
             self.checkFamily()
+        }
+        FIRAuth.auth()!.addStateDidChangeListener { auth, user in
+            guard user != nil else { return }
+            self.user = User.Instance().getData().name
         }
         
     }
