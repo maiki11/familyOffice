@@ -62,9 +62,8 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
     func createAccount(uid: String){
         let userModel = ["name" : self.nameTxtfield.text!,
                          "phone": self.phoneTxtfield.text!]
-        
         self.ref.child("users").child(uid).setValue(userModel)
-        Utility.Instance().gotoView(view: "LoginView", context: self)
+        Utility.Instance().gotoView(view: "StartView", context: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
