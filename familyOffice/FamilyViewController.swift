@@ -24,7 +24,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com")
         loadMembers(table: self.membersTable)
         
-        imageFamily.image = family?.photo
+        imageFamily.image = UIImage(data: (family?.photoData)!)
         // Do any additional setup after loading the view.
     }
     

@@ -13,30 +13,50 @@ import FirebaseAuth
 class HomeViewController: UIViewController {
     
     var ref: FIRDatabaseReference!
+<<<<<<< HEAD
     var user: String = ""
     
+=======
+    var family = User.Instance().getData().family
+>>>>>>> master
     @IBOutlet weak var familyImage: UIImageView!
     @IBOutlet weak var familyName: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        
+        ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
+        Utility.Instance().loading(view: self.view)
+        reloadFamily()
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
         self.familyImage.clipsToBounds = true
-        ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
-            
             self.checkFamily()
         }
+<<<<<<< HEAD
         FIRAuth.auth()!.addStateDidChangeListener { auth, user in
             guard user != nil else { return }
             self.user = User.Instance().getData().name
+=======
+        NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){_ in 
+            self.reloadFamily()
+            Utility.Instance().stopLoading(view: self.view)
+>>>>>>> master
         }
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        let family = User.Instance().getData().family
-        self.familyImage.image = family?.photo
+        
+    }
+   
+    func reloadFamily() -> Void {
+        family = User.Instance().getData().family
+        self.familyImage.image = UIImage(data: (family?.photoData)!)
         self.familyName.text = family?.name ?? "No seleccionada"
+        if(family?.name != ""){
+            Utility.Instance().stopLoading(view: self.view)
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

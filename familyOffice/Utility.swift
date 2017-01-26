@@ -5,7 +5,6 @@
 //  Created by Leonardo Durazo on 05/01/17.
 //
 //
-
 import Foundation
 import UIKit
 import FirebaseDatabase
@@ -18,8 +17,6 @@ class Utility {
     public static func Instance() -> Utility {
                 return instance
     }
-    var ref: FIRDatabaseReference! = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
-
     static let instance : Utility = Utility()
     var state = 0
     
@@ -78,7 +75,9 @@ class Utility {
         activityIndicatior.stopAnimating()
     }
     func clearObservers(){
-        ref.removeAllObservers()
-
+        REF.removeAllObservers()
+        REF_USERS.removeAllObservers()
+        REF_FAMILIES.removeAllObservers()
+        NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
     }
 }
