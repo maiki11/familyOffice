@@ -28,6 +28,8 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
     }
     override func viewWillAppear(_ animated: Bool) {
         self.families = FamilyService.instance.families
+        self.collectionView?.reloadData()
+        Utility.Instance().clearObservers()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -35,8 +37,6 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
-        
         self.family = families[indexPath.row]
         self.performSegue(withIdentifier: "changeScreen", sender: nil)
     }
@@ -69,16 +69,16 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         let family = families[indexPath.row]
         
         cell.name.text = family.name
-        cell.imageFamily.image = family.photo
+        cell.imageFamily.image = UIImage(data: family.photoData!)
         
         // Configure the cell
     
         return cell
     }
+
     func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath)
     {
         longPressTarget = ((cell: collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! FamilyCollectionViewCell), indexPath: indexPath)
-        
     }
     //Long press
     func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {

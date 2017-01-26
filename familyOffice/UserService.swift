@@ -35,23 +35,21 @@ class User {
         userDefaults.set(user.phone, forKey: "phone")
         userDefaults.set(user.photo, forKey: "photo")
         userDefaults.set(user.families, forKey: "families")
+        //NotificationCenter.default.post(name: USER_NOTIFICATION, object: nil)
     }
-    func setFamily(family: Family, photoData: Data) -> Void {
+    func setFamily(family: Family) -> Void {
         userDefaults.setValue(family.id, forKeyPath: "familyId")
         userDefaults.setValue(family.name, forKeyPath: "familyName")
-        userDefaults.setValue(photoData, forKeyPath: "familyPhoto")
+        userDefaults.setValue(family.photoData, forKeyPath: "familyPhoto")
+        NotificationCenter.default.post(name: USER_NOTIFICATION, object: nil)
     }
     
     func getData() -> usermodel {
-        let family = Family()
-        family.name = exist(field: "familyName")
-        family.id = exist(field: "familyId")
-        family.photo = UIImage(data: existData(field: "familyPhoto")!)
+        let family  = Family(name: exist(field: "familyName")!, photo: existData(field: "familyPhoto")!, id: exist(field: "familyId")!)
         let xuser = usermodel(
             name: (exist(field: "name")! as String) , phone: (exist(field: "phone")! as String) , photo: (existData(field: "photo"))! as NSData, families: (existArray(field: "families") as! Array<Family>), family: family)
         return xuser
     }
-    
     
     func clearData() {
         userDefaults.removeObject(forKey: "name")

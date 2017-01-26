@@ -7,22 +7,18 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseAuth
 import UIKit
-
 class AuthService {
 
     
     public static let authService = AuthService()
-    var storageRef: FIRStorageReference!
-    var ref: FIRDatabaseReference!
+    var uid = FIRAuth.auth()?.currentUser?.uid
     private init() {
     }
     //MARK: Shared Instance
     
     func login(email: String, password: String){
-
-        
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
             if((error) != nil){
                 print(error.debugDescription)
@@ -31,35 +27,29 @@ class AuthService {
         }
     }
     
+    func userStatus(state: String) -> Void {
+        REF_USERS.child(self.uid!).updateChildValues(["online": state])
+    }
+    
     func login(credential:FIRAuthCredential){
-        self.ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
         FIRAuth.auth()?.signIn(with: credential ) { (user, error) in
             print("Usuario autentificado con google")
-            
-            self.ref.child("users").child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in
-                // Get user value
-                if !snapshot.exists() {
-                    self.createAccount(user: user as AnyObject)
-                }
-            }) { (error) in
-                print(error.localizedDescription)
-            }
         }
     }
     func logOut(){
         try! FIRAuth.auth()!.signOut()
         User.Instance().clearData()
+        self.userStatus(state: "Offline")
+        FamilyService.instance.families = []
     }
     
     //Create account with federate entiies like Facebook Twitter Google  etc
     func createAccount(user: AnyObject)   {
-        storageRef = FIRStorage.storage().reference(forURL: "gs://familyoffice-6017a.appspot.com")
-        self.ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
         let imageName = NSUUID().uuidString
         let url = user.photoURL
         let data = NSData(contentsOf:url!! as URL)
         if let uploadData = UIImagePNGRepresentation(UIImage(data: data as! Data)!){
-            storageRef.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
+            STORAGEREF.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
                 if (error != nil) {
                     // Uh-oh, an error occurred!
                     print(error.debugDescription)
@@ -69,8 +59,9 @@ class AuthService {
                         
                         let xuserModel = ["name" : user.displayName!,
                                           "photoUrl": downloadURL] as [String : Any]
-                        self.ref.child("users").child(user.uid).setValue(xuserModel)
+                        REF_USERS.child(user.uid).setValue(xuserModel)
                         self.setData()
+                        self.userStatus(state: "Online")
                     }
                     
                 }
@@ -79,24 +70,27 @@ class AuthService {
     }
     
     func isAuth(view: UIViewController, name: String)  {
-        let ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
         var checkFamily = false;
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            self.uid = user?.uid
             if (user != nil) {
+                
+                NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
+                    Utility.Instance().gotoView(view: "RegisterFamilyView", context: view)
+                    return
+                }
                 if(!checkFamily){
-                    FamilyService.instance.getFamilies(completionHandler: { (_: [Family]?) in
-                    })
+                    FamilyService.instance.getFamilies()
                     checkFamily = true
                 }
-                ref.child("users").child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in
+                REF_USERS.child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in
                     // Get user value
                     if !snapshot.exists() {
                         self.createAccount(user: user as AnyObject)
-                        Utility.Instance().gotoView(view: "RegisterFamilyView", context: view)
                     }else{
                         self.setData()
+                        self.userStatus(state: "Online")
                         Utility.Instance().gotoView(view: name, context: view)
-                        ref.removeAllObservers()
                     }
                 }) { (error) in
                     print(error.localizedDescription)
@@ -106,9 +100,8 @@ class AuthService {
     }
     
     func setData()  {
-        let ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
-        let uid = (FIRAuth.auth()?.currentUser?.uid)!
-        ref.child(("users/\(uid)")).observeSingleEvent(of: .value, with: { (snapshot) in
+        print(REF)
+        REF_USERS.child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             var url : NSURL
             var data : Any
@@ -125,6 +118,7 @@ class AuthService {
             print(error.localizedDescription)
         }
     }
+    
     
     func exist(field: String, dictionary:NSDictionary) -> String {
         if let value = dictionary[field] {
