@@ -13,7 +13,8 @@ import FirebaseAuth
 class HomeViewController: UIViewController {
     
     var ref: FIRDatabaseReference!
-    var family = User.Instance().getData().family
+    var userService =  UserService.Instance()
+    var family = UserService.Instance().user?.family
     @IBOutlet weak var familyImage: UIImageView!
     @IBOutlet weak var familyName: UILabel!
     
@@ -40,10 +41,11 @@ class HomeViewController: UIViewController {
     }
    
     func reloadFamily() -> Void {
-        family = User.Instance().getData().family
-        self.familyImage.image = UIImage(data: (family?.photoData)!)
-        self.familyName.text = family?.name ?? "No seleccionada"
+        family = userService.user?.family
+        
         if(family?.name != ""){
+            self.familyImage.image = UIImage(data: (family?.photoData)!)
+            self.familyName.text = family?.name ?? "No seleccionada"
             Utility.Instance().stopLoading(view: self.view)
         }
     }

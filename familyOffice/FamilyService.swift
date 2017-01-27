@@ -13,7 +13,7 @@ import UIKit
 class FamilyService {
     
     public static let instance = FamilyService()
-    
+    var userService = UserService.Instance()
     var families: [Family] = []
     
     private init() {
@@ -30,7 +30,7 @@ class FamilyService {
                             let family = Family(snapshot: snapshot)
                             self.families.append(family)
                             if(family.id == item){
-                                User.Instance().setFamily(family: family)
+                                self.userService.setFamily(family: family)
                                 NotificationCenter.default.post(name: USER_NOTIFICATION, object: nil)
                             }
                         }else{
@@ -89,11 +89,13 @@ class FamilyService {
             }
         }
     }
+    func exitFamily(id: String, uid:String) -> Void {
+        
+    }
     func selectFamily(family: Family) -> Void {
         print(family.id)
         REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["familyActive" : family.id])
-        User.Instance().setFamily(family: family)
-        print(User.Instance().getData().family?.name ?? "Ninguno")
+        userService.setFamily(family: family)
         NotificationCenter.default.post(name: USER_NOTIFICATION, object: nil)
     }
     

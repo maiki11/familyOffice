@@ -18,6 +18,7 @@
 		02382F3B1E1C2E1D0036FFC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */; };
 		023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F9CEE1E1C39D300420217 /* AuthService.swift */; };
 		025C70FE1E38229D004A4A5B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C70FD1E38229D004A4A5B /* Constants.swift */; };
+		026AE1061E3A93A9003B75BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026AE1051E3A93A9003B75BD /* User.swift */; };
 		0271DD4F1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */; };
 		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
 		02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B876441E1C677C005E5473 /* SingUpViewController.swift */; };
@@ -72,6 +73,7 @@
 		02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		023F9CEE1E1C39D300420217 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		025C70FD1E38229D004A4A5B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		026AE1051E3A93A9003B75BD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyMemberTableViewCell.swift; sourceTree = "<group>"; };
 		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		02B876441E1C677C005E5473 /* SingUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			children = (
 				022EC1D11E20078C0096A18B /* Family.swift */,
 				8471A2511E2D8C5100EC9FD7 /* ConfigProfile.swift */,
+				026AE1051E3A93A9003B75BD /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -555,7 +558,6 @@
 			files = (
 				023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */,
 				025C70FE1E38229D004A4A5B /* Constants.swift in Sources */,
-				02382F0F1E1C210C0036FFC9 /* LoginViewController.swift in Sources */,
 				02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */,
 				02BD2D191E1F130900A61A84 /* UserService.swift in Sources */,
 				8471A2521E2D8C5100EC9FD7 /* ConfigProfile.swift in Sources */,
@@ -572,6 +574,7 @@
 				849C81C71E1D6D2F00FF3EE7 /* StartViewController.swift in Sources */,
 				02EABF591E312B67008A7CA9 /* FamilyCollectionViewCell.swift in Sources */,
 				8421167C1E2860C000C6BD80 /* textFieldStyleController.swift in Sources */,
+				026AE1061E3A93A9003B75BD /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

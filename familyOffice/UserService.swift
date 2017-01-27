@@ -10,27 +10,21 @@ import Foundation
 import UIKit
 import Firebase
 
-struct usermodel {
-    let name : String
-    let phone: String
-    let photo: NSData
-    let families : [Family]
-    let family : Family?
-}
 
-class User {
+
+class UserService {
     var userDefaults: UserDefaults
-    public static let user = User()
+    public var user : User? = nil
     private init(){
         userDefaults = UserDefaults.standard
     }
-    public static func Instance() -> User {
+    public static func Instance() -> UserService {
         return instance
     }
     
-    static let instance : User = User()
+    static let instance : UserService = UserService()
     
-    func fillData(user: usermodel) {
+    func fillData(user: User) {
         userDefaults.set(user.name, forKey: "name")
         userDefaults.set(user.phone, forKey: "phone")
         userDefaults.set(user.photo, forKey: "photo")
@@ -44,11 +38,15 @@ class User {
         NotificationCenter.default.post(name: USER_NOTIFICATION, object: nil)
     }
     
-    func getData() -> usermodel {
-        let family  = Family(name: exist(field: "familyName")!, photo: existData(field: "familyPhoto")!, id: exist(field: "familyId")!)
-        let xuser = usermodel(
-            name: (exist(field: "name")! as String) , phone: (exist(field: "phone")! as String) , photo: (existData(field: "photo"))! as NSData, families: (existArray(field: "families") as! Array<Family>), family: family)
-        return xuser
+    func getUser(uid: String) -> Void {
+        REF.child("/users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
+            if(snapshot.exists()){
+                self.user = User(snapshot: snapshot)
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
     }
     
     func clearData() {

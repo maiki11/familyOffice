@@ -10,8 +10,8 @@ import UIKit
 import Firebase
 
 class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    var members : [usermodel] = []
+    let userService = UserService.Instance()
+    var members : [User] = []
     var family : Family?
     var ref: FIRDatabaseReference!
     @IBOutlet weak var familyName: UILabel!
@@ -42,22 +42,10 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let refUsers = self.ref.child("/users/")
             for item in value?.allKeys as! [String] {
                 refUsers.child(item).observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let value = snapshot.value as? NSDictionary
-                    var url : NSURL
-                    var data : Any
                     if(snapshot.exists()){
-                        if ((value?["photoUrl"]) != nil) {
-                            url = (NSURL(string: (value?["photoUrl"] as? String)!) ?? nil)!
-                            data = NSData(contentsOf:url as URL)!
-                        } else {
-                            data = UIImagePNGRepresentation(#imageLiteral(resourceName: "Profile"))! as NSData
-                        }
-                        
-                        let xuser = usermodel(name: self.exist(field: "name", dictionary: value!), phone: self.exist(field: "phone", dictionary: value!), photo: data as! NSData, families: [], family: nil)
-                        self.members.append(xuser)
+                        let user = User(snapshot: snapshot)
+                        self.members.append(user)
                         table.reloadData()
-
                     }
                     
                 }) { (error) in

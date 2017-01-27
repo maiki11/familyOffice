@@ -10,14 +10,13 @@ import Foundation
 import FirebaseAuth
 import UIKit
 class AuthService {
-
-    
     public static let authService = AuthService()
+    let userService = UserService.Instance()
     var uid = FIRAuth.auth()?.currentUser?.uid
     private init() {
     }
     //MARK: Shared Instance
-    
+
     func login(email: String, password: String){
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
             if((error) != nil){
@@ -26,11 +25,11 @@ class AuthService {
             }
         }
     }
-    
+
     func userStatus(state: String) -> Void {
         REF_USERS.child(self.uid!).updateChildValues(["online": state])
     }
-    
+
     func login(credential:FIRAuthCredential){
         FIRAuth.auth()?.signIn(with: credential ) { (user, error) in
             print("Usuario autentificado con google")
@@ -38,11 +37,14 @@ class AuthService {
     }
     func logOut(){
         try! FIRAuth.auth()!.signOut()
-        User.Instance().clearData()
+        userService.clearData()
         self.userStatus(state: "Offline")
         FamilyService.instance.families = []
     }
-    
+
+    func registerCell(user: AnyObject) {
+    }
+
     //Create account with federate entiies like Facebook Twitter Google  etc
     func createAccount(user: AnyObject)   {
         let imageName = NSUUID().uuidString
@@ -56,25 +58,24 @@ class AuthService {
                 } else {
                     // Metadata contains file metadata such as size, content-type, and download URL.
                     if let downloadURL = metadata?.downloadURL()?.absoluteString {
-                        
                         let xuserModel = ["name" : user.displayName!,
                                           "photoUrl": downloadURL] as [String : Any]
                         REF_USERS.child(user.uid).setValue(xuserModel)
-                        self.setData()
-                        self.userStatus(state: "Online")
+                        self.userService.getUser(uid: user.uid)
+                        //self.userStatus(state: "Online")
                     }
-                    
+
                 }
             }
         }
     }
-    
+
     func isAuth(view: UIViewController, name: String)  {
         var checkFamily = false;
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             self.uid = user?.uid
             if (user != nil) {
-                
+
                 NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
                     Utility.Instance().gotoView(view: "RegisterFamilyView", context: view)
                     return
@@ -88,8 +89,8 @@ class AuthService {
                     if !snapshot.exists() {
                         self.createAccount(user: user as AnyObject)
                     }else{
-                        self.setData()
-                        self.userStatus(state: "Online")
+                        self.userService.getUser(uid: (user?.uid)!)
+                        //self.userStatus(state: "Online")
                         Utility.Instance().gotoView(view: name, context: view)
                     }
                 }) { (error) in
@@ -98,28 +99,8 @@ class AuthService {
             }
         }
     }
-    
-    func setData()  {
-        print(REF)
-        REF_USERS.child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            var url : NSURL
-            var data : Any
-            if ((value?["photoUrl"]) != nil) {
-                url = (NSURL(string: (value?["photoUrl"] as? String)!) ?? nil)!
-                data = NSData(contentsOf:url as URL)!
-            } else {
-                data = UIImagePNGRepresentation(#imageLiteral(resourceName: "profile_default"))! as NSData
-            }
-            let xuser = usermodel(name: self.exist(field: "name", dictionary: value!), phone: self.exist(field: "phone", dictionary: value!), photo: data as! NSData, families: [], family: nil)
-            User.Instance().userDefaults.set(self.exist(field: "familyActive", dictionary: value!), forKey: "familyId")
-            User.Instance().fillData(user: xuser)
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-    }
-    
-    
+
+
     func exist(field: String, dictionary:NSDictionary) -> String {
         if let value = dictionary[field] {
             return value as! String
@@ -141,6 +122,6 @@ class AuthService {
             return []
         }
     }
-    
-    
+
+
 }
