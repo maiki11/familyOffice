@@ -61,7 +61,7 @@ class AuthService {
                         let xuserModel = ["name" : user.displayName!,
                                           "photoUrl": downloadURL] as [String : Any]
                         REF_USERS.child(user.uid).setValue(xuserModel)
-                        self.userService.getUser(uid: user.uid)
+                        self.userService.getUser(uid: user.uid, mainly: true)
                         //self.userStatus(state: "Online")
                     }
 
@@ -89,7 +89,7 @@ class AuthService {
                     if !snapshot.exists() {
                         self.createAccount(user: user as AnyObject)
                     }else{
-                        self.userService.getUser(uid: (user?.uid)!)
+                        self.userService.getUser(uid: (user?.uid)!, mainly: true)
                         //self.userStatus(state: "Online")
                         Utility.Instance().gotoView(view: name, context: view)
                     }

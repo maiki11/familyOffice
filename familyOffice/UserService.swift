@@ -10,76 +10,69 @@ import Foundation
 import UIKit
 import Firebase
 
-
-
 class UserService {
-    var userDefaults: UserDefaults
     public var user : User? = nil
+    public var users: [User] = []
     private init(){
-        userDefaults = UserDefaults.standard
     }
     public static func Instance() -> UserService {
         return instance
     }
     
     static let instance : UserService = UserService()
-    
-    func fillData(user: User) {
-        userDefaults.set(user.name, forKey: "name")
-        userDefaults.set(user.phone, forKey: "phone")
-        userDefaults.set(user.photo, forKey: "photo")
-        userDefaults.set(user.families, forKey: "families")
-        //NotificationCenter.default.post(name: USER_NOTIFICATION, object: nil)
-    }
+   
     func setFamily(family: Family) -> Void {
-        userDefaults.setValue(family.id, forKeyPath: "familyId")
-        userDefaults.setValue(family.name, forKeyPath: "familyName")
-        userDefaults.setValue(family.photoData, forKeyPath: "familyPhoto")
-        NotificationCenter.default.post(name: USER_NOTIFICATION, object: nil)
+        user?.family = family
+        user?.familyActive = family.id
     }
     
-    func getUser(uid: String) -> Void {
+    func getUser(uid: String, mainly: Bool) -> Void {
         REF.child("/users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
             if(snapshot.exists()){
-                self.user = User(snapshot: snapshot)
+                let user = User(snapshot: snapshot)
+                if(mainly){
+                    self.user = user
+                }
+                if(self.duplicate(id:user.id)){
+                    self.users.append(User(snapshot: snapshot))
+                    NotificationCenter.default.post(name: USERS_NOTIFICATION, object: nil)
+                }
             }
         }) { (error) in
             print(error.localizedDescription)
         }
-        
+    }
+ 
+    func searchUser(uid: String)->User?{
+        for item in self.users {
+            if(item.id == uid){
+                return item
+            }
+        }
+        return nil
     }
     
     func clearData() {
-        userDefaults.removeObject(forKey: "name")
-        userDefaults.removeObject(forKey: "photo")
-        userDefaults.removeObject(forKey: "phone")
-        userDefaults.removeObject(forKey: "families")
-        userDefaults.removeObject(forKey: "familyId")
-        userDefaults.removeObject(forKey: "familyName")
-        userDefaults.removeObject(forKey: "familyPhoto")
+        self.user = nil
     }
     
-    private func exist(field: String) -> String? {
-        if let value = userDefaults.string(forKey: field) {
-            return value
-        }else {
-            return ""
+    private func removeUser(user: User) -> Void {
+        var cont = 0
+        for item in self.users {
+            if(item.id == user.id){
+                self.users.remove(at: cont)
+            }
+            cont += 1
         }
     }
-    private func existData(field: String) -> Data? {
-        if let value = userDefaults.data(forKey: field) {
-            return value
-        }else {
-            return UIImagePNGRepresentation(#imageLiteral(resourceName: "Profile2") )
+    func duplicate(id: String) -> Bool {
+        var bool = true
+        for item in self.users {
+            if(item.id == id){
+                bool = false
+                break
+            }
         }
+        return bool
     }
-    private func existArray(field: String) -> [Any] {
-        if let value = userDefaults.array(forKey: field) {
-            return value
-        }else {
-            return []
-        }
-    }
-    
-    
 }

@@ -60,6 +60,7 @@ struct Family  {
         self.photoURL = URL(string: snapshotValue[Family.kFamilyPhotoUrlKey] as! String) as NSURL!
         if let members = snapshotValue[Family.kFamilyMembersKey] {
             self.totalMembers = UInt((members as AnyObject).count)
+            self.members = members as? NSDictionary
         }
         if let admin = snapshotValue[Family.kFamilyAdminKey]  {
             self.admin = admin as? String
@@ -78,4 +79,5 @@ struct Family  {
             Family.kFamilyAdminKey : self.admin ?? ""
         ]
     }
+    
 }

@@ -25,13 +25,13 @@ struct User {
     static let kUserBloodTypeKey = "bloodType"
     
     let id: String!
-    let name : String!
-    let phone: String!
-    let photo: Data!
-    let photoURL: URL!
+    var name : String!
+    var phone: String!
+    var photo: Data!
+    var photoURL: URL!
     var families : NSDictionary? = nil
     var family: Family? = nil
-    let familyActive : String!
+    var familyActive : String!
     var rfc : String? = ""
     var nss : String? = ""
     var curp : String? = ""
@@ -60,9 +60,19 @@ struct User {
         let snapshotValue = snapshot.value as! NSDictionary
         self.name = snapshotValue[User.kUserNameKey] as! String
         self.id = snapshot.key
-        self.photoURL = URL(string: snapshotValue[User.kUserPhotoUrlKey] as! String)
+        let url = User.utilityService.exist(field: User.kUserPhotoUrlKey, dictionary: snapshotValue)
+        if (url != "") {
+            self.photoURL = URL(string: url)
+        }else {
+            self.photoURL = nil
+        }
         self.familyActive = User.utilityService.exist(field: User.kUserFamilyActiveKey, dictionary: snapshotValue)
-        self.photo = NSData(contentsOf: self.photoURL as URL) as Data?
+        if self.photoURL != nil {
+            self.photo = NSData(contentsOf: self.photoURL as URL) as Data?
+        }else{
+            self.photo = UIImagePNGRepresentation(#imageLiteral(resourceName: "profile_default"))
+        }
+        
         self.address = User.utilityService.exist(field: User.kUserAddressKey, dictionary: snapshotValue )
         self.birthday = User.utilityService.exist(field: User.kUserAddressKey, dictionary: snapshotValue )
         self.curp = User.utilityService.exist(field: User.kUserCurpKey, dictionary: snapshotValue)
