@@ -80,4 +80,34 @@ class Utility {
         REF_FAMILIES.removeAllObservers()
         NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
     }
+    
+    func exist(field: String, dictionary:NSDictionary) -> String {
+        if let value = dictionary[field] {
+            return value as! String
+        }else {
+            return ""
+        }
+    }
+    func existData(field: String, dictionary: NSDictionary) -> Data? {
+        if let value = dictionary[field] {
+            return (value as! Data)
+        }else {
+            return UIImagePNGRepresentation(#imageLiteral(resourceName: "Profile2") )
+        }
+    }
+    func existArray(field: String, dictionary:NSDictionary) -> [Any] {
+        if let value = dictionary[field] {
+            return value as! Array<Any>
+        }else {
+            return []
+        }
+    }
+    func existNSDictionary(field: String, dictionary:NSDictionary) -> NSDictionary {
+        if let value = dictionary[field] {
+            return value as! NSDictionary
+        }else {
+            return [:]
+        }
+    }
+
 }

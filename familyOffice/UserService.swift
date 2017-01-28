@@ -10,78 +10,69 @@ import Foundation
 import UIKit
 import Firebase
 
-struct usermodel {
-    let name : String
-    let phone: String
-    let photo: NSData
-    let families : [Family]
-    let family : Family?
-}
-
-class User {
-    var userDefaults: UserDefaults
-    public static let user = User()
+class UserService {
+    public var user : User? = nil
+    public var users: [User] = []
     private init(){
-        userDefaults = UserDefaults.standard
     }
-    public static func Instance() -> User {
+    public static func Instance() -> UserService {
         return instance
     }
     
-    static let instance : User = User()
-    
-    func fillData(user: usermodel) {
-        userDefaults.set(user.name, forKey: "name")
-        userDefaults.set(user.phone, forKey: "phone")
-        userDefaults.set(user.photo, forKey: "photo")
-        userDefaults.set(user.families, forKey: "families")
-        //NotificationCenter.default.post(name: USER_NOTIFICATION, object: nil)
-    }
+    static let instance : UserService = UserService()
+   
     func setFamily(family: Family) -> Void {
-        userDefaults.setValue(family.id, forKeyPath: "familyId")
-        userDefaults.setValue(family.name, forKeyPath: "familyName")
-        userDefaults.setValue(family.photoData, forKeyPath: "familyPhoto")
-        NotificationCenter.default.post(name: USER_NOTIFICATION, object: nil)
+        user?.family = family
+        user?.familyActive = family.id
     }
     
-    func getData() -> usermodel {
-        let family  = Family(name: exist(field: "familyName")!, photo: existData(field: "familyPhoto")!, id: exist(field: "familyId")!)
-        let xuser = usermodel(
-            name: (exist(field: "name")! as String) , phone: (exist(field: "phone")! as String) , photo: (existData(field: "photo"))! as NSData, families: (existArray(field: "families") as! Array<Family>), family: family)
-        return xuser
+    func getUser(uid: String, mainly: Bool) -> Void {
+        REF.child("/users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
+            if(snapshot.exists()){
+                let user = User(snapshot: snapshot)
+                if(mainly){
+                    self.user = user
+                }
+                if(self.duplicate(id:user.id)){
+                    self.users.append(User(snapshot: snapshot))
+                    NotificationCenter.default.post(name: USERS_NOTIFICATION, object: nil)
+                }
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+ 
+    func searchUser(uid: String)->User?{
+        for item in self.users {
+            if(item.id == uid){
+                return item
+            }
+        }
+        return nil
     }
     
     func clearData() {
-        userDefaults.removeObject(forKey: "name")
-        userDefaults.removeObject(forKey: "photo")
-        userDefaults.removeObject(forKey: "phone")
-        userDefaults.removeObject(forKey: "families")
-        userDefaults.removeObject(forKey: "familyId")
-        userDefaults.removeObject(forKey: "familyName")
-        userDefaults.removeObject(forKey: "familyPhoto")
+        self.user = nil
     }
     
-    private func exist(field: String) -> String? {
-        if let value = userDefaults.string(forKey: field) {
-            return value
-        }else {
-            return ""
+    private func removeUser(user: User) -> Void {
+        var cont = 0
+        for item in self.users {
+            if(item.id == user.id){
+                self.users.remove(at: cont)
+            }
+            cont += 1
         }
     }
-    private func existData(field: String) -> Data? {
-        if let value = userDefaults.data(forKey: field) {
-            return value
-        }else {
-            return UIImagePNGRepresentation(#imageLiteral(resourceName: "Profile2") )
+    func duplicate(id: String) -> Bool {
+        var bool = true
+        for item in self.users {
+            if(item.id == id){
+                bool = false
+                break
+            }
         }
+        return bool
     }
-    private func existArray(field: String) -> [Any] {
-        if let value = userDefaults.array(forKey: field) {
-            return value
-        }else {
-            return []
-        }
-    }
-    
-    
 }

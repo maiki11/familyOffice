@@ -14,6 +14,7 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
     var families : [Family] = []
     var ref: FIRDatabaseReference!
     var family : Family?
+    let familyService = FamilyService.instance
     var longPressTarget: (cell: UICollectionViewCell, indexPath: NSIndexPath)?
     
     @IBOutlet var familyCollection: UICollectionView!
@@ -25,9 +26,28 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         self.familyCollection.addGestureRecognizer(lpgr)
         self.clearsSelectionOnViewWillAppear = true
         
+        REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").observe(.childAdded, with: { (snapshot) -> Void in
+            if(snapshot.exists()){
+                REF_FAMILIES.child(snapshot.key).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    let family = Family(snapshot: snapshot)
+                    if (self.familyService.duplicate(id: family.id)){
+                        self.familyService.families.append(family)
+                        self.families.append(family)
+                        self.collectionView?.reloadData()
+                    }
+                    // ...
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+            }
+        })
+        
+     
+        
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.families = FamilyService.instance.families
+        self.families = familyService.families
         self.collectionView?.reloadData()
         Utility.Instance().clearObservers()
     }
@@ -100,10 +120,10 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
                         }
                     }))
                     alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.cancel, handler: nil))
-                    if(family.admin != ""){
+                    if(family.admin == FIRAuth.auth()?.currentUser?.uid){
                         alert.addAction(UIAlertAction(title: "Eliminar", style: UIAlertActionStyle.destructive, handler:  { action in
                             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-                                self.togglePendingDelete(_id: family.id)
+                                self.togglePendingDelete(family: family)
                                 self.families.remove(at: (indexPath?.row)!)
                                 self.collectionView?.deleteItems(at: [indexPath!])
                             }
@@ -128,9 +148,9 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         FamilyService.instance.selectFamily(family: family)
     }
     
-    func togglePendingDelete(_id: String) -> Void
+    func togglePendingDelete(family: Family) -> Void
     {
-        FamilyService.instance.delete(id: _id)
+        FamilyService.instance.delete(family: family)
         
     }
 

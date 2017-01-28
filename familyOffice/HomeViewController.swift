@@ -13,17 +13,20 @@ import FirebaseAuth
 class HomeViewController: UIViewController {
     
     var ref: FIRDatabaseReference!
+<<<<<<< HEAD
 
     var family = User.Instance().getData().family
 
+=======
+    var userService =  UserService.Instance()
+    var family = UserService.Instance().user?.family
+    var utilityService = Utility.Instance()
+>>>>>>> master
     @IBOutlet weak var familyImage: UIImageView!
     @IBOutlet weak var familyName: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        
-        ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
         Utility.Instance().loading(view: self.view)
         reloadFamily()
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
@@ -43,10 +46,11 @@ class HomeViewController: UIViewController {
     }
    
     func reloadFamily() -> Void {
-        family = User.Instance().getData().family
-        self.familyImage.image = UIImage(data: (family?.photoData)!)
-        self.familyName.text = family?.name ?? "No seleccionada"
-        if(family?.name != ""){
+        family = userService.user?.family
+        
+        if(family != nil){
+            self.familyImage.image = UIImage(data: (family?.photoData)!)
+            self.familyName.text = family?.name ?? "No seleccionada"
             Utility.Instance().stopLoading(view: self.view)
         }
     }
@@ -61,14 +65,5 @@ class HomeViewController: UIViewController {
             Utility.Instance().gotoView(view: "RegisterFamilyView", context: self)
         }
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

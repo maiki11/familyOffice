@@ -101,15 +101,7 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     @IBAction func handleBack(_ sender: UIButton) {
         Utility.Instance().gotoView(view: "StartView", context: self)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+  
     func createAccount(uid: String){
         let userModel = ["name" : self.nameTxtfield.text!,
                          "phone": self.phoneTxtfield.text!]
