@@ -13,8 +13,11 @@ import Firebase
 let USER_NOTIFICATION = Notification.Name("UserNotification")
 let NOFAMILIES_NOTIFICATION = Notification.Name("NoFamiliesNotification")
 let LOGINERROR = Notification.Name("LoginNotification")
-let REF = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
+let USERS_NOTIFICATION = Notification.Name("UserNotification")
 
+//Firebase References
+
+let REF = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
 let REF_FAMILIES = REF.child("families")
 let REF_USERS = REF.child("users")
 let STORAGEREF = FIRStorage.storage().reference(forURL: "gs://familyoffice-6017a.appspot.com")

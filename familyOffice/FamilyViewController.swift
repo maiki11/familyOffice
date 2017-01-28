@@ -10,8 +10,8 @@ import UIKit
 import Firebase
 
 class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    var members : [usermodel] = []
+    let userService = UserService.Instance()
+    var members : [User] = []
     var family : Family?
     var ref: FIRDatabaseReference!
     @IBOutlet weak var familyName: UILabel!
@@ -23,50 +23,38 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         familyName.text = family?.name
         ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com")
         loadMembers(table: self.membersTable)
-        
         imageFamily.image = UIImage(data: (family?.photoData)!)
+        
         // Do any additional setup after loading the view.
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(forName: USERS_NOTIFICATION, object: nil, queue: nil){ notification in
+            self.loadMembers(table: self.membersTable)
+        }
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: USERS_NOTIFICATION, object: nil)
+    }
     override func didReceiveMemoryWarning(){
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
+    @IBAction func handleExitFamily(_ sender: UIButton) {
+        FamilyService.instance.exitFamily(family: family!, uid: (FIRAuth.auth()?.currentUser?.uid)!)
+        Utility.Instance().gotoView(view: "TabBarControllerView", context: self)
+    }
     
     func loadMembers(table: UITableView){
-        ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com")
-        ref.child("/families/\((self.family?.id)!)/members").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            let refUsers = self.ref.child("/users/")
-            for item in value?.allKeys as! [String] {
-                refUsers.child(item).observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let value = snapshot.value as? NSDictionary
-                    var url : NSURL
-                    var data : Any
-                    if(snapshot.exists()){
-                        if ((value?["photoUrl"]) != nil) {
-                            url = (NSURL(string: (value?["photoUrl"] as? String)!) ?? nil)!
-                            data = NSData(contentsOf:url as URL)!
-                        } else {
-                            data = UIImagePNGRepresentation(#imageLiteral(resourceName: "Profile"))! as NSData
-                        }
-                        
-                        let xuser = usermodel(name: self.exist(field: "name", dictionary: value!), phone: self.exist(field: "phone", dictionary: value!), photo: data as! NSData, families: [], family: nil)
-                        self.members.append(xuser)
-                        table.reloadData()
-
-                    }
-                    
-                }) { (error) in
-                    
-                }
+        for item in family?.members?.allKeys as! [String] {
+            if let user = userService.searchUser(uid: item){
+                self.members.append(user)
+            }else{
+                userService.getUser(uid: item, mainly: false)
             }
-        }) { (error) in
-            print(error.localizedDescription)
         }
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

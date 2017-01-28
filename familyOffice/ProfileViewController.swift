@@ -9,16 +9,17 @@
 import UIKit
 
 class ProfileViewController: UIViewController{
+    var userService = UserService.Instance()
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet var userName: UILabel!
     @IBOutlet var logOutButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let profile = User.Instance().getData()
+        let profile = userService.user
         //self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         //self.profileImage.clipsToBounds = true
-        self.userName.text =  profile.name
-        self.profileImage.image = UIImage(data: profile.photo as Data)
+        self.userName.text =  profile?.name
+        self.profileImage.image = UIImage(data: (profile?.photo)! as Data)
         self.logOutButton.layer.borderColor = UIColor(red: 32.0/255, green: 53.0/255, blue:88.0/255, alpha: 1.0).cgColor 
         // Do any additional setup after loading the view.
     }
