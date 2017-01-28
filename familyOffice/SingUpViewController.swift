@@ -12,6 +12,7 @@ import FirebaseDatabase
 import GoogleSignIn
 
 private let auth = AuthService.authService
+private let animations = Animations.instance
 
 class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
 
@@ -20,7 +21,6 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     @IBOutlet weak var phoneTxtfield: UITextField!
     @IBOutlet weak var passwordTxtfield: UITextField!
     @IBOutlet weak var confirmPassTxtfield: UITextField!
-    @IBOutlet var googleSignUp: GIDSignInButton!
     
     let ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
   
@@ -33,6 +33,10 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
         
         self.confirmPassTxtfield.delegate = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -41,14 +45,57 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     
 
     @IBAction func handleSingUp(_ sender: UIButton) {
-        if(passwordTxtfield.text! == confirmPassTxtfield.text!){
-            FIRAuth.auth()?.createUser(withEmail: emailTxtfield.text!, password: passwordTxtfield.text!) { (user, error) in
-                if(error != nil){
-                    print("Algo salio mal!!")
+        var er: String?
+        if(nameTxtfield.text==""){
+            er = "Nombre debe ser capturado"
+            animations.shakeTextField(txt: nameTxtfield)
+        }else{
+            if(emailTxtfield.text==""){
+                er = "Correo electrónico debe ser capturado"
+                animations.shakeTextField(txt: emailTxtfield)
+            }else{
+                if(phoneTxtfield.text==""){
+                    er = "Celular debe ser capturado"
+                    animations.shakeTextField(txt: phoneTxtfield)
                 }else{
-                    self.createAccount(uid: (user?.uid)!)
+                    if(passwordTxtfield.text=="" || confirmPassTxtfield.text==""){
+                        er = "La contraseña y confirmación de contraseña deben ser capturadas"
+                        animations.shakeTextField(txt: passwordTxtfield)
+                        animations.shakeTextField(txt: confirmPassTxtfield)
+                    }else{
+                        if(passwordTxtfield.text! == confirmPassTxtfield.text!){
+                            FIRAuth.auth()?.createUser(withEmail: emailTxtfield.text!, password: passwordTxtfield.text!) { (user, error) in
+                                if let errCode = FIRAuthErrorCode(rawValue: error!._code) {
+                                    
+                                    switch errCode {
+                                    case .errorCodeInvalidEmail:
+                                        er = "Correo electrónico incorrecto"
+                                    case .errorCodeWrongPassword:
+                                        er = "Contraseña incorrecta"
+                                    case .errorCodeWeakPassword:
+                                        er = "La contraseña debe de contener al menos 6 caracteres"
+                                    default:
+                                        er = "Algo salio mal, intente más tarde"
+                                    }
+                                    //print("Algo salio mal!!")
+                                }else{
+                                    self.createAccount(uid: (user?.uid)!)
+                                }
+                            }
+                        }else{
+                            er = "Las contraseñas deben de coincidir"
+                            animations.shakeTextField(txt: passwordTxtfield)
+                            animations.shakeTextField(txt: confirmPassTxtfield)
+                        }
+                    }
                 }
             }
+        }
+        if(er != nil ){
+            let alert = UIAlertController(title: "Verifica tus datos", message: er, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     @IBAction func handleBack(_ sender: UIButton) {

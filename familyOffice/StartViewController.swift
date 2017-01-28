@@ -14,6 +14,7 @@ import AVFoundation
 import AVKit
 
 private let auth = AuthService.authService
+private let animations = Animations.instance
 private let utility = Utility.Instance()
 
 class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDelegate {
@@ -169,6 +170,8 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
             utility.disabledView()
             NotificationCenter.default.addObserver(forName: LOGINERROR, object: nil, queue: nil){_ in
                 let alert = UIAlertController(title: "Verifica tus datos", message: "Su correo electrónico y contraseña son incorrectas.", preferredStyle: .alert)
+                animations.shakeTextField(txt: self.emailField)
+                animations.shakeTextField(txt: self.passwordField)
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(okAction)
                 self.present(alert, animated: true, completion: nil)
@@ -179,6 +182,8 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
         }else{
             let alert = UIAlertController(title: "Verifica tus datos", message: "Inserte un correo electrónico y una contraseña", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            animations.shakeTextField(txt: emailField)
+            animations.shakeTextField(txt: passwordField)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
             utility.stopLoading(view: self.view)
