@@ -95,30 +95,17 @@
                                 </connections>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-gR-T0q">
-<<<<<<< HEAD
-                                <rect key="frame" x="99" y="591" width="217" height="29"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-9j-XHn">
-                                        <rect key="frame" x="0.0" y="0.0" width="187" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-=======
                                 <rect key="frame" x="67.333333333333343" y="574" width="280.66666666666663" height="152"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-9j-XHn">
                                         <rect key="frame" x="0.0" y="0.0" width="243.66666666666669" height="152"/>
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
->>>>>>> maiki11
                                         <color key="textColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="highlightedColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rB-XC-zD2">
-<<<<<<< HEAD
-                                        <rect key="frame" x="187" y="0.0" width="30" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-=======
                                         <rect key="frame" x="243.66666666666669" y="0.0" width="37" height="152"/>
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
->>>>>>> maiki11
                                         <state key="normal" title="aquí"/>
                                         <connections>
                                             <action selector="signUp:" destination="gkV-lX-uju" eventType="touchUpInside" id="Wgi-Ap-2PZ"/>
@@ -127,11 +114,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AwA-sU-zu3" customClass="GIDSignInButton">
-<<<<<<< HEAD
-                                <rect key="frame" x="40" y="532" width="334" height="69"/>
-=======
                                 <rect key="frame" x="40" y="544" width="192" height="40"/>
->>>>>>> maiki11
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5fA-1h-PlK"/>
