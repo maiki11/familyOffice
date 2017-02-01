@@ -13,15 +13,10 @@ import FirebaseAuth
 class HomeViewController: UIViewController {
     
     var ref: FIRDatabaseReference!
-<<<<<<< HEAD
-
-    var family = User.Instance().getData().family
-
-=======
     var userService =  UserService.Instance()
     var family = UserService.Instance().user?.family
     var utilityService = Utility.Instance()
->>>>>>> master
+
     @IBOutlet weak var familyImage: UIImageView!
     @IBOutlet weak var familyName: UILabel!
     

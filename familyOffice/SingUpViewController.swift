@@ -65,22 +65,23 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
                     }else{
                         if(passwordTxtfield.text! == confirmPassTxtfield.text!){
                             FIRAuth.auth()?.createUser(withEmail: emailTxtfield.text!, password: passwordTxtfield.text!) { (user, error) in
-                                if let errCode = FIRAuthErrorCode(rawValue: error!._code) {
-                                    
-                                    switch errCode {
-                                    case .errorCodeInvalidEmail:
-                                        er = "Correo electrónico incorrecto"
-                                    case .errorCodeWrongPassword:
-                                        er = "Contraseña incorrecta"
-                                    case .errorCodeWeakPassword:
-                                        er = "La contraseña debe de contener al menos 6 caracteres"
-                                    default:
-                                        er = "Algo salio mal, intente más tarde"
-                                    }
-                                    //print("Algo salio mal!!")
-                                }else{
+                                if(error == nil){
                                     self.createAccount(uid: (user?.uid)!)
                                 }
+                                else{
+                                    let errCode : FIRAuthErrorCode = FIRAuthErrorCode(rawValue: error!._code)!
+                                        switch errCode {
+                                        case .errorCodeInvalidEmail:
+                                            er = "Correo electrónico incorrecto"
+                                        case .errorCodeWrongPassword:
+                                            er = "Contraseña incorrecta"
+                                        case .errorCodeWeakPassword:
+                                            er = "La contraseña debe de contener al menos 6 caracteres"
+                                        default:
+                                            er = "Algo salio mal, intente más tarde"
+                                        }
+                                }
+                               
                             }
                         }else{
                             er = "Las contraseñas deben de coincidir"
@@ -115,6 +116,29 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     
     @IBAction func googlePlusTouchUpInside(sender: AnyObject){
         GIDSignIn.sharedInstance().signIn()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        moveTextField(textField: textField, moveDistance: -200, up: true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        moveTextField(textField: textField, moveDistance: -200, up: false)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func moveTextField(textField: UITextField, moveDistance: Int, up: Bool){
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance: -moveDistance)
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
     }
     
 }
