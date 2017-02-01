@@ -14,6 +14,7 @@ import AVFoundation
 import AVKit
 
 private let auth = AuthService.authService
+private let animations = Animations.instance
 private let utility = Utility.Instance()
 
 class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDelegate {
@@ -21,8 +22,8 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     @IBOutlet var logo: UIImageView!
     @IBOutlet var titleLogo: UIImageView!
     @IBOutlet var googleSignUp: GIDSignInButton!
-    @IBOutlet var emailField: textFieldStyleController!
-    @IBOutlet var passwordField: textFieldStyleController!
+    @IBOutlet var emailField: UITextField!
+    @IBOutlet var passwordField: UITextField!
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var footer: UIStackView!
     
@@ -38,6 +39,12 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     override func viewDidLoad() {
         auth.isAuth(view: self.self, name:"TabBarControllerView")
         super.viewDidLoad()
+        print("hola")
+        print(UIDevice().description)
+        if(UIDevice.current.model == "Iphone 5s"){
+            logo.frame.origin.y = logo.frame.origin.y-20
+        }
+        
         GIDSignIn.sharedInstance().uiDelegate = self
         //Loading video
         let videoString:String? = Bundle.main.path(forResource: "background", ofType: "mp4")
@@ -169,6 +176,8 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
             utility.disabledView()
             NotificationCenter.default.addObserver(forName: LOGINERROR, object: nil, queue: nil){_ in
                 let alert = UIAlertController(title: "Verifica tus datos", message: "Su correo electrónico y contraseña son incorrectas.", preferredStyle: .alert)
+                animations.shakeTextField(txt: self.emailField)
+                animations.shakeTextField(txt: self.passwordField)
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(okAction)
                 self.present(alert, animated: true, completion: nil)
@@ -176,13 +185,11 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
                 utility.stopLoading(view: self.view)
             }
             auth.login(email: emailField.text!, password: passwordField.text!)
-            
-            
-            
-            
         }else{
             let alert = UIAlertController(title: "Verifica tus datos", message: "Inserte un correo electrónico y una contraseña", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            animations.shakeTextField(txt: emailField)
+            animations.shakeTextField(txt: passwordField)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
             utility.stopLoading(view: self.view)
@@ -200,6 +207,44 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-
+    
+    @IBAction func emailField(_ sender: Any) {
+        textFieldDidBeginEditing(self.emailField)
+    }
+    
+    @IBAction func emailFieldEnd(_ sender: Any) {
+        textFieldDidEndEditing(self.emailField)
+    }
+    
+    @IBAction func passwordFieldBeginEditing(_ sender: Any) {
+        textFieldDidBeginEditing(self.passwordField)
+    }
+    
+    @IBAction func passwordFieldEndEditing(_ sender: Any) {
+        textFieldDidEndEditing(self.passwordField)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        moveTextField(textField: textField, moveDistance: -150, up: true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        moveTextField(textField: textField, moveDistance: -150, up: false)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func moveTextField(textField: UITextField, moveDistance: Int, up: Bool){
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance: -moveDistance)
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
 
 }
