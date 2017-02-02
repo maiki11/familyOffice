@@ -13,17 +13,25 @@ class textFieldStyleController: UITextField, UITextFieldDelegate {
     //textfield style
     let border = CALayer()
     let width = CGFloat(2.0)
+    var borderColor: UIColor! = UIColor(red: 255/255, green: 255/255, blue:255/255, alpha: 1.0 )
     
     required init?(coder aDecoder: (NSCoder!)) {
         super.init(coder: aDecoder)
         setup()
+        changeColorText(color: borderColor)
         self.delegate=self;
-        border.borderColor = UIColor( red: 255/255, green: 255.0/255, blue:255.0/255, alpha: 1.0 ).cgColor
+        //border.borderColor = borderColor.cgColor
         
         border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
         border.borderWidth = width
         self.layer.addSublayer(border)
         self.layer.masksToBounds = true
+    }
+    
+    func changeColorText(color: UIColor){
+        border.borderColor = color.cgColor
+        border.borderWidth = width
+        self.layer.addSublayer(border)
     }
     
     override func draw(_ rect: CGRect) {

@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     var userService =  UserService.Instance()
     var family = UserService.Instance().user?.family
     var utilityService = Utility.Instance()
+
     @IBOutlet weak var familyImage: UIImageView!
     @IBOutlet weak var familyName: UILabel!
     
@@ -28,6 +29,7 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
             self.checkFamily()
         }
+
         NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){_ in 
             self.reloadFamily()
             Utility.Instance().stopLoading(view: self.view)
