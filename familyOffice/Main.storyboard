@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gkV-lX-uju">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gkV-lX-uju">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -95,7 +95,7 @@
                                 </connections>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-gR-T0q">
-                                <rect key="frame" x="67" y="574" width="280.66666666666669" height="152"/>
+                                <rect key="frame" x="67.333333333333343" y="574" width="280.66666666666663" height="152"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-9j-XHn">
                                         <rect key="frame" x="0.0" y="0.0" width="243.66666666666669" height="152"/>
@@ -386,31 +386,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NN-uv-FnZ">
-                                <rect key="frame" x="154" y="5" width="68" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iwK-bb-aXW">
-                                <rect key="frame" x="20" y="24" width="60" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Family Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiZ-VY-qOu">
-                                <rect key="frame" x="88" y="39" width="228" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfE-34-gyN">
+                                <rect key="frame" x="0.0" y="30" width="414" height="223"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iwK-bb-aXW">
+                                        <rect key="frame" x="132" y="44" width="150" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="8iV-fH-vzv"/>
+                                            <constraint firstAttribute="height" constant="150" id="NDi-Ri-FJ4"/>
+                                        </constraints>
+                                    </imageView>
+                                    <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBE-iw-Wld">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <items>
+                                            <navigationItem id="U0v-ve-cTO"/>
+                                        </items>
+                                    </navigationBar>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Family Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiZ-VY-qOu">
+                                        <rect key="frame" x="0.0" y="210" width="414" height="14.333333333333343"/>
+                                        <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="iwK-bb-aXW" firstAttribute="centerX" secondItem="vfE-34-gyN" secondAttribute="centerX" id="4jt-YJ-oRH"/>
+                                    <constraint firstItem="wiZ-VY-qOu" firstAttribute="centerX" secondItem="vfE-34-gyN" secondAttribute="centerX" id="8CI-Or-Wg1"/>
+                                    <constraint firstAttribute="trailing" secondItem="wiZ-VY-qOu" secondAttribute="trailing" id="Fp4-6X-OtE"/>
+                                    <constraint firstItem="wiZ-VY-qOu" firstAttribute="top" secondItem="iwK-bb-aXW" secondAttribute="bottom" constant="16" id="UQ7-uG-CHP"/>
+                                    <constraint firstItem="WBE-iw-Wld" firstAttribute="leading" secondItem="vfE-34-gyN" secondAttribute="leading" id="Zg4-YU-j7l"/>
+                                    <constraint firstItem="wiZ-VY-qOu" firstAttribute="leading" secondItem="vfE-34-gyN" secondAttribute="leading" id="bNi-cl-rQ5"/>
+                                    <constraint firstAttribute="width" secondItem="vfE-34-gyN" secondAttribute="height" multiplier="414:223" id="fBD-wQ-wKh"/>
+                                    <constraint firstItem="WBE-iw-Wld" firstAttribute="top" secondItem="vfE-34-gyN" secondAttribute="top" id="ppi-ac-v0q"/>
+                                    <constraint firstAttribute="trailing" secondItem="WBE-iw-Wld" secondAttribute="trailing" id="psX-QL-tCZ"/>
+                                    <constraint firstItem="iwK-bb-aXW" firstAttribute="top" secondItem="WBE-iw-Wld" secondAttribute="bottom" id="zK2-hQ-amn"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vfE-34-gyN" firstAttribute="top" secondItem="9GE-zD-wLJ" secondAttribute="bottom" constant="10" id="HGh-5P-E7i"/>
+                            <constraint firstItem="vfE-34-gyN" firstAttribute="leading" secondItem="0ik-yb-Voo" secondAttribute="leading" id="Veb-B9-EnT"/>
+                            <constraint firstAttribute="trailing" secondItem="vfE-34-gyN" secondAttribute="trailing" id="pUg-9Y-bNj"/>
+                            <constraint firstItem="vfE-34-gyN" firstAttribute="centerX" secondItem="0ik-yb-Voo" secondAttribute="centerX" id="vIr-Ub-SQX"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="Home" id="u00-Wi-OtT"/>
                     <connections>
                         <outlet property="familyImage" destination="iwK-bb-aXW" id="qcN-FF-goM"/>
                         <outlet property="familyName" destination="wiZ-VY-qOu" id="sFb-jN-c00"/>
+                        <outlet property="navBar" destination="WBE-iw-Wld" id="ARn-ua-jej"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNJ-R1-TZ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -518,7 +544,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="414" height="84"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6UI-Je-hcE" id="CEI-UN-2J5">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="83"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="83.666666666666671"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K8z-zN-hbz">
@@ -600,7 +626,7 @@
             <objects>
                 <navigationController id="yrp-og-A18" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Familias" image="Group" id="oUv-KB-294"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LRu-1F-eID">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LRu-1F-eID">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -894,7 +920,7 @@
                                 <rect key="frame" x="0.0" y="286" width="381" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yoK-A7-a26" id="Soa-RX-AVA">
-                                    <rect key="frame" x="0.0" y="0.0" width="381" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="381" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

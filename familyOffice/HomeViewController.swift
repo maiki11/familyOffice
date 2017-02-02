@@ -17,11 +17,13 @@ class HomeViewController: UIViewController {
     var family = UserService.Instance().user?.family
     var utilityService = Utility.Instance()
 
+    @IBOutlet var navBar: UINavigationBar!
     @IBOutlet weak var familyImage: UIImageView!
     @IBOutlet weak var familyName: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navBar.isHidden = true
         Utility.Instance().loading(view: self.view)
         reloadFamily()
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
