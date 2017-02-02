@@ -151,7 +151,6 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
     func togglePendingDelete(family: Family) -> Void
     {
         FamilyService.instance.delete(family: family)
-        
     }
 
     
