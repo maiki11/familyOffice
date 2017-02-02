@@ -11,6 +11,8 @@ import UIKit
 import Firebase
 
 class UserService {
+    let avtivityService = ActivityLogService.Instance()
+    let utilityService = Utility.Instance()
     public var user : User? = nil
     public var users: [User] = []
     private init(){
@@ -19,7 +21,7 @@ class UserService {
         return instance
     }
     
-    static let instance : UserService = UserService()
+    private static let instance : UserService = UserService()
    
     func setFamily(family: Family) -> Void {
         user?.family = family
@@ -42,7 +44,30 @@ class UserService {
             print(error.localizedDescription)
         }
     }
- 
+    func changePassword(oldPass: String, newPass: String) -> Void {
+        let user = FIRAuth.auth()?.currentUser
+        FIRAuth.auth()?.signIn(withEmail: (user?.email)!, password: oldPass) { (user, error) in
+            if((error) != nil){
+                print(error.debugDescription)
+            }else{
+                user?.updatePassword(newPass) { error in
+                    if let error = error {
+                        NotificationCenter.default.post(name: ERROR_NOTIFICATION, object: nil)
+                        print(error.localizedDescription)
+                    } else {
+                        
+                        self.avtivityService.create(id: (self.user?.id)!, activity: "Se cambio contraseña", photo: (self.user?.photoURL)!, type: "personalInfo")
+                        NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: nil)
+                    }
+                }
+            }
+        }
+    }
+    func updateUser(user: User) -> Void {
+        REF_USERS.child(user.id).updateChildValues(user.toDictionary() as! [AnyHashable : Any])
+        self.avtivityService.create(id: (self.user?.id)!, activity: "Se actualizo información personal", photo: (self.user?.photoURL)!, type: "personalInfo")
+        self.user = user
+    }
     func searchUser(uid: String)->User?{
         for item in self.users {
             if(item.id == uid){

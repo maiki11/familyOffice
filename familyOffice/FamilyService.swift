@@ -15,6 +15,8 @@ class FamilyService {
     public static let instance = FamilyService()
     var userService = UserService.Instance()
     var families: [Family] = []
+    let utilityService = Utility.Instance()
+    let avtivityService = ActivityLogService.Instance()
     
     private init() {
     }
@@ -31,8 +33,6 @@ class FamilyService {
                             if(self.userService.user?.familyActive == item){
                                 self.selectFamily(family: family)
                             }
-                        }else{
-                            NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
                         }
                         
                     })
@@ -49,12 +49,12 @@ class FamilyService {
     func delete(family : Family) {
         REF_FAMILIES.child("\((family.id)!)/members").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
-            let refFamily = REF.child("users")
             for item in value?.allKeys as! [String] {
-                refFamily.child(item).child("families/\((family.id)!)").removeValue()
+                REF.child("users").child(item).child("families/\((family.id)!)").removeValue()
                 self.removeFamily(family: family)
             }
             REF_FAMILIES.child(family.id!).removeValue()
+            self.avtivityService.create(id: (self.userService.user?.id)!, activity: "Se elimino la familia \(family.name)", photo: (family.photoURL?.absoluteString)!, type: "deleteFamily")
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -78,6 +78,7 @@ class FamilyService {
                         //Set family for app
                         self.selectFamily(family: family)
                         self.families.append(family)
+                        self.avtivityService.create(id: (self.userService.user?.id)!, activity: "Se creo la familia  \(family.name)", photo: downloadURL.absoluteString, type: "addFamily")
                         //Go to Home
                         Utility.Instance().gotoView(view: "TabBarControllerView", context: view.self)
                     }
@@ -90,6 +91,7 @@ class FamilyService {
         print(REF_USERS.child("/\(uid)/families/\((family.id)!)").description())
         REF_USERS.child("/\(uid)/families/\((family.id)!)").removeValue()
         REF_FAMILIES.child("/\((family.id)!)/members/\(uid)").removeValue()
+        
         removeFamily(family: family)
     }
     
