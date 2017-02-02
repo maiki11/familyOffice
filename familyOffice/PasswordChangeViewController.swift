@@ -17,7 +17,7 @@ class PasswordChangeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let homeButton : UIBarButtonItem = UIBarButtonItem(title: "Atras", style: UIBarButtonItemStyle.plain, target: self, action: #selector(back(sender:)))
-        let doneButton : UIBarButtonItem = UIBarButtonItem(title: "Cambiar", style: UIBarButtonItemStyle.plain, target: self, action:#selector(PasswordChangeViewController.changePassword(sender:)))
+        let doneButton : UIBarButtonItem = UIBarButtonItem(title: "Cambiar", style: UIBarButtonItemStyle.plain, target: self, action:#selector(changePassword(sender:)))
         
         self.navigationItem.backBarButtonItem = homeButton
         self.navigationItem.rightBarButtonItem = doneButton
