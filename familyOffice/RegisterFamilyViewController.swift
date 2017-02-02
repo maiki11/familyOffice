@@ -121,8 +121,13 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         
         /*if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             imageView.contentMode = .scaleAspectFit
+<<<<<<< HEAD
             imageView.image = Utility.Instance().resizeImage(image: pickedImage, targetSize: CGSize(width: 600.0, height: 600.0))
         }else if let cameraImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
+=======
+            imageView.image = Utility.Instance().resizeImage(image: pickedImage, targetSize: CGSize(width: 200.0, height: 200.0))
+        }else if let cameraImage = info[UIImagePickerControllerEditedImage] as? UIImage{
+>>>>>>> Leonardo
             imageView.contentMode = .scaleAspectFit
             imageView.image = Utility.Instance().resizeImage(image: cameraImage, targetSize: CGSize(width: 600.0, height: 600.0))
         }
