@@ -8,14 +8,22 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController{
-    var userService = UserService.Instance()
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    let userService = UserService.Instance()
+    var activities : [Record] = []
+    
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet var userName: UILabel!
     @IBOutlet var logOutButton: UIButton!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let profile = userService.user
+        ActivityLogService.Instance().getActivities(id: userService.user!.id)
         //self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         //self.profileImage.clipsToBounds = true
         self.userName.text =  profile?.name
@@ -25,9 +33,23 @@ class ProfileViewController: UIViewController{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.activities = ActivityLogService.Instance().activityLog
+        self.activities.sort(by: {$0.date > $1.date})
+        self.tableView.reloadData()
+        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
+            Utility.Instance().stopLoading(view: self.view)
+            self.activities = ActivityLogService.Instance().activityLog
+            self.activities.sort(by: {$0.date > $1.date})
+            self.tableView.reloadData()
+        }
         
     }
-
+    @IBAction func segmentedControl(_ sender: UISegmentedControl) {
+       tableView.reloadData()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -37,6 +59,39 @@ class ProfileViewController: UIViewController{
         AuthService.authService.logOut()
         Utility.Instance().gotoView(view: "StartView", context: self)
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if segmentedControl.selectedSegmentIndex == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! recordTableViewCell
+            let activity = activities[indexPath.row]
+            cell.date.text = activity.date
+            cell.activity.text = activity.activity
+            cell.iconImage.image = #imageLiteral(resourceName: "logo")
+            if(activity.photo != nil){
+                cell.photo.image = UIImage(data: activity.photo!)
+            }
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath)
+            return cell
+        }
+
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if segmentedControl.selectedSegmentIndex == 1 {
+             return activities.count
+        }
+        return 0
+       
+    }
+    
+    
 
     /*
     // MARK: - Navigation

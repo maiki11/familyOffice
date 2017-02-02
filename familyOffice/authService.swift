@@ -12,6 +12,7 @@ import UIKit
 class AuthService {
     public static let authService = AuthService()
     let userService = UserService.Instance()
+    let avtivityService = ActivityLogService.Instance()
     var uid = FIRAuth.auth()?.currentUser?.uid
     private init() {
     }
@@ -23,6 +24,7 @@ class AuthService {
                 print(error.debugDescription)
                 NotificationCenter.default.post(name: LOGINERROR, object: nil)
             }
+            self.avtivityService.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
         }
     }
 
@@ -33,6 +35,7 @@ class AuthService {
     func login(credential:FIRAuthCredential){
         FIRAuth.auth()?.signIn(with: credential ) { (user, error) in
             print("Usuario autentificado con google")
+            self.avtivityService.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
         }
     }
     func logOut(){
@@ -40,9 +43,6 @@ class AuthService {
         userService.clearData()
         self.userStatus(state: "Offline")
         FamilyService.instance.families = []
-    }
-
-    func registerCell(user: AnyObject) {
     }
 
     //Create account with federate entiies like Facebook Twitter Google  etc
@@ -61,6 +61,7 @@ class AuthService {
                         let xuserModel = ["name" : user.displayName!,
                                           "photoUrl": downloadURL] as [String : Any]
                         REF_USERS.child(user.uid).setValue(xuserModel)
+                        self.avtivityService.create(id: user.uid, activity: "Se actualizo información personal", photo: downloadURL, type: "sesion")
                         self.userService.getUser(uid: user.uid, mainly: true)
                         //self.userStatus(state: "Online")
                     }
@@ -71,11 +72,11 @@ class AuthService {
     }
 
     func isAuth(view: UIViewController, name: String)  {
-        var checkFamily = false;
+        var checkFamily = false
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             self.uid = user?.uid
             if (user != nil) {
-
+                
                 NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
                     Utility.Instance().gotoView(view: "RegisterFamilyView", context: view)
                     return

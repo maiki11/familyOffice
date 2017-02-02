@@ -74,6 +74,12 @@ class Utility {
         
         activityIndicatior.stopAnimating()
     }
+    func getDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy hh:mm"
+        return formatter.string(from: Date())
+    }
+    
     func clearObservers(){
         REF.removeAllObservers()
         REF_USERS.removeAllObservers()
@@ -81,7 +87,7 @@ class Utility {
         NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
     }
     
-    func exist(field: String, dictionary:NSDictionary) -> String {
+    func exist(field: String, dictionary:NSDictionary) -> String! {
         if let value = dictionary[field] {
             return value as! String
         }else {
