@@ -9,13 +9,15 @@ import Foundation
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+
 private var activityIndicatior:UIActivityIndicatorView = UIActivityIndicatorView()
+
 class Utility {
     
     private init(){
     }
     public static func Instance() -> Utility {
-                return instance
+        return instance
     }
     static let instance : Utility = Utility()
     var state = 0

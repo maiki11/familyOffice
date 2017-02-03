@@ -10,8 +10,9 @@ import UIKit
 
 class PersonalDataTableViewController: UITableViewController {
     
-    var userDictionary = UserService.Instance().user!.toDictionary()
-    var user : User = UserService.Instance().user!
+    var userDictionary = USER_SERVICE.user!.toDictionary()
+    var user : User = USER_SERVICE.user!
+    
     var date : String!
     var placeholders = ["Nombre", "Teléfono", "Dirección", "Fecha de Cumpleaños","", "RFC", "CURP", "NSS", "Tipo de sangre"]
     var aboutkeys = ["name", "phone",  "address","birthday","", "rfc", "curp", "nss", "bloodType"]
@@ -134,7 +135,7 @@ class PersonalDataTableViewController: UITableViewController {
             }
             index += 1
         }
-        UserService.Instance().updateUser(user: user)
+        USER_SERVICE.updateUser(user: user)
     }
     
     

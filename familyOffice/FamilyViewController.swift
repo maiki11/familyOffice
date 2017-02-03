@@ -7,13 +7,13 @@
 
 
 import UIKit
-import Firebase
+import FirebaseAuth
 
 class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let userService = UserService.Instance()
+    
     var members : [User] = []
     var family : Family?
-    var ref: FIRDatabaseReference!
+    
     @IBOutlet weak var familyName: UILabel!
     @IBOutlet weak var imageFamily: UIImageView!
     @IBOutlet weak var membersTable: UITableView!
@@ -21,9 +21,10 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         familyName.text = family?.name
-        ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com")
         loadMembers(table: self.membersTable)
-        imageFamily.image = UIImage(data: (family?.photoData)!)
+        if let data = STORAGE_SERVICE.search(url: (family?.photoURL?.absoluteString)!) {
+            imageFamily.image = UIImage(data: data)
+        }
         
         // Do any additional setup after loading the view.
     }
@@ -42,16 +43,16 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @IBAction func handleExitFamily(_ sender: UIButton) {
-        FamilyService.instance.exitFamily(family: family!, uid: (FIRAuth.auth()?.currentUser?.uid)!)
-        Utility.Instance().gotoView(view: "TabBarControllerView", context: self)
+        FAMILY_SERVICE.exitFamily(family: family!, uid: (FIRAuth.auth()?.currentUser?.uid)!)
+        UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
     }
     
     func loadMembers(table: UITableView){
         for item in family?.members?.allKeys as! [String] {
-            if let user = userService.searchUser(uid: item){
+            if let user = USER_SERVICE.searchUser(uid: item){
                 self.members.append(user)
             }else{
-                userService.getUser(uid: item, mainly: false)
+                USER_SERVICE.getUser(uid: item, mainly: false)
             }
         }
         
@@ -69,7 +70,11 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FamilyMemberTableViewCell
         let member = self.members[indexPath.row]
         cell.name.text = member.name
-        cell.memberImage.image = UIImage(data: member.photo as Data)
+        if let data = STORAGE_SERVICE.search(url: member.photoURL) {
+            cell.memberImage.image = UIImage(data: data)
+        }else {
+            cell.memberImage.image = #imageLiteral(resourceName: "profile_default")
+        }
         cell.phone.text = member.phone
         
         return cell

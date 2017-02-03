@@ -11,7 +11,6 @@ import Firebase
 
 struct User {
     
-    static let utilityService = Utility.Instance()
     static let kUserNameKey = "name"
     static let kUserIdKey = "id"
     static let kUserPhotoUrlKey = "photoUrl"
@@ -28,7 +27,6 @@ struct User {
     let id: String!
     var name : String!
     var phone: String!
-    var photo: Data!
     var photoURL: String!
     var families : NSDictionary? = nil
     var family: Family? = nil
@@ -40,12 +38,11 @@ struct User {
     var address : String!
     var bloodtype: String!
     
-    init(id: String, name: String, phone: String, photo: Data, photoURL: String, families: NSDictionary, family : Family, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String) {
+    init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, family : Family, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String) {
         self.id = id
         self.name = name
         self.phone = phone
         self.photoURL = photoURL
-        self.photo =  photo
         self.families = families
         self.family = family
         self.familyActive = familyActive
@@ -61,22 +58,16 @@ struct User {
         let snapshotValue = snapshot.value as! NSDictionary
         self.name = snapshotValue[User.kUserNameKey] as! String
         self.id = snapshot.key
-        self.photoURL = User.utilityService.exist(field: User.kUserPhotoUrlKey, dictionary: snapshotValue)
-        self.familyActive = User.utilityService.exist(field: User.kUserFamilyActiveKey, dictionary: snapshotValue)
-        if self.photoURL != "" {
-            self.photo = NSData(contentsOf: URL(string: self.photoURL!)!) as Data?
-        }else{
-            self.photo = UIImagePNGRepresentation(#imageLiteral(resourceName: "profile_default"))
-        }
-        
-        self.address = User.utilityService.exist(field: User.kUserAddressKey, dictionary: snapshotValue )
-        self.birthday = User.utilityService.exist(field: User.kUserBirthdayKey, dictionary: snapshotValue )
-        self.curp = User.utilityService.exist(field: User.kUserCurpKey, dictionary: snapshotValue)
-        self.rfc = User.utilityService.exist(field: User.kUserRFCKey, dictionary: snapshotValue)
-        self.nss = User.utilityService.exist(field: User.kUserNSSKey, dictionary: snapshotValue)
-        self.bloodtype = User.utilityService.exist(field: User.kUserBloodTypeKey, dictionary: snapshotValue)
-        self.families = User.utilityService.existNSDictionary(field: User.kUserFamiliesKey, dictionary: snapshotValue)
-        self.phone = User.utilityService.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
+        self.photoURL = UTILITY_SERVICE.exist(field: User.kUserPhotoUrlKey, dictionary: snapshotValue)
+        self.familyActive = UTILITY_SERVICE.exist(field: User.kUserFamilyActiveKey, dictionary: snapshotValue)
+        self.address = UTILITY_SERVICE.exist(field: User.kUserAddressKey, dictionary: snapshotValue )
+        self.birthday = UTILITY_SERVICE.exist(field: User.kUserBirthdayKey, dictionary: snapshotValue )
+        self.curp = UTILITY_SERVICE.exist(field: User.kUserCurpKey, dictionary: snapshotValue)
+        self.rfc = UTILITY_SERVICE.exist(field: User.kUserRFCKey, dictionary: snapshotValue)
+        self.nss = UTILITY_SERVICE.exist(field: User.kUserNSSKey, dictionary: snapshotValue)
+        self.bloodtype = UTILITY_SERVICE.exist(field: User.kUserBloodTypeKey, dictionary: snapshotValue)
+        self.families = UTILITY_SERVICE.existNSDictionary(field: User.kUserFamiliesKey, dictionary: snapshotValue)
+        self.phone = UTILITY_SERVICE.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
     }
     
     func toDictionary() -> NSDictionary {

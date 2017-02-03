@@ -9,32 +9,35 @@
 import UIKit
 
 class PasswordChangeViewController: UIViewController {
-    let userService = UserService.Instance()
     @IBOutlet weak var oldPassword: UITextField!
     @IBOutlet weak var newPassword: UITextField!
     @IBOutlet weak var repeatPass: UITextField!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        let homeButton : UIBarButtonItem = UIBarButtonItem(title: "Atras", style: UIBarButtonItemStyle.plain, target: self, action: #selector(back(sender:)))
+        let homeButton : UIBarButtonItem = UIBarButtonItem(title: "Atras", style: .plain, target: self, action: #selector(back(sender:)))
         let doneButton : UIBarButtonItem = UIBarButtonItem(title: "Cambiar", style: UIBarButtonItemStyle.plain, target: self, action:#selector(changePassword(sender:)))
         
         self.navigationItem.backBarButtonItem = homeButton
         self.navigationItem.rightBarButtonItem = doneButton
+        super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
     }
    
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
-             Utility.Instance().stopLoading(view: self.view)
+             UTILITY_SERVICE.stopLoading(view: self.view)
         }
         NotificationCenter.default.addObserver(forName: ERROR_NOTIFICATION, object: nil, queue: nil){_ in
-             Utility.Instance().stopLoading(view: self.view)
+             UTILITY_SERVICE.stopLoading(view: self.view)
            
         }
         
     }
     
+    @IBAction func savePassword(_ sender: Any) {
+        changePassword(sender: nil)
+    }
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
         NotificationCenter.default.removeObserver(ERROR_NOTIFICATION)
@@ -47,10 +50,10 @@ class PasswordChangeViewController: UIViewController {
         _ =  navigationController?.popViewController(animated: true)
     }
     
-    func changePassword(sender: UIBarButtonItem) -> Void {
-        Utility.Instance().loading(view: self.view)
-        if(newPassword.text == repeatPass.text){
-            userService.changePassword(oldPass: oldPassword.text!, newPass: newPassword.text!)
+    func changePassword(sender: UIBarButtonItem?) -> Void {
+        UTILITY_SERVICE.loading(view: self.view)
+        if(newPassword.text == repeatPass.text ){
+            USER_SERVICE.changePassword(oldPass: oldPassword.text!, newPass: newPassword.text!)
         }
     }
     /*

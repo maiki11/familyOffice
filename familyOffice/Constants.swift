@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-
+//Notification Center
 let USER_NOTIFICATION = Notification.Name("UserNotification")
 let NOFAMILIES_NOTIFICATION = Notification.Name("NoFamiliesNotification")
 let LOGINERROR = Notification.Name("LoginNotification")
@@ -29,3 +29,11 @@ let REF_ACTIVITY = REF.child("activityLog")
 //Storage Reference
 let STORAGEREF = FIRStorage.storage().reference(forURL: "gs://familyoffice-6017a.appspot.com")
 
+//Service
+let ACTIVITYLOG_SERVICE = ActivityLogService.Instance()
+let UTILITY_SERVICE = Utility.Instance()
+let AUTH_SERVICE = AuthService.Instance()
+let ANIMATIONS = Animations.instance
+let STORAGE_SERVICE = StorageService.Instance()
+let FAMILY_SERVICE = FamilyService.Instance()
+let USER_SERVICE = UserService.Instance()

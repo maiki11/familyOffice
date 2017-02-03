@@ -10,10 +10,15 @@ import Foundation
 import FirebaseAuth
 import UIKit
 class AuthService {
-    public static let authService = AuthService()
-    let userService = UserService.Instance()
-    let avtivityService = ActivityLogService.Instance()
     var uid = FIRAuth.auth()?.currentUser?.uid
+    
+    public static func Instance() -> AuthService {
+        return instance
+    }
+    
+    private static let instance : AuthService = AuthService()
+    
+    
     private init() {
     }
     //MARK: Shared Instance
@@ -24,7 +29,7 @@ class AuthService {
                 print(error.debugDescription)
                 NotificationCenter.default.post(name: LOGINERROR, object: nil)
             }
-            self.avtivityService.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
+            ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
         }
     }
 
@@ -35,14 +40,14 @@ class AuthService {
     func login(credential:FIRAuthCredential){
         FIRAuth.auth()?.signIn(with: credential ) { (user, error) in
             print("Usuario autentificado con google")
-            self.avtivityService.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
+            ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
         }
     }
     func logOut(){
         try! FIRAuth.auth()!.signOut()
-        userService.clearData()
+        USER_SERVICE.clearData()
         self.userStatus(state: "Offline")
-        FamilyService.instance.families = []
+        FAMILY_SERVICE.families = []
     }
 
     //Create account with federate entiies like Facebook Twitter Google  etc
@@ -61,8 +66,8 @@ class AuthService {
                         let xuserModel = ["name" : user.displayName!,
                                           "photoUrl": downloadURL] as [String : Any]
                         REF_USERS.child(user.uid).setValue(xuserModel)
-                        self.avtivityService.create(id: user.uid, activity: "Se actualizo información personal", photo: downloadURL, type: "sesion")
-                        self.userService.getUser(uid: user.uid, mainly: true)
+                        ACTIVITYLOG_SERVICE.create(id: user.uid, activity: "Se actualizo información personal", photo: downloadURL, type: "sesion")
+                        USER_SERVICE.getUser(uid: user.uid, mainly: true)
                         //self.userStatus(state: "Online")
                     }
 
@@ -78,11 +83,11 @@ class AuthService {
             if (user != nil) {
                 
                 NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
-                    Utility.Instance().gotoView(view: "RegisterFamilyView", context: view)
+                    UTILITY_SERVICE.gotoView(view: "RegisterFamilyView", context: view)
                     return
                 }
                 if(!checkFamily){
-                    FamilyService.instance.getFamilies()
+                    FAMILY_SERVICE.getFamilies()
                     checkFamily = true
                 }
                 REF_USERS.child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -90,37 +95,14 @@ class AuthService {
                     if !snapshot.exists() {
                         self.createAccount(user: user as AnyObject)
                     }else{
-                        self.userService.getUser(uid: (user?.uid)!, mainly: true)
+                        USER_SERVICE.getUser(uid: (user?.uid)!, mainly: true)
                         //self.userStatus(state: "Online")
-                        Utility.Instance().gotoView(view: name, context: view)
+                        UTILITY_SERVICE.gotoView(view: name, context: view)
                     }
                 }) { (error) in
                     print(error.localizedDescription)
                 }
             }
-        }
-    }
-
-
-    func exist(field: String, dictionary:NSDictionary) -> String {
-        if let value = dictionary[field] {
-            return value as! String
-        }else {
-            return ""
-        }
-    }
-    func existData(field: String, dictionary: NSDictionary) -> Data? {
-        if let value = dictionary[field] {
-            return (value as! Data)
-        }else {
-            return UIImagePNGRepresentation(#imageLiteral(resourceName: "Profile2") )
-        }
-    }
-    func existArray(field: String, dictionary:NSDictionary) -> [Any] {
-        if let value = dictionary[field] {
-            return value as! Array<Any>
-        }else {
-            return []
         }
     }
 

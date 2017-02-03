@@ -13,10 +13,6 @@ import Firebase
 import AVFoundation
 import AVKit
 
-private let auth = AuthService.authService
-private let animations = Animations.instance
-private let utility = Utility.Instance()
-
 class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDelegate {
 
     @IBOutlet var logo: UIImageView!
@@ -32,14 +28,13 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     
     
     func webviewDidFinishLoad(_ : UIWebView){
-        utility.stopLoading(view: self.view)
+        UTILITY_SERVICE.stopLoading(view: self.view)
         
     }
     
     override func viewDidLoad() {
-        auth.isAuth(view: self.self, name:"TabBarControllerView")
+        AUTH_SERVICE.isAuth(view: self.self, name:"TabBarControllerView")
         super.viewDidLoad()
-        print("hola")
         print(UIDevice().description)
         if(UIDevice.current.model == "Iphone 5s"){
             logo.frame.origin.y = logo.frame.origin.y-20
@@ -80,7 +75,7 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        utility.enabledView()
+        UTILITY_SERVICE.enabledView()
     }
     
     func videoDidReachEnd() {
@@ -159,7 +154,7 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     }
    
     @IBAction func signUp(_ sender: UIButton) {
-        utility.loading(view: self.view)
+        UTILITY_SERVICE.loading(view: self.view)
         UIApplication.shared.beginIgnoringInteractionEvents()
         gotoView(view: "SignUpView")
     }
@@ -172,27 +167,27 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     //signin login
     @IBAction func handleSignIn(_ sender: UIButton) {
         if(!(emailField.text?.isEmpty)! && !(passwordField.text?.isEmpty)!){
-            utility.loading(view: self.view)
-            utility.disabledView()
+            UTILITY_SERVICE.loading(view: self.view)
+            UTILITY_SERVICE.disabledView()
             NotificationCenter.default.addObserver(forName: LOGINERROR, object: nil, queue: nil){_ in
                 let alert = UIAlertController(title: "Verifica tus datos", message: "Su correo electrónico y contraseña son incorrectas.", preferredStyle: .alert)
-                animations.shakeTextField(txt: self.emailField)
-                animations.shakeTextField(txt: self.passwordField)
+                ANIMATIONS.shakeTextField(txt: self.emailField)
+                ANIMATIONS.shakeTextField(txt: self.passwordField)
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(okAction)
                 self.present(alert, animated: true, completion: nil)
-                utility.enabledView()
-                utility.stopLoading(view: self.view)
+                UTILITY_SERVICE.enabledView()
+                UTILITY_SERVICE.stopLoading(view: self.view)
             }
-            auth.login(email: emailField.text!, password: passwordField.text!)
+            AUTH_SERVICE.login(email: emailField.text!, password: passwordField.text!)
         }else{
             let alert = UIAlertController(title: "Verifica tus datos", message: "Inserte un correo electrónico y una contraseña", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            animations.shakeTextField(txt: emailField)
-            animations.shakeTextField(txt: passwordField)
+            ANIMATIONS.shakeTextField(txt: emailField)
+            ANIMATIONS.shakeTextField(txt: passwordField)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
-            utility.stopLoading(view: self.view)
+            UTILITY_SERVICE.stopLoading(view: self.view)
         }
     }
     

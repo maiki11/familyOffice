@@ -14,6 +14,8 @@ class FamilyCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
     override func layoutSubviews() {
-        super.layoutSubviews()    
+        super.layoutSubviews()
+        self.imageFamily.layer.cornerRadius = self.imageFamily.frame.size.width/16
+        self.imageFamily.clipsToBounds = true
     }
 }
