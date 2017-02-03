@@ -9,7 +9,6 @@
 import UIKit
 
 class ConfigurationTableViewController: UITableViewController {
-
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +24,12 @@ class ConfigurationTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(indexPath.row == 3){
+            AUTH_SERVICE.logOut()
+            Utility.Instance().gotoView(view: "StartView", context: self)
+        }
+    }
     
     // MARK: - Table view data source
 
@@ -37,8 +41,6 @@ class ConfigurationTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 4
-    }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

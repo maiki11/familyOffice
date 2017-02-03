@@ -11,9 +11,6 @@ import FirebaseAuth
 import FirebaseDatabase
 import GoogleSignIn
 
-private let auth = AuthService.authService
-private let animations = Animations.instance
-
 class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate {
 
     @IBOutlet weak var nameTxtfield: UITextField!
@@ -21,12 +18,10 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     @IBOutlet weak var phoneTxtfield: UITextField!
     @IBOutlet weak var passwordTxtfield: UITextField!
     @IBOutlet weak var confirmPassTxtfield: UITextField!
-    
-    let ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
   
     
     override func viewDidLoad() {
-        auth.isAuth(view: self.self, name:"TabBarControllerView")
+        AUTH_SERVICE.isAuth(view: self.self, name:"TabBarControllerView")
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
         // Do any additional setup after loading the view.
@@ -48,20 +43,20 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
         var er: String?
         if(nameTxtfield.text==""){
             er = "Nombre debe ser capturado"
-            animations.shakeTextField(txt: nameTxtfield)
+            ANIMATIONS.shakeTextField(txt: nameTxtfield)
         }else{
             if(emailTxtfield.text==""){
                 er = "Correo electrónico debe ser capturado"
-                animations.shakeTextField(txt: emailTxtfield)
+                ANIMATIONS.shakeTextField(txt: emailTxtfield)
             }else{
                 if(phoneTxtfield.text==""){
                     er = "Celular debe ser capturado"
-                    animations.shakeTextField(txt: phoneTxtfield)
+                    ANIMATIONS.shakeTextField(txt: phoneTxtfield)
                 }else{
                     if(passwordTxtfield.text=="" || confirmPassTxtfield.text==""){
                         er = "La contraseña y confirmación de contraseña deben ser capturadas"
-                        animations.shakeTextField(txt: passwordTxtfield)
-                        animations.shakeTextField(txt: confirmPassTxtfield)
+                        ANIMATIONS.shakeTextField(txt: passwordTxtfield)
+                        ANIMATIONS.shakeTextField(txt: confirmPassTxtfield)
                     }else{
                         if(passwordTxtfield.text! == confirmPassTxtfield.text!){
                             FIRAuth.auth()?.createUser(withEmail: emailTxtfield.text!, password: passwordTxtfield.text!) { (user, error) in
@@ -85,8 +80,8 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
                             }
                         }else{
                             er = "Las contraseñas deben de coincidir"
-                            animations.shakeTextField(txt: passwordTxtfield)
-                            animations.shakeTextField(txt: confirmPassTxtfield)
+                            ANIMATIONS.shakeTextField(txt: passwordTxtfield)
+                            ANIMATIONS.shakeTextField(txt: confirmPassTxtfield)
                         }
                     }
                 }
@@ -100,13 +95,13 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
         }
     }
     @IBAction func handleBack(_ sender: UIButton) {
-        Utility.Instance().gotoView(view: "StartView", context: self)
+        UTILITY_SERVICE.gotoView(view: "StartView", context: self)
     }
   
     func createAccount(uid: String){
         let userModel = ["name" : self.nameTxtfield.text!,
                          "phone": self.phoneTxtfield.text!]
-        self.ref.child("users").child(uid).setValue(userModel)
+        REF_USERS.child(uid).setValue(userModel)
         Utility.Instance().gotoView(view: "StartView", context: self)
     }
     

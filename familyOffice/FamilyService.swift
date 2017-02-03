@@ -11,14 +11,14 @@ import FirebaseAuth
 import UIKit
 
 class FamilyService {
-    
-    public static let instance = FamilyService()
-    var userService = UserService.Instance()
+    private static let instance : FamilyService = FamilyService()
     var families: [Family] = []
-    let utilityService = Utility.Instance()
-    let avtivityService = ActivityLogService.Instance()
     
     private init() {
+    }
+    
+    public static func Instance() -> FamilyService {
+        return instance
     }
     func getFamilies() {
         REF.child("/users/\((FIRAuth.auth()?.currentUser?.uid)!)/families").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -30,7 +30,7 @@ class FamilyService {
                         if(snapshot.exists()){
                             let family = Family(snapshot: snapshot)
                             self.families.append(family)
-                            if(self.userService.user?.familyActive == item){
+                            if(USER_SERVICE.user?.familyActive == item){
                                 self.selectFamily(family: family)
                             }
                         }
@@ -54,7 +54,7 @@ class FamilyService {
                 self.removeFamily(family: family)
             }
             REF_FAMILIES.child(family.id!).removeValue()
-            self.avtivityService.create(id: (self.userService.user?.id)!, activity: "Se elimino la familia \(family.name)", photo: (family.photoURL?.absoluteString)!, type: "deleteFamily")
+            ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.user?.id)!, activity: "Se elimino la familia \((family.name)!)", photo: (family.photoURL?.absoluteString)!, type: "deleteFamily")
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -72,13 +72,14 @@ class FamilyService {
                 } else {
                     // Metadata contains file metadata such as size, content-type, and download URL.
                     if let downloadURL = metadata?.downloadURL()?.absoluteURL {
-                        let family = Family(name: name, photoURL: downloadURL as NSURL, photo: uploadData, members:  [(FIRAuth.auth()?.currentUser?.uid)! : true], admin: (FIRAuth.auth()?.currentUser?.uid)! , id: key)
+                        StorageService.Instance().save(url: downloadURL.absoluteString, data: uploadData)
+                        let family = Family(name: name, photoURL: downloadURL as NSURL, members:  [(FIRAuth.auth()?.currentUser?.uid)! : true], admin: (FIRAuth.auth()?.currentUser?.uid)! , id: key)
                         REF_FAMILIES.child(key).setValue(family.toDictionary())
                         REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").updateChildValues([ key: true])
                         //Set family for app
                         self.selectFamily(family: family)
                         self.families.append(family)
-                        self.avtivityService.create(id: (self.userService.user?.id)!, activity: "Se creo la familia  \(family.name)", photo: downloadURL.absoluteString, type: "addFamily")
+                        ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.user?.id)!, activity: "Se creo la familia  \((family.name)!)", photo: downloadURL.absoluteString, type: "addFamily")
                         //Go to Home
                         Utility.Instance().gotoView(view: "TabBarControllerView", context: view.self)
                     }
@@ -106,7 +107,7 @@ class FamilyService {
         }
     }
     func verifyFamilyActive(family: Family) -> Void {
-        if(family.id == userService.user?.familyActive){
+        if(family.id == USER_SERVICE.user?.familyActive){
             if(self.families.count > 0){
                 self.selectFamily(family: self.families[0])
             }else{
@@ -127,7 +128,7 @@ class FamilyService {
     func selectFamily(family: Family) -> Void {
         print(family.id)
         REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["familyActive" : family.id])
-        userService.setFamily(family: family)
+        USER_SERVICE.setFamily(family: family)
         NotificationCenter.default.post(name: USER_NOTIFICATION, object: nil)
     }
     
