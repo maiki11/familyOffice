@@ -109,39 +109,43 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         let scaleHeight = scrollViewFrame.size.height/scrollView.contentSize.height
         let minScale = min(scaleHeight, scaleWidth)
         
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            imageView2.contentMode = .scaleAspectFill
+            imageView2.image = Utility.Instance().resizeImage(image: pickedImage, targetSize: CGSize(width: 600.0, height: 600.0))
+        }else if let cameraImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            imageView2.contentMode = .scaleAspectFill
+            imageView2.image = Utility.Instance().resizeImage(image: cameraImage, targetSize: CGSize(width: 600.0, height: 600.0))
+        }
+        
         scrollView.minimumZoomScale = minScale
         scrollView.maximumZoomScale = 1
         scrollView.zoomScale = minScale
         
-        picker.dismiss(animated: true, completion: nil)
-        
         centerScrollViewContents()
-        
-        
             imageView2.contentMode = .scaleAspectFit
             imageView2.image = Utility.Instance().resizeImage(image: imageView2.image!, targetSize: CGSize(width: 400.0, height: 400.0))
-        
-       
     }
     
     func centerScrollViewContents(){
-        //let boundsSize = scrollView.bounds.size
+        let boundsSize = scrollView.bounds.size
         var contentsFrame = imageView2.frame
         
         contentsFrame.origin.x = 0
         contentsFrame.origin.y = 0
         
-        /*if contentsFrame.size.width < boundsSize.width {
-            contentsFrame.origin.x = 0//(boundsSize.width - contentsFrame.size.width) / 2
+        if contentsFrame.size.width < boundsSize.width {
+            contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2
         }else{
             contentsFrame.origin.x = 0
         }
         
         if contentsFrame.size.height < boundsSize.height {
-            contentsFrame.origin.y = 0//boundsSize.height - contentsFrame.size.height) / 2
+            contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2
         }else{
             contentsFrame.origin.y = 0
-        }*/
+        }
+        
+        imageView2.frame = contentsFrame
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
@@ -157,7 +161,19 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     }
     
     @IBAction func handleAdd(_ sender: UIButton) {
+
         let key = REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
+
+        UIGraphicsBeginImageContextWithOptions(scrollView.bounds.size, true, UIScreen.main.scale)
+        let offset = scrollView.contentOffset
+        //CGcontextTranslateCTM(UIGraphicsGetCurrentContext(), -offset.x, -offset.y)
+        UIGraphicsGetCurrentContext()?.translateBy(x: -offset.x, y: -offset.y)
+        scrollView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+
         //Add validations
         if(imageView2.image != nil && nameTxtField.text != nil){
             FAMILY_SERVICE.createFamily(key: key, image: imageView2.image!, name: nameTxtField.text!, view: self.self)
