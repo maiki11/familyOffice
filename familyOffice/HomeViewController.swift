@@ -12,10 +12,7 @@ import FirebaseAuth
 
 class HomeViewController: UIViewController {
     
-    var ref: FIRDatabaseReference!
-    var userService =  UserService.Instance()
-    var family = UserService.Instance().user?.family
-    var utilityService = Utility.Instance()
+    private var family : Family?
 
     @IBOutlet var navBar: UINavigationBar!
     @IBOutlet weak var familyImage: UIImageView!
@@ -23,8 +20,10 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UTILITY_SERVICE.loading(view: self.view)
+
         self.navBar.isHidden = true
-        Utility.Instance().loading(view: self.view)
+
         reloadFamily()
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
         self.familyImage.clipsToBounds = true
@@ -43,10 +42,11 @@ class HomeViewController: UIViewController {
     }
    
     func reloadFamily() -> Void {
-        family = userService.user?.family
-        
-        if(family != nil){
-            self.familyImage.image = UIImage(data: (family?.photoData)!)
+        family = USER_SERVICE.user?.family
+        if(self.family != nil){
+            if let data = STORAGE_SERVICE.search(url: (self.family?.photoURL?.absoluteString)!) {
+                self.familyImage.image = UIImage(data: data)
+            }
             self.familyName.text = family?.name ?? "No seleccionada"
             Utility.Instance().stopLoading(view: self.view)
         }
@@ -56,9 +56,9 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     func checkFamily(){
-        print(FamilyService.instance.families.count)
+        print(FAMILY_SERVICE.families.count)
         
-        if(FamilyService.instance.families.count == 0){
+        if(FAMILY_SERVICE.families.count == 0){
             Utility.Instance().gotoView(view: "RegisterFamilyView", context: self)
         }
     }

@@ -23,7 +23,6 @@ struct Record {
     let date: String!
     let type: String!
     var photoURL: String!
-    var photo: Data? = nil
     
     init(id: String, activity: String, date: String, type: String, photoURL: String) {
         
@@ -31,9 +30,6 @@ struct Record {
         self.date = date
         self.id = id
         self.photoURL = photoURL
-        if self.photoURL != "" {
-            self.photo = NSData(contentsOf: URL(string: self.photoURL)!) as Data!
-        }
         self.type = type
     }
     
@@ -44,12 +40,8 @@ struct Record {
         self.date = Record.utilityService.exist(field: Record.kRecordDatekey, dictionary: snapshotValue)
         self.type = Record.utilityService.exist(field: Record.kRecordTypekey, dictionary: snapshotValue)
         self.photoURL = Record.utilityService.exist(field: Record.kRecordPhotokey, dictionary: snapshotValue)
-        if self.photoURL != "" {
-            self.photo = NSData(contentsOf: URL(string: self.photoURL)!) as Data!
-        }
-    }
 
-    
+    }
     func toDictionary() -> NSDictionary {
         return [
             Record.kRecordDatekey : self.date,

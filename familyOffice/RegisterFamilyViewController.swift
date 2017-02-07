@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
-private let utility = Utility.Instance()
+
 
 class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate {
     
@@ -23,8 +23,6 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     var heightScrollView = 0.0
     
     //let imagePicker = UIImagePickerController()
-    var ref: FIRDatabaseReference!
-    var storageRef: FIRStorageReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +44,6 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         // Do any additional setup after loading the view.
         //imagePicker.delegate = self
         //imageView.isUserInteractionEnabled = true
-        ref = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
-        storageRef = FIRStorage.storage().reference(forURL: "gs://familyoffice-6017a.appspot.com")
         //Circle image
         /*imageView.layer.borderWidth = 1
         imageView.layer.masksToBounds = false
@@ -101,6 +97,8 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         imageView2.image = image
+        
+        
         imageView2.contentMode = UIViewContentMode.center
         imageView2.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
         
@@ -124,10 +122,8 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         scrollView.zoomScale = minScale
         
         centerScrollViewContents()
-        
-        picker.dismiss(animated: true, completion: nil)
-        
-        //dismiss(animated: true, completion: nil)
+            imageView2.contentMode = .scaleAspectFit
+            imageView2.image = Utility.Instance().resizeImage(image: imageView2.image!, targetSize: CGSize(width: 400.0, height: 400.0))
     }
     
     func centerScrollViewContents(){
@@ -165,6 +161,9 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     }
     
     @IBAction func handleAdd(_ sender: UIButton) {
+
+        let key = REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
+
         UIGraphicsBeginImageContextWithOptions(scrollView.bounds.size, true, UIScreen.main.scale)
         let offset = scrollView.contentOffset
         //CGcontextTranslateCTM(UIGraphicsGetCurrentContext(), -offset.x, -offset.y)
@@ -174,13 +173,12 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         UIGraphicsEndImageContext()
         
         UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
-        
-        let key = ref.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
+
         //Add validations
         if(imageView2.image != nil && nameTxtField.text != nil){
-             FamilyService.instance.createFamily(key: key, image: imageView2.image!, name: nameTxtField.text!, view: self.self)
-            utility.loading(view: self.view)
-            utility.disabledView()
+            FAMILY_SERVICE.createFamily(key: key, image: imageView2.image!, name: nameTxtField.text!, view: self.self)
+            UTILITY_SERVICE.loading(view: self.view)
+            UTILITY_SERVICE.disabledView()
         }
     }
     
@@ -214,7 +212,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        utility.enabledView()
+        UTILITY_SERVICE.enabledView()
     }
     /*
      // MARK: - Navigation

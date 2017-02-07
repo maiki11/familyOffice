@@ -10,7 +10,8 @@ import Foundation
 import Firebase
 
 struct Family  {
-   
+    
+    
     static let kFamilyNameKey = "name"
     static let kFamilyIdKey = "id"
     static let kFamilyPhotoUrlKey = "photoUrl"
@@ -21,7 +22,6 @@ struct Family  {
     let id: String!
     let name: String!
     let photoURL: NSURL?
-    let photoData: Data?
     var totalMembers : UInt? = 0
     var admin : String? = ""
     var members : NSDictionary?
@@ -32,7 +32,6 @@ struct Family  {
     init(name: String, photo: Data, id: String){
         self.name = name
         self.photoURL = nil
-        self.photoData = photo
         self.admin = ""
         self.totalMembers = 0
         self.firebaseReference = nil
@@ -40,10 +39,9 @@ struct Family  {
         self.members = nil
     }
     
-    init(name: String, photoURL: NSURL, photo: Data, members: NSDictionary, admin: String, id: String){
+    init(name: String, photoURL: NSURL, members: NSDictionary, admin: String, id: String){
         self.name = name
         self.photoURL = photoURL
-        self.photoData = photo
         self.admin = admin
         self.totalMembers = 0
         self.firebaseReference = nil
@@ -65,7 +63,6 @@ struct Family  {
         if let admin = snapshotValue[Family.kFamilyAdminKey]  {
             self.admin = admin as? String
         }
-        self.photoData = NSData(contentsOf: self.photoURL as! URL) as Data?
         self.firebaseReference = snapshot.ref
     }
     

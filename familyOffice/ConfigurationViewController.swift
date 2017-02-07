@@ -9,14 +9,16 @@
 import UIKit
 
 class ConfigurationViewController: UIViewController {
-    let userService = UserService.Instance()
     var user: User!
     @IBOutlet weak var profileImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        user = userService.user
-        profileImage.image = UIImage(data: user.photo)
+        user = USER_SERVICE.user
+        if let data = STORAGE_SERVICE.search(url: (user.photoURL)) {
+             profileImage.image = UIImage(data: data)
+        }
+       
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         self.profileImage.clipsToBounds = true
         // Do any additional setup after loading the view.
