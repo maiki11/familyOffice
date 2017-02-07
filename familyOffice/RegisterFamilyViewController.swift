@@ -122,18 +122,8 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         scrollView.zoomScale = minScale
         
         centerScrollViewContents()
-        
-<<<<<<< HEAD
-        
             imageView2.contentMode = .scaleAspectFit
             imageView2.image = Utility.Instance().resizeImage(image: imageView2.image!, targetSize: CGSize(width: 400.0, height: 400.0))
-        
-       
-=======
-        picker.dismiss(animated: true, completion: nil)
-        
-        //dismiss(animated: true, completion: nil)
->>>>>>> maiki11
     }
     
     func centerScrollViewContents(){
@@ -171,9 +161,9 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     }
     
     @IBAction func handleAdd(_ sender: UIButton) {
-<<<<<<< HEAD
+
         let key = REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
-=======
+
         UIGraphicsBeginImageContextWithOptions(scrollView.bounds.size, true, UIScreen.main.scale)
         let offset = scrollView.contentOffset
         //CGcontextTranslateCTM(UIGraphicsGetCurrentContext(), -offset.x, -offset.y)
@@ -183,9 +173,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         UIGraphicsEndImageContext()
         
         UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
-        
-        let key = ref.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
->>>>>>> maiki11
+
         //Add validations
         if(imageView2.image != nil && nameTxtField.text != nil){
             FAMILY_SERVICE.createFamily(key: key, image: imageView2.image!, name: nameTxtField.text!, view: self.self)

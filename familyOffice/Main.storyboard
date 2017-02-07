@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gkV-lX-uju">
-<<<<<<< HEAD
     <device id="retina4_7" orientation="portrait">
-=======
-    <device id="retina5_5" orientation="portrait">
->>>>>>> maiki11
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -99,27 +95,16 @@
                                 </connections>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-gR-T0q">
-<<<<<<< HEAD
-                                <rect key="frame" x="47" y="565.5" width="281" height="91.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-9j-XHn">
-                                        <rect key="frame" x="0.0" y="0.0" width="244" height="91.5"/>
-=======
                                 <rect key="frame" x="66.666666666666686" y="574" width="280.66666666666663" height="152"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-9j-XHn">
                                         <rect key="frame" x="0.0" y="0.0" width="243.66666666666663" height="152"/>
->>>>>>> maiki11
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                         <color key="textColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="highlightedColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rB-XC-zD2">
-<<<<<<< HEAD
-                                        <rect key="frame" x="244" y="0.0" width="37" height="91.5"/>
-=======
                                         <rect key="frame" x="243.66666666666663" y="0.0" width="37" height="152"/>
->>>>>>> maiki11
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                         <state key="normal" title="aquí"/>
                                         <connections>
@@ -129,11 +114,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AwA-sU-zu3" customClass="GIDSignInButton">
-<<<<<<< HEAD
-                                <rect key="frame" x="36" y="535.5" width="192" height="40"/>
-=======
                                 <rect key="frame" x="40" y="544" width="192" height="40"/>
->>>>>>> maiki11
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5fA-1h-PlK"/>
@@ -233,11 +214,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1o-zm-gG7">
-<<<<<<< HEAD
-                                <rect key="frame" x="16" y="30" width="374" height="30"/>
-=======
                                 <rect key="frame" x="20" y="30" width="374" height="30"/>
->>>>>>> maiki11
+
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="PUd-uY-SRl"/>
                                     <constraint firstAttribute="width" secondItem="J1o-zm-gG7" secondAttribute="height" multiplier="187:15" id="q6V-BK-Voq"/>
@@ -471,11 +449,7 @@
             <objects>
                 <collectionViewController id="XpR-DC-7PS" customClass="FamilyCollectionViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="DJQ-D4-Rsb">
-<<<<<<< HEAD
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-=======
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
->>>>>>> maiki11
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="scrollIndicatorInsets" minX="10" minY="10" maxX="10" maxY="10"/>
@@ -706,35 +680,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_default" translatesAutoresizingMaskIntoConstraints="NO" id="9ac-iJ-UoS">
-<<<<<<< HEAD
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="256"/>
-=======
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="283"/>
->>>>>>> maiki11
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9ac-iJ-UoS" secondAttribute="height" multiplier="413:282" id="E3F-Fq-ctu"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0i-2v-Yu5">
-<<<<<<< HEAD
-                                <rect key="frame" x="36" y="228" width="303" height="28"/>
-=======
                                 <rect key="frame" x="40" y="255" width="334" height="28"/>
->>>>>>> maiki11
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
-<<<<<<< HEAD
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="B7b-JI-Kda">
                                 <rect key="frame" x="36" y="276" width="303" height="29"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-=======
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypc-QU-hOg">
-                                <rect key="frame" x="40" y="527" width="334" height="58"/>
->>>>>>> maiki11
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="B7b-JI-Kda" secondAttribute="height" multiplier="29:4" constant="100" id="qV9-ll-E5h"/>
                                 </constraints>
@@ -754,33 +715,19 @@
                                 <connections>
                                     <action selector="segmentedControl:" destination="Wxb-dw-Dkc" eventType="valueChanged" id="RUE-Mr-WQK"/>
                                 </connections>
-<<<<<<< HEAD
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CsW-aT-p6h">
                                 <rect key="frame" x="16" y="324" width="343" height="304"/>
-=======
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CsW-aT-p6h">
-                                <rect key="frame" x="40" y="341" width="334" height="176"/>
->>>>>>> maiki11
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="CsW-aT-p6h" secondAttribute="height" multiplier="167:88" constant="-233.90909090909088" id="yWF-bp-ukk"/>
                                 </constraints>
                                 <prototypes>
-<<<<<<< HEAD
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recordCell" rowHeight="60" id="Hn0-PB-zQG" customClass="recordTableViewCell" customModule="familyOffice" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hn0-PB-zQG" id="yId-L5-g7w">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="59"/>
-=======
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recordCell" id="Hn0-PB-zQG" customClass="recordTableViewCell" customModule="familyOffice" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="334" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hn0-PB-zQG" id="yId-L5-g7w">
-                                            <rect key="frame" x="0.0" y="0.0" width="334" height="43"/>
->>>>>>> maiki11
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WjC-sX-ofn">
@@ -842,32 +789,6 @@
                                     <outlet property="delegate" destination="Wxb-dw-Dkc" id="7No-Zc-Ata"/>
                                 </connections>
                             </tableView>
-<<<<<<< HEAD
-=======
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="B7b-JI-Kda">
-                                <rect key="frame" x="105.66666666666669" y="303" width="203" height="29"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="B7b-JI-Kda" secondAttribute="height" multiplier="29:4" id="qV9-ll-E5h"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Notificaciones"/>
-                                    <segment title="Historial"/>
-                                </segments>
-                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="segmentedControl:" destination="Wxb-dw-Dkc" eventType="valueChanged" id="RUE-Mr-WQK"/>
-                                </connections>
-                            </segmentedControl>
->>>>>>> maiki11
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1018,11 +939,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BZ9-Gi-cIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<<<<<<< HEAD
-            <point key="canvasLocation" x="804" y="2364"/>
-=======
             <point key="canvasLocation" x="31.884057971014496" y="776.9021739130435"/>
->>>>>>> maiki11
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vq8-7X-P9a">
@@ -1077,11 +994,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile" translatesAutoresizingMaskIntoConstraints="NO" id="dkn-Iv-ITf">
-<<<<<<< HEAD
-                                <rect key="frame" x="112" y="72" width="151" height="150"/>
-=======
+
                                 <rect key="frame" x="116" y="72" width="182" height="150"/>
->>>>>>> maiki11
+
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Cwr-WT-HDu"/>
                                 </constraints>
@@ -1277,11 +1192,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-mT-iSW">
-<<<<<<< HEAD
-                                            <rect key="frame" x="-1" y="-9" width="375" height="173"/>
-=======
+
                                             <rect key="frame" x="-1" y="-9" width="407" height="173"/>
->>>>>>> maiki11
+
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <date key="date" timeIntervalSinceReferenceDate="507585004.35117102">
                                                 <!--2017-01-31 19:50:04 +0000-->
@@ -1317,11 +1230,9 @@
                         <viewControllerLayoutGuide type="bottom" id="EQJ-VN-hPD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tgy-ig-Xcc">
-<<<<<<< HEAD
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-=======
+
                         <rect key="frame" x="0.0" y="0.0" width="406" height="244"/>
->>>>>>> maiki11
+
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Contraseña nueva" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qMU-hI-DVI">

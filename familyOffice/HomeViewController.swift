@@ -20,12 +20,10 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-<<<<<<< HEAD
         UTILITY_SERVICE.loading(view: self.view)
-=======
+
         self.navBar.isHidden = true
-        Utility.Instance().loading(view: self.view)
->>>>>>> maiki11
+
         reloadFamily()
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
         self.familyImage.clipsToBounds = true
