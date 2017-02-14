@@ -28,8 +28,9 @@ class AuthService {
             if((error) != nil){
                 print(error.debugDescription)
                 NotificationCenter.default.post(name: LOGINERROR, object: nil)
+            }else{
+                ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
             }
-            ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
         }
     }
 
