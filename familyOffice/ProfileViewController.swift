@@ -44,12 +44,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.activities = ActivityLogService.Instance().activityLog
-        //self.activities.sort(by: {$0.date > $1.date})
+        self.activities.sort(by: {$0.timestamp > $1.timestamp})
         self.tableView.reloadData()
         NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
             Utility.Instance().stopLoading(view: self.view)
             self.activities = ActivityLogService.Instance().activityLog
-            //self.activities.sort(by: {$0.date > $1.date})
+            self.activities.sort(by: {$0.timestamp > $1.timestamp})
             self.tableView.reloadData()
         }
         
