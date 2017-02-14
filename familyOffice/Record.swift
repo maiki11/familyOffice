@@ -14,20 +14,20 @@ struct Record {
     
     static let kRecordIdkey = "id"
     static let kRecordActivykey = "action"
-    static let kRecordDatekey = "date"
+    static let kRecordDatekey = "timestamp"
     static let kRecordPhotokey = "photo"
     static let kRecordTypekey = "type"
     
     let id: String!
     let activity: String!
-    let date: String!
+    let timestamp: String!
     let type: String!
     var photoURL: String!
     
-    init(id: String, activity: String, date: String, type: String, photoURL: String) {
+    init(id: String, activity: String, timestamp: String, type: String, photoURL: String) {
         
         self.activity = activity
-        self.date = date
+        self.timestamp = timestamp
         self.id = id
         self.photoURL = photoURL
         self.type = type
@@ -37,14 +37,15 @@ struct Record {
         let snapshotValue = snapshot.value as! NSDictionary
         self.id = snapshot.key
         self.activity = Record.utilityService.exist(field: Record.kRecordActivykey, dictionary: snapshotValue)
-        self.date = Record.utilityService.exist(field: Record.kRecordDatekey, dictionary: snapshotValue)
+        self.timestamp = Record.utilityService.exist(field: Record.kRecordDatekey, dictionary: snapshotValue)
+        print(self.timestamp)
         self.type = Record.utilityService.exist(field: Record.kRecordTypekey, dictionary: snapshotValue)
         self.photoURL = Record.utilityService.exist(field: Record.kRecordPhotokey, dictionary: snapshotValue)
 
     }
     func toDictionary() -> NSDictionary {
         return [
-            Record.kRecordDatekey : self.date,
+            Record.kRecordDatekey : self.timestamp,
             Record.kRecordActivykey : self.activity,
             Record.kRecordPhotokey : self.photoURL,
             Record.kRecordTypekey : self.type

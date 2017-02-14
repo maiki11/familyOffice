@@ -30,11 +30,13 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
             if(snapshot.exists()){
                 REF_FAMILIES.child(snapshot.key).observeSingleEvent(of: .value, with: { (snapshot) in
                     // Get user value
-                    let family = Family(snapshot: snapshot)
-                    if (FAMILY_SERVICE.duplicate(id: family.id)){
-                        FAMILY_SERVICE.families.append(family)
-                        self.families.append(family)
-                        self.collectionView?.reloadData()
+                    if(snapshot.exists()){
+                        let family = Family(snapshot: snapshot)
+                        if (FAMILY_SERVICE.duplicate(id: family.id)){
+                            FAMILY_SERVICE.families.append(family)
+                            self.families.append(family)
+                            self.collectionView?.reloadData()
+                        }
                     }
                     // ...
                 }) { (error) in
