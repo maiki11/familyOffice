@@ -21,18 +21,30 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         familyName.text = family?.name
-        loadMembers(table: self.membersTable)
-        if let data = STORAGE_SERVICE.search(url: (family?.photoURL?.absoluteString)!) {
-            imageFamily.image = UIImage(data: data)
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            if let data = STORAGE_SERVICE.search(url: (self.family?.photoURL?.absoluteString)!) {
+                self.imageFamily.image = UIImage(data: data)
+            }
         }
+        let addButton : UIBarButtonItem = UIBarButtonItem(title: "Agregar", style: UIBarButtonItemStyle.plain, target: self, action:#selector(addMember(sender:)))
+        
+        
+        self.navigationItem.rightBarButtonItem = addButton
         
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
+        family = FAMILY_SERVICE.searchFamily(id: (family?.id)!)
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            self.loadMembers(table: self.membersTable)
+        }
         NotificationCenter.default.addObserver(forName: USERS_NOTIFICATION, object: nil, queue: nil){ notification in
             self.loadMembers(table: self.membersTable)
         }
         
+    }
+    func addMember(sender: UIBarButtonItem) -> Void {
+        self.performSegue(withIdentifier: "addMembersScreen", sender: nil)
     }
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: USERS_NOTIFICATION, object: nil)
@@ -50,9 +62,14 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func loadMembers(table: UITableView){
         for item in family?.members?.allKeys as! [String] {
             if let user = USER_SERVICE.searchUser(uid: item){
-                self.members.append(user)
+                if duplicate(id: user.id) {
+                    self.members.append(user)
+                    table.reloadData()
+                }
+                
             }else{
                 USER_SERVICE.getUser(uid: item, mainly: false)
+                
             }
         }
         
@@ -76,42 +93,36 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.memberImage.image = #imageLiteral(resourceName: "profile_default")
         }
         cell.phone.text = member.phone
+        if(family?.admin == member.id){
+            cell.adminlabel.isHidden = false
+        }else{
+            cell.adminlabel.isHidden = true
+        }
+
         
         return cell
     }
     
-    
-    func exist(field: String, dictionary:NSDictionary) -> String {
-        if let value = dictionary[field] {
-            return value as! String
-        }else {
-            return ""
+    func duplicate(id: String) -> Bool {
+        var bool = true
+        for item in self.members {
+            if(item.id == id){
+                bool = false
+                break
+            }
         }
-    }
-    func existData(field: String, dictionary: NSDictionary) -> Data? {
-        if let value = dictionary[field] {
-            return (value as! Data)
-        }else {
-            return UIImagePNGRepresentation(#imageLiteral(resourceName: "Profile2") )
-        }
-    }
-    func existArray(field: String, dictionary:NSDictionary) -> [Any] {
-        if let value = dictionary[field] {
-            return value as! Array<Any>
-        }else {
-            return []
-        }
+        return bool
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "addMembersScreen"){
+            let viewController  = segue.destination as! AddMembersTableViewController
+            viewController.family = family!
+        }
+    }
     
 }

@@ -18,36 +18,38 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadData()
         let profile = USER_SERVICE.user
         self.tableView.separatorStyle = .none
-        DispatchQueue.global(qos: .userInitiated).async  {
-            ACTIVITYLOG_SERVICE.getActivities(id: USER_SERVICE.user!.id)
-            // Bounce back to the main thread to update the UI
-            DispatchQueue.main.async {
-                self.activities = ActivityLogService.Instance().activityLog
-                
-            }
-        }
-        //self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         //self.profileImage.clipsToBounds = true
         self.userName.text =  profile?.name
         if let data = STORAGE_SERVICE.search(url: (profile?.photoURL)!) {
             self.profileImage.image = UIImage(data: data)
         }
-        
-        
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.tintColor = UIColor.gray
+        tableView.refreshControl?.backgroundColor = UIColor.white
+        tableView.refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
         // Do any additional setup after loading the view.
+    }
+    func loadData(){
+        ACTIVITYLOG_SERVICE.getActivities(id: USER_SERVICE.user!.id)
+        // Bounce back to the main thread to update the UI
+        self.activities = ActivityLogService.Instance().activityLog
+        self.tableView.refreshControl?.endRefreshing()
+        self.tableView.reloadData()
+        //
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.activities = ActivityLogService.Instance().activityLog
-        self.activities.sort(by: {$0.date > $1.date})
+        //self.activities.sort(by: {$0.date > $1.date})
         self.tableView.reloadData()
         NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
             Utility.Instance().stopLoading(view: self.view)
             self.activities = ActivityLogService.Instance().activityLog
-            self.activities.sort(by: {$0.date > $1.date})
+            //self.activities.sort(by: {$0.date > $1.date})
             self.tableView.reloadData()
         }
         
@@ -78,7 +80,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         if segmentedControl.selectedSegmentIndex == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! recordTableViewCell
             let activity = activities[indexPath.row]
-            cell.date.text = activity.date
+            cell.date.text = UTILITY_SERVICE.getDate(date: activity.timestamp)
             cell.activity.text = activity.activity
             cell.iconImage.image = #imageLiteral(resourceName: "logo")
             if let data = STORAGE_SERVICE.search(url: activity.photoURL) {

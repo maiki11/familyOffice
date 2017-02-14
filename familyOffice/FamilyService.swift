@@ -47,17 +47,12 @@ class FamilyService {
     }
     
     func delete(family : Family) {
-        REF_FAMILIES.child("\((family.id)!)/members").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            for item in value?.allKeys as! [String] {
-                REF.child("users").child(item).child("families/\((family.id)!)").removeValue()
-                self.removeFamily(family: family)
-            }
-            REF_FAMILIES.child(family.id!).removeValue()
-            ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.user?.id)!, activity: "Se elimino la familia \((family.name)!)", photo: (family.photoURL?.absoluteString)!, type: "deleteFamily")
-        }) { (error) in
-            print(error.localizedDescription)
+        for item in (family.members?.allKeys)! {
+            REF_USERS.child(item as! String).child("families/\((family.id)!)").removeValue()
         }
+        self.removeFamily(family: family)
+        REF_FAMILIES.child(family.id!).removeValue()
+        ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.user?.id)!, activity: "Se elimino la familia \((family.name)!)", photo: (family.photoURL?.absoluteString)!, type: "deleteFamily")
     }
     
     func createFamily(key: String, image: UIImage, name: String, view: UIViewController){
@@ -88,14 +83,56 @@ class FamilyService {
             }
         }
     }
+    func addMembers(members: [User], family: Family) -> Void {
+        var index = 0
+        for fam in families {
+            
+            if(fam.id == family.id){
+                var memberDict : [String:Bool]  = self.families[index].members as! [String : Bool]
+                for member in members {
+                    memberDict[member.id] = true
+                    REF_USERS.child("\((member.id)!)/families").updateChildValues([family.id : true])
+                }
+                self.families[index].members = memberDict as NSDictionary?
+                REF_FAMILIES.child("\((family.id)!)/members").setValue(memberDict)
+                break
+            }
+            index+=1
+        }
+    }
     func exitFamily(family: Family, uid:String) -> Void {
         print(REF_USERS.child("/\(uid)/families/\((family.id)!)").description())
         REF_USERS.child("/\(uid)/families/\((family.id)!)").removeValue()
         REF_FAMILIES.child("/\((family.id)!)/members/\(uid)").removeValue()
-        
+        if(family.admin == USER_SERVICE.user?.id){
+            self.addAdmin(index: searchFamilyIndex(id: family.id)!, uid: nil)
+        }
         removeFamily(family: family)
     }
-    
+    func addAdmin(index: Int, uid: String?) -> Void {
+        if(uid != nil){
+            self.families[index].admin = uid
+        }else{
+            if (self.families[index].members?.count)! > 1 {
+                for item in (self.families[index].members?.allKeys)! as! [String] {
+                    if(USER_SERVICE.user?.id != item){
+                         self.families[index].admin = item
+                         REF_FAMILIES.child(self.families[index].id).updateChildValues(["admin": item])
+                    }
+                }
+            }else{
+                delete(family: self.families[index])
+            }
+        }
+    }
+    func searchFamily(id: String) -> Family? {
+        for item in self.families {
+            if(item.id == id){
+                return item
+            }
+        }
+        return nil
+    }
     private func removeFamily(family: Family) -> Void {
         var cont = 0
         for item in self.families {
@@ -114,6 +151,16 @@ class FamilyService {
                 NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
             }
         }
+    }
+    func searchFamilyIndex(id: String) -> Int? {
+       var index = 0
+        for item in self.families {
+            if(item.id == id){
+                return index
+            }
+            index+=1
+        }
+        return nil
     }
     func duplicate(id: String) -> Bool {
         var bool = true

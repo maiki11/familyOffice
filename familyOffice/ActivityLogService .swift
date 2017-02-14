@@ -24,13 +24,13 @@ class ActivityLogService {
     
     func create(id: String, activity: String, photo:String, type: String ) -> Void {
         let key = REF_ACTIVITY.child(id).childByAutoId().key
-        let record = Record(id: key, activity: activity, date: Utility.Instance().getDate(), type: type, photoURL: photo)
+        let record = Record(id: key, activity: activity, timestamp: Utility.Instance().getDate(), type: type, photoURL: photo)
         REF_ACTIVITY.child("\(id)/\(key)").setValue(record.toDictionary())
         activityLog.append(record)
     }
     
     func getActivities(id: String) {
-        REF_ACTIVITY.child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+        REF_ACTIVITY.child(id).queryOrdered(byChild: "timestamp").observeSingleEvent(of: .value, with: { (snapshot) in
             self.activityLog = []
             if(snapshot.exists()){
                 for item in snapshot.children{
