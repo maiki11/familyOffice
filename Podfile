@@ -11,6 +11,7 @@ target 'familyOffice' do
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
   pod 'Firebase/Storage'
+  pod 'Firebase/Messaging'
   pod 'JVFloatLabeledTextField'
   pod 'MGSwipeTableCell' 
   target 'familyOfficeTests' do
