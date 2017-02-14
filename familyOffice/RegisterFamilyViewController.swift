@@ -14,124 +14,78 @@ import FirebaseStorage
 
 class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate {
     
-    //@IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var nameTxtField: UITextField!
-    @IBOutlet weak var activityILoad: UIActivityIndicatorView!
-    @IBOutlet weak var addButton: UIButton!
-    @IBOutlet var scrollView: UIScrollView!
-    var imageView2 = UIImageView()
-    var heightScrollView = 0.0
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet var nameTxtField: textFieldStyleController!
+    @IBOutlet var cropAreaView: CropAreaView!
+    var imageView = UIImageView()
+    var blurImageView = UIImageView()
     
-    //let imagePicker = UIImagePickerController()
+    func webviewDidFinishLoad(_ : UIWebView){
+        UTILITY_SERVICE.stopLoading(view: self.view)
+        UTILITY_SERVICE.enabledView()
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
-        self.heightScrollView = Double(scrollView.frame.size.height)
-        imageView2.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
-        //imageView2.image = UIImage(named: "image_blank")
-        //imageView2.contentMode = .scaleAspectFit
-        imageView2.isUserInteractionEnabled = true
-        
-        scrollView.addSubview(imageView2)
-        
+        imageView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
+        //imageView.image = UIImage(named: "image")
+        blurImageView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
+        imageView.isUserInteractionEnabled = true
+        scrollView.addSubview(blurImageView)
+        scrollView.addSubview(imageView)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.loadImage(_:)))
         
         tapGestureRecognizer.numberOfTapsRequired = 1
-        imageView2.addGestureRecognizer(tapGestureRecognizer)
-        
-        
-        // Do any additional setup after loading the view.
-        //imagePicker.delegate = self
-        //imageView.isUserInteractionEnabled = true
-        //Circle image
-        /*imageView.layer.borderWidth = 1
-        imageView.layer.masksToBounds = false
-        imageView.layer.borderColor = UIColor.black.cgColor
-        imageView.layer.cornerRadius = imageView.frame.height/2
-        imageView.clipsToBounds = true*/
+        imageView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     func loadImage(_ recognizer: UITapGestureRecognizer){
-        //scrollView.frame.size.width = self.view.frame.size.width
-        //scrollView.frame.size.height = CGFloat(self.heightScrollView)
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        
         self.present(imagePicker, animated: true, completion: nil)
+        
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resournbvcvbnm,ces that can be recreated.
-    }
-    
-    /*
-    @IBAction func loadImageButtonTapped(sender: UIButton) {
-        
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    @IBAction func openCameraButton(_ sender: UIButton) {
-        
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
-            imagePicker.allowsEditing = false
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-        
-    }
-    @IBAction func openPhotoLibraryButton(_ sender: UIButton) {
-        
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-            imagePicker.allowsEditing = true
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-        
-    }*/
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
-        imageView2.image = image
-        
-        
-        imageView2.contentMode = UIViewContentMode.center
-        imageView2.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
-        
+        self.imageView.image = image
+        blurImageView.image = imageView.image
+        imageView.contentMode = UIViewContentMode.center
+        imageView.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
         scrollView.contentSize = image.size
         
         let scrollViewFrame = scrollView.frame
-        let scaleWidth = scrollViewFrame.size.width/scrollView.contentSize.width
-        let scaleHeight = scrollViewFrame.size.height/scrollView.contentSize.height
-        let minScale = min(scaleHeight, scaleWidth)
-        
-        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            imageView2.contentMode = .scaleAspectFill
-            imageView2.image = Utility.Instance().resizeImage(image: pickedImage, targetSize: CGSize(width: 600.0, height: 600.0))
-        }else if let cameraImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
-            imageView2.contentMode = .scaleAspectFill
-            imageView2.image = Utility.Instance().resizeImage(image: cameraImage, targetSize: CGSize(width: 600.0, height: 600.0))
-        }
+        let scaleWidth = scrollViewFrame.size.width / scrollView.contentSize.width
+        let scaleHeight = scrollViewFrame.size.height / scrollView.contentSize.height
+        let minScale = min(scaleWidth, scaleHeight)
         
         scrollView.minimumZoomScale = minScale
         scrollView.maximumZoomScale = 1
         scrollView.zoomScale = minScale
-        
         centerScrollViewContents()
-            imageView2.contentMode = .scaleAspectFit
-            imageView2.image = Utility.Instance().resizeImage(image: imageView2.image!, targetSize: CGSize(width: 400.0, height: 400.0))
+        
+        //blur
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        //always fill the view
+        blurEffectView.frame = self.view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurImageView.addSubview(blurEffectView)
+        
+        picker.dismiss(animated: true, completion: nil)
     }
     
     func centerScrollViewContents(){
         let boundsSize = scrollView.bounds.size
-        var contentsFrame = imageView2.frame
+        var contentsFrame = imageView.frame
         
-        contentsFrame.origin.x = 0
-        contentsFrame.origin.y = 0
+        //contentsFrame.origin.x = 0
+        //contentsFrame.origin.y = 0
         
         if contentsFrame.size.width < boundsSize.width {
             contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2
@@ -144,8 +98,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         }else{
             contentsFrame.origin.y = 0
         }
-        
-        imageView2.frame = contentsFrame
+        imageView.frame = contentsFrame
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
@@ -153,75 +106,71 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return imageView2
+        return imageView
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func handleAdd(_ sender: UIButton) {
-
+    @IBAction func cropAndSave(_ sender: Any) {
         let key = REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
-
         UIGraphicsBeginImageContextWithOptions(scrollView.bounds.size, true, UIScreen.main.scale)
         let offset = scrollView.contentOffset
-        //CGcontextTranslateCTM(UIGraphicsGetCurrentContext(), -offset.x, -offset.y)
+        
         UIGraphicsGetCurrentContext()?.translateBy(x: -offset.x, y: -offset.y)
         scrollView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
         UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
-
+        
         //Add validations
-        if(imageView2.image != nil && nameTxtField.text != nil){
-            FAMILY_SERVICE.createFamily(key: key, image: imageView2.image!, name: nameTxtField.text!, view: self.self)
+        if(imageView.image != nil && nameTxtField.text != nil){
+            FAMILY_SERVICE.createFamily(key: key, image: image!, name: nameTxtField.text!, view: self.self)
             UTILITY_SERVICE.loading(view: self.view)
             UTILITY_SERVICE.disabledView()
         }
     }
     
-    @IBAction func chooseImage(_ sender: Any) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        
-        let actionSheet = UIAlertController(title: "Photo Source", message: "Choose a source", preferredStyle: .actionSheet)
-        
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(UIAlertAction) in
-            imagePickerController.sourceType = .camera
-            self.present(imagePickerController, animated: true, completion: nil)
-        }))
-            
-        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(UIAlertAction) in
-            self.present(imagePickerController, animated: true, completion: nil)
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.present(actionSheet, animated: true, completion: nil)
-            
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+    func getCropArea() -> CGRect{
+        let factor = self.imageView.image!.size.width/view.frame.width
+        let scale = 1/scrollView.zoomScale
+        let imageFrame = self.imageView.frame//imageView.imageFrame()
+        let x = (scrollView.contentOffset.x + cropAreaView.frame.origin.x - imageFrame.origin.x) * scale * factor
+        let y = (scrollView.contentOffset.y + cropAreaView.frame.origin.y - imageFrame.origin.y) * scale * factor
+        let width = cropAreaView.frame.size.width * scale //* factor
+        let height = cropAreaView.frame.size.height * scale //* factor
+        return CGRect(x: x, y: y, width: width, height: height)
     }
     
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+}
+
+
+class CropAreaView: UIView {
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        return false
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        UTILITY_SERVICE.enabledView()
+}
+
+extension UIImageView{
+    func imageFrame()->CGRect{
+        let imageViewSize = self.frame.size
+        guard let imageSize = self.image?.size else{return CGRect.zero}
+        let imageRatio = imageSize.width / imageSize.height
+        let imageViewRatio = imageViewSize.width / imageViewSize.height
+        if imageRatio < imageViewRatio {
+            let scaleFactor = imageViewSize.height / imageSize.height
+            let width = imageSize.width * scaleFactor
+            let topLeftX = (imageViewSize.width - width) * 0.5
+            return CGRect(x: topLeftX, y: 0, width: width, height: imageViewSize.height)
+        }else{
+            let scalFactor = imageViewSize.width / imageSize.width
+            let height = imageSize.height * scalFactor
+            let topLeftY = (imageViewSize.height - height) * 0.5
+            return CGRect(x: 0, y: topLeftY, width: imageViewSize.width, height: height)
+        }
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

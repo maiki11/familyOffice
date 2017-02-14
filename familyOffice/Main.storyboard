@@ -95,16 +95,16 @@
                                 </connections>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-gR-T0q">
-                                <rect key="frame" x="61.5" y="565.5" width="252" height="91.5"/>
+                                <rect key="frame" x="47" y="565.5" width="281" height="91.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-9j-XHn">
-                                        <rect key="frame" x="0.0" y="0.0" width="219" height="91.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="244" height="91.5"/>
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                         <color key="textColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="highlightedColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rB-XC-zD2">
-                                        <rect key="frame" x="219" y="0.0" width="33" height="91.5"/>
+                                        <rect key="frame" x="244" y="0.0" width="37" height="91.5"/>
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                         <state key="normal" title="aquí"/>
                                         <connections>
@@ -403,7 +403,7 @@
                                         </items>
                                     </navigationBar>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Family Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiZ-VY-qOu">
-                                        <rect key="frame" x="0.0" y="210" width="375" height="19"/>
+                                        <rect key="frame" x="0.0" y="210" width="375" height="14.5"/>
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1005,7 +1005,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baa-3n-qeF">
-                                <rect key="frame" x="16" y="578" width="343" height="30"/>
+                                <rect key="frame" x="16" y="580" width="343" height="28"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8F0-Ub-p6I"/>
@@ -1014,14 +1014,15 @@
                                 <color key="tintColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Agregar"/>
                                 <connections>
-                                    <action selector="handleAdd:" destination="GLH-xv-Wxs" eventType="touchUpInside" id="Khw-0i-wtf"/>
+                                    <action selector="cropAndSave:" destination="GLH-xv-Wxs" eventType="touchUpInside" id="od1-OD-4cb"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NPg-YX-n7C">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="NPg-YX-n7C">
                                 <rect key="frame" x="0.0" y="104" width="375" height="250"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick an image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq3-MI-k5I">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="251"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1029,6 +1030,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="5Bf-L7-3KU"/>
+                                    <constraint firstAttribute="width" constant="375" id="8ku-5C-YP4"/>
                                     <constraint firstAttribute="trailing" secondItem="Aq3-MI-k5I" secondAttribute="trailing" id="9cU-wB-Pyu"/>
                                     <constraint firstItem="Aq3-MI-k5I" firstAttribute="centerX" secondItem="NPg-YX-n7C" secondAttribute="centerX" id="HGW-Pr-tsw"/>
                                     <constraint firstItem="Aq3-MI-k5I" firstAttribute="centerY" secondItem="NPg-YX-n7C" secondAttribute="centerY" id="eDa-df-Khq"/>
@@ -1036,14 +1038,17 @@
                                     <constraint firstItem="Aq3-MI-k5I" firstAttribute="top" secondItem="NPg-YX-n7C" secondAttribute="top" id="j5F-7w-KIl"/>
                                     <constraint firstItem="Aq3-MI-k5I" firstAttribute="leading" secondItem="NPg-YX-n7C" secondAttribute="leading" id="y8N-W3-1HI"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="GLH-xv-Wxs" id="6EH-mz-FPV"/>
+                                </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0YU-0C-IAo">
                                 <rect key="frame" x="364" y="254" width="50" height="50"/>
                                 <state key="normal" image="camera_2x"/>
-                                <connections>
-                                    <action selector="chooseImage:" destination="GLH-xv-Wxs" eventType="touchUpInside" id="fkU-nL-7up"/>
-                                </connections>
                             </button>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ob-2U-lMQ" customClass="CropAreaView" customModule="familyOffice" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="104" width="375" height="250"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1067,20 +1072,23 @@
                             <constraint firstItem="nnz-CF-goV" firstAttribute="top" secondItem="NPg-YX-n7C" secondAttribute="bottom" constant="20" id="qet-J4-UAY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="baa-3n-qeF" secondAttribute="trailing" id="qhP-WD-cK0"/>
                             <constraint firstItem="6jB-2e-78c" firstAttribute="leading" secondItem="Sfm-Oi-VRX" secondAttribute="leadingMargin" id="sGJ-4k-Emb"/>
+                            <constraint firstItem="0Ob-2U-lMQ" firstAttribute="centerX" secondItem="Sfm-Oi-VRX" secondAttribute="centerX" id="ugx-gX-3dj"/>
                             <constraint firstItem="baa-3n-qeF" firstAttribute="centerX" secondItem="Sfm-Oi-VRX" secondAttribute="centerX" id="wAy-2F-nXS"/>
                             <constraint firstItem="O6U-4s-4zc" firstAttribute="leading" secondItem="Sfm-Oi-VRX" secondAttribute="leading" id="zDq-MH-GlD"/>
                             <constraint firstItem="O6U-4s-4zc" firstAttribute="top" secondItem="4nq-bH-HDo" secondAttribute="bottom" id="zIh-en-VMi"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
-                        <outlet property="addButton" destination="baa-3n-qeF" id="qB5-oQ-GSv"/>
-                        <outlet property="nameTxtField" destination="nnz-CF-goV" id="xkp-ut-IrB"/>
-                        <outlet property="scrollView" destination="NPg-YX-n7C" id="6YP-eq-Fj1"/>
+                        <outlet property="cropAreaView" destination="0Ob-2U-lMQ" id="9fr-u2-6eA"/>
+                        <outlet property="nameTxtField" destination="nnz-CF-goV" id="t93-sH-Bn2"/>
+                        <outlet property="scrollView" destination="NPg-YX-n7C" id="yTU-bO-wzg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BZ9-Gi-cIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="31.884057971014496" y="776.9021739130435"/>
+            <point key="canvasLocation" x="-327" y="1387"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vq8-7X-P9a">
@@ -1331,7 +1339,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-mT-iSW">
-                                            <rect key="frame" x="-2" y="-9" width="375" height="173"/>
+                                            <rect key="frame" x="-3" y="-9" width="375" height="173"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <date key="date" timeIntervalSinceReferenceDate="507585004.35117102">
                                                 <!--2017-01-31 19:50:04 +0000-->
@@ -1422,6 +1430,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jeq-qX-Qbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="76" y="697"/>
         </scene>
     </scenes>
     <resources>
