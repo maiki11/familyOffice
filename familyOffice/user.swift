@@ -23,6 +23,7 @@ struct User {
     static let kUserRFCKey = "rfc"
     static let kUserNSSKey = "nss"
     static let kUserBloodTypeKey = "bloodType"
+    static let kUserTokensFCMeKey = "tokensFCM"
     
     let id: String!
     var name : String!
@@ -37,6 +38,7 @@ struct User {
     var birthday: String!
     var address : String!
     var bloodtype: String!
+    var tokens: NSDictionary? = nil
     
     init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, family : Family, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String) {
         self.id = id
@@ -52,6 +54,7 @@ struct User {
         self.birthday = birth
         self.address = address
         self.bloodtype = bloodtype
+        self.tokens = nil
     }
     
     init(snapshot: FIRDataSnapshot) {
@@ -68,6 +71,7 @@ struct User {
         self.bloodtype = UTILITY_SERVICE.exist(field: User.kUserBloodTypeKey, dictionary: snapshotValue)
         self.families = UTILITY_SERVICE.existNSDictionary(field: User.kUserFamiliesKey, dictionary: snapshotValue)
         self.phone = UTILITY_SERVICE.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
+        self.tokens = UTILITY_SERVICE.existNSDictionary(field: User.kUserTokensFCMeKey, dictionary: snapshotValue)
     }
     
     func toDictionary() -> NSDictionary {

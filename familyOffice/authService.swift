@@ -97,6 +97,7 @@ class AuthService {
                         self.createAccount(user: user as AnyObject)
                     }else{
                         USER_SERVICE.getUser(uid: (user?.uid)!, mainly: true)
+                        
                         //self.userStatus(state: "Online")
                         UTILITY_SERVICE.gotoView(view: name, context: view)
                     }

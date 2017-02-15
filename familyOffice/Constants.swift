@@ -37,3 +37,8 @@ let ANIMATIONS = Animations.instance
 let STORAGE_SERVICE = StorageService.Instance()
 let FAMILY_SERVICE = FamilyService.Instance()
 let USER_SERVICE = UserService.Instance()
+let NOTIFICATION_SERVICE = NotificationService.Instance()
+
+//Others
+let SERVERKEY =  "AIzaSyAkiqHhHKI0xcXrYF9eq-D6PzhUl-mPOls"
+let NOTIFICATION_URL = "https://fcm.googleapis.com/fcm/send"

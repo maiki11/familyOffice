@@ -51,6 +51,12 @@ class FamilyService {
             REF_USERS.child(item as! String).child("families/\((family.id)!)").removeValue()
         }
         self.removeFamily(family: family)
+        STORAGEREF.child("families/\((family.id)!)/images/\((family.imageProfilePath)!)").delete(completion: { (error) -> Void in
+            if (error != nil){
+                print(error.debugDescription)
+            }
+          }
+        )
         REF_FAMILIES.child(family.id!).removeValue()
         ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.user?.id)!, activity: "Se elimino la familia \((family.name)!)", photo: (family.photoURL?.absoluteString)!, type: "deleteFamily")
     }
@@ -60,7 +66,7 @@ class FamilyService {
         
         if let uploadData = UIImagePNGRepresentation(image){
             
-            _ = STORAGEREF.child("families/\(key)").child("images").child("\(imageName).png").put(uploadData, metadata: nil) { metadata, error in
+            _ = STORAGEREF.child("families/\(key)").child("images/\(imageName).png").put(uploadData, metadata: nil) { metadata, error in
                 if (error != nil) {
                     // Uh-oh, an error occurred!
                     print(error.debugDescription)
@@ -68,7 +74,7 @@ class FamilyService {
                     // Metadata contains file metadata such as size, content-type, and download URL.
                     if let downloadURL = metadata?.downloadURL()?.absoluteURL {
                         StorageService.Instance().save(url: downloadURL.absoluteString, data: uploadData)
-                        let family = Family(name: name, photoURL: downloadURL as NSURL, members:  [(FIRAuth.auth()?.currentUser?.uid)! : true], admin: (FIRAuth.auth()?.currentUser?.uid)! , id: key)
+                        let family = Family(name: name, photoURL: downloadURL as NSURL, members:  [(FIRAuth.auth()?.currentUser?.uid)! : true], admin: (FIRAuth.auth()?.currentUser?.uid)! , id: key, imageProfilePath: metadata?.name)
                         REF_FAMILIES.child(key).setValue(family.toDictionary())
                         REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").updateChildValues([ key: true])
                         //Set family for app
@@ -92,6 +98,9 @@ class FamilyService {
                 for member in members {
                     memberDict[member.id] = true
                     REF_USERS.child("\((member.id)!)/families").updateChildValues([family.id : true])
+                    for token in (member.tokens?.allKeys)! {
+                         NOTIFICATION_SERVICE.sendNotification(title: "Familia Creada", message: "\((family.name)!)", to: token as! String)
+                    }
                 }
                 self.families[index].members = memberDict as NSDictionary?
                 REF_FAMILIES.child("\((family.id)!)/members").setValue(memberDict)
@@ -116,8 +125,8 @@ class FamilyService {
             if (self.families[index].members?.count)! > 1 {
                 for item in (self.families[index].members?.allKeys)! as! [String] {
                     if(USER_SERVICE.user?.id != item){
-                         self.families[index].admin = item
-                         REF_FAMILIES.child(self.families[index].id).updateChildValues(["admin": item])
+                        self.families[index].admin = item
+                        REF_FAMILIES.child(self.families[index].id).updateChildValues(["admin": item])
                     }
                 }
             }else{
@@ -153,7 +162,7 @@ class FamilyService {
         }
     }
     func searchFamilyIndex(id: String) -> Int? {
-       var index = 0
+        var index = 0
         for item in self.families {
             if(item.id == id){
                 return index

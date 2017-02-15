@@ -13,7 +13,8 @@ target 'familyOffice' do
   pod 'Firebase/Storage'
   pod 'Firebase/Messaging'
   pod 'JVFloatLabeledTextField'
-  pod 'MGSwipeTableCell' 
+  pod 'MGSwipeTableCell'
+  pod 'Alamofire'
   target 'familyOfficeTests' do
     inherit! :search_paths
     pod 'Firebase'

@@ -16,6 +16,7 @@ class Utility {
     
     private init(){
     }
+    
     public static func Instance() -> Utility {
         return instance
     }
