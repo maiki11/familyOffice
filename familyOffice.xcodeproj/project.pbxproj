@@ -847,7 +847,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = familyOffice/familyOffice.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Juan Pedro Atondo (5A5ENQB5UH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos10.2]" = "iPhone Developer: Juan Pedro Atondo (5A5ENQB5UH)";
 				DEVELOPMENT_TEAM = XSFS8X2N87;
 				INFOPLIST_FILE = familyOffice/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

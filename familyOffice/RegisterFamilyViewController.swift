@@ -108,6 +108,9 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        UTILITY_SERVICE.enabledView()
+    }
     
     @IBAction func cropAndSave(_ sender: Any) {
         let key = REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key

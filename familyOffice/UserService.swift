@@ -33,6 +33,7 @@ class UserService {
                 let user = User(snapshot: snapshot)
                 if(mainly){
                     self.user = user
+                    NOTIFICATION_SERVICE.saveToken()
                 }
                 if(self.duplicate(id:user.id)){
                     self.users.append(User(snapshot: snapshot))

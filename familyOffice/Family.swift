@@ -11,17 +11,17 @@ import Firebase
 
 struct Family  {
     
-    
-    static let kFamilyNameKey = "name"
     static let kFamilyIdKey = "id"
+    static let kFamilyNameKey = "name"
     static let kFamilyPhotoUrlKey = "photoUrl"
     static let kFamilyMembersKey = "members"
     static let kFamilyAdminKey = "admin"
-    
+    static let kFamilyImagePathKey = "imageProfilePath"
     
     let id: String!
     let name: String!
     let photoURL: NSURL?
+    var imageProfilePath : String?
     var totalMembers : UInt? = 0
     var admin : String? = ""
     var members : NSDictionary?
@@ -39,7 +39,7 @@ struct Family  {
         self.members = nil
     }
     
-    init(name: String, photoURL: NSURL, members: NSDictionary, admin: String, id: String){
+    init(name: String, photoURL: NSURL, members: NSDictionary, admin: String, id: String, imageProfilePath: String? ){
         self.name = name
         self.photoURL = photoURL
         self.admin = admin
@@ -47,6 +47,7 @@ struct Family  {
         self.firebaseReference = nil
         self.id = id
         self.members = members
+        self.imageProfilePath = imageProfilePath
     }
     
     /* Initializer for instantiating an object received from Firebase.
@@ -55,6 +56,7 @@ struct Family  {
         let snapshotValue = snapshot.value as! [String: Any]
         self.name = snapshotValue[Family.kFamilyNameKey] as! String
         self.id = snapshot.key
+        self.imageProfilePath = UTILITY_SERVICE.exist(field: Family.kFamilyImagePathKey, dictionary: snapshotValue as NSDictionary)
         self.photoURL = URL(string: snapshotValue[Family.kFamilyPhotoUrlKey] as! String) as NSURL!
         if let members = snapshotValue[Family.kFamilyMembersKey] {
             self.totalMembers = UInt((members as AnyObject).count)
@@ -73,7 +75,8 @@ struct Family  {
             Family.kFamilyNameKey: self.name,
             Family.kFamilyPhotoUrlKey: self.photoURL!.absoluteString!,
             Family.kFamilyMembersKey : self.members!,
-            Family.kFamilyAdminKey : self.admin ?? ""
+            Family.kFamilyAdminKey : self.admin ?? "",
+            Family.kFamilyImagePathKey: self.imageProfilePath!
         ]
     }
     
