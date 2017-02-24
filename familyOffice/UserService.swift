@@ -11,9 +11,10 @@ import UIKit
 import Firebase
 
 class UserService {
-   
+    
     public var user : User? = nil
     public var users: [User] = []
+    
     private init(){
     }
     public static func Instance() -> UserService {
@@ -21,24 +22,16 @@ class UserService {
     }
     
     private static let instance : UserService = UserService()
-   
+    
     func setFamily(family: Family) -> Void {
-        user?.family = family
+        //user?.family = family
         user?.familyActive = family.id
     }
     
-    func getUser(uid: String, mainly: Bool) -> Void {
+    func getUser(uid: String) -> Void {
         REF.child("/users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
             if(snapshot.exists()){
-                let user = User(snapshot: snapshot)
-                if(mainly){
-                    self.user = user
-                    NOTIFICATION_SERVICE.saveToken()
-                }
-                if(self.duplicate(id:user.id)){
-                    self.users.append(User(snapshot: snapshot))
-                    NotificationCenter.default.post(name: USERS_NOTIFICATION, object: nil)
-                }
+                self.addUser(user:  User(snapshot: snapshot))
             }
         }) { (error) in
             print(error.localizedDescription)
@@ -47,29 +40,20 @@ class UserService {
     func getUser(email: String) -> Void {
         REF.child("/users/").queryOrderedByValue().queryEqual(toValue: email).observeSingleEvent(of: .value, with: { (snapshot) in
             if(snapshot.exists()){
-                let user = User(snapshot: snapshot)
-                if(self.duplicate(id:user.id)){
-                    self.users.append(User(snapshot: snapshot))
-                    NotificationCenter.default.post(name: USERS_NOTIFICATION, object: user)
-                }
+                 self.addUser(user:  User(snapshot: snapshot))
             }
         }) { (error) in
             print(error.localizedDescription)
         }
     }
     func getUser(phone: String) -> Void {
-        REF.child("users").queryOrdered(byChild: "phone").queryStarting(atValue: phone).queryEnding(atValue: phone).observe(.childAdded, with: { (snapshot) -> Void in
+        REF_USERS.queryOrdered(byChild: "phone").queryStarting(atValue: "\(phone)").queryEnding(atValue: "\(phone)").observe(.childAdded, with: { (snapshot) -> Void in
             if(snapshot.exists()){
-                let user = User(snapshot: snapshot)
-                if(self.duplicate(id:user.id)){
-                    self.users.append(User(snapshot: snapshot))
-                    NotificationCenter.default.post(name: USERS_NOTIFICATION, object: user)
-                }
+                 self.addUser(user:  User(snapshot: snapshot))
             }
 
         })
     }
-    
     func changePassword(oldPass: String, newPass: String) -> Void {
         let user = FIRAuth.auth()?.currentUser
         FIRAuth.auth()?.signIn(withEmail: (user?.email)!, password: oldPass) { (user, error) in
@@ -89,42 +73,51 @@ class UserService {
             }
         }
     }
-    
     func updateUser(user: User) -> Void {
         REF_USERS.child(user.id).updateChildValues(user.toDictionary() as! [AnyHashable : Any])
         ACTIVITYLOG_SERVICE.create(id: (self.user?.id)!, activity: "Se actualizo información personal", photo: (self.user?.photoURL)!, type: "personalInfo")
+        self.user = nil
         self.user = user
+        /*if let index = self.users.index(where:{$0.id == user.id as String}) {
+            self.users[index].phone = user.phone
+        }*/
     }
-    
-    
-    
-    internal func searchUser(uid: String)->User?{
-        for item in self.users {
-            if(item.id == uid){
-                return item
+    func observers() -> Void {
+        
+        REF_USERS.child("\((user?.id)!)/families").observe(.childAdded, with: { (snapshot) -> Void in
+            FAMILY_SERVICE.getFamilies(key: snapshot.key)
+            var families = self.user?.families as! [String: Bool]
+            families[snapshot.key] = (snapshot.value as! Bool)
+            self.user?.families = families as NSDictionary?
+            if let index = self.users.index(where:{$0.id == (self.user?.id)! as String}) {
+                self.users[index].families = self.user!.families
             }
-        }
-        return nil
-    }
-    
-    func searchUser(phone: String) -> User? {
-        for item in self.users {
-            if(item.phone == phone){
-                return item
+            
+        })
+        // Listen for deleted comments in the Firebase database
+        REF_USERS.child("\((user?.id)!)/families").observe(.childRemoved, with: { (snapshot) -> Void in
+            if let index = self.users.index(where: {$0.id == self.user?.id})  {
+                let filter = self.user?.families?.filter({$0.key as? String != snapshot.key})
+                var families : [String: Bool] = [:]
+                for result in filter! {
+                    families[result.key as! String] = (result.value as! Bool)
+                }
+                if let family = FAMILY_SERVICE.families.first(where: {$0.id == snapshot.key}) {
+                    FAMILY_SERVICE.removeFamily(family:family)
+                }
+                
+                if(FAMILY_SERVICE.families.count == 0){
+                    NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
+                }
+                self.user?.families = families as NSDictionary
+                self.users[index].families = families as NSDictionary
+                NotificationCenter.default.post(name: FAMILYREMOVED_NOTIFICATION, object: nil)
             }
-        }
-        return nil
+        })
+        
+        
     }
-    
-    func searchUser(email: String) -> User? {
-        for item in self.users {
-            if(item.phone == email){
-                return item
-            }
-        }
-        return nil
-    }
-    
+  
     internal func clearData() {
         self.user = nil
         self.users.removeAll()
@@ -139,14 +132,12 @@ class UserService {
             cont += 1
         }
     }
-    func duplicate(id: String) -> Bool {
-        var bool = true
-        for item in self.users {
-            if(item.id == id){
-                bool = false
-                break
-            }
+    
+    internal func addUser(user: User)-> Void{
+        if !self.users.contains(where: {$0.id == user.id}) {
+            self.users.append(user)
+            NotificationCenter.default.post(name: USER_NOTIFICATION, object: user)
         }
-        return bool
     }
+
 }

@@ -11,6 +11,7 @@ import UIKit
 class FamilyMemberTableViewCell: UITableViewCell {
 
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var adminlabel: UILabel!
     @IBOutlet weak var memberImage: UIImageView!
     @IBOutlet weak var name: UILabel!
@@ -19,6 +20,7 @@ class FamilyMemberTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.memberImage.image = #imageLiteral(resourceName: "profile_default")
         self.memberImage.layer.cornerRadius = self.memberImage.frame.size.width/2
         self.memberImage.clipsToBounds = true
     }

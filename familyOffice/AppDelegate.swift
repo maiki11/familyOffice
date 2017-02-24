@@ -30,8 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         FIRApp.configure()
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-        
-    
         NotificationCenter.default.addObserver(self,
         selector: #selector(tokenRefreshNotification),
         name: NSNotification.Name.firInstanceIDTokenRefresh,

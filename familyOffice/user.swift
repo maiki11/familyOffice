@@ -30,7 +30,6 @@ struct User {
     var phone: String!
     var photoURL: String!
     var families : NSDictionary? = nil
-    var family: Family? = nil
     var familyActive : String!
     var rfc : String!
     var nss : String!
@@ -40,13 +39,12 @@ struct User {
     var bloodtype: String!
     var tokens: NSDictionary? = nil
     
-    init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, family : Family, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String) {
+    init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String) {
         self.id = id
         self.name = name
         self.phone = phone
         self.photoURL = photoURL
         self.families = families
-        self.family = family
         self.familyActive = familyActive
         self.rfc = rfc
         self.nss = nss
