@@ -36,7 +36,7 @@ class StorageService {
         }
         return storage.object(forKey: url) as! Data?
     }
-  
+    
     
     func clear() -> Void {
         self.storage.removeAllObjects()

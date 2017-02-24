@@ -15,6 +15,7 @@ class memberSelectedCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
         self.imageMember.layer.cornerRadius = self.imageMember.frame.size.width/2
         self.imageMember.clipsToBounds = true
     }

@@ -26,5 +26,12 @@ class recordTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
+    
+    func config(title: String, date: String) -> Void {
+      
+        activity.text = title
+        self.date.text = date
+       
+    }
 
 }
