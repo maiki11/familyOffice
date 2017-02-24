@@ -39,7 +39,7 @@ class FamilyService {
                     })
                 }
             }else{
-                NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
+                //NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
             }
         }) { (error) in
             print(error.localizedDescription)

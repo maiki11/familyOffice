@@ -58,6 +58,11 @@ class Utility {
         return newImage!
     }
     
+    //radious corner
+    func radiousCorner(obj: AnyObject){
+        obj.layer.cornerRadius = obj.frame.size.width/2
+    }
+    
     func disabledView(){
         UIApplication.shared.beginIgnoringInteractionEvents()
     }
