@@ -39,7 +39,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewDidLoad()
         USER_SERVICE.observers()
         UTILITY_SERVICE.loading(view: self.view)
-        self.navBar.isHidden = true
+        
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
         self.headPosY = self.headerView.frame.origin.y
         self.headWidth = self.headerView.frame.width
@@ -75,6 +75,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     }
                 }
             }
+            self.familyName.text = family.name ?? "No seleccionada"
         }
     }
     
