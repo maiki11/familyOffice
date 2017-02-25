@@ -19,20 +19,10 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     var imageView = UIImageView()
     var blurImageView = UIImageView()
     
-    override func viewWillDisappear(_ animated: Bool) {
-        UTILITY_SERVICE.stopLoading(view: self.view)
-        UTILITY_SERVICE.enabledView()
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.cropAndSave(_:)))
         navigationItem.rightBarButtonItems = [saveButton]
-        if(USER_SERVICE.user?.family == nil){
-            let logoutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(self.logout(_:)))
-            navigationItem.leftBarButtonItems = [logoutButton]
-        }
         scrollView.delegate = self
         blurImageView.contentMode = UIViewContentMode.scaleAspectFill
         imageView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)

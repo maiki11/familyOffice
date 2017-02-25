@@ -85,13 +85,6 @@ class AuthService {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             self.uid = user?.uid
             if (user != nil) {
-<<<<<<< Updated upstream
-=======
-                if(!checkFamily){
-                    FAMILY_SERVICE.getFamilies()
-                    checkFamily = true
-                }
->>>>>>> Stashed changes
                 REF_USERS.child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in
                     // Get user value
                     if !snapshot.exists() {

@@ -433,34 +433,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T93-d6-7Lq">
                                 <rect key="frame" x="0.0" y="30" width="375" height="200"/>
                                 <subviews>
-<<<<<<< Updated upstream
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="familyImage" translatesAutoresizingMaskIntoConstraints="NO" id="iwK-bb-aXW">
-                                        <rect key="frame" x="113" y="44" width="150" height="150"/>
-=======
+      <rect key="frame" x="113" y="44" width="150" height="150"/>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iwK-bb-aXW">
                                         <rect key="frame" x="108" y="10" width="160" height="160"/>
->>>>>>> Stashed changes
                                         <constraints>
                                             <constraint firstAttribute="width" constant="160" id="Wbk-cL-Cw6"/>
                                             <constraint firstAttribute="height" constant="160" id="i7y-xU-6xI"/>
                                         </constraints>
                                     </imageView>
-<<<<<<< Updated upstream
-                                    <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBE-iw-Wld">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                        <items>
-                                            <navigationItem id="U0v-ve-cTO"/>
-                                        </items>
-                                    </navigationBar>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Family Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiZ-VY-qOu">
-                                        <rect key="frame" x="0.0" y="210" width="375" height="15"/>
-=======
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Family Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiZ-VY-qOu">
                                         <rect key="frame" x="0.0" y="175" width="375" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="cPt-pb-GvM"/>
                                         </constraints>
->>>>>>> Stashed changes
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -498,11 +483,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
-<<<<<<< Updated upstream
-                        <outlet property="activityIndicator" destination="KvL-yt-llR" id="KOR-Nk-8Em"/>
-=======
                         <outlet property="collectionView" destination="wMk-Nw-1AJ" id="QGM-GJ-5KY"/>
->>>>>>> Stashed changes
                         <outlet property="familyImage" destination="iwK-bb-aXW" id="qcN-FF-goM"/>
                         <outlet property="familyName" destination="wiZ-VY-qOu" id="sFb-jN-c00"/>
                         <outlet property="headerView" destination="T93-d6-7Lq" id="Ekq-vC-nZg"/>
@@ -515,13 +496,8 @@
         <!--Familias-->
         <scene sceneID="12L-Oj-ID7">
             <objects>
-<<<<<<< Updated upstream
-                <collectionViewController id="XpR-DC-7PS" customClass="FamilyCollectionViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="DJQ-D4-Rsb">
-=======
                 <collectionViewController storyboardIdentifier="FamiliesView" id="XpR-DC-7PS" customClass="FamilyCollectionViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="DJQ-D4-Rsb">
->>>>>>> Stashed changes
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -657,11 +633,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="84"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6UI-Je-hcE" id="CEI-UN-2J5">
-<<<<<<< Updated upstream
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
-=======
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="83"/>
->>>>>>> Stashed changes
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K8z-zN-hbz">
@@ -802,11 +774,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2vl-BK-11d" id="z1p-Xd-hAg">
-<<<<<<< Updated upstream
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
-=======
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
->>>>>>> Stashed changes
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Siu-LT-19e">
@@ -821,13 +789,8 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellMember" id="2Ci-b0-deS" customClass="memberSelectedCollectionViewCell" customModule="familyOffice" customModuleProvider="target">
-<<<<<<< Updated upstream
-                                                    <rect key="frame" x="0.0" y="15" width="80" height="90"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-=======
                                                     <rect key="frame" x="10" y="11" width="70" height="70"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
->>>>>>> Stashed changes
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="90"/>
                                                         <autoresizingMask key="autoresizingMask"/>
@@ -875,11 +838,7 @@
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="84" id="BlU-uF-I69" customClass="FamilyMemberTableViewCell" customModule="familyOffice" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="148" width="375" height="84"/>
                                 <autoresizingMask key="autoresizingMask"/>
-<<<<<<< Updated upstream
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BlU-uF-I69" id="N3V-PO-Kie">
-=======
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XWu-x0-dIW" id="k6U-7W-bI5">
->>>>>>> Stashed changes
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -1439,11 +1398,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-mT-iSW">
-<<<<<<< Updated upstream
-                                            <rect key="frame" x="-7" y="-9" width="378" height="173"/>
-=======
                                             <rect key="frame" x="-5" y="-9" width="373" height="173"/>
->>>>>>> Stashed changes
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <date key="date" timeIntervalSinceReferenceDate="507585004.35117102">
                                                 <!--2017-01-31 19:50:04 +0000-->

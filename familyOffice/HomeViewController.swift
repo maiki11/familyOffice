@@ -10,14 +10,6 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-<<<<<<< Updated upstream
-class HomeViewController: UIViewController {
-    
- 
-    
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var navBar: UINavigationBar!
-=======
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     let myImages=["chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png"]
     let newHeight: CGFloat = 60
@@ -28,7 +20,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     private var flag = true
     private var family : Family?
 
->>>>>>> Stashed changes
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var navBar: UINavigationBar!
     @IBOutlet weak var familyImage: UIImageView!
     @IBOutlet weak var familyName: UILabel!
     @IBOutlet weak var headerView: UIView!
@@ -42,36 +35,19 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var navigationBarOriginalOffset : CGFloat?
 
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationBarOriginalOffset = familyImage.frame.origin.y
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         USER_SERVICE.observers()
         UTILITY_SERVICE.loading(view: self.view)
-<<<<<<< Updated upstream
-    
         self.navBar.isHidden = true
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
-=======
-        
-        reloadFamily()
         self.headPosY = self.headerView.frame.origin.y
         self.headWidth = self.headerView.frame.width
         self.famPosY = familyName.frame.origin.y
         self.collectionHeight = collectionView.frame.height
-        //if (USER_SERVICE.user?.family == nil) {
-        //    UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
-        //}
-        //get image height to use in scroll view load and borders
         lastContentOffset = familyImage.frame.size.height/2
         heightImg = familyImage.frame.size.height
         self.familyImage.layer.cornerRadius = lastContentOffset
->>>>>>> Stashed changes
         self.familyImage.clipsToBounds = true
         
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
@@ -83,7 +59,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.reloadFamily()
         }
     }
-<<<<<<< Updated upstream
+
     override func viewWillAppear(_ animated: Bool) {
         reloadFamily()
     }
@@ -98,7 +74,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                         self.familyImage.image = UIImage(data: data)
                     }
                 }
-=======
+            }
+        }
+    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollView.bounces = false
@@ -196,34 +174,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         })
     }
     
-    func reloadFamily() -> Void {
-        self.familyImage.frame = CGRect(x: 0, y: 0, width: 160, height: 160)
-        familyImage.center = self.headerView.center
-        familyImage.frame.origin.y = self.view.frame.origin.y + 10
-        family = USER_SERVICE.user?.family
-        if(self.family != nil){
-            if let data = STORAGE_SERVICE.search(url: (self.family?.photoURL?.absoluteString)!) {
-                self.familyImage.image = UIImage(data: data)
->>>>>>> Stashed changes
-            }
-            self.familyName.text = family.name ?? "No seleccionada"
-        }
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-<<<<<<< Updated upstream
-
-=======
-    func checkFamily(){
-        print(FAMILY_SERVICE.families.count)
-        
-        if(FAMILY_SERVICE.families.count == 0){
-            Utility.Instance().gotoView(view: "RegisterFamilyView", context: self)
-        }
-    }
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -238,5 +192,4 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cell
     
     }
->>>>>>> Stashed changes
 }

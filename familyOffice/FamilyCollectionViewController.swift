@@ -24,8 +24,6 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         lpgr.minimumPressDuration = 0.5
         lpgr.delaysTouchesBegan = true
         self.familyCollection.addGestureRecognizer(lpgr)
-<<<<<<< Updated upstream
-        
         self.clearsSelectionOnViewWillAppear = true     
         
     }
@@ -50,39 +48,8 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(FAMILYREMOVED_NOTIFICATION)
         NotificationCenter.default.removeObserver(FAMILYADDED_NOTIFICATION)
-=======
-        self.clearsSelectionOnViewWillAppear = true
-        
-        REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").observe(.childAdded, with: { (snapshot) -> Void in
-            if(snapshot.exists()){
-                REF_FAMILIES.child(snapshot.key).observeSingleEvent(of: .value, with: { (snapshot) in
-                    // Get user value
-                    if(snapshot.exists()){
-                        let family = Family(snapshot: snapshot)
-                        if (FAMILY_SERVICE.duplicate(id: family.id)){
-                            FAMILY_SERVICE.families.append(family)
-                            self.families.append(family)
-                            self.collectionView?.reloadData()
-                        }
-                    }
-                    // ...
-                }) { (error) in
-                    print(error.localizedDescription)
-                }
-            }
-        })
-        
     }
-    override func viewWillAppear(_ animated: Bool) {
-        if(self.families.count == 0){
-            self.performSegue(withIdentifier: "registerSegue", sender: nil)
-        }
-        self.families = FAMILY_SERVICE.families
-        self.collectionView?.reloadData()
-        Utility.Instance().clearObservers()
-        
->>>>>>> Stashed changes
-    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
