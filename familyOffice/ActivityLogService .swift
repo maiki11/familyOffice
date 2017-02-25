@@ -12,7 +12,7 @@ import FirebaseAuth
 
 class ActivityLogService {
     public var activityLog : [Record] = []
-    
+    var handle: UInt!
     private init() {
     }
     
@@ -29,14 +29,31 @@ class ActivityLogService {
         activityLog.append(record)
     }
     
-    func getActivities(id: String) {
-        REF_ACTIVITY.child(id).queryOrdered(byChild: "timestamp").observeSingleEvent(of: .value, with: { (snapshot) in
-            self.activityLog = []
+    func getActivities()  {
+        /*REF_ACTIVITY.child((USER_SERVICE.user?.id)!).observeSingleEvent(of: .value, with: { (snapshot) in
+         if(snapshot.exists()){
+         for item in snapshot.children {
+         let not = Record(snapshot:item as! FIRDataSnapshot)
+         if !self.activityLog.contains(where: {$0.id == not.id}){
+         self.activityLog.append(not)
+         NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: not)
+         }
+         
+         }
+         }
+         })*/
+        
+        handle = REF_ACTIVITY.child((USER_SERVICE.user?.id)!).queryOrdered(byChild: "timestamp").observe( .childAdded, with: { (snapshot) in
+         var cont = 1
             if(snapshot.exists()){
-                for item in snapshot.children{
-                    self.activityLog.append(Record(snapshot: item as! FIRDataSnapshot))
+                print(cont)
+                cont+=1
+                let not = Record(snapshot:snapshot)
+                if !self.activityLog.contains(where: {$0.id == not.id}){
+                    self.activityLog.append(not)
+                    NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: not)
                 }
-                NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: nil)
+                
             }
         })
     }

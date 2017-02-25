@@ -11,7 +11,7 @@ import UIKit
 class PersonalDataTableViewController: UITableViewController {
     
     var userDictionary = USER_SERVICE.user!.toDictionary()
-    var user : User = USER_SERVICE.user!
+   
     
     var date : String!
     var placeholders = ["Nombre", "Teléfono", "Dirección", "Fecha de Cumpleaños","", "RFC", "CURP", "NSS", "Tipo de sangre"]
@@ -93,8 +93,8 @@ class PersonalDataTableViewController: UITableViewController {
     
     //Private methods
     func setDate() -> Void {
-        user.birthday = date
-        userDictionary = user.toDictionary()
+        USER_SERVICE.user!.birthday = date
+        userDictionary = USER_SERVICE.user!.toDictionary()
         self.tableView.reloadData()
     }
     func save(sender: UINavigationBar) -> Void {
@@ -106,28 +106,28 @@ class PersonalDataTableViewController: UITableViewController {
                 let value = cell?.myTextField.text
                 switch  aboutkeys[indexPath.row] {
                 case "name":
-                    user.name = value
+                    USER_SERVICE.user!.name = value
                     break
                 case "phone":
-                    user.phone = value
+                    USER_SERVICE.user!.phone = value
                     break
                 case "address":
-                    user.address = value
+                    USER_SERVICE.user!.address = value
                     break
                 case "rfc":
-                    user.rfc = value
+                    USER_SERVICE.user!.rfc = value
                     break
                 case "curp":
-                    user.curp = value
+                    USER_SERVICE.user!.curp = value
                     break
                 case "birthday":
-                    user.birthday = value
+                    USER_SERVICE.user!.birthday = value
                     break
                 case "nss":
-                    user.nss = value
+                    USER_SERVICE.user!.nss = value
                     break
                 case "bloodType":
-                    user.bloodtype = value
+                    USER_SERVICE.user!.bloodtype = value
                     break
                 default:
                     break
@@ -135,7 +135,7 @@ class PersonalDataTableViewController: UITableViewController {
             }
             index += 1
         }
-        USER_SERVICE.updateUser(user: user)
+        USER_SERVICE.updateUser(user: USER_SERVICE.user!)
     }
     
     

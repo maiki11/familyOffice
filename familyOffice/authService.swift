@@ -45,10 +45,15 @@ class AuthService {
         }
     }
     func logOut(){
+        NOTIFICATION_SERVICE.deleteToken(token: NOTIFICATION_SERVICE.token, id: (USER_SERVICE.user?.id)!)
         try! FIRAuth.auth()!.signOut()
-        USER_SERVICE.clearData()
+        REF_USERS.child("\((USER_SERVICE.user?.id)!)/families").removeAllObservers()
+        UTILITY_SERVICE.clearObservers()
+        NOTIFICATION_SERVICE.notifications.removeAll()
+        ACTIVITYLOG_SERVICE.activityLog.removeAll()
         self.userStatus(state: "Offline")
-        FAMILY_SERVICE.families = []
+        FAMILY_SERVICE.families.removeAll()
+        USER_SERVICE.clearData()
     }
 
     //Create account with federate entiies like Facebook Twitter Google  etc
@@ -67,8 +72,7 @@ class AuthService {
                         let xuserModel = ["name" : user.displayName!,
                                           "photoUrl": downloadURL] as [String : Any]
                         REF_USERS.child(user.uid).setValue(xuserModel)
-                        ACTIVITYLOG_SERVICE.create(id: user.uid, activity: "Se actualizo información personal", photo: downloadURL, type: "sesion")
-                        USER_SERVICE.getUser(uid: user.uid, mainly: true)
+                        ACTIVITYLOG_SERVICE.create(id: user.uid, activity: "Se creo la cuenta", photo: downloadURL, type: "sesion")
                         //self.userStatus(state: "Online")
                     }
 
@@ -78,28 +82,23 @@ class AuthService {
     }
 
     func isAuth(view: UIViewController, name: String)  {
-        var checkFamily = false
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             self.uid = user?.uid
             if (user != nil) {
-                
-                NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
-                    UTILITY_SERVICE.gotoView(view: "RegisterFamilyView", context: view)
-                    return
-                }
-                if(!checkFamily){
-                    FAMILY_SERVICE.getFamilies()
-                    checkFamily = true
-                }
                 REF_USERS.child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in
                     // Get user value
                     if !snapshot.exists() {
                         self.createAccount(user: user as AnyObject)
                     }else{
-                        USER_SERVICE.getUser(uid: (user?.uid)!, mainly: true)
+                        USER_SERVICE.user = User(snapshot: snapshot)
+                        USER_SERVICE.addUser(user: User(snapshot: snapshot))
+                        NOTIFICATION_SERVICE.saveToken()
+                        FAMILY_SERVICE.getFamilies()
                         //self.userStatus(state: "Online")
+                        REF_USERS.child((user!.uid)).removeAllObservers()
                         UTILITY_SERVICE.gotoView(view: name, context: view)
                     }
+                    
                 }) { (error) in
                     print(error.localizedDescription)
                 }

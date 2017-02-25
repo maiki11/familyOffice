@@ -53,6 +53,9 @@ class AddMembersTableViewController: UITableViewController {
         
         tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        REF_USERS.removeAllObservers()
+    }
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(indexPath.row == 0){
@@ -64,11 +67,16 @@ class AddMembersTableViewController: UITableViewController {
         let user = users[indexPath.row-1]
         cell.name.text = user.name
         cell.phone.text = user.phone
-        if let data = STORAGE_SERVICE.search(url: user.photoURL) {
-            cell.memberImage.image = UIImage(data: data)
-        }else{
-            cell.imageView?.image = #imageLiteral(resourceName: "User")
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let data = STORAGE_SERVICE.search(url: user.photoURL) {
+                DispatchQueue.main.async {
+                    cell.memberImage.image = nil
+                    cell.memberImage.image = UIImage(data: data)
+                }
+            }
+            cell.activityIndicator.stopAnimating()
         }
+        
 
         return cell
     }
@@ -88,6 +96,7 @@ class AddMembersTableViewController: UITableViewController {
         let fetchRequest = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor])
         try! store.enumerateContacts(with: fetchRequest) { contact, stop in
             if contact.phoneNumbers.count > 0 {
+               
                 self.contacts.append(contact)
             }
         }
@@ -97,13 +106,13 @@ class AddMembersTableViewController: UITableViewController {
         self.users = []
         for item in contacts {
             for phone in item.phoneNumbers {
-                if let user =  USER_SERVICE.searchUser(phone:  phone.value.stringValue) {
+                if let user = USER_SERVICE.users.filter({ $0.phone == phone.value.value(forKey: "digits") as! String }).first {
                     if (family.members?[user.id]) == nil {
                         self.users.append(user)
                         self.tableView.reloadData()
                     }
                 }else{
-                     USER_SERVICE.getUser(phone: phone.value.stringValue)
+                     USER_SERVICE.getUser(phone: (phone.value.value(forKey: "digits"))! as! String)
                 }
             }
         }

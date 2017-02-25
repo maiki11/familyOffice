@@ -29,7 +29,6 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     
     func webviewDidFinishLoad(_ : UIWebView){
         UTILITY_SERVICE.stopLoading(view: self.view)
-        
     }
     
     override func viewDidLoad() {

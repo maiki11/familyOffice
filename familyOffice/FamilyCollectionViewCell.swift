@@ -10,6 +10,7 @@ import UIKit
 
 class FamilyCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var activityindicator: UIActivityIndicatorView!
     @IBOutlet weak var imageFamily: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var deleteButton: UIButton!

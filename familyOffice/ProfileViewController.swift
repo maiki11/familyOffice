@@ -9,7 +9,6 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    var activities : [Record] = []
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet var userName: UILabel!
@@ -18,57 +17,57 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
-        let profile = USER_SERVICE.user
         self.tableView.separatorStyle = .none
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         //self.profileImage.clipsToBounds = true
-        self.userName.text =  profile?.name
-        if let data = STORAGE_SERVICE.search(url: (profile?.photoURL)!) {
-            self.profileImage.image = UIImage(data: data)
+        self.userName.text =  USER_SERVICE.user?.name
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let data = STORAGE_SERVICE.search(url: (USER_SERVICE.user?.photoURL)!) {
+                DispatchQueue.main.async {
+                    self.profileImage.image = UIImage(data: data)                }
+            }
         }
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.tintColor = UIColor.gray
-        tableView.refreshControl?.backgroundColor = UIColor.white
-        tableView.refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
-        // Do any additional setup after loading the view.
     }
+    
     func loadData(){
-        ACTIVITYLOG_SERVICE.getActivities(id: USER_SERVICE.user!.id)
-        // Bounce back to the main thread to update the UI
-        self.activities = ActivityLogService.Instance().activityLog
         self.tableView.refreshControl?.endRefreshing()
         self.tableView.reloadData()
         //
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.activities = ActivityLogService.Instance().activityLog
-        self.activities.sort(by: {$0.timestamp > $1.timestamp})
-        self.tableView.reloadData()
-        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
-            Utility.Instance().stopLoading(view: self.view)
-            self.activities = ActivityLogService.Instance().activityLog
-            self.activities.sort(by: {$0.timestamp > $1.timestamp})
-            self.tableView.reloadData()
-        }
         
+        ACTIVITYLOG_SERVICE.getActivities()
+        NOTIFICATION_SERVICE.getNotifications()
+        self.tableView.reloadData()
+        print("NOTFICACIONES----------")
+        print(NOTIFICATION_SERVICE.notifications)
+        print("----------------")
+        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
+            
+            if self.segmentedControl.selectedSegmentIndex == 0 {
+                if let _ : NotificationModel = notification.object as? NotificationModel {
+                    self.tableView.insertRows(at: [IndexPath(row: NOTIFICATION_SERVICE.notifications.count-1, section: 0) ], with: .fade)
+                }
+            }else{
+                if let _ : Record = notification.object as?  Record {
+                    self.tableView.insertRows(at: [IndexPath(row: ACTIVITYLOG_SERVICE.activityLog.count-1, section: 0) ], with: .fade)
+                }
+            }
+            //self.loadData()
+        }
     }
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
         self.tableView.reloadData()
-        
     }
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
+        REF_ACTIVITY.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: ACTIVITYLOG_SERVICE.handle)
+        //REF_NOTIFICATION.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: NOTIFICATION_SERVICE.handle)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func logOut(_ sender: UIButton) {
-        AuthService.Instance().logOut()
-        Utility.Instance().gotoView(view: "StartView", context: self)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -76,30 +75,41 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! recordTableViewCell
+        cell.iconImage.image = nil
+        cell.photo.image = nil
         if segmentedControl.selectedSegmentIndex == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! recordTableViewCell
-            let activity = activities[indexPath.row]
-            cell.date.text = UTILITY_SERVICE.getDate(date: activity.timestamp)
-            cell.activity.text = activity.activity
+            let activity = ACTIVITYLOG_SERVICE.activityLog[indexPath.row]
             cell.iconImage.image = #imageLiteral(resourceName: "logo")
-            if let data = STORAGE_SERVICE.search(url: activity.photoURL) {
-                cell.photo.image = UIImage(data: data)
+            cell.config(title: activity.activity, date: UTILITY_SERVICE.getDate(date: activity.timestamp!))
+            DispatchQueue.global(qos: .userInitiated).async {
+                if let data = STORAGE_SERVICE.search(url: activity.photoURL) {
+                    DispatchQueue.main.async {
+                        cell.photo.image = UIImage(data: data)
+                    }
+                }
             }
-            return cell
+            
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath)
-            return cell
+            let notification = NOTIFICATION_SERVICE.notifications[indexPath.row]
+            cell.config(title: notification.title, date: UTILITY_SERVICE.getDate(date: notification.timestamp))
+            DispatchQueue.global(qos: .userInitiated).async {
+                if let data = STORAGE_SERVICE.search(url: notification.photoURL) {
+                    DispatchQueue.main.async {
+                        cell.iconImage.image = UIImage(data: data)
+                    }
+                }
+            }
         }
-        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentedControl.selectedSegmentIndex == 1 {
-            return activities.count
+            return ACTIVITYLOG_SERVICE.activityLog.count
+        }else{
+            return NOTIFICATION_SERVICE.notifications.count
         }
-        return 0
-        
     }
     
     

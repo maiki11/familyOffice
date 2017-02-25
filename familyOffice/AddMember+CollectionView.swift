@@ -24,8 +24,10 @@ extension AddMembersTableViewController:  UICollectionViewDelegate, UICollection
         if let data = STORAGE_SERVICE.search(url: user.photoURL) {
             cell.imageMember.image = UIImage(data: data)
         }else{
-            cell.imageMember.image = #imageLiteral(resourceName: "User")
+            cell.imageMember.image = #imageLiteral(resourceName: "profile_default")
         }
+        cell.imageMember.layer.cornerRadius = cell.imageMember.frame.size.width/2
+        cell.imageMember.clipsToBounds = true
         cell.name.text = user.name
         
         return cell
@@ -58,12 +60,10 @@ extension AddMembersTableViewController:  UICollectionViewDelegate, UICollection
     func reloal(type: Bool) -> Void {
     
         
-        if(selected.count == 1){
+        if(selected.count >= 1){
             tableView.reloadRows(at: [IndexPathOfFirstRow as IndexPath], with: UITableViewRowAnimation.fade)
         }else if(selected.count == 0){
             tableView.reloadRows(at: [IndexPathOfFirstRow as IndexPath], with: UITableViewRowAnimation.none)
-        }else{
-             tableView.reloadRows(at: [IndexPathOfFirstRow as IndexPath], with: UITableViewRowAnimation.fade)
         }
         
         

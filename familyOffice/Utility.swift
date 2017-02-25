@@ -1,6 +1,6 @@
 //
 //  Utility.swift
-//  
+//
 //
 //  Created by Leonardo Durazo on 05/01/17.
 //
@@ -16,6 +16,7 @@ class Utility {
     
     private init(){
     }
+    
     public static func Instance() -> Utility {
         return instance
     }
@@ -25,7 +26,7 @@ class Utility {
     func gotoView(view:String, context: UIViewController )  {
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController : UIViewController = storyboard.instantiateViewController(withIdentifier: view)
-         context.present(viewController, animated: true, completion: nil)
+        context.present(viewController, animated: true, completion: nil)
     }
     
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
@@ -37,7 +38,7 @@ class Utility {
         // Figure out what our orientation is, and use that to form the rectangle
         var newSize: CGSize
         if(widthRatio > heightRatio) {
-        //if(size.width > size.height) {
+            //if(size.width > size.height) {
             //newSize = CGSize(width: targetSize.width, height: size.width * targetSize.width / targetSize.height)
             newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
         } else {
@@ -57,11 +58,16 @@ class Utility {
         return newImage!
     }
     
+    //radious corner
+    func radiousCorner(obj: AnyObject){
+        obj.layer.cornerRadius = obj.frame.size.width/2
+    }
+    
     func disabledView(){
         UIApplication.shared.beginIgnoringInteractionEvents()
     }
     
-
+    
     func enabledView(){
         UIApplication.shared.endIgnoringInteractionEvents()
     }
@@ -79,25 +85,24 @@ class Utility {
         
         activityIndicatior.stopAnimating()
     }
-    func getDate() -> String {
+    func getDate() -> Double {
         let date = NSDate().timeIntervalSince1970
-        return String(date)
+        return date
     }
     
-    func getDate(date: String) -> String{
-        if  let timeResult = Double(date){
-            let xdate = NSDate(timeIntervalSince1970: timeResult)
-            let dayTimePeriodFormatter = DateFormatter()
-            dayTimePeriodFormatter.dateFormat = "dd-MM-yyyy hh:mm"
-            return dayTimePeriodFormatter.string(from: xdate as Date)
-        }
-        return ""
+    func getDate(date: Double) -> String{
+        let xdate = NSDate(timeIntervalSince1970: abs(date) )
+        let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.dateFormat = "dd-MM-yyyy hh:mm"
+        return dayTimePeriodFormatter.string(from: xdate as Date)
     }
     
     func clearObservers(){
         REF.removeAllObservers()
         REF_USERS.removeAllObservers()
         REF_FAMILIES.removeAllObservers()
+        REF_ACTIVITY.removeAllObservers()
+        REF_NOTIFICATION.removeAllObservers()
         NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
     }
     
@@ -106,6 +111,13 @@ class Utility {
             return value as! String
         }else {
             return ""
+        }
+    }
+    func exist(field: String, dictionary:NSDictionary) -> Double! {
+        if let value = dictionary[field] {
+            return value as! Double
+        }else {
+            return 0.0
         }
     }
     func existData(field: String, dictionary: NSDictionary) -> Data? {
@@ -129,5 +141,5 @@ class Utility {
             return [:]
         }
     }
-
+    
 }
