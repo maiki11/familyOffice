@@ -24,7 +24,6 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         lpgr.minimumPressDuration = 0.5
         lpgr.delaysTouchesBegan = true
         self.familyCollection.addGestureRecognizer(lpgr)
-        
         self.clearsSelectionOnViewWillAppear = true     
         
     }
@@ -50,6 +49,7 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         NotificationCenter.default.removeObserver(FAMILYREMOVED_NOTIFICATION)
         NotificationCenter.default.removeObserver(FAMILYADDED_NOTIFICATION)
     }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
