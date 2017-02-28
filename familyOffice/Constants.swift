@@ -43,6 +43,7 @@ let STORAGE_SERVICE = StorageService.Instance()
 let FAMILY_SERVICE = FamilyService.Instance()
 let USER_SERVICE = UserService.Instance()
 let NOTIFICATION_SERVICE = NotificationService.Instance()
+let ALERT_SERVICE = AlertService.Instance()
 
 //Others
 let SERVERKEY =  "AIzaSyAkiqHhHKI0xcXrYF9eq-D6PzhUl-mPOls"

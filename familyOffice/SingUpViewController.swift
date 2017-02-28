@@ -102,7 +102,7 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
         let userModel = ["name" : self.nameTxtfield.text!,
                          "phone": self.phoneTxtfield.text!]
         REF_USERS.child(uid).setValue(userModel)
-        Utility.Instance().gotoView(view: "StartView", context: self)
+        UTILITY_SERVICE.gotoView(view: "StartView", context: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
