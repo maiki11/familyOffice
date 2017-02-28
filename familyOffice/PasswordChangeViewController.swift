@@ -52,9 +52,39 @@ class PasswordChangeViewController: UIViewController {
     
     func changePassword(sender: UIBarButtonItem?) -> Void {
         UTILITY_SERVICE.loading(view: self.view)
-        if(newPassword.text == repeatPass.text ){
-            USER_SERVICE.changePassword(oldPass: oldPassword.text!, newPass: newPassword.text!)
+        if(oldPassword.text! == ""){
+            ANIMATIONS.shakeTextField(txt: oldPassword)
+            ALERT_SERVICE.alertMessage(context: self, title: "Campo vacío", msg: "El campo Contraseña actual no puede estar vacío")
+        }else{
+            if(newPassword.text == ""){
+                ANIMATIONS.shakeTextField(txt: newPassword)
+                ALERT_SERVICE.alertMessage(context: self, title: "Campo vacío", msg: "El campo Contraseña nueva no puede estar vacío")
+            }else{
+                if((newPassword.text?.characters.count)! < 6){
+                    ANIMATIONS.shakeTextField(txt: newPassword)
+                    ALERT_SERVICE.alertMessage(context: self, title: "Mínimo de caracteres", msg: "El campo Contraseña nueva tiene que tener al menos 6 caracteres")
+                }else{
+                    if(repeatPass.text == ""){
+                        ANIMATIONS.shakeTextField(txt: repeatPass)
+                        ALERT_SERVICE.alertMessage(context: self, title: "Campo vacío", msg: "El campo Repetir contraseña no puede estar vacío")
+                    }else{
+                        if((repeatPass.text?.characters.count)! < 6){
+                            ANIMATIONS.shakeTextField(txt: repeatPass)
+                            ALERT_SERVICE.alertMessage(context: self, title: "Mínimo de caracteres", msg: "El campo Confirmar contraseña tiene que tener al menos 6 caracteres")
+                        }else{
+                            if(newPassword.text == repeatPass.text ){
+                                USER_SERVICE.changePassword(oldPass: oldPassword.text!, newPass: newPassword.text!, context: self)
+                            }else{
+                                ANIMATIONS.shakeTextField(txt: newPassword)
+                                ANIMATIONS.shakeTextField(txt: repeatPass)
+                                ALERT_SERVICE.alertMessage(context: self, title: "Contraseña distinta", msg: "La contraseña nueva y  confirmar contraseña no coinciden")
+                            }
+                        }
+                    }
+                }
+            }
         }
+        UTILITY_SERVICE.stopLoading(view: self.view)
     }
     /*
     // MARK: - Navigation
@@ -65,5 +95,18 @@ class PasswordChangeViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: true, context: self)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: false, context: self)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
 }

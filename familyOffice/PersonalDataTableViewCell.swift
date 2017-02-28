@@ -22,10 +22,10 @@ class PersonalDataTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(text: String?, placeholde: String ) -> Void {
+    func configure(text: String?, placeholder: String ) -> Void {
         
         myTextField.text = text
-        myTextField.placeholder = placeholde
+        myTextField.placeholder = placeholder
     }
    
 }
