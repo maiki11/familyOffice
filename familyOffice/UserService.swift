@@ -103,9 +103,6 @@ class UserService {
                 for result in filter! {
                     families[result.key as! String] = (result.value as! Bool)
                 }
-                
-                let indexFam : Int = FAMILY_SERVICE.families.index(where: {$0.id == snapshot.key})!
-
                 if let family = FAMILY_SERVICE.families.first(where: {$0.id == snapshot.key}) {
                     FAMILY_SERVICE.removeFamily(family:family)
                 }
@@ -116,8 +113,7 @@ class UserService {
                 
                 self.user?.families = families as NSDictionary
                 self.users[index].families = families as NSDictionary
-                NotificationCenter.default.post(name: FAMILYREMOVED_NOTIFICATION, object: indexFam)
-            }
+                            }
         })
         
         

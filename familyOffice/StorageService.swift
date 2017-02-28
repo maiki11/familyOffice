@@ -25,13 +25,13 @@ class StorageService {
         if(data != nil){
             self.storage.setValue(data, forKey: url)
         }else{
-            DispatchQueue.global(qos: .default).async {
+            DispatchQueue.global(qos: .background).async {
                 if let data = NSData(contentsOf: URL(string: url)!){
                     DispatchQueue.main.async {
                         self.storage.setValue(data , forKey: url)
+                        NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: nil)
                     }
                 }
-                
             }
         }
         

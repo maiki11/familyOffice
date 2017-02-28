@@ -14,15 +14,17 @@ import FirebaseStorage
 
 class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate {
     
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var nameTxtField: textFieldStyleController!
+    
     var imageView = UIImageView()
     var blurImageView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.cropAndSave(_:)))
-        navigationItem.rightBarButtonItems = [saveButton]
+        //let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.cropAndSave(_:)))
+        //navigationItem.rightBarButtonItems = [saveButton]
         scrollView.delegate = self
         blurImageView.contentMode = UIViewContentMode.scaleAspectFill
         imageView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
@@ -45,6 +47,9 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         
     }
     
+    @IBAction func handleAdd(_ sender: Any) {
+        save()
+    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         scrollView.zoomScale = 1
@@ -107,6 +112,9 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     }
     
     func cropAndSave(_ sender: Any) {
+        save()
+    }
+    func save() -> Void {
         let key = REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
         UIGraphicsBeginImageContextWithOptions(scrollView.bounds.size, true, UIScreen.main.scale)
         let offset = scrollView.contentOffset

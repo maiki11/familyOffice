@@ -24,7 +24,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         if let data = STORAGE_SERVICE.search(url: (USER_SERVICE.user?.photoURL)!) {
             self.profileImage.image = UIImage(data: data)
         }
-        
     }
     
     func loadData(){
@@ -59,7 +58,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
         REF_ACTIVITY.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: ACTIVITYLOG_SERVICE.handle)
-        //REF_NOTIFICATION.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: NOTIFICATION_SERVICE.handle)
+        REF_NOTIFICATION.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: NOTIFICATION_SERVICE.handle)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
