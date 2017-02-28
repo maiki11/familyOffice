@@ -84,27 +84,18 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let posX: CGFloat = (self.headWidth / -2) + 40
             let posY: CGFloat = ( newHeight ) * -1
             if(self.headerView.frame.size.height > self.newHeight){
-<<<<<<< HEAD
-            DispatchQueue.main.async {
-                UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                    self.familyImage.transform = CGAffineTransform(scaleX: percent, y: percent).concatenating(CGAffineTransform(translationX: posX, y: posY))
-                    self.familyName.transform = CGAffineTransform(translationX: posX+(self.familyName.frame.width/2)-40, y: (self.headPosY-self.famPosY) - 5 )
-                    self.headerView.frame.size.height = self.newHeight
-                    self.collectionView.frame.origin.y = -posY
-                    self.collectionView.frame.size.height = self.collectionView.frame.size.height + self.heightHeader - 15
-                }, completion: nil)
-            }
-            print("hola")
-=======
+                
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
                         self.familyImage.transform = CGAffineTransform(scaleX: percent, y: percent).concatenating(CGAffineTransform(translationX: posX, y: posY))
                         self.familyName.transform = CGAffineTransform(translationX: posX+(self.familyName.frame.width/2)-40, y: (self.headPosY-self.famPosY) - 5 )
                         self.headerView.frame.size.height = self.newHeight
+                        self.collectionView.frame.origin.y = -posY
+                        self.collectionView.frame.size.height = self.collectionView.frame.size.height + self.heightHeader - 15
                     }, completion: nil)
                 }
                 print("hola")
->>>>>>> master
+                
             }
         }else if (0 >= collectionView.contentOffset.y){
             let percent = 1
@@ -118,56 +109,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 //self.collectionView.frame.size.height = self.collectionHeight
             }, completion: nil)
         }
-<<<<<<< HEAD
-=======
-        /*else{
-         let percent = 1
-         let scale = CGAffineTransform(scaleX: CGFloat(percent), y: CGFloat(percent))
-         DispatchQueue.main.async {
-         UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-         self.familyImage.transform = scale
-         }, completion: nil)
-         }
-         }*/
-        /*if(100 <= collectionView.contentOffset.y && self.headerView.frame.size.height == 200 && flag == true){
-         let percent = 40/self.heightHeader
-         let posX: CGFloat = (self.headWidth / -2) + 40
-         let posY: CGFloat = ( newHeight ) * -1
-         DispatchQueue.main.async {
-         UIView.animate(withDuration: 0.8, delay: 0.2, options: UIViewAnimationOptions.curveEaseOut, animations: {
-         self.familyImage.transform = CGAffineTransform(scaleX: percent, y: percent).concatenating(CGAffineTransform(translationX: posX, y: posY))
-         self.familyName.transform = CGAffineTransform(translationX: posX+60, y: (self.headPosY-self.famPosY) - 5 )
-         self.collectionView.frame.origin.y = self.newHeight
-         self.headerView.frame.size.height = self.newHeight
-         }, completion: nil)
-         }
-         print("down")
-         //self.collectionView?.scrollToItem(at: IndexPath(row: 4, section: 0),at: .centeredVertically,animated: true)
-         //collectionView.contentOffset.y = 200
-         flag = false
-         }
-         else if (0 >= collectionView.contentOffset.y && self.headerView.frame.size.height == 60) {
-         let percent = 1
-         let scale = CGAffineTransform(scaleX: CGFloat(percent), y: CGFloat(percent))
-         //self.headerView.frame.origin.y = top
-         //DispatchQueue.main.async {
-         UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-         self.familyImage.transform = scale
-         self.headerView.frame.size.height = self.heightHeader
-         self.collectionView.frame.origin.y = self.heightHeader + self.top
-         //self.collectionView.frame.size.height = self.collectionHeight+(self.heightHeader-self.newHeight)
-         }, completion: nil)
-         /*DispatchQueue.main.async {
-         UIView.animate(withDuration: 0.5, delay: 0.9, options: UIViewAnimationOptions.curveEaseOut,animations: {
-         self.collectionView.frame.size.height = self.collectionView.frame.size.height+(self.heightHeader-self.newHeight)
-         })
-         }*/
-         //}
-         flag = true
-         }*/
-        // update the new position acquired
-        //self.lastContentOffset = scrollView.contentOffset.y
->>>>>>> master
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
