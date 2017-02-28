@@ -40,7 +40,7 @@ class UserService {
     func getUser(email: String) -> Void {
         REF.child("/users/").queryOrderedByValue().queryEqual(toValue: email).observeSingleEvent(of: .value, with: { (snapshot) in
             if(snapshot.exists()){
-                 self.addUser(user:  User(snapshot: snapshot))
+                self.addUser(user:  User(snapshot: snapshot))
             }
         }) { (error) in
             print(error.localizedDescription)
@@ -49,9 +49,9 @@ class UserService {
     func getUser(phone: String) -> Void {
         REF_USERS.queryOrdered(byChild: "phone").queryStarting(atValue: "\(phone)").queryEnding(atValue: "\(phone)").observe(.childAdded, with: { (snapshot) -> Void in
             if(snapshot.exists()){
-                 self.addUser(user:  User(snapshot: snapshot))
+                self.addUser(user:  User(snapshot: snapshot))
             }
-
+            
         })
     }
     func changePassword(oldPass: String, newPass: String) -> Void {
@@ -79,16 +79,49 @@ class UserService {
         self.user = nil
         self.user = user
         /*if let index = self.users.index(where:{$0.id == user.id as String}) {
-            self.users[index].phone = user.phone
-        }*/
+         self.users[index].phone = user.phone
+         }*/
     }
     func observers() -> Void {
         
-        
+        REF_USERS.child("\((user?.id)!)/families").observe(.childAdded, with: { (snapshot) -> Void in
+            FAMILY_SERVICE.getFamilies(key: snapshot.key)
+            var families = self.user?.families as! [String: Bool]
+            families[snapshot.key] = (snapshot.value as! Bool)
+            self.user?.families = families as NSDictionary?
+            if let index = self.users.index(where:{$0.id == (self.user?.id)! as String}) {
+                self.users[index].families = self.user!.families
+            }
+            
+        })
+        // Listen for deleted comments in the Firebase database
+        REF_USERS.child("\((user?.id)!)/families").observe(.childRemoved, with: { (snapshot) -> Void in
+            if let index = self.users.index(where: {$0.id == self.user?.id})  {
+                let filter = self.user?.families?.filter({$0.key as? String != snapshot.key})
+                var families : [String: Bool] = [:]
+                for result in filter! {
+                    families[result.key as! String] = (result.value as! Bool)
+                }
+                
+                let indexFam : Int = FAMILY_SERVICE.families.index(where: {$0.id == snapshot.key})!
+
+                if let family = FAMILY_SERVICE.families.first(where: {$0.id == snapshot.key}) {
+                    FAMILY_SERVICE.removeFamily(family:family)
+                }
+                
+                if(FAMILY_SERVICE.families.count == 0){
+                    NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
+                }
+                
+                self.user?.families = families as NSDictionary
+                self.users[index].families = families as NSDictionary
+                NotificationCenter.default.post(name: FAMILYREMOVED_NOTIFICATION, object: indexFam)
+            }
+        })
         
         
     }
-  
+    
     internal func clearData() {
         self.user = nil
         self.users.removeAll()
@@ -110,5 +143,5 @@ class UserService {
             NotificationCenter.default.post(name: USER_NOTIFICATION, object: user)
         }
     }
-
+    
 }

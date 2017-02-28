@@ -36,16 +36,13 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
             self.performSegue(withIdentifier: "registerSegue", sender: nil)
         }
         NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){ notification in
-            self.collectionView?.reloadData()
+            self.collectionView?.insertItems(at: [IndexPath(item: FAMILY_SERVICE.families.count-1, section: 0)])
         }
-        NotificationCenter.default.addObserver(forName: FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){_ in
-            self.collectionView?.reloadData()
-            
+        NotificationCenter.default.addObserver(forName: FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){index in
+            self.collectionView?.deleteItems(at: [IndexPath(item: index.object as! Int, section: 0)])
             if (FAMILY_SERVICE.families.count == 0){
                 UTILITY_SERVICE.gotoView(view: "RegisterFamilyView", context: self)
             }
-            
-            
         }
     }
     override func viewWillDisappear(_ animated: Bool) {

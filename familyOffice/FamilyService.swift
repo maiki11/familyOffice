@@ -51,9 +51,9 @@ class FamilyService {
             // Get user value
             if(snapshot.exists()){
                 let family = Family(snapshot: snapshot)
-                if let index =  self.families.index(where: { $0.id == family.id }) {
+                if let index = self.families.index(where: { $0.id == family.id }) {
                     self.families[index] = family
-                    NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: nil)
+                    NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: index)
                 }else{
                     self.families.append(family)
                     NotificationCenter.default.post(name: FAMILYADDED_NOTIFICATION, object: nil)
