@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 extension AddMembersTableViewController:  UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         return selected.count
@@ -21,63 +22,56 @@ extension AddMembersTableViewController:  UICollectionViewDelegate, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellMember", for: indexPath) as! memberSelectedCollectionViewCell
         
         let user = selected[indexPath.row]
-        if let data = STORAGE_SERVICE.search(url: user.photoURL) {
-            cell.imageMember.image = UIImage(data: data)
-        }else{
-            cell.imageMember.image = #imageLiteral(resourceName: "profile_default")
+        cell.imageMember.image = nil
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let data = STORAGE_SERVICE.search(url: user.photoURL) {
+                DispatchQueue.main.async {
+                    
+                    cell.imageMember.image = UIImage(data: data)
+                }
+            }else{
+                cell.imageMember.image = #imageLiteral(resourceName: "profile_default")
+            }
+            
         }
-        cell.imageMember.layer.cornerRadius = cell.imageMember.frame.size.width/2
-        cell.imageMember.clipsToBounds = true
         cell.name.text = user.name
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectOnTable(id: selected[indexPath.row].id)
+        self.tableView.deselectRow(at: IndexPath(row: users.index(where: {$0.id == selected[indexPath.row].id})!+1, section: 0), animated: true)
         selected.remove(at: indexPath.row)
-        reloal(type: true)
+        collectionView.deleteItems(at: [indexPath])
+        reload()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if(indexPath.row != 0){
+            
             let selUser = users[indexPath.row-1]
-            if(duplicate(id: selUser.id)){
+            
+            if !selected.contains(where: {$0.id == selUser.id}) {
                 selected.append(selUser)
-                reloal(type: true)
+                firstCell.collectionView.insertItems(at: [IndexPath(item: selected.count-1 , section: 0)])
+                reload()
             }
         }
     }
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let selUser = users[indexPath.row-1]
+        let index = IndexPath(item: selected.index(where: {$0.id == selUser.id})!, section: 0)
         if(indexPath.row != 0){
-            
-            selected.remove(at: search(id: selUser.id))
-            
-            reloal(type: false)
+            selected.remove(at: selected.index(where: {$0.id == selUser.id})!)
+            firstCell.collectionView.deleteItems(at: [index])
+            reload()
         }
     }
-    func reloal(type: Bool) -> Void {
-    
-        
-        if(selected.count >= 1){
-            tableView.reloadRows(at: [IndexPathOfFirstRow as IndexPath], with: UITableViewRowAnimation.fade)
-        }else if(selected.count == 0){
-            tableView.reloadRows(at: [IndexPathOfFirstRow as IndexPath], with: UITableViewRowAnimation.none)
+    func reload() -> Void {
+        if(selected.count <= 1 ){
+            tableView.reloadRows(at: [IndexPathOfFirstRow as IndexPath], with: UITableViewRowAnimation.automatic)
         }
         
-        
-    }
-    
-    func didSelectOnTable(id: String){
-        var index = 1
-        for item in users {
-            if(item.id == id){
-                tableView.deselectRow(at: NSIndexPath(row: index, section: 0) as IndexPath, animated: true)
-                return
-            }
-            index+=1
-        }
     }
     
 }

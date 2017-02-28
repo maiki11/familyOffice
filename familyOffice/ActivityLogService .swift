@@ -44,10 +44,7 @@ class ActivityLogService {
          })*/
         
         handle = REF_ACTIVITY.child((USER_SERVICE.user?.id)!).queryOrdered(byChild: "timestamp").observe( .childAdded, with: { (snapshot) in
-         var cont = 1
             if(snapshot.exists()){
-                print(cont)
-                cont+=1
                 let not = Record(snapshot:snapshot)
                 if !self.activityLog.contains(where: {$0.id == not.id}){
                     self.activityLog.append(not)

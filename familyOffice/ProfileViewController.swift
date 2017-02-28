@@ -21,12 +21,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         //self.profileImage.clipsToBounds = true
         self.userName.text =  USER_SERVICE.user?.name
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let data = STORAGE_SERVICE.search(url: (USER_SERVICE.user?.photoURL)!) {
-                DispatchQueue.main.async {
-                    self.profileImage.image = UIImage(data: data)                }
-            }
+        if let data = STORAGE_SERVICE.search(url: (USER_SERVICE.user?.photoURL)!) {
+            self.profileImage.image = UIImage(data: data)
         }
+        
     }
     
     func loadData(){
@@ -40,9 +38,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         ACTIVITYLOG_SERVICE.getActivities()
         NOTIFICATION_SERVICE.getNotifications()
         self.tableView.reloadData()
-        print("NOTFICACIONES----------")
-        print(NOTIFICATION_SERVICE.notifications)
-        print("----------------")
         NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
             
             if self.segmentedControl.selectedSegmentIndex == 0 {
@@ -61,6 +56,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.reloadData()
     }
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
         REF_ACTIVITY.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: ACTIVITYLOG_SERVICE.handle)
         //REF_NOTIFICATION.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: NOTIFICATION_SERVICE.handle)
@@ -82,24 +78,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             let activity = ACTIVITYLOG_SERVICE.activityLog[indexPath.row]
             cell.iconImage.image = #imageLiteral(resourceName: "logo")
             cell.config(title: activity.activity, date: UTILITY_SERVICE.getDate(date: activity.timestamp!))
-            DispatchQueue.global(qos: .userInitiated).async {
-                if let data = STORAGE_SERVICE.search(url: activity.photoURL) {
-                    DispatchQueue.main.async {
-                        cell.photo.image = UIImage(data: data)
-                    }
-                }
+            if let data = STORAGE_SERVICE.search(url: activity.photoURL) {
+                cell.photo.image = UIImage(data: data)
             }
-            
         }else{
             let notification = NOTIFICATION_SERVICE.notifications[indexPath.row]
             cell.config(title: notification.title, date: UTILITY_SERVICE.getDate(date: notification.timestamp))
-            DispatchQueue.global(qos: .userInitiated).async {
-                if let data = STORAGE_SERVICE.search(url: notification.photoURL) {
-                    DispatchQueue.main.async {
-                        cell.iconImage.image = UIImage(data: data)
-                    }
-                }
+            if let data = STORAGE_SERVICE.search(url: notification.photoURL) {
+                cell.iconImage.image = UIImage(data: data) 
             }
+            
         }
         return cell
     }

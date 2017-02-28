@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
                 // Enable or disable features based on authorization.
             }
             application.registerForRemoteNotifications()
-            connectToFcm()
+            //connectToFcm()
         }
         FIRApp.configure()
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID

@@ -24,10 +24,13 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         lpgr.minimumPressDuration = 0.5
         lpgr.delaysTouchesBegan = true
         self.familyCollection.addGestureRecognizer(lpgr)
-        self.clearsSelectionOnViewWillAppear = true     
+        self.clearsSelectionOnViewWillAppear = true
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+        
+        super.viewDidAppear(animated)
         self.collectionView?.reloadData()
         if (FAMILY_SERVICE.families.count == 0){
             self.performSegue(withIdentifier: "registerSegue", sender: nil)
@@ -39,7 +42,7 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
             self.collectionView?.reloadData()
             
             if (FAMILY_SERVICE.families.count == 0){
-               UTILITY_SERVICE.gotoView(view: "RegisterFamilyView", context: self)
+                UTILITY_SERVICE.gotoView(view: "RegisterFamilyView", context: self)
             }
             
             
@@ -49,7 +52,7 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         NotificationCenter.default.removeObserver(FAMILYREMOVED_NOTIFICATION)
         NotificationCenter.default.removeObserver(FAMILYADDED_NOTIFICATION)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -96,17 +99,14 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
             
             cell.name.text = family.name
             // Bounce back to the main thread to update the UI
-            DispatchQueue.global(qos: .userInitiated).async {
-                
-                if let data = STORAGE_SERVICE.search(url: (family.photoURL?.absoluteString)!) {
-                   
-                    DispatchQueue.main.async {
-                        cell.activityindicator.stopAnimating()
-                        cell.imageFamily.image = UIImage(data: data)
-                    }
-                }
+            
+            if let data = STORAGE_SERVICE.search(url: (family.photoURL?.absoluteString)!) {
+                cell.activityindicator.stopAnimating()
+                cell.imageFamily.image = UIImage(data: data)
                 
             }
+            
+            
             // Configure the cell
             
             return cell
@@ -133,7 +133,7 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
             switch gestureReconizer.state {
             case .began:
                 let family = FAMILY_SERVICE.families[(indexPath?.row)!]
-    
+                
                 // create the alert
                 let alert = UIAlertController(title: family.name, message: "¿Qué deseas hacer?", preferredStyle: UIAlertControllerStyle.alert)
                 
