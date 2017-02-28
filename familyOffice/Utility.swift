@@ -142,4 +142,15 @@ class Utility {
         }
     }
     
+    
+    func moveTextField(textField: UITextField, moveDistance: Int, up: Bool, context: UIViewController){
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance: -moveDistance)
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        context.view.frame = context.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
+    
 }

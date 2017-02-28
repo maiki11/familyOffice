@@ -54,11 +54,12 @@ class UserService {
 
         })
     }
-    func changePassword(oldPass: String, newPass: String) -> Void {
+    func changePassword(oldPass: String, newPass: String, context: UIViewController) -> Void {
         let user = FIRAuth.auth()?.currentUser
         FIRAuth.auth()?.signIn(withEmail: (user?.email)!, password: oldPass) { (user, error) in
             if((error) != nil){
-                print(error.debugDescription)
+                ALERT_SERVICE.alertMessage(context: context, title: "Error en contraseña", msg: "La contraseña anterior no es válida")
+                //print(error.debugDescription)
             }else{
                 user?.updatePassword(newPass) { error in
                     if let error = error {

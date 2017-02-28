@@ -20,7 +20,8 @@ class PersonalDataTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
+        //tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -40)
+        tableView.layoutMargins = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         let homeButton : UIBarButtonItem = UIBarButtonItem(title: "Atras", style: UIBarButtonItemStyle.plain, target: self, action: #selector(back(sender:)))
         let doneButton : UIBarButtonItem = UIBarButtonItem(title: "Guardar", style: UIBarButtonItemStyle.plain, target: self, action:#selector(save(sender:)))
         self.navigationItem.backBarButtonItem = homeButton
@@ -87,7 +88,7 @@ class PersonalDataTableViewController: UITableViewController {
             cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
             cell.myTextField.isEnabled = false
         }
-        cell.configure(text:  userDictionary.object(forKey: aboutkeys[indexPath.row]) as! String!, placeholde: placeholders[indexPath.row])
+        cell.configure(text:  userDictionary.object(forKey: aboutkeys[indexPath.row]) as! String!, placeholder: placeholders[indexPath.row])
         return cell
     }
     
@@ -104,12 +105,23 @@ class PersonalDataTableViewController: UITableViewController {
             if(index != 4){
                 let cell: PersonalDataTableViewCell? = self.tableView.cellForRow(at: indexPath as IndexPath) as? PersonalDataTableViewCell
                 let value = cell?.myTextField.text
+                
                 switch  aboutkeys[indexPath.row] {
                 case "name":
-                    USER_SERVICE.user!.name = value
+                    if(value?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)==""){
+                        ALERT_SERVICE.alertMessage(context: self, title: "Campo Vacío", msg: "El campo Nombre no puede quedar vacío")
+                        ANIMATIONS.shakeTextField(txt: (cell?.myTextField)!)
+                    }else{
+                        USER_SERVICE.user!.name = value
+                    }
                     break
                 case "phone":
-                    USER_SERVICE.user!.phone = value
+                    if(value?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)==""){
+                        ALERT_SERVICE.alertMessage(context: self, title: "Campo Vacío", msg: "El campo Teléfono no puede quedar vacío")
+                        ANIMATIONS.shakeTextField(txt: (cell?.myTextField)!)
+                    }else{
+                        USER_SERVICE.user!.phone = value
+                    }
                     break
                 case "address":
                     USER_SERVICE.user!.address = value
@@ -136,7 +148,21 @@ class PersonalDataTableViewController: UITableViewController {
             index += 1
         }
         USER_SERVICE.updateUser(user: USER_SERVICE.user!)
+        _ =  navigationController?.popViewController(animated: true)
+        //UTILITY_SERVICE.gotoView(view: "ConfiguracionScene", context: self)
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: true, context: self)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: false, context: self)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
 }
