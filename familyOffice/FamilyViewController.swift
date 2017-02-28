@@ -38,6 +38,11 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        for item in (family?.members?.allKeys)! {
+            self.existUser(id: item as! String)
+        }
+        
         REF_FAMILIES.child((family?.id)!).child("members").observe(.childRemoved, with: { (snapshot) -> Void in
             if(snapshot.exists()){
                 if let obj = self.members.filter({$0.id == snapshot.key as String}).first {
@@ -112,7 +117,6 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let member = self.members[indexPath.row]
         cell.name.text = member.name
         if let data = STORAGE_SERVICE.search(url: member.photoURL) {
-            
             cell.activityIndicator.stopAnimating()
             cell.memberImage.image = UIImage(data: data)
             cell.memberImage.image = UIImage(data: data)

@@ -28,24 +28,25 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        
-        
         super.viewDidAppear(animated)
         self.collectionView?.reloadData()
+        print(FAMILY_SERVICE.families)
         if (FAMILY_SERVICE.families.count == 0){
             self.performSegue(withIdentifier: "registerSegue", sender: nil)
         }
         NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){ notification in
+            //self.collectionView?.insertItems(at: [IndexPath(item: FAMILY_SERVICE.families.count-1, section: 0)])
             self.collectionView?.reloadData()
         }
-        NotificationCenter.default.addObserver(forName: FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){_ in
+        NotificationCenter.default.addObserver(forName: FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){index in
+            //self.collectionView?.deleteItems(at: [IndexPath(item: index.object as! Int, section: 0)])
             self.collectionView?.reloadData()
-            
             if (FAMILY_SERVICE.families.count == 0){
                 UTILITY_SERVICE.gotoView(view: "RegisterFamilyView", context: self)
             }
-            
-            
+        }
+        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){_ in
+            self.collectionView?.reloadData()
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -65,7 +66,6 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
             self.family = FAMILY_SERVICE.families[indexPath.row]
             self.performSegue(withIdentifier: "changeScreen", sender: nil)
         }
-        
     }
     
     // MARK: - Navigation
@@ -73,7 +73,7 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier=="changeScreen" {
-            let viewController  = segue.destination as! FamilyViewController
+            let viewController = segue.destination as! FamilyViewController
             viewController.family = family!
         }
     }
@@ -87,28 +87,27 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
+        for item in FAMILY_SERVICE.families {
+            if item.members?[(USER_SERVICE.user?.id)!] == nil {
+                 FAMILY_SERVICE.families.remove(at:  FAMILY_SERVICE.families.index(where: {$0.id == item.id})!)
+            }
+        }
+        
         return FAMILY_SERVICE.families.count + 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         //Family Cell
         if ( indexPath.row < FAMILY_SERVICE.families.count){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FamilyCollectionViewCell
             let family = FAMILY_SERVICE.families[indexPath.row]
-            
             cell.name.text = family.name
             // Bounce back to the main thread to update the UI
-            
             if let data = STORAGE_SERVICE.search(url: (family.photoURL?.absoluteString)!) {
                 cell.activityindicator.stopAnimating()
                 cell.imageFamily.image = UIImage(data: data)
                 
             }
-            
-            
-            // Configure the cell
-            
             return cell
         }
         //Add Cell
@@ -154,10 +153,8 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
                         
                     }))
                 }
-                
                 // show the alert
                 self.present(alert, animated: true, completion: nil)
-                
                 break
             case .ended:
                 print("termine")
