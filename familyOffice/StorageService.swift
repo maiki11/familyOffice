@@ -21,11 +21,20 @@ class StorageService {
     private static let instance : StorageService = StorageService()
     
     func save(url: String, data: Data?) -> Void {
+        
         if(data != nil){
-            storage.setValue(data, forKey: url)
+            self.storage.setValue(data, forKey: url)
         }else{
-            storage.setValue( NSData(contentsOf: URL(string: url)!), forKey: url)
+            DispatchQueue.global(qos: .default).async {
+                if let data = NSData(contentsOf: URL(string: url)!){
+                    DispatchQueue.main.async {
+                        self.storage.setValue(data , forKey: url)
+                    }
+                }
+                
+            }
         }
+        
     }
     
     func search(url: String) -> Data? {

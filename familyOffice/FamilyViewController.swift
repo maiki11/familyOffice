@@ -10,23 +10,21 @@ import UIKit
 import FirebaseAuth
 
 class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate  {
-
     
     var members : [User] = []
     var family : Family?
     
-    @IBOutlet weak var familyName: UILabel!
+    
     @IBOutlet weak var imageFamily: UIImageView!
     @IBOutlet weak var membersTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        familyName.text = family?.name
         
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            if let data = STORAGE_SERVICE.search(url: (self.family?.photoURL?.absoluteString)!) {
-                self.imageFamily.image = UIImage(data: data)
-            }
+        
+        
+        if let data = STORAGE_SERVICE.search(url: (self.family?.photoURL?.absoluteString)!) {
+            self.imageFamily.image = UIImage(data: data)
         }
         
         let lpgr = UILongPressGestureRecognizer(target: self, action:#selector(handleLongPress(gestureReconizer:)))
@@ -35,11 +33,11 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let addButton : UIBarButtonItem = UIBarButtonItem(title: "Agregar", style: UIBarButtonItemStyle.plain, target: self, action:#selector(addMemberScreen(sender:)))
         self.navigationItem.rightBarButtonItem = addButton
-        
+        self.navigationItem.title = family?.name
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
-        
+        super.viewDidAppear(animated)
         REF_FAMILIES.child((family?.id)!).child("members").observe(.childRemoved, with: { (snapshot) -> Void in
             if(snapshot.exists()){
                 if let obj = self.members.filter({$0.id == snapshot.key as String}).first {
@@ -61,22 +59,20 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if(snapshot.exists()){
                 self.existUser(id: snapshot.key)
             }
-            
         })
-        
         
         self.membersTable.reloadData()
         NotificationCenter.default.addObserver(forName: USERS_NOTIFICATION, object: nil, queue: nil){ obj in
             if let user : User = obj.object as? User {
-                 self.existUser(id: user.id)
+                self.existUser(id: user.id)
             }
-           
         }
         NotificationCenter.default.addObserver(forName: FAMILYUPDATED_NOTIFICATION, object: nil, queue: nil){ notification in
             self.membersTable.reloadData()
         }
         
     }
+    
     func existUser(id: String) -> Void {
         if let user = USER_SERVICE.users.filter({$0.id == id}).first {
             if !self.members.contains(where: {$0.id == user.id}){
@@ -88,12 +84,14 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             USER_SERVICE.getUser(uid: id)
         }
     }
+    
     func addMemberScreen(sender: UIBarButtonItem) -> Void {
         self.performSegue(withIdentifier: "addMembersScreen", sender: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: USERS_NOTIFICATION, object: nil)
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(name: USERS_NOTIFICATION)
         REF_FAMILIES.child((family?.id)!).child("members").removeAllObservers()
         
     }
@@ -113,19 +111,18 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FamilyMemberTableViewCell
         let member = self.members[indexPath.row]
         cell.name.text = member.name
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let data = STORAGE_SERVICE.search(url: member.photoURL) {
-                DispatchQueue.main.async {
-                    cell.activityIndicator.stopAnimating()
-                    cell.memberImage.image = UIImage(data: data)
-                }
-                cell.memberImage.image = UIImage(data: data)
-            }else {
-                cell.activityIndicator.stopAnimating()
-                cell.memberImage.image = #imageLiteral(resourceName: "profile_default")
-            }
+        if let data = STORAGE_SERVICE.search(url: member.photoURL) {
+            
+            cell.activityIndicator.stopAnimating()
+            cell.memberImage.image = UIImage(data: data)
+            cell.memberImage.image = UIImage(data: data)
+        }else {
+            cell.activityIndicator.stopAnimating()
+            cell.memberImage.image = #imageLiteral(resourceName: "profile_default")
         }
+        
         cell.phone.text = member.phone
+        
         if(FAMILY_SERVICE.families.filter({$0.id == family?.id}).first?.admin == member.id){
             cell.adminlabel.isHidden = false
         }else{
@@ -134,7 +131,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         return cell
     }
-
+    
     //Long press
     func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
         let point: CGPoint = gestureReconizer.location(in: self.membersTable)
@@ -153,9 +150,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 // add the actions (buttons)
                 alert.addAction(UIAlertAction(title: "Ver Perfil", style: UIAlertActionStyle.default, handler: {action in
-                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-                        
-                    }
+                    
                 }))
                 alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.cancel, handler: nil))
                 if(family?.admin == FIRAuth.auth()?.currentUser?.uid){
@@ -191,7 +186,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
     }
-
+    
     func addMembers(user: User){
         if let index = FAMILY_SERVICE.families.index(where: {$0.id == self.family?.id}) {
             let memberDict : [String:Bool]  = FAMILY_SERVICE.families[index].members as! [String : Bool]
@@ -199,13 +194,13 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.family?.members = memberDict as NSDictionary?
         }
     }
-
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "addMembersScreen"){
-            let viewController  = segue.destination as! AddMembersTableViewController
+            let viewController = segue.destination as! AddMembersTableViewController
             viewController.family = family!
         }
     }

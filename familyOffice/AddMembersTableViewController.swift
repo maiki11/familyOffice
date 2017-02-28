@@ -11,52 +11,55 @@ import Contacts
 import ContactsUI
 
 class AddMembersTableViewController: UITableViewController {
+    
     var contacts : [CNContact] = []
     var selected : [User] = []
     var users : [User] = []
     var family : Family!
     var itemCount = 0
     let IndexPathOfFirstRow = NSIndexPath(row: 0, section: 0)
+    var firstCell : SelectedTableViewCell!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let doneButton : UIBarButtonItem = UIBarButtonItem(title: "Guardar", style: UIBarButtonItemStyle.plain, target: self, action:#selector(save(sender:)))
         self.navigationItem.rightBarButtonItem = doneButton
-        getContacts()
-        showContacts()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return users.count + 1
     }
-
+    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let tableViewCell = cell as? SelectedTableViewCell else { return }
-        
         tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+        firstCell = tableViewCell
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getContacts()
+        showContacts()
     }
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         REF_USERS.removeAllObservers()
+        NotificationCenter.default.removeObserver(USER_NOTIFICATION)
     }
-  
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(indexPath.row == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "selectedMembers", for: indexPath) as! SelectedTableViewCell
@@ -67,20 +70,16 @@ class AddMembersTableViewController: UITableViewController {
         let user = users[indexPath.row-1]
         cell.name.text = user.name
         cell.phone.text = user.phone
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let data = STORAGE_SERVICE.search(url: user.photoURL) {
-                DispatchQueue.main.async {
-                    cell.memberImage.image = nil
-                    cell.memberImage.image = UIImage(data: data)
-                }
-            }
-            cell.activityIndicator.stopAnimating()
+        if let data = STORAGE_SERVICE.search(url: user.photoURL) {
+            cell.memberImage.image = nil
+            cell.memberImage.image = UIImage(data: data)
+            
         }
+        cell.activityIndicator.stopAnimating()
         
-
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             if selected.count == 0 {
@@ -96,7 +95,7 @@ class AddMembersTableViewController: UITableViewController {
         let fetchRequest = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor])
         try! store.enumerateContacts(with: fetchRequest) { contact, stop in
             if contact.phoneNumbers.count > 0 {
-               
+                
                 self.contacts.append(contact)
             }
         }
@@ -112,7 +111,7 @@ class AddMembersTableViewController: UITableViewController {
                         self.tableView.reloadData()
                     }
                 }else{
-                     USER_SERVICE.getUser(phone: (phone.value.value(forKey: "digits"))! as! String)
+                    USER_SERVICE.getUser(phone: (phone.value.value(forKey: "digits"))! as! String)
                 }
             }
         }
@@ -124,69 +123,4 @@ class AddMembersTableViewController: UITableViewController {
         FAMILY_SERVICE.addMembers(members: selected, family: family)
     }
     
-    func duplicate(id: String) -> Bool {
-        var res = true
-        for item in selected {
-            if(item.id == id){
-                res = false
-                break
-            }
-        }
-        return res
-    }
-    func search(id: String) -> Int {
-        var index = 0
-        for item in selected {
-            if(item.id == id){
-                break
-            }
-            index+=1
-        }
-        return index
-    }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

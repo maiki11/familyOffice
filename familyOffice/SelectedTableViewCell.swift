@@ -19,13 +19,11 @@ class SelectedTableViewCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        super.setSelected(selected, animated: true)
     }
     
     func setCollectionViewDataSourceDelegate
-        <D: protocol<UICollectionViewDataSource, UICollectionViewDelegate>>
+        <D: UICollectionViewDataSource & UICollectionViewDelegate>
         (dataSourceDelegate: D, forRow row: Int) {
         
         collectionView.delegate = dataSourceDelegate
