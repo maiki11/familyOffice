@@ -39,7 +39,7 @@ class FamilyService {
                     })
                 }
             }else{
-                //NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
+                NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
             }
         }) { (error) in
             print(error.localizedDescription)
@@ -51,9 +51,9 @@ class FamilyService {
             // Get user value
             if(snapshot.exists()){
                 let family = Family(snapshot: snapshot)
-                if let index =  self.families.index(where: { $0.id == family.id }) {
+                if let index = self.families.index(where: { $0.id == family.id }) {
                     self.families[index] = family
-                    NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: nil)
+                    NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: index)
                 }else{
                     self.families.append(family)
                     NotificationCenter.default.post(name: FAMILYADDED_NOTIFICATION, object: nil)
@@ -144,7 +144,7 @@ class FamilyService {
         if(family.admin == USER_SERVICE.user?.id){
             self.addAdmin(index: self.families.index(where: {$0.id == family.id})!, uid: nil)
         }
-        removeFamily(family: family)
+        
     }
     
     func addAdmin(index: Int, uid: String?) -> Void {
@@ -167,6 +167,7 @@ class FamilyService {
         if let index = self.families.index(where: {$0.id == family.id}){
             self.families.remove(at: index)
             verifyFamilyActive(family: family)
+            NotificationCenter.default.post(name: FAMILYREMOVED_NOTIFICATION, object: index)
         }
     }
     func verifyFamilyActive(family: Family) -> Void {

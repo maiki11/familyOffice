@@ -106,7 +106,7 @@ class AddMembersTableViewController: UITableViewController {
         for item in contacts {
             for phone in item.phoneNumbers {
                 if let user = USER_SERVICE.users.filter({ $0.phone == phone.value.value(forKey: "digits") as! String }).first {
-                    if (family.members?[user.id]) == nil {
+                    if (FAMILY_SERVICE.families.first(where: {$0.id == family.id})?.members?[user.id]) == nil {
                         self.users.append(user)
                         self.tableView.reloadData()
                     }

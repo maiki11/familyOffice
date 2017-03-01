@@ -50,6 +50,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.familyImage.layer.cornerRadius = lastContentOffset
         self.familyImage.clipsToBounds = true
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        reloadFamily()
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
             UTILITY_SERVICE.gotoView(view: "RegisterFamilyView", context: self)
             return
@@ -58,10 +63,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             Utility.Instance().stopLoading(view: self.view)
             self.reloadFamily()
         }
+        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){_ in
+            self.reloadFamily()
+        }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        reloadFamily()
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
     }
     
     func reloadFamily() -> Void {
@@ -70,7 +77,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 self.activityIndicator.stopAnimating()
                 UTILITY_SERVICE.stopLoading(view: self.view)
                 self.familyImage.image = UIImage(data: data)
-                
             }
             
             self.familyName.text = family.name ?? "No seleccionada"
