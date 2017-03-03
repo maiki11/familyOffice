@@ -37,6 +37,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
+        self.automaticallyAdjustsScrollViewInsets = false
         USER_SERVICE.observers()
         UTILITY_SERVICE.loading(view: self.view)
         
@@ -46,10 +48,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.famPosY = familyName.frame.origin.y
         self.collectionHeight = collectionView.frame.height
         lastContentOffset = familyImage.frame.size.height/2
-        heightImg = familyImage.frame.size.height
         self.familyImage.layer.cornerRadius = lastContentOffset
         self.familyImage.clipsToBounds = true
-        
         
     }
     
@@ -67,6 +67,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.reloadFamily()
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        heightImg = familyImage.frame.size.height
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
     }
@@ -84,6 +90,27 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        collectionView.bounces = false
+        let percentage = collectionView.contentOffset.y / (collectionView.contentSize.height - collectionView.frame.size.height)
+        print(percentage)
+        if(percentage > 0.10){
+        UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            self.headerView.frame.size.height = self.headerView.frame.size.height * (percentage + 1 )
+        }, completion: nil)
+        }
+        /*
+        if(scrollView.contentOffset.y > 100){
+            UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                    self.headerView.frame.size.height = self.newHeight
+            }, completion: nil)
+        }else{
+            UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                    self.headerView.frame.size.height = self.heightHeader
+            }, completion: nil)
+        }*/
+    }
+    
+    /*func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollView.bounces = false
         if(collectionView.contentOffset.y >= 100 && self.headerView.frame.height == heightHeader){
             let percent = 40/self.heightHeader
@@ -115,7 +142,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 //self.collectionView.frame.size.height = self.collectionHeight
             }, completion: nil)
         }
-    }
+    }*/
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.alpha = 0
