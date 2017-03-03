@@ -28,22 +28,16 @@ class ActivityLogService {
         REF_ACTIVITY.child("\(id)/\(key)").setValue(record.toDictionary())
         activityLog.append(record)
     }
+    func add(record: Record) -> Void {
+        if !self.activityLog.contains(where: {$0.id == record.id}){
+            self.activityLog.append(record)
+            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: record)
+        }
+    }
     
     func getActivities()  {
-        /*REF_ACTIVITY.child((USER_SERVICE.user?.id)!).observeSingleEvent(of: .value, with: { (snapshot) in
-         if(snapshot.exists()){
-         for item in snapshot.children {
-         let not = Record(snapshot:item as! FIRDataSnapshot)
-         if !self.activityLog.contains(where: {$0.id == not.id}){
-         self.activityLog.append(not)
-         NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: not)
-         }
-         
-         }
-         }
-         })*/
         
-        handle = REF_ACTIVITY.child((USER_SERVICE.user?.id)!).queryOrdered(byChild: "timestamp").observe( .childAdded, with: { (snapshot) in
+        REF_ACTIVITY.child((USER_SERVICE.user?.id)!).queryOrdered(byChild: "timestamp").observe( .childAdded, with: { (snapshot) in
             if(snapshot.exists()){
                 let not = Record(snapshot:snapshot)
                 if !self.activityLog.contains(where: {$0.id == not.id}){

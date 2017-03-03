@@ -23,8 +23,8 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.cropAndSave(_:)))
-        //navigationItem.rightBarButtonItems = [saveButton]
+        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.cropAndSave(_:)))
+        navigationItem.rightBarButtonItems = [saveButton]
         scrollView.delegate = self
         blurImageView.contentMode = UIViewContentMode.scaleAspectFill
         imageView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)

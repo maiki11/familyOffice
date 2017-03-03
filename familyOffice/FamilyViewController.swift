@@ -14,14 +14,11 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var members : [User] = []
     var family : Family?
     
-    
     @IBOutlet weak var imageFamily: UIImageView!
     @IBOutlet weak var membersTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         if let data = STORAGE_SERVICE.search(url: (self.family?.photoURL?.absoluteString)!) {
             self.imageFamily.image = UIImage(data: data)
@@ -36,57 +33,63 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationItem.title = family?.name
         // Do any additional setup after loading the view.
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        for item in (family?.members?.allKeys)! {
-            self.existUser(id: item as! String)
-        }
-        
-        REF_FAMILIES.child((family?.id)!).child("members").observe(.childRemoved, with: { (snapshot) -> Void in
-            if(snapshot.exists()){
-                if let obj = self.members.filter({$0.id == snapshot.key as String}).first {
-                    // do something with namedFoot
-                    FAMILY_SERVICE.getFamilies(key: (self.family?.id)!)
-                    FAMILY_SERVICE.removeMember(member: obj, family: self.family!)
-                    let index = self.members.enumerated().filter({$0.element.id == snapshot.key}).first?.offset
-                    self.members.remove(at: index!)
-                    self.membersTable.deleteRows(at: [IndexPath(row: index!, section: 0)], with: UITableViewRowAnimation.automatic)
-                    if self.family?.admin == snapshot.key {
-                        FAMILY_SERVICE.getFamilies(key: (self.family?.id)!)
-                    }
-                }
-            }
-            
-        })
-        
-        REF_FAMILIES.child((family?.id)!).child("members").observe(.childAdded, with: { (snapshot) -> Void in
-            if(snapshot.exists()){
-                self.existUser(id: snapshot.key)
-            }
-        })
-        
+        members = []
         self.membersTable.reloadData()
+        verifyMembersOffLine()
+        
+       
+        REF_SERVICE.chilRemoved(ref: "families/\((family?.id)!)/members")
+        REF_SERVICE.chilAdded(ref: "families/\((family?.id)!)/members")
+        
+        
         NotificationCenter.default.addObserver(forName: USERS_NOTIFICATION, object: nil, queue: nil){ obj in
             if let user : User = obj.object as? User {
-                self.existUser(id: user.id)
+                self.addMember(id: user.id)
+            }
+        }
+        
+        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ obj in
+            if let user : [String:String] = obj.object as? [String:String] {
+                if user.first?.value == "removed"{
+                    self.removeMembers(key: (user.first?.key)!)
+                }else if user.first?.value == "added" {
+                    self.addMember(id: (user.first?.key)!)
+                }
+            }else if let url = obj.object as? String {
+                if let index = self.members.index(where: {$0.photoURL == url}) {
+                    self.membersTable.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+                }
             }
         }
         NotificationCenter.default.addObserver(forName: FAMILYUPDATED_NOTIFICATION, object: nil, queue: nil){ notification in
             self.membersTable.reloadData()
         }
-        
+    }
+
+    func removeMembers(key: String) -> Void {
+        if let index = self.members.index(where: {$0.id == key}) {
+            self.members.remove(at: index)
+            self.membersTable.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+        }
+    }
+    func verifyMembersOffLine() -> Void {
+        for item in (FAMILY_SERVICE.families.first(where: {$0.id == family?.id})?.members!.allKeys)! {
+            addMember(id: item as! String)
+        }
     }
     
-    func existUser(id: String) -> Void {
+    func addMember(id: String) -> Void {
         if let user = USER_SERVICE.users.filter({$0.id == id}).first {
-            if !self.members.contains(where: {$0.id == user.id}){
+           if !self.members.contains(where: {$0.id == user.id}){
                 self.members.append(user)
                 self.membersTable.insertRows(at: [NSIndexPath(row: self.members.count-1, section: 0) as IndexPath], with: .fade)
             }
             self.addMembers(user: user)
         }else{
-            USER_SERVICE.getUser(uid: id)
+            REF_SERVICE.valueSingleton(ref: "users/\(id)")
         }
     }
     
@@ -96,8 +99,8 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        REF_SERVICE.remove(ref: "families/\((family?.id)!)/members")
         NotificationCenter.default.removeObserver(name: USERS_NOTIFICATION)
-        REF_FAMILIES.child((family?.id)!).child("members").removeAllObservers()
         
     }
     override func didReceiveMemoryWarning(){
@@ -116,9 +119,10 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FamilyMemberTableViewCell
         let member = self.members[indexPath.row]
         cell.name.text = member.name
+    
         if let data = STORAGE_SERVICE.search(url: member.photoURL) {
             cell.activityIndicator.stopAnimating()
-            cell.memberImage.image = UIImage(data: data)
+            cell.memberImage.image = nil
             cell.memberImage.image = UIImage(data: data)
         }else {
             cell.activityIndicator.stopAnimating()
@@ -146,7 +150,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             case .began:
                 
                 let user = members[(indexPath?.row)!]
-                if(user.id == USER_SERVICE.user?.id){
+                if(user.id == FIRAuth.auth()?.currentUser?.uid){
                     break
                 }
                 // create the alert
@@ -161,14 +165,10 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     alert.addAction(UIAlertAction(title: "Remover de la familia", style: UIAlertActionStyle.destructive, handler:  { action in
                         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                             //ELiminar usuario de la familia
-                            FAMILY_SERVICE.removeMember(member: user, family: self.family!)
-                            self.members.remove(at: (indexPath?.row)!)
-                            self.membersTable.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.fade)
+                            FAMILY_SERVICE.removeMember(member: user.id, familyId: (self.family?.id!)!)
                         }
-                        
                     }))
                 }
-                
                 // show the alert
                 self.present(alert, animated: true, completion: nil)
                 
@@ -183,12 +183,9 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     @IBAction func handleExitFamily(_ sender: UIButton) {
         FAMILY_SERVICE.exitFamily(family: family!, uid: (FIRAuth.auth()?.currentUser?.uid)!)
-        if FAMILY_SERVICE.families.count > 0 {
-            UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
-        }else{
-            UTILITY_SERVICE.gotoView(view: "RegisterFamilyView", context: self)
-        }
-        
+       
+        UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
+       
     }
     
     func addMembers(user: User){

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ConfigurationViewController: UIViewController {
     var user: User!
@@ -14,7 +15,7 @@ class ConfigurationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        user = USER_SERVICE.user
+        user = USER_SERVICE.users[0]
         if let data = STORAGE_SERVICE.search(url: (user.photoURL)) {
              profileImage.image = UIImage(data: data)
         }

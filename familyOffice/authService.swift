@@ -33,11 +33,9 @@ class AuthService {
             }
         }
     }
-
     func userStatus(state: String) -> Void {
         REF_USERS.child(self.uid!).updateChildValues(["online": state])
     }
-
     func login(credential:FIRAuthCredential){
         FIRAuth.auth()?.signIn(with: credential ) { (user, error) in
             print("Usuario autentificado con google")
@@ -45,9 +43,8 @@ class AuthService {
         }
     }
     func logOut(){
-        NOTIFICATION_SERVICE.deleteToken(token: NOTIFICATION_SERVICE.token, id: (USER_SERVICE.user?.id)!)
+        NOTIFICATION_SERVICE.deleteToken(token: NOTIFICATION_SERVICE.token, id: (FIRAuth.auth()?.currentUser?.uid)!)
         try! FIRAuth.auth()!.signOut()
-        REF_USERS.child("\((USER_SERVICE.user?.id)!)/families").removeAllObservers()
         UTILITY_SERVICE.clearObservers()
         NOTIFICATION_SERVICE.notifications.removeAll()
         ACTIVITYLOG_SERVICE.activityLog.removeAll()
@@ -75,7 +72,6 @@ class AuthService {
                         ACTIVITYLOG_SERVICE.create(id: user.uid, activity: "Se creo la cuenta", photo: downloadURL, type: "sesion")
                         //self.userStatus(state: "Online")
                     }
-
                 }
             }
         }
@@ -85,23 +81,8 @@ class AuthService {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             self.uid = user?.uid
             if (user != nil) {
-                REF_USERS.child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in
-                    // Get user value
-                    if !snapshot.exists() {
-                        self.createAccount(user: user as AnyObject)
-                    }else{
-                        USER_SERVICE.user = User(snapshot: snapshot)
-                        USER_SERVICE.addUser(user: User(snapshot: snapshot))
-                        NOTIFICATION_SERVICE.saveToken()
-                        FAMILY_SERVICE.getFamilies()
-                        //self.userStatus(state: "Online")
-                        REF_USERS.child((user!.uid)).removeAllObservers()
-                        UTILITY_SERVICE.gotoView(view: name, context: view)
-                    }
-                    
-                }) { (error) in
-                    print(error.localizedDescription)
-                }
+                REF_SERVICE.value(ref: ref_users(uid: (user?.uid)!))
+                UTILITY_SERVICE.gotoView(view: name, context: view)
             }
         }
     }

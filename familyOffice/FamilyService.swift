@@ -20,47 +20,33 @@ class FamilyService {
     public static func Instance() -> FamilyService {
         return instance
     }
-    func getFamilies() {
-        REF.child("/users/\((FIRAuth.auth()?.currentUser?.uid)!)/families").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if(snapshot.exists()){
-                for item in value?.allKeys as! [String] {
-                    REF_FAMILIES.child(item).observeSingleEvent(of: .value, with: { (snapshot) in
-                        if(snapshot.exists()){
-                            let family = Family(snapshot: snapshot)
-                            if !self.families.contains(where: { $0.id == family.id }) {
-                                self.families.append(family)
-                            }
-                            if(USER_SERVICE.user?.familyActive == item || USER_SERVICE.user?.familyActive == ""){
-                                self.selectFamily(family: family)
-                                NotificationCenter.default.post(name: USER_NOTIFICATION, object: nil)
-                            }
-                        }
-                    })
-                }
-            }else{
-                NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
+    func addFamily(family: Family) -> Void {
+        if !self.families.contains(where: { $0.id == family.id }) {
+            self.families.append(family)
+            NotificationCenter.default.post(name: FAMILYADDED_NOTIFICATION, object: family)
+        }else{
+            if let index = self.families.index(where: {$0.id == family.id}){
+                self.families[index] = family
+                NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: nil)
             }
-        }) { (error) in
-            print(error.localizedDescription)
         }
     }
-    
-    func getFamilies(key: String) -> Void {
-        REF_FAMILIES.child(key).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            if(snapshot.exists()){
-                let family = Family(snapshot: snapshot)
-                if let index = self.families.index(where: { $0.id == family.id }) {
-                    self.families[index] = family
-                    NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: index)
-                }else{
-                    self.families.append(family)
-                    NotificationCenter.default.post(name: FAMILYADDED_NOTIFICATION, object: nil)
-                }
+    func removeFamily(key: String) -> Void {
+        //Actualizo la información de familias al usuario logeado
+        if let index = USER_SERVICE.users.index(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})  {
+            let filter =  USER_SERVICE.users[index].families?.filter({$0.key as? String != key})
+            var families : [String: Bool] = [:]
+            for result in filter! {
+                families[result.key as! String] = (result.value as! Bool)
             }
-        }) { (error) in
-            print(error.localizedDescription)
+            USER_SERVICE.users[index].families = families as NSDictionary
+        }
+        //Elimino la familia localmente
+        if let index = self.families.index(where: {$0.id == key}){
+            let family = self.families[index]
+            self.families.remove(at: index)
+            verifyFamilyActive(family: family)
+            NotificationCenter.default.post(name: FAMILYREMOVED_NOTIFICATION, object: index)
         }
     }
     
@@ -68,14 +54,11 @@ class FamilyService {
         for item in (family.members?.allKeys)! {
             REF_USERS.child(item as! String).child("families/\((family.id)!)").removeValue()
         }
-        
-        
         STORAGEREF.child("families/\((family.id)!)/images/\((family.imageProfilePath)!)").delete(completion: { (error) -> Void in
             if (error != nil){
                 print(error.debugDescription)
             }
-        }
-        )
+        })
         REF_FAMILIES.child(family.id!).removeValue()
         ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.user?.id)!, activity: "Se elimino la familia \((family.name)!)", photo: (family.photoURL?.absoluteString)!, type: "deleteFamily")
     }
@@ -97,7 +80,7 @@ class FamilyService {
                         //Set family for app
                         self.selectFamily(family: family)
                         self.families.append(family)
-                        ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.user?.id)!, activity: "Se creo la familia  \((family.name)!)", photo: downloadURL.absoluteString, type: "addFamily")
+                        ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.users[0].id)!, activity: "Se creo la familia  \((family.name)!)", photo: downloadURL.absoluteString, type: "addFamily")
                         //Go to Home
                         Utility.Instance().gotoView(view: "TabBarControllerView", context: view.self)
                     }
@@ -107,34 +90,30 @@ class FamilyService {
         }
     }
     
-    func addMembers(members: [User], family: Family) -> Void {
-        if let index = self.families.index(where: {$0.id == family.id}) {
+    func addMember(member: String, family: String) -> Void {
+        
+        if let index = self.families.index(where: {$0.id == family}) {
             var memberDict : [String:Bool]  = self.families[index].members as! [String : Bool]
-            for member in members {
-                memberDict[member.id] = true
-                REF_USERS.child("\((member.id)!)/families").updateChildValues([family.id : true])
-                for token in (member.tokens?.allKeys)! {
-                    NOTIFICATION_SERVICE.sendNotification(title: "Se te agrego a la familia: ", message: "\((family.name)!)", to: token as! String, user: member)
-                }
-                NOTIFICATION_SERVICE.saveNotification(id: member.id, title: "Se te agrego a la familia: \((family.name)!)", photo: (USER_SERVICE.user?.photoURL)!)
-            }
+            memberDict[member] = true
             self.families[index].members = memberDict as NSDictionary?
-            REF_FAMILIES.child("\((family.id)!)/members").setValue(memberDict)
+            
+            REF_FAMILIES.child("\(family)/members").updateChildValues([member: true])
+            REF_USERS.child("\(member)/families").updateChildValues([family:true])
+            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [member:"added"])
         }
     }
-    
-    
-    func removeMember(member: User, family:Family) -> Void {
-        REF_FAMILIES.child("\((family.id)!)/members/\((member.id)!)").removeValue()
-        REF_USERS.child("\((member.id)!)/families/\((family.id)!)").removeValue()
+    func removeMember(member: String, familyId:String) -> Void {
+        REF_USERS.child("\((member))/families/\((familyId))").removeValue()
+        REF_FAMILIES.child("\(familyId)/members/\(member)").removeValue()
         
-        if let index = families.index(where: {$0.id == family.id})  {
-            let filter = self.families[index].members?.filter({$0.key as? String != member.id})
+        if let index = families.index(where: {$0.id == familyId})  {
+            let filter = self.families[index].members?.filter({$0.key as? String != member})
             var members : [String: Bool] = [:]
             for result in filter! {
                 members[result.key as! String] = (result.value as! Bool)
             }
             self.families[index].members = members as NSDictionary
+            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [member : "removed"])
         }
     }
     
@@ -144,7 +123,6 @@ class FamilyService {
         if(family.admin == USER_SERVICE.user?.id){
             self.addAdmin(index: self.families.index(where: {$0.id == family.id})!, uid: nil)
         }
-        
     }
     
     func addAdmin(index: Int, uid: String?) -> Void {
@@ -163,22 +141,19 @@ class FamilyService {
             }
         }
     }
-    func removeFamily(family: Family) -> Void {
-        if let index = self.families.index(where: {$0.id == family.id}){
-            self.families.remove(at: index)
-            verifyFamilyActive(family: family)
-            NotificationCenter.default.post(name: FAMILYREMOVED_NOTIFICATION, object: index)
-        }
-    }
+    
     func verifyFamilyActive(family: Family) -> Void {
-        if(family.id == USER_SERVICE.user?.familyActive){
+        if(family.id == USER_SERVICE.users.first(where: {$0.id == (FIRAuth.auth()?.currentUser?.uid)!})?.familyActive){
             if(self.families.count > 0){
                 self.selectFamily(family: self.families[0])
             }else{
                 NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
             }
+        }else if USER_SERVICE.users[0].families?.count == FAMILY_SERVICE.families.count && FAMILY_SERVICE.families.count > 0 {
+            selectFamily(family: family)
         }
     }
+    
     func selectFamily(family: Family) -> Void {
         REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["familyActive" : family.id])
         USER_SERVICE.setFamily(family: family)

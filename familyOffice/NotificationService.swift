@@ -12,7 +12,6 @@ import Firebase
 
 class NotificationService {
     var token = ""
-    var handle:UInt!
     public var notifications : [NotificationModel] = []
     private init(){
     }
@@ -55,17 +54,12 @@ class NotificationService {
             
         })
     }
-    func getNotifications() {
-        handle = REF_NOTIFICATION.child((USER_SERVICE.user?.id)!).queryOrdered(byChild: "timestamp").observe( .childAdded, with: { (snapshot) in
-            if(snapshot.exists()){
-                let not = NotificationModel(snapshot: snapshot)
-                if !self.notifications.contains(where: {$0.id == not.id}){
-                    self.notifications.append(not)
-                    NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: not)
-                }
-                
-            }
-        })
+
+    func add(notification: NotificationModel) -> Void {
+        if !self.notifications.contains(where: {$0.id == notification.id}){
+            self.notifications.append(notification)
+            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: notification)
+        }
     }
 
     func saveNotification(id: String, title: String, photo:String) -> Void {
