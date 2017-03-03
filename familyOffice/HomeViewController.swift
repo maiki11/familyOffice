@@ -19,6 +19,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var famPosY: CGFloat = 0
     private var flag = true
     private var family : Family?
+    let user = USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var navBar: UINavigationBar!
@@ -37,7 +38,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        USER_SERVICE.observers()
+        //USER_SERVICE.observers()
         UTILITY_SERVICE.loading(view: self.view)
         
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
@@ -50,13 +51,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.familyImage.layer.cornerRadius = lastContentOffset
         self.familyImage.clipsToBounds = true
         
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         reloadFamily()
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
-            UTILITY_SERVICE.gotoView(view: "RegisterFamilyView", context: self)
+            self.activityIndicator.stopAnimating()
+            self.familyImage.image = #imageLiteral(resourceName: "Family")
+            self.familyName.text = "No tiene familias, por favor \n crea una familia"
             return
         }
         NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){_ in
@@ -66,13 +68,19 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){_ in
             self.reloadFamily()
         }
+        NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
+            self.reloadFamily()
+            //FAMILY_SERVICE.verifyFamilyActive(family: family.object as! Family)
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
+        NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
+        NotificationCenter.default.removeObserver(FAMILYADDED_NOTIFICATION)
     }
     
     func reloadFamily() -> Void {
-        if let family = FAMILY_SERVICE.families.filter({$0.id == (USER_SERVICE.user?.familyActive)! as String}).first{
+        if let family = FAMILY_SERVICE.families.filter({$0.id == (USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})?.familyActive)! as String}).first{
             if let data = STORAGE_SERVICE.search(url: (family.photoURL?.absoluteString)!) {
                 self.activityIndicator.stopAnimating()
                 UTILITY_SERVICE.stopLoading(view: self.view)

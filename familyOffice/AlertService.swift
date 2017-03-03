@@ -24,7 +24,4 @@ class AlertService  {
         alert.addAction(okAction)
         context.present(alert, animated: true, completion: nil)
     }
-    
-    
-    
 }

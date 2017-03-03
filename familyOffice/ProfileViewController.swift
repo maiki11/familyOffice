@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
@@ -20,8 +21,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.separatorStyle = .none
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         //self.profileImage.clipsToBounds = true
-        self.userName.text =  USER_SERVICE.user?.name
-        if let data = STORAGE_SERVICE.search(url: (USER_SERVICE.user?.photoURL)!) {
+        self.userName.text =  USER_SERVICE.users[0].name
+        if let data = STORAGE_SERVICE.search(url: (USER_SERVICE.users[0].photoURL)!) {
             self.profileImage.image = UIImage(data: data)
         }
     }
@@ -33,12 +34,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        ACTIVITYLOG_SERVICE.getActivities()
-        NOTIFICATION_SERVICE.getNotifications()
+        REF_SERVICE.chilAdded(ref: "activityLog/\((FIRAuth.auth()?.currentUser?.uid)!)")
+        REF_SERVICE.chilAdded(ref: "notifications/\((FIRAuth.auth()?.currentUser?.uid)!)")
+        //ACTIVITYLOG_SERVICE.getActivities()
+        //NOTIFICATION_SERVICE.getNotifications()
         self.tableView.reloadData()
         NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
-            
             if self.segmentedControl.selectedSegmentIndex == 0 {
                 if let _ : NotificationModel = notification.object as? NotificationModel {
                     self.tableView.insertRows(at: [IndexPath(row: NOTIFICATION_SERVICE.notifications.count-1, section: 0) ], with: .fade)
@@ -57,8 +58,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
-        REF_ACTIVITY.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: ACTIVITYLOG_SERVICE.handle)
-        REF_NOTIFICATION.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: NOTIFICATION_SERVICE.handle)
+        REF_SERVICE.remove(ref:  "activityLog/\((FIRAuth.auth()?.currentUser?.uid)!)")
+        REF_SERVICE.remove(ref: "notifications/\((FIRAuth.auth()?.currentUser?.uid)!)")
+        //REF_ACTIVITY.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: ACTIVITYLOG_SERVICE.handle)
+        //REF_NOTIFICATION.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: NOTIFICATION_SERVICE.handle)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -98,8 +101,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             return NOTIFICATION_SERVICE.notifications.count
         }
     }
-    
-    
     
     /*
      // MARK: - Navigation

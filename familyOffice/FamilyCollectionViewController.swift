@@ -30,7 +30,6 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.collectionView?.reloadData()
-        print(FAMILY_SERVICE.families)
         if (FAMILY_SERVICE.families.count == 0){
             self.performSegue(withIdentifier: "registerSegue", sender: nil)
         }
@@ -42,7 +41,7 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
             //self.collectionView?.deleteItems(at: [IndexPath(item: index.object as! Int, section: 0)])
             self.collectionView?.reloadData()
             if (FAMILY_SERVICE.families.count == 0){
-                UTILITY_SERVICE.gotoView(view: "RegisterFamilyView", context: self)
+                self.performSegue(withIdentifier: "registerSegue", sender: nil)
             }
         }
         NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){_ in
@@ -88,7 +87,7 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         for item in FAMILY_SERVICE.families {
-            if item.members?[(USER_SERVICE.user?.id)!] == nil {
+            if item.members?[(FIRAuth.auth()?.currentUser?.uid)!] == nil {
                  FAMILY_SERVICE.families.remove(at:  FAMILY_SERVICE.families.index(where: {$0.id == item.id})!)
             }
         }
@@ -148,7 +147,6 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
                         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                             self.togglePendingDelete(family: family)
                             //self.collectionView?.deleteItems(at: [indexPath!])
-                            
                         }
                         
                     }))
@@ -157,7 +155,6 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
                 self.present(alert, animated: true, completion: nil)
                 break
             case .ended:
-                print("termine")
                 break
             default:
                 break

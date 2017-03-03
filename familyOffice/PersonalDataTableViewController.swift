@@ -10,7 +10,7 @@ import UIKit
 
 class PersonalDataTableViewController: UITableViewController {
     
-    var userDictionary = USER_SERVICE.user!.toDictionary()
+    var userDictionary = USER_SERVICE.users[0].toDictionary()
    
     
     var date : String!
@@ -94,8 +94,8 @@ class PersonalDataTableViewController: UITableViewController {
     
     //Private methods
     func setDate() -> Void {
-        USER_SERVICE.user!.birthday = date
-        userDictionary = USER_SERVICE.user!.toDictionary()
+        USER_SERVICE.users[0].birthday = date
+        userDictionary = USER_SERVICE.users[0].toDictionary()
         self.tableView.reloadData()
     }
     func save(sender: UINavigationBar) -> Void {
@@ -112,7 +112,7 @@ class PersonalDataTableViewController: UITableViewController {
                         ALERT_SERVICE.alertMessage(context: self, title: "Campo Vacío", msg: "El campo Nombre no puede quedar vacío")
                         ANIMATIONS.shakeTextField(txt: (cell?.myTextField)!)
                     }else{
-                        USER_SERVICE.user!.name = value
+                        USER_SERVICE.users[0].name = value
                     }
                     break
                 case "phone":
@@ -120,26 +120,26 @@ class PersonalDataTableViewController: UITableViewController {
                         ALERT_SERVICE.alertMessage(context: self, title: "Campo Vacío", msg: "El campo Teléfono no puede quedar vacío")
                         ANIMATIONS.shakeTextField(txt: (cell?.myTextField)!)
                     }else{
-                        USER_SERVICE.user!.phone = value
+                        USER_SERVICE.users[0].phone = value
                     }
                     break
                 case "address":
-                    USER_SERVICE.user!.address = value
+                    USER_SERVICE.users[0].address = value
                     break
                 case "rfc":
-                    USER_SERVICE.user!.rfc = value
+                    USER_SERVICE.users[0].rfc = value
                     break
                 case "curp":
-                    USER_SERVICE.user!.curp = value
+                    USER_SERVICE.users[0].curp = value
                     break
                 case "birthday":
-                    USER_SERVICE.user!.birthday = value
+                    USER_SERVICE.users[0].birthday = value
                     break
                 case "nss":
-                    USER_SERVICE.user!.nss = value
+                    USER_SERVICE.users[0].nss = value
                     break
                 case "bloodType":
-                    USER_SERVICE.user!.bloodtype = value
+                    USER_SERVICE.users[0].bloodtype = value
                     break
                 default:
                     break
@@ -147,7 +147,7 @@ class PersonalDataTableViewController: UITableViewController {
             }
             index += 1
         }
-        USER_SERVICE.updateUser(user: USER_SERVICE.user!)
+        USER_SERVICE.updateUser(user: USER_SERVICE.users[0])
         _ =  navigationController?.popViewController(animated: true)
         //UTILITY_SERVICE.gotoView(view: "ConfiguracionScene", context: self)
     }

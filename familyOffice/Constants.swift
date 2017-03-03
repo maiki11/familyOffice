@@ -9,6 +9,8 @@
 import Foundation
 import Firebase
 
+
+
 //Notification Center
 let USER_NOTIFICATION = Notification.Name("UserNotification")
 let NOFAMILIES_NOTIFICATION = Notification.Name("NoFamiliesNotification")
@@ -44,6 +46,7 @@ let FAMILY_SERVICE = FamilyService.Instance()
 let USER_SERVICE = UserService.Instance()
 let NOTIFICATION_SERVICE = NotificationService.Instance()
 let ALERT_SERVICE = AlertService.Instance()
+let REF_SERVICE = RefHandle.Instance()
 
 //Others
 let SERVERKEY =  "AIzaSyAkiqHhHKI0xcXrYF9eq-D6PzhUl-mPOls"

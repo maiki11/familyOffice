@@ -51,10 +51,22 @@ class AddMembersTableViewController: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         getContacts()
         showContacts()
+        
+        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ obj in
+            if let url = obj.object as? String {
+                if let index = self.users.index(where: {$0.photoURL == url}) {
+                    self.tableView.reloadRows(at: [IndexPath(row: index+1, section: 0)], with: .automatic)
+                    self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+                }
+            }
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
+        users = []
+        selected = []
         super.viewDidDisappear(animated)
         REF_USERS.removeAllObservers()
         NotificationCenter.default.removeObserver(USER_NOTIFICATION)
@@ -79,7 +91,6 @@ class AddMembersTableViewController: UITableViewController {
         
         return cell
     }
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             if selected.count == 0 {
@@ -89,7 +100,6 @@ class AddMembersTableViewController: UITableViewController {
         }
         return 84.0
     }
-    
     func getContacts() -> Void {
         let store = CNContactStore()
         let fetchRequest = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor])
@@ -100,7 +110,6 @@ class AddMembersTableViewController: UITableViewController {
             }
         }
     }
-    
     func showContacts() -> Void {
         self.users = []
         for item in contacts {
@@ -120,7 +129,10 @@ class AddMembersTableViewController: UITableViewController {
         }
     }
     func save(sender: UIBarButtonItem) -> Void {
-        FAMILY_SERVICE.addMembers(members: selected, family: family)
+        for user in selected {
+            FAMILY_SERVICE.addMember(member: user.id, family: family.id)
+        }
+        
     }
     
 }
