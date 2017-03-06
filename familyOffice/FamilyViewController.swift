@@ -20,8 +20,8 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let data = STORAGE_SERVICE.search(url: (self.family?.photoURL?.absoluteString)!) {
-            self.imageFamily.image = UIImage(data: data)
+        if !(self.family?.photoURL?.isEmpty)! {
+            self.imageFamily.loadImage(urlString: (self.family?.photoURL!)!)
         }
         
         let lpgr = UILongPressGestureRecognizer(target: self, action:#selector(handleLongPress(gestureReconizer:)))
@@ -57,10 +57,6 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.removeMembers(key: (user.first?.key)!)
                 }else if user.first?.value == "added" {
                     self.addMember(id: (user.first?.key)!)
-                }
-            }else if let url = obj.object as? String {
-                if let index = self.members.index(where: {$0.photoURL == url}) {
-                    self.membersTable.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
                 }
             }
         }
@@ -120,13 +116,8 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let member = self.members[indexPath.row]
         cell.name.text = member.name
     
-        if let data = STORAGE_SERVICE.search(url: member.photoURL) {
-            cell.activityIndicator.stopAnimating()
-            cell.memberImage.image = nil
-            cell.memberImage.image = UIImage(data: data)
-        }else {
-            cell.activityIndicator.stopAnimating()
-            cell.memberImage.image = #imageLiteral(resourceName: "profile_default")
+        if !member.photoURL.isEmpty {
+            cell.memberImage.loadImage(urlString: member.photoURL)
         }
         
         cell.phone.text = member.phone

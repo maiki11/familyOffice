@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
                 // Enable or disable features based on authorization.
             }
             application.registerForRemoteNotifications()
-            //connectToFcm()
+            connectToFcm()
         }
         FIRApp.configure()
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
@@ -111,6 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         // Connect to FCM since connection may have failed when attempted before having a token.
         connectToFcm()
     }
+    
     func connectToFcm() {
         FIRMessaging.messaging().connect { (error) in
             if (error != nil) {

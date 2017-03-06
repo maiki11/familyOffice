@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseDatabase
 import UIKit
 
 class FamilyService {
@@ -19,6 +20,14 @@ class FamilyService {
     
     public static func Instance() -> FamilyService {
         return instance
+    }
+    
+    func updated(id: String, snapshot: FIRDataSnapshot) -> Void {
+        if let index = FAMILY_SERVICE.families.index(where: { $0.id == id }){
+            //let familyMirror = type(of: Mirror(reflecting: self.families[index] ).children.first(where: {$0.label == snapshot.key})?.value)
+            self.families[index].update(snapshot: snapshot)
+            NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: index)
+        }
     }
     func addFamily(family: Family) -> Void {
         if !self.families.contains(where: { $0.id == family.id }) {
@@ -60,7 +69,7 @@ class FamilyService {
             }
         })
         REF_FAMILIES.child(family.id!).removeValue()
-        ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.user?.id)!, activity: "Se elimino la familia \((family.name)!)", photo: (family.photoURL?.absoluteString)!, type: "deleteFamily")
+        ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.users[0].id)!, activity: "Se elimino la familia \((family.name)!)", photo: (family.photoURL)!, type: "deleteFamily")
     }
     
     func createFamily(key: String, image: UIImage, name: String, view: UIViewController){
@@ -74,7 +83,7 @@ class FamilyService {
                     // Metadata contains file metadata such as size, content-type, and download URL.
                     if let downloadURL = metadata?.downloadURL()?.absoluteURL {
                         StorageService.Instance().save(url: downloadURL.absoluteString, data: uploadData)
-                        let family = Family(name:   name, photoURL: downloadURL as NSURL, members:  [(FIRAuth.auth()?.currentUser?.uid)! : true], admin: (FIRAuth.auth()?.currentUser?.uid)! , id: name+key, imageProfilePath: metadata?.name)
+                        let family = Family(name:   name, photoURL: downloadURL.absoluteString, members:  [(FIRAuth.auth()?.currentUser?.uid)! : true], admin: (FIRAuth.auth()?.currentUser?.uid)! , id: name+key, imageProfilePath: metadata?.name)
                         REF_FAMILIES.child(family.id).setValue(family.toDictionary())
                         REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").updateChildValues([ family.id: true])
                         //Set family for app

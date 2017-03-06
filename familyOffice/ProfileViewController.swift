@@ -22,8 +22,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         //self.profileImage.clipsToBounds = true
         self.userName.text =  USER_SERVICE.users[0].name
-        if let data = STORAGE_SERVICE.search(url: (USER_SERVICE.users[0].photoURL)!) {
-            self.profileImage.image = UIImage(data: data)
+        if !USER_SERVICE.users[0].photoURL.isEmpty, let url = USER_SERVICE.users[0].photoURL {
+            self.profileImage.loadImage(urlString: url)
         }
     }
     
@@ -60,8 +60,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
         REF_SERVICE.remove(ref:  "activityLog/\((FIRAuth.auth()?.currentUser?.uid)!)")
         REF_SERVICE.remove(ref: "notifications/\((FIRAuth.auth()?.currentUser?.uid)!)")
-        //REF_ACTIVITY.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: ACTIVITYLOG_SERVICE.handle)
-        //REF_NOTIFICATION.child((USER_SERVICE.user?.id)!).removeObserver(withHandle: NOTIFICATION_SERVICE.handle)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -80,14 +78,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             let activity = ACTIVITYLOG_SERVICE.activityLog[indexPath.row]
             cell.iconImage.image = #imageLiteral(resourceName: "logo")
             cell.config(title: activity.activity, date: UTILITY_SERVICE.getDate(date: activity.timestamp!))
-            if let data = STORAGE_SERVICE.search(url: activity.photoURL) {
-                cell.photo.image = UIImage(data: data)
+            if !activity.photoURL.isEmpty {
+                cell.photo.loadImage(urlString: activity.photoURL)
             }
         }else{
             let notification = NOTIFICATION_SERVICE.notifications[indexPath.row]
             cell.config(title: notification.title, date: UTILITY_SERVICE.getDate(date: notification.timestamp))
-            if let data = STORAGE_SERVICE.search(url: notification.photoURL) {
-                cell.iconImage.image = UIImage(data: data) 
+            if !notification.photoURL.isEmpty {
+                cell.iconImage.loadImage(urlString: notification.photoURL)
             }
             
         }

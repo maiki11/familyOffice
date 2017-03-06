@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 
-
+let modelName = UIDevice.current.modelName
 //Notification Center
 let USER_NOTIFICATION = Notification.Name("UserNotification")
 let NOFAMILIES_NOTIFICATION = Notification.Name("NoFamiliesNotification")
