@@ -36,12 +36,16 @@ class AddMembersTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return users.count + 1
+        if section == 0 {
+            return 1
+        }else{
+            return users.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -55,44 +59,36 @@ class AddMembersTableViewController: UITableViewController {
         getContacts()
         showContacts()
         
-        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ obj in
-            if let url = obj.object as? String {
-                if let index = self.users.index(where: {$0.photoURL == url}) {
-                    self.tableView.reloadRows(at: [IndexPath(row: index+1, section: 0)], with: .automatic)
-                    self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
-                }
-            }
-        }
+       
     }
     override func viewWillDisappear(_ animated: Bool) {
         users = []
         selected = []
         super.viewDidDisappear(animated)
         REF_USERS.removeAllObservers()
-        NotificationCenter.default.removeObserver(USER_NOTIFICATION)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if(indexPath.row == 0){
+        //Cell for selected members
+        if(indexPath.section == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "selectedMembers", for: indexPath) as! SelectedTableViewCell
             return cell
         }
         
+        //Conctacts
+        let user = users[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FamilyMemberTableViewCell
-        let user = users[indexPath.row-1]
+        
+        if !user.photoURL.isEmpty {
+            cell.memberImage.loadImage(urlString: user.photoURL)
+        }
         cell.name.text = user.name
         cell.phone.text = user.phone
-        if let data = STORAGE_SERVICE.search(url: user.photoURL) {
-            cell.memberImage.image = nil
-            cell.memberImage.image = UIImage(data: data)
-            
-        }
-        cell.activityIndicator.stopAnimating()
         
         return cell
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             if selected.count == 0 {
                 return 0.0
             }
@@ -105,7 +101,6 @@ class AddMembersTableViewController: UITableViewController {
         let fetchRequest = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor])
         try! store.enumerateContacts(with: fetchRequest) { contact, stop in
             if contact.phoneNumbers.count > 0 {
-                
                 self.contacts.append(contact)
             }
         }

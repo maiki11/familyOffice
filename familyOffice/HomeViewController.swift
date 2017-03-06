@@ -81,10 +81,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func reloadFamily() -> Void {
         if let family = FAMILY_SERVICE.families.filter({$0.id == (USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})?.familyActive)! as String}).first{
-            if let data = STORAGE_SERVICE.search(url: (family.photoURL?.absoluteString)!) {
+            if let url = family.photoURL {
                 self.activityIndicator.stopAnimating()
                 UTILITY_SERVICE.stopLoading(view: self.view)
-                self.familyImage.image = UIImage(data: data)
+                self.familyImage.loadImage(urlString: url)
             }
             
             self.familyName.text = family.name ?? "No seleccionada"
@@ -108,7 +108,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                         self.collectionView.frame.size.height = self.collectionView.frame.size.height + self.heightHeader - 15
                     }, completion: nil)
                 }
-                print("hola")
                 
             }
         }else if (0 >= collectionView.contentOffset.y){

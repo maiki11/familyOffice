@@ -19,8 +19,8 @@ struct Family  {
     static let kFamilyImagePathKey = "imageProfilePath"
     
     let id: String!
-    let name: String!
-    let photoURL: NSURL?
+    var name: String!
+    let photoURL: String?
     var imageProfilePath : String?
     var totalMembers : UInt? = 0
     var admin : String? = ""
@@ -39,7 +39,7 @@ struct Family  {
         self.members = nil
     }
     
-    init(name: String, photoURL: NSURL, members: NSDictionary, admin: String, id: String, imageProfilePath: String? ){
+    init(name: String, photoURL: String, members: NSDictionary, admin: String, id: String, imageProfilePath: String? ){
         self.name = name
         self.photoURL = photoURL
         self.admin = admin
@@ -57,7 +57,7 @@ struct Family  {
         self.name = snapshotValue[Family.kFamilyNameKey] as! String
         self.id = snapshot.key
         self.imageProfilePath = UTILITY_SERVICE.exist(field: Family.kFamilyImagePathKey, dictionary: snapshotValue as NSDictionary)
-        self.photoURL = URL(string: snapshotValue[Family.kFamilyPhotoUrlKey] as! String) as NSURL!
+        self.photoURL = snapshotValue[Family.kFamilyPhotoUrlKey] as! String
         if let members = snapshotValue[Family.kFamilyMembersKey] {
             self.totalMembers = UInt((members as AnyObject).count)
             self.members = members as? NSDictionary
@@ -73,11 +73,24 @@ struct Family  {
     func toDictionary() -> Any {
         return [
             Family.kFamilyNameKey: self.name,
-            Family.kFamilyPhotoUrlKey: self.photoURL!.absoluteString!,
+            Family.kFamilyPhotoUrlKey: self.photoURL!,
             Family.kFamilyMembersKey : self.members!,
             Family.kFamilyAdminKey : self.admin ?? "",
             Family.kFamilyImagePathKey: self.imageProfilePath!
         ]
+    }
+    
+    mutating func update(snapshot: FIRDataSnapshot){
+        switch snapshot.key {
+        case  Family.kFamilyNameKey:
+            self.name =  snapshot.value! as! String
+            break
+        case Family.kFamilyMembersKey:
+            self.members = snapshot.value as? NSDictionary
+            break
+        default:
+            break
+        }
     }
     
 }

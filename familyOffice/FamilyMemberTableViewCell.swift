@@ -10,8 +10,6 @@ import UIKit
 
 class FamilyMemberTableViewCell: UITableViewCell {
 
-    
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var adminlabel: UILabel!
     @IBOutlet weak var memberImage: UIImageView!
     @IBOutlet weak var name: UILabel!
