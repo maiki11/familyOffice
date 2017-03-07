@@ -22,6 +22,7 @@ extension AddMembersTableViewController:  UICollectionViewDelegate, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellMember", for: indexPath) as! memberSelectedCollectionViewCell
         
         let user = selected[indexPath.row]
+        cell.imageMember.image = #imageLiteral(resourceName: "profile_default")
         if !user.photoURL.isEmpty{
             cell.imageMember.loadImage(urlString: user.photoURL)
         }
@@ -43,7 +44,8 @@ extension AddMembersTableViewController:  UICollectionViewDelegate, UICollection
             let selUser = users[indexPath.row]
             if !selected.contains(where: {$0.id == selUser.id}) {
                 selected.append(selUser)
-                firstCell.collectionView.insertItems(at: [IndexPath(item: selected.count-1 , section: 0)])
+                
+                firstCell.collectionView.insertItems(at: [IndexPath(item: selected.count-1, section: 0)])
                 reload()
             }
         }
