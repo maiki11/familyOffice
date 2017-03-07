@@ -115,7 +115,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FamilyMemberTableViewCell
         let member = self.members[indexPath.row]
         cell.name.text = member.name
-    
+        cell.memberImage.image = #imageLiteral(resourceName: "profile_default")
         if !member.photoURL.isEmpty {
             cell.memberImage.loadImage(urlString: member.photoURL)
         }

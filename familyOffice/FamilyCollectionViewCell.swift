@@ -20,8 +20,5 @@ class FamilyCollectionViewCell: UICollectionViewCell {
         self.imageFamily.clipsToBounds = true
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-    }
+
 }

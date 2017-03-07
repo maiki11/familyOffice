@@ -78,7 +78,7 @@ class AddMembersTableViewController: UITableViewController {
         //Conctacts
         let user = users[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FamilyMemberTableViewCell
-        
+        cell.memberImage.image = #imageLiteral(resourceName: "profile_default")
         if !user.photoURL.isEmpty {
             cell.memberImage.loadImage(urlString: user.photoURL)
         }
