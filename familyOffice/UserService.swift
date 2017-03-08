@@ -74,6 +74,13 @@ class UserService {
             }
         }
     }
+    func updated(snapshot: FIRDataSnapshot, uid: String) -> Void {
+        if let index = self.users.index(where: { $0.id == uid }){
+            self.users[index].update(snapshot: snapshot)
+            NotificationCenter.default.post(name: USERUPDATED_NOTIFICATION, object: index)
+        }
+    }
+    
     func updateUser(user: User) -> Void {
         REF_USERS.child(user.id).updateChildValues(user.toDictionary() as! [AnyHashable : Any])
         ACTIVITYLOG_SERVICE.create(id: (self.users[0].id)!, activity: "Se actualizo información personal", photo: (self.users[0].photoURL)!, type: "personalInfo")

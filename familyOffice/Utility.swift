@@ -141,8 +141,7 @@ class Utility {
             return [:]
         }
     }
-    
-    
+   
     func moveTextField(textField: UITextField, moveDistance: Int, up: Bool, context: UIViewController){
         let moveDuration = 0.3
         let movement: CGFloat = CGFloat(up ? moveDistance: -moveDistance)

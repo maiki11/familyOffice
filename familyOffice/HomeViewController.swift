@@ -71,7 +71,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.reloadFamily()
         }
         NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
-            self.view.makeToast("Se te agrego a familia", duration: 3.0, position: .top)
+          
             self.reloadFamily()
             //FAMILY_SERVICE.verifyFamilyActive(family: family.object as! Family)
         }
@@ -83,7 +83,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func reloadFamily() -> Void {
-        if let family = FAMILY_SERVICE.families.filter({$0.id == (USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})?.familyActive)! as String}).first{
+        if let family = FAMILY_SERVICE.families.filter({$0.id == (USER_SERVICE.users[0].familyActive)! as String}).first{
             if let url = family.photoURL {
                 self.activityIndicator.stopAnimating()
                 UTILITY_SERVICE.stopLoading(view: self.view)

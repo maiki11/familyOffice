@@ -24,14 +24,18 @@ class FamilyService: repository {
         return instance
     }
     
-    func add(snapshot: FIRDataSnapshot) {
+    func added(snapshot: FIRDataSnapshot) {
         let family : Family = Family(snapshot: snapshot)
+        
+        
         if !self.families.contains(where: { $0.id == family.id }) {
             self.families.append(family)
             NotificationCenter.default.post(name: FAMILYADDED_NOTIFICATION, object: family)
+            ToastService.getTopViewControllerAndShowToast(text: "Fam. agregada: \(family.name!)")
         }else{
             if let index = self.families.index(where: {$0.id == family.id}){
                 self.families[index] = family
+                ToastService.getTopViewControllerAndShowToast(text: "Familia actualizada: \(family.name!)")
                 NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: nil)
             }
         }
@@ -54,11 +58,12 @@ class FamilyService: repository {
             let family = self.families[index]
             self.families.remove(at: index)
             verifyFamilyActive(family: family)
+            ToastService.getTopViewControllerAndShowToast(text: "Familia eliminada: \(family.name!)")
             NotificationCenter.default.post(name: FAMILYREMOVED_NOTIFICATION, object: index)
         }
     }
     
-    func update(snapshot: FIRDataSnapshot, id: Any) {
+    func updated(snapshot: FIRDataSnapshot, id: Any) {
         if let index = FAMILY_SERVICE.families.index(where: { $0.id == id as! String }){
             //let familyMirror = type(of: Mirror(reflecting: self.families[index] ).children.first(where: {$0.label == snapshot.key})?.value)
             self.families[index].update(snapshot: snapshot)
@@ -153,7 +158,7 @@ class FamilyService: repository {
 extension FamilyService {
     //Added members
     func added(snapshot: FIRDataSnapshot, id: String) -> Void {
-        let familyID = id as! String
+        let familyID = id
         let memberID = snapshot.key
         if let index = self.families.index(where: {$0.id == familyID}) {
             var memberDict : [String:Bool]  = self.families[index].members as! [String : Bool]
@@ -174,7 +179,8 @@ extension FamilyService {
             REF_USERS.child("\(uid)/families").updateChildValues([fid:true])
             NOTIFICATION_SERVICE.send(title: "Agregado a: ", message: self.families[index].name!, to: uid)
             NOTIFICATION_SERVICE.saveNotification(id: USER_SERVICE.users[0].id, title: "Agregado a: \(self.families[index].name!)", photo: self.families[index].photoURL!)
-            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [uid:"added"])
+            ToastService.getTopViewControllerAndShowToast(text: "Miembro \((USER_SERVICE.users.first(where: {$0.id == uid})?.name).unsafelyUnwrapped) Agregado")
+            //NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [uid:"added"])
         }
     }
     //Remove members

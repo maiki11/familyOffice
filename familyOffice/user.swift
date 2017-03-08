@@ -86,6 +86,15 @@ struct User {
             User.kUserBirthdayKey : self.birthday!
         ]
     }
+    mutating func update(snapshot: FIRDataSnapshot){
+        switch snapshot.key {
+        case  User.kUserPhotoUrlKey:
+            self.phone =  snapshot.value! as! String
+            break
+        default:
+            break
+        }
+    }
     
     
 }

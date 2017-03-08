@@ -21,6 +21,8 @@ let FAMILYUPDATED_NOTIFICATION = Notification.Name("FamilyUpdatedNotification")
 let FAMILYADDED_NOTIFICATION = Notification.Name("FamilyAddedNotification")
 let FAMILYREMOVED_NOTIFICATION = Notification.Name("FamilyRemovedNotification")
 
+let USERUPDATED_NOTIFICATION = Notification.Name("UserUpdatedNotification")
+
 let SUCCESS_NOTIFICATION  = Notification.Name("SuccessNotification")
 let ERROR_NOTIFICATION  = Notification.Name("ErrorNotification")
 

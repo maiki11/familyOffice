@@ -30,6 +30,17 @@ class RefHandle {
         listeners[String(NSDate().timeIntervalSince1970)+"+"+ref] = handle
         print(ref , handle)
     }
+    func chilAdded(ref: String, byChild: String) -> Void {
+        let handle = REF.child(ref).queryOrdered(byChild: byChild).observe(.childAdded, with: {(snapshot) in
+            if(snapshot.exists()){
+                self.handle(snapshot: snapshot, action: "added", ref: ref)
+            }
+        }, withCancel: {(error) in
+            print(error.localizedDescription)
+        })
+        listeners[String(NSDate().timeIntervalSince1970)+"+"+ref] = handle
+        print(ref , handle)
+    }
     
     func chilRemoved(ref: String) -> Void {
         let handle = REF.child(ref).observe(.childRemoved, with: {(snapshot) in
@@ -99,13 +110,13 @@ class RefHandle {
             case "families/\(reference[1])":
                 switch action {
                 case "value":
-                    FAMILY_SERVICE.add(snapshot: snapshot)
+                    FAMILY_SERVICE.added(snapshot: snapshot)
                     remove(ref: ref)
                 case "valueS":
-                    FAMILY_SERVICE.add(snapshot: snapshot)
+                    FAMILY_SERVICE.added(snapshot: snapshot)
                     break
                 case "changed":
-                    FAMILY_SERVICE.update(snapshot: snapshot, id: snapshot.key)
+                    FAMILY_SERVICE.updated(snapshot: snapshot, id: snapshot.key)
                     break
                     //self.valueSingleton(ref: ref)
                 default: break

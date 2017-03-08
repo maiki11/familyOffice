@@ -50,6 +50,14 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.addMember(id: user.id)
             }
         }
+        NotificationCenter.default.addObserver(forName: USERUPDATED_NOTIFICATION, object: nil, queue: nil){ obj in
+            if let id : String = obj.object as? String {
+                if let index = self.members.index(where: {$0.id == id }) {
+                    self.members[index] = USER_SERVICE.users.first(where: {$0.id == id})!
+                    self.membersTable.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                }
+            }
+        }
         NotificationCenter.default.addObserver(forName: FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){index in
             _ = self.navigationController?.popViewController(animated: true)
         }
@@ -57,6 +65,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ obj in
             if let user : [String:String] = obj.object as? [String:String] {
                 if user.first?.value == "removed"{
+                    
                     self.removeMembers(key: (user.first?.key)!)
                 }else if user.first?.value == "added" {
                     self.addMember(id: (user.first?.key)!)
@@ -71,13 +80,16 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func removeMembers(key: String) -> Void {
         if let index = self.members.index(where: {$0.id == key}) {
             self.members.remove(at: index)
+            REF_SERVICE.remove(ref: "users/\(key)")
             self.membersTable.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
            
         }
     }
     func verifyMembersOffLine() -> Void {
         for item in (FAMILY_SERVICE.families.first(where: {$0.id == family?.id})?.members!.allKeys)! {
+            
             addMember(id: item as! String)
+            
         }
     }
     
@@ -85,6 +97,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let user = USER_SERVICE.users.filter({$0.id == id}).first {
            if !self.members.contains(where: {$0.id == user.id}){
                 self.members.append(user)
+                REF_SERVICE.childChanged(ref: "users/\(id)")
                 self.membersTable.insertRows(at: [NSIndexPath(row: self.members.count-1, section: 0) as IndexPath], with: .fade)
             }
             self.addMembers(user: user)
@@ -99,6 +112,9 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        for item in self.members {
+            REF_SERVICE.remove(ref: "users/\((item.id)!)")
+        }
         REF_SERVICE.remove(ref: "families/\((family?.id)!)/members")
         NotificationCenter.default.removeObserver(name: USERS_NOTIFICATION)
         NotificationCenter.default.removeObserver(FAMILYREMOVED_NOTIFICATION)

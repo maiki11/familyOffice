@@ -95,16 +95,16 @@
                                 </connections>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-gR-T0q">
-                                <rect key="frame" x="61.5" y="565.5" width="252" height="91.5"/>
+                                <rect key="frame" x="47" y="565.5" width="281" height="91.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-9j-XHn">
-                                        <rect key="frame" x="0.0" y="0.0" width="219" height="91.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="244" height="91.5"/>
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                         <color key="textColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="highlightedColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rB-XC-zD2">
-                                        <rect key="frame" x="219" y="0.0" width="33" height="91.5"/>
+                                        <rect key="frame" x="244" y="0.0" width="37" height="91.5"/>
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                         <state key="normal" title="aquí"/>
                                         <connections>
@@ -199,7 +199,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jke-H5-E5T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32" y="36"/>
+            <point key="canvasLocation" x="140" y="18"/>
         </scene>
         <!--Sing Up View Controller-->
         <scene sceneID="CeM-YR-5gn">
@@ -372,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="80y-Sm-zFD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="730.43478260869574" y="35.869565217391305"/>
+            <point key="canvasLocation" x="898" y="36"/>
         </scene>
         <!--Home-->
         <scene sceneID="AtC-uM-FkL">
@@ -387,7 +387,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wMk-Nw-1AJ">
-                                <rect key="frame" x="0.0" y="234" width="375" height="379"/>
+                                <rect key="frame" x="0.0" y="230" width="375" height="383"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xdr-2f-HXW">
@@ -431,7 +431,7 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T93-d6-7Lq">
-                                <rect key="frame" x="0.0" y="30" width="375" height="204"/>
+                                <rect key="frame" x="0.0" y="30" width="375" height="200"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iwK-bb-aXW">
                                         <rect key="frame" x="108" y="10" width="160" height="160"/>
@@ -441,7 +441,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Family Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiZ-VY-qOu">
-                                        <rect key="frame" x="0.0" y="175" width="375" height="19"/>
+                                        <rect key="frame" x="0.0" y="175" width="375" height="15"/>
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -615,7 +615,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6UI-Je-hcE" id="CEI-UN-2J5">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K8z-zN-hbz">
@@ -723,7 +723,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2vl-BK-11d" id="z1p-Xd-hAg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Siu-LT-19e">
@@ -738,7 +738,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellMember" id="2Ci-b0-deS" customClass="memberSelectedCollectionViewCell" customModule="familyOffice" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="14.5" width="80" height="90"/>
+                                                    <rect key="frame" x="0.0" y="15" width="80" height="90"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="90"/>
@@ -785,7 +785,7 @@
                                 <rect key="frame" x="0.0" y="148" width="375" height="84"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="k6U-7W-bI5">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h00-zt-Msp">
@@ -903,7 +903,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hn0-PB-zQG" id="yId-L5-g7w">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WjC-sX-ofn">
@@ -1174,6 +1174,15 @@
                                     <segue destination="5Yd-vX-NMy" kind="embed" id="xLn-4x-s4E"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ol-X2-HYI">
+                                <rect key="frame" x="213" y="174" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="camera_2x"/>
+                                <connections>
+                                    <action selector="chooseImage:" destination="q30-K7-Xag" eventType="touchUpInside" id="cLO-7f-QRo"/>
+                                    <action selector="chooseImage:" destination="GLH-xv-Wxs" eventType="touchUpInside" id="z42-Ty-4G7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1194,6 +1203,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="profileImage" destination="dkn-Iv-ITf" id="xmz-jH-7X1"/>
+                        <segue destination="Tnh-Q2-ztE" kind="show" identifier="updateImageSegue" id="aht-bg-wTO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Twq-CY-dHJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1215,11 +1225,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="07e-gX-rZ9" id="mB2-uq-9dy">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Datos Personales" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D0f-tN-3g1">
-                                                    <rect key="frame" x="15" y="0.0" width="293" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="293" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1236,11 +1246,11 @@
                                         <rect key="frame" x="0.0" y="44" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZsL-Hn-UYd" id="ltu-jk-gaJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Contraseña" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dSr-Uf-Im3">
-                                                    <rect key="frame" x="15" y="0.0" width="293" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="293" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1257,11 +1267,11 @@
                                         <rect key="frame" x="0.0" y="88" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xEQ-Bo-le7" id="aKn-mM-GQN">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activar Notificaciones" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5E-54-BW0">
-                                                    <rect key="frame" x="18" y="8" width="186.5" height="15.5"/>
+                                                    <rect key="frame" x="18" y="8" width="187" height="16"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1284,7 +1294,7 @@
                                         <rect key="frame" x="0.0" y="132" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S8b-AT-GwE" id="J2f-Pf-i82">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cerrar Sesión" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnK-Md-o77">
@@ -1333,7 +1343,7 @@
                                 <rect key="frame" x="0.0" y="28" width="343" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Soa-RX-AVA">
-                                    <rect key="frame" x="0.0" y="0.0" width="343" height="49.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="49"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="19a-wE-eVl" customClass="textFieldStyleController" customModule="familyOffice" customModuleProvider="target">
@@ -1354,7 +1364,7 @@
                                 <rect key="frame" x="0.0" y="78" width="343" height="165"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="keu-Sq-g4d" id="HYN-P4-3B3">
-                                    <rect key="frame" x="0.0" y="0.0" width="343" height="164.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="164"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-mT-iSW">
@@ -1399,13 +1409,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cambiar contraseña" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gl1-Zh-OZn">
-                                <rect key="frame" x="16" y="20" width="343" height="20"/>
+                                <rect key="frame" x="16" y="20" width="343" height="16"/>
                                 <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Contraseña nueva" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qMU-hI-DVI" customClass="textFieldStyleController" customModule="familyOffice" customModuleProvider="target">
-                                <rect key="frame" x="16" y="155" width="343" height="35"/>
+                                <rect key="frame" x="16" y="151" width="343" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Yop-m0-o41"/>
                                 </constraints>
@@ -1413,7 +1423,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Contraseña actual" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YWY-6m-XQe" customClass="textFieldStyleController" customModule="familyOffice" customModuleProvider="target">
-                                <rect key="frame" x="16" y="90" width="343" height="35"/>
+                                <rect key="frame" x="16" y="86" width="343" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="yzA-DV-YmO"/>
                                 </constraints>
@@ -1421,7 +1431,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Confirmar contraseña" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qIT-bn-N4J" customClass="textFieldStyleController" customModule="familyOffice" customModuleProvider="target">
-                                <rect key="frame" x="16" y="220" width="343" height="35"/>
+                                <rect key="frame" x="16" y="216" width="343" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Z3L-6N-xdQ"/>
                                 </constraints>
@@ -1464,10 +1474,10 @@
             </objects>
             <point key="canvasLocation" x="5706" y="1907"/>
         </scene>
-        <!--View Controller-->
+        <!--Image View Controller-->
         <scene sceneID="OkP-Jz-aAg">
             <objects>
-                <viewController id="Tnh-Q2-ztE" sceneMemberID="viewController">
+                <viewController id="Tnh-Q2-ztE" customClass="ImageViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tP7-jv-rN6"/>
                         <viewControllerLayoutGuide type="bottom" id="RXB-38-EtD"/>
@@ -1475,12 +1485,22 @@
                     <view key="view" contentMode="scaleToFill" id="2o7-KU-7Ur">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qft-ef-bLc">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="xiO-be-UlR"/>
+                    <connections>
+                        <outlet property="imageView" destination="Qft-ef-bLc" id="Cou-sb-5Od"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jeq-qX-Qbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="76" y="697"/>
+            <point key="canvasLocation" x="4959.1999999999998" y="579.76011994002999"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="H7H-nq-vk8">
@@ -1495,7 +1515,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Fy-Nr-0QP" id="HzO-W5-hga">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -1509,12 +1529,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HhE-vU-vZk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-575" y="-181"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HPe-e3-KCm">
             <objects>
                 <navigationController id="uFT-7o-4V4" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IE0-uY-wGX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="IE0-uY-wGX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1524,6 +1545,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opw-AZ-I99" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-575" y="485"/>
         </scene>
     </scenes>
     <resources>

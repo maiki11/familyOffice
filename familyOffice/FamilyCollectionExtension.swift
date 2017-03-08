@@ -44,14 +44,16 @@ extension FamilyCollectionViewController {
             }
         }
         NotificationCenter.default.addObserver(forName: FAMILYUPDATED_NOTIFICATION, object: nil, queue: nil){index in
-            //self.collectionView?.deleteItems(at: [IndexPath(item: index.object as! Int, section: 0)])
-            self.collectionView?.reloadItems(at: [IndexPath(item: index.object as! Int, section: 0)])
+            if (self.collectionView?.numberOfItems(inSection: 0))! > 0, let index = index.object as? Int {
+                self.collectionView?.reloadItems(at: [IndexPath(item: index, section: 0)])
+            }
         }
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         deleteListeners()
+        NotificationCenter.default.removeObserver(FAMILYUPDATED_NOTIFICATION)
         NotificationCenter.default.removeObserver(FAMILYREMOVED_NOTIFICATION)
         NotificationCenter.default.removeObserver(FAMILYADDED_NOTIFICATION)
     }
