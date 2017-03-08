@@ -50,6 +50,9 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.addMember(id: user.id)
             }
         }
+        NotificationCenter.default.addObserver(forName: FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){index in
+            _ = self.navigationController?.popViewController(animated: true)
+        }
         
         NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ obj in
             if let user : [String:String] = obj.object as? [String:String] {
@@ -69,6 +72,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let index = self.members.index(where: {$0.id == key}) {
             self.members.remove(at: index)
             self.membersTable.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+           
         }
     }
     func verifyMembersOffLine() -> Void {
@@ -97,6 +101,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewWillDisappear(animated)
         REF_SERVICE.remove(ref: "families/\((family?.id)!)/members")
         NotificationCenter.default.removeObserver(name: USERS_NOTIFICATION)
+        NotificationCenter.default.removeObserver(FAMILYREMOVED_NOTIFICATION)
         
     }
     override func didReceiveMemoryWarning(){
@@ -156,7 +161,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     alert.addAction(UIAlertAction(title: "Remover de la familia", style: UIAlertActionStyle.destructive, handler:  { action in
                         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                             //ELiminar usuario de la familia
-                            FAMILY_SERVICE.removeMember(member: user.id, familyId: (self.family?.id!)!)
+                            FAMILY_SERVICE.remove(snapshot: user.id, id: (self.family?.id!)!)
                         }
                     }))
                 }

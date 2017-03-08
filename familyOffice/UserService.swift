@@ -105,7 +105,11 @@ class UserService {
             self.users.append(user)
             if FIRAuth.auth()?.currentUser?.uid == user.id {
                 NOTIFICATION_SERVICE.saveToken()
-                
+                if let families = user.families?.allKeys {
+                    for id in families {
+                        REF_SERVICE.valueSingleton(ref: "families/\((id))")
+                    }
+                }
                 REF_SERVICE.chilAdded(ref: "users/\((FIRAuth.auth()?.currentUser?.uid)!)/families")
                 REF_SERVICE.chilRemoved(ref: "users/\((FIRAuth.auth()?.currentUser?.uid)!)/families")
                 if(self.users[0].families?.count == 0 ){

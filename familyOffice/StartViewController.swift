@@ -144,7 +144,7 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
             self.googleSignUp.transform = CGAffineTransform(translationX: 0, y: -20.0 )
             self.googleSignUp.alpha = 1
         }, completion: nil)
-        
+       
         self.footer.alpha = 0
         UIView.animate(withDuration: 1.0, delay: 2.4, options: .curveEaseInOut, animations: {
             self.footer.alpha = 1

@@ -11,6 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+
     let myImages=["chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png"]
     let newHeight: CGFloat = 60
     let heightHeader: CGFloat = 200
@@ -66,9 +67,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.reloadFamily()
         }
         NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){_ in
+            
             self.reloadFamily()
         }
         NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
+            self.view.makeToast("Se te agrego a familia", duration: 3.0, position: .top)
             self.reloadFamily()
             //FAMILY_SERVICE.verifyFamilyActive(family: family.object as! Family)
         }

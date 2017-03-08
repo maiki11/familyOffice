@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Toast_Swift
 private let reuseIdentifier = "cell"
 
 class FamilyCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate  {
@@ -27,48 +28,7 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         self.clearsSelectionOnViewWillAppear = true
         
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        createListeners()
-        self.collectionView?.reloadData()
         
-        if (FAMILY_SERVICE.families.count == 0){
-            self.performSegue(withIdentifier: "registerSegue", sender: nil)
-        }
-        NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){ notification in
-            
-            if modelName == "iPhone 5s" {
-                self.collectionView?.reloadData()
-            }else{
-                self.collectionView?.insertItems(at: [IndexPath(item: FAMILY_SERVICE.families.count-1, section: 0)])
-                self.collectionView?.reloadData()
-            }
-            
-        }
-        NotificationCenter.default.addObserver(forName: FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){index in
-            if modelName == "iPhone 5s" {
-                self.collectionView?.reloadData()
-            }else{
-                self.collectionView?.deleteItems(at: [IndexPath(item: index.object as! Int, section: 0)])
-                self.collectionView?.reloadData()
-            }
-            if (FAMILY_SERVICE.families.count == 0){
-                self.performSegue(withIdentifier: "registerSegue", sender: nil)
-            }
-        }
-        NotificationCenter.default.addObserver(forName: FAMILYUPDATED_NOTIFICATION, object: nil, queue: nil){index in
-            //self.collectionView?.deleteItems(at: [IndexPath(item: index.object as! Int, section: 0)])
-            self.collectionView?.reloadItems(at: [IndexPath(item: index.object as! Int, section: 0)])
-        }
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        deleteListeners()
-        NotificationCenter.default.removeObserver(FAMILYREMOVED_NOTIFICATION)
-        NotificationCenter.default.removeObserver(FAMILYADDED_NOTIFICATION)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -121,7 +81,6 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
             if !(family.photoURL?.isEmpty)! {
                 cell.imageFamily.loadImage(urlString: (family.photoURL)!)
             }
-            
             return cell
         }
         //Add Cell
@@ -138,64 +97,5 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         longPressTarget = ((cell: collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! FamilyCollectionViewCell), indexPath: indexPath)
     }
     //Long press
-    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
-        let point: CGPoint = gestureReconizer.location(in: self.collectionView)
-        let indexPath = self.collectionView?.indexPathForItem(at: point)
-        
-        if (indexPath != nil && (indexPath?.row)! < FAMILY_SERVICE.families.count) {
-            switch gestureReconizer.state {
-            case .began:
-                let family = FAMILY_SERVICE.families[(indexPath?.row)!]
-                
-                // create the alert
-                let alert = UIAlertController(title: family.name, message: "¿Qué deseas hacer?", preferredStyle: UIAlertControllerStyle.alert)
-                
-                // add the actions (buttons)
-                alert.addAction(UIAlertAction(title: "Seleccionar", style: UIAlertActionStyle.default, handler: {action in
-                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-                        self.toggleSelect(family: family)
-                    }
-                }))
-                alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.cancel, handler: nil))
-                if(family.admin == FIRAuth.auth()?.currentUser?.uid){
-                    alert.addAction(UIAlertAction(title: "Eliminar", style: UIAlertActionStyle.destructive, handler:  { action in
-                        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-                            self.togglePendingDelete(family: family)
-                            //self.collectionView?.deleteItems(at: [indexPath!])
-                        }
-                        
-                    }))
-                }
-                // show the alert
-                self.present(alert, animated: true, completion: nil)
-                break
-            case .ended:
-                break
-            default:
-                break
-            }
-        }
-    }
-    
-    func toggleSelect(family: Family){
-        FAMILY_SERVICE.selectFamily(family: family)
-    }
-    
-    func togglePendingDelete(family: Family) -> Void
-    {
-        FAMILY_SERVICE.delete(family: family)
-        
-    }
-    func createListeners() -> Void {
-        for item in FAMILY_SERVICE.families {
-            REF_SERVICE.childChanged(ref: "families/\((item.id)!)")
-        }
-    }
-    func deleteListeners() -> Void {
-        for item in FAMILY_SERVICE.families {
-            REF_SERVICE.remove(ref: "families/\((item.id)!)")
-        }
-    }
-    
-    
+       
 }

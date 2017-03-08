@@ -47,6 +47,7 @@ let USER_SERVICE = UserService.Instance()
 let NOTIFICATION_SERVICE = NotificationService.Instance()
 let ALERT_SERVICE = AlertService.Instance()
 let REF_SERVICE = RefHandle.Instance()
+let REQUEST_SERVICE = RequestService.Instance()
 
 //Others
 let SERVERKEY =  "AIzaSyAkiqHhHKI0xcXrYF9eq-D6PzhUl-mPOls"
