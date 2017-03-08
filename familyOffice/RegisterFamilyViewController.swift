@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import Toast_Swift
 
 
 
@@ -127,8 +128,9 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         
         //Add validations
         if(imageView.image != nil && nameTxtField.text != nil){
+            self.view.makeToastActivity(.center)
             FAMILY_SERVICE.createFamily(key: key, image: image!, name: nameTxtField.text!, view: self.self)
-            UTILITY_SERVICE.loading(view: self.view)
+            //UTILITY_SERVICE.loading(view: self.view)
             UTILITY_SERVICE.disabledView()
         }else{
             let alert = UIAlertController(title: "Error", message: "Agregue una imagen y un nombre", preferredStyle: .alert)

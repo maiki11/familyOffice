@@ -11,7 +11,9 @@ import FirebaseAuth
 import FirebaseDatabase
 import UIKit
 
-class FamilyService {
+class FamilyService: repository {
+    
+
     private static let instance : FamilyService = FamilyService()
     var families: [Family] = []
     
@@ -22,25 +24,26 @@ class FamilyService {
         return instance
     }
     
-    func updated(id: String, snapshot: FIRDataSnapshot) -> Void {
-        if let index = FAMILY_SERVICE.families.index(where: { $0.id == id }){
-            //let familyMirror = type(of: Mirror(reflecting: self.families[index] ).children.first(where: {$0.label == snapshot.key})?.value)
-            self.families[index].update(snapshot: snapshot)
-            NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: index)
-        }
-    }
-    func addFamily(family: Family) -> Void {
+    func added(snapshot: FIRDataSnapshot) {
+        let family : Family = Family(snapshot: snapshot)
+        
+        
         if !self.families.contains(where: { $0.id == family.id }) {
             self.families.append(family)
             NotificationCenter.default.post(name: FAMILYADDED_NOTIFICATION, object: family)
+            ToastService.getTopViewControllerAndShowToast(text: "Fam. agregada: \(family.name!)")
         }else{
             if let index = self.families.index(where: {$0.id == family.id}){
                 self.families[index] = family
+                ToastService.getTopViewControllerAndShowToast(text: "Familia actualizada: \(family.name!)")
                 NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: nil)
             }
         }
+        
     }
-    func removeFamily(key: String) -> Void {
+    
+    func removed(snapshot: FIRDataSnapshot) -> Void {
+        let key : String = snapshot.key
         //Actualizo la información de familias al usuario logeado
         if let index = USER_SERVICE.users.index(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})  {
             let filter =  USER_SERVICE.users[index].families?.filter({$0.key as? String != key})
@@ -55,7 +58,16 @@ class FamilyService {
             let family = self.families[index]
             self.families.remove(at: index)
             verifyFamilyActive(family: family)
+            ToastService.getTopViewControllerAndShowToast(text: "Familia eliminada: \(family.name!)")
             NotificationCenter.default.post(name: FAMILYREMOVED_NOTIFICATION, object: index)
+        }
+    }
+    
+    func updated(snapshot: FIRDataSnapshot, id: Any) {
+        if let index = FAMILY_SERVICE.families.index(where: { $0.id == id as! String }){
+            //let familyMirror = type(of: Mirror(reflecting: self.families[index] ).children.first(where: {$0.label == snapshot.key})?.value)
+            self.families[index].update(snapshot: snapshot)
+            NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: index)
         }
     }
     
@@ -84,7 +96,8 @@ class FamilyService {
                     if let downloadURL = metadata?.downloadURL()?.absoluteURL {
                         StorageService.Instance().save(url: downloadURL.absoluteString, data: uploadData)
                         let family = Family(name:   name, photoURL: downloadURL.absoluteString, members:  [(FIRAuth.auth()?.currentUser?.uid)! : true], admin: (FIRAuth.auth()?.currentUser?.uid)! , id: name+key, imageProfilePath: metadata?.name)
-                        REF_FAMILIES.child(family.id).setValue(family.toDictionary())
+                        REQUEST_SERVICE.insert(value: family.toDictionary() as! NSDictionary, ref: "families/\((family.id)!)")
+                        // REF_FAMILIES.child(family.id).setValue(family.toDictionary())
                         REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").updateChildValues([ family.id: true])
                         //Set family for app
                         self.selectFamily(family: family)
@@ -96,33 +109,6 @@ class FamilyService {
                     
                 }
             }
-        }
-    }
-    
-    func addMember(member: String, family: String) -> Void {
-        
-        if let index = self.families.index(where: {$0.id == family}) {
-            var memberDict : [String:Bool]  = self.families[index].members as! [String : Bool]
-            memberDict[member] = true
-            self.families[index].members = memberDict as NSDictionary?
-            
-            REF_FAMILIES.child("\(family)/members").updateChildValues([member: true])
-            REF_USERS.child("\(member)/families").updateChildValues([family:true])
-            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [member:"added"])
-        }
-    }
-    func removeMember(member: String, familyId:String) -> Void {
-        REF_USERS.child("\((member))/families/\((familyId))").removeValue()
-        REF_FAMILIES.child("\(familyId)/members/\(member)").removeValue()
-        
-        if let index = families.index(where: {$0.id == familyId})  {
-            let filter = self.families[index].members?.filter({$0.key as? String != member})
-            var members : [String: Bool] = [:]
-            for result in filter! {
-                members[result.key as! String] = (result.value as! Bool)
-            }
-            self.families[index].members = members as NSDictionary
-            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [member : "removed"])
         }
     }
     
@@ -167,6 +153,53 @@ class FamilyService {
         REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["familyActive" : family.id])
         USER_SERVICE.setFamily(family: family)
     }
-    
-    
+}
+
+extension FamilyService {
+    //Added members
+    func added(snapshot: FIRDataSnapshot, id: String) -> Void {
+        let familyID = id
+        let memberID = snapshot.key
+        if let index = self.families.index(where: {$0.id == familyID}) {
+            var memberDict : [String:Bool]  = self.families[index].members as! [String : Bool]
+            memberDict[memberID] = true
+            self.families[index].members = memberDict as NSDictionary?
+            REF_FAMILIES.child("\(familyID)/members").updateChildValues([memberID: true])
+            REF_USERS.child("\(memberID)/families").updateChildValues([familyID:true])
+            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [memberID:"added"])
+        }
+    }
+    func addMember(uid: String, fid: String) -> Void {
+      
+        if let index = self.families.index(where: {$0.id == fid}) {
+            var memberDict : [String:Bool]  = self.families[index].members as! [String : Bool]
+            memberDict[uid] = true
+            self.families[index].members = memberDict as NSDictionary?
+            REF_FAMILIES.child("\(fid)/members").updateChildValues([uid : true])
+            REF_USERS.child("\(uid)/families").updateChildValues([fid:true])
+            NOTIFICATION_SERVICE.send(title: "Agregado a: ", message: self.families[index].name!, to: uid)
+            NOTIFICATION_SERVICE.saveNotification(id: USER_SERVICE.users[0].id, title: "Agregado a: \(self.families[index].name!)", photo: self.families[index].photoURL!)
+            ToastService.getTopViewControllerAndShowToast(text: "Miembro \((USER_SERVICE.users.first(where: {$0.id == uid})?.name).unsafelyUnwrapped) Agregado")
+            //NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [uid:"added"])
+        }
+    }
+    //Remove members
+    func remove(snapshot: Any, id: Any) -> Void {
+        let familyID = id as! String
+        let memberID = snapshot as! String
+        if let index = self.families.index(where: {$0.id == familyID})  {
+            let filter = self.families[index].members?.filter({$0.key as? String != memberID})
+            var members : [String: Bool] = [:]
+            for result in filter! {
+                members[result.key as! String] = (result.value as! Bool)
+            }
+            self.families[index].members = members as NSDictionary
+            if (self.families[index].members?[USER_SERVICE.users[0].id] == nil ){
+                self.families.remove(at: index)
+            }
+            REF_USERS.child("\((memberID))/families/\((familyID))").removeValue()
+            REF_FAMILIES.child("\(familyID)/members/\(memberID)").removeValue()
+            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [memberID : "removed"])
+        }
+    }
 }

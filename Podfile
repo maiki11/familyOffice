@@ -15,6 +15,7 @@ target 'familyOffice' do
   pod 'JVFloatLabeledTextField'
   pod 'MGSwipeTableCell'
   pod 'Alamofire'
+  pod 'Toast-Swift', '~> 2.0.0'
   target 'familyOfficeTests' do
     inherit! :search_paths
     pod 'Firebase'

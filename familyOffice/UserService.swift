@@ -74,6 +74,13 @@ class UserService {
             }
         }
     }
+    func updated(snapshot: FIRDataSnapshot, uid: String) -> Void {
+        if let index = self.users.index(where: { $0.id == uid }){
+            self.users[index].update(snapshot: snapshot)
+            NotificationCenter.default.post(name: USERUPDATED_NOTIFICATION, object: index)
+        }
+    }
+    
     func updateUser(user: User) -> Void {
         REF_USERS.child(user.id).updateChildValues(user.toDictionary() as! [AnyHashable : Any])
         ACTIVITYLOG_SERVICE.create(id: (self.users[0].id)!, activity: "Se actualizo información personal", photo: (self.users[0].photoURL)!, type: "personalInfo")
@@ -105,7 +112,11 @@ class UserService {
             self.users.append(user)
             if FIRAuth.auth()?.currentUser?.uid == user.id {
                 NOTIFICATION_SERVICE.saveToken()
-                
+                if let families = user.families?.allKeys {
+                    for id in families {
+                        REF_SERVICE.valueSingleton(ref: "families/\((id))")
+                    }
+                }
                 REF_SERVICE.chilAdded(ref: "users/\((FIRAuth.auth()?.currentUser?.uid)!)/families")
                 REF_SERVICE.chilRemoved(ref: "users/\((FIRAuth.auth()?.currentUser?.uid)!)/families")
                 if(self.users[0].families?.count == 0 ){

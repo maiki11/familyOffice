@@ -124,9 +124,11 @@ class AddMembersTableViewController: UITableViewController {
         }
     }
     func save(sender: UIBarButtonItem) -> Void {
+        self.view.makeToastActivity(.center)
         for user in selected {
-            FAMILY_SERVICE.addMember(member: user.id, family: family.id)
+            FAMILY_SERVICE.addMember(uid: user.id, fid: family.id)
         }
+        _ = self.navigationController?.popViewController(animated: true)
         
     }
     
