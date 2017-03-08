@@ -12,58 +12,45 @@ import FirebaseAuth
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     let myImages=["chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png"]
-    let newHeight: CGFloat = 60
-    let heightHeader: CGFloat = 200
-    let top: CGFloat = 20
-    var headPosY: CGFloat = 0
-    var famPosY: CGFloat = 0
-    private var flag = true
     private var family : Family?
     let user = USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var navBar: UINavigationBar!
-    @IBOutlet weak var familyImage: UIImageView!
-    @IBOutlet weak var familyName: UILabel!
-    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
+    var familyName: String!
+    var famImage: UIImage!
+    //private let heightHeader //height from header
     
-    private var heightImg: CGFloat = 0
-    private var lastContentOffset: CGFloat = 0
-    private var startPosX: CGFloat = 0
-    private var headWidth: CGFloat = 0
-    private var collectionHeight: CGFloat = 0
+    //private var familyName: UILabel!
+    //private var familyImage: UIImageView! = UIImageView(image: #imageLiteral(resourceName: "Family"))
+    //private var activityIndicator: UIActivityIndicatorView!
     
     var navigationBarOriginalOffset : CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-<<<<<<< HEAD
-        collectionView.delegate = self
-        self.automaticallyAdjustsScrollViewInsets = false
-        USER_SERVICE.observers()
-=======
-        //USER_SERVICE.observers()
->>>>>>> master
+        self.collectionView.delegate = self
+        collectionView.dataSource = self
+        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        layout?.sectionHeadersPinToVisibleBounds = true
+
         UTILITY_SERVICE.loading(view: self.view)
-        
-        self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
-        self.headPosY = self.headerView.frame.origin.y
-        self.headWidth = self.headerView.frame.width
-        self.famPosY = familyName.frame.origin.y
-        self.collectionHeight = collectionView.frame.height
-        lastContentOffset = familyImage.frame.size.height/2
-        self.familyImage.layer.cornerRadius = lastContentOffset
-        self.familyImage.clipsToBounds = true
+        //self.familyImage.frame = CGRect(x: 10, y: 10, width: 140, height: 140)
+        //self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
+        //self.famPosY = familyName.frame.origin.y
+        //self.collectionHeight = collectionView.frame.height
+        //lastContentOffset = familyImage.frame.size.height/2
+        //self.familyImage.layer.cornerRadius = lastContentOffset
+        //self.familyImage.clipsToBounds = true
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         reloadFamily()
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
-            self.activityIndicator.stopAnimating()
-            self.familyImage.image = #imageLiteral(resourceName: "Family")
-            self.familyName.text = "No tiene familias, por favor \n crea una familia"
+            //self.activityIndicator.stopAnimating()
+            self.famImage = #imageLiteral(resourceName: "Family")
+            self.familyName = "No tiene familias, por favor \n crea una familia"
             return
         }
         NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){_ in
@@ -81,7 +68,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        heightImg = familyImage.frame.size.height
+        //heightImg = familyImage.frame.size.height
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -93,33 +80,36 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func reloadFamily() -> Void {
         if let family = FAMILY_SERVICE.families.filter({$0.id == (USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})?.familyActive)! as String}).first{
             if let data = STORAGE_SERVICE.search(url: (family.photoURL?.absoluteString)!) {
-                self.activityIndicator.stopAnimating()
+                //self.activityIndicator.stopAnimating()
                 UTILITY_SERVICE.stopLoading(view: self.view)
-                self.familyImage.image = UIImage(data: data)
+                //self.familyImage.image = UIImage(data: data)
+                self.famImage = UIImage(data: data)
             }
             
-            self.familyName.text = family.name ?? "No seleccionada"
+            self.familyName = family.name ?? "No seleccionada"
+            self.collectionView.reloadData()
         }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         collectionView.bounces = false
-        let percentage = collectionView.contentOffset.y / (collectionView.contentSize.height - collectionView.frame.size.height)
-        print(percentage)
-        if(percentage > 0.10){
-        UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-            self.headerView.frame.size.height = self.headerView.frame.size.height * (percentage + 1 )
-        }, completion: nil)
-        }
-        /*
-        if(scrollView.contentOffset.y > 100){
-            UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                    self.headerView.frame.size.height = self.newHeight
-            }, completion: nil)
+        /*let header = collectionView.dequeueReusableCell(withReuseIdentifier: "header", for: IndexPath(item: 0, section: 0))
+        if(scrollView.contentOffset.y >= 100 && scrollView.contentOffset.y <= 240){
+            header.frame.size.height  = 200 - (scrollView.contentOffset.y - 100)
+            //let percent = 40/self.headerView.frame.size.height
+            //let posX: CGFloat = (self.headWidth / -2) + 40
+            //let posY: CGFloat = ( self.headerView.frame.size.height ) * -1
+            //self.familyImage.transform = CGAffineTransform(scaleX: percent, y: percent).concatenating(CGAffineTransform(translationX: posX, y: posY))
+            //self.familyName.transform = CGAffineTransform(translationX: posX+(self.familyName.frame.width/2)-40, y: (self.headPosY-self.famPosY) - 5 )
+            //self.headerView.frame.size.height = self.heightHeader - (scrollView.contentOffset.y - 100)
+            
         }else{
-            UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                    self.headerView.frame.size.height = self.heightHeader
-            }, completion: nil)
+            if(scrollView.contentOffset.y < 100 && self.headerView.frame.height < self.heightHeader){
+                UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                    //self.headerView.frame.size.height = self.heightHeader
+                    //self.collectionView.frame.origin.y = self.heightHeader + 10
+                }, completion: nil)
+            }
         }*/
     }
     
@@ -181,6 +171,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellModule", for: indexPath) as! ModuleCollectionViewCell
         cell.image.image = UIImage(named: myImages[indexPath.item])!
         return cell
-        
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderHomeView", for: indexPath) as! HeaderHomeView
+        header.familyName.text = self.familyName
+        header.familyImage.image = famImage
+        return header
+    }
+    
 }
