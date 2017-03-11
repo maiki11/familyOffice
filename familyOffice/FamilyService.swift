@@ -26,8 +26,7 @@ class FamilyService: repository {
     
     func added(snapshot: FIRDataSnapshot) {
         let family : Family = Family(snapshot: snapshot)
-        
-        
+
         if !self.families.contains(where: { $0.id == family.id }) {
             self.families.append(family)
             NotificationCenter.default.post(name: FAMILYADDED_NOTIFICATION, object: family)
@@ -36,7 +35,7 @@ class FamilyService: repository {
             if let index = self.families.index(where: {$0.id == family.id}){
                 self.families[index] = family
                 ToastService.getTopViewControllerAndShowToast(text: "Familia actualizada: \(family.name!)")
-                NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: nil)
+                NotificationCenter.default.post(name: FAMILYUPDATED_NOTIFICATION, object: index)
             }
         }
         
@@ -98,10 +97,10 @@ class FamilyService: repository {
                         let family = Family(name:   name, photoURL: downloadURL.absoluteString, members:  [(FIRAuth.auth()?.currentUser?.uid)! : true], admin: (FIRAuth.auth()?.currentUser?.uid)! , id: name+key, imageProfilePath: metadata?.name)
                         REQUEST_SERVICE.insert(value: family.toDictionary() as! NSDictionary, ref: "families/\((family.id)!)")
                         // REF_FAMILIES.child(family.id).setValue(family.toDictionary())
-                        REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").updateChildValues([ family.id: true])
+                        REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").updateChildValues([family.id : true])
                         //Set family for app
                         self.selectFamily(family: family)
-                        self.families.append(family)
+                        
                         ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.users[0].id)!, activity: "Se creo la familia  \((family.name)!)", photo: downloadURL.absoluteString, type: "addFamily")
                         //Go to Home
                         Utility.Instance().gotoView(view: "TabBarControllerView", context: view.self)
@@ -115,7 +114,7 @@ class FamilyService: repository {
     func exitFamily(family: Family, uid:String) -> Void {
         REF_USERS.child("/\(uid)/families/\((family.id)!)").removeValue()
         REF_FAMILIES.child("/\((family.id)!)/members/\(uid)").removeValue()
-        if(family.admin == USER_SERVICE.user?.id){
+        if(family.admin == USER_SERVICE.users[0].id){
             self.addAdmin(index: self.families.index(where: {$0.id == family.id})!, uid: nil)
         }
     }
@@ -126,9 +125,10 @@ class FamilyService: repository {
         }else{
             if (self.families[index].members?.count)! > 1 {
                 for item in (self.families[index].members?.allKeys)! as! [String] {
-                    if(USER_SERVICE.user?.id != item){
+                    if(USER_SERVICE.users[0].id != item){
                         self.families[index].admin = item
                         REF_FAMILIES.child(self.families[index].id).updateChildValues(["admin": item])
+                        break
                     }
                 }
             }else{

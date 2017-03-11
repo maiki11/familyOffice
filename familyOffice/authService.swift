@@ -43,14 +43,19 @@ class AuthService {
         }
     }
     func logOut(){
-        NOTIFICATION_SERVICE.deleteToken(token: NOTIFICATION_SERVICE.token, id: (FIRAuth.auth()?.currentUser?.uid)!)
+        if let uid = FIRAuth.auth()?.currentUser?.uid {
+            NOTIFICATION_SERVICE.deleteToken(token: NOTIFICATION_SERVICE.token, id: uid)
+            self.userStatus(state: "Offline")
+        }
+        
         try! FIRAuth.auth()!.signOut()
         UTILITY_SERVICE.clearObservers()
         NOTIFICATION_SERVICE.notifications.removeAll()
         ACTIVITYLOG_SERVICE.activityLog.removeAll()
-        self.userStatus(state: "Offline")
+        
         FAMILY_SERVICE.families.removeAll()
         USER_SERVICE.clearData()
+        imageCache.removeAllObjects()
     }
 
     //Create account with federate entiies like Facebook Twitter Google  etc
@@ -76,13 +81,33 @@ class AuthService {
             }
         }
     }
+    func checkUserAgainstDatabase(completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+        guard let currentUser = FIRAuth.auth()?.currentUser else { return }
+        currentUser.getTokenForcingRefresh(true) { (idToken, error) in
+            if let error = error {
+                completion(false, error as NSError?)
+                print(error.localizedDescription)
+            } else {
+                completion(true, nil)
+            }
+        }
+    }
 
     func isAuth(view: UIViewController, name: String)  {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             self.uid = user?.uid
             if (user != nil) {
-                REF_SERVICE.value(ref: ref_users(uid: (user?.uid)!))
-                UTILITY_SERVICE.gotoView(view: name, context: view)
+                self.checkUserAgainstDatabase(completion: {(success, error ) in
+                    if success {
+                        REF_SERVICE.value(ref: ref_users(uid: (user?.uid)!))
+                        UTILITY_SERVICE.gotoView(view: name, context: view)
+
+                    }else{
+                       self.logOut()
+                    }
+                })
+            }else{
+                self.logOut()
             }
         }
     }

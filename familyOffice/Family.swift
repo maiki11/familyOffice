@@ -20,7 +20,7 @@ struct Family  {
     
     let id: String!
     var name: String!
-    let photoURL: String?
+    var photoURL: String?
     var imageProfilePath : String?
     var totalMembers : UInt? = 0
     var admin : String? = ""
@@ -87,6 +87,9 @@ struct Family  {
             break
         case Family.kFamilyMembersKey:
             self.members = snapshot.value as? NSDictionary
+            break
+        case Family.kFamilyPhotoUrlKey:
+            self.photoURL = snapshot.value as! String
             break
         default:
             break
