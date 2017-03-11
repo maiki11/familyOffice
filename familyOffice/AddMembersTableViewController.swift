@@ -55,6 +55,9 @@ class AddMembersTableViewController: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         users = []
+        if let index = FAMILY_SERVICE.families.index(where: {$0.id == self.family.id}) {
+            self.family = FAMILY_SERVICE.families[index]
+        }
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){user in
@@ -121,6 +124,7 @@ class AddMembersTableViewController: UITableViewController {
         }
     }
     func addMember(phone: String) -> Void {
+        
         if let user = USER_SERVICE.users.filter({$0.phone == phone}).first {
             if !self.users.contains(where: {$0.id == user.id}) && self.family.members?[user.id] == nil{
                 self.users.append(user)

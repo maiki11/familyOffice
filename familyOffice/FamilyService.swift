@@ -138,14 +138,12 @@ class FamilyService: repository {
     }
     
     func verifyFamilyActive(family: Family) -> Void {
-        if(family.id == USER_SERVICE.users.first(where: {$0.id == (FIRAuth.auth()?.currentUser?.uid)!})?.familyActive){
+        if(family.id == USER_SERVICE.users[0].familyActive){
             if(self.families.count > 0){
                 self.selectFamily(family: self.families[0])
             }else{
                 NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
             }
-        }else if USER_SERVICE.users[0].families?.count == FAMILY_SERVICE.families.count && FAMILY_SERVICE.families.count > 0 {
-            selectFamily(family: family)
         }
     }
     
