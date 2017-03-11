@@ -50,6 +50,8 @@ class UserService {
         REF_USERS.queryOrdered(byChild: "phone").queryStarting(atValue: "\(phone)").queryEnding(atValue: "\(phone)").observe(.childAdded, with: { (snapshot) -> Void in
             if(snapshot.exists()){
                 self.addUser(user:  User(snapshot: snapshot))
+                REF_USERS.removeAllObservers()
+                return
             }
             
         })
@@ -77,7 +79,7 @@ class UserService {
     func updated(snapshot: FIRDataSnapshot, uid: String) -> Void {
         if let index = self.users.index(where: { $0.id == uid }){
             self.users[index].update(snapshot: snapshot)
-            NotificationCenter.default.post(name: USERUPDATED_NOTIFICATION, object: index)
+            NotificationCenter.default.post(name: USERUPDATED_NOTIFICATION, object: self.users[index].id)
         }
     }
     
@@ -124,6 +126,11 @@ class UserService {
                 }
             }
             NotificationCenter.default.post(name: USER_NOTIFICATION, object: user)
+        }else{
+            if let index = self.users.index(where: {$0.id == user.id}) {
+                self.users[index] = user
+                NotificationCenter.default.post(name: USER_NOTIFICATION, object: user)
+            }
         }
     }
     

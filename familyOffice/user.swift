@@ -57,7 +57,7 @@ struct User {
     
     init(snapshot: FIRDataSnapshot) {
         let snapshotValue = snapshot.value as! NSDictionary
-        self.name = snapshotValue[User.kUserNameKey] as! String
+        self.name = UTILITY_SERVICE.exist(field: User.kUserNameKey, dictionary: snapshotValue)
         self.id = snapshot.key
         self.photoURL = UTILITY_SERVICE.exist(field: User.kUserPhotoUrlKey, dictionary: snapshotValue)
         self.familyActive = UTILITY_SERVICE.exist(field: User.kUserFamilyActiveKey, dictionary: snapshotValue)
@@ -89,7 +89,10 @@ struct User {
     mutating func update(snapshot: FIRDataSnapshot){
         switch snapshot.key {
         case  User.kUserPhotoUrlKey:
-            self.phone =  snapshot.value! as! String
+            self.photoURL =  snapshot.value! as! String
+            break
+        case User.kUserFamiliesKey:
+            self.families = snapshot.value! as! NSDictionary
             break
         default:
             break

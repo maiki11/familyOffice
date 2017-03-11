@@ -9,6 +9,7 @@ import UIKit
 let imageCache = NSCache<AnyObject, AnyObject>()
 
 extension UIImageView {
+    
     func loadImage(urlString: String) -> Void {
         
         let url = URL(string: urlString)

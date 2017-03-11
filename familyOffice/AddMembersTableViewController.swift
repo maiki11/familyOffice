@@ -54,8 +54,14 @@ class AddMembersTableViewController: UITableViewController {
         firstCell = tableViewCell
     }
     override func viewWillAppear(_ animated: Bool) {
+        users = []
         super.viewWillAppear(animated)
-        
+        self.tableView.reloadData()
+        NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){user in
+            if let user : User = user.object as? User {
+                self.addMember(phone: user.phone)
+            }
+        }
         getContacts()
         showContacts()
         
@@ -64,6 +70,7 @@ class AddMembersTableViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         users = []
         selected = []
+        NotificationCenter.default.removeObserver(USER_NOTIFICATION)
         super.viewDidDisappear(animated)
         REF_USERS.removeAllObservers()
     }
@@ -109,18 +116,18 @@ class AddMembersTableViewController: UITableViewController {
         self.users = []
         for item in contacts {
             for phone in item.phoneNumbers {
-                if let user = USER_SERVICE.users.filter({ $0.phone == phone.value.value(forKey: "digits") as! String }).first {
-                    if (FAMILY_SERVICE.families.first(where: {$0.id == family.id})?.members?[user.id]) == nil {
-                        self.users.append(user)
-                        self.tableView.reloadData()
-                    }
-                }else{
-                    USER_SERVICE.getUser(phone: (phone.value.value(forKey: "digits"))! as! String)
-                }
+                addMember(phone: phone.value.value(forKey: "digits") as! String )
             }
         }
-        NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){user in
-            self.showContacts()
+    }
+    func addMember(phone: String) -> Void {
+        if let user = USER_SERVICE.users.filter({$0.phone == phone}).first {
+            if !self.users.contains(where: {$0.id == user.id}) && self.family.members?[user.id] == nil{
+                self.users.append(user)
+                self.tableView.insertRows(at: [NSIndexPath(row: self.users.count-1, section: 1) as IndexPath], with: .fade)
+            }
+        }else{
+            USER_SERVICE.getUser(phone: phone)
         }
     }
     func save(sender: UIBarButtonItem) -> Void {

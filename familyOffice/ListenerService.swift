@@ -67,8 +67,11 @@ class RefHandle {
     
     func value(ref: String) -> Void {
         let handle = REF.child(ref).observe(.value, with: {(snapshot) in
+            let reference : [String] = ref.characters.split(separator: "/").map(String.init)
             if snapshot.exists(){
                 self.handle(snapshot: snapshot, action: "value", ref: ref)
+            }else if ref == "users/\(reference[1])" {
+                AUTH_SERVICE.createAccount(user: (FIRAuth.auth()?.currentUser)!)
             }
         }, withCancel: {(error) in
             print(error.localizedDescription)
@@ -91,61 +94,68 @@ class RefHandle {
         print("REFERENCE COUNT ADD \(listeners.count)")
         let reference : [String] = ref.characters.split(separator: "/").map(String.init)
         switch ref {
-            case "users/\(reference[1])":
-                if snapshot.exists() {
-                    USER_SERVICE.addUser(user: User(snapshot: snapshot))
-                    remove(ref: ref)
-                //Veifico si el que esta buscando es el que se logeo y no tiene cuneta para que se la cree
-                }else if (reference[1] == FIRAuth.auth()?.currentUser?.uid) {
-                    AUTH_SERVICE.createAccount(user: (FIRAuth.auth()?.currentUser)!)
-                }
+        case "users/\(reference[1])":
+            switch action {
+            case "value":
+                USER_SERVICE.addUser(user: User(snapshot: snapshot))
+                remove(ref: ref)
                 break
-            case "users/\((FIRAuth.auth()?.currentUser?.uid)!)/families":
-                if action == "added" {
-                    self.valueSingleton(ref: "families/\(snapshot.key)")
-                }else if action == "removed" {
-                    FAMILY_SERVICE.removed(snapshot: snapshot)
-                }
+            case "valueS":
+                USER_SERVICE.addUser(user: User(snapshot: snapshot))
+                break
+            case "changed":
+                USER_SERVICE.updated(snapshot: snapshot, uid: reference[1])
+                break
+            default: break
+            }
+        break
+        case "users/\((FIRAuth.auth()?.currentUser?.uid)!)/families":
+            if action == "added" {
+                self.valueSingleton(ref: "families/\(snapshot.key)")
+            }else if action == "removed" {
+                FAMILY_SERVICE.removed(snapshot: snapshot)
+            }
             break
-            case "families/\(reference[1])":
-                switch action {
-                case "value":
-                    FAMILY_SERVICE.added(snapshot: snapshot)
-                    remove(ref: ref)
-                case "valueS":
-                    FAMILY_SERVICE.added(snapshot: snapshot)
-                    break
-                case "changed":
-                    FAMILY_SERVICE.updated(snapshot: snapshot, id: snapshot.key)
-                    break
-                    //self.valueSingleton(ref: ref)
-                default: break
-                }
+        case "families/\(reference[1])":
+            switch action {
+            case "value":
+                FAMILY_SERVICE.added(snapshot: snapshot)
+                remove(ref: ref)
                 break
-            case "families/\(reference[1])/members":
-                if action == "added" {
-                    FAMILY_SERVICE.added(snapshot: snapshot, id: reference[1])
-                }else if action == "removed" {
-                    FAMILY_SERVICE.remove(snapshot: snapshot.key, id: reference[1])
-                }
+            case "valueS":
+                FAMILY_SERVICE.added(snapshot: snapshot)
                 break
-            case "notifications/\(reference[1])":
-                if action == "added" {
-                    NOTIFICATION_SERVICE.add(notification: NotificationModel(snapshot: snapshot))
-                }
+            case "changed":
+                FAMILY_SERVICE.updated(snapshot: snapshot, id: reference[1])
                 break
-            case "activityLog/\(reference[1])":
-                if action == "added" {
-                    ACTIVITYLOG_SERVICE.add(record: Record(snapshot: snapshot))
-                }
-                break
-            default:
-                break
+            //self.valueSingleton(ref: ref)
+            default: break
+            }
+            break
+        case "families/\(reference[1])/members":
+            if action == "added" {
+                FAMILY_SERVICE.added(snapshot: snapshot, id: reference[1])
+            }else if action == "removed" {
+                FAMILY_SERVICE.remove(snapshot: snapshot.key, id: reference[1])
+            }
+            break
+        case "notifications/\(reference[1])":
+            if action == "added" {
+                NOTIFICATION_SERVICE.add(notification: NotificationModel(snapshot: snapshot))
+            }
+            break
+        case "activityLog/\(reference[1])":
+            if action == "added" {
+                ACTIVITYLOG_SERVICE.add(record: Record(snapshot: snapshot))
+            }
+            break
+        default:
+            break
         }
     }
     
     func remove(ref: String) -> Void {
-       
+        
         for value in listeners.keys {
             let filter = value.characters.split(separator: "+").map(String.init)
             if filter[1] == ref {
@@ -156,8 +166,8 @@ class RefHandle {
             }
         }
         
-       
+        
         
     }
-
+    
 }

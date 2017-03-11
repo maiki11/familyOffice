@@ -19,12 +19,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle = .none
-        self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         //self.profileImage.clipsToBounds = true
-        self.userName.text =  USER_SERVICE.users[0].name
-        if !USER_SERVICE.users[0].photoURL.isEmpty, let url = USER_SERVICE.users[0].photoURL {
-            self.profileImage.loadImage(urlString: url)
-        }
+        
     }
     
     func loadData(){
@@ -36,8 +32,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewWillAppear(true)
         REF_SERVICE.chilAdded(ref: "activityLog/\((FIRAuth.auth()?.currentUser?.uid)!)", byChild: "timestamp")
         REF_SERVICE.chilAdded(ref: "notifications/\((FIRAuth.auth()?.currentUser?.uid)!)", byChild: "timestamp")
-        //ACTIVITYLOG_SERVICE.getActivities()
-        //NOTIFICATION_SERVICE.getNotifications()
+        self.userName.text = USER_SERVICE.users[0].name
+        if !USER_SERVICE.users[0].photoURL.isEmpty, let url = USER_SERVICE.users[0].photoURL {
+            self.profileImage.loadImage(urlString: url)
+        }
         self.tableView.reloadData()
         NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
             if self.segmentedControl.selectedSegmentIndex == 0 {
