@@ -43,9 +43,7 @@ class InfoContaineeTableViewController: UITableViewController {
 
         // Configure the cell...
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PersonalDataTableViewCell
-        
         cell.myTextField.isEnabled = false
-        
         cell.configure(text:  userDic.object(forKey: aboutkeys[indexPath.row]) as! String!, placeholder: placeholders[indexPath.row])
         return cell
     }
