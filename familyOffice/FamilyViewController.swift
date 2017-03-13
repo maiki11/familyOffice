@@ -10,10 +10,11 @@ import UIKit
 import FirebaseAuth
 
 class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate  {
-    
+    let center = NotificationCenter.default
     var members : [User] = []
     var family : Family?
-    
+    var index: Int? = nil
+    var localeChangeObserver : [NSObjectProtocol] = []
     @IBOutlet weak var imageFamily: UIImageView!
     @IBOutlet weak var membersTable: UITableView!
     
@@ -40,29 +41,30 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.membersTable.reloadData()
         verifyMembersOffLine()
         
-       
+        REF_SERVICE.valueSingleton(ref: "families/\((family?.id)!)")
+        
         REF_SERVICE.chilRemoved(ref: "families/\((family?.id)!)/members")
         REF_SERVICE.chilAdded(ref: "families/\((family?.id)!)/members")
         
         
-        NotificationCenter.default.addObserver(forName: USERS_NOTIFICATION, object: nil, queue: nil){ obj in
+        localeChangeObserver.append( center.addObserver(forName: USERS_NOTIFICATION, object: nil, queue: nil){ obj in
             if let user : User = obj.object as? User {
                 self.addMember(id: user.id)
             }
-        }
-        NotificationCenter.default.addObserver(forName: USERUPDATED_NOTIFICATION, object: nil, queue: nil){ obj in
+        })
+         localeChangeObserver.append(center.addObserver(forName: USERUPDATED_NOTIFICATION, object: nil, queue: nil){ obj in
             if let id : String = obj.object as? String {
                 if let index = self.members.index(where: {$0.id == id }) {
                     self.members[index] = USER_SERVICE.users.first(where: {$0.id == id})!
                     self.membersTable.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
                 }
             }
-        }
-        NotificationCenter.default.addObserver(forName: FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){index in
+        })
+        localeChangeObserver.append(center.addObserver(forName: FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){index in
             _ = self.navigationController?.popViewController(animated: true)
-        }
+        })
         
-        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ obj in
+         localeChangeObserver.append(center.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ obj in
             if let user : [String:String] = obj.object as? [String:String] {
                 if user.first?.value == "removed"{
                     
@@ -71,18 +73,22 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.addMember(id: (user.first?.key)!)
                 }
             }
-        }
-        NotificationCenter.default.addObserver(forName: FAMILYUPDATED_NOTIFICATION, object: nil, queue: nil){ notification in
-            self.membersTable.reloadData()
-        }
+        })
+         localeChangeObserver.append(center.addObserver(forName: FAMILYUPDATED_NOTIFICATION, object: nil, queue: nil){ notification in
+            if let index : Int = notification.object as? Int {
+                self.family = FAMILY_SERVICE.families[index]
+                self.imageFamily.loadImage(urlString: (self.family?.photoURL)!)
+                self.navigationItem.title = self.family?.name
+            
+            }
+        })
     }
 
     func removeMembers(key: String) -> Void {
         if let index = self.members.index(where: {$0.id == key}) {
             self.members.remove(at: index)
             REF_SERVICE.remove(ref: "users/\(key)")
-            self.membersTable.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
-           
+            self.membersTable.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.top)
         }
     }
     func verifyMembersOffLine() -> Void {
@@ -100,7 +106,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 REF_SERVICE.childChanged(ref: "users/\(id)")
                 self.membersTable.insertRows(at: [NSIndexPath(row: self.members.count-1, section: 0) as IndexPath], with: .fade)
             }
-            self.addMembers(user: user)
+            //self.addMembers(user: user)
         }else{
             REF_SERVICE.valueSingleton(ref: "users/\(id)")
         }
@@ -112,14 +118,18 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         for item in self.members {
             REF_SERVICE.remove(ref: "users/\((item.id)!)")
         }
+        members = []
         REF_SERVICE.remove(ref: "families/\((family?.id)!)/members")
-        NotificationCenter.default.removeObserver(name: USERS_NOTIFICATION)
-        NotificationCenter.default.removeObserver(FAMILYREMOVED_NOTIFICATION)
-        
+        for observer in localeChangeObserver {
+            center.removeObserver(observer)
+        }
+        self.localeChangeObserver.removeAll()
     }
+    
     override func didReceiveMemoryWarning(){
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -171,6 +181,12 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 // add the actions (buttons)
                 alert.addAction(UIAlertAction(title: "Ver Perfil", style: UIAlertActionStyle.default, handler: {action in
                     
+                    if let index = USER_SERVICE.users.index(where: {$0.id == user.id}) {
+                        self.index = index
+                        self.performSegue(withIdentifier: "ProfileSegue", sender: nil)
+
+                    }
+                    
                 }))
                 alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.cancel, handler: nil))
                 if(family?.admin == FIRAuth.auth()?.currentUser?.uid){
@@ -195,11 +211,10 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     @IBAction func handleExitFamily(_ sender: UIButton) {
         FAMILY_SERVICE.exitFamily(family: family!, uid: (FIRAuth.auth()?.currentUser?.uid)!)
-       
         UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
        
     }
-    
+    //Agrega miembro a la familia
     func addMembers(user: User){
         if let index = FAMILY_SERVICE.families.index(where: {$0.id == self.family?.id}) {
             let memberDict : [String:Bool]  = FAMILY_SERVICE.families[index].members as! [String : Bool]
@@ -215,6 +230,9 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if(segue.identifier == "addMembersScreen"){
             let viewController = segue.destination as! AddMembersTableViewController
             viewController.family = family!
+        }else if segue.identifier == "ProfileSegue" {
+            let viewController = segue.destination as! ProfileUserViewController
+            viewController.index  = index!
         }
     }
     

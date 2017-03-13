@@ -18,17 +18,18 @@ UINavigationControllerDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        picker.delegate = self
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         self.profileImage.clipsToBounds = true
+        picker.delegate = self
+       
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         user = USER_SERVICE.users[0]
-        if let data = STORAGE_SERVICE.search(url: (user.photoURL)) {
-            profileImage.image = UIImage(data: data)
+        if !user.photoURL.isEmpty {
+            profileImage.loadImage(urlString: user.photoURL)
         }
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -99,7 +100,7 @@ UINavigationControllerDelegate  {
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier=="updateImageSegue" {
             let viewController = segue.destination as! ImageViewController
-            viewController.image = chosenImage
+            viewController.imageView.image = chosenImage
         }
      }
      

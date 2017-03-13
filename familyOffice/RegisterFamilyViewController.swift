@@ -71,7 +71,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         scrollView.maximumZoomScale = 1
         scrollView.zoomScale = minScale
         centerScrollViewContents()
-
+        
         //blur
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -124,7 +124,6 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         scrollView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
         
         //Add validations
         if(imageView.image != nil && nameTxtField.text != nil){
@@ -133,7 +132,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
             //UTILITY_SERVICE.loading(view: self.view)
             UTILITY_SERVICE.disabledView()
         }else{
-            let alert = UIAlertController(title: "Error", message: "Agregue una imagen y un nombre", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             ANIMATIONS.shakeTextField(txt: nameTxtField)
             alert.addAction(okAction)
@@ -147,7 +146,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         
         let actionSheet = UIAlertController(title: "Photo Source", message: "Choose a source", preferredStyle: .actionSheet)
         
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action: UIAlertAction) in 
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action: UIAlertAction) in
             imagePickerController.sourceType = .camera
             self.present(imagePickerController, animated: true, completion: nil)
         }))

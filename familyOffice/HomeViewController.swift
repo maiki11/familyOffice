@@ -22,7 +22,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     private var family : Family?
     let user = USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var navBar: UINavigationBar!
     @IBOutlet weak var familyImage: UIImageView!
     @IBOutlet weak var familyName: UILabel!
@@ -61,7 +60,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         //USER_SERVICE.observers()
-        UTILITY_SERVICE.loading(view: self.view)
         
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
         self.headPosY = self.headerView.frame.origin.y
@@ -94,21 +92,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewWillAppear(_ animated: Bool) {
         reloadFamily()
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
-            self.activityIndicator.stopAnimating()
             self.familyImage.image = #imageLiteral(resourceName: "Family")
-            self.familyName.text = "No tiene familias, por favor \n crea una familia"
+            self.familyName.text = "Sin familia seleccionada"
             return
         }
         NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){_ in
-            Utility.Instance().stopLoading(view: self.view)
-            self.reloadFamily()
-        }
-        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){_ in
-            
             self.reloadFamily()
         }
         NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
-          
             self.reloadFamily()
             //FAMILY_SERVICE.verifyFamilyActive(family: family.object as! Family)
         }
@@ -116,7 +107,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     /** Quita los observers */
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
+        NotificationCenter.default.removeObserver(USER_NOTIFICATION)
         NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
         NotificationCenter.default.removeObserver(FAMILYADDED_NOTIFICATION)
     }
@@ -124,12 +115,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func reloadFamily() -> Void {
         if let family = FAMILY_SERVICE.families.first(where: {$0.id == (USER_SERVICE.users[0].familyActive)! as String}){
             if let url = family.photoURL {
-                self.activityIndicator.stopAnimating()
-                UTILITY_SERVICE.stopLoading(view: self.view)
                 self.familyImage.loadImage(urlString: url)
             }
-            
-            self.familyName.text = family.name ?? "No seleccionada"
+            self.familyName.text = family.name
+        }else{
+            self.familyImage.image = #imageLiteral(resourceName: "Family")
+            self.familyName.text = "Sin familia seleccionada"
         }
     }
     
