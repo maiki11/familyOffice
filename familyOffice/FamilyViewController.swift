@@ -10,10 +10,11 @@ import UIKit
 import FirebaseAuth
 
 class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate  {
-    
+    let center = NotificationCenter.default
     var members : [User] = []
     var family : Family?
     var index: Int? = nil
+    var localeChangeObserver : [NSObjectProtocol] = []
     @IBOutlet weak var imageFamily: UIImageView!
     @IBOutlet weak var membersTable: UITableView!
     
@@ -46,24 +47,24 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         REF_SERVICE.chilAdded(ref: "families/\((family?.id)!)/members")
         
         
-        NotificationCenter.default.addObserver(forName: USERS_NOTIFICATION, object: nil, queue: nil){ obj in
+        localeChangeObserver.append( center.addObserver(forName: USERS_NOTIFICATION, object: nil, queue: nil){ obj in
             if let user : User = obj.object as? User {
                 self.addMember(id: user.id)
             }
-        }
-        NotificationCenter.default.addObserver(forName: USERUPDATED_NOTIFICATION, object: nil, queue: nil){ obj in
+        })
+         localeChangeObserver.append(center.addObserver(forName: USERUPDATED_NOTIFICATION, object: nil, queue: nil){ obj in
             if let id : String = obj.object as? String {
                 if let index = self.members.index(where: {$0.id == id }) {
                     self.members[index] = USER_SERVICE.users.first(where: {$0.id == id})!
                     self.membersTable.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
                 }
             }
-        }
-        NotificationCenter.default.addObserver(forName: FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){index in
+        })
+        localeChangeObserver.append(center.addObserver(forName: FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){index in
             _ = self.navigationController?.popViewController(animated: true)
-        }
+        })
         
-        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ obj in
+         localeChangeObserver.append(center.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ obj in
             if let user : [String:String] = obj.object as? [String:String] {
                 if user.first?.value == "removed"{
                     
@@ -72,23 +73,22 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.addMember(id: (user.first?.key)!)
                 }
             }
-        }
-        NotificationCenter.default.addObserver(forName: FAMILYUPDATED_NOTIFICATION, object: nil, queue: nil){ notification in
+        })
+         localeChangeObserver.append(center.addObserver(forName: FAMILYUPDATED_NOTIFICATION, object: nil, queue: nil){ notification in
             if let index : Int = notification.object as? Int {
                 self.family = FAMILY_SERVICE.families[index]
                 self.imageFamily.loadImage(urlString: (self.family?.photoURL)!)
                 self.navigationItem.title = self.family?.name
-                self.membersTable.reloadData()
+            
             }
-        }
+        })
     }
 
     func removeMembers(key: String) -> Void {
         if let index = self.members.index(where: {$0.id == key}) {
             self.members.remove(at: index)
             REF_SERVICE.remove(ref: "users/\(key)")
-            self.membersTable.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
-            self.membersTable.reloadData()
+            self.membersTable.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.top)
         }
     }
     func verifyMembersOffLine() -> Void {
@@ -118,12 +118,16 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         for item in self.members {
             REF_SERVICE.remove(ref: "users/\((item.id)!)")
         }
+        members = []
         REF_SERVICE.remove(ref: "families/\((family?.id)!)/members")
-        NotificationCenter.default.removeObserver(name: USERS_NOTIFICATION)
-        NotificationCenter.default.removeObserver(FAMILYREMOVED_NOTIFICATION)
+        for observer in localeChangeObserver {
+            center.removeObserver(observer)
+        }
+        self.localeChangeObserver.removeAll()
     }
     
     override func didReceiveMemoryWarning(){

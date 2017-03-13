@@ -9,7 +9,10 @@
 import UIKit
 
 class ProfileUserViewController: UIViewController {
-    
+    var placeholders = ["Nombre", "Teléfono", "Dirección", "Fecha de Cumpleaños", "RFC", "CURP", "NSS", "Tipo de sangre"]
+    var aboutkeys = ["name", "phone",  "address","birthday", "rfc", "curp", "nss", "bloodType"]
+    var families : [Family] = []
+    var userDic : NSDictionary! = [:]
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var name: UILabel!
     var index: Int! = 0
@@ -18,9 +21,8 @@ class ProfileUserViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBOutlet weak var familiesContainer: UIView!
-    
-    @IBOutlet weak var infoContainer: UIView!
+    @IBOutlet weak var familiesCollection: UICollectionView!
+    @IBOutlet weak var infoTable: UITableView!
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -34,36 +36,36 @@ class ProfileUserViewController: UIViewController {
             profileImage.image = #imageLiteral(resourceName: "profile_default")
         }
         name.text = USER_SERVICE.users[index].name
+        userDic = USER_SERVICE.users[index].toDictionary()
         
+        NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){_ in
+            self.userDic = USER_SERVICE.users[self.index].toDictionary()
+            self.setFamiliesInComun()
+            
+            self.familiesCollection.reloadData()
+            self.infoTable.reloadData()
+        }
         profileImage.layer.cornerRadius = profileImage.frame.size.width/2
         profileImage.clipsToBounds = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        userDic = [:]
+        families = []
+        self.familiesCollection.reloadData()
+        self.infoTable.reloadData()
     }
     @IBAction func handleChangeSegmented(_ sender: UISegmentedControl) {
-        infoContainer.isHidden = true
-        familiesContainer.isHidden = true
+        infoTable.isHidden = true
+        familiesCollection.isHidden = true
         if sender.selectedSegmentIndex == 0 {
-            infoContainer.isHidden = false
+            infoTable.isHidden = false
         }else if sender.selectedSegmentIndex == 1 {
-            familiesContainer.isHidden = false
+            familiesCollection.isHidden = false
         }
     }
     
-    
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier=="familiesEmbedSegue" {
-            let viewController = segue.destination as! familiesContainerCollectionViewController
-            viewController.index = self.index!
-        }else if segue.identifier == "infoContainerSegue" {
-            let viewController = segue.destination as! InfoContaineeTableViewController
-            viewController.index = self.index!
-        }
-     }
-    
-    
 }
+
+
+
