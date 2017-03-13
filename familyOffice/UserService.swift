@@ -11,8 +11,6 @@ import UIKit
 import Firebase
 
 class UserService {
-    
-    public var user : User? = nil
     public var users: [User] = []
     
     private init(){
@@ -69,7 +67,7 @@ class UserService {
                         print(error.localizedDescription)
                     } else {
                         
-                        ACTIVITYLOG_SERVICE.create(id: (self.user?.id)!, activity: "Se cambio contraseña", photo: (self.user?.photoURL)!, type: "personalInfo")
+                        ACTIVITYLOG_SERVICE.create(id: self.users[0].id, activity: "Se cambio contraseña", photo: self.users[0].photoURL, type: "personalInfo")
                         NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: nil)
                     }
                 }
@@ -86,17 +84,7 @@ class UserService {
     func updateUser(user: User) -> Void {
         REF_USERS.child(user.id).updateChildValues(user.toDictionary() as! [AnyHashable : Any])
         ACTIVITYLOG_SERVICE.create(id: (self.users[0].id)!, activity: "Se actualizo información personal", photo: (self.users[0].photoURL)!, type: "personalInfo")
-        self.user = nil
-        self.user = user
-        /*if let index = self.users.index(where:{$0.id == user.id as String}) {
-         self.users[index].phone = user.phone
-         }*/
-    }
-    
-    
-    internal func clearData() {
-        self.user = nil
-        self.users.removeAll()
+        self.users[0] = user
     }
     
     private func removeUser(user: User) -> Void {

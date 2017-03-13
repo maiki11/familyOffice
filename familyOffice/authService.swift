@@ -52,9 +52,7 @@ class AuthService {
         UTILITY_SERVICE.clearObservers()
         NOTIFICATION_SERVICE.notifications.removeAll()
         ACTIVITYLOG_SERVICE.activityLog.removeAll()
-        
         FAMILY_SERVICE.families.removeAll()
-        USER_SERVICE.clearData()
         imageCache.removeAllObjects()
     }
 

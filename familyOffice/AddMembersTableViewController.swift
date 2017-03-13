@@ -11,12 +11,13 @@ import Contacts
 import ContactsUI
 
 class AddMembersTableViewController: UITableViewController {
-    
+    let center = NotificationCenter.default
     var contacts : [CNContact] = []
     var selected : [User] = []
     var users : [User] = []
     var family : Family!
     var itemCount = 0
+    var localeChangeObserver : NSObjectProtocol!
     let IndexPathOfFirstRow = NSIndexPath(row: 0, section: 0)
     var firstCell : SelectedTableViewCell!
     
@@ -60,22 +61,22 @@ class AddMembersTableViewController: UITableViewController {
         }
         super.viewWillAppear(animated)
         self.tableView.reloadData()
-        NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){user in
+        
+        let mainQueue = OperationQueue.main
+        self.localeChangeObserver =  center.addObserver(forName: USER_NOTIFICATION, object: nil, queue: mainQueue){user in
             if let user : User = user.object as? User {
                 self.addMember(phone: user.phone)
             }
         }
         getContacts()
-        showContacts()
-        
-       
+        showContacts()   
     }
     override func viewWillDisappear(_ animated: Bool) {
         users = []
         selected = []
-        NotificationCenter.default.removeObserver(USER_NOTIFICATION)
-        super.viewDidDisappear(animated)
+        center.removeObserver(self.localeChangeObserver)
         REF_USERS.removeAllObservers()
+        super.viewDidDisappear(animated)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
