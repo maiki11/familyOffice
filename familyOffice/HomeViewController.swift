@@ -113,7 +113,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func reloadFamily() -> Void {
-        if let family = FAMILY_SERVICE.families.first(where: {$0.id == (USER_SERVICE.users[0].familyActive)! as String}){
+        if USER_SERVICE.users.count > 0, let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
+            let family = FAMILY_SERVICE.families[index]
             if let url = family.photoURL {
                 self.familyImage.loadImage(urlString: url)
             }
