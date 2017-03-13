@@ -79,6 +79,7 @@ class AuthService {
 
     func isAuth(view: UIViewController, name: String)  {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            
             self.uid = user?.uid
             if (user != nil) {
                 REF_SERVICE.value(ref: ref_users(uid: (user?.uid)!))

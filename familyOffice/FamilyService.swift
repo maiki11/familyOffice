@@ -27,7 +27,6 @@ class FamilyService: repository {
     func added(snapshot: FIRDataSnapshot) {
         let family : Family = Family(snapshot: snapshot)
         
-        
         if !self.families.contains(where: { $0.id == family.id }) {
             self.families.append(family)
             NotificationCenter.default.post(name: FAMILYADDED_NOTIFICATION, object: family)

@@ -430,14 +430,14 @@
                                     <outlet property="delegate" destination="vtu-qR-ECs" id="7RA-58-wXT"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T93-d6-7Lq">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="T93-d6-7Lq">
                                 <rect key="frame" x="0.0" y="30" width="375" height="200"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iwK-bb-aXW">
                                         <rect key="frame" x="108" y="10" width="160" height="160"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="160" id="Wbk-cL-Cw6"/>
-                                            <constraint firstAttribute="height" constant="160" id="i7y-xU-6xI"/>
+                                            <constraint firstAttribute="width" constant="160" id="Wc4-QW-ASG"/>
+                                            <constraint firstAttribute="width" secondItem="iwK-bb-aXW" secondAttribute="height" multiplier="1:1" id="fnY-aF-cFR"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Family Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiZ-VY-qOu">
@@ -457,7 +457,6 @@
                                     <constraint firstItem="wiZ-VY-qOu" firstAttribute="leading" secondItem="T93-d6-7Lq" secondAttribute="leading" id="6ke-zA-O76"/>
                                     <constraint firstItem="iwK-bb-aXW" firstAttribute="centerX" secondItem="T93-d6-7Lq" secondAttribute="centerX" id="FjJ-T7-End"/>
                                     <constraint firstAttribute="trailing" secondItem="wiZ-VY-qOu" secondAttribute="trailing" id="I7Q-wR-1wA"/>
-                                    <constraint firstItem="wiZ-VY-qOu" firstAttribute="top" secondItem="iwK-bb-aXW" secondAttribute="bottom" constant="5" id="XJ0-OO-KKl"/>
                                     <constraint firstAttribute="bottom" secondItem="wiZ-VY-qOu" secondAttribute="bottom" constant="10" id="mY5-2T-be7"/>
                                 </constraints>
                             </view>
@@ -470,8 +469,8 @@
                             <constraint firstItem="wMk-Nw-1AJ" firstAttribute="top" secondItem="T93-d6-7Lq" secondAttribute="bottom" id="QfC-fy-ijT"/>
                             <constraint firstItem="T93-d6-7Lq" firstAttribute="top" secondItem="9GE-zD-wLJ" secondAttribute="bottom" constant="10" id="dxz-ab-dEg"/>
                             <constraint firstItem="wMk-Nw-1AJ" firstAttribute="width" secondItem="0ik-yb-Voo" secondAttribute="width" id="ehK-Zn-MwT"/>
-                            <constraint firstItem="T93-d6-7Lq" firstAttribute="leading" secondItem="0ik-yb-Voo" secondAttribute="leading" id="iji-Ov-huZ"/>
                             <constraint firstAttribute="trailing" secondItem="T93-d6-7Lq" secondAttribute="trailing" id="tUQ-GM-yWS"/>
+                            <constraint firstItem="T93-d6-7Lq" firstAttribute="leading" secondItem="0ik-yb-Voo" secondAttribute="leading" id="yZn-eC-aLE"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="Home" id="u00-Wi-OtT"/>
@@ -480,6 +479,9 @@
                     <connections>
                         <outlet property="activityIndicator" destination="KvL-yt-llR" id="wbF-jD-6FX"/>
                         <outlet property="collectionView" destination="wMk-Nw-1AJ" id="QGM-GJ-5KY"/>
+                        <outlet property="famImageCenterXConstraint" destination="FjJ-T7-End" id="umF-lC-V7c"/>
+                        <outlet property="famImageWidthConstraint" destination="Wc4-QW-ASG" id="tQg-SO-fnX"/>
+                        <outlet property="famNameLeadingConstraint" destination="6ke-zA-O76" id="9cB-Tg-2ZU"/>
                         <outlet property="familyImage" destination="iwK-bb-aXW" id="qcN-FF-goM"/>
                         <outlet property="familyName" destination="wiZ-VY-qOu" id="sFb-jN-c00"/>
                         <outlet property="headerView" destination="T93-d6-7Lq" id="Ekq-vC-nZg"/>
@@ -1368,7 +1370,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-mT-iSW">
-                                            <rect key="frame" x="19" y="-9" width="303.5" height="173"/>
+                                            <rect key="frame" x="19" y="-9" width="303" height="173"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <date key="date" timeIntervalSinceReferenceDate="507585004.35117102">
                                                 <!--2017-01-31 19:50:04 +0000-->

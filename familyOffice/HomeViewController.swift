@@ -35,7 +35,28 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     private var headWidth: CGFloat = 0
     private var collectionHeight: CGFloat = 0
     
+    private var headerExpanded = true
+    private var headerAnimating = false
+    
     var navigationBarOriginalOffset : CGFloat?
+    
+    
+    @IBOutlet weak var famImageCenterXConstraint: NSLayoutConstraint!
+    @IBOutlet weak var famImageWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var famNameLeadingConstraint: NSLayoutConstraint!
+    
+    var famExpandedHeight: CGFloat = 0
+    let famCollapsedHeight: CGFloat = 40
+    
+    var collectionOriginalHeight: CGFloat = 0
+    var famImageOriginalSize: CGFloat = 0
+    var famImageOriginalX: CGFloat = 0
+    var famImageOriginalY: CGFloat = 0
+    var isExpanded = true
+    
+    var famImagePositionXConstraint: NSLayoutConstraint?
+    var famNamePositionXConstraint: NSLayoutConstraint?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,8 +73,24 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.familyImage.layer.cornerRadius = lastContentOffset
         self.familyImage.clipsToBounds = true
         
+        collectionView.delegate = self
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        famExpandedHeight = famImageWidthConstraint.constant
+        collectionOriginalHeight = collectionView.frame.height
+        famImageOriginalSize = familyImage.frame.size.width
+        famImageOriginalX = familyImage.frame.origin.x
+        famImageOriginalY = familyImage.frame.origin.y
+        famImagePositionXConstraint = familyImage.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor)
+        famImagePositionXConstraint?.isActive = true
+        famImagePositionXConstraint?.priority = UILayoutPriorityDefaultLow
+        famNamePositionXConstraint = familyName.leadingAnchor.constraint(equalTo: familyName.trailingAnchor)
+        famNamePositionXConstraint?.isActive = true
+        famNamePositionXConstraint?.priority = UILayoutPriorityDefaultLow
+        familyImage.image = #imageLiteral(resourceName: "familyImage")
     }
     
+    /** ESTA FUNCION NOMAS PONE OBSERVERS */
     override func viewWillAppear(_ animated: Bool) {
         reloadFamily()
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
@@ -76,6 +113,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             //FAMILY_SERVICE.verifyFamilyActive(family: family.object as! Family)
         }
     }
+    
+    /** Quita los observers */
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
         NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
@@ -83,7 +122,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func reloadFamily() -> Void {
-        if let family = FAMILY_SERVICE.families.filter({$0.id == (USER_SERVICE.users[0].familyActive)! as String}).first{
+        if let family = FAMILY_SERVICE.families.first(where: {$0.id == (USER_SERVICE.users[0].familyActive)! as String}){
             if let url = family.photoURL {
                 self.activityIndicator.stopAnimating()
                 UTILITY_SERVICE.stopLoading(view: self.view)
@@ -94,37 +133,51 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+    
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollView.bounces = false
-        if(collectionView.contentOffset.y >= 100 && self.headerView.frame.height == heightHeader){
-            let percent = 40/self.heightHeader
-            let posX: CGFloat = (self.headWidth / -2) + 40
-            let posY: CGFloat = ( newHeight ) * -1
-            if(self.headerView.frame.size.height > self.newHeight){
-                
-                DispatchQueue.main.async {
-                    UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                        self.familyImage.transform = CGAffineTransform(scaleX: percent, y: percent).concatenating(CGAffineTransform(translationX: posX, y: posY))
-                        self.familyName.transform = CGAffineTransform(translationX: posX+(self.familyName.frame.width/2)-40, y: (self.headPosY-self.famPosY) - 5 )
-                        self.headerView.frame.size.height = self.newHeight
-                        self.collectionView.frame.origin.y = -posY
-                        self.collectionView.frame.size.height = self.collectionView.frame.size.height + self.heightHeader - 15
-                    }, completion: nil)
-                }
-                
-            }
-        }else if (0 >= collectionView.contentOffset.y){
-            let percent = 1
-            let scale = CGAffineTransform(scaleX: CGFloat(percent), y: CGFloat(percent))
-            //DispatchQueue.main.async {
+        
+        let offsetY = collectionView.contentOffset.y
+        let maxScroll = famExpandedHeight - famCollapsedHeight
+        if offsetY > maxScroll && isExpanded {
+            isExpanded = false
             UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                self.familyImage.transform = scale
-                self.headerView.frame.size.height = self.heightHeader
-                self.collectionView.frame.origin.y = self.heightHeader + 20
-                self.familyName.transform = CGAffineTransform(translationX: 0, y: 0 )
-                //self.collectionView.frame.size.height = self.collectionHeight
-            }, completion: nil)
+                self.famImageCenterXConstraint.priority = UILayoutPriorityDefaultLow
+                self.famImagePositionXConstraint?.priority = UILayoutPriorityDefaultHigh
+                self.famImageWidthConstraint.constant = self.famCollapsedHeight
+                self.famNameLeadingConstraint.priority = UILayoutPriorityDefaultLow
+                self.famNamePositionXConstraint?.priority = UILayoutPriorityDefaultHigh
+                self.view.layoutIfNeeded()
+            })
+            let anim = CABasicAnimation(keyPath: "cornerRadius")
+            anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+            anim.fromValue = familyImage.layer.cornerRadius
+            anim.toValue = self.famCollapsedHeight/2
+            anim.duration = 0.8
+            self.familyImage.layer.cornerRadius = self.famCollapsedHeight/2
+            self.familyImage.layer.add(anim, forKey: "cornerRadius")
+        } else if offsetY < maxScroll && !isExpanded {
+            isExpanded = true
+            UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                self.famImageCenterXConstraint.priority = UILayoutPriorityDefaultHigh
+                self.famImagePositionXConstraint?.priority = UILayoutPriorityDefaultLow
+                self.famImageWidthConstraint.constant = self.famExpandedHeight
+                self.famNameLeadingConstraint.priority = UILayoutPriorityDefaultHigh
+                self.famNamePositionXConstraint?.priority = UILayoutPriorityDefaultLow
+                self.view.layoutIfNeeded()
+            })
+            let anim = CABasicAnimation(keyPath: "cornerRadius")
+            anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+            anim.fromValue = familyImage.layer.cornerRadius
+            anim.toValue = self.famExpandedHeight/2
+			anim.duration = 0.8
+            self.familyImage.layer.cornerRadius = self.famExpandedHeight/2
+            self.familyImage.layer.add(anim, forKey: "cornerRadius")
         }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
