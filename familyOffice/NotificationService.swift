@@ -70,7 +70,7 @@ class NotificationService {
         let key = REF_NOTIFICATION.child(id).childByAutoId().key
         let notification = NotificationModel(id: key, title: title, timestamp: Utility.Instance().getDate(), photoURL: photo)
         REF_NOTIFICATION.child("\(id)/\(key)").setValue(notification.toDictionary())
-        notifications.append(notification)
+        
     }
     
     func deleteToken(token: String, id: String) -> Void {
