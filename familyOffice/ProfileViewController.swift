@@ -10,6 +10,8 @@ import UIKit
 import FirebaseAuth
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    let center = NotificationCenter.default
+    var localeChangeObserver : NSObjectProtocol!
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet var userName: UILabel!
@@ -37,16 +39,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.profileImage.loadImage(urlString: url)
         }
         self.tableView.reloadData()
-        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
+        localeChangeObserver = center.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
             if self.segmentedControl.selectedSegmentIndex == 0 {
                 if let _ : NotificationModel = notification.object as? NotificationModel {
                     self.tableView.insertRows(at: [IndexPath(row: NOTIFICATION_SERVICE.notifications.count-1, section: 0) ], with: .fade)
+                    NOTIFICATION_SERVICE.notifications.sort(by: {$0.timestamp < $1.timestamp})
                 }
             }else{
                 if let _ : Record = notification.object as?  Record {
                     self.tableView.insertRows(at: [IndexPath(row: ACTIVITYLOG_SERVICE.activityLog.count-1, section: 0) ], with: .fade)
+                    ACTIVITYLOG_SERVICE.activityLog.sort(by: {$0.timestamp < $1.timestamp})
                 }
             }
+            self.tableView.reloadData()
             //self.loadData()
         }
     }
@@ -55,7 +60,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
+        center.removeObserver(localeChangeObserver)
+        
         REF_SERVICE.remove(ref:  "activityLog/\((FIRAuth.auth()?.currentUser?.uid)!)")
         REF_SERVICE.remove(ref: "notifications/\((FIRAuth.auth()?.currentUser?.uid)!)")
     }

@@ -32,7 +32,7 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     }
     
     override func viewDidLoad() {
-        AUTH_SERVICE.isAuth(view: self.self, name:"TabBarControllerView")
+        AUTH_SERVICE.isAuth(view: self.self, name:"mainView")
         super.viewDidLoad()
         print(UIDevice().description)
         if(UIDevice.current.model == "Iphone 5s"){
