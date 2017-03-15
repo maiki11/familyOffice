@@ -20,6 +20,8 @@ class recordTableViewCell: UITableViewCell {
         // Initialization code
         self.photo.layer.cornerRadius = self.photo.frame.size.width/2
         self.photo.clipsToBounds = true
+        self.iconImage.layer.cornerRadius = self.iconImage.frame.size.width/2
+        self.iconImage.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

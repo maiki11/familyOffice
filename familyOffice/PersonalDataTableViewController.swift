@@ -10,8 +10,7 @@ import UIKit
 
 class PersonalDataTableViewController: UITableViewController {
     
-    var userDictionary = USER_SERVICE.users[0].toDictionary()
-   
+    var userDictionary : NSDictionary!
     
     var date : String!
     var placeholders = ["Nombre", "Teléfono", "Dirección", "Fecha de Cumpleaños","", "RFC", "CURP", "NSS", "Tipo de sangre"]
@@ -30,7 +29,13 @@ class PersonalDataTableViewController: UITableViewController {
 
         //loadInfo()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+       userDictionary =  USER_SERVICE.users[0].toDictionary()
+
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        userDictionary = [:]
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -176,7 +176,7 @@ extension FamilyService {
             REF_FAMILIES.child("\(fid)/members").updateChildValues([uid : true])
             REF_USERS.child("\(uid)/families").updateChildValues([fid:true])
             NOTIFICATION_SERVICE.send(title: "Agregado a: ", message: self.families[index].name!, to: uid)
-            NOTIFICATION_SERVICE.saveNotification(id: USER_SERVICE.users[0].id, title: "Agregado a: \(self.families[index].name!)", photo: self.families[index].photoURL!)
+            NOTIFICATION_SERVICE.saveNotification(id: uid, title: "Agregado a: \(self.families[index].name!)", photo: self.families[index].photoURL!)
             ToastService.getTopViewControllerAndShowToast(text: "Miembro \((USER_SERVICE.users.first(where: {$0.id == uid})?.name).unsafelyUnwrapped) Agregado")
             //NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [uid:"added"])
         }
