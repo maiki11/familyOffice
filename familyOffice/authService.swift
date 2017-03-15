@@ -49,6 +49,7 @@ class AuthService {
         }
         
         try! FIRAuth.auth()!.signOut()
+        USER_SERVICE.users.removeAll()
         UTILITY_SERVICE.clearObservers()
         NOTIFICATION_SERVICE.notifications.removeAll()
         ACTIVITYLOG_SERVICE.activityLog.removeAll()
@@ -99,7 +100,6 @@ class AuthService {
                     if success {
                         REF_SERVICE.value(ref: ref_users(uid: (user?.uid)!))
                         UTILITY_SERVICE.gotoView(view: name, context: view)
-
                     }else{
                        self.logOut()
                     }
