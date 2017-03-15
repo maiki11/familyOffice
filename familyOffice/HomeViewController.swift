@@ -79,12 +79,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         famImageOriginalSize = familyImage.frame.size.width
         famImageOriginalX = familyImage.frame.origin.x
         famImageOriginalY = familyImage.frame.origin.y
-        famImagePositionXConstraint = familyImage.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor)
-        famImagePositionXConstraint?.isActive = true
-        famImagePositionXConstraint?.priority = UILayoutPriorityDefaultLow
-        famNamePositionXConstraint = familyName.leadingAnchor.constraint(equalTo: familyName.trailingAnchor)
-        famNamePositionXConstraint?.isActive = true
-        famNamePositionXConstraint?.priority = UILayoutPriorityDefaultLow
+//        famImagePositionXConstraint = familyImage.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor)
+//        famImagePositionXConstraint?.isActive = true
+//        famImagePositionXConstraint?.priority = UILayoutPriorityDefaultLow
+//        famNamePositionXConstraint = familyName.leadingAnchor.constraint(equalTo: familyName.trailingAnchor)
+//        famNamePositionXConstraint?.isActive = true
+//        famNamePositionXConstraint?.priority = UILayoutPriorityDefaultLow
         familyImage.image = #imageLiteral(resourceName: "familyImage")
     }
     
@@ -132,43 +132,43 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        let offsetY = collectionView.contentOffset.y
-        let maxScroll = famExpandedHeight - famCollapsedHeight
-        if offsetY > maxScroll && isExpanded {
-            isExpanded = false
-            UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                self.famImageCenterXConstraint.priority = UILayoutPriorityDefaultLow
-                self.famImagePositionXConstraint?.priority = UILayoutPriorityDefaultHigh
-                self.famImageWidthConstraint.constant = self.famCollapsedHeight
-                self.famNameLeadingConstraint.priority = UILayoutPriorityDefaultLow
-                self.famNamePositionXConstraint?.priority = UILayoutPriorityDefaultHigh
-                self.view.layoutIfNeeded()
-            })
-            let anim = CABasicAnimation(keyPath: "cornerRadius")
-            anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-            anim.fromValue = familyImage.layer.cornerRadius
-            anim.toValue = self.famCollapsedHeight/2
-            anim.duration = 0.8
-            self.familyImage.layer.cornerRadius = self.famCollapsedHeight/2
-            self.familyImage.layer.add(anim, forKey: "cornerRadius")
-        } else if offsetY < maxScroll && !isExpanded {
-            isExpanded = true
-            UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                self.famImageCenterXConstraint.priority = UILayoutPriorityDefaultHigh
-                self.famImagePositionXConstraint?.priority = UILayoutPriorityDefaultLow
-                self.famImageWidthConstraint.constant = self.famExpandedHeight
-                self.famNameLeadingConstraint.priority = UILayoutPriorityDefaultHigh
-                self.famNamePositionXConstraint?.priority = UILayoutPriorityDefaultLow
-                self.view.layoutIfNeeded()
-            })
-            let anim = CABasicAnimation(keyPath: "cornerRadius")
-            anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-            anim.fromValue = familyImage.layer.cornerRadius
-            anim.toValue = self.famExpandedHeight/2
-			anim.duration = 0.8
-            self.familyImage.layer.cornerRadius = self.famExpandedHeight/2
-            self.familyImage.layer.add(anim, forKey: "cornerRadius")
-        }
+//        let offsetY = collectionView.contentOffset.y
+//        let maxScroll = famExpandedHeight - famCollapsedHeight
+//        if offsetY > maxScroll && isExpanded {
+//            isExpanded = false
+//            UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+//                self.famImageCenterXConstraint.priority = UILayoutPriorityDefaultLow
+//                self.famImagePositionXConstraint?.priority = UILayoutPriorityDefaultHigh
+//                self.famImageWidthConstraint.constant = self.famCollapsedHeight
+//                self.famNameLeadingConstraint.priority = UILayoutPriorityDefaultLow
+//                self.famNamePositionXConstraint?.priority = UILayoutPriorityDefaultHigh
+//                self.view.layoutIfNeeded()
+//            })
+//            let anim = CABasicAnimation(keyPath: "cornerRadius")
+//            anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+//            anim.fromValue = familyImage.layer.cornerRadius
+//            anim.toValue = self.famCollapsedHeight/2
+//            anim.duration = 0.8
+//            self.familyImage.layer.cornerRadius = self.famCollapsedHeight/2
+//            self.familyImage.layer.add(anim, forKey: "cornerRadius")
+//        } else if offsetY < maxScroll && !isExpanded {
+//            isExpanded = true
+//            UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+//                self.famImageCenterXConstraint.priority = UILayoutPriorityDefaultHigh
+//                self.famImagePositionXConstraint?.priority = UILayoutPriorityDefaultLow
+//                self.famImageWidthConstraint.constant = self.famExpandedHeight
+//                self.famNameLeadingConstraint.priority = UILayoutPriorityDefaultHigh
+//                self.famNamePositionXConstraint?.priority = UILayoutPriorityDefaultLow
+//                self.view.layoutIfNeeded()
+//            })
+//            let anim = CABasicAnimation(keyPath: "cornerRadius")
+//            anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+//            anim.fromValue = familyImage.layer.cornerRadius
+//            anim.toValue = self.famExpandedHeight/2
+//			anim.duration = 0.8
+//            self.familyImage.layer.cornerRadius = self.famExpandedHeight/2
+//            self.familyImage.layer.add(anim, forKey: "cornerRadius")
+//        }
         
     }
     

@@ -71,6 +71,8 @@
 		849C81C71E1D6D2F00FF3EE7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */; };
 		84AEA8A41E3BE32C002B2D43 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AEA8A31E3BE32C002B2D43 /* Animations.swift */; };
 		A44ACF6A1E70DB1800A5CA84 /* homeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44ACF691E70DB1800A5CA84 /* homeExtension.swift */; };
+		A46316B21E78C69E00E3F72C /* Health.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46316B11E78C69E00E3F72C /* Health.swift */; };
+		A46316B41E78CFC600E3F72C /* HealthTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46316B31E78CFC600E3F72C /* HealthTableViewController.swift */; };
 		DBC61BF3F1B28E8FA0CCC6AA /* Pods_familyOfficeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9F185A83D04F89C69B99A9 /* Pods_familyOfficeTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -166,6 +168,8 @@
 		849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		84AEA8A31E3BE32C002B2D43 /* Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		A44ACF691E70DB1800A5CA84 /* homeExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeExtension.swift; sourceTree = "<group>"; };
+		A46316B11E78C69E00E3F72C /* Health.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Health.swift; sourceTree = "<group>"; };
+		A46316B31E78CFC600E3F72C /* HealthTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthTableViewController.swift; sourceTree = "<group>"; };
 		D09E6D98CC40D45676606902 /* Pods-familyOfficeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-familyOfficeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-familyOfficeUITests/Pods-familyOfficeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD0DB8FD178D3D2D96269556 /* Pods_familyOffice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_familyOffice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F79F8707321AB6D245679BFF /* Pods-familyOfficeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-familyOfficeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-familyOfficeUITests/Pods-familyOfficeUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 				0215F4E21E3FA97C00AC01D3 /* PersonalDataTableViewController.swift */,
 				0215F4E71E3FBCCD00AC01D3 /* PasswordChangeViewController.swift */,
 				02FA70651E7092ED0080AAEB /* ImageViewController.swift */,
+				A46316B31E78CFC600E3F72C /* HealthTableViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -323,7 +328,6 @@
 		024104851E6F40A5002B8E1C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				02AD814F1E4B94250030B3DD /* AddMember+CollectionView.swift */,
 				024104861E6F40C4002B8E1C /* FamilyCollectionExtension.swift */,
 				02AD814F1E4B94250030B3DD /* AddMember+CollectionView.swift */,
 			);
@@ -351,7 +355,6 @@
 			isa = PBXGroup;
 			children = (
 				029059211E78B9D8005F760C /* Cells */,
-				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -377,7 +380,6 @@
 		029059231E78BA29005F760C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				022D50FF1E2036390073F0EF /* ProfileViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -401,6 +403,7 @@
 				02C17D281E424F6A00EE7CFA /* Record.swift */,
 				020540961E552A13000741CC /* Notification.swift */,
 				024BCA821E6F237900736F1A /* Proccess.swift */,
+				A46316B11E78C69E00E3F72C /* Health.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -772,6 +775,8 @@
 				0226C8E41E3C265A007968BA /* ConfigurationView.swift in Sources */,
 				02D2C0D11E6747AE007A6798 /* References.swift in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
+				A46316B21E78C69E00E3F72C /* Health.swift in Sources */,
+				A46316B41E78CFC600E3F72C /* HealthTableViewController.swift in Sources */,
 				023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */,
 				02ABAC421E6E02B5003780AB /* Device.swift in Sources */,
 				025C70FE1E38229D004A4A5B /* Constants.swift in Sources */,
