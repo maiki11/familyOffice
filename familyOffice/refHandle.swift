@@ -41,6 +41,17 @@ class RefHandle {
         listeners[String(NSDate().timeIntervalSince1970)+"+"+ref] = handle
         print(ref , handle)
     }
+    func childChanged(ref: String) -> Void {
+        let handle = REF.child(ref).observe(.childChanged, with: {(snapshot) in
+            if(snapshot.exists()){
+                self.handle(snapshot: snapshot, action: "changed", ref: ref)
+            }
+        }, withCancel: {(error) in
+            print(error.localizedDescription)
+        })
+        listeners[String(NSDate().timeIntervalSince1970)+"+"+ref] = handle
+        print(ref , handle)
+    }
     
     func value(ref: String) -> Void {
         let handle = REF.child(ref).observe(.value, with: {(snapshot) in
@@ -92,6 +103,10 @@ class RefHandle {
                 case "valueS":
                     FAMILY_SERVICE.addFamily(family: Family(snapshot: snapshot))
                     break
+                case "changed":
+                    FAMILY_SERVICE.updated(id: reference[1], snapshot: snapshot)
+                    break
+                    //self.valueSingleton(ref: ref)
                 default: break
                 }
                 break

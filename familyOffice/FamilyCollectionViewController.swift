@@ -29,26 +29,42 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        createListeners()
         self.collectionView?.reloadData()
+        
         if (FAMILY_SERVICE.families.count == 0){
             self.performSegue(withIdentifier: "registerSegue", sender: nil)
         }
         NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){ notification in
-            //self.collectionView?.insertItems(at: [IndexPath(item: FAMILY_SERVICE.families.count-1, section: 0)])
-            self.collectionView?.reloadData()
+            
+            if modelName == "iPhone 5s" {
+                self.collectionView?.reloadData()
+            }else{
+                self.collectionView?.insertItems(at: [IndexPath(item: FAMILY_SERVICE.families.count-1, section: 0)])
+                self.collectionView?.reloadData()
+            }
+            
         }
         NotificationCenter.default.addObserver(forName: FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){index in
-            //self.collectionView?.deleteItems(at: [IndexPath(item: index.object as! Int, section: 0)])
-            self.collectionView?.reloadData()
+            if modelName == "iPhone 5s" {
+                self.collectionView?.reloadData()
+            }else{
+                self.collectionView?.deleteItems(at: [IndexPath(item: index.object as! Int, section: 0)])
+                self.collectionView?.reloadData()
+            }
             if (FAMILY_SERVICE.families.count == 0){
                 self.performSegue(withIdentifier: "registerSegue", sender: nil)
             }
         }
-        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){_ in
-            self.collectionView?.reloadData()
+        NotificationCenter.default.addObserver(forName: FAMILYUPDATED_NOTIFICATION, object: nil, queue: nil){index in
+            //self.collectionView?.deleteItems(at: [IndexPath(item: index.object as! Int, section: 0)])
+            self.collectionView?.reloadItems(at: [IndexPath(item: index.object as! Int, section: 0)])
         }
+        
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
+        deleteListeners()
         NotificationCenter.default.removeObserver(FAMILYREMOVED_NOTIFICATION)
         NotificationCenter.default.removeObserver(FAMILYADDED_NOTIFICATION)
     }
@@ -88,7 +104,7 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         // #warning Incomplete implementation, return the number of items
         for item in FAMILY_SERVICE.families {
             if item.members?[(FIRAuth.auth()?.currentUser?.uid)!] == nil {
-                 FAMILY_SERVICE.families.remove(at:  FAMILY_SERVICE.families.index(where: {$0.id == item.id})!)
+                FAMILY_SERVICE.families.remove(at:  FAMILY_SERVICE.families.index(where: {$0.id == item.id})!)
             }
         }
         
@@ -102,11 +118,10 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
             let family = FAMILY_SERVICE.families[indexPath.row]
             cell.name.text = family.name
             // Bounce back to the main thread to update the UI
-            if let data = STORAGE_SERVICE.search(url: (family.photoURL?.absoluteString)!) {
-                cell.activityindicator.stopAnimating()
-                cell.imageFamily.image = UIImage(data: data)
-                
+            if !(family.photoURL?.isEmpty)! {
+                cell.imageFamily.loadImage(urlString: (family.photoURL)!)
             }
+            
             return cell
         }
         //Add Cell
@@ -170,6 +185,16 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
     {
         FAMILY_SERVICE.delete(family: family)
         
+    }
+    func createListeners() -> Void {
+        for item in FAMILY_SERVICE.families {
+            REF_SERVICE.childChanged(ref: "families/\((item.id)!)")
+        }
+    }
+    func deleteListeners() -> Void {
+        for item in FAMILY_SERVICE.families {
+            REF_SERVICE.remove(ref: "families/\((item.id)!)")
+        }
     }
     
     

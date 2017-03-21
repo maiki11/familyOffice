@@ -10,14 +10,15 @@ import UIKit
 
 class FamilyCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var activityindicator: UIActivityIndicatorView!
     @IBOutlet weak var imageFamily: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.imageFamily.image = #imageLiteral(resourceName: "familyImage")
         self.imageFamily.layer.cornerRadius = self.imageFamily.frame.size.width/16
         self.imageFamily.clipsToBounds = true
     }
+    
+
 }

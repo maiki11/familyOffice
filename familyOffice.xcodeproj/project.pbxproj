@@ -30,6 +30,8 @@
 		026AE1061E3A93A9003B75BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026AE1051E3A93A9003B75BD /* User.swift */; };
 		0271DD4F1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */; };
 		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
+		02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC3F1E6DE73A003780AB /* UIImage.swift */; };
+		02ABAC421E6E02B5003780AB /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC411E6E02B5003780AB /* Device.swift */; };
 		02AD814B1E4B87520030B3DD /* AddMembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AD814A1E4B87520030B3DD /* AddMembersTableViewController.swift */; };
 		02AD814D1E4B90B10030B3DD /* SelectedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AD814C1E4B90B10030B3DD /* SelectedTableViewCell.swift */; };
 		02AD81501E4B94250030B3DD /* AddMember+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AD814F1E4B94250030B3DD /* AddMember+CollectionView.swift */; };
@@ -111,6 +113,8 @@
 		026AE1051E3A93A9003B75BD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyMemberTableViewCell.swift; sourceTree = "<group>"; };
 		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
+		02ABAC3F1E6DE73A003780AB /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		02ABAC411E6E02B5003780AB /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		02AD814A1E4B87520030B3DD /* AddMembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMembersTableViewController.swift; sourceTree = "<group>"; };
 		02AD814C1E4B90B10030B3DD /* SelectedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedTableViewCell.swift; sourceTree = "<group>"; };
 		02AD814F1E4B94250030B3DD /* AddMember+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AddMember+CollectionView.swift"; sourceTree = "<group>"; };
@@ -298,6 +302,8 @@
 			isa = PBXGroup;
 			children = (
 				02AD814F1E4B94250030B3DD /* AddMember+CollectionView.swift */,
+				02ABAC3F1E6DE73A003780AB /* UIImage.swift */,
+				02ABAC411E6E02B5003780AB /* Device.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -325,8 +331,8 @@
 				02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */,
 				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
 				022D50FF1E2036390073F0EF /* ProfileViewController.swift */,
-				020A30941E2DA4440024B1FB /* FamilyViewController.swift */,
 				02EABF561E312AE8008A7CA9 /* FamilyCollectionViewController.swift */,
+				020A30941E2DA4440024B1FB /* FamilyViewController.swift */,
 				02AD814A1E4B87520030B3DD /* AddMembersTableViewController.swift */,
 			);
 			name = Controllers;
@@ -672,6 +678,7 @@
 				0226C8E41E3C265A007968BA /* ConfigurationView.swift in Sources */,
 				02D2C0D11E6747AE007A6798 /* References.swift in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
+				02ABAC421E6E02B5003780AB /* Device.swift in Sources */,
 				025C70FE1E38229D004A4A5B /* Constants.swift in Sources */,
 				02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */,
 				02BD2D191E1F130900A61A84 /* UserService.swift in Sources */,
@@ -692,6 +699,7 @@
 				02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */,
 				02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */,
 				84AEA8A41E3BE32C002B2D43 /* Animations.swift in Sources */,
+				02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */,
 				02AD814D1E4B90B10030B3DD /* SelectedTableViewCell.swift in Sources */,
 				0215F4E31E3FA97C00AC01D3 /* PersonalDataTableViewController.swift in Sources */,
 				02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */,
