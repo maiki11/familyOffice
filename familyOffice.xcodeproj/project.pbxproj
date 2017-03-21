@@ -31,6 +31,9 @@
 		0249F3361E43C1E6000872CD /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249F3351E43C1E6000872CD /* StorageService.swift */; };
 		024BCA811E6F1E2D00736F1A /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024BCA801E6F1E2D00736F1A /* RequestService.swift */; };
 		024BCA831E6F237900736F1A /* Proccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024BCA821E6F237900736F1A /* Proccess.swift */; };
+		025A89921E79B5F40032C3C0 /* PreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025A89911E79B5F40032C3C0 /* PreHomeViewController.swift */; };
+		025A89961E7A04AF0032C3C0 /* FamiliesPreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025A89951E7A04AF0032C3C0 /* FamiliesPreCollectionViewCell.swift */; };
+		025A89981E7A06000032C3C0 /* familyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025A89971E7A06000032C3C0 /* familyCollection.swift */; };
 		025C70FE1E38229D004A4A5B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C70FD1E38229D004A4A5B /* Constants.swift */; };
 		026AE1061E3A93A9003B75BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026AE1051E3A93A9003B75BD /* User.swift */; };
 		0271DD4F1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */; };
@@ -42,6 +45,8 @@
 		02AD81501E4B94250030B3DD /* AddMember+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AD814F1E4B94250030B3DD /* AddMember+CollectionView.swift */; };
 		02AD81521E4B963C0030B3DD /* memberSelectedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AD81511E4B963C0030B3DD /* memberSelectedCollectionViewCell.swift */; };
 		02B46A341E52908200CC7511 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B46A331E52908200CC7511 /* NotificationService.swift */; };
+		02B7E7FA1E7C614A0082BAE7 /* settingLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7E7F91E7C614A0082BAE7 /* settingLauncher.swift */; };
+		02B7E7FC1E7C7A0E0082BAE7 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7E7FB1E7C7A0E0082BAE7 /* UIView.swift */; };
 		02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B876441E1C677C005E5473 /* SingUpViewController.swift */; };
 		02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */; };
 		02BD2D191E1F130900A61A84 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2D181E1F130900A61A84 /* UserService.swift */; };
@@ -122,6 +127,9 @@
 		0249F3351E43C1E6000872CD /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		024BCA801E6F1E2D00736F1A /* RequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		024BCA821E6F237900736F1A /* Proccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proccess.swift; sourceTree = "<group>"; };
+		025A89911E79B5F40032C3C0 /* PreHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreHomeViewController.swift; sourceTree = "<group>"; };
+		025A89951E7A04AF0032C3C0 /* FamiliesPreCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamiliesPreCollectionViewCell.swift; sourceTree = "<group>"; };
+		025A89971E7A06000032C3C0 /* familyCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = familyCollection.swift; sourceTree = "<group>"; };
 		025C70FD1E38229D004A4A5B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		026AE1051E3A93A9003B75BD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyMemberTableViewCell.swift; sourceTree = "<group>"; };
@@ -132,8 +140,10 @@
 		02AD814C1E4B90B10030B3DD /* SelectedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedTableViewCell.swift; sourceTree = "<group>"; };
 		02AD814F1E4B94250030B3DD /* AddMember+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AddMember+CollectionView.swift"; sourceTree = "<group>"; };
 		02AD81511E4B963C0030B3DD /* memberSelectedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = memberSelectedCollectionViewCell.swift; sourceTree = "<group>"; };
-		02B46A321E52281200CC7511 /* familyOffice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = familyOffice.entitlements; sourceTree = "<group>"; };
+		02B46A321E52281200CC7511 /* familyOffice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = familyOffice.entitlements; path = familyOffice/familyOffice.entitlements; sourceTree = "<group>"; };
 		02B46A331E52908200CC7511 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		02B7E7F91E7C614A0082BAE7 /* settingLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settingLauncher.swift; sourceTree = "<group>"; };
+		02B7E7FB1E7C7A0E0082BAE7 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		02B876441E1C677C005E5473 /* SingUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		02BD2D181E1F130900A61A84 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -217,6 +227,7 @@
 			children = (
 				02E7E5ED1E7883E700D8360B /* Assets.xcassets */,
 				840393AD1E413127008873A2 /* background.mp4 */,
+				02B46A321E52281200CC7511 /* familyOffice.entitlements */,
 				02382F0B1E1C210C0036FFC9 /* familyOffice */,
 				02382F201E1C210C0036FFC9 /* familyOfficeTests */,
 				02382F2B1E1C210C0036FFC9 /* familyOfficeUITests */,
@@ -239,8 +250,8 @@
 		02382F0B1E1C210C0036FFC9 /* familyOffice */ = {
 			isa = PBXGroup;
 			children = (
+				02B7E7F81E7C5A8F0082BAE7 /* Extra */,
 				024450601E6F7C9900B15E24 /* Repository */,
-				02B46A321E52281200CC7511 /* familyOffice.entitlements */,
 				8488E1661E41706D00045646 /* Fonts */,
 				025C70FC1E382132004A4A5B /* Constants */,
 				8421167D1E28622900C6BD80 /* Styles */,
@@ -335,6 +346,24 @@
 			name = Repository;
 			sourceTree = "<group>";
 		};
+		025A89931E7A02240032C3C0 /* PreHome */ = {
+			isa = PBXGroup;
+			children = (
+				025A89941E7A02440032C3C0 /* Cell */,
+				025A89911E79B5F40032C3C0 /* PreHomeViewController.swift */,
+				025A89971E7A06000032C3C0 /* familyCollection.swift */,
+			);
+			name = PreHome;
+			sourceTree = "<group>";
+		};
+		025A89941E7A02440032C3C0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				025A89951E7A04AF0032C3C0 /* FamiliesPreCollectionViewCell.swift */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		025C70FC1E382132004A4A5B /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,11 +411,19 @@
 		02AD814E1E4B92FF0030B3DD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0290591F1E78B9AA005F760C /* Home */,
 				02ABAC3F1E6DE73A003780AB /* UIImage.swift */,
 				02ABAC411E6E02B5003780AB /* Device.swift */,
+				02B7E7FB1E7C7A0E0082BAE7 /* UIView.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		02B7E7F81E7C5A8F0082BAE7 /* Extra */ = {
+			isa = PBXGroup;
+			children = (
+				02B7E7F91E7C614A0082BAE7 /* settingLauncher.swift */,
+			);
+			name = Extra;
 			sourceTree = "<group>";
 		};
 		02B876461E1C717A005E5473 /* Model */ = {
@@ -415,6 +452,8 @@
 		02F5E35A1E1C322500A9FBFA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				025A89931E7A02240032C3C0 /* PreHome */,
+				0290591F1E78B9AA005F760C /* Home */,
 				02AD814E1E4B92FF0030B3DD /* Extensions */,
 				029059231E78BA29005F760C /* Profile */,
 				024104831E6F405E002B8E1C /* Families */,
@@ -767,13 +806,17 @@
 				02D2C0D11E6747AE007A6798 /* References.swift in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
 				023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */,
+				02B7E7FA1E7C614A0082BAE7 /* settingLauncher.swift in Sources */,
 				02ABAC421E6E02B5003780AB /* Device.swift in Sources */,
 				025C70FE1E38229D004A4A5B /* Constants.swift in Sources */,
 				02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */,
 				02BD2D191E1F130900A61A84 /* UserService.swift in Sources */,
+				02B7E7FC1E7C7A0E0082BAE7 /* UIView.swift in Sources */,
 				8471A2521E2D8C5100EC9FD7 /* ConfigProfile.swift in Sources */,
 				022EC1D21E20078C0096A18B /* Family.swift in Sources */,
 				0218B5B31E66522A00025EBB /* ListenerService.swift in Sources */,
+				025A89981E7A06000032C3C0 /* familyCollection.swift in Sources */,
+				025A89921E79B5F40032C3C0 /* PreHomeViewController.swift in Sources */,
 				024BCA831E6F237900736F1A /* Proccess.swift in Sources */,
 				0271DD4F1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift in Sources */,
 				02AD81501E4B94250030B3DD /* AddMember+CollectionView.swift in Sources */,
@@ -782,6 +825,7 @@
 				0215F4E81E3FBCCD00AC01D3 /* PasswordChangeViewController.swift in Sources */,
 				020A30951E2DA4440024B1FB /* FamilyViewController.swift in Sources */,
 				02FA70641E707BAB0080AAEB /* ToastService.swift in Sources */,
+				025A89961E7A04AF0032C3C0 /* FamiliesPreCollectionViewCell.swift in Sources */,
 				02D956331E41220A007BAC66 /* DatePickerTableViewCell.swift in Sources */,
 				020540971E552A13000741CC /* Notification.swift in Sources */,
 				02DB30731E26A44F00A8FF1C /* FamilyService.swift in Sources */,

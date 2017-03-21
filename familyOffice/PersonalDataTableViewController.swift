@@ -30,6 +30,7 @@ class PersonalDataTableViewController: UITableViewController {
         //loadInfo()
     }
     override func viewWillAppear(_ animated: Bool) {
+       self.navigationController?.setNavigationBarHidden(false, animated: true)
        userDictionary =  USER_SERVICE.users[0].toDictionary()
 
     }

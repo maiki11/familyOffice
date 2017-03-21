@@ -14,6 +14,7 @@ extension FamilyCollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         createListeners()
         
         if (FAMILY_SERVICE.families.count == 0){
@@ -25,7 +26,7 @@ extension FamilyCollectionViewController {
             }else{
                 if (self.collectionView?.numberOfItems(inSection: 0))! <= FAMILY_SERVICE.families.count {
                     self.collectionView?.insertItems(at: [IndexPath(item: FAMILY_SERVICE.families.count-1, section: 0)])
-                    self.collectionView?.reloadData()
+                    
                 }
             }
         }

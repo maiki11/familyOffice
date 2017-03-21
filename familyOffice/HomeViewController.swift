@@ -9,51 +9,55 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import MIBadgeButton_Swift
 
-class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
 
-    let myImages=["chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png"]
-    let newHeight: CGFloat = 60
-    let heightHeader: CGFloat = 200
-    let top: CGFloat = 20
-    var headPosY: CGFloat = 0
-    var famPosY: CGFloat = 0
-    private var flag = true
-    private var family : Family?
-    let user = USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
+    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts"]
+    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos"]
     
-    @IBOutlet var navBar: UINavigationBar!
+    private var family : Family?
+    
+    let user = USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
+    var families : [String]! = []
+
     @IBOutlet weak var familyImage: UIImageView!
     @IBOutlet weak var familyName: UILabel!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    private var heightImg: CGFloat = 0
-    private var lastContentOffset: CGFloat = 0
-    private var startPosX: CGFloat = 0
-    private var headWidth: CGFloat = 0
-    private var collectionHeight: CGFloat = 0
-    
+
     var navigationBarOriginalOffset : CGFloat?
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         //USER_SERVICE.observers()
         
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
-        self.headPosY = self.headerView.frame.origin.y
-        self.headWidth = self.headerView.frame.width
-        self.famPosY = familyName.frame.origin.y
-        self.collectionHeight = collectionView.frame.height
-        lastContentOffset = familyImage.frame.size.height/2
-        heightImg = familyImage.frame.size.height
-        self.familyImage.layer.cornerRadius = lastContentOffset
+        self.familyImage.layer.cornerRadius = self.familyImage.frame.size.height/2
         self.familyImage.clipsToBounds = true
+        let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
+        self.tabBarController?.navigationItem.rightBarButtonItem = moreButton
         
     }
+    let settingLauncher = SettingLauncher()
+
+    func handleMore(_ sender: Any) {
+        settingLauncher.setView(view: self)
+        settingLauncher.showSetting()
+    }
+    
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         reloadFamily()
+        
+       
+        if let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
+            self.tabBarController?.navigationItem.title = FAMILY_SERVICE.families[index].name
+        }
+     
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
             self.familyImage.image = #imageLiteral(resourceName: "Family")
             self.familyName.text = "Sin familia seleccionada"
@@ -76,8 +80,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func reloadFamily() -> Void {
         if USER_SERVICE.users.count > 0, let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
             let family = FAMILY_SERVICE.families[index]
-            if let url = family.photoURL {
-                self.familyImage.loadImage(urlString: url)
+            if !(family.photoURL?.isEmpty)! {
+                 self.familyImage.loadImage(urlString: family.photoURL!)
             }
             self.familyName.text = family.name
         }else{
@@ -86,38 +90,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollView.bounces = false
-        if(collectionView.contentOffset.y >= 100 && self.headerView.frame.height == heightHeader){
-            let percent = 40/self.heightHeader
-            let posX: CGFloat = (self.headWidth / -2) + 40
-            let posY: CGFloat = ( newHeight ) * -1
-            if(self.headerView.frame.size.height > self.newHeight){
-                
-                DispatchQueue.main.async {
-                    UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                        self.familyImage.transform = CGAffineTransform(scaleX: percent, y: percent).concatenating(CGAffineTransform(translationX: posX, y: posY))
-                        self.familyName.transform = CGAffineTransform(translationX: posX+(self.familyName.frame.width/2)-40, y: (self.headPosY-self.famPosY) - 5 )
-                        self.headerView.frame.size.height = self.newHeight
-                        self.collectionView.frame.origin.y = -posY
-                        self.collectionView.frame.size.height = self.collectionView.frame.size.height + self.heightHeader - 15
-                    }, completion: nil)
-                }
-                
-            }
-        }else if (0 >= collectionView.contentOffset.y){
-            let percent = 1
-            let scale = CGAffineTransform(scaleX: CGFloat(percent), y: CGFloat(percent))
-            //DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                self.familyImage.transform = scale
-                self.headerView.frame.size.height = self.heightHeader
-                self.collectionView.frame.origin.y = self.heightHeader + 20
-                self.familyName.transform = CGAffineTransform(translationX: 0, y: 0 )
-                //self.collectionView.frame.size.height = self.collectionHeight
-            }, completion: nil)
-        }
-    }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.alpha = 0
@@ -136,12 +108,17 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return myImages.count
+        return icons.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellModule", for: indexPath) as! ModuleCollectionViewCell
-        cell.image.image = UIImage(named: myImages[indexPath.item])!
+        
+        cell.buttonicon.setImage(UIImage(named: icons[indexPath.item])!, for: .normal)
+        cell.name.text = labels[indexPath.row]
+        cell.buttonicon.badgeString = "8"
+        cell.buttonicon.badgeEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0)
+        cell.buttonicon.badgeBackgroundColor = UIColor.red
         return cell
         
     }

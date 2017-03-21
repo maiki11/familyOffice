@@ -25,10 +25,14 @@ UINavigationControllerDelegate  {
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         user = USER_SERVICE.users[0]
         if !user.photoURL.isEmpty {
             profileImage.loadImage(urlString: user.photoURL)
         }
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
         
     }
     override func didReceiveMemoryWarning() {

@@ -21,11 +21,12 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let lpgr = UILongPressGestureRecognizer(target: self, action:#selector(FamilyCollectionViewController.handleLongPress(gestureReconizer:)))
+        let lpgr = UILongPressGestureRecognizer(target: self, action:#selector(handleLongPress(gestureReconizer:)))
         lpgr.minimumPressDuration = 0.5
         lpgr.delaysTouchesBegan = true
         self.familyCollection.addGestureRecognizer(lpgr)
         self.clearsSelectionOnViewWillAppear = true
+        
         
     }
         

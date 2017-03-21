@@ -25,6 +25,7 @@ class PasswordChangeViewController: UIViewController {
     }
    
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
              UTILITY_SERVICE.stopLoading(view: self.view)
         }
