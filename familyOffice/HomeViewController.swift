@@ -11,7 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import MIBadgeButton_Swift
 
-class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate{
 
     let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts"]
     let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos"]
@@ -35,10 +35,15 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.height/2
         self.familyImage.clipsToBounds = true
+        let lpgr = UILongPressGestureRecognizer(target: self, action:#selector(handleLongPress(gestureReconizer:)))
+        lpgr.minimumPressDuration = 0.1
+        lpgr.delaysTouchesBegan = true
+        self.collectionView.addGestureRecognizer(lpgr)
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
         self.tabBarController?.navigationItem.rightBarButtonItem = moreButton
         
     }
+    
     let settingLauncher = SettingLauncher()
 
     func handleMore(_ sender: Any) {
@@ -121,5 +126,33 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell.buttonicon.badgeBackgroundColor = UIColor.red
         return cell
         
+    }
+    
+    
+    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+        let point: CGPoint = gestureReconizer.location(in: self.collectionView)
+        let indexPath = self.collectionView?.indexPathForItem(at: point)
+        
+        if (indexPath != nil && (indexPath?.row)! < FAMILY_SERVICE.families.count) {
+            switch gestureReconizer.state {
+            case .began:
+                gotoModule(index: (indexPath?.row)!)
+                break
+            case .ended:
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    func gotoModule(index: Int) -> Void {
+        switch index {
+        case 0:
+            self.performSegue(withIdentifier: "chatSegue", sender: nil)
+        default:
+            break
+        }
+    
     }
 }
