@@ -11,13 +11,20 @@ import FirebaseDatabase
 import FirebaseAuth
 import MIBadgeButton_Swift
 
+<<<<<<< HEAD
+
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
+=======
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate{
+>>>>>>> master
 
     let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts"]
     let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos"]
     
+
     private var family : Family?
     
+
     let user = USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
     var families : [String]! = []
 
@@ -26,10 +33,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
 
+
     var navigationBarOriginalOffset : CGFloat?
   
     override func viewDidLoad() {
         super.viewDidLoad()
+
         //USER_SERVICE.observers()
         
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
@@ -41,6 +50,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.collectionView.addGestureRecognizer(lpgr)
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
         self.tabBarController?.navigationItem.rightBarButtonItem = moreButton
+
         
     }
     
@@ -76,6 +86,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             //FAMILY_SERVICE.verifyFamilyActive(family: family.object as! Family)
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //heightImg = familyImage.frame.size.height
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(USER_NOTIFICATION)
         NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
@@ -94,7 +110,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.familyName.text = "Sin familia seleccionada"
         }
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.alpha = 0
@@ -115,7 +130,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return icons.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellModule", for: indexPath) as! ModuleCollectionViewCell
         
@@ -125,10 +140,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell.buttonicon.badgeEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0)
         cell.buttonicon.badgeBackgroundColor = UIColor.red
         return cell
-        
     }
     
     
+<<<<<<< HEAD
+=======
     func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
         let point: CGPoint = gestureReconizer.location(in: self.collectionView)
         let indexPath = self.collectionView?.indexPathForItem(at: point)
@@ -155,4 +171,5 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     
     }
+>>>>>>> master
 }

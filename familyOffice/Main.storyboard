@@ -29,10 +29,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="p2Q-UG-ygO">
-                                <rect key="frame" x="16" y="70" width="343" height="180"/>
+                                <rect key="frame" x="16" y="70" width="343" height="99"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="familyoffice" translatesAutoresizingMaskIntoConstraints="NO" id="1U1-9B-Lux">
-                                <rect key="frame" x="16" y="250" width="343" height="120"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="family_office_white" translatesAutoresizingMaskIntoConstraints="NO" id="1U1-9B-Lux">
+                                <rect key="frame" x="16" y="169" width="343" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="hfv-vk-ySX"/>
                                 </constraints>
@@ -61,7 +61,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dKq-qN-fUv" userLabel="Password" customClass="textFieldStyleController" customModule="familyOffice" customModuleProvider="target">
-                                <rect key="frame" x="36" y="413" width="303" height="42.5"/>
+                                <rect key="frame" x="36" y="332" width="303" height="42.5"/>
                                 <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dKq-qN-fUv" secondAttribute="height" multiplier="335:47" id="vaC-iH-UY0"/>
@@ -95,16 +95,16 @@
                                 </connections>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-gR-T0q">
-                                <rect key="frame" x="47" y="565.5" width="281" height="91.5"/>
+                                <rect key="frame" x="47" y="484.5" width="281" height="172.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-9j-XHn">
-                                        <rect key="frame" x="0.0" y="0.0" width="244" height="91.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="244" height="172.5"/>
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                         <color key="textColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="highlightedColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rB-XC-zD2">
-                                        <rect key="frame" x="244" y="0.0" width="37" height="91.5"/>
+                                        <rect key="frame" x="244" y="0.0" width="37" height="172.5"/>
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                         <state key="normal" title="aquí"/>
                                         <connections>
@@ -114,7 +114,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AwA-sU-zu3" customClass="GIDSignInButton">
-                                <rect key="frame" x="36" y="535.5" width="192" height="40"/>
+                                <rect key="frame" x="36" y="454.5" width="192" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5fA-1h-PlK"/>
@@ -122,7 +122,7 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q64-md-P18" customClass="textFieldStyleController" customModule="familyOffice" customModuleProvider="target">
-                                <rect key="frame" x="36" y="354" width="303" height="39"/>
+                                <rect key="frame" x="36" y="273" width="303" height="39"/>
                                 <color key="tintColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Q64-md-P18" secondAttribute="height" multiplier="334:43" id="uXH-Qi-U55"/>
@@ -1139,7 +1139,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BZ9-Gi-cIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1920.8" y="3141.6791604197902"/>
+            <point key="canvasLocation" x="756" y="3140"/>
         </scene>
         <!--Profile User View Controller-->
         <scene sceneID="gDo-hT-eaC">
@@ -1687,16 +1687,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Laq-D2-vJH">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" translatesAutoresizingMaskIntoConstraints="NO" id="Laq-D2-vJH">
                                 <rect key="frame" x="0.0" y="208" width="375" height="250"/>
+                                <color key="backgroundColor" white="0.4089355469" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Laq-D2-vJH" secondAttribute="height" multiplier="3:2" id="jYD-6f-nxL"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.12375079314720816" green="0.12375079314720816" blue="0.12375079314720816" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="RXB-38-EtD" firstAttribute="top" secondItem="Laq-D2-vJH" secondAttribute="bottom" constant="160" id="6Td-at-z7b"/>
-                            <constraint firstItem="Laq-D2-vJH" firstAttribute="leading" secondItem="2o7-KU-7Ur" secondAttribute="leading" id="Xw2-aY-UqA"/>
-                            <constraint firstItem="Laq-D2-vJH" firstAttribute="top" secondItem="tP7-jv-rN6" secondAttribute="bottom" constant="144" id="YVb-2w-lx6"/>
-                            <constraint firstAttribute="trailing" secondItem="Laq-D2-vJH" secondAttribute="trailing" id="km1-e8-s89"/>
+                            <constraint firstItem="Laq-D2-vJH" firstAttribute="leading" secondItem="2o7-KU-7Ur" secondAttribute="leading" id="7M9-eC-wwS"/>
+                            <constraint firstItem="Laq-D2-vJH" firstAttribute="centerX" secondItem="2o7-KU-7Ur" secondAttribute="centerX" id="LNv-Df-5NK"/>
+                            <constraint firstItem="Laq-D2-vJH" firstAttribute="centerY" secondItem="2o7-KU-7Ur" secondAttribute="centerY" id="PYg-AS-vXK"/>
+                            <constraint firstAttribute="trailing" secondItem="Laq-D2-vJH" secondAttribute="trailing" id="yCt-6p-yEg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Actualizar Imagen" id="xiO-be-UlR"/>
@@ -1740,7 +1744,7 @@
                                 <rect key="frame" x="7" y="72" width="360" height="158"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L7v-Dz-Fbd">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L7v-Dz-Fbd">
                                         <rect key="frame" x="130" y="8" width="115" height="115"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -1873,6 +1877,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3A-0L-eCz">
                                         <rect key="frame" x="68" y="62" width="76" height="76"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" backgroundImage="social">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1936,6 +1941,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Arl-Gs-Dk0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="2228" y="-115"/>
         </scene>
     </scenes>
     <resources>
@@ -1948,9 +1954,9 @@
         <image name="business" width="76" height="76"/>
         <image name="camera_2x" width="76" height="76"/>
         <image name="check-1" width="76" height="76"/>
-        <image name="familyoffice" width="693" height="124"/>
+        <image name="family_office_white" width="280" height="43"/>
         <image name="gmail" width="30" height="30"/>
-        <image name="logo" width="180" height="180"/>
+        <image name="logo" width="99" height="99"/>
         <image name="logout-red" width="25" height="25"/>
         <image name="profile_default" width="626" height="626"/>
         <image name="social" width="76" height="76"/>
