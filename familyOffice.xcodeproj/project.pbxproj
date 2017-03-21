@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		020540971E552A13000741CC /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020540961E552A13000741CC /* Notification.swift */; };
 		020A30951E2DA4440024B1FB /* FamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A30941E2DA4440024B1FB /* FamilyViewController.swift */; };
+		020A64F91E81A8AF00F473A0 /* menuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A64F81E81A8AF00F473A0 /* menuBar.swift */; };
+		020A64FB1E81C4AF00F473A0 /* tableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A64FA1E81C4AF00F473A0 /* tableView.swift */; };
+		020A64FD1E81EE1A00F473A0 /* chatCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A64FC1E81EE1A00F473A0 /* chatCollectionViewController.swift */; };
 		0215F4E31E3FA97C00AC01D3 /* PersonalDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0215F4E21E3FA97C00AC01D3 /* PersonalDataTableViewController.swift */; };
 		0215F4E81E3FBCCD00AC01D3 /* PasswordChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0215F4E71E3FBCCD00AC01D3 /* PasswordChangeViewController.swift */; };
 		0215F4EA1E3FCDD400AC01D3 /* PersonalDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0215F4E91E3FCDD400AC01D3 /* PersonalDataTableViewCell.swift */; };
@@ -98,6 +101,9 @@
 /* Begin PBXFileReference section */
 		020540961E552A13000741CC /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		020A30941E2DA4440024B1FB /* FamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyViewController.swift; sourceTree = "<group>"; };
+		020A64F81E81A8AF00F473A0 /* menuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuBar.swift; sourceTree = "<group>"; };
+		020A64FA1E81C4AF00F473A0 /* tableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableView.swift; sourceTree = "<group>"; };
+		020A64FC1E81EE1A00F473A0 /* chatCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatCollectionViewController.swift; sourceTree = "<group>"; };
 		0215F4E21E3FA97C00AC01D3 /* PersonalDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDataTableViewController.swift; sourceTree = "<group>"; };
 		0215F4E71E3FBCCD00AC01D3 /* PasswordChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordChangeViewController.swift; sourceTree = "<group>"; };
 		0215F4E91E3FCDD400AC01D3 /* PersonalDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDataTableViewCell.swift; sourceTree = "<group>"; };
@@ -208,6 +214,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		020A64F41E81A77E00F473A0 /* chat */ = {
+			isa = PBXGroup;
+			children = (
+				020A64F71E81A89700F473A0 /* extensions */,
+				020A64FC1E81EE1A00F473A0 /* chatCollectionViewController.swift */,
+			);
+			name = chat;
+			sourceTree = "<group>";
+		};
+		020A64F71E81A89700F473A0 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				020A64F81E81A8AF00F473A0 /* menuBar.swift */,
+				020A64FA1E81C4AF00F473A0 /* tableView.swift */,
+			);
+			name = extensions;
+			sourceTree = "<group>";
+		};
 		0215F4E41E3FAB1400AC01D3 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +400,7 @@
 		0290591F1E78B9AA005F760C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				020A64F41E81A77E00F473A0 /* chat */,
 				029059211E78B9D8005F760C /* Cells */,
 				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
 			);
@@ -803,6 +828,7 @@
 				02AD814B1E4B87520030B3DD /* AddMembersTableViewController.swift in Sources */,
 				023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */,
 				0226C8E41E3C265A007968BA /* ConfigurationView.swift in Sources */,
+				020A64FB1E81C4AF00F473A0 /* tableView.swift in Sources */,
 				02D2C0D11E6747AE007A6798 /* References.swift in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
 				023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */,
@@ -822,6 +848,7 @@
 				02AD81501E4B94250030B3DD /* AddMember+CollectionView.swift in Sources */,
 				02AD81521E4B963C0030B3DD /* memberSelectedCollectionViewCell.swift in Sources */,
 				0226C8E61E3C267B007968BA /* ConfigurationTableViewController.swift in Sources */,
+				020A64FD1E81EE1A00F473A0 /* chatCollectionViewController.swift in Sources */,
 				0215F4E81E3FBCCD00AC01D3 /* PasswordChangeViewController.swift in Sources */,
 				020A30951E2DA4440024B1FB /* FamilyViewController.swift in Sources */,
 				02FA70641E707BAB0080AAEB /* ToastService.swift in Sources */,
@@ -838,6 +865,7 @@
 				02FA70661E7092ED0080AAEB /* ImageViewController.swift in Sources */,
 				02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */,
 				02AD814D1E4B90B10030B3DD /* SelectedTableViewCell.swift in Sources */,
+				020A64F91E81A8AF00F473A0 /* menuBar.swift in Sources */,
 				0215F4E31E3FA97C00AC01D3 /* PersonalDataTableViewController.swift in Sources */,
 				02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */,
 				02C17D271E424AD400EE7CFA /* ActivityLogService .swift in Sources */,
