@@ -323,8 +323,6 @@
 		024104841E6F407F002B8E1C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				02AD814C1E4B90B10030B3DD /* SelectedTableViewCell.swift */,
-				02AD81511E4B963C0030B3DD /* memberSelectedCollectionViewCell.swift */,
 				0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */,
 				02EABF581E312B67008A7CA9 /* FamilyCollectionViewCell.swift */,
 			);
@@ -378,6 +376,7 @@
 		0290591F1E78B9AA005F760C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				84AD56C01E81B76800E88EB4 /* Agenda */,
 				029059211E78B9D8005F760C /* Cells */,
 				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
 			);
@@ -387,7 +386,6 @@
 		029059211E78B9D8005F760C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8452F5AA1E5F4F540064A964 /* ModuleCollectionViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -508,6 +506,13 @@
 				8488E1671E41728700045646 /* Gotham-Book.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		84AD56C01E81B76800E88EB4 /* Agenda */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Agenda;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

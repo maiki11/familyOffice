@@ -17,6 +17,8 @@ class SelectCategoryViewController: UIViewController {
     var localeChangeObserver :[NSObjectProtocol] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        let logOutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(self.logout))
+        navigationItem.rightBarButtonItems = [logOutButton]
         // Do any additional setup after loading the view.
     }
     @IBAction func handlePressSocial(_ sender: UIButton) {
@@ -72,6 +74,10 @@ class SelectCategoryViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
     }
-
-
+    
+    func logout(){
+        AUTH_SERVICE.logOut()
+        Utility.Instance().gotoView(view: "StartView", context: self)
+    }
+    
 }
