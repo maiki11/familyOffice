@@ -79,18 +79,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func reloadFamily() -> Void {
         if let family = FAMILY_SERVICE.families.filter({$0.id == (USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})?.familyActive)! as String}).first{
-<<<<<<< HEAD
-            if let data = STORAGE_SERVICE.search(url: (family.photoURL?.absoluteString)!) {
-                //self.activityIndicator.stopAnimating()
-                UTILITY_SERVICE.stopLoading(view: self.view)
-                //self.familyImage.image = UIImage(data: data)
-                self.famImage = UIImage(data: data)
-=======
             if let url = family.photoURL {
-                self.activityIndicator.stopAnimating()
                 UTILITY_SERVICE.stopLoading(view: self.view)
-                self.familyImage.loadImage(urlString: url)
->>>>>>> master
             }
             
             self.familyName = family.name ?? "No seleccionada"
@@ -172,7 +162,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return myImages.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellModule", for: indexPath) as! ModuleCollectionViewCell
         cell.image.image = UIImage(named: myImages[indexPath.item])!
