@@ -11,6 +11,10 @@ import FirebaseDatabase
 import FirebaseAuth
 import MIBadgeButton_Swift
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate{
 
     let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts"]
@@ -138,6 +142,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
         let point: CGPoint = gestureReconizer.location(in: self.collectionView)
         let indexPath = self.collectionView?.indexPathForItem(at: point)
