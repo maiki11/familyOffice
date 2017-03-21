@@ -11,12 +11,13 @@ import Contacts
 import ContactsUI
 
 class AddMembersTableViewController: UITableViewController {
-    
+    let center = NotificationCenter.default
     var contacts : [CNContact] = []
     var selected : [User] = []
     var users : [User] = []
     var family : Family!
     var itemCount = 0
+    var localeChangeObserver : NSObjectProtocol!
     let IndexPathOfFirstRow = NSIndexPath(row: 0, section: 0)
     var firstCell : SelectedTableViewCell!
     
@@ -54,18 +55,28 @@ class AddMembersTableViewController: UITableViewController {
         firstCell = tableViewCell
     }
     override func viewWillAppear(_ animated: Bool) {
+        users = []
+        if let index = FAMILY_SERVICE.families.index(where: {$0.id == self.family.id}) {
+            self.family = FAMILY_SERVICE.families[index]
+        }
         super.viewWillAppear(animated)
+        self.tableView.reloadData()
         
+        let mainQueue = OperationQueue.main
+        self.localeChangeObserver =  center.addObserver(forName: USER_NOTIFICATION, object: nil, queue: mainQueue){user in
+            if let user : User = user.object as? User {
+                self.addMember(phone: user.phone)
+            }
+        }
         getContacts()
-        showContacts()
-        
-       
+        showContacts()   
     }
     override func viewWillDisappear(_ animated: Bool) {
         users = []
         selected = []
-        super.viewDidDisappear(animated)
+        center.removeObserver(self.localeChangeObserver)
         REF_USERS.removeAllObservers()
+        super.viewDidDisappear(animated)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,24 +120,27 @@ class AddMembersTableViewController: UITableViewController {
         self.users = []
         for item in contacts {
             for phone in item.phoneNumbers {
-                if let user = USER_SERVICE.users.filter({ $0.phone == phone.value.value(forKey: "digits") as! String }).first {
-                    if (FAMILY_SERVICE.families.first(where: {$0.id == family.id})?.members?[user.id]) == nil {
-                        self.users.append(user)
-                        self.tableView.reloadData()
-                    }
-                }else{
-                    USER_SERVICE.getUser(phone: (phone.value.value(forKey: "digits"))! as! String)
-                }
+                addMember(phone: phone.value.value(forKey: "digits") as! String )
             }
         }
-        NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){user in
-            self.showContacts()
+    }
+    func addMember(phone: String) -> Void {
+        
+        if let user = USER_SERVICE.users.filter({$0.phone == phone}).first {
+            if !self.users.contains(where: {$0.id == user.id}) && self.family.members?[user.id] == nil{
+                self.users.append(user)
+                self.tableView.insertRows(at: [NSIndexPath(row: self.users.count-1, section: 1) as IndexPath], with: .fade)
+            }
+        }else{
+            USER_SERVICE.getUser(phone: phone)
         }
     }
     func save(sender: UIBarButtonItem) -> Void {
+        self.view.makeToastActivity(.center)
         for user in selected {
-            FAMILY_SERVICE.addMember(member: user.id, family: family.id)
+            FAMILY_SERVICE.addMember(uid: user.id, fid: family.id)
         }
+        _ = self.navigationController?.popViewController(animated: true)
         
     }
     

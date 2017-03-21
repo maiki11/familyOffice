@@ -35,17 +35,4 @@ class ActivityLogService {
         }
     }
     
-    func getActivities()  {
-        
-        REF_ACTIVITY.child((USER_SERVICE.user?.id)!).queryOrdered(byChild: "timestamp").observe( .childAdded, with: { (snapshot) in
-            if(snapshot.exists()){
-                let not = Record(snapshot:snapshot)
-                if !self.activityLog.contains(where: {$0.id == not.id}){
-                    self.activityLog.append(not)
-                    NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: not)
-                }
-                
-            }
-        })
-    }
 }
