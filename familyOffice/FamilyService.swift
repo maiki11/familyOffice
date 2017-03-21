@@ -103,7 +103,7 @@ class FamilyService: repository {
                         
                         ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.users[0].id)!, activity: "Se creo la familia  \((family.name)!)", photo: downloadURL.absoluteString, type: "addFamily")
                         //Go to Home
-                        Utility.Instance().gotoView(view: "TabBarControllerView", context: view.self)
+                        Utility.Instance().gotoView(view: "mainView", context: view.self)
                     }
                     
                 }

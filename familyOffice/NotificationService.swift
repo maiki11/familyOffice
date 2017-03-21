@@ -72,6 +72,10 @@ class NotificationService {
         REF_NOTIFICATION.child("\(id)/\(key)").setValue(notification.toDictionary())
         
     }
+    func seenNotification(index: Int) -> Void {
+        self.notifications[index].seen = true
+        REF_NOTIFICATION.child(USER_SERVICE.users[0].id).child(self.notifications[index].id!).updateChildValues(self.notifications[index].toDictionary() as! [AnyHashable : Any])
+    }
     
     func deleteToken(token: String, id: String) -> Void {
         REF_USERS.child("\(id)/\(User.kUserTokensFCMeKey)/\(token)").removeValue()
