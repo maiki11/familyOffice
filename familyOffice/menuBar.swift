@@ -9,6 +9,9 @@
 import UIKit
 
 class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+   
+    var chatController : chatCollectionViewController!
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -24,11 +27,12 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         super.init(frame: frame)
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellId)
         addSubview(collectionView)
+        
         addContraintWithFormat(format: "H:|[v0]|", views: collectionView)
         addContraintWithFormat(format: "V:|[v0]|", views: collectionView)
         let selectedIndexPath = IndexPath(item: 0, section: 0)
         backgroundColor = UIColor.gray
-        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .bottom )
+        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .centeredHorizontally )
         setupHorizontalBar()
     }
     var horizontalBarLeftAnchorContraint: NSLayoutConstraint?
@@ -45,11 +49,11 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let x = CGFloat(indexPath.item) * frame.width / 3
-        horizontalBarLeftAnchorContraint?.constant = x
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+       
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
+        chatController.scrollMenuIndex(menuIndex: indexPath.item)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -69,7 +73,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         return 0
     }
    
-    
+   
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) No ha sido implementado")
     }

@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02002BF71E820589007191CC /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02002BF61E820589007191CC /* GroupsTableViewCell.swift */; };
+		02002BF91E820631007191CC /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02002BF81E820631007191CC /* MemberTableViewCell.swift */; };
+		02002BFB1E82074E007191CC /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02002BFA1E82074E007191CC /* BaseTableViewCell.swift */; };
+		02002BFE1E8208C2007191CC /* sectionChatCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02002BFD1E8208C2007191CC /* sectionChatCollectionViewController.swift */; };
 		020540971E552A13000741CC /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020540961E552A13000741CC /* Notification.swift */; };
 		020A30951E2DA4440024B1FB /* FamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A30941E2DA4440024B1FB /* FamilyViewController.swift */; };
 		020A64F91E81A8AF00F473A0 /* menuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A64F81E81A8AF00F473A0 /* menuBar.swift */; };
-		020A64FB1E81C4AF00F473A0 /* tableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A64FA1E81C4AF00F473A0 /* tableView.swift */; };
 		020A64FD1E81EE1A00F473A0 /* chatCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A64FC1E81EE1A00F473A0 /* chatCollectionViewController.swift */; };
 		0215F4E31E3FA97C00AC01D3 /* PersonalDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0215F4E21E3FA97C00AC01D3 /* PersonalDataTableViewController.swift */; };
 		0215F4E81E3FBCCD00AC01D3 /* PasswordChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0215F4E71E3FBCCD00AC01D3 /* PasswordChangeViewController.swift */; };
@@ -34,6 +37,8 @@
 		0249F3361E43C1E6000872CD /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249F3351E43C1E6000872CD /* StorageService.swift */; };
 		024BCA811E6F1E2D00736F1A /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024BCA801E6F1E2D00736F1A /* RequestService.swift */; };
 		024BCA831E6F237900736F1A /* Proccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024BCA821E6F237900736F1A /* Proccess.swift */; };
+		024EF9A71E83412700F5B4DF /* SafeBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EF9A61E83412700F5B4DF /* SafeBoxViewController.swift */; };
+		024EF9AA1E834B6A00F5B4DF /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EF9A91E834B6A00F5B4DF /* IndexViewController.swift */; };
 		025A89921E79B5F40032C3C0 /* PreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025A89911E79B5F40032C3C0 /* PreHomeViewController.swift */; };
 		025A89961E7A04AF0032C3C0 /* FamiliesPreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025A89951E7A04AF0032C3C0 /* FamiliesPreCollectionViewCell.swift */; };
 		025A89981E7A06000032C3C0 /* familyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025A89971E7A06000032C3C0 /* familyCollection.swift */; };
@@ -100,10 +105,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02002BF61E820589007191CC /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
+		02002BF81E820631007191CC /* MemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
+		02002BFA1E82074E007191CC /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		02002BFD1E8208C2007191CC /* sectionChatCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sectionChatCollectionViewController.swift; sourceTree = "<group>"; };
 		020540961E552A13000741CC /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		020A30941E2DA4440024B1FB /* FamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyViewController.swift; sourceTree = "<group>"; };
 		020A64F81E81A8AF00F473A0 /* menuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuBar.swift; sourceTree = "<group>"; };
-		020A64FA1E81C4AF00F473A0 /* tableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableView.swift; sourceTree = "<group>"; };
 		020A64FC1E81EE1A00F473A0 /* chatCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatCollectionViewController.swift; sourceTree = "<group>"; };
 		0215F4E21E3FA97C00AC01D3 /* PersonalDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDataTableViewController.swift; sourceTree = "<group>"; };
 		0215F4E71E3FBCCD00AC01D3 /* PasswordChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordChangeViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +142,8 @@
 		0249F3351E43C1E6000872CD /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		024BCA801E6F1E2D00736F1A /* RequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		024BCA821E6F237900736F1A /* Proccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proccess.swift; sourceTree = "<group>"; };
+		024EF9A61E83412700F5B4DF /* SafeBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeBoxViewController.swift; sourceTree = "<group>"; };
+		024EF9A91E834B6A00F5B4DF /* IndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
 		025A89911E79B5F40032C3C0 /* PreHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreHomeViewController.swift; sourceTree = "<group>"; };
 		025A89951E7A04AF0032C3C0 /* FamiliesPreCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamiliesPreCollectionViewCell.swift; sourceTree = "<group>"; };
 		025A89971E7A06000032C3C0 /* familyCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = familyCollection.swift; sourceTree = "<group>"; };
@@ -216,6 +226,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02002BFC1E82084E007191CC /* sectionChat */ = {
+			isa = PBXGroup;
+			children = (
+				02002BFD1E8208C2007191CC /* sectionChatCollectionViewController.swift */,
+			);
+			name = sectionChat;
+			sourceTree = "<group>";
+		};
 		020A64F41E81A77E00F473A0 /* chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,8 +246,11 @@
 		020A64F71E81A89700F473A0 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				02002BFC1E82084E007191CC /* sectionChat */,
 				020A64F81E81A8AF00F473A0 /* menuBar.swift */,
-				020A64FA1E81C4AF00F473A0 /* tableView.swift */,
+				02002BF61E820589007191CC /* GroupsTableViewCell.swift */,
+				02002BF81E820631007191CC /* MemberTableViewCell.swift */,
+				02002BFA1E82074E007191CC /* BaseTableViewCell.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -370,6 +391,15 @@
 			name = Repository;
 			sourceTree = "<group>";
 		};
+		024EF9A81E83413200F5B4DF /* safeBox */ = {
+			isa = PBXGroup;
+			children = (
+				024EF9A61E83412700F5B4DF /* SafeBoxViewController.swift */,
+				024EF9A91E834B6A00F5B4DF /* IndexViewController.swift */,
+			);
+			name = safeBox;
+			sourceTree = "<group>";
+		};
 		025A89931E7A02240032C3C0 /* PreHome */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				84AD56C01E81B76800E88EB4 /* Agenda */,
+				024EF9A81E83413200F5B4DF /* safeBox */,
 				020A64F41E81A77E00F473A0 /* chat */,
 				029059211E78B9D8005F760C /* Cells */,
 				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
@@ -838,8 +869,8 @@
 				8450EFC61E64A1E500A51C09 /* AlertService.swift in Sources */,
 				02AD814B1E4B87520030B3DD /* AddMembersTableViewController.swift in Sources */,
 				023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */,
+				02002BFB1E82074E007191CC /* BaseTableViewCell.swift in Sources */,
 				0226C8E41E3C265A007968BA /* ConfigurationView.swift in Sources */,
-				020A64FB1E81C4AF00F473A0 /* tableView.swift in Sources */,
 				02D2C0D11E6747AE007A6798 /* References.swift in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
 				023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */,
@@ -860,9 +891,13 @@
 				02AD81521E4B963C0030B3DD /* memberSelectedCollectionViewCell.swift in Sources */,
 				0226C8E61E3C267B007968BA /* ConfigurationTableViewController.swift in Sources */,
 				020A64FD1E81EE1A00F473A0 /* chatCollectionViewController.swift in Sources */,
+				02002BF71E820589007191CC /* GroupsTableViewCell.swift in Sources */,
 				0215F4E81E3FBCCD00AC01D3 /* PasswordChangeViewController.swift in Sources */,
 				020A30951E2DA4440024B1FB /* FamilyViewController.swift in Sources */,
+				024EF9A71E83412700F5B4DF /* SafeBoxViewController.swift in Sources */,
 				02FA70641E707BAB0080AAEB /* ToastService.swift in Sources */,
+				02002BFE1E8208C2007191CC /* sectionChatCollectionViewController.swift in Sources */,
+				02002BF91E820631007191CC /* MemberTableViewCell.swift in Sources */,
 				025A89961E7A04AF0032C3C0 /* FamiliesPreCollectionViewCell.swift in Sources */,
 				02D956331E41220A007BAC66 /* DatePickerTableViewCell.swift in Sources */,
 				020540971E552A13000741CC /* Notification.swift in Sources */,
@@ -874,6 +909,7 @@
 				02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */,
 				84AEA8A41E3BE32C002B2D43 /* Animations.swift in Sources */,
 				02FA70661E7092ED0080AAEB /* ImageViewController.swift in Sources */,
+				024EF9AA1E834B6A00F5B4DF /* IndexViewController.swift in Sources */,
 				02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */,
 				02AD814D1E4B90B10030B3DD /* SelectedTableViewCell.swift in Sources */,
 				020A64F91E81A8AF00F473A0 /* menuBar.swift in Sources */,

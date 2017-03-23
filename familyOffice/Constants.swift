@@ -26,6 +26,7 @@ let USERUPDATED_NOTIFICATION = Notification.Name("UserUpdatedNotification")
 let SUCCESS_NOTIFICATION  = Notification.Name("SuccessNotification")
 let ERROR_NOTIFICATION  = Notification.Name("ErrorNotification")
 
+let BACKGROUND_NOTIFICATION = Notification.Name("BackgroundNotification")
 //Firebase References
 
 let REF = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")

@@ -86,13 +86,14 @@ struct User {
             User.kUserBirthdayKey : self.birthday!
         ]
     }
+    
     mutating func update(snapshot: FIRDataSnapshot){
         switch snapshot.key {
         case  User.kUserPhotoUrlKey:
             self.photoURL =  snapshot.value! as! String
             break
         case User.kUserFamiliesKey:
-            self.families = snapshot.value! as! NSDictionary
+            self.families = snapshot.value! as? NSDictionary
             break
         default:
             break
