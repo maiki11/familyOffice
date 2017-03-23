@@ -14,7 +14,6 @@ extension FamilyCollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
         createListeners()
         
         if (FAMILY_SERVICE.families.count == 0){
