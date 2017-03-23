@@ -18,7 +18,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         let doneButton : UIBarButtonItem = UIBarButtonItem(title: "Guardar", style: UIBarButtonItemStyle.plain, target: self, action:#selector(save(sender:)))
         self.navigationItem.rightBarButtonItem = doneButton
         scrollView.delegate = self
-        //imageView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
+        imageView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
         imageView.isUserInteractionEnabled = true
         scrollView.addSubview(imageView)
         // Do any additional setup after loadi
