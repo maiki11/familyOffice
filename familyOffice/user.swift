@@ -24,6 +24,7 @@ struct User {
     static let kUserNSSKey = "nss"
     static let kUserBloodTypeKey = "bloodType"
     static let kUserTokensFCMeKey = "tokensFCM"
+    static let kUserHealthKey = "health"
     
     let id: String!
     var name : String!
@@ -38,8 +39,9 @@ struct User {
     var address : String!
     var bloodtype: String!
     var tokens: NSDictionary? = nil
+    var health: NSDictionary? = nil
     
-    init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String) {
+    init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String, health: NSDictionary) {
         self.id = id
         self.name = name
         self.phone = phone
@@ -53,6 +55,7 @@ struct User {
         self.address = address
         self.bloodtype = bloodtype
         self.tokens = nil
+        self.health = health
     }
     
     init(snapshot: FIRDataSnapshot) {
@@ -70,6 +73,7 @@ struct User {
         self.families = UTILITY_SERVICE.existNSDictionary(field: User.kUserFamiliesKey, dictionary: snapshotValue)
         self.phone = UTILITY_SERVICE.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
         self.tokens = UTILITY_SERVICE.existNSDictionary(field: User.kUserTokensFCMeKey, dictionary: snapshotValue)
+        self.health = UTILITY_SERVICE.existNSDictionary(field: User.kUserHealthKey, dictionary: snapshotValue)
     }
     
     func toDictionary() -> NSDictionary {
@@ -83,7 +87,8 @@ struct User {
             User.kUserNSSKey: self.nss!,
             User.kUserBloodTypeKey: self.bloodtype!,
             User.kUserPhoneKey : self.phone!,
-            User.kUserBirthdayKey : self.birthday!
+            User.kUserBirthdayKey : self.birthday!,
+            User.kUserHealthKey : self.health!
         ]
     }
     mutating func update(snapshot: FIRDataSnapshot){
@@ -94,6 +99,8 @@ struct User {
         case User.kUserFamiliesKey:
             self.families = snapshot.value! as! NSDictionary
             break
+        case User.kUserHealthKey:
+            self.health = snapshot.value! as? NSDictionary
         default:
             break
         }
