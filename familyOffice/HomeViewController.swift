@@ -45,14 +45,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         lpgr.delaysTouchesBegan = true
         self.collectionView.addGestureRecognizer(lpgr)
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
-<<<<<<< HEAD
-        self.tabBarController?.navigationItem.rightBarButtonItem = moreButton
 
-=======
         self.navigationItem.rightBarButtonItem = moreButton
         let barButton = UIBarButtonItem(title: "Atras", style: .plain, target: self, action: #selector(self.handleBack))
         self.navigationItem.leftBarButtonItem = barButton
->>>>>>> Leonardo
         
     }
     
