@@ -400,7 +400,6 @@
 		0290591F1E78B9AA005F760C /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				84AD56C01E81B76800E88EB4 /* Agenda */,
 				020A64F41E81A77E00F473A0 /* chat */,
 				029059211E78B9D8005F760C /* Cells */,
 				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
@@ -531,13 +530,6 @@
 				8488E1671E41728700045646 /* Gotham-Book.ttf */,
 			);
 			name = Fonts;
-			sourceTree = "<group>";
-		};
-		84AD56C01E81B76800E88EB4 /* Agenda */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Agenda;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

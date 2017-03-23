@@ -86,6 +86,7 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
   install_framework "$BUILT_PRODUCTS_DIR/BTNavigationDropdownMenu/BTNavigationDropdownMenu.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/CVCalendar/CVCalendar.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2/GTMOAuth2.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac-615f275e/GoogleToolboxForMac.framework"
@@ -98,6 +99,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
   install_framework "$BUILT_PRODUCTS_DIR/BTNavigationDropdownMenu/BTNavigationDropdownMenu.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/CVCalendar/CVCalendar.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2/GTMOAuth2.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac-615f275e/GoogleToolboxForMac.framework"
