@@ -21,7 +21,7 @@ class SelectCategoryViewController: UIViewController {
     }
     @IBAction func handlePressSocial(_ sender: UIButton) {
         if FAMILY_SERVICE.families.count > 0 && FAMILY_SERVICE.families.contains(where: {$0.id == USER_SERVICE.users[0].familyActive}){
-            self.performSegue(withIdentifier: "socialSegue", sender: nil)
+            UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
         }
     }
 
