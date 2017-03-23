@@ -1670,11 +1670,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-mT-iSW">
-<<<<<<< HEAD
-                                            <rect key="frame" x="9.5" y="-9" width="339.5" height="173"/>
-=======
+
                                             <rect key="frame" x="9" y="-9" width="339.5" height="173"/>
->>>>>>> origin/master
+
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <date key="date" timeIntervalSinceReferenceDate="507585004.35117102">
                                                 <!--2017-01-31 19:50:04 +0000-->
