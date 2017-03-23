@@ -11,7 +11,6 @@ import FirebaseDatabase
 import FirebaseAuth
 import MIBadgeButton_Swift
 
-
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate{
 
     let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts"]
@@ -166,8 +165,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         switch index {
         case 0:
             self.performSegue(withIdentifier: "chatSegue", sender: nil)
+
+        case 1:
+            self.performSegue(withIdentifier: "calendarSegue", sender: nil)
+
         case 4:
             self.performSegue(withIdentifier: "safeBoxSegue", sender: nil)
+
         default:
             break
         }
