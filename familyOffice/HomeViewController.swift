@@ -40,12 +40,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.familyImage.layer.cornerRadius = self.familyImage.frame.size.height/2
         self.familyImage.clipsToBounds = true
         let lpgr = UILongPressGestureRecognizer(target: self, action:#selector(handleLongPress(gestureReconizer:)))
-        lpgr.minimumPressDuration = 0.1
+        lpgr.minimumPressDuration = 0
         lpgr.delaysTouchesBegan = true
         self.collectionView.addGestureRecognizer(lpgr)
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
-        self.tabBarController?.navigationItem.rightBarButtonItem = moreButton
 
+        self.navigationItem.rightBarButtonItem = moreButton
+        let barButton = UIBarButtonItem(title: "Atras", style: .plain, target: self, action: #selector(self.handleBack))
+        self.navigationItem.leftBarButtonItem = barButton
         
     }
     
@@ -57,14 +59,17 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     
+    func handleBack()  {
+        UTILITY_SERVICE.gotoView(view: "mainView", context: self)
     
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         reloadFamily()
         
        
         if let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
-            self.tabBarController?.navigationItem.title = FAMILY_SERVICE.families[index].name
+            self.navigationItem.title = FAMILY_SERVICE.families[index].name
         }
      
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -143,10 +148,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let point: CGPoint = gestureReconizer.location(in: self.collectionView)
         let indexPath = self.collectionView?.indexPathForItem(at: point)
         
-        if (indexPath != nil && (indexPath?.row)! < FAMILY_SERVICE.families.count) {
+        if (indexPath != nil ){
             switch gestureReconizer.state {
             case .began:
-                gotoModule(index: (indexPath?.row)!)
+                gotoModule(index: (indexPath?.item)!)
                 break
             case .ended:
                 break
@@ -160,8 +165,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         switch index {
         case 0:
             self.performSegue(withIdentifier: "chatSegue", sender: nil)
+<<<<<<< HEAD
         case 1:
             self.performSegue(withIdentifier: "calendarSegue", sender: nil)
+=======
+        case 4:
+            self.performSegue(withIdentifier: "safeBoxSegue", sender: nil)
+>>>>>>> master
         default:
             break
         }
