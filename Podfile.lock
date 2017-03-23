@@ -1,7 +1,6 @@
 PODS:
   - Alamofire (4.4.0)
   - BTNavigationDropdownMenu (0.4.1)
-  - CVCalendar (1.4.1)
   - Firebase (3.15.0):
     - Firebase/Core (= 3.15.0)
   - Firebase/Auth (3.15.0):
@@ -74,7 +73,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - BTNavigationDropdownMenu (from `https://github.com/PhamBaTho/BTNavigationDropdownMenu.git`, branch `swift-3.0`)
-  - CVCalendar
   - Firebase
   - Firebase/Auth
   - Firebase/Core
@@ -107,7 +105,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
-  CVCalendar: 61912eb5dc39c3bcfe22a731147a559a696fbc15
   Firebase: 2b1cdfba1cda8589f32904a697cc753322bff9d8
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
   FirebaseAuth: cc8a1824170adbd351edb7f994490a3fb5c18be6
@@ -127,10 +124,6 @@ SPEC CHECKSUMS:
   SmileLock: ee34bf37e824c8afc71217fccc2b2bee5510db64
   Toast-Swift: 5b2f8f720f7e78e48511f693df1f9c9a6e38a25a
 
-<<<<<<< HEAD
-PODFILE CHECKSUM: ac87aecded2cc2f961f3295c3f9ba3cd5e7d31bc
-=======
-PODFILE CHECKSUM: c1ba6166b14a88b1800efbac2e3991b0389f114d
->>>>>>> master
+PODFILE CHECKSUM: 700c3ec98c2cabe47591db309f46459cce5aaf51
 
 COCOAPODS: 1.1.1

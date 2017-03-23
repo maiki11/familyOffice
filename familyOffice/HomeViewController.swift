@@ -165,13 +165,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         switch index {
         case 0:
             self.performSegue(withIdentifier: "chatSegue", sender: nil)
-<<<<<<< HEAD
+
         case 1:
             self.performSegue(withIdentifier: "calendarSegue", sender: nil)
-=======
+
         case 4:
             self.performSegue(withIdentifier: "safeBoxSegue", sender: nil)
->>>>>>> master
+
         default:
             break
         }
