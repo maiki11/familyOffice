@@ -75,6 +75,9 @@
 		A46316B41E78CFC600E3F72C /* HealthTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46316B31E78CFC600E3F72C /* HealthTableViewController.swift */; };
 		A46D7AD31E7B5AA10036A52C /* NewMedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46D7AD21E7B5AA10036A52C /* NewMedTableViewController.swift */; };
 		A48E4DAB1E8342940051A55D /* DiseasesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E4DAA1E8342940051A55D /* DiseasesTableViewController.swift */; };
+		A48F4BD21E84861800B1293F /* DoctorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48F4BD11E84861800B1293F /* DoctorCollectionViewCell.swift */; };
+		A48F4BD41E8486CA00B1293F /* DoctorCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48F4BD31E8486CA00B1293F /* DoctorCollectionViewController.swift */; };
+		A48F4BD61E8495C700B1293F /* NewDoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48F4BD51E8495C700B1293F /* NewDoctorViewController.swift */; };
 		A4A23F771E7CAE460011D471 /* MedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A23F761E7CAE460011D471 /* MedCollectionViewCell.swift */; };
 		A4FA7DE21E7A0D4D00C10B1D /* MedsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA7DE11E7A0D4D00C10B1D /* MedsCollectionViewController.swift */; };
 		DBC61BF3F1B28E8FA0CCC6AA /* Pods_familyOfficeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9F185A83D04F89C69B99A9 /* Pods_familyOfficeTests.framework */; };
@@ -176,6 +179,9 @@
 		A46316B31E78CFC600E3F72C /* HealthTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthTableViewController.swift; sourceTree = "<group>"; };
 		A46D7AD21E7B5AA10036A52C /* NewMedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMedTableViewController.swift; sourceTree = "<group>"; };
 		A48E4DAA1E8342940051A55D /* DiseasesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseasesTableViewController.swift; sourceTree = "<group>"; };
+		A48F4BD11E84861800B1293F /* DoctorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorCollectionViewCell.swift; sourceTree = "<group>"; };
+		A48F4BD31E8486CA00B1293F /* DoctorCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorCollectionViewController.swift; sourceTree = "<group>"; };
+		A48F4BD51E8495C700B1293F /* NewDoctorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDoctorViewController.swift; sourceTree = "<group>"; };
 		A4A23F761E7CAE460011D471 /* MedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4FA7DE11E7A0D4D00C10B1D /* MedsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedsCollectionViewController.swift; sourceTree = "<group>"; };
 		D09E6D98CC40D45676606902 /* Pods-familyOfficeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-familyOfficeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-familyOfficeUITests/Pods-familyOfficeUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -486,6 +492,7 @@
 			isa = PBXGroup;
 			children = (
 				A4A23F761E7CAE460011D471 /* MedCollectionViewCell.swift */,
+				A48F4BD11E84861800B1293F /* DoctorCollectionViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -498,6 +505,8 @@
 				A4FA7DE11E7A0D4D00C10B1D /* MedsCollectionViewController.swift */,
 				A46D7AD21E7B5AA10036A52C /* NewMedTableViewController.swift */,
 				A48E4DAA1E8342940051A55D /* DiseasesTableViewController.swift */,
+				A48F4BD31E8486CA00B1293F /* DoctorCollectionViewController.swift */,
+				A48F4BD51E8495C700B1293F /* NewDoctorViewController.swift */,
 			);
 			name = Health;
 			sourceTree = "<group>";
@@ -811,6 +820,7 @@
 				023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */,
 				02ABAC421E6E02B5003780AB /* Device.swift in Sources */,
 				025C70FE1E38229D004A4A5B /* Constants.swift in Sources */,
+				A48F4BD61E8495C700B1293F /* NewDoctorViewController.swift in Sources */,
 				A44ACF6A1E70DB1800A5CA84 /* homeExtension.swift in Sources */,
 				A4FA7DE21E7A0D4D00C10B1D /* MedsCollectionViewController.swift in Sources */,
 				02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */,
@@ -846,6 +856,8 @@
 				0215F4EA1E3FCDD400AC01D3 /* PersonalDataTableViewCell.swift in Sources */,
 				0226C8E21E3C217D007968BA /* ConfigurationViewController.swift in Sources */,
 				02382F0D1E1C210C0036FFC9 /* AppDelegate.swift in Sources */,
+				A48F4BD41E8486CA00B1293F /* DoctorCollectionViewController.swift in Sources */,
+				A48F4BD21E84861800B1293F /* DoctorCollectionViewCell.swift in Sources */,
 				02EABF571E312AE8008A7CA9 /* FamilyCollectionViewController.swift in Sources */,
 				024104871E6F40C4002B8E1C /* FamilyCollectionExtension.swift in Sources */,
 				849C81C71E1D6D2F00FF3EE7 /* StartViewController.swift in Sources */,

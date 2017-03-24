@@ -16,12 +16,19 @@ struct Health {
     static let kHealthDoctors = "doctors";
     static let kHealthOperations = "operations";
     
-    var meds: [NSDictionary]! //ids
-    var diseases: [NSDictionary]!
-    var doctors: [NSDictionary]!
-    var operations: [NSDictionary]!
+    var meds: [NSDictionary]
+    var diseases: [NSDictionary]
+    var doctors: [NSDictionary]
+    var operations: [NSDictionary]
     
     struct Operation {}
+    
+    init(health: NSDictionary){
+        self.meds = health[Health.kHealthMeds] as? [NSDictionary] ?? []
+        self.diseases = health[Health.kHealthDiseases] as? [NSDictionary] ?? []
+        self.doctors = health[Health.kHealthDoctors] as? [NSDictionary] ?? []
+        self.operations = health[Health.kHealthOperations] as? [NSDictionary] ?? []
+    }
     
     init(meds: [NSDictionary], diseases: [NSDictionary], doctors: [NSDictionary], operations: [NSDictionary]){
         self.meds = meds;
@@ -62,10 +69,10 @@ extension Health {
         static let kMedDose = "dose"
         static let kMedLapse = "lapse"
         
-        var name: String!
-        var type: String!
-        var dose: String!
-        var lapse: Int64!
+        var name: String
+        var type: String
+        var dose: String
+        var lapse: Int64
         
         init(name: String, type: String, dose: String, lapse: Int64){
             self.name = name
@@ -86,7 +93,7 @@ extension Health {
     struct Disease {
     	static let kDiseaseName = "name"
         
-        var name: String!
+        var name: String
         
         init(name: String){
             self.name = name
@@ -100,16 +107,39 @@ extension Health {
     
     struct Doctor {
     	static let kDoctorName = "name"
+        static let kDoctorPhone = "phone"
+        static let kDoctorAddress = "address"
         
-        var name: String!
+        var name: String
+        var phone: String
+        var address: String
         
-        init(name: String){
+        init(doctor: NSDictionary){
+            self.name = doctor[Doctor.kDoctorName] as! String
+            self.phone = doctor[Doctor.kDoctorPhone] as! String
+            self.address = doctor[Doctor.kDoctorAddress] as! String
+        }
+        
+        init(name: String, phone: String, address: String){
             self.name = name
+            self.phone = phone
+            self.address = address
         }
         
         init(snapshot: FIRDataSnapshot){
             let snapDic = snapshot.value as! NSDictionary
             self.name = UTILITY_SERVICE.exist(field: Doctor.kDoctorName, dictionary: snapDic)
+            self.phone = UTILITY_SERVICE.exist(field: Doctor.kDoctorPhone, dictionary: snapDic)
+            self.address = UTILITY_SERVICE.exist(field: Doctor.kDoctorAddress, dictionary: snapDic)
         }
+        
+        func toDictionary() -> NSDictionary {
+            return [
+                Doctor.kDoctorName: self.name,
+                Doctor.kDoctorPhone: self.phone,
+                Doctor.kDoctorAddress: self.address
+            ]
+        }
+
     }
 }

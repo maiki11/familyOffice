@@ -218,7 +218,7 @@ class NewMedTableViewController: UITableViewController, UIPickerViewDataSource, 
         
         var user = USER_SERVICE.users[0]
         if let health = user.health! as NSDictionary? {
-            var meds = health[Health.kHealthMeds] as! [NSDictionary]
+            var meds = health[Health.kHealthMeds] as? [NSDictionary] ?? []
             if let i = index {
                 meds[i] = med
             }else {
