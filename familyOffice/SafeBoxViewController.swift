@@ -27,7 +27,7 @@ class SafeBoxViewController: UIViewController {
         //customize password UI
         passwordContainerView.tintColor = UIColor.black
         passwordContainerView.highlightedColor = UIColor.brown
-        self.navigationController?.title = "Caja Fuerte"
+        self.navigationItem.title = "Caja Fuerte"
 
     }
     
