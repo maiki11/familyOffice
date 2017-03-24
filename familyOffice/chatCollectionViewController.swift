@@ -122,6 +122,7 @@ class chatCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isTranslucent = true
         
     }
     // MARK: UICollectionViewDelegate

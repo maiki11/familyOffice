@@ -95,9 +95,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func reloadFamily() -> Void {
         if USER_SERVICE.users.count > 0, let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
             let family = FAMILY_SERVICE.families[index]
-            
-        }else{
-            
+            self.navigationItem.title = family.name
         }
     }
     
