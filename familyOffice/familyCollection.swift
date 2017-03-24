@@ -23,14 +23,19 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FamiliesPreCollectionViewCell
             let family = families[indexPath.row]
             cell.name.text = family.name
+            cell.check.layer.cornerRadius = 15
+            cell.check.layer.borderWidth = 3
+            cell.check.layer.borderColor = UIColor(red: 255.0/255, green: 255.0/255, blue: 255.0/255, alpha: 1).cgColor
             // Bounce back to the main thread to update the UI
             if !(family.photoURL?.isEmpty)! {
                 cell.image.loadImage(urlString: (family.photoURL)!)
             }
             cell.check.isHidden = true
+            cell.name.textColor = #colorLiteral(red: 0.6941176471, green: 0.6941176471, blue: 0.6941176471, alpha: 1)
             if family.id == USER_SERVICE.users[0].familyActive {
                 cell.check.isHidden = false
                 imageSelect = cell.image.image
+                cell.name.textColor = #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)
             }
             return cell
         }

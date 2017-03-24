@@ -12,14 +12,35 @@ class SelectCategoryViewController: UIViewController {
     var families : [Family]! = []
     var imageSelect : UIImage!
     @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var familiesCollection: UICollectionView!
+    @IBOutlet weak var familiasView: UIView!
+    @IBOutlet weak var categoriasView: UIView!
+    @IBOutlet weak var empresarialView: UIView!
+    @IBOutlet weak var socialView: UIView!
     var localeChangeObserver :[NSObjectProtocol] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         let logOutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(self.logout))
+        logOutButton.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
         navigationItem.rightBarButtonItems = [logOutButton]
-        // Do any additional setup after loading the view.
+        let nav = self.navigationController?.navigationBar
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
+        self.headerView.layer.borderWidth = 1
+        self.headerView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.familiasView.layer.borderWidth = 1
+        self.familiasView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.familiasView.layer.cornerRadius = 5
+        self.categoriasView.layer.borderWidth = 1
+        self.categoriasView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.categoriasView.layer.cornerRadius = 5
+        self.socialView.layer.borderWidth = 1
+        self.socialView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.socialView.layer.cornerRadius = 5
+        self.empresarialView.layer.borderWidth = 1
+        self.empresarialView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.empresarialView.layer.cornerRadius = 5
     }
     @IBAction func handlePressSocial(_ sender: UIButton) {
         if FAMILY_SERVICE.families.count > 0 && FAMILY_SERVICE.families.contains(where: {$0.id == USER_SERVICE.users[0].familyActive}){
@@ -65,6 +86,9 @@ class SelectCategoryViewController: UIViewController {
         self.name.text = USER_SERVICE.users[0].name
         self.image.layer.cornerRadius = self.image.frame.size.width/2
         self.image.clipsToBounds = true
+        self.image.layer.borderWidth = 4.0
+        self.image.layer.borderColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
+        self.image.layer.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
     }
     
    

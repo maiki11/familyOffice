@@ -13,8 +13,8 @@ import MIBadgeButton_Swift
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate{
 
-    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts"]
-    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos"]
+    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property"]
+    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles"]
     
 
     private var family : Family?
@@ -23,8 +23,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     let user = USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
     var families : [String]! = []
 
-    @IBOutlet weak var familyImage: UIImageView!
-    @IBOutlet weak var familyName: UILabel!
+   
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
 
@@ -36,9 +35,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
         //USER_SERVICE.observers()
         
-        self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
-        self.familyImage.layer.cornerRadius = self.familyImage.frame.size.height/2
-        self.familyImage.clipsToBounds = true
         let lpgr = UILongPressGestureRecognizer(target: self, action:#selector(handleLongPress(gestureReconizer:)))
         lpgr.minimumPressDuration = 0
         lpgr.delaysTouchesBegan = true
@@ -74,8 +70,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
      
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
-            self.familyImage.image = #imageLiteral(resourceName: "Family")
-            self.familyName.text = "Sin familia seleccionada"
             return
         }
         NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){_ in
@@ -101,13 +95,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func reloadFamily() -> Void {
         if USER_SERVICE.users.count > 0, let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
             let family = FAMILY_SERVICE.families[index]
-            if !(family.photoURL?.isEmpty)! {
-                 self.familyImage.loadImage(urlString: family.photoURL!)
-            }
-            self.familyName.text = family.name
+            
         }else{
-            self.familyImage.image = #imageLiteral(resourceName: "Family")
-            self.familyName.text = "Sin familia seleccionada"
+            
         }
     }
     
