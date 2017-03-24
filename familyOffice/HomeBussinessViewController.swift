@@ -10,8 +10,8 @@ import UIKit
 
 class HomeBussinessViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    let icons = ["chat", "calendar", "objetives", "gallery"]
-    let labels = ["Proyectos", "Presupuesto", "Protocolos", "Votación"]
+    let icons = ["proyectos", "presupuesto", "politicas", "votacion"]
+    let labels = ["Proyectos", "Presupuesto", "Políticas", "Votación"]
     
     
     private var family : Family?
