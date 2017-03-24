@@ -91,12 +91,17 @@ class SelectCategoryViewController: UIViewController {
         self.image.layer.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
     }
     
+    @IBAction func handleBussiness(_ sender: UIButton) {
+        if FAMILY_SERVICE.families.count > 0 && FAMILY_SERVICE.families.contains(where: {$0.id == USER_SERVICE.users[0].familyActive}){
+            UTILITY_SERVICE.gotoView(view: "HomeBussiness", context: self)
+        }
+        
+    }
    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
     }
     
     func logout(){

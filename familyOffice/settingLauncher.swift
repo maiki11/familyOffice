@@ -76,12 +76,18 @@ class SettingLauncher: NSObject, UICollectionViewDelegateFlowLayout, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         FAMILY_SERVICE.selectFamily(family: FAMILY_SERVICE.families[indexPath.row])
         handleDismiss()
-        self.view.reloadFamily()
-        self.view.tabBarController?.navigationItem.title = FAMILY_SERVICE.families[indexPath.row].name
+        if view != nil {
+            self.view.reloadFamily()
+            self.view.tabBarController?.navigationItem.title = FAMILY_SERVICE.families[indexPath.row].name
+        }
+       
     }
     
-    func setView(view: HomeViewController) -> Void {
-        self.view = view
+    func setView(view: UIViewController) -> Void {
+        
+        if let view = view as? HomeViewController {
+            self.view = view
+        }
     }
     override init(){
         super.init()
