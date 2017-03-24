@@ -34,7 +34,6 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
             cell.name.textColor = #colorLiteral(red: 0.6941176471, green: 0.6941176471, blue: 0.6941176471, alpha: 1)
             if family.id == USER_SERVICE.users[0].familyActive {
                 cell.check.isHidden = false
-                imageSelect = cell.image.image
                 cell.name.textColor = #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)
             }
             return cell

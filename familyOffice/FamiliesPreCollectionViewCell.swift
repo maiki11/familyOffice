@@ -17,7 +17,7 @@ class FamiliesPreCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.image.image = #imageLiteral(resourceName: "familyImage")
-        self.image.layer.cornerRadius = 5
+        self.image.layer.cornerRadius = 2
         self.image.clipsToBounds = true
     }
 }
