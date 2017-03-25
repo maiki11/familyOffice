@@ -15,7 +15,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.darkGray
+        cv.backgroundColor = UIColor.white
         cv.delegate = self
         cv.dataSource = self
         return cv
@@ -31,21 +31,20 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         addContraintWithFormat(format: "H:|[v0]|", views: collectionView)
         addContraintWithFormat(format: "V:|[v0]|", views: collectionView)
         let selectedIndexPath = IndexPath(item: 0, section: 0)
-        backgroundColor = UIColor.gray
         collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .centeredHorizontally )
         setupHorizontalBar()
     }
     var horizontalBarLeftAnchorContraint: NSLayoutConstraint?
     func setupHorizontalBar() -> Void {
         let horizontalView = UIView()
-        horizontalView.backgroundColor = UIColor.white
+        horizontalView.backgroundColor = #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
         horizontalView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(horizontalView)
         horizontalBarLeftAnchorContraint =  horizontalView.leftAnchor.constraint(equalTo: self.leftAnchor)
         horizontalBarLeftAnchorContraint?.isActive = true
         horizontalView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         horizontalView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3).isActive = true
-        horizontalView.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        horizontalView.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -83,18 +82,18 @@ class MenuCell: BaseCell {
     let label: UILabel = {
         let lb = UILabel()
         lb.font = lb.font.withSize(12)
-        lb.tintColor = UIColor.init(red: 91, green: 14, blue: 13, alpha: 0)
+        lb.tintColor =  #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
         return lb
     }()
     
     override var isHighlighted: Bool {
         didSet {
-            label.textColor = isHighlighted ? UIColor.white : UIColor.black
+            label.textColor = isHighlighted ? #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1) : #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
         }
     }
     override var isSelected: Bool {
         didSet {
-            label.textColor = isSelected ? UIColor.white : UIColor.black
+            label.textColor = isSelected ? #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1) : #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
         }
     }
     
