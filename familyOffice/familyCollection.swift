@@ -47,6 +47,7 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
     func addFamily(family: Family) -> Void {
         if !self.families.contains(where: {$0.id == family.id!}){
             self.families.append(family)
+           
             self.familiesCollection.insertItems(at: [IndexPath(item: self.families.count-1, section: 0)])
             
         }    

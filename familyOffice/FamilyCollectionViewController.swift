@@ -26,6 +26,8 @@ class FamilyCollectionViewController: UICollectionViewController, UIGestureRecog
         lpgr.delaysTouchesBegan = true
         self.familyCollection.addGestureRecognizer(lpgr)
         self.clearsSelectionOnViewWillAppear = true
+        let nav = self.navigationController?.navigationBar
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
         
         
     }

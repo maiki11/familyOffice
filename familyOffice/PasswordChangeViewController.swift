@@ -20,7 +20,9 @@ class PasswordChangeViewController: UIViewController {
         self.navigationItem.backBarButtonItem = homeButton
         self.navigationItem.rightBarButtonItem = doneButton
         super.viewDidLoad()
-        
+        TEXTFIELDSTYLES.borderbottom(textField: oldPassword, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
+        TEXTFIELDSTYLES.borderbottom(textField: newPassword, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
+        TEXTFIELDSTYLES.borderbottom(textField: repeatPass, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
         // Do any additional setup after loading the view.
     }
    

@@ -32,6 +32,8 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let addButton : UIBarButtonItem = UIBarButtonItem(title: "Agregar", style: UIBarButtonItemStyle.plain, target: self, action:#selector(addMemberScreen(sender:)))
         self.navigationItem.rightBarButtonItem = addButton
         self.navigationItem.title = family?.name
+        let nav = self.navigationController?.navigationBar
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
         // Do any additional setup after loading the view.
     }
     

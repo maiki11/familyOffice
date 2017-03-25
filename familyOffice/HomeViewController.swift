@@ -44,6 +44,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.navigationItem.rightBarButtonItem = moreButton
         let barButton = UIBarButtonItem(title: "Atras", style: .plain, target: self, action: #selector(self.handleBack))
         self.navigationItem.leftBarButtonItem = barButton
+        let nav = self.navigationController?.navigationBar
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
         
     }
     

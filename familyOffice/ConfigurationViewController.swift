@@ -21,7 +21,8 @@ UINavigationControllerDelegate  {
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         self.profileImage.clipsToBounds = true
         picker.delegate = self
-       
+        let nav = self.navigationController?.navigationBar
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
