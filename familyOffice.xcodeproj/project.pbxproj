@@ -37,6 +37,7 @@
 		0249F3361E43C1E6000872CD /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249F3351E43C1E6000872CD /* StorageService.swift */; };
 		024BCA811E6F1E2D00736F1A /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024BCA801E6F1E2D00736F1A /* RequestService.swift */; };
 		024BCA831E6F237900736F1A /* Proccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024BCA821E6F237900736F1A /* Proccess.swift */; };
+		024CA7921E871A6700E2B7FC /* RegisterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024CA7911E871A6700E2B7FC /* RegisterExtension.swift */; };
 		024EF9A71E83412700F5B4DF /* SafeBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EF9A61E83412700F5B4DF /* SafeBoxViewController.swift */; };
 		024EF9AA1E834B6A00F5B4DF /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EF9A91E834B6A00F5B4DF /* IndexViewController.swift */; };
 		025A89921E79B5F40032C3C0 /* PreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025A89911E79B5F40032C3C0 /* PreHomeViewController.swift */; };
@@ -153,6 +154,7 @@
 		0249F3351E43C1E6000872CD /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		024BCA801E6F1E2D00736F1A /* RequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		024BCA821E6F237900736F1A /* Proccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proccess.swift; sourceTree = "<group>"; };
+		024CA7911E871A6700E2B7FC /* RegisterExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterExtension.swift; sourceTree = "<group>"; };
 		024EF9A61E83412700F5B4DF /* SafeBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeBoxViewController.swift; sourceTree = "<group>"; };
 		024EF9A91E834B6A00F5B4DF /* IndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
 		025A89911E79B5F40032C3C0 /* PreHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreHomeViewController.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				02F5E35A1E1C322500A9FBFA /* Controllers */,
 				02382F0C1E1C210C0036FFC9 /* AppDelegate.swift */,
 				02E7E5EB1E78806D00D8360B /* Main.storyboard */,
+				024CA7911E871A6700E2B7FC /* RegisterExtension.swift */,
 				02382F151E1C210C0036FFC9 /* LaunchScreen.storyboard */,
 				02382F181E1C210C0036FFC9 /* Info.plist */,
 				02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */,
@@ -967,6 +970,7 @@
 				02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */,
 				84AEA8A41E3BE32C002B2D43 /* Animations.swift in Sources */,
 				02FA70661E7092ED0080AAEB /* ImageViewController.swift in Sources */,
+				024CA7921E871A6700E2B7FC /* RegisterExtension.swift in Sources */,
 				024EF9AA1E834B6A00F5B4DF /* IndexViewController.swift in Sources */,
 				02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */,
 				02AD814D1E4B90B10030B3DD /* SelectedTableViewCell.swift in Sources */,

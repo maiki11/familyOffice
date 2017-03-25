@@ -10,10 +10,21 @@ import UIKit
 import Firebase
 import FirebaseStorage
 import Toast_Swift
-
-
+import Contacts
+import ContactsUI
 
 class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate {
+    
+    let center = NotificationCenter.default
+    var contacts : [CNContact] = []
+    var selected : [User] = []
+    var users : [User] = []
+    var itemCount = 0
+    var localeChangeObserver : NSObjectProtocol!
+    let IndexPathOfFirstRow = NSIndexPath(row: 0, section: 0)
+    var firstCell : SelectedTableViewCell!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -24,8 +35,9 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.cropAndSave(_:)))
+        let saveButton = UIBarButtonItem(title: "Crear", style: .plain, target: self, action: #selector(self.cropAndSave(_:)))
         navigationItem.rightBarButtonItems = [saveButton]
+        navigationItem.title = "Crear Familia"
         scrollView.delegate = self
         blurImageView.contentMode = UIViewContentMode.scaleAspectFill
         imageView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
@@ -110,6 +122,10 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     }
     override func viewWillDisappear(_ animated: Bool) {
         UTILITY_SERVICE.enabledView()
+        selected = []
+        center.removeObserver(self.localeChangeObserver)
+        REF_USERS.removeAllObservers()
+        super.viewDidDisappear(animated)
     }
     
     func cropAndSave(_ sender: Any) {
@@ -128,7 +144,8 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         //Add validations
         if(imageView.image != nil && nameTxtField.text != nil){
             self.view.makeToastActivity(.center)
-            FAMILY_SERVICE.createFamily(key: key, image: image!, name: nameTxtField.text!, view: self.self)
+            selected.append(USER_SERVICE.users[0])
+            FAMILY_SERVICE.createFamily(key: key, image: image!, name: nameTxtField.text!, users: selected, view: self.self)
             //UTILITY_SERVICE.loading(view: self.view)
             UTILITY_SERVICE.disabledView()
         }else{
