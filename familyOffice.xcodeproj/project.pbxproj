@@ -76,6 +76,10 @@
 		02E7E5EE1E7883E700D8360B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02E7E5ED1E7883E700D8360B /* Assets.xcassets */; };
 		02EABF571E312AE8008A7CA9 /* FamilyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EABF561E312AE8008A7CA9 /* FamilyCollectionViewController.swift */; };
 		02EABF591E312B67008A7CA9 /* FamilyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EABF581E312B67008A7CA9 /* FamilyCollectionViewCell.swift */; };
+		02F15BB51E85E99D008C26F8 /* ChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02F15BB41E85E99D008C26F8 /* ChatCell.xib */; };
+		02F15BB71E85ECE2008C26F8 /* chatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F15BB61E85ECE2008C26F8 /* chatModel.swift */; };
+		02F15BBA1E85F37A008C26F8 /* chatCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F15BB81E85F37A008C26F8 /* chatCellTableViewCell.swift */; };
+		02F15BBB1E85F37A008C26F8 /* chatCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02F15BB91E85F37A008C26F8 /* chatCellTableViewCell.xib */; };
 		02FA70641E707BAB0080AAEB /* ToastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA70631E707BAB0080AAEB /* ToastService.swift */; };
 		02FA70661E7092ED0080AAEB /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA70651E7092ED0080AAEB /* ImageViewController.swift */; };
 		0B865800BAEDBF5C9736A410 /* Pods_familyOfficeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BEF645D6ACC3C21FFD1530 /* Pods_familyOfficeUITests.framework */; };
@@ -190,6 +194,10 @@
 		02E7E5ED1E7883E700D8360B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = familyOffice/Assets.xcassets; sourceTree = "<group>"; };
 		02EABF561E312AE8008A7CA9 /* FamilyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyCollectionViewController.swift; sourceTree = "<group>"; };
 		02EABF581E312B67008A7CA9 /* FamilyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyCollectionViewCell.swift; sourceTree = "<group>"; };
+		02F15BB41E85E99D008C26F8 /* ChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCell.xib; sourceTree = "<group>"; };
+		02F15BB61E85ECE2008C26F8 /* chatModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatModel.swift; sourceTree = "<group>"; };
+		02F15BB81E85F37A008C26F8 /* chatCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatCellTableViewCell.swift; sourceTree = "<group>"; };
+		02F15BB91E85F37A008C26F8 /* chatCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatCellTableViewCell.xib; sourceTree = "<group>"; };
 		02FA70631E707BAB0080AAEB /* ToastService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastService.swift; sourceTree = "<group>"; };
 		02FA70651E7092ED0080AAEB /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		18BEF645D6ACC3C21FFD1530 /* Pods_familyOfficeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_familyOfficeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,6 +254,8 @@
 			isa = PBXGroup;
 			children = (
 				02002BFD1E8208C2007191CC /* sectionChatCollectionViewController.swift */,
+				02F15BB81E85F37A008C26F8 /* chatCellTableViewCell.swift */,
+				02F15BB91E85F37A008C26F8 /* chatCellTableViewCell.xib */,
 			);
 			name = sectionChat;
 			sourceTree = "<group>";
@@ -255,6 +265,7 @@
 			children = (
 				020A64F71E81A89700F473A0 /* extensions */,
 				020A64FC1E81EE1A00F473A0 /* chatCollectionViewController.swift */,
+				02F15BB41E85E99D008C26F8 /* ChatCell.xib */,
 			);
 			name = chat;
 			sourceTree = "<group>";
@@ -539,6 +550,7 @@
 				020540961E552A13000741CC /* Notification.swift */,
 				024BCA821E6F237900736F1A /* Proccess.swift */,
 				027213A81E848509001A144B /* DatesModel.swift */,
+				02F15BB61E85ECE2008C26F8 /* chatModel.swift */,
 				027213AA1E84865F001A144B /* testFile.swift */,
 			);
 			name = Model;
@@ -737,9 +749,11 @@
 			files = (
 				02E7E5EC1E78806D00D8360B /* Main.storyboard in Resources */,
 				02382F171E1C210C0036FFC9 /* LaunchScreen.storyboard in Resources */,
+				02F15BBB1E85F37A008C26F8 /* chatCellTableViewCell.xib in Resources */,
 				8421167A1E28124600C6BD80 /* background.mp4 in Resources */,
 				0272139B1E8445AC001A144B /* CellView.xib in Resources */,
 				8488E1681E41728700045646 /* Gotham-Book.ttf in Resources */,
+				02F15BB51E85E99D008C26F8 /* ChatCell.xib in Resources */,
 				02E7E5EE1E7883E700D8360B /* Assets.xcassets in Resources */,
 				02382F3B1E1C2E1D0036FFC9 /* GoogleService-Info.plist in Resources */,
 			);
@@ -940,6 +954,7 @@
 				020A30951E2DA4440024B1FB /* FamilyViewController.swift in Sources */,
 				024EF9A71E83412700F5B4DF /* SafeBoxViewController.swift in Sources */,
 				02FA70641E707BAB0080AAEB /* ToastService.swift in Sources */,
+				02F15BB71E85ECE2008C26F8 /* chatModel.swift in Sources */,
 				02002BFE1E8208C2007191CC /* sectionChatCollectionViewController.swift in Sources */,
 				02002BF91E820631007191CC /* MemberTableViewCell.swift in Sources */,
 				025A89961E7A04AF0032C3C0 /* FamiliesPreCollectionViewCell.swift in Sources */,
@@ -968,6 +983,7 @@
 				02382F0D1E1C210C0036FFC9 /* AppDelegate.swift in Sources */,
 				02EABF571E312AE8008A7CA9 /* FamilyCollectionViewController.swift in Sources */,
 				024104871E6F40C4002B8E1C /* FamilyCollectionExtension.swift in Sources */,
+				02F15BBA1E85F37A008C26F8 /* chatCellTableViewCell.swift in Sources */,
 				849C81C71E1D6D2F00FF3EE7 /* StartViewController.swift in Sources */,
 				0249F3361E43C1E6000872CD /* StorageService.swift in Sources */,
 				022D600F1E71DECD0082586E /* ProfileUserViewController.swift in Sources */,
