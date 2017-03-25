@@ -40,6 +40,8 @@ class CalendarViewController: UIViewController {
         formatter.dateFormat = "yyyy MM dd"
         formatter.timeZone = testCalendar.timeZone
         formatter.locale = testCalendar.locale
+        let nav = self.navigationController?.navigationBar
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
         
         // Setting up your dataSource and delegate is manditory
         // ___________________________________________________________________

@@ -52,6 +52,9 @@ let ALERT_SERVICE = AlertService.Instance()
 let REF_SERVICE = RefHandle.Instance()
 let REQUEST_SERVICE = RequestService.Instance()
 
+//Styles
+let STYLES = Styles.Instance()
+
 //Others
 let SERVERKEY =  "AIzaSyAkiqHhHKI0xcXrYF9eq-D6PzhUl-mPOls"
 let NOTIFICATION_URL = "https://fcm.googleapis.com/fcm/send"
