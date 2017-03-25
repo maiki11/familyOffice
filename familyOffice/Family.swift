@@ -11,6 +11,11 @@ import Firebase
 
 struct Family  {
     
+<<<<<<< Updated upstream
+=======
+    
+    static let kFamilyNameKey = "name"
+>>>>>>> Stashed changes
     static let kFamilyIdKey = "id"
     static let kFamilyNameKey = "name"
     static let kFamilyPhotoUrlKey = "photoUrl"
@@ -19,9 +24,14 @@ struct Family  {
     static let kFamilyImagePathKey = "imageProfilePath"
     
     let id: String!
+<<<<<<< Updated upstream
     var name: String!
     var photoURL: String?
     var imageProfilePath : String?
+=======
+    let name: String!
+    let photoURL: NSURL?
+>>>>>>> Stashed changes
     var totalMembers : UInt? = 0
     var admin : String? = ""
     var members : NSDictionary?
@@ -39,7 +49,11 @@ struct Family  {
         self.members = nil
     }
     
+<<<<<<< Updated upstream
     init(name: String, photoURL: String, members: NSDictionary, admin: String, id: String, imageProfilePath: String? ){
+=======
+    init(name: String, photoURL: NSURL, members: NSDictionary, admin: String, id: String){
+>>>>>>> Stashed changes
         self.name = name
         self.photoURL = photoURL
         self.admin = admin

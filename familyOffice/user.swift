@@ -37,9 +37,14 @@ struct User {
     var birthday: String!
     var address : String!
     var bloodtype: String!
+<<<<<<< Updated upstream
     var tokens: NSDictionary? = nil
     
     init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String) {
+=======
+    
+    init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, family : Family, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String) {
+>>>>>>> Stashed changes
         self.id = id
         self.name = name
         self.phone = phone
@@ -69,7 +74,10 @@ struct User {
         self.bloodtype = UTILITY_SERVICE.exist(field: User.kUserBloodTypeKey, dictionary: snapshotValue)
         self.families = UTILITY_SERVICE.existNSDictionary(field: User.kUserFamiliesKey, dictionary: snapshotValue)
         self.phone = UTILITY_SERVICE.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
+<<<<<<< Updated upstream
         self.tokens = UTILITY_SERVICE.existNSDictionary(field: User.kUserTokensFCMeKey, dictionary: snapshotValue)
+=======
+>>>>>>> Stashed changes
     }
     
     func toDictionary() -> NSDictionary {

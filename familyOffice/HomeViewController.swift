@@ -16,6 +16,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property"]
     let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles"]
     
+<<<<<<< Updated upstream
+=======
+    private var family : Family?
+>>>>>>> Stashed changes
 
     private var family : Family?
     
@@ -32,6 +36,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
     override func viewDidLoad() {
         super.viewDidLoad()
+<<<<<<< Updated upstream
 
         //USER_SERVICE.observers()
         
@@ -61,6 +66,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     override func viewWillAppear(_ animated: Bool) {
+=======
+        UTILITY_SERVICE.loading(view: self.view)
+>>>>>>> Stashed changes
         reloadFamily()
         
        
@@ -93,9 +101,19 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func reloadFamily() -> Void {
+<<<<<<< Updated upstream
         if USER_SERVICE.users.count > 0, let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
             let family = FAMILY_SERVICE.families[index]
             self.navigationItem.title = family.name
+=======
+        family = USER_SERVICE.user?.family
+        if(self.family != nil){
+            if let data = STORAGE_SERVICE.search(url: (self.family?.photoURL?.absoluteString)!) {
+                self.familyImage.image = UIImage(data: data)
+            }
+            self.familyName.text = family?.name ?? "No seleccionada"
+            Utility.Instance().stopLoading(view: self.view)
+>>>>>>> Stashed changes
         }
     }
     
@@ -111,6 +129,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+<<<<<<< Updated upstream
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -146,6 +165,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             default:
                 break
             }
+=======
+    func checkFamily(){
+        print(FAMILY_SERVICE.families.count)
+        
+        if(FAMILY_SERVICE.families.count == 0){
+            Utility.Instance().gotoView(view: "RegisterFamilyView", context: self)
+>>>>>>> Stashed changes
         }
     }
     

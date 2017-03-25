@@ -29,6 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="p2Q-UG-ygO">
+<<<<<<< Updated upstream
                                 <rect key="frame" x="16" y="70" width="343" height="99"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="99" id="8Js-vJ-S6a"/>
@@ -36,6 +37,12 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="family_office_white" translatesAutoresizingMaskIntoConstraints="NO" id="1U1-9B-Lux">
                                 <rect key="frame" x="36" y="169" width="303" height="120"/>
+=======
+                                <rect key="frame" x="16" y="70" width="343" height="180"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="familyoffice" translatesAutoresizingMaskIntoConstraints="NO" id="1U1-9B-Lux">
+                                <rect key="frame" x="16" y="250" width="343" height="120"/>
+>>>>>>> Stashed changes
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="hfv-vk-ySX"/>
                                 </constraints>
@@ -64,7 +71,11 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dKq-qN-fUv" userLabel="Password" customClass="textFieldStyleController" customModule="familyOffice" customModuleProvider="target">
+<<<<<<< Updated upstream
                                 <rect key="frame" x="36" y="332" width="303" height="42.5"/>
+=======
+                                <rect key="frame" x="36" y="413" width="303" height="42.5"/>
+>>>>>>> Stashed changes
                                 <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dKq-qN-fUv" secondAttribute="height" multiplier="335:47" id="vaC-iH-UY0"/>
@@ -98,16 +109,31 @@
                                 </connections>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-gR-T0q">
+<<<<<<< Updated upstream
                                 <rect key="frame" x="47" y="484.5" width="281" height="172.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-9j-XHn">
                                         <rect key="frame" x="0.0" y="0.0" width="244" height="172.5"/>
+=======
+<<<<<<< HEAD
+                                <rect key="frame" x="67" y="574" width="280.66666666666669" height="152"/>
+=======
+                                <rect key="frame" x="47" y="565.5" width="281" height="91.5"/>
+>>>>>>> master
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-9j-XHn">
+                                        <rect key="frame" x="0.0" y="0.0" width="244" height="91.5"/>
+>>>>>>> Stashed changes
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                         <color key="textColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="highlightedColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rB-XC-zD2">
+<<<<<<< Updated upstream
                                         <rect key="frame" x="244" y="0.0" width="37" height="172.5"/>
+=======
+                                        <rect key="frame" x="244" y="0.0" width="37" height="91.5"/>
+>>>>>>> Stashed changes
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                         <state key="normal" title="aquí">
                                             <color key="titleColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -119,7 +145,11 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AwA-sU-zu3" customClass="GIDSignInButton">
+<<<<<<< Updated upstream
                                 <rect key="frame" x="36" y="454.5" width="192" height="40"/>
+=======
+                                <rect key="frame" x="36" y="535.5" width="192" height="40"/>
+>>>>>>> Stashed changes
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5fA-1h-PlK"/>
@@ -127,7 +157,11 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q64-md-P18" customClass="textFieldStyleController" customModule="familyOffice" customModuleProvider="target">
+<<<<<<< Updated upstream
                                 <rect key="frame" x="36" y="273" width="303" height="39"/>
+=======
+                                <rect key="frame" x="36" y="354" width="303" height="39"/>
+>>>>>>> Stashed changes
                                 <color key="tintColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Q64-md-P18" secondAttribute="height" multiplier="334:43" id="uXH-Qi-U55"/>
@@ -269,7 +303,11 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HI-GW-0Ln">
                                 <rect key="frame" x="16" y="430" width="343" height="40"/>
+<<<<<<< Updated upstream
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+=======
+                                <color key="backgroundColor" red="0.22352941179999999" green="0.54117647059999996" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+>>>>>>> Stashed changes
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="jsv-6e-gK4"/>
                                 </constraints>
@@ -296,7 +334,11 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ksd-4E-P65">
                                 <rect key="frame" x="16" y="500" width="343" height="40"/>
+<<<<<<< Updated upstream
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+=======
+                                <color key="backgroundColor" red="0.22352941179999999" green="0.54117647059999996" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+>>>>>>> Stashed changes
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0gb-eJ-4na"/>
                                 </constraints>
@@ -688,7 +730,11 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add" translatesAutoresizingMaskIntoConstraints="NO" id="kBv-QA-sT8">
+<<<<<<< Updated upstream
                                             <rect key="frame" x="28" y="28" width="114" height="114"/>
+=======
+                                            <rect key="frame" x="47" y="47" width="76" height="76"/>
+>>>>>>> Stashed changes
                                         </imageView>
                                     </subviews>
                                 </view>
@@ -707,8 +753,13 @@
                     <navigationItem key="navigationItem" title="Familias" id="GMF-gv-Dj6"/>
                     <connections>
                         <outlet property="familyCollection" destination="DJQ-D4-Rsb" id="2rD-rD-Qoe"/>
+<<<<<<< Updated upstream
                         <segue destination="GLH-xv-Wxs" kind="show" identifier="registerSegue" id="shG-jv-lI8"/>
                         <segue destination="UkY-DF-dfj" kind="show" identifier="changeScreen" id="Abq-5e-aKA"/>
+=======
+                        <segue destination="UkY-DF-dfj" kind="show" identifier="changeScreen" id="J8z-Ju-CQ3"/>
+                        <segue destination="GLH-xv-Wxs" kind="show" identifier="registerSegue" id="shG-jv-lI8"/>
+>>>>>>> Stashed changes
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NZb-NE-hrX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -728,8 +779,85 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+<<<<<<< Updated upstream
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k1D-vM-1hc">
                                 <rect key="frame" x="0.0" y="64" width="375" height="269"/>
+=======
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wFb-XP-7zO">
+                                <rect key="frame" x="20" y="64" width="94" height="20"/>
+                            </stackView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wFm-jS-bSN">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k1D-vM-1hc">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="269"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="269" id="X1T-2F-AtH"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0S-wd-gIl">
+                                        <rect key="frame" x="8" y="212" width="390" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <color key="textColor" red="0.99963909387588501" green="1" blue="0.99975615739822388" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="84" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fLy-6T-lgm">
+                                        <rect key="frame" x="0.0" y="298" width="414" height="258"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="84" id="6UI-Je-hcE" customClass="FamilyMemberTableViewCell" customModule="familyOffice" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="414" height="84"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6UI-Je-hcE" id="CEI-UN-2J5">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K8z-zN-hbz">
+                                                            <rect key="frame" x="17" y="0.0" width="75" height="75"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idt-zu-8OJ">
+                                                            <rect key="frame" x="110" y="8" width="209" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JiZ-7c-Utf">
+                                                            <rect key="frame" x="110" y="27" width="209" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="memberImage" destination="K8z-zN-hbz" id="jRa-hz-3tu"/>
+                                                    <outlet property="name" destination="Idt-zu-8OJ" id="h3q-yu-cBC"/>
+                                                    <outlet property="phone" destination="JiZ-7c-Utf" id="vRC-6v-8h4"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="UkY-DF-dfj" id="yew-RL-NWp"/>
+                                            <outlet property="delegate" destination="UkY-DF-dfj" id="zRk-w2-oNx"/>
+                                        </connections>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tef-9V-ovE">
+                                        <rect key="frame" x="184" y="575" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Salir">
+                                            <color key="titleColor" red="1" green="0.17963762182669707" blue="0.19910657570496448" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="handleExitFamily:" destination="UkY-DF-dfj" eventType="touchUpInside" id="9DG-JT-XAk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+>>>>>>> Stashed changes
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="k1D-vM-1hc" secondAttribute="height" multiplier="375:269" id="OIx-ZS-qki"/>
                                 </constraints>
@@ -849,6 +977,7 @@
         <!--Contactos-->
         <scene sceneID="woW-lJ-H75">
             <objects>
+<<<<<<< Updated upstream
                 <tableViewController id="ZcQ-Rb-uLo" customClass="AddMembersTableViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fuz-ue-2eY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -959,6 +1088,19 @@
                     <navigationItem key="navigationItem" title="Contactos" id="aRZ-t1-C30"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AyT-hF-OP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+=======
+                <navigationController id="yrp-og-A18" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Familias" image="Group" id="oUv-KB-294"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LRu-1F-eID">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="XpR-DC-7PS" kind="relationship" relationship="rootViewController" id="yTi-Xi-Y3k"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HiG-vv-Sw8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+>>>>>>> Stashed changes
             </objects>
             <point key="canvasLocation" x="3501.5999999999999" y="2356.3718140929536"/>
         </scene>
@@ -1113,7 +1255,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KPg-gE-bTI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< Updated upstream
             <point key="canvasLocation" x="1316" y="1327"/>
+=======
+            <point key="canvasLocation" x="1301.5999999999999" y="1448.7256371814094"/>
+>>>>>>> Stashed changes
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="mpx-Wd-ndH">
@@ -1142,6 +1288,7 @@
                         <viewControllerLayoutGuide type="top" id="bok-wI-gdW"/>
                         <viewControllerLayoutGuide type="bottom" id="5xH-L8-vMD"/>
                     </layoutGuides>
+<<<<<<< Updated upstream
                     <view key="view" contentMode="scaleToFill" id="mRQ-n0-A3b">
                         <rect key="frame" x="0.0" y="0.0" width="365" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1225,6 +1372,63 @@
                                         <rect key="frame" x="306" y="0.0" width="28" height="20.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+=======
+                    <view key="view" contentMode="scaleToFill" id="Sfm-Oi-VRX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nombre de la Familia" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nnz-CF-goV" customClass="textFieldStyleController" customModule="familyOffice" customModuleProvider="target">
+                                <rect key="frame" x="16" y="374" width="343" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="fLQ-Xv-ws7"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6U-4s-4zc">
+                                <rect key="frame" x="0.0" y="64" width="375" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="TPX-bH-j4a"/>
+                                </constraints>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Crear Familia" id="9l5-uj-siF"/>
+                                </items>
+                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jB-2e-78c">
+                                <rect key="frame" x="16" y="422" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="dzg-7O-4w4"/>
+                                </constraints>
+                                <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Añadir integrantes" image="plus_1x">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baa-3n-qeF">
+                                <rect key="frame" x="16" y="578" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="8F0-Ub-p6I"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
+                                <color key="tintColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Agregar"/>
+                                <connections>
+                                    <action selector="handleAdd:" destination="GLH-xv-Wxs" eventType="touchUpInside" id="Khw-0i-wtf"/>
+                                </connections>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NPg-YX-n7C">
+                                <rect key="frame" x="0.0" y="104" width="375" height="250"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick an image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq3-MI-k5I">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="251"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+>>>>>>> Stashed changes
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1407,6 +1611,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BZ9-Gi-cIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< Updated upstream
             <point key="canvasLocation" x="1921" y="3126"/>
         </scene>
         <!--Profile User View Controller-->
@@ -1582,6 +1787,9 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dTZ-Q9-4gV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2861.5999999999999" y="3126.3868065967017"/>
+=======
+            <point key="canvasLocation" x="804" y="2364"/>
+>>>>>>> Stashed changes
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vq8-7X-P9a">
@@ -1632,7 +1840,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
+<<<<<<< Updated upstream
                         <segue destination="q30-K7-Xag" kind="relationship" relationship="rootViewController" id="rhf-oa-D5W"/>
+=======
+                        <segue destination="q30-K7-Xag" kind="relationship" relationship="rootViewController" id="SNF-bx-bBz"/>
+>>>>>>> Stashed changes
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="va2-N1-41r" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1642,7 +1854,11 @@
         <!--Configuraciones-->
         <scene sceneID="WBA-JZ-CTS">
             <objects>
+<<<<<<< Updated upstream
                 <viewController storyboardIdentifier="ConfiguracionesView" id="q30-K7-Xag" customClass="ConfigurationViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
+=======
+                <viewController id="q30-K7-Xag" customClass="ConfigurationViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
+>>>>>>> Stashed changes
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oGz-v0-u7Q"/>
                         <viewControllerLayoutGuide type="bottom" id="CjS-EL-dRA"/>
@@ -1651,6 +1867,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+<<<<<<< Updated upstream
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background2" translatesAutoresizingMaskIntoConstraints="NO" id="CBN-L0-Q3m">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="166"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1702,18 +1919,57 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Configuración" image="Setting" id="EMO-gH-Gut"/>
+=======
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile" translatesAutoresizingMaskIntoConstraints="NO" id="dkn-Iv-ITf">
+                                <rect key="frame" x="112" y="72" width="151" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="Cwr-WT-HDu"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Configurar Perfil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2r-Jb-lWZ">
+                                <rect key="frame" x="16" y="263" width="180" height="16"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" red="0.66671830415725708" green="0.66670364141464233" blue="0.66670650243759155" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xvj-Ri-XHO" customClass="ConfigurationView" customModule="familyOffice" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="287" width="375" height="175"/>
+                                <connections>
+                                    <segue destination="5Yd-vX-NMy" kind="embed" id="xLn-4x-s4E"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dkn-Iv-ITf" firstAttribute="leading" secondItem="6B3-qk-H1H" secondAttribute="leadingMargin" constant="96" id="3bu-ly-7nK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xvj-Ri-XHO" secondAttribute="trailing" constant="-16" id="43e-eM-92g"/>
+                            <constraint firstItem="dkn-Iv-ITf" firstAttribute="top" secondItem="oGz-v0-u7Q" secondAttribute="bottom" constant="8" symbolic="YES" id="Aeb-nR-Yaf"/>
+                            <constraint firstItem="xvj-Ri-XHO" firstAttribute="leading" secondItem="x2r-Jb-lWZ" secondAttribute="leading" constant="-16" id="RaE-PL-57P"/>
+                            <constraint firstItem="CjS-EL-dRA" firstAttribute="top" secondItem="xvj-Ri-XHO" secondAttribute="bottom" constant="156" id="aMm-Nz-XCJ"/>
+                            <constraint firstItem="xvj-Ri-XHO" firstAttribute="top" secondItem="x2r-Jb-lWZ" secondAttribute="bottom" constant="8" id="eRc-o2-OJy"/>
+                            <constraint firstItem="dkn-Iv-ITf" firstAttribute="centerX" secondItem="6B3-qk-H1H" secondAttribute="centerX" id="jqW-qP-iqo"/>
+                            <constraint firstItem="xvj-Ri-XHO" firstAttribute="leading" secondItem="6B3-qk-H1H" secondAttribute="leadingMargin" constant="-16" id="tno-zl-Olh"/>
+                            <constraint firstItem="x2r-Jb-lWZ" firstAttribute="top" secondItem="dkn-Iv-ITf" secondAttribute="bottom" constant="41" id="vuK-dK-Fam"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="x2r-Jb-lWZ" secondAttribute="trailing" constant="163" id="xTs-WN-YzY"/>
+                        </constraints>
+                    </view>
+>>>>>>> Stashed changes
                     <navigationItem key="navigationItem" title="Configuraciones" id="JoT-Kk-4xJ">
                         <barButtonItem key="backBarButtonItem" title="Atras" id="FXM-fD-ggn"/>
                     </navigationItem>
                     <connections>
                         <outlet property="profileImage" destination="dkn-Iv-ITf" id="xmz-jH-7X1"/>
+<<<<<<< Updated upstream
                         <segue destination="Tnh-Q2-ztE" kind="show" identifier="updateImageSegue" id="aht-bg-wTO"/>
+=======
+>>>>>>> Stashed changes
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Twq-CY-dHJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4133.6000000000004" y="995.35232383808102"/>
         </scene>
+<<<<<<< Updated upstream
         <!--Item-->
         <scene sceneID="B4y-vi-Cf0">
             <objects>
@@ -1816,12 +2072,18 @@
             </objects>
             <point key="canvasLocation" x="4133.6000000000004" y="1765.3673163418291"/>
         </scene>
+=======
+>>>>>>> Stashed changes
         <!--Configuration Table View Controller-->
         <scene sceneID="Rgq-3r-hZ5">
             <objects>
                 <tableViewController id="5Yd-vX-NMy" customClass="ConfigurationTableViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="oo4-6n-fRn">
+<<<<<<< Updated upstream
                         <rect key="frame" x="0.0" y="0.0" width="375" height="221"/>
+=======
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
+>>>>>>> Stashed changes
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -1834,11 +2096,25 @@
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+<<<<<<< Updated upstream
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Datos Personales" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D0f-tN-3g1">
                                                     <rect key="frame" x="15" y="0.0" width="325" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                                     <nil key="textColor"/>
+=======
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D0f-tN-3g1">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Datos Personales">
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="system" size="17"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+>>>>>>> Stashed changes
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1858,7 +2134,11 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Contraseña" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dSr-Uf-Im3">
                                                     <rect key="frame" x="15" y="0.0" width="325" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+<<<<<<< Updated upstream
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
+=======
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+>>>>>>> Stashed changes
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1876,6 +2156,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+<<<<<<< Updated upstream
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activar Notificaciones" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5E-54-BW0">
                                                     <rect key="frame" x="18" y="8" width="186.5" height="15.5"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
@@ -1893,6 +2174,20 @@
                                                 <constraint firstItem="y5E-54-BW0" firstAttribute="top" secondItem="aKn-mM-GQN" secondAttribute="topMargin" id="wKm-50-bOJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="k15-Op-I7N" secondAttribute="bottom" constant="8" id="zB5-ez-Q7T"/>
                                             </constraints>
+=======
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Activar Notificaciones" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5E-54-BW0">
+                                                    <rect key="frame" x="18" y="8" width="197" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k15-Op-I7N">
+                                                    <rect key="frame" x="318" y="3" width="51" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </switch>
+                                            </subviews>
+>>>>>>> Stashed changes
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
@@ -1906,6 +2201,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cerrar Sesión" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnK-Md-o77">
                                                     <rect key="frame" x="16" y="7" width="177" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+<<<<<<< Updated upstream
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1919,6 +2215,17 @@
                                                 <constraint firstItem="SQY-Vd-Cwq" firstAttribute="top" secondItem="J2f-Pf-i82" secondAttribute="top" constant="6" id="NsV-1R-LIr"/>
                                                 <constraint firstAttribute="trailing" secondItem="SQY-Vd-Cwq" secondAttribute="trailing" constant="8" id="gCY-mo-Ais"/>
                                             </constraints>
+=======
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logout" translatesAutoresizingMaskIntoConstraints="NO" id="SQY-Vd-Cwq">
+                                                    <rect key="frame" x="337" y="6" width="30" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+>>>>>>> Stashed changes
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
@@ -1939,6 +2246,7 @@
         <scene sceneID="0AK-Wb-M3f">
             <objects>
                 <tableViewController id="QR4-Ly-dDu" customClass="PersonalDataTableViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
+<<<<<<< Updated upstream
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="p5H-oD-NSa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="221"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1991,6 +2299,57 @@
                                     <outlet property="datepicker" destination="HYN-P4-3B3" id="Ish-Ng-I7L"/>
                                 </connections>
                             </tableViewCell>
+=======
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="p5H-oD-NSa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Rpa-W3-JMX" customClass="PersonalDataTableViewCell" customModule="familyOffice" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rpa-W3-JMX" id="k0V-Mv-Tox">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="19a-wE-eVl">
+                                            <rect key="frame" x="8" y="5" width="322" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <attributedString key="attributedText"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="myTextField" destination="19a-wE-eVl" id="dMN-V2-3av"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="datepickerCell" rowHeight="165" id="keu-Sq-g4d" customClass="DatePickerTableViewCell" customModule="familyOffice" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="165"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="keu-Sq-g4d" id="HYN-P4-3B3">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="164"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-mT-iSW">
+                                            <rect key="frame" x="-1" y="-9" width="375" height="173"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <date key="date" timeIntervalSinceReferenceDate="507585004.35117102">
+                                                <!--2017-01-31 19:50:04 +0000-->
+                                            </date>
+                                            <locale key="locale" localeIdentifier="es_MX"/>
+                                            <connections>
+                                                <action selector="dateChanged:" destination="QR4-Ly-dDu" eventType="valueChanged" id="hHT-8p-O98"/>
+                                            </connections>
+                                        </datePicker>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="datepicker" destination="HYN-P4-3B3" id="Ish-Ng-I7L"/>
+                                </connections>
+                            </tableViewCell>
+>>>>>>> Stashed changes
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="QR4-Ly-dDu" id="vzI-6B-xpc"/>
@@ -2000,7 +2359,11 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="slE-Cj-31N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< Updated upstream
             <point key="canvasLocation" x="4799" y="2920"/>
+=======
+            <point key="canvasLocation" x="5765.6000000000004" y="1109.5952023988007"/>
+>>>>>>> Stashed changes
         </scene>
         <!--Contraseña-->
         <scene sceneID="jth-QP-jIE">
@@ -2014,6 +2377,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+<<<<<<< Updated upstream
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cambiar contraseña" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gl1-Zh-OZn">
                                 <rect key="frame" x="16" y="20" width="343" height="15.5"/>
                                 <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
@@ -2041,6 +2405,23 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Z3L-6N-xdQ"/>
                                 </constraints>
+=======
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Contraseña nueva" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qMU-hI-DVI">
+                                <rect key="frame" x="16" y="216" width="323" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Contraseña actual" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YWY-6m-XQe">
+                                <rect key="frame" x="16" y="171" width="323" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Repetir contraseña" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qIT-bn-N4J">
+                                <rect key="frame" x="16" y="266" width="323" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+>>>>>>> Stashed changes
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                                 <connections>
@@ -2078,12 +2459,21 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Mf-Bn-WhF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< Updated upstream
             <point key="canvasLocation" x="5706" y="1907"/>
         </scene>
         <!--Actualizar Imagen-->
         <scene sceneID="OkP-Jz-aAg">
             <objects>
                 <viewController id="Tnh-Q2-ztE" customClass="ImageViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
+=======
+            <point key="canvasLocation" x="5766" y="1603"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="OkP-Jz-aAg">
+            <objects>
+                <viewController id="Tnh-Q2-ztE" sceneMemberID="viewController">
+>>>>>>> Stashed changes
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tP7-jv-rN6"/>
                         <viewControllerLayoutGuide type="bottom" id="RXB-38-EtD"/>
@@ -2091,6 +2481,7 @@
                     <view key="view" contentMode="scaleToFill" id="2o7-KU-7Ur">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+<<<<<<< Updated upstream
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" translatesAutoresizingMaskIntoConstraints="NO" id="Laq-D2-vJH">
                                 <rect key="frame" x="0.0" y="208" width="375" height="250"/>
@@ -2412,13 +2803,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E8l-nm-wdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2602.4000000000001" y="440.32983508245883"/>
+=======
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jeq-qX-Qbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+>>>>>>> Stashed changes
         </scene>
     </scenes>
     <resources>
         <image name="Group" width="29" height="29"/>
         <image name="Home" width="20" height="20"/>
+        <image name="Profile" width="76" height="76"/>
         <image name="Setting" width="29" height="29"/>
         <image name="User" width="29" height="29"/>
+<<<<<<< Updated upstream
         <image name="add" width="114" height="114"/>
         <image name="background2" width="1280" height="540"/>
         <image name="business" width="114" height="114"/>
@@ -2428,6 +2828,15 @@
         <image name="gmail" width="30" height="30"/>
         <image name="logo" width="99" height="99"/>
         <image name="logout-red" width="25" height="25"/>
+=======
+        <image name="add" width="76" height="76"/>
+        <image name="camera_2x" width="50" height="50"/>
+        <image name="familyoffice" width="693" height="124"/>
+        <image name="gmail" width="30" height="30"/>
+        <image name="logo" width="180" height="180"/>
+        <image name="logout" width="25" height="25"/>
+        <image name="plus_1x" width="25" height="25"/>
+>>>>>>> Stashed changes
         <image name="profile_default" width="626" height="626"/>
         <image name="social" width="114" height="114"/>
     </resources>

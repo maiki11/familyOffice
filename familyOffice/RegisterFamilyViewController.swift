@@ -12,6 +12,10 @@ import FirebaseStorage
 import Toast_Swift
 
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate {
     
@@ -19,8 +23,12 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var nameTxtField: textFieldStyleController!
     
+<<<<<<< Updated upstream
     var imageView = UIImageView()
     var blurImageView = UIImageView()
+=======
+    //let imagePicker = UIImagePickerController()
+>>>>>>> Stashed changes
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +44,22 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.loadImage(_:)))
         
         tapGestureRecognizer.numberOfTapsRequired = 1
+<<<<<<< Updated upstream
         imageView.addGestureRecognizer(tapGestureRecognizer)
+=======
+        imageView2.addGestureRecognizer(tapGestureRecognizer)
+        
+        
+        // Do any additional setup after loading the view.
+        //imagePicker.delegate = self
+        //imageView.isUserInteractionEnabled = true
+        //Circle image
+        /*imageView.layer.borderWidth = 1
+        imageView.layer.masksToBounds = false
+        imageView.layer.borderColor = UIColor.black.cgColor
+        imageView.layer.cornerRadius = imageView.frame.height/2
+        imageView.clipsToBounds = true*/
+>>>>>>> Stashed changes
     }
     
     func loadImage(_ recognizer: UITapGestureRecognizer){
@@ -56,10 +79,19 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         scrollView.zoomScale = 1
         self.imageView.image = image
         
+<<<<<<< Updated upstream
         blurImageView.image = imageView.image
         imageView.contentMode = UIViewContentMode.center
         imageView.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
         scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: scrollView.frame.size.height)
+=======
+        imageView2.image = image
+        
+        
+        imageView2.contentMode = UIViewContentMode.center
+        imageView2.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        
+>>>>>>> Stashed changes
         scrollView.contentSize = image.size
         
         let scrollViewFrame = scrollView.frame
@@ -72,6 +104,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         scrollView.zoomScale = minScale
         centerScrollViewContents()
         
+<<<<<<< Updated upstream
         //blur
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -81,6 +114,13 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         self.blurImageView.addSubview(blurEffectView)
         
         picker.dismiss(animated: true, completion: nil)
+=======
+        
+            imageView2.contentMode = .scaleAspectFit
+            imageView2.image = Utility.Instance().resizeImage(image: imageView2.image!, targetSize: CGSize(width: 400.0, height: 400.0))
+        
+       
+>>>>>>> Stashed changes
     }
     
     func centerScrollViewContents(){
@@ -112,6 +152,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         UTILITY_SERVICE.enabledView()
     }
     
+<<<<<<< Updated upstream
     func cropAndSave(_ sender: Any) {
         save()
     }
@@ -137,6 +178,15 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
             ANIMATIONS.shakeTextField(txt: nameTxtField)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
+=======
+    @IBAction func handleAdd(_ sender: UIButton) {
+        let key = REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
+        //Add validations
+        if(imageView2.image != nil && nameTxtField.text != nil){
+            FAMILY_SERVICE.createFamily(key: key, image: imageView2.image!, name: nameTxtField.text!, view: self.self)
+            UTILITY_SERVICE.loading(view: self.view)
+            UTILITY_SERVICE.disabledView()
+>>>>>>> Stashed changes
         }
     }
     
@@ -165,8 +215,13 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         super.didReceiveMemoryWarning()
     }
     
+<<<<<<< Updated upstream
     func logout(_ sender: Any){
         AUTH_SERVICE.logOut()
         Utility.Instance().gotoView(view: "StartView", context: self)
+=======
+    override func viewDidDisappear(_ animated: Bool) {
+        UTILITY_SERVICE.enabledView()
+>>>>>>> Stashed changes
     }
 }

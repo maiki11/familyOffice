@@ -85,6 +85,7 @@ class Utility {
         
         activityIndicatior.stopAnimating()
     }
+<<<<<<< Updated upstream
     func getDate() -> Double {
         let date = NSDate().timeIntervalSince1970
         return date
@@ -95,6 +96,12 @@ class Utility {
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "dd-MM-yyyy hh:mm"
         return dayTimePeriodFormatter.string(from: xdate as Date)
+=======
+    func getDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy hh:mm"
+        return formatter.string(from: Date())
+>>>>>>> Stashed changes
     }
     
     func clearObservers(){

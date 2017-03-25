@@ -31,6 +31,7 @@ class AuthService {
             }else{
                 ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
             }
+            ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
         }
     }
     func userStatus(state: String) -> Void {
@@ -49,12 +50,18 @@ class AuthService {
         }
         
         try! FIRAuth.auth()!.signOut()
+<<<<<<< Updated upstream
         USER_SERVICE.users.removeAll()
         UTILITY_SERVICE.clearObservers()
         NOTIFICATION_SERVICE.notifications.removeAll()
         ACTIVITYLOG_SERVICE.activityLog.removeAll()
         FAMILY_SERVICE.families.removeAll()
         imageCache.removeAllObjects()
+=======
+        USER_SERVICE.clearData()
+        self.userStatus(state: "Offline")
+        FAMILY_SERVICE.families = []
+>>>>>>> Stashed changes
     }
 
     //Create account with federate entiies like Facebook Twitter Google  etc
@@ -73,7 +80,12 @@ class AuthService {
                         let xuserModel = ["name" : user.displayName!,
                                           "photoUrl": downloadURL] as [String : Any]
                         REF_USERS.child(user.uid).setValue(xuserModel)
+<<<<<<< Updated upstream
                         ACTIVITYLOG_SERVICE.create(id: user.uid, activity: "Se creo la cuenta", photo: downloadURL, type: "sesion")
+=======
+                        ACTIVITYLOG_SERVICE.create(id: user.uid, activity: "Se actualizo información personal", photo: downloadURL, type: "sesion")
+                        USER_SERVICE.getUser(uid: user.uid, mainly: true)
+>>>>>>> Stashed changes
                         //self.userStatus(state: "Online")
                     }
                 }
@@ -93,6 +105,7 @@ class AuthService {
     }
 
     func isAuth(view: UIViewController, name: String)  {
+<<<<<<< Updated upstream
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             self.uid = user?.uid
             if (user != nil) {
@@ -102,6 +115,29 @@ class AuthService {
                         UTILITY_SERVICE.gotoView(view: name, context: view)
                     }else{
                        self.logOut()
+=======
+        var checkFamily = false
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            self.uid = user?.uid
+            if (user != nil) {
+                
+                NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
+                    UTILITY_SERVICE.gotoView(view: "RegisterFamilyView", context: view)
+                    return
+                }
+                if(!checkFamily){
+                    FAMILY_SERVICE.getFamilies()
+                    checkFamily = true
+                }
+                REF_USERS.child((user!.uid)).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    if !snapshot.exists() {
+                        self.createAccount(user: user as AnyObject)
+                    }else{
+                        USER_SERVICE.getUser(uid: (user?.uid)!, mainly: true)
+                        //self.userStatus(state: "Online")
+                        UTILITY_SERVICE.gotoView(view: name, context: view)
+>>>>>>> Stashed changes
                     }
                 })
             }else{

@@ -10,7 +10,12 @@ import UIKit
 
 class PersonalDataTableViewController: UITableViewController {
     
+<<<<<<< Updated upstream
     var userDictionary : NSDictionary!
+=======
+    var userDictionary = USER_SERVICE.user!.toDictionary()
+    var user : User = USER_SERVICE.user!
+>>>>>>> Stashed changes
     
     var date : String!
     var placeholders = ["Nombre", "Teléfono", "Dirección", "Fecha de Cumpleaños","", "RFC", "CURP", "NSS", "Tipo de sangre"]
@@ -19,8 +24,12 @@ class PersonalDataTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+<<<<<<< Updated upstream
         //tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -40)
         tableView.layoutMargins = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+=======
+        tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
+>>>>>>> Stashed changes
         let homeButton : UIBarButtonItem = UIBarButtonItem(title: "Atras", style: UIBarButtonItemStyle.plain, target: self, action: #selector(back(sender:)))
         let doneButton : UIBarButtonItem = UIBarButtonItem(title: "Guardar", style: UIBarButtonItemStyle.plain, target: self, action:#selector(save(sender:)))
         self.navigationItem.backBarButtonItem = homeButton
@@ -29,6 +38,7 @@ class PersonalDataTableViewController: UITableViewController {
 
         //loadInfo()
     }
+<<<<<<< Updated upstream
     override func viewWillAppear(_ animated: Bool) {
        userDictionary =  USER_SERVICE.users[0].toDictionary()
 
@@ -36,6 +46,9 @@ class PersonalDataTableViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         userDictionary = [:]
     }
+=======
+    
+>>>>>>> Stashed changes
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -93,14 +106,23 @@ class PersonalDataTableViewController: UITableViewController {
             cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
             cell.myTextField.isEnabled = false
         }
+<<<<<<< Updated upstream
         cell.configure(text:  userDictionary.object(forKey: aboutkeys[indexPath.row]) as! String!, placeholder: placeholders[indexPath.row])
+=======
+        cell.configure(text:  userDictionary.object(forKey: aboutkeys[indexPath.row]) as! String!, placeholde: placeholders[indexPath.row])
+>>>>>>> Stashed changes
         return cell
     }
     
     //Private methods
     func setDate() -> Void {
+<<<<<<< Updated upstream
         USER_SERVICE.users[0].birthday = date
         userDictionary = USER_SERVICE.users[0].toDictionary()
+=======
+        user.birthday = date
+        userDictionary = user.toDictionary()
+>>>>>>> Stashed changes
         self.tableView.reloadData()
     }
     func save(sender: UINavigationBar) -> Void {
@@ -110,6 +132,7 @@ class PersonalDataTableViewController: UITableViewController {
             if(index != 4){
                 let cell: PersonalDataTableViewCell? = self.tableView.cellForRow(at: indexPath as IndexPath) as? PersonalDataTableViewCell
                 let value = cell?.myTextField.text
+<<<<<<< Updated upstream
                 
                 switch  aboutkeys[indexPath.row] {
                 case "name":
@@ -145,6 +168,32 @@ class PersonalDataTableViewController: UITableViewController {
                     break
                 case "bloodType":
                     USER_SERVICE.users[0].bloodtype = value
+=======
+                switch  aboutkeys[indexPath.row] {
+                case "name":
+                    user.name = value
+                    break
+                case "phone":
+                    user.phone = value
+                    break
+                case "address":
+                    user.address = value
+                    break
+                case "rfc":
+                    user.rfc = value
+                    break
+                case "curp":
+                    user.curp = value
+                    break
+                case "birthday":
+                    user.birthday = value
+                    break
+                case "nss":
+                    user.nss = value
+                    break
+                case "bloodType":
+                    user.bloodtype = value
+>>>>>>> Stashed changes
                     break
                 default:
                     break
@@ -152,6 +201,7 @@ class PersonalDataTableViewController: UITableViewController {
             }
             index += 1
         }
+<<<<<<< Updated upstream
         USER_SERVICE.updateUser(user: USER_SERVICE.users[0])
         _ =  navigationController?.popViewController(animated: true)
         //UTILITY_SERVICE.gotoView(view: "ConfiguracionScene", context: self)
@@ -169,5 +219,10 @@ class PersonalDataTableViewController: UITableViewController {
         textField.resignFirstResponder()
         return true
     }
+=======
+        USER_SERVICE.updateUser(user: user)
+    }
+    
+>>>>>>> Stashed changes
     
 }
