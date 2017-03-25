@@ -29,18 +29,10 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     
     func webviewDidFinishLoad(_ : UIWebView){
         UTILITY_SERVICE.stopLoading(view: self.view)
-<<<<<<< Updated upstream
     }
     
     override func viewDidLoad() {
         AUTH_SERVICE.isAuth(view: self.self, name:"mainView")
-=======
-        
-    }
-    
-    override func viewDidLoad() {
-        AUTH_SERVICE.isAuth(view: self.self, name:"TabBarControllerView")
->>>>>>> Stashed changes
         super.viewDidLoad()
         print(UIDevice().description)
         if(UIDevice.current.model == "Iphone 5s"){

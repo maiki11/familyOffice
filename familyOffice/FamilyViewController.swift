@@ -9,34 +9,17 @@
 import UIKit
 import FirebaseAuth
 
-<<<<<<< Updated upstream
 class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate  {
     let center = NotificationCenter.default
     var members : [User] = []
     var family : Family?
     var index: Int? = nil
     var localeChangeObserver : [NSObjectProtocol] = []
-=======
-class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    var members : [User] = []
-    var family : Family?
-    
-    @IBOutlet weak var familyName: UILabel!
->>>>>>> Stashed changes
     @IBOutlet weak var imageFamily: UIImageView!
     @IBOutlet weak var membersTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-<<<<<<< Updated upstream
-=======
-        familyName.text = family?.name
-        loadMembers(table: self.membersTable)
-        if let data = STORAGE_SERVICE.search(url: (family?.photoURL?.absoluteString)!) {
-            imageFamily.image = UIImage(data: data)
-        }
->>>>>>> Stashed changes
         
         if !(self.family?.photoURL?.isEmpty)! {
             self.imageFamily.loadImage(urlString: (self.family?.photoURL!)!)
@@ -109,7 +92,6 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.membersTable.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.top)
         }
     }
-<<<<<<< Updated upstream
     func verifyMembersOffLine() -> Void {
         for item in (FAMILY_SERVICE.families.first(where: {$0.id == family?.id})?.members!.allKeys)! {
             
@@ -124,20 +106,6 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.members.append(user)
                 REF_SERVICE.childChanged(ref: "users/\(id)")
                 self.membersTable.insertRows(at: [NSIndexPath(row: self.members.count-1, section: 0) as IndexPath], with: .fade)
-=======
-    
-    @IBAction func handleExitFamily(_ sender: UIButton) {
-        FAMILY_SERVICE.exitFamily(family: family!, uid: (FIRAuth.auth()?.currentUser?.uid)!)
-        UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
-    }
-    
-    func loadMembers(table: UITableView){
-        for item in family?.members?.allKeys as! [String] {
-            if let user = USER_SERVICE.searchUser(uid: item){
-                self.members.append(user)
-            }else{
-                USER_SERVICE.getUser(uid: item, mainly: false)
->>>>>>> Stashed changes
             }
             //self.addMembers(user: user)
         }else{
@@ -179,19 +147,11 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FamilyMemberTableViewCell
         let member = self.members[indexPath.row]
         cell.name.text = member.name
-<<<<<<< Updated upstream
         cell.memberImage.image = #imageLiteral(resourceName: "profile_default")
         if !member.photoURL.isEmpty {
             cell.memberImage.loadImage(urlString: member.photoURL)
         }
         
-=======
-        if let data = STORAGE_SERVICE.search(url: member.photoURL) {
-            cell.memberImage.image = UIImage(data: data)
-        }else {
-            cell.memberImage.image = #imageLiteral(resourceName: "profile_default")
-        }
->>>>>>> Stashed changes
         cell.phone.text = member.phone
         
         if(FAMILY_SERVICE.families.filter({$0.id == family?.id}).first?.admin == member.id){

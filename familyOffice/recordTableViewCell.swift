@@ -20,16 +20,12 @@ class recordTableViewCell: UITableViewCell {
         // Initialization code
         self.photo.layer.cornerRadius = self.photo.frame.size.width/2
         self.photo.clipsToBounds = true
-<<<<<<< Updated upstream
         self.iconImage.layer.cornerRadius = self.iconImage.frame.size.width/2
         self.iconImage.clipsToBounds = true
-=======
->>>>>>> Stashed changes
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-<<<<<<< Updated upstream
         // Configure the view for the selected state
     }
     
@@ -39,10 +35,5 @@ class recordTableViewCell: UITableViewCell {
         self.date.text = date
        
     }
-=======
-        
-        // Configure the view for the selected state
-    }
->>>>>>> Stashed changes
 
 }

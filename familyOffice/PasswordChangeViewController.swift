@@ -52,7 +52,6 @@ class PasswordChangeViewController: UIViewController {
     
     func changePassword(sender: UIBarButtonItem?) -> Void {
         UTILITY_SERVICE.loading(view: self.view)
-<<<<<<< Updated upstream
         if(oldPassword.text! == ""){
             ANIMATIONS.shakeTextField(txt: oldPassword)
             ALERT_SERVICE.alertMessage(context: self, title: "Campo vacío", msg: "El campo Contraseña actual no puede estar vacío")
@@ -86,11 +85,6 @@ class PasswordChangeViewController: UIViewController {
             }
         }
         UTILITY_SERVICE.stopLoading(view: self.view)
-=======
-        if(newPassword.text == repeatPass.text ){
-            USER_SERVICE.changePassword(oldPass: oldPassword.text!, newPass: newPassword.text!)
-        }
->>>>>>> Stashed changes
     }
     /*
     // MARK: - Navigation
@@ -101,7 +95,6 @@ class PasswordChangeViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-<<<<<<< Updated upstream
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: true, context: self)
@@ -115,7 +108,5 @@ class PasswordChangeViewController: UIViewController {
         textField.resignFirstResponder()
         return true
     }
-=======
->>>>>>> Stashed changes
 
 }

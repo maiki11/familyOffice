@@ -11,13 +11,9 @@ import FirebaseAuth
 import FirebaseDatabase
 import UIKit
 
-<<<<<<< Updated upstream
 class FamilyService: repository {
     
 
-=======
-class FamilyService {
->>>>>>> Stashed changes
     private static let instance : FamilyService = FamilyService()
     var families: [Family] = []
     
@@ -27,7 +23,6 @@ class FamilyService {
     public static func Instance() -> FamilyService {
         return instance
     }
-<<<<<<< Updated upstream
     
     func added(snapshot: FIRDataSnapshot) {
         let family : Family = Family(snapshot: snapshot)
@@ -54,28 +49,6 @@ class FamilyService {
             var families : [String: Bool] = [:]
             for result in filter! {
                 families[result.key as! String] = (result.value as! Bool)
-=======
-    func getFamilies() {
-        REF.child("/users/\((FIRAuth.auth()?.currentUser?.uid)!)/families").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if(snapshot.exists()){
-                self.families = []
-                for item in value?.allKeys as! [String] {
-                    REF_FAMILIES.child(item).observeSingleEvent(of: .value, with: { (snapshot) in
-                        if(snapshot.exists()){
-                            let family = Family(snapshot: snapshot)
-                            self.families.append(family)
-                            if(USER_SERVICE.user?.familyActive == item){
-                                self.selectFamily(family: family)
-                            }
-                        }
-                        
-                    })
-                    
-                }
-            }else{
-                NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
->>>>>>> Stashed changes
             }
             USER_SERVICE.users[index].families = families as NSDictionary
         }
@@ -98,21 +71,8 @@ class FamilyService {
     }
     
     func delete(family : Family) {
-<<<<<<< Updated upstream
         for item in (family.members?.allKeys)! {
             REF_USERS.child(item as! String).child("families/\((family.id)!)").removeValue()
-=======
-        REF_FAMILIES.child("\((family.id)!)/members").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            for item in value?.allKeys as! [String] {
-                REF.child("users").child(item).child("families/\((family.id)!)").removeValue()
-                self.removeFamily(family: family)
-            }
-            REF_FAMILIES.child(family.id!).removeValue()
-            ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.user?.id)!, activity: "Se elimino la familia \((family.name)!)", photo: (family.photoURL?.absoluteString)!, type: "deleteFamily")
-        }) { (error) in
-            print(error.localizedDescription)
->>>>>>> Stashed changes
         }
         STORAGEREF.child("families/\((family.id)!)/images/\((family.imageProfilePath)!)").delete(completion: { (error) -> Void in
             if (error != nil){
@@ -134,7 +94,6 @@ class FamilyService {
                     // Metadata contains file metadata such as size, content-type, and download URL.
                     if let downloadURL = metadata?.downloadURL()?.absoluteURL {
                         StorageService.Instance().save(url: downloadURL.absoluteString, data: uploadData)
-<<<<<<< Updated upstream
                         let family = Family(name:   name, photoURL: downloadURL.absoluteString, members:  [(FIRAuth.auth()?.currentUser?.uid)! : true], admin: (FIRAuth.auth()?.currentUser?.uid)! , id: name+key, imageProfilePath: metadata?.name)
                         REQUEST_SERVICE.insert(value: family.toDictionary() as! NSDictionary, ref: "families/\((family.id)!)")
                         // REF_FAMILIES.child(family.id).setValue(family.toDictionary())
@@ -143,15 +102,6 @@ class FamilyService {
                         self.selectFamily(family: family)
                         
                         ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.users[0].id)!, activity: "Se creo la familia  \((family.name)!)", photo: downloadURL.absoluteString, type: "addFamily")
-=======
-                        let family = Family(name: name, photoURL: downloadURL as NSURL, members:  [(FIRAuth.auth()?.currentUser?.uid)! : true], admin: (FIRAuth.auth()?.currentUser?.uid)! , id: key)
-                        REF_FAMILIES.child(key).setValue(family.toDictionary())
-                        REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").updateChildValues([ key: true])
-                        //Set family for app
-                        self.selectFamily(family: family)
-                        self.families.append(family)
-                        ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.user?.id)!, activity: "Se creo la familia  \((family.name)!)", photo: downloadURL.absoluteString, type: "addFamily")
->>>>>>> Stashed changes
                         //Go to Home
                         Utility.Instance().gotoView(view: "mainView", context: view.self)
                     }
@@ -164,14 +114,9 @@ class FamilyService {
     func exitFamily(family: Family, uid:String) -> Void {
         REF_USERS.child("/\(uid)/families/\((family.id)!)").removeValue()
         REF_FAMILIES.child("/\((family.id)!)/members/\(uid)").removeValue()
-<<<<<<< Updated upstream
         if(family.admin == USER_SERVICE.users[0].id){
             self.addAdmin(index: self.families.index(where: {$0.id == family.id})!, uid: nil)
         }
-=======
-        
-        removeFamily(family: family)
->>>>>>> Stashed changes
     }
     
     func addAdmin(index: Int, uid: String?) -> Void {
@@ -193,11 +138,7 @@ class FamilyService {
     }
     
     func verifyFamilyActive(family: Family) -> Void {
-<<<<<<< Updated upstream
         if(family.id == USER_SERVICE.users[0].familyActive){
-=======
-        if(family.id == USER_SERVICE.user?.familyActive){
->>>>>>> Stashed changes
             if(self.families.count > 0){
                 self.selectFamily(family: self.families[0])
             }else{
@@ -209,7 +150,6 @@ class FamilyService {
     func selectFamily(family: Family) -> Void {
         REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["familyActive" : family.id])
         USER_SERVICE.setFamily(family: family)
-<<<<<<< Updated upstream
     }
 }
 
@@ -259,8 +199,5 @@ extension FamilyService {
             REF_FAMILIES.child("\(familyID)/members/\(memberID)").removeValue()
             NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [memberID : "removed"])
         }
-=======
-        NotificationCenter.default.post(name: USER_NOTIFICATION, object: nil)
->>>>>>> Stashed changes
     }
 }
