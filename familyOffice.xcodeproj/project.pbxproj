@@ -89,7 +89,7 @@
 		8450EFC61E64A1E500A51C09 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450EFC51E64A1E500A51C09 /* AlertService.swift */; };
 		8452F5AB1E5F4F550064A964 /* ModuleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452F5AA1E5F4F540064A964 /* ModuleCollectionViewCell.swift */; };
 		8471A2521E2D8C5100EC9FD7 /* ConfigProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8471A2511E2D8C5100EC9FD7 /* ConfigProfile.swift */; };
-		848130161E85ECAD008B08B8 /* TextFieldStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848130151E85ECAD008B08B8 /* TextFieldStyles.swift */; };
+		848130161E85ECAD008B08B8 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848130151E85ECAD008B08B8 /* Styles.swift */; };
 		8488E1681E41728700045646 /* Gotham-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8488E1671E41728700045646 /* Gotham-Book.ttf */; };
 		8488E1691E41728700045646 /* Gotham-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8488E1671E41728700045646 /* Gotham-Book.ttf */; };
 		8488E16A1E41728700045646 /* Gotham-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8488E1671E41728700045646 /* Gotham-Book.ttf */; };
@@ -211,7 +211,7 @@
 		8450EFC51E64A1E500A51C09 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		8452F5AA1E5F4F540064A964 /* ModuleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleCollectionViewCell.swift; sourceTree = "<group>"; };
 		8471A2511E2D8C5100EC9FD7 /* ConfigProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigProfile.swift; sourceTree = "<group>"; };
-		848130151E85ECAD008B08B8 /* TextFieldStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldStyles.swift; sourceTree = "<group>"; };
+		848130151E85ECAD008B08B8 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		8488E1671E41728700045646 /* Gotham-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.ttf"; sourceTree = "<group>"; };
 		849C4A911E6DEA5D0065CFBD /* HeaderHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderHomeView.swift; sourceTree = "<group>"; };
 		849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -610,7 +610,7 @@
 			isa = PBXGroup;
 			children = (
 				8421167B1E2860C000C6BD80 /* textFieldStyleController.swift */,
-				848130151E85ECAD008B08B8 /* TextFieldStyles.swift */,
+				848130151E85ECAD008B08B8 /* Styles.swift */,
 			);
 			name = Styles;
 			sourceTree = "<group>";
@@ -987,7 +987,7 @@
 				849C81C71E1D6D2F00FF3EE7 /* StartViewController.swift in Sources */,
 				0249F3361E43C1E6000872CD /* StorageService.swift in Sources */,
 				022D600F1E71DECD0082586E /* ProfileUserViewController.swift in Sources */,
-				848130161E85ECAD008B08B8 /* TextFieldStyles.swift in Sources */,
+				848130161E85ECAD008B08B8 /* Styles.swift in Sources */,
 				02EABF591E312B67008A7CA9 /* FamilyCollectionViewCell.swift in Sources */,
 				023DE7431E7720D9002F6A4E /* infoextension.swift in Sources */,
 				8421167C1E2860C000C6BD80 /* textFieldStyleController.swift in Sources */,

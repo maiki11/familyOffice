@@ -13,6 +13,9 @@ class ConfigurationViewController: UIViewController, UIImagePickerControllerDele
 UINavigationControllerDelegate  {
     var user: User!
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var headerView: UIImageView!
+    @IBOutlet weak var containerView: ConfigurationView!
+    @IBOutlet weak var iconView: UIView!
     let picker = UIImagePickerController()
     var chosenImage: UIImage!
     
@@ -20,10 +23,21 @@ UINavigationControllerDelegate  {
         super.viewDidLoad()
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         self.profileImage.clipsToBounds = true
+        self.iconView.layer.cornerRadius = self.iconView.frame.size.width/2
+        self.iconView.clipsToBounds = true
+        iconView.layer.borderWidth = 1
+        iconView.layer.borderColor = UIColor(red: 238.0/255, green: 69.0/255, blue: 74.0/255, alpha: 1).cgColor
         picker.delegate = self
         let nav = self.navigationController?.navigationBar
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
         // Do any additional setup after loading the view.
+        STYLES.borderbottom(textField: headerView, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
+        self.containerView.layer.borderWidth = 1
+        self.containerView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
+        self.containerView.layer.cornerRadius = 5
+        self.profileImage.layer.borderWidth = 4.0
+        self.profileImage.layer.borderColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
+        self.profileImage.layer.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
     }
     override func viewWillAppear(_ animated: Bool) {
         user = USER_SERVICE.users[0]

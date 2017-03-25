@@ -9,15 +9,15 @@
 import Foundation
 import UIKit
 
-class TextFieldStyles{
+class Styles{
     
-    public static func Instance() -> TextFieldStyles {
+    public static func Instance() -> Styles {
         return instance
     }
 
-    static let instance : TextFieldStyles = TextFieldStyles()
+    static let instance : Styles = Styles()
     
-    func borderbottom(textField: UITextField, color: UIColor, width: Float){
+    func borderbottom(textField: AnyObject, color: UIColor, width: Float){
         let border = CALayer()
         let width = CGFloat(width)
         border.borderColor = color.cgColor

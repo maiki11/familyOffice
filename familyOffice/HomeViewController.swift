@@ -45,12 +45,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let barButton = UIBarButtonItem(title: "Regresar", style: .plain, target: self, action: #selector(self.handleBack))
         barButton.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
         self.navigationItem.leftBarButtonItem = barButton
-<<<<<<< HEAD
         let nav = self.navigationController?.navigationBar
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
-        
-=======
->>>>>>> master
     }
     
     let settingLauncher = SettingLauncher()
