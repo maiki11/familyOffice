@@ -48,7 +48,7 @@ class MemberTableViewCell:  BaseCell, UITableViewDelegate, UITableViewDataSource
         cell.nameLabel.text = chat.name
         cell.lastMessage.text = chat.lastMessage
         cell.time.text = chat.date
-        
+        cell.haveMessage.isHidden = true
         // Configure the cell..
         return cell
     }
