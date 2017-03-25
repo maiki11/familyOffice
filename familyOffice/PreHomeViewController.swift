@@ -65,7 +65,10 @@ class SelectCategoryViewController: UIViewController {
         localeChangeObserver.append(NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
             if let family : Family = family.object as? Family {
                 self.addFamily(family: family)
+<<<<<<< HEAD
                 
+=======
+>>>>>>> master
             }
         })
 

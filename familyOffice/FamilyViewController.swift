@@ -39,7 +39,6 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
         members = []
         self.membersTable.reloadData()
         verifyMembersOffLine()
