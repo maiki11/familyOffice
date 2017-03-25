@@ -30,18 +30,18 @@ class SelectCategoryViewController: UIViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
         self.headerView.layer.borderWidth = 1
-        self.headerView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.headerView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
         self.familiasView.layer.borderWidth = 1
-        self.familiasView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.familiasView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
         self.familiasView.layer.cornerRadius = 5
         self.categoriasView.layer.borderWidth = 1
-        self.categoriasView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.categoriasView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
         self.categoriasView.layer.cornerRadius = 5
         self.socialView.layer.borderWidth = 1
-        self.socialView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.socialView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
         self.socialView.layer.cornerRadius = 5
         self.empresarialView.layer.borderWidth = 1
-        self.empresarialView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.empresarialView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
         self.empresarialView.layer.cornerRadius = 5
     }
     @IBAction func handlePressSocial(_ sender: UIButton) {
@@ -67,6 +67,7 @@ class SelectCategoryViewController: UIViewController {
         localeChangeObserver.append(NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
             if let family : Family = family.object as? Family {
                 self.addFamily(family: family)
+
             }
         })
 
@@ -76,7 +77,6 @@ class SelectCategoryViewController: UIViewController {
             NotificationCenter.default.removeObserver(obs)
         }
         self.localeChangeObserver.removeAll()
-        
     }
     func loadImage() -> Void {
         if !USER_SERVICE.users[0].photoURL.isEmpty {
