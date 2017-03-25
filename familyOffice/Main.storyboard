@@ -523,7 +523,9 @@
                         </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Inicio" image="Home" id="u00-Wi-OtT"/>
-                    <navigationItem key="navigationItem" id="7gy-uR-g5H"/>
+                    <navigationItem key="navigationItem" id="7gy-uR-g5H">
+                        <barButtonItem key="backBarButtonItem" title="Regresar" id="Cdk-IQ-u8j"/>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
@@ -538,7 +540,7 @@
             </objects>
             <point key="canvasLocation" x="461.60000000000002" y="1734.7826086956522"/>
         </scene>
-        <!--Chat Collection View Controller-->
+        <!--Chat-->
         <scene sceneID="c8n-K9-eM2">
             <objects>
                 <collectionViewController id="1Df-8N-8yB" customClass="chatCollectionViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
@@ -567,7 +569,9 @@
                             <outlet property="delegate" destination="1Df-8N-8yB" id="UPh-IF-f1x"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="Qfe-Hp-6Tu"/>
+                    <navigationItem key="navigationItem" title="Chat" id="Qfe-Hp-6Tu">
+                        <barButtonItem key="backBarButtonItem" title="Atras" id="ing-2U-Bud"/>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJX-IG-vL4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -686,7 +690,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpI-Qy-uDQ">
-                                                    <rect key="frame" x="53.5" y="145" width="33" height="15"/>
+                                                    <rect key="frame" x="54" y="145" width="33" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2471,6 +2475,10 @@
         <scene sceneID="Xcm-yu-raZ">
             <objects>
                 <viewController id="GQM-yb-0Ph" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2mq-hH-FqR"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gjr-qN-xfH"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kjR-47-QAo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2484,6 +2492,10 @@
         <scene sceneID="j4A-ZM-xie">
             <objects>
                 <viewController id="kNI-Rd-3Zj" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="naX-Jf-Frn"/>
+                        <viewControllerLayoutGuide type="bottom" id="P72-D5-Sek"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="H2d-sU-o64">
                         <rect key="frame" x="0.0" y="0.0" width="343" height="154"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2513,7 +2525,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Sn9-Fa-Z0Q"/>
-        <segue reference="WZE-jV-roy"/>
+        <segue reference="oTe-0A-F0j"/>
         <segue reference="6Qp-Mh-uYf"/>
         <segue reference="rMU-CR-Mc7"/>
     </inferredMetricsTieBreakers>

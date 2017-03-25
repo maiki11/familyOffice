@@ -9,7 +9,7 @@
 import UIKit
 
 class ChatTableViewController: BaseCell, UITableViewDelegate, UITableViewDataSource {
-    
+    var myconversations : [chatModel] = []
     
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero)
@@ -20,15 +20,17 @@ class ChatTableViewController: BaseCell, UITableViewDelegate, UITableViewDataSou
     
     override func setupViews() {
         super.setupViews()
-        
+        myconversations = testFile().testChatConversations()
         addSubview(tableView)
         addContraintWithFormat(format: "H:|[v0]|", views: tableView)
         addContraintWithFormat(format: "V:|[v0]|", views: tableView)
-        tableView.register(chatCell.self, forCellReuseIdentifier: "cellId")
+        tableView.register(UINib(nibName: "chatCellTableViewCell", bundle: nil), forCellReuseIdentifier: "cellId")
     }
     
     // MARK: - Table view data source
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -40,39 +42,16 @@ class ChatTableViewController: BaseCell, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! chatCell
-        let colors :
-            [UIColor] = [UIColor.black, UIColor.blue, UIColor.cyan]
-        cell.backgroundColor = colors[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! chatCellTableViewCell
+        let chat = myconversations[indexPath.row]
+        cell.userImage.loadImage(urlString: chat.photoUrl)
+        cell.nameLabel.text = chat.name
+        cell.lastMessage.text = chat.lastMessage
+        cell.time.text = chat.date
+        
         // Configure the cell..
         return cell
     }
     
 }
 
-class chatCell: UITableViewCell {
-    let label: UILabel = {
-        let lb = UILabel()
-        lb.font = lb.font.withSize(12)
-        lb.tintColor = UIColor.init(red: 91, green: 14, blue: 13, alpha: 0)
-        return lb
-    }()
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        addSubview(label)
-        addContraintWithFormat(format: "H:[v0(60)]", views: label)
-        addContraintWithFormat(format: "V:[v0(28)]", views: label)
-        
-        addConstraint(NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
-    }
-    
-    override var isHighlighted: Bool {
-        didSet {
-            label.textColor = isHighlighted ? UIColor.white : UIColor.black
-        }
-    }
-    
-    
-}
