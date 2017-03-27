@@ -79,6 +79,8 @@
 		A48F4BD41E8486CA00B1293F /* DoctorCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48F4BD31E8486CA00B1293F /* DoctorCollectionViewController.swift */; };
 		A48F4BD61E8495C700B1293F /* NewDoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48F4BD51E8495C700B1293F /* NewDoctorViewController.swift */; };
 		A4A23F771E7CAE460011D471 /* MedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A23F761E7CAE460011D471 /* MedCollectionViewCell.swift */; };
+		A4C8F06D1E85E57C005EE1E4 /* OperationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C8F06C1E85E57C005EE1E4 /* OperationTableViewController.swift */; };
+		A4C8F06F1E85EAD0005EE1E4 /* NewOperationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C8F06E1E85EAD0005EE1E4 /* NewOperationTableViewController.swift */; };
 		A4FA7DE21E7A0D4D00C10B1D /* MedsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA7DE11E7A0D4D00C10B1D /* MedsCollectionViewController.swift */; };
 		DBC61BF3F1B28E8FA0CCC6AA /* Pods_familyOfficeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9F185A83D04F89C69B99A9 /* Pods_familyOfficeTests.framework */; };
 /* End PBXBuildFile section */
@@ -183,6 +185,8 @@
 		A48F4BD31E8486CA00B1293F /* DoctorCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorCollectionViewController.swift; sourceTree = "<group>"; };
 		A48F4BD51E8495C700B1293F /* NewDoctorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDoctorViewController.swift; sourceTree = "<group>"; };
 		A4A23F761E7CAE460011D471 /* MedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedCollectionViewCell.swift; sourceTree = "<group>"; };
+		A4C8F06C1E85E57C005EE1E4 /* OperationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationTableViewController.swift; sourceTree = "<group>"; };
+		A4C8F06E1E85EAD0005EE1E4 /* NewOperationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOperationTableViewController.swift; sourceTree = "<group>"; };
 		A4FA7DE11E7A0D4D00C10B1D /* MedsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedsCollectionViewController.swift; sourceTree = "<group>"; };
 		D09E6D98CC40D45676606902 /* Pods-familyOfficeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-familyOfficeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-familyOfficeUITests/Pods-familyOfficeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD0DB8FD178D3D2D96269556 /* Pods_familyOffice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_familyOffice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -507,6 +511,8 @@
 				A48E4DAA1E8342940051A55D /* DiseasesTableViewController.swift */,
 				A48F4BD31E8486CA00B1293F /* DoctorCollectionViewController.swift */,
 				A48F4BD51E8495C700B1293F /* NewDoctorViewController.swift */,
+				A4C8F06C1E85E57C005EE1E4 /* OperationTableViewController.swift */,
+				A4C8F06E1E85EAD0005EE1E4 /* NewOperationTableViewController.swift */,
 			);
 			name = Health;
 			sourceTree = "<group>";
@@ -810,8 +816,10 @@
 			files = (
 				02C17D2B1E42796700EE7CFA /* recordTableViewCell.swift in Sources */,
 				8450EFC61E64A1E500A51C09 /* AlertService.swift in Sources */,
+				A4C8F06F1E85EAD0005EE1E4 /* NewOperationTableViewController.swift in Sources */,
 				02AD814B1E4B87520030B3DD /* AddMembersTableViewController.swift in Sources */,
 				023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */,
+				A4C8F06D1E85E57C005EE1E4 /* OperationTableViewController.swift in Sources */,
 				0226C8E41E3C265A007968BA /* ConfigurationView.swift in Sources */,
 				02D2C0D11E6747AE007A6798 /* References.swift in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,

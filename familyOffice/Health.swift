@@ -21,8 +21,6 @@ struct Health {
     var doctors: [NSDictionary]
     var operations: [NSDictionary]
     
-    struct Operation {}
-    
     init(health: NSDictionary){
         self.meds = health[Health.kHealthMeds] as? [NSDictionary] ?? []
         self.diseases = health[Health.kHealthDiseases] as? [NSDictionary] ?? []
@@ -141,5 +139,36 @@ extension Health {
             ]
         }
 
+    }
+    
+    
+    struct Operation {
+    	static let kOperationDescription = "description"
+        static let kOperationDate = "date"
+        
+        var description: String
+        var date: Date
+        
+        init(dic: NSDictionary){
+            self.description = dic[Operation.kOperationDescription] as! String
+            self.date = Date(timeIntervalSince1970: dic[Operation.kOperationDate] as! TimeInterval)
+        }
+        
+        init(description: String, date: Date){
+            self.description = description
+            self.date = date
+        }
+        
+        init(snapshot: FIRDataSnapshot){
+            let dic = snapshot.value as! NSDictionary
+            self.init(dic: dic)
+        }
+        
+        func toDictionary() -> NSDictionary {
+            return [
+                Operation.kOperationDescription: self.description,
+                Operation.kOperationDate: self.date.timeIntervalSince1970
+            ]
+        }
     }
 }
