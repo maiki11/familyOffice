@@ -21,7 +21,7 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
   
     
     override func viewDidLoad() {
-        //AUTH_SERVICE.isAuth(view: self.self, name:"TabBarControllerView")
+        AUTH_SERVICE.isAuth(view: self.self, name:"TabBarControllerView")
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
         // Do any additional setup after loading the view.
@@ -31,8 +31,6 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = "Registrar"
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
