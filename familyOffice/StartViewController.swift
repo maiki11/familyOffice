@@ -32,6 +32,7 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     }
     
     override func viewDidLoad() {
+        
         AUTH_SERVICE.isAuth(view: self.self, name:"mainView")
         super.viewDidLoad()
         print(UIDevice().description)
@@ -155,7 +156,7 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     @IBAction func signUp(_ sender: UIButton) {
         UTILITY_SERVICE.loading(view: self.view)
         UIApplication.shared.beginIgnoringInteractionEvents()
-        gotoView(view: "SignUpView")
+        self.performSegue(withIdentifier: "signupSegue", sender: nil)
     }
     
     func gotoView(view:String )  {

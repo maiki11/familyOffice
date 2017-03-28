@@ -53,6 +53,7 @@
 		027213AB1E84865F001A144B /* testFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027213AA1E84865F001A144B /* testFile.swift */; };
 		027213AD1E8488E1001A144B /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027213AC1E8488E1001A144B /* DateTableViewCell.swift */; };
 		027213B11E84B38C001A144B /* HomeBussinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027213B01E84B38C001A144B /* HomeBussinessViewController.swift */; };
+		028385501E8AE11F00DD93C8 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0283854F1E8AE11F00DD93C8 /* Settings.storyboard */; };
 		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
 		02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC3F1E6DE73A003780AB /* UIImage.swift */; };
 		02ABAC421E6E02B5003780AB /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC411E6E02B5003780AB /* Device.swift */; };
@@ -171,6 +172,7 @@
 		027213AA1E84865F001A144B /* testFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testFile.swift; sourceTree = "<group>"; };
 		027213AC1E8488E1001A144B /* DateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		027213B01E84B38C001A144B /* HomeBussinessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBussinessViewController.swift; sourceTree = "<group>"; };
+		0283854F1E8AE11F00DD93C8 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		02ABAC3F1E6DE73A003780AB /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		02ABAC411E6E02B5003780AB /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
@@ -337,7 +339,7 @@
 				02F5E35A1E1C322500A9FBFA /* Controllers */,
 				02382F0C1E1C210C0036FFC9 /* AppDelegate.swift */,
 				02E7E5EB1E78806D00D8360B /* Main.storyboard */,
-				024CA7911E871A6700E2B7FC /* RegisterExtension.swift */,
+				0283854F1E8AE11F00DD93C8 /* Settings.storyboard */,
 				02382F151E1C210C0036FFC9 /* LaunchScreen.storyboard */,
 				02382F181E1C210C0036FFC9 /* Info.plist */,
 				02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */,
@@ -582,6 +584,7 @@
 				02B876441E1C677C005E5473 /* SingUpViewController.swift */,
 				849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */,
 				02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */,
+				024CA7911E871A6700E2B7FC /* RegisterExtension.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				02F15BB51E85E99D008C26F8 /* ChatCell.xib in Resources */,
 				02E7E5EE1E7883E700D8360B /* Assets.xcassets in Resources */,
 				02382F3B1E1C2E1D0036FFC9 /* GoogleService-Info.plist in Resources */,
+				028385501E8AE11F00DD93C8 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

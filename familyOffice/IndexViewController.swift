@@ -43,7 +43,8 @@ class IndexViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     func handleBack() {
-        self.performSegue(withIdentifier: "homeSegue", sender: nil)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
 

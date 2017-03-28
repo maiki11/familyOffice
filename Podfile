@@ -16,6 +16,7 @@ target 'familyOffice' do
   pod 'JVFloatLabeledTextField'
   pod 'MGSwipeTableCell'
   pod 'Alamofire'
+  pod 'FSCalendar'
   pod 'JTAppleCalendar', '~> 6.1'
   pod 'Toast-Swift', '~> 2.0.0'
   pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
