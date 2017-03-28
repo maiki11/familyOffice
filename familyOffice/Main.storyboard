@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gkV-lX-uju">
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kip-84-qVL">
+>>>>>>> origin/master
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Unknown constraint types" minToolsVersion="5.1"/>
@@ -438,7 +442,7 @@
             <objects>
                 <navigationController id="xBb-2B-CJp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Inicio" image="Home" id="rI5-tj-9Ev"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r7p-lP-FCi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r7p-lP-FCi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1237,6 +1241,7 @@
         <!--Index View Controller-->
         <scene sceneID="jHr-94-Iue">
             <objects>
+<<<<<<< HEAD
                 <viewController id="SU9-tn-u9W" customClass="IndexViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bok-wI-gdW"/>
@@ -1259,6 +1264,15 @@
                             <constraint firstItem="XFb-eY-ZSf" firstAttribute="leading" secondItem="mRQ-n0-A3b" secondAttribute="leadingMargin" id="hz9-vA-6gu"/>
                         </constraints>
                     </view>
+=======
+                <navigationController id="vo7-HH-trf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Inicio" image="Home" selectedImage="Home" id="qNc-2W-dbA"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ajE-bd-LBM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </navigationBar>
+>>>>>>> origin/master
                     <connections>
                         <segue destination="vtu-qR-ECs" kind="push" identifier="homeSegue" id="IWv-GY-qIc"/>
                     </connections>
@@ -2667,6 +2681,7 @@
         <!--View Controller-->
         <scene sceneID="j4A-ZM-xie">
             <objects>
+<<<<<<< HEAD
                 <viewController id="kNI-Rd-3Zj" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n7W-9v-XsE"/>
@@ -2679,6 +2694,28 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WNv-P1-npg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+=======
+                <viewControllerPlaceholder storyboardName="Chat" id="FyI-zj-JMa" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="byN-qn-xw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="462" y="2463"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ydb-xL-gA7">
+            <objects>
+                <navigationController storyboardIdentifier="StartView" automaticallyAdjustsScrollViewInsets="NO" id="Kip-84-qVL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xTp-qL-h7S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gkV-lX-uju" kind="relationship" relationship="rootViewController" id="xSk-8B-ZiI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lmn-eb-193" userLabel="First Responder" sceneMemberID="firstResponder"/>
+>>>>>>> origin/master
             </objects>
         </scene>
     </scenes>
