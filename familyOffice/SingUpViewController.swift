@@ -25,7 +25,8 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
         // Do any additional setup after loading the view.
-        
+        let backButton : UIBarButtonItem = UIBarButtonItem(title: "Regresar", style: UIBarButtonItemStyle.plain, target: self, action:#selector(handleBack))
+        self.navigationItem.leftBarButtonItem = backButton
         self.confirmPassTxtfield.delegate = self
     }
     
@@ -94,7 +95,7 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
             self.present(alert, animated: true, completion: nil)
         }
     }
-    @IBAction func handleBack(_ sender: UIButton) {
+    func handleBack() {
         UTILITY_SERVICE.gotoView(view: "StartView", context: self)
     }
   
