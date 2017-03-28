@@ -63,6 +63,11 @@
 		02B46A341E52908200CC7511 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B46A331E52908200CC7511 /* NotificationService.swift */; };
 		02B7E7FA1E7C614A0082BAE7 /* settingLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7E7F91E7C614A0082BAE7 /* settingLauncher.swift */; };
 		02B7E7FC1E7C7A0E0082BAE7 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7E7FB1E7C7A0E0082BAE7 /* UIView.swift */; };
+		02B82ABF1E8AE3CF00E41E32 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B82ABE1E8AE3CF00E41E32 /* Settings.storyboard */; };
+		02B82AC11E8AE4A100E41E32 /* Families.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B82AC01E8AE4A100E41E32 /* Families.storyboard */; };
+		02B82AC31E8AE4D800E41E32 /* SafeBox.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B82AC21E8AE4D800E41E32 /* SafeBox.storyboard */; };
+		02B82AC51E8AE50B00E41E32 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B82AC41E8AE50B00E41E32 /* Calendar.storyboard */; };
+		02B82AC71E8AE52600E41E32 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B82AC61E8AE52600E41E32 /* Chat.storyboard */; };
 		02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B876441E1C677C005E5473 /* SingUpViewController.swift */; };
 		02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */; };
 		02BD2D191E1F130900A61A84 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2D181E1F130900A61A84 /* UserService.swift */; };
@@ -182,6 +187,11 @@
 		02B46A331E52908200CC7511 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		02B7E7F91E7C614A0082BAE7 /* settingLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settingLauncher.swift; sourceTree = "<group>"; };
 		02B7E7FB1E7C7A0E0082BAE7 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		02B82ABE1E8AE3CF00E41E32 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		02B82AC01E8AE4A100E41E32 /* Families.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Families.storyboard; sourceTree = "<group>"; };
+		02B82AC21E8AE4D800E41E32 /* SafeBox.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SafeBox.storyboard; sourceTree = "<group>"; };
+		02B82AC41E8AE50B00E41E32 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
+		02B82AC61E8AE52600E41E32 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		02B876441E1C677C005E5473 /* SingUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		02BD2D181E1F130900A61A84 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -337,6 +347,11 @@
 				02F5E35A1E1C322500A9FBFA /* Controllers */,
 				02382F0C1E1C210C0036FFC9 /* AppDelegate.swift */,
 				02E7E5EB1E78806D00D8360B /* Main.storyboard */,
+				02B82AC61E8AE52600E41E32 /* Chat.storyboard */,
+				02B82AC41E8AE50B00E41E32 /* Calendar.storyboard */,
+				02B82AC21E8AE4D800E41E32 /* SafeBox.storyboard */,
+				02B82AC01E8AE4A100E41E32 /* Families.storyboard */,
+				02B82ABE1E8AE3CF00E41E32 /* Settings.storyboard */,
 				024CA7911E871A6700E2B7FC /* RegisterExtension.swift */,
 				02382F151E1C210C0036FFC9 /* LaunchScreen.storyboard */,
 				02382F181E1C210C0036FFC9 /* Info.plist */,
@@ -750,15 +765,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02B82AC71E8AE52600E41E32 /* Chat.storyboard in Resources */,
 				02E7E5EC1E78806D00D8360B /* Main.storyboard in Resources */,
+				02B82AC11E8AE4A100E41E32 /* Families.storyboard in Resources */,
 				02382F171E1C210C0036FFC9 /* LaunchScreen.storyboard in Resources */,
 				02F15BBB1E85F37A008C26F8 /* chatCellTableViewCell.xib in Resources */,
 				8421167A1E28124600C6BD80 /* background.mp4 in Resources */,
+				02B82AC31E8AE4D800E41E32 /* SafeBox.storyboard in Resources */,
 				0272139B1E8445AC001A144B /* CellView.xib in Resources */,
 				8488E1681E41728700045646 /* Gotham-Book.ttf in Resources */,
 				02F15BB51E85E99D008C26F8 /* ChatCell.xib in Resources */,
 				02E7E5EE1E7883E700D8360B /* Assets.xcassets in Resources */,
 				02382F3B1E1C2E1D0036FFC9 /* GoogleService-Info.plist in Resources */,
+				02B82AC51E8AE50B00E41E32 /* Calendar.storyboard in Resources */,
+				02B82ABF1E8AE3CF00E41E32 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
