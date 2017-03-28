@@ -32,6 +32,10 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     }
     
     override func viewDidLoad() {
+        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
+        self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
+        
         AUTH_SERVICE.isAuth(view: self.self, name:"mainView")
         super.viewDidLoad()
         print(UIDevice().description)
@@ -95,11 +99,13 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         //background.alpha = 0.0
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
     }
     
     func animateView(){
@@ -155,7 +161,7 @@ class StartViewController: UIViewController, GIDSignInUIDelegate, UITextFieldDel
     @IBAction func signUp(_ sender: UIButton) {
         UTILITY_SERVICE.loading(view: self.view)
         UIApplication.shared.beginIgnoringInteractionEvents()
-        gotoView(view: "SignUpView")
+        self.performSegue(withIdentifier: "signUpSegue", sender: nil)
     }
     
     func gotoView(view:String )  {
