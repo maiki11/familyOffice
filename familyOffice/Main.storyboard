@@ -99,27 +99,18 @@
                                 </connections>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-gR-T0q">
-<<<<<<< HEAD
-                                <rect key="frame" x="61.5" y="625" width="252" height="32"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-9j-XHn">
-                                        <rect key="frame" x="0.0" y="0.0" width="219" height="32"/>
-=======
+
                                 <rect key="frame" x="47" y="484.5" width="281" height="172.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tienes cuenta, regístrate  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-9j-XHn">
                                         <rect key="frame" x="0.0" y="0.0" width="244" height="172.5"/>
->>>>>>> parent of db01b4b... Merge remote-tracking branch 'origin/master'
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                         <color key="textColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="highlightedColor" red="0.97927886659999996" green="1" blue="0.99371440200000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rB-XC-zD2">
-<<<<<<< HEAD
-                                        <rect key="frame" x="219" y="0.0" width="33" height="32"/>
-=======
+
                                         <rect key="frame" x="244" y="0.0" width="37" height="172.5"/>
->>>>>>> parent of db01b4b... Merge remote-tracking branch 'origin/master'
                                         <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                         <state key="normal" title="aquí">
                                             <color key="titleColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -131,11 +122,8 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AwA-sU-zu3" customClass="GIDSignInButton">
-<<<<<<< HEAD
-                                <rect key="frame" x="36" y="498.5" width="192" height="136.5"/>
-=======
+
                                 <rect key="frame" x="36" y="454.5" width="192" height="40"/>
->>>>>>> parent of db01b4b... Merge remote-tracking branch 'origin/master'
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5fA-1h-PlK"/>
@@ -411,11 +399,8 @@
                             <constraint firstItem="J1o-zm-gG7" firstAttribute="leading" secondItem="w4M-g7-AKD" secondAttribute="leadingMargin" id="Utd-sg-iKI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="txa-Bh-p2K" secondAttribute="trailing" constant="20" id="VSq-n8-DaE"/>
                             <constraint firstItem="sgf-fX-Vjj" firstAttribute="trailing" secondItem="w4M-g7-AKD" secondAttribute="trailingMargin" id="WI5-6g-7Hb"/>
-<<<<<<< HEAD
-                            <constraint firstAttribute="centerX" secondItem="w4M-g7-AKD" secondAttribute="centerX" id="XJX-g9-eri"/>
-=======
+
                             <constraint firstItem="txa-Bh-p2K" firstAttribute="centerX" secondItem="w4M-g7-AKD" secondAttribute="centerX" id="XJX-g9-eri"/>
->>>>>>> parent of db01b4b... Merge remote-tracking branch 'origin/master'
                             <constraint firstItem="2HI-GW-0Ln" firstAttribute="top" secondItem="Rtj-sI-Blw" secondAttribute="bottom" constant="30" id="XQl-J8-4IL"/>
                             <constraint firstItem="Ksd-4E-P65" firstAttribute="leading" secondItem="w4M-g7-AKD" secondAttribute="leadingMargin" id="YB4-D0-2TD"/>
                             <constraint firstItem="txa-Bh-p2K" firstAttribute="leading" secondItem="w4M-g7-AKD" secondAttribute="leadingMargin" constant="20" id="YXf-2D-Lrq"/>
@@ -1262,11 +1247,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cajafuerte_screen" translatesAutoresizingMaskIntoConstraints="NO" id="XFb-eY-ZSf">
-<<<<<<< HEAD
-                                <rect key="frame" x="16" y="20" width="333" height="647"/>
-=======
+
                                 <rect key="frame" x="16" y="64" width="333" height="554"/>
->>>>>>> parent of db01b4b... Merge remote-tracking branch 'origin/master'
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1351,11 +1333,8 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fk7-Fz-R4l">
-<<<<<<< HEAD
-                                <rect key="frame" x="16" y="430" width="343" height="229"/>
-=======
+
                                 <rect key="frame" x="16" y="430" width="343" height="180"/>
->>>>>>> parent of db01b4b... Merge remote-tracking branch 'origin/master'
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="8tn-cb-4s7" customClass="DateTableViewCell" customModule="familyOffice" customModuleProvider="target">
@@ -2721,15 +2700,10 @@
         <image name="social" width="114" height="114"/>
     </resources>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
-        <segue reference="b0R-mJ-VAU"/>
-        <segue reference="EwO-5D-k9Z"/>
-        <segue reference="Sn9-Fa-Z0Q"/>
-=======
+
         <segue reference="Sn9-Fa-Z0Q"/>
         <segue reference="EwO-5D-k9Z"/>
         <segue reference="b0R-mJ-VAU"/>
         <segue reference="WZE-jV-roy"/>
->>>>>>> parent of db01b4b... Merge remote-tracking branch 'origin/master'
     </inferredMetricsTieBreakers>
 </document>
