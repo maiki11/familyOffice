@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kip-84-qVL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kip-84-qVL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -395,7 +395,7 @@
             <objects>
                 <navigationController id="xBb-2B-CJp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Inicio" image="Home" id="rI5-tj-9Ev"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r7p-lP-FCi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r7p-lP-FCi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -593,7 +593,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hn0-PB-zQG" id="yId-L5-g7w">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="59"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WjC-sX-ofn">
@@ -743,7 +743,7 @@
             <objects>
                 <navigationController id="vo7-HH-trf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Inicio" image="Home" selectedImage="Home" id="qNc-2W-dbA"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ajE-bd-LBM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ajE-bd-LBM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -849,7 +849,7 @@
         <scene sceneID="9Am-e1-fmx">
             <objects>
                 <navigationController storyboardIdentifier="mainView" id="kMC-B3-l3W" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RyQ-kR-bXX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RyQ-kR-bXX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1198,7 +1198,7 @@
             <objects>
                 <navigationController storyboardIdentifier="StartView" automaticallyAdjustsScrollViewInsets="NO" id="Kip-84-qVL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xTp-qL-h7S">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xTp-qL-h7S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
