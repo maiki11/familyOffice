@@ -28,11 +28,6 @@ class Utility {
         let viewController : UIViewController = storyboard.instantiateViewController(withIdentifier: view)
         context.present(viewController, animated: true, completion: nil)
     }
-    func gotoView(view:String, context: UIViewController, storyBoard: String )  {
-        let storyboard: UIStoryboard = UIStoryboard(name: storyBoard, bundle: nil)
-        let viewController : UIViewController = storyboard.instantiateViewController(withIdentifier: view)
-        context.present(viewController, animated: true, completion: nil)
-    }
     
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
         let size = image.size

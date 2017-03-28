@@ -107,17 +107,9 @@ class FamilyService: repository {
                         REQUEST_SERVICE.insert(value: family.toDictionary() as! NSDictionary, ref: "families/\((family.id)!)")
                         // REF_FAMILIES.child(family.id).setValue(family.toDictionary())
                         REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").updateChildValues([family.id : true])
-                        DispatchQueue.main.async {
-                            for item in users {
-                              self.notification(uid: item.id, title: "Agregado a: ", message: family.name, photoUrl: family.photoURL!)
-                            }
-                        }
                         //Set family for app
                         self.selectFamily(family: family)
-                        //Add to family
-                        for item in users {
-                            REF_USERS.child(item.id!).child("families").updateChildValues([family.id: true])
-                        }
+                        
                         ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.users[0].id)!, activity: "Se creo la familia  \((family.name)!)", photo: downloadURL.absoluteString, type: "addFamily")
                         //Go to Home
                         Utility.Instance().gotoView(view: "mainView", context: view.self)
@@ -192,14 +184,11 @@ extension FamilyService {
             self.families[index].members = memberDict as NSDictionary?
             REF_FAMILIES.child("\(fid)/members").updateChildValues([uid : true])
             REF_USERS.child("\(uid)/families").updateChildValues([fid:true])
-            notification(uid: uid, title: "Agregado a: ", message: self.families[index].name, photoUrl: self.families[index].photoURL!)
+            NOTIFICATION_SERVICE.send(title: "Agregado a: ", message: self.families[index].name!, to: uid)
+            NOTIFICATION_SERVICE.saveNotification(id: uid, title: "Agregado a: \(self.families[index].name!)", photo: self.families[index].photoURL!)
+            ToastService.getTopViewControllerAndShowToast(text: "Miembro \((USER_SERVICE.users.first(where: {$0.id == uid})?.name).unsafelyUnwrapped) Agregado")
             //NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [uid:"added"])
         }
-    }
-    func notification(uid: String, title: String, message: String, photoUrl: String) -> Void {
-        NOTIFICATION_SERVICE.send(title: title, message:message, to: uid)
-        NOTIFICATION_SERVICE.saveNotification(id: uid, title: title + message, photo: photoUrl)
-        ToastService.getTopViewControllerAndShowToast(text: "Miembro \((USER_SERVICE.users.first(where: {$0.id == uid})?.name).unsafelyUnwrapped) Agregado")
     }
     //Remove members
     func remove(snapshot: Any, id: Any) -> Void {
