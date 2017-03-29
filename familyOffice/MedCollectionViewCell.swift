@@ -13,5 +13,6 @@ class MedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var medImageView: UIImageView!
     @IBOutlet weak var medNameView: UILabel!
     @IBOutlet weak var medDoseView: UILabel!
+    
 
 }

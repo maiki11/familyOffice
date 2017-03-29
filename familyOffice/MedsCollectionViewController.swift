@@ -89,7 +89,9 @@ class MedsCollectionViewController: UICollectionViewController {
         let med = meds[indexPath.row]
         
         let medType = med[Health.Med.kMedType] as! String
-        cell.medImageView.image = UIImage(named: medType)
+        let medImage = UIImage(named: medType)?.withRenderingMode(.alwaysTemplate)
+        cell.medImageView.image = medImage
+        cell.medImageView.tintColor = UIColor.red
         cell.medNameView.text = med[Health.Med.kMedName] as? String
         var dose = med[Health.Med.kMedDose] as! String
         if(dose.contains("m")){

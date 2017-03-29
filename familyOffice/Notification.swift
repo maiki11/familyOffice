@@ -19,7 +19,7 @@ struct NotificationModel {
     let id: String!
     let title: String!
     let timestamp: Double!
-    let seen: Bool!
+    var seen: Bool!
     var photoURL: String!
     
     init(id: String, title: String, timestamp: Double, photoURL: String) {

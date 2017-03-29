@@ -7,16 +7,26 @@
 //
 
 import UIKit
-
+import MIBadgeButton_Swift
 class ModuleCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var image: UIImageView!
+   
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var container: UIImageView!
+    @IBOutlet weak var buttonicon: MIBadgeButton!
+    
     override func layoutSubviews() {
-        image.layer.cornerRadius = 10
-        image.clipsToBounds = true
-        image.layer.shadowColor = UIColor.black.cgColor
-        image.layer.shadowOffset = CGSize(width: 3, height: 3)
-        image.layer.shadowOpacity = 0.5
-        image.layer.shadowRadius = 10
+        self.layer.cornerRadius = 12
+        self.container.layer.borderWidth = 1
+        self.container.layer.borderColor = UIColor.black.cgColor
+        self.container.layer.cornerRadius = 3
+        self.container.clipsToBounds = true
+        self.clipsToBounds = true
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 3, height: 3)
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowRadius = 10
+        
     }
+    
 }

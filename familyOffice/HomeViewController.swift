@@ -9,91 +9,70 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import MIBadgeButton_Swift
 
-class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate{
 
-    let myImages=["chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png","chat_home.png","calendar_home.png","contacts_home.png","target_home.png"]
-    let newHeight: CGFloat = 60
-    let heightHeader: CGFloat = 200
-    let top: CGFloat = 20
-    var headPosY: CGFloat = 0
-    var famPosY: CGFloat = 0
-    private var flag = true
-    private var family : Family?
-    let user = USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
+    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health"]
+    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud"]
     
-    @IBOutlet var navBar: UINavigationBar!
-    @IBOutlet weak var familyImage: UIImageView!
-    @IBOutlet weak var familyName: UILabel!
+
+    private var family : Family?
+    
+
+    let user = USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
+    var families : [String]! = []
+
+   
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    private var heightImg: CGFloat = 0
-    private var lastContentOffset: CGFloat = 0
-    private var startPosX: CGFloat = 0
-    private var headWidth: CGFloat = 0
-    private var collectionHeight: CGFloat = 0
-    
-    private var headerExpanded = true
-    private var headerAnimating = false
-    
+
+
     var navigationBarOriginalOffset : CGFloat?
-    
-    
-    @IBOutlet weak var famImageCenterXConstraint: NSLayoutConstraint!
-    @IBOutlet weak var famImageWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var famNameLeadingConstraint: NSLayoutConstraint!
-    
-    var famExpandedHeight: CGFloat = 0
-    let famCollapsedHeight: CGFloat = 40
-    
-    var collectionOriginalHeight: CGFloat = 0
-    var famImageOriginalSize: CGFloat = 0
-    var famImageOriginalX: CGFloat = 0
-    var famImageOriginalY: CGFloat = 0
-    var isExpanded = true
-    
-    var famImagePositionXConstraint: NSLayoutConstraint?
-    var famNamePositionXConstraint: NSLayoutConstraint?
-    
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
+
         //USER_SERVICE.observers()
         
-        self.familyImage.layer.cornerRadius = self.familyImage.frame.size.width/2
-        self.headPosY = self.headerView.frame.origin.y
-        self.headWidth = self.headerView.frame.width
-        self.famPosY = familyName.frame.origin.y
-        self.collectionHeight = collectionView.frame.height
-        lastContentOffset = familyImage.frame.size.height/2
-        heightImg = familyImage.frame.size.height
-        self.familyImage.layer.cornerRadius = lastContentOffset
-        self.familyImage.clipsToBounds = true
-        
-        collectionView.delegate = self
-        self.automaticallyAdjustsScrollViewInsets = false
-        
-        famExpandedHeight = famImageWidthConstraint.constant
-        collectionOriginalHeight = collectionView.frame.height
-        famImageOriginalSize = familyImage.frame.size.width
-        famImageOriginalX = familyImage.frame.origin.x
-        famImageOriginalY = familyImage.frame.origin.y
-//        famImagePositionXConstraint = familyImage.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor)
-//        famImagePositionXConstraint?.isActive = true
-//        famImagePositionXConstraint?.priority = UILayoutPriorityDefaultLow
-//        famNamePositionXConstraint = familyName.leadingAnchor.constraint(equalTo: familyName.trailingAnchor)
-//        famNamePositionXConstraint?.isActive = true
-//        famNamePositionXConstraint?.priority = UILayoutPriorityDefaultLow
-        familyImage.image = #imageLiteral(resourceName: "familyImage")
+        let lpgr = UILongPressGestureRecognizer(target: self, action:#selector(handleLongPress(gestureReconizer:)))
+        lpgr.minimumPressDuration = 0
+        lpgr.delaysTouchesBegan = true
+        self.collectionView.addGestureRecognizer(lpgr)
+        let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
+
+        self.navigationItem.rightBarButtonItem = moreButton
+        let barButton = UIBarButtonItem(title: "Regresar", style: .plain, target: self, action: #selector(self.handleBack))
+        barButton.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
+        self.navigationItem.leftBarButtonItem = barButton
+        let nav = self.navigationController?.navigationBar
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
+    }
+    
+    let settingLauncher = SettingLauncher()
+
+    func handleMore(_ sender: Any) {
+        settingLauncher.setView(view: self)
+        settingLauncher.showSetting()
+    }
+    
+    
+    func handleBack()  {
+        UTILITY_SERVICE.gotoView(view: "mainView", context: self)
+    
     }
     
     /** ESTA FUNCION NOMAS PONE OBSERVERS */
     override func viewWillAppear(_ animated: Bool) {
         reloadFamily()
+        
+       
+        if let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
+            self.navigationItem.title = FAMILY_SERVICE.families[index].name
+        }
+     
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
-            self.familyImage.image = #imageLiteral(resourceName: "Family")
-            self.familyName.text = "Sin familia seleccionada"
             return
         }
         NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){_ in
@@ -105,7 +84,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    /** Quita los observers */
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //heightImg = familyImage.frame.size.height
+    }
+    
+
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(USER_NOTIFICATION)
         NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
@@ -115,61 +100,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func reloadFamily() -> Void {
         if USER_SERVICE.users.count > 0, let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
             let family = FAMILY_SERVICE.families[index]
-            if let url = family.photoURL {
-                self.familyImage.loadImage(urlString: url)
-            }
-            self.familyName.text = family.name
-        }else{
-            self.familyImage.image = #imageLiteral(resourceName: "Family")
-            self.familyName.text = "Sin familia seleccionada"
+
+            self.navigationItem.title = family.name
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-    
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-//        let offsetY = collectionView.contentOffset.y
-//        let maxScroll = famExpandedHeight - famCollapsedHeight
-//        if offsetY > maxScroll && isExpanded {
-//            isExpanded = false
-//            UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-//                self.famImageCenterXConstraint.priority = UILayoutPriorityDefaultLow
-//                self.famImagePositionXConstraint?.priority = UILayoutPriorityDefaultHigh
-//                self.famImageWidthConstraint.constant = self.famCollapsedHeight
-//                self.famNameLeadingConstraint.priority = UILayoutPriorityDefaultLow
-//                self.famNamePositionXConstraint?.priority = UILayoutPriorityDefaultHigh
-//                self.view.layoutIfNeeded()
-//            })
-//            let anim = CABasicAnimation(keyPath: "cornerRadius")
-//            anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-//            anim.fromValue = familyImage.layer.cornerRadius
-//            anim.toValue = self.famCollapsedHeight/2
-//            anim.duration = 0.8
-//            self.familyImage.layer.cornerRadius = self.famCollapsedHeight/2
-//            self.familyImage.layer.add(anim, forKey: "cornerRadius")
-//        } else if offsetY < maxScroll && !isExpanded {
-//            isExpanded = true
-//            UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-//                self.famImageCenterXConstraint.priority = UILayoutPriorityDefaultHigh
-//                self.famImagePositionXConstraint?.priority = UILayoutPriorityDefaultLow
-//                self.famImageWidthConstraint.constant = self.famExpandedHeight
-//                self.famNameLeadingConstraint.priority = UILayoutPriorityDefaultHigh
-//                self.famNamePositionXConstraint?.priority = UILayoutPriorityDefaultLow
-//                self.view.layoutIfNeeded()
-//            })
-//            let anim = CABasicAnimation(keyPath: "cornerRadius")
-//            anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-//            anim.fromValue = familyImage.layer.cornerRadius
-//            anim.toValue = self.famExpandedHeight/2
-//			anim.duration = 0.8
-//            self.familyImage.layer.cornerRadius = self.famExpandedHeight/2
-//            self.familyImage.layer.add(anim, forKey: "cornerRadius")
-//        }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -189,13 +122,55 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return myImages.count
+        return icons.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellModule", for: indexPath) as! ModuleCollectionViewCell
-        cell.image.image = UIImage(named: myImages[indexPath.item])!
-        return cell
         
+        cell.buttonicon.setImage(UIImage(named: icons[indexPath.item])!, for: .normal)
+        cell.name.text = labels[indexPath.row]
+        cell.buttonicon.badgeString = "8"
+        cell.buttonicon.badgeEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0)
+        cell.buttonicon.badgeBackgroundColor = UIColor.red
+        return cell
+    }
+    
+    
+
+    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+        let point: CGPoint = gestureReconizer.location(in: self.collectionView)
+        let indexPath = self.collectionView?.indexPathForItem(at: point)
+        
+        if (indexPath != nil ){
+            switch gestureReconizer.state {
+            case .began:
+                gotoModule(index: (indexPath?.item)!)
+                break
+            case .ended:
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    func gotoModule(index: Int) -> Void {
+        switch index {
+        case 0:
+            self.performSegue(withIdentifier: "chatSegue", sender: nil)
+
+        case 1:
+            self.performSegue(withIdentifier: "calendarSegue", sender: nil)
+
+        case 4:
+            self.performSegue(withIdentifier: "safeBoxSegue", sender: nil)
+
+        case 8:
+            self.performSegue(withIdentifier: "healthSegue", sender: nil)
+        default:
+            break
+        }
+    
     }
 }

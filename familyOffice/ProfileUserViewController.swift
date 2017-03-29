@@ -47,6 +47,9 @@ class ProfileUserViewController: UIViewController {
         }
         profileImage.layer.cornerRadius = profileImage.frame.size.width/2
         profileImage.clipsToBounds = true
+        self.infoTable.layer.borderWidth = 1
+        self.infoTable.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
+        self.infoTable.layer.cornerRadius = 5
     }
     
     override func viewWillDisappear(_ animated: Bool) {

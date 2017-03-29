@@ -83,7 +83,16 @@ class FamilyService: repository {
         ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.users[0].id)!, activity: "Se elimino la familia \((family.name)!)", photo: (family.photoURL)!, type: "deleteFamily")
     }
     
-    func createFamily(key: String, image: UIImage, name: String, view: UIViewController){
+    func createFamily(key: String, image: UIImage, name: String, users: [User], view: UIViewController){
+        let membersDict : [String: Bool] = {
+            var dic: [String:Bool] = [:]
+            for user in users {
+                dic[user.id] = true
+            }
+            return dic
+        }()
+        
+        
         let imageName = NSUUID().uuidString
         if let uploadData = UIImagePNGRepresentation(image){
             _ = STORAGEREF.child("families/\(name)\(key)").child("images/\(imageName).png").put(uploadData, metadata: nil) { metadata, error in
@@ -94,7 +103,7 @@ class FamilyService: repository {
                     // Metadata contains file metadata such as size, content-type, and download URL.
                     if let downloadURL = metadata?.downloadURL()?.absoluteURL {
                         StorageService.Instance().save(url: downloadURL.absoluteString, data: uploadData)
-                        let family = Family(name:   name, photoURL: downloadURL.absoluteString, members:  [(FIRAuth.auth()?.currentUser?.uid)! : true], admin: (FIRAuth.auth()?.currentUser?.uid)! , id: name+key, imageProfilePath: metadata?.name)
+                        let family = Family(name:   name, photoURL: downloadURL.absoluteString, members: membersDict as NSDictionary, admin: (FIRAuth.auth()?.currentUser?.uid)! , id: name+key, imageProfilePath: metadata?.name)
                         REQUEST_SERVICE.insert(value: family.toDictionary() as! NSDictionary, ref: "families/\((family.id)!)")
                         // REF_FAMILIES.child(family.id).setValue(family.toDictionary())
                         REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").updateChildValues([family.id : true])
@@ -103,7 +112,7 @@ class FamilyService: repository {
                         
                         ACTIVITYLOG_SERVICE.create(id: (USER_SERVICE.users[0].id)!, activity: "Se creo la familia  \((family.name)!)", photo: downloadURL.absoluteString, type: "addFamily")
                         //Go to Home
-                        Utility.Instance().gotoView(view: "TabBarControllerView", context: view.self)
+                        Utility.Instance().gotoView(view: "mainView", context: view.self)
                     }
                     
                 }
