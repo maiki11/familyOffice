@@ -12,8 +12,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     let testDate : [DateModel] = testFile().testDate()
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
-    @IBOutlet weak var animationSwitch: UISwitch!
-    
+    var localeChangeObserver : [NSObjectProtocol] = []
     @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
     
     fileprivate lazy var dateFormatter: DateFormatter = {
@@ -110,15 +109,15 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     // MARK:- UITableViewDelegate
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let tableViewCell = cell as? EventTableViewCell else { return }
-        tableViewCell.setTableViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
-        tableViewCell.setCollectionDataSourceDelegate(dataSourceDelegate: self, forRow:  indexPath.row)
+        tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+      
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             let scope: FSCalendarScope = (indexPath.row == 0) ? .month : .week
-            self.calendar.setScope(scope, animated: self.animationSwitch.isOn)
+            self.calendar.setScope(scope, animated: )
         }
     }
     
@@ -134,13 +133,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     
     // MARK:- Target actions
     
-    @IBAction func toggleClicked(sender: AnyObject) {
-        if self.calendar.scope == .month {
-            self.calendar.setScope(.week, animated: self.animationSwitch.isOn)
-        } else {
-            self.calendar.setScope(.month, animated: self.animationSwitch.isOn)
-        }
-    }
+   
     
 }
 

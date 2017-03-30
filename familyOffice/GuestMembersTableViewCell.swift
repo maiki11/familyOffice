@@ -8,27 +8,27 @@
 
 import UIKit
 
-class GuestMembersTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var collectionView: UICollectionView!
+extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func viewWillAppear(_ animated: Bool) {
+        localeChangeObserver.append( NotificationCenter.default.addObserver(forName: USERS_NOTIFICATION, object: nil, queue: nil){ obj in
+            if let user : User = obj.object as? User {
+                self.addMember(id: user.id)
+            }
+        })
     }
-    func setCollectionViewDataSourceDelegate
-        (dataSource: UICollectionViewDataSource, delegate: UICollectionViewDelegate, forRow row: Int) {
-        
-        collectionView.delegate = delegate
-        collectionView.dataSource = dataSource
-        collectionView.tag = row
-        collectionView.reloadData()
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
-
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return testDate[collectionView.tag].members.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return 
+    }
 }
