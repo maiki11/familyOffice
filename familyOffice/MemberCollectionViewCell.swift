@@ -9,7 +9,10 @@
 import UIKit
 
 class MemberCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var image: UIImageView!
     override func awakeFromNib() {
-        
+        image.layer.cornerRadius = image.frame.width / 2
+        image.clipsToBounds = true
     }
 }

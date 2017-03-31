@@ -51,7 +51,7 @@
 		027213AB1E84865F001A144B /* testFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027213AA1E84865F001A144B /* testFile.swift */; };
 		027213B11E84B38C001A144B /* HomeBussinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027213B01E84B38C001A144B /* HomeBussinessViewController.swift */; };
 		027FC2451E8D830500450EFB /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2441E8D830500450EFB /* EventTableViewCell.swift */; };
-		027FC2471E8D89C000450EFB /* GuestMembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2461E8D89C000450EFB /* GuestMembersTableViewCell.swift */; };
+		027FC2471E8D89C000450EFB /* memberCollection-CalendarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2461E8D89C000450EFB /* memberCollection-CalendarExtension.swift */; };
 		027FC2491E8DCF3E00450EFB /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2481E8DCF3E00450EFB /* MemberCollectionViewCell.swift */; };
 		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
 		02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC3F1E6DE73A003780AB /* UIImage.swift */; };
@@ -174,7 +174,7 @@
 		027213AA1E84865F001A144B /* testFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testFile.swift; sourceTree = "<group>"; };
 		027213B01E84B38C001A144B /* HomeBussinessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBussinessViewController.swift; sourceTree = "<group>"; };
 		027FC2441E8D830500450EFB /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
-		027FC2461E8D89C000450EFB /* GuestMembersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestMembersTableViewCell.swift; sourceTree = "<group>"; };
+		027FC2461E8D89C000450EFB /* memberCollection-CalendarExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "memberCollection-CalendarExtension.swift"; sourceTree = "<group>"; };
 		027FC2481E8DCF3E00450EFB /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		02ABAC3F1E6DE73A003780AB /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -477,7 +477,7 @@
 			children = (
 				0272139E1E84478F001A144B /* CalendarViewController.swift */,
 				027FC2441E8D830500450EFB /* EventTableViewCell.swift */,
-				027FC2461E8D89C000450EFB /* GuestMembersTableViewCell.swift */,
+				027FC2461E8D89C000450EFB /* memberCollection-CalendarExtension.swift */,
 				027FC2481E8DCF3E00450EFB /* MemberCollectionViewCell.swift */,
 			);
 			name = calendar;
@@ -991,7 +991,7 @@
 				02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */,
 				02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */,
 				84AEA8A41E3BE32C002B2D43 /* Animations.swift in Sources */,
-				027FC2471E8D89C000450EFB /* GuestMembersTableViewCell.swift in Sources */,
+				027FC2471E8D89C000450EFB /* memberCollection-CalendarExtension.swift in Sources */,
 				02FA70661E7092ED0080AAEB /* ImageViewController.swift in Sources */,
 				024CA7921E871A6700E2B7FC /* RegisterExtension.swift in Sources */,
 				024EF9AA1E834B6A00F5B4DF /* IndexViewController.swift in Sources */,

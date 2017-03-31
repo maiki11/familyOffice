@@ -10,6 +10,7 @@ import FSCalendar
 
 class CalendarViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate {
     let testDate : [DateModel] = testFile().testDate()
+    var dates: [DateModel] = []
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
     var localeChangeObserver : [NSObjectProtocol] = []
@@ -80,6 +81,8 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         if monthPosition == .next || monthPosition == .previous {
             calendar.setCurrentPage(date, animated: true)
         }
+        dates = testDate.filter({$0.date == self.dateFormatter.string(from: date )})
+        tableView.reloadData()
     }
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
@@ -93,14 +96,15 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    
+        return dates.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventTableViewCell
-        cell.info = testDate[indexPath.row]
-        
+        cell.info = dates[indexPath.row]
+        cell.count.text = String(indexPath.row)
         return cell
         
     }
@@ -117,7 +121,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             let scope: FSCalendarScope = (indexPath.row == 0) ? .month : .week
-            self.calendar.setScope(scope, animated:true )
+            self.calendar.setScope(scope, animated: true )
         }
     }
     
