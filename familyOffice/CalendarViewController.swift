@@ -117,7 +117,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             let scope: FSCalendarScope = (indexPath.row == 0) ? .month : .week
-            self.calendar.setScope(scope, animated: )
+            self.calendar.setScope(scope, animated:true )
         }
     }
     
