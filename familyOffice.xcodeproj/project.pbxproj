@@ -52,6 +52,7 @@
 		027213B11E84B38C001A144B /* HomeBussinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027213B01E84B38C001A144B /* HomeBussinessViewController.swift */; };
 		027FC2451E8D830500450EFB /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2441E8D830500450EFB /* EventTableViewCell.swift */; };
 		027FC2471E8D89C000450EFB /* GuestMembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2461E8D89C000450EFB /* GuestMembersTableViewCell.swift */; };
+		027FC2491E8DCF3E00450EFB /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2481E8DCF3E00450EFB /* MemberCollectionViewCell.swift */; };
 		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
 		02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC3F1E6DE73A003780AB /* UIImage.swift */; };
 		02ABAC421E6E02B5003780AB /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC411E6E02B5003780AB /* Device.swift */; };
@@ -174,6 +175,7 @@
 		027213B01E84B38C001A144B /* HomeBussinessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBussinessViewController.swift; sourceTree = "<group>"; };
 		027FC2441E8D830500450EFB /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		027FC2461E8D89C000450EFB /* GuestMembersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestMembersTableViewCell.swift; sourceTree = "<group>"; };
+		027FC2481E8DCF3E00450EFB /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		02ABAC3F1E6DE73A003780AB /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		02ABAC411E6E02B5003780AB /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 				0272139E1E84478F001A144B /* CalendarViewController.swift */,
 				027FC2441E8D830500450EFB /* EventTableViewCell.swift */,
 				027FC2461E8D89C000450EFB /* GuestMembersTableViewCell.swift */,
+				027FC2481E8DCF3E00450EFB /* MemberCollectionViewCell.swift */,
 			);
 			name = calendar;
 			sourceTree = "<group>";
@@ -710,7 +713,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Leonardo Durazo";
 				TargetAttributes = {
 					02382F081E1C210C0036FFC9 = {
@@ -954,6 +957,7 @@
 				02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */,
 				02BD2D191E1F130900A61A84 /* UserService.swift in Sources */,
 				02B7E7FC1E7C7A0E0082BAE7 /* UIView.swift in Sources */,
+				027FC2491E8DCF3E00450EFB /* MemberCollectionViewCell.swift in Sources */,
 				8471A2521E2D8C5100EC9FD7 /* ConfigProfile.swift in Sources */,
 				022EC1D21E20078C0096A18B /* Family.swift in Sources */,
 				0218B5B31E66522A00025EBB /* ListenerService.swift in Sources */,

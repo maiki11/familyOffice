@@ -95,7 +95,7 @@
                                                         <inset key="sectionInset" minX="2" minY="3" maxX="2" maxY="3"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="AKL-jE-7Dz">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="AKL-jE-7Dz" customClass="MemberCollectionViewCell" customModule="familyOffice" customModuleProvider="target">
                                                             <rect key="frame" x="2" y="3" width="30" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">

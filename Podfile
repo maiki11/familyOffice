@@ -18,7 +18,6 @@ target 'familyOffice' do
   pod 'Alamofire'
   pod 'FSCalendar'
   pod 'Toast-Swift', '~> 2.0.0'
-  pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
 pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
   target 'familyOfficeTests' do
     inherit! :search_paths

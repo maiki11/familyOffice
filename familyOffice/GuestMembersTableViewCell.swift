@@ -21,6 +21,17 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
             }
         })
     }
+    func addMember(id: String) -> User {
+        if let user = USER_SERVICE.users.filter({$0.id == id}).first {
+            if !USER_SERVICE.users.contains(where: {$0.id == id}){
+                REF_SERVICE.childChanged(ref: "users/\(id)")
+                self.membersTable.insertRows(at: [NSIndexPath(row: self.members.count-1, section: 0) as IndexPath], with: .fade)
+            }
+            //self.addMembers(user: user)
+        }else{
+            REF_SERVICE.valueSingleton(ref: "users/\(id)")
+        }
+    }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
