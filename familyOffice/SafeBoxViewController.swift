@@ -42,13 +42,15 @@ class SafeBoxViewController: UIViewController {
 }
 
 extension SafeBoxViewController: PasswordInputCompleteProtocol {
-    func touchAuthenticationComplete(_ passwordContainerView: PasswordContainerView, success: Bool, error: Error?) {
+    
+    public func touchAuthenticationComplete(_ passwordContainerView: PasswordContainerView, success: Bool, error: NSError?) {
         if success {
             self.validationSuccess()
         }else{
             passwordContainerView.clearInput()
         }
     }
+
     
     func passwordInputComplete(_ passwordContainerView: PasswordContainerView, input: String) {
         if validation(input) {
