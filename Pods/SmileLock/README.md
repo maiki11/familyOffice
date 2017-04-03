@@ -1,6 +1,7 @@
 # SmileLock
 
 [![GitHub Issues](http://img.shields.io/github/issues/recruit-lifestyle/Smile-Lock.svg?style=flat)](https://github.com/recruit-lifestyle/Smile-Lock/issues)
+<a href="https://github.com/Carthage/Carthage/"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
 [![Version](https://img.shields.io/cocoapods/v/SmileLock.svg?style=flat)](http://cocoadocs.org/docsets/SmileLock)
 [![License](https://img.shields.io/cocoapods/l/SmileLock.svg?style=flat)](http://cocoadocs.org/docsets/SmileLock)
 [![Platform](https://img.shields.io/cocoapods/p/SmileLock.svg?style=flat)](http://cocoadocs.org/docsets/SmileLock)
@@ -9,8 +10,14 @@ A library for make a beautiful Passcode Lock View, also support Touch ID.
 
 <img src="SmileLock-Example/demo_gif/smilelock_logo.png" width="600">
 
-<img src="SmileLock-Example/demo_gif/demo.gif" width="400">
-<img src="SmileLock-Example/demo_gif/demo_blur.gif" width="400">
+<img src="SmileLock-Example/demo_gif/demo.gif" width="300">
+<img src="SmileLock-Example/demo_gif/demo_blur.gif" width="300">
+
+
+# Requirements
+
+- iOS 9.0+
+- Swift 3 (pod version 2.x), Swift 2.3 (pod version 1.x)
 
 #What can it do for you?
 
@@ -19,7 +26,7 @@ A library for make a beautiful Passcode Lock View, also support Touch ID.
 
 ``` swift
 let kPasswordDigit = 6
-self.passwordContainerView = PasswordContainerView.createWithDigit(kPasswordDigit)
+passwordContainerView = PasswordContainerView.createWithDigit(kPasswordDigit)
 ```
 
 #### 2. Passcode input completed delegate callback.
@@ -57,12 +64,12 @@ extension ViewController: PasswordInputCompleteProtocol {
 #### 4. Customize UI.
 
 ``` swift
-self.passwordContainerView.tintColor = UIColor.color(.TextColor)
-self.passwordContainerView.highlightedColor = UIColor.color(.Blue)
+passwordContainerView.tintColor = UIColor.color(.textColor)
+passwordContainerView.highlightedColor = UIColor.color(.blue)
 ```
 
 #### 5. Visual Effect.
-If you want to see no visual effect verison, change the property `let isBlurUI = false` in `HomeViewController.swift`.
+If you want to see no visual effect, change the property `isBlurUI` to `false` in `HomeViewController.swift`.
 
 
 #How to use it for your project?
@@ -82,22 +89,22 @@ You can subclass `PasswordUIValidation` for a more simple & elegant code. More d
 ```swift
 override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //create PasswordUIValidation subclass
-        self.passwordUIValidation = MyPasswordUIValidation(in: passwordStackView)
-        
-        self.passwordUIValidation.success = { [weak self] _ in
+        passwordUIValidation = MyPasswordUIValidation(in: passwordStackView)
+
+        passwordUIValidation.success = { [weak self] _ in
             print("*️⃣ success!")
             self?.alertForRightPassword { _ in
                 self?.passwordUIValidation.resetUI()
             }
         }
-        
-        self.passwordUIValidation.failure = { _ in
+
+        passwordUIValidation.failure = { _ in
             //do not forget add [weak self] if the view controller become nil at some point during its lifetime
             print("*️⃣ failure!")
         }
-        
+
         ...
     }
 ```
