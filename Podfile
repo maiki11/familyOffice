@@ -17,13 +17,11 @@ target 'familyOffice' do
   pod 'MGSwipeTableCell'
   pod 'Alamofire'
   pod 'FSCalendar'
-  pod 'ProtocolBuffers'
   pod 'Toast-Swift', '~> 2.0.0'
 pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
   target 'familyOfficeTests' do
     inherit! :search_paths
     pod 'Firebase'
-    pod 'SmileLock'
     # Pods for testing
   end
 

@@ -67,7 +67,6 @@ PODS:
   - MGSwipeTableCell (1.5.6)
   - MIBadgeButton-Swift (0.5)
   - Protobuf (3.2.0)
-  - ProtocolBuffers (1.9.11)
   - SmileLock (2.0.0)
   - Toast-Swift (2.0.0)
 
@@ -84,7 +83,6 @@ DEPENDENCIES:
   - JVFloatLabeledTextField
   - MGSwipeTableCell
   - MIBadgeButton-Swift (from `https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git`, branch `master`)
-  - ProtocolBuffers
   - SmileLock
   - Toast-Swift (~> 2.0.0)
 
@@ -117,10 +115,9 @@ SPEC CHECKSUMS:
   MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
   MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
-  ProtocolBuffers: d509225eb2ea43d9582a59e94348fcf86e2abd65
   SmileLock: ee34bf37e824c8afc71217fccc2b2bee5510db64
   Toast-Swift: 5b2f8f720f7e78e48511f693df1f9c9a6e38a25a
 
-PODFILE CHECKSUM: 1783fd43998c31cd7a8ae2d6c004254313d2cd32
+PODFILE CHECKSUM: 9e01190fbcde1da8773ad4b66de92e72e5a69642
 
 COCOAPODS: 1.1.1
