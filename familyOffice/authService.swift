@@ -62,7 +62,7 @@ class AuthService {
         let imageName = NSUUID().uuidString
         let url = user.photoURL
         let data = NSData(contentsOf:url!! as URL)
-        if let uploadData = UIImagePNGRepresentation(UIImage(data: data! as Data)!){
+        if let uploadData = UIImagePNGRepresentation(UIImage(data: data as! Data)!){
             STORAGEREF.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
                 if (error != nil) {
                     // Uh-oh, an error occurred!

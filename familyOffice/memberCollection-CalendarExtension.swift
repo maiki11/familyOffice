@@ -19,33 +19,30 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
             self.tableView.reloadData()
         })
     }
+    func addMember(id: String, indexPath: IndexPath, collectionView: UICollectionView) -> Void {
+        if let user = USER_SERVICE.users.filter({$0.id == id}).first {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! MemberCollectionViewCell
+            if !user.photoURL.isEmpty {
+                cell.image.loadImage(urlString: user.photoURL)
+                cell.image.image = #imageLiteral(resourceName: "familyImage")
+            }
+        }else{
+            REF_SERVICE.valueSingleton(ref: "users/\(id)")
+        }
+    }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dates[collectionView.tag].members.count
     }
-    func collectionView(collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        if dates[collectionView.tag].members.count == 0 {
-            return CGSize(width: 0, height: 0)
-        }
-        return CGSize(width: 36, height: 273)
-    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! MemberCollectionViewCell
-        
+        cell.image.image = #imageLiteral(resourceName: "profile_default")
         if !dates[collectionView.tag].members[indexPath.row].isEmpty {
-            let id = dates[collectionView.tag].members[indexPath.row]
-            if let user = USER_SERVICE.users.filter({$0.id == id}).first {
-                if !user.photoURL.isEmpty {
-                    cell.image.image = #imageLiteral(resourceName: "profile_default")
-                    cell.image.loadImage(urlString: user.photoURL)
-                }
-            }else{
-                REF_SERVICE.valueSingleton(ref: "users/\(id)")
-            }
+            addMember(id: dates[collectionView.tag].members[indexPath.row], indexPath: indexPath, collectionView: collectionView)
+            
         }
         return cell
     }
