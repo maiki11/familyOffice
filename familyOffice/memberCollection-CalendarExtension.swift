@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,30 +20,45 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
         })
     }
     func addMember(id: String, indexPath: IndexPath, collectionView: UICollectionView) -> Void {
-        if let user = USER_SERVICE.users.filter({$0.id == id}).first {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! MemberCollectionViewCell
-            if !user.photoURL.isEmpty {
-                cell.image.loadImage(urlString: user.photoURL)
-                cell.image.image = #imageLiteral(resourceName: "familyImage")
-            }
-        }else{
-            REF_SERVICE.valueSingleton(ref: "users/\(id)")
-        }
+       
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dates[collectionView.tag].members.count
+        let cant: Int! = dates[collectionView.tag].members.count
+        return cant > 0 ? cant : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cant: Int! = dates[collectionView.tag].members.count
+        if cant == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nomemberCell", for: indexPath)
+            return cell
+        }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! MemberCollectionViewCell
         cell.image.image = #imageLiteral(resourceName: "profile_default")
-        if !dates[collectionView.tag].members[indexPath.row].isEmpty {
-            addMember(id: dates[collectionView.tag].members[indexPath.row], indexPath: indexPath, collectionView: collectionView)
-            
-        }
+        if !dates[collectionView.tag].members[indexPath.item].isEmpty, let id = dates[collectionView.tag].members[indexPath.item] as? String{
+            if let user = USER_SERVICE.users.filter({$0.id == id}).first {
+                if !user.photoURL.isEmpty {
+                    cell.image.loadImage(urlString: user.photoURL)
+                }
+            }else{
+                REF_SERVICE.valueSingleton(ref: "users/\(id)")
+            }        }
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cant: Int! = dates[collectionView.tag].members.count
+        if cant == 0 {
+            return CGSize(width: collectionView.frame.width, height: 30)
+        }
+        return CGSize(width: 30, height: 30)
+    }
+   
+
+    
+    
+    
 }

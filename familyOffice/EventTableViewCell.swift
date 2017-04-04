@@ -28,7 +28,8 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        count.layer.cornerRadius = count.frame.width/2
+        count.clipsToBounds = true
         // Configure the view for the selected state
     }
     func  setCollectionViewDataSourceDelegate
