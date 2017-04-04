@@ -39,7 +39,7 @@ struct User {
     var address : String!
     var bloodtype: String!
     var tokens: NSDictionary? = nil
-    var health: NSDictionary? = nil
+    var health: Health
     
     init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String, health: NSDictionary) {
         self.id = id
@@ -55,7 +55,7 @@ struct User {
         self.address = address
         self.bloodtype = bloodtype
         self.tokens = nil
-        self.health = health
+        self.health = Health(health: health ?? [:])
     }
     
     init(snapshot: FIRDataSnapshot) {
@@ -73,7 +73,7 @@ struct User {
         self.families = UTILITY_SERVICE.existNSDictionary(field: User.kUserFamiliesKey, dictionary: snapshotValue)
         self.phone = UTILITY_SERVICE.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
         self.tokens = UTILITY_SERVICE.existNSDictionary(field: User.kUserTokensFCMeKey, dictionary: snapshotValue)
-        self.health = UTILITY_SERVICE.existNSDictionary(field: User.kUserHealthKey, dictionary: snapshotValue)
+        self.health = Health(snapshot: snapshot.childSnapshot(forPath: "health"))
     }
     
     func toDictionary() -> NSDictionary {
@@ -88,7 +88,7 @@ struct User {
             User.kUserBloodTypeKey: self.bloodtype!,
             User.kUserPhoneKey : self.phone!,
             User.kUserBirthdayKey : self.birthday!,
-            User.kUserHealthKey : self.health!
+            User.kUserHealthKey : self.health.toDictionary()
         ]
     }
     
@@ -101,7 +101,7 @@ struct User {
             self.families = snapshot.value! as? NSDictionary
             break
         case User.kUserHealthKey:
-            self.health = snapshot.value! as? NSDictionary
+            self.health = Health(snapshot: snapshot)
         default:
             break
         }

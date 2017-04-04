@@ -27,6 +27,23 @@ let SUCCESS_NOTIFICATION  = Notification.Name("SuccessNotification")
 let ERROR_NOTIFICATION  = Notification.Name("ErrorNotification")
 
 let BACKGROUND_NOTIFICATION = Notification.Name("BackgroundNotification")
+
+let HEALTHMED_ADDED = Notification.Name("MedAddedNotification")
+let HEALTHMED_UPDATED = Notification.Name("MedUpdatedNotification")
+let HEALTHMED_REMOVED = Notification.Name("MedRemovedNotification")
+
+let HEALTHDISEASE_ADDED = Notification.Name("DiseaseAddedNotification")
+let HEALTHDISEASE_UPDATED = Notification.Name("DiseaseUpdatedNotification")
+let HEALTHDISEASE_REMOVED = Notification.Name("DiseaseRemovedNotification")
+
+let HEALTHDOCTOR_ADDED = Notification.Name("DoctorAddedNotification")
+let HEALTHDOCTOR_UPDATED = Notification.Name("DoctorUpdatedNotification")
+let HEALTHDOCTOR_REMOVED = Notification.Name("DoctorRemovedNotification")
+
+let HEALTHOPERATION_ADDED = Notification.Name("OperationAddedNotification")
+let HEALTHOPERATION_UPDATED = Notification.Name("OperationUpdatedNotification")
+let HEALTHOPERATION_REMOVED = Notification.Name("OperationRemovedNotification")
+
 //Firebase References
 
 let REF = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
@@ -47,6 +64,7 @@ let ANIMATIONS = Animations.instance
 let STORAGE_SERVICE = StorageService.Instance()
 let FAMILY_SERVICE = FamilyService.Instance()
 let USER_SERVICE = UserService.Instance()
+let HEALTH_SERVICE = HealthService.Instance()
 let NOTIFICATION_SERVICE = NotificationService.Instance()
 let ALERT_SERVICE = AlertService.Instance()
 let REF_SERVICE = RefHandle.Instance()

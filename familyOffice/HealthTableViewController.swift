@@ -11,6 +11,7 @@ import UIKit
 class HealthTableViewController: UITableViewController {
     
     //var healthInfo: Health = USER_SERVICE.users[0].health
+    var userIndex: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,14 +86,32 @@ class HealthTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        switch indexPath!.row {
+        case 0:
+            let ctrl = segue.destination as! MedsCollectionViewController
+            ctrl.userIndex = userIndex
+            break
+        case 1:
+            let ctrl = segue.destination as! DiseasesTableViewController
+            ctrl.userIndex = userIndex
+            break
+        case 2:
+            let ctrl = segue.destination as! DoctorCollectionViewController
+            ctrl.userIndex = userIndex
+            break
+        case 3:
+            let ctrl = segue.destination as! OperationTableViewController
+            ctrl.userIndex = userIndex
+        default: break
+        }
     }
-    */
 
 }

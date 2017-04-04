@@ -16,19 +16,23 @@ struct Health {
     static let kHealthDoctors = "doctors";
     static let kHealthOperations = "operations";
     
-    var meds: [NSDictionary]
-    var diseases: [NSDictionary]
-    var doctors: [NSDictionary]
-    var operations: [NSDictionary]
+    var meds: [Med]
+    var diseases: [Disease]
+    var doctors: [Doctor]
+    var operations: [Operation]
     
     init(health: NSDictionary){
-        self.meds = health[Health.kHealthMeds] as? [NSDictionary] ?? []
-        self.diseases = health[Health.kHealthDiseases] as? [NSDictionary] ?? []
-        self.doctors = health[Health.kHealthDoctors] as? [NSDictionary] ?? []
-        self.operations = health[Health.kHealthOperations] as? [NSDictionary] ?? []
+        let medArray = health[Health.kHealthMeds] as? [NSDictionary] ?? []
+        self.meds = medArray.map({m in return Med(dic: m)})
+    	let diseaseArray = health[Health.kHealthDiseases] as? [NSDictionary] ?? []
+        self.diseases = diseaseArray.map({d in return Disease(dic: d)})
+        let doctorArray = health[Health.kHealthDoctors] as? [NSDictionary] ?? []
+        self.doctors = doctorArray.map({d in return Doctor(dic: d)})
+        let operationArray = health[Health.kHealthOperations] as? [NSDictionary] ?? []
+        self.operations = operationArray.map({o in return Operation(dic: o)})
     }
     
-    init(meds: [NSDictionary], diseases: [NSDictionary], doctors: [NSDictionary], operations: [NSDictionary]){
+    init(meds: [Med], diseases: [Disease], doctors: [Doctor], operations: [Operation]){
         self.meds = meds;
         self.diseases = diseases;
         self.doctors = doctors;
@@ -36,20 +40,16 @@ struct Health {
     }
     
     init(snapshot: FIRDataSnapshot){
-        let snapDic = snapshot.value as! NSDictionary
-        self.meds = UTILITY_SERVICE.existArray(field: Health.kHealthMeds, dictionary: snapDic) as! [NSDictionary]
-        self.diseases = UTILITY_SERVICE.existArray(field: Health.kHealthDiseases, dictionary: snapDic) as! [NSDictionary]
-        self.doctors = UTILITY_SERVICE.existArray(field: Health.kHealthDoctors, dictionary: snapDic) as! [NSDictionary]
-        self.operations = UTILITY_SERVICE.existArray(field: Health.kHealthOperations, dictionary: snapDic) as! [NSDictionary]
-        
+        let snapDic = snapshot.value as? NSDictionary
+        self.init(health: snapDic ?? [:])
     }
     
     func toDictionary() -> NSDictionary {
         return [
-            Health.kHealthMeds: self.meds,
-            Health.kHealthDiseases: self.diseases,
-            Health.kHealthDoctors: self.doctors,
-            Health.kHealthOperations: self.operations
+            Health.kHealthMeds: self.meds.map({m in return m.toDictionary()}),
+            Health.kHealthDiseases: self.diseases.map({d in return d.toDictionary()}),
+            Health.kHealthDoctors: self.doctors.map({d in return d.toDictionary()}),
+            Health.kHealthOperations: self.operations.map({o in return o.toDictionary()})
         ]
     }
     
@@ -61,6 +61,7 @@ struct Health {
 }
 
 extension Health {
+    
     struct Med {
         static let kMedName = "name"
         static let kMedType = "type"
@@ -70,21 +71,34 @@ extension Health {
         var name: String
         var type: String
         var dose: String
-        var lapse: Int64
+        var lapse: Int
         
-        init(name: String, type: String, dose: String, lapse: Int64){
+        init(name: String, type: String, dose: String, lapse: Int){
             self.name = name
             self.type = type
             self.dose = dose
             self.lapse = lapse
         }
         
+        init(dic: NSDictionary){
+            self.name = UTILITY_SERVICE.exist(field: Health.Med.kMedName, dictionary: dic)
+            self.type = UTILITY_SERVICE.exist(field: Health.Med.kMedType, dictionary: dic)
+            self.dose = UTILITY_SERVICE.exist(field: Health.Med.kMedDose, dictionary: dic)
+            self.lapse = dic[Health.Med.kMedLapse] as! Int
+        }
+        
         init(snapshot: FIRDataSnapshot){
             let snapDic = snapshot.value as! NSDictionary
-            self.name = UTILITY_SERVICE.exist(field: Health.Med.kMedName, dictionary: snapDic)
-            self.type = UTILITY_SERVICE.exist(field: Health.Med.kMedType, dictionary: snapDic)
-            self.dose = UTILITY_SERVICE.exist(field: Health.Med.kMedDose, dictionary: snapDic)
-            self.lapse = Int64(UTILITY_SERVICE.exist(field: Health.Med.kMedLapse, dictionary: snapDic))
+            self.init(dic: snapDic)
+        }
+        
+        func toDictionary() -> NSDictionary {
+            return [
+                Med.kMedName : self.name,
+                Med.kMedType : self.type,
+                Med.kMedDose : self.dose,
+                Med.kMedLapse: self.lapse
+            ]
         }
     }
     
@@ -97,9 +111,19 @@ extension Health {
             self.name = name
         }
         
+        init(dic: NSDictionary){
+            self.name = UTILITY_SERVICE.exist(field: Disease.kDiseaseName, dictionary: dic)
+        }
+        
         init(snapshot: FIRDataSnapshot){
             let snapDic = snapshot.value as! NSDictionary
-            self.name = UTILITY_SERVICE.exist(field: Disease.kDiseaseName, dictionary: snapDic)
+            self.init(dic: snapDic)
+        }
+        
+        func toDictionary() -> NSDictionary {
+            return [
+                Disease.kDiseaseName: self.name
+            ]
         }
     }
     
@@ -112,10 +136,10 @@ extension Health {
         var phone: String
         var address: String
         
-        init(doctor: NSDictionary){
-            self.name = doctor[Doctor.kDoctorName] as! String
-            self.phone = doctor[Doctor.kDoctorPhone] as! String
-            self.address = doctor[Doctor.kDoctorAddress] as! String
+        init(dic: NSDictionary){
+            self.name = dic[Doctor.kDoctorName] as! String
+            self.phone = dic[Doctor.kDoctorPhone] as! String
+            self.address = dic[Doctor.kDoctorAddress] as! String
         }
         
         init(name: String, phone: String, address: String){

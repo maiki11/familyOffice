@@ -1,36 +1,50 @@
 //
-//  NewOperationTableViewController.swift
+//  MembersForHealthTableViewController.swift
 //  familyOffice
 //
-//  Created by Nan Montaño on 24/mar/17.
+//  Created by Nan Montaño on 03/abr/17.
 //  Copyright © 2017 Leonardo Durazo. All rights reserved.
 //
 
 import UIKit
 
-class NewOperationTableViewController: UITableViewController {
+class MembersForHealthTableViewController: UITableViewController {
+    
+    var fam : Family!
+    var membersIds : [String] = []
+    var observer : NSObjectProtocol?
 
-    
-    @IBOutlet weak var operationDescriptionText: UITextView!
-    @IBOutlet weak var operationDatePicker: UIDatePicker!
-    
-    var userIndex : Int = 0
-    var editIndex : Int?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        operationDatePicker.maximumDate = Date()
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        let saveButton = UIBarButtonItem(title: "Guardar", style: .plain, target: self, action: #selector(save(sender:)))
-        self.navigationItem.rightBarButtonItem = saveButton
+        let user = USER_SERVICE.users[0]
+        fam = FAMILY_SERVICE.families.first(where: {$0.id == user.familyActive})
+        membersIds = fam?.members?.allKeys as! [String]
+        let myId = membersIds.index(where: { $0 == user.id! })
+        membersIds.remove(at: myId!)
         
-        if let opIndex = editIndex {
-            let user = USER_SERVICE.users[userIndex]
-            let op = user.health.operations[opIndex]
-            operationDescriptionText.text = op.description
-            operationDatePicker.date = op.date
+        for id in membersIds {
+            USER_SERVICE.getUser(uid: id)
         }
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        observer = NotificationCenter.default
+            .addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil, using: { _ in
+                self.tableView.reloadData()
+            })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(observer!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,18 +61,33 @@ class NewOperationTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return section == 0 ? 1 : membersIds.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Yo"
+        } else {
+            return "Demás miembros"
+        }
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        // Configure the cell...
+        
+        if indexPath.section == 0 {
+            cell.textLabel?.text = "Ver/Cambiar mis datos médicos"
+        }else{
+            if let user = USER_SERVICE.users.first(where: { $0.id == membersIds[indexPath.row] }) {
+                cell.textLabel?.text = user.name
+            }else {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+        }
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -95,36 +124,22 @@ class NewOperationTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    */
-    
-    func save(sender: UIBarButtonItem){
-        let desc = operationDescriptionText.text
-        let date = operationDatePicker.date
         
-        var user = USER_SERVICE.users[userIndex]
-        
-        if desc == nil || desc?.characters.count == 0 {
-            ANIMATIONS.shakeTextField(txt: operationDescriptionText)
-        }else  {
-            let op = Health.Operation(description: desc!, date: date)
-            
-            if let opIndex = editIndex {
-                user.health.operations[opIndex] = op
-            }else {
-                user.health.operations.append(op)
-            }
-            USER_SERVICE.updateUser(user: user)
-            
-            self.navigationController!.popViewController(animated: true)
-
+        if let cell = sender as? UITableViewCell {
+        	let indexPath = tableView.indexPath(for: cell)
+            let id = membersIds[indexPath!.row]
+            let userIndex = indexPath!.section == 0 ? 0 : USER_SERVICE.users.index(where: {$0.id == id})
+            let ctrl = segue.destination as! HealthTableViewController
+            ctrl.userIndex = userIndex!
+        }else {
+            print(sender!)
         }
     }
 

@@ -149,6 +149,66 @@ class RefHandle {
                 ACTIVITYLOG_SERVICE.add(record: Record(snapshot: snapshot))
             }
             break
+        case "users/\(reference[1])/health/meds":
+            switch action {
+            case "added":
+                HEALTH_SERVICE.addedMed(snapshot: snapshot, uid: reference[1])
+                break
+            case "changed":
+                HEALTH_SERVICE.updatedMed(snapshot: snapshot, uid: reference[1])
+                break
+            case "removed":
+                HEALTH_SERVICE.removedMed(snapshot: snapshot, uid: reference[1])
+                break;
+            default: break;
+            }
+            
+            break
+        case "users/\(reference[1])/health/diseases":
+            switch action {
+            case "added":
+                HEALTH_SERVICE.addedDisease(snapshot: snapshot, uid: reference[1])
+                break
+            case "changed":
+                HEALTH_SERVICE.updatedDisease(snapshot: snapshot, uid: reference[1])
+                break
+            case "removed":
+                HEALTH_SERVICE.removedDisease(snapshot: snapshot, uid: reference[1])
+                break;
+            default: break;
+            }
+
+            break
+        case "users/\(reference[1])/health/doctors":
+            switch action {
+            case "added":
+                HEALTH_SERVICE.addedDoctor(snapshot: snapshot, uid: reference[1])
+                break
+            case "changed":
+                HEALTH_SERVICE.updatedDoctor(snapshot: snapshot, uid: reference[1])
+                break
+            case "removed":
+                HEALTH_SERVICE.removedDoctor(snapshot: snapshot, uid: reference[1])
+                break;
+            default: break;
+            }
+            
+            break
+        case "users/\(reference[1])/health/operations":
+            switch action {
+            case "added":
+                HEALTH_SERVICE.addedOperation(snapshot: snapshot, uid: reference[1])
+                break
+            case "changed":
+                HEALTH_SERVICE.updatedOperation(snapshot: snapshot, uid: reference[1])
+                break
+            case "removed":
+                HEALTH_SERVICE.removedOperation(snapshot: snapshot, uid: reference[1])
+                break;
+            default: break;
+            }
+            
+            break
         default:
             break
         }

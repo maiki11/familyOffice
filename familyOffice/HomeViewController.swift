@@ -65,7 +65,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     /** ESTA FUNCION NOMAS PONE OBSERVERS */
     override func viewWillAppear(_ animated: Bool) {
         reloadFamily()
-        
        
         if let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
             self.navigationItem.title = FAMILY_SERVICE.families[index].name

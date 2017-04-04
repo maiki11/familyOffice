@@ -14,7 +14,7 @@ class NewDoctorViewController: UIViewController {
     @IBOutlet weak var doctorAddress: UITextField!
     @IBOutlet weak var doctorPhone: UITextField!
     
-    var editDoctor : Health.Doctor?
+    var userIndex : Int = 0
     var editIndex : Int?
     
     override func viewDidLoad() {
@@ -24,7 +24,8 @@ class NewDoctorViewController: UIViewController {
 		self.navigationItem.rightBarButtonItem = saveButton
         // Do any additional setup after loading the view.
         
-        if let doc = editDoctor {
+        if let docIndex = editIndex {
+            let doc = USER_SERVICE.users[userIndex].health.doctors[docIndex]
             doctorName.text = doc.name
             doctorAddress.text = doc.address
             doctorPhone.text = doc.phone
@@ -48,8 +49,6 @@ class NewDoctorViewController: UIViewController {
     */
     
     func save(sender: UIBarButtonItem){
-        var user = USER_SERVICE.users[0]
-        var health = Health(health: user.health ?? [:])
         
         var emptyText: UITextField?
         if let docName = doctorName.text, let docPhone = doctorPhone.text, let docAddress = doctorAddress.text {
@@ -60,22 +59,19 @@ class NewDoctorViewController: UIViewController {
                 emptyText = doctorAddress
             }else if docPhone.characters.count != 10 || Int(docPhone) == nil {
                 emptyText = doctorPhone
-            }else if var doc = editDoctor {
+            }else if let docIndex = editIndex {
                 
-                doc.name = docName
-                doc.phone = docPhone
-                doc.address = docAddress
+                USER_SERVICE.users[userIndex].health.doctors[docIndex].name = docName
+                USER_SERVICE.users[userIndex].health.doctors[docIndex].phone = docPhone
+                USER_SERVICE.users[userIndex].health.doctors[docIndex].address = docAddress
                 
-                health.doctors[editIndex!] = doc.toDictionary()
-                user.health = health.toDictionary()
-                USER_SERVICE.updateUser(user: user)
+                USER_SERVICE.updateUser(user: USER_SERVICE.users[userIndex])
                 self.navigationController!.popViewController(animated: true)
                 
             } else {
                 let doc = Health.Doctor(name: docName, phone: docPhone, address: docAddress)
-                health.doctors.append(doc.toDictionary())
-                user.health = health.toDictionary()
-                USER_SERVICE.updateUser(user: user)
+                USER_SERVICE.users[userIndex].health.doctors.append(doc)
+                USER_SERVICE.updateUser(user: USER_SERVICE.users[userIndex])
                 self.navigationController!.popViewController(animated: true)
             }
             

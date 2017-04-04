@@ -13,28 +13,25 @@ private let reuseIdentifier = "Cell"
 
 class DoctorCollectionViewController: UICollectionViewController {
     
-    var doctorsRef : FIRDatabaseReference!
-    var observerId : UInt!
-    
-    var doctors : [Health.Doctor]! = []
-    
-    var doctorToEdit: Health.Doctor?
+    var doctorsUrl: String!
+    var userIndex : Int = 0
     var indexToEdit: Int?
+    var observers : [NSObjectProtocol?] = [nil, nil, nil]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let user = USER_SERVICE.users[0]
-		doctorsRef = REF_USERS.child("\(user.id!)/\(User.kUserHealthKey)/\(Health.kHealthDoctors)")
-        
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add(sender:)))
-        self.navigationItem.rightBarButtonItem = addButton
-        
-        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
-        lpgr.minimumPressDuration = 0.5
-        lpgr.delaysTouchesBegan = true
-        collectionView!.addGestureRecognizer(lpgr)
-        self.clearsSelectionOnViewWillAppear = true
+        if userIndex == 0 {
+            
+            let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add(sender:)))
+            self.navigationItem.rightBarButtonItem = addButton
+            
+            let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
+            lpgr.minimumPressDuration = 0.5
+            lpgr.delaysTouchesBegan = true
+            collectionView!.addGestureRecognizer(lpgr)
+            self.clearsSelectionOnViewWillAppear = true
+        }
 
         
     }
@@ -45,19 +42,45 @@ class DoctorCollectionViewController: UICollectionViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        observerId = doctorsRef.observe(.value, with: {snapshot in
-            self.doctors = []
-            let iter = snapshot.children
-            
-            while let doc😘 = iter.nextObject() as? FIRDataSnapshot {
-                self.doctors.append(Health.Doctor(snapshot: doc😘))
-            }
-            self.collectionView!.reloadData()
-        })
+        self.collectionView?.reloadData()
+        
+        var user = USER_SERVICE.users[userIndex]
+        doctorsUrl = "users/\(user.id!)/health/doctors"
+        REF_SERVICE.chilAdded(ref: doctorsUrl)
+        REF_SERVICE.childChanged(ref: doctorsUrl)
+        REF_SERVICE.chilRemoved(ref: doctorsUrl)
+        
+        var observerJustAdded = true
+        
+        observers[0] = NotificationCenter.default
+            .addObserver(forName: HEALTHDOCTOR_ADDED, object: nil, queue: nil, using: { doc in
+                if observerJustAdded {
+                    observerJustAdded = false
+                    user.health.doctors.removeAll()
+                    user.health.doctors.append(doc.object as! Health.Doctor)
+                    USER_SERVICE.users[self.userIndex] = user
+                }
+            	self.collectionView?.reloadData()
+            })
+        
+        observers[1] = NotificationCenter.default
+            .addObserver(forName: HEALTHDOCTOR_UPDATED, object: nil, queue: nil, using: { _ in
+            	self.collectionView?.reloadData()
+            })
+        
+        observers[2] = NotificationCenter.default
+            .addObserver(forName: HEALTHDOCTOR_REMOVED, object: nil, queue: nil, using: { _ in
+            	self.collectionView?.reloadData()
+            })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        doctorsRef.removeObserver(withHandle: observerId)
+        REF_SERVICE.remove(ref: doctorsUrl)
+        
+        observers = observers.map({ proto in
+        	NotificationCenter.default.removeObserver(proto!)
+            return nil
+        })
     }
 
     // MARK: - Navigation
@@ -67,9 +90,9 @@ class DoctorCollectionViewController: UICollectionViewController {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         let ctrl = segue.destination as! NewDoctorViewController
-        ctrl.editDoctor = self.doctorToEdit
+        ctrl.userIndex = self.userIndex
         ctrl.editIndex = self.indexToEdit
-        self.doctorToEdit = nil
+        self.indexToEdit = nil
     }
     
     func add(sender: UIBarButtonItem){
@@ -87,13 +110,13 @@ class DoctorCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return doctors.count
+        return USER_SERVICE.users[userIndex].health.doctors.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DoctorCollectionViewCell
     
-        let doctor = doctors[indexPath.row]
+        let doctor = USER_SERVICE.users[userIndex].health.doctors[indexPath.row]
         cell.doctorName.text = doctor.name
         cell.doctorAddress.text = doctor.address
         cell.doctorPhone.text = doctor.phone
@@ -136,19 +159,16 @@ class DoctorCollectionViewController: UICollectionViewController {
         let point = gestureRecognizer.location(in: self.collectionView)
         let indexPath = self.collectionView?.indexPathForItem(at: point)
         
-        if indexPath != nil && indexPath!.row < doctors.count {
-            let alert = UIAlertController(title: doctors[indexPath!.row].name, message: "¿Qué deseas hacer?", preferredStyle: .alert)
+        if indexPath != nil && indexPath!.row < USER_SERVICE.users[userIndex].health.doctors.count {
+            let alert = UIAlertController(title: USER_SERVICE.users[userIndex].health.doctors[indexPath!.row].name, message: "¿Qué deseas hacer?", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "Eliminar", style: .destructive, handler: {_ in
             	var user = USER_SERVICE.users[0]
-                var health = Health(health: user.health ?? [:])
-                health.doctors.remove(at: indexPath!.row)
-                user.health = health.toDictionary()
+                user.health.doctors.remove(at: indexPath!.row)
                 USER_SERVICE.updateUser(user: user)
             }))
             
             alert.addAction(UIAlertAction(title: "Editar", style: .default, handler: {_ in
-            	self.doctorToEdit = self.doctors[indexPath!.row]
                 self.indexToEdit = indexPath!.row
                 self.performSegue(withIdentifier: "addDoctor", sender: nil)
             }))

@@ -16,7 +16,7 @@ class NewMedTableViewController: UITableViewController, UIPickerViewDataSource, 
     @IBOutlet weak var medNameView: UITextField!
     
     var pickerSelection = [0,0,0,0,0]
-    var med : NSDictionary?
+    var userIndex : Int = 0
     var index: Int?
 
     override func viewDidLoad() {
@@ -32,20 +32,25 @@ class NewMedTableViewController: UITableViewController, UIPickerViewDataSource, 
         medDosePicker.dataSource = self
         medDosePicker.delegate = self
         
-        if let m = med {
-            medNameView.text = m["name"] as? String
-            medTypeView.selectedSegmentIndex = ["pill": 0, "shot": 1, "drinkable": 2][m["type"] as! String]!
-            let dose = m["dose"] as! String
+        if let i = index {
+            let med = USER_SERVICE.users[userIndex].health.meds[i]
+            medNameView.text = med.name
+            medTypeView.selectedSegmentIndex = ["pill": 0, "shot": 1, "drinkable": 2][med.type]!
+            let dose = med.dose
             let endIndexMinusOne = dose.index(before: dose.endIndex)
             if dose[endIndexMinusOne] == "m" {
                 let doseMg = Int(dose.substring(to: endIndexMinusOne))
                 medDosePicker.selectRow(doseMg!-1, inComponent: 0, animated: false)
                 medDosePicker.selectRow(0, inComponent: 1, animated: false)
+                pickerSelection[0] = doseMg!-1
+                pickerSelection[1] = 0
             }else{
                 medDosePicker.selectRow(Int(dose)!, inComponent: 0, animated: false)
                 medDosePicker.selectRow(1, inComponent: 1, animated: false)
+                pickerSelection[0] = Int(dose)!
+                pickerSelection[1] = 1
             }
-            var lapse = m["lapse"] as! Int, timeUnit = 0
+            var lapse = med.lapse, timeUnit = 0
             if lapse > 60 { // mas de 60 minutos
                 lapse /= 60
                 timeUnit += 1
@@ -60,6 +65,8 @@ class NewMedTableViewController: UITableViewController, UIPickerViewDataSource, 
             }
             medDosePicker.selectRow(lapse-1, inComponent: 3, animated: false)
             medDosePicker.selectRow(timeUnit, inComponent: 4, animated: false)
+            pickerSelection[3] = lapse-1
+            pickerSelection[4] = timeUnit
         }
 
     }
@@ -209,31 +216,16 @@ class NewMedTableViewController: UITableViewController, UIPickerViewDataSource, 
         let medLapse = minutes
         
         
-        let med : NSDictionary = [
-            Health.Med.kMedName: medName!,
-            Health.Med.kMedType: medType,
-            Health.Med.kMedDose: medDose,
-            Health.Med.kMedLapse: medLapse
-        ]
+        let med = Health.Med(name: medName!, type: medType, dose: medDose, lapse: medLapse)
         
-        var user = USER_SERVICE.users[0]
-        if let health = user.health! as NSDictionary? {
-            var meds = health[Health.kHealthMeds] as? [NSDictionary] ?? []
-            if let i = index {
-                meds[i] = med
-            }else {
-                meds.append(med)
-            }
-            health.setValue(meds, forKey: Health.kHealthMeds) 
-            user.health = health
+        if let i = index {
+            USER_SERVICE.users[userIndex].health.meds[i] = med
         }else{
-            user.health = [
-                Health.kHealthMeds: [med]
-            ]
-            
+            USER_SERVICE.users[userIndex].health.meds.append(med)
         }
         
-        USER_SERVICE.updateUser(user: user)
+        
+        USER_SERVICE.updateUser(user: USER_SERVICE.users[userIndex])
         // TODO: goback
         self.navigationController!.popViewController(animated: false)
     }
