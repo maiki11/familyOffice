@@ -12,6 +12,7 @@ import FirebaseAuth
 
 class ActivityLogService {
     public var activityLog : [Record] = []
+    public var sections : [Record] = []
     var handle: UInt!
     private init() {
     }
@@ -34,20 +35,13 @@ class ActivityLogService {
             NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: record)
         }
     }
-<<<<<<< HEAD
     
-    func all(){
-        /*var sections = []
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "mm/yyyy"
-        for var i in (0..<self.activityLog.count){
-            if (self.activityLog[i].timestamp != dateFormatter.date(from: self.activityLog[i].timestamp)){
+    func getSections(){
+        for item in self.activityLog {
+            print(item.timestamp)
+            /*if (item.timestamp != dateFormatter.date(from: self.activityLog[i].timestamp)){
                 sections.append(dateFormatter.date(from: self.activityLog[i].timestamp))
-            }
+            }*/
         }
-        return sections*/
     }
-    
-=======
->>>>>>> Mainsb
 }
