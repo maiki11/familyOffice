@@ -32,6 +32,11 @@ class EventTableViewCell: UITableViewCell {
         count.clipsToBounds = true
         // Configure the view for the selected state
     }
+    func configure(date: DateModel) {
+        self.info = date
+        self.hour.text = Date(string: date.date, formatter: .dayMonthYearHourMinute)?.string(with: .localeMediumStyle)
+        self.title.text = date.title
+    }
     func  setCollectionViewDataSourceDelegate
         <D: UICollectionViewDataSource & UICollectionViewDelegate>
         (dataSourceDelegate: D, forRow row: Int) {

@@ -19,15 +19,13 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
             self.tableView.reloadData()
         })
     }
-    func addMember(id: String, indexPath: IndexPath, collectionView: UICollectionView) -> Void {
-       
-    }
+   
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let cant: Int! = dates[collectionView.tag].members.count
-        return cant > 0 ? cant : 1
+        return cant > 0 ? cant < 5 ? cant : 5 : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -35,18 +33,31 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
         if cant == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nomemberCell", for: indexPath)
             return cell
-        }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! MemberCollectionViewCell
-        cell.image.image = #imageLiteral(resourceName: "profile_default")
-        if !dates[collectionView.tag].members[indexPath.item].isEmpty, let id = dates[collectionView.tag].members[indexPath.item] as? String{
-            if let user = USER_SERVICE.users.filter({$0.id == id}).first {
-                if !user.photoURL.isEmpty {
-                    cell.image.loadImage(urlString: user.photoURL)
+        }else if indexPath.item < 4 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! MemberCollectionViewCell
+            cell.image.image = #imageLiteral(resourceName: "profile_default")
+            let id: String = dates[collectionView.tag].members[indexPath.item]
+            if !id.isEmpty {
+                if let user = USER_SERVICE.users.filter({$0.id == id}).first {
+                    if !user.photoURL.isEmpty {
+                        cell.image.loadImage(urlString: user.photoURL)
+                    }
+                }else{
+                    REF_SERVICE.valueSingleton(ref: "users/\(id)")
                 }
-            }else{
-                REF_SERVICE.valueSingleton(ref: "users/\(id)")
-            }        }
-        return cell
+            }
+            return cell
+        }else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! MemberCollectionViewCell
+            cell.image.image = #imageLiteral(resourceName: "more_icon")
+            cell.image.tintColor = UIColor.gray
+            cell.layer.borderWidth = 0.5
+            cell.layer.borderColor = UIColor.gray.cgColor
+            cell.layer.cornerRadius = cell.frame.width/2
+            cell.clipsToBounds = true
+            return cell
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -12,21 +12,22 @@ struct DateModel {
     static let kTitle = "title"
     static let kDescription = "description"
     static let kDate = "date"
-    static let kHour = "hour"
+    static let kEndDate = "endDate"
     static let kPriority = "priority"
     static let kMembers = "members"
-    let title: String!
-    let description: String!
-    let date: String!
-    var hour: String!
+    
+    var title: String!
+    var description: String!
+    var date: String!
+    var endDate: String!
     var priority: Int!
     var members: [String]!
     
-    init(title: String, description: String, date: String, hour: String, priority: Int, members: [String]) {
+    init(title: String, description: String, date: String, endDate: String, priority: Int, members: [String]) {
         self.title = title
         self.description = description
         self.date = date
-        self.hour = hour
+        self.endDate = endDate
         self.priority = priority
         self.members = members
     }
@@ -36,7 +37,7 @@ struct DateModel {
         return [
             DateModel.kTitle : self.title,
             DateModel.kDescription : self.description,
-            DateModel.kHour : self.hour,
+            DateModel.kEndDate : self.endDate,
             DateModel.kPriority : self.priority,
             DateModel.kMembers : self.members
         ]
@@ -44,5 +45,6 @@ struct DateModel {
     
     
 }
+
 
 

@@ -42,7 +42,8 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
         self.calendar.scope = .week
-        
+        let barButton = UIBarButtonItem(title: "Nuevo", style: .plain, target: self, action: #selector(self.handleNewEvent))
+        self.navigationItem.rightBarButtonItem = barButton
         // For UITest
         self.calendar.accessibilityIdentifier = "calendar"
         
@@ -52,8 +53,10 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         print("\(#function)")
     }
     
+    func handleNewEvent() -> Void {
+        self.performSegue(withIdentifier: "addEventSegue", sender: nil)
+    }
     // MARK:- UIGestureRecognizerDelegate
-    
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         let shouldBegin = self.tableView.contentOffset.y <= -self.tableView.contentInset.top
         if shouldBegin {
@@ -65,7 +68,6 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
                 return velocity.y > 0
             }
         }
-        
         return shouldBegin
     }
     
@@ -73,22 +75,29 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         self.calendarHeightConstraint.constant = bounds.height
         self.view.layoutIfNeeded()
     }
-    
+    //Select cell of Calendar
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        print("did select date \(self.dateFormatter.string(from: date))")
+        print("did select date \(date.string(with: .dayMonthAndYear))")
         let selectedDates = calendar.selectedDates.map({self.dateFormatter.string(from: $0)})
         print("selected dates is \(selectedDates)")
         if monthPosition == .next || monthPosition == .previous {
             calendar.setCurrentPage(date, animated: true)
         }
-        dates = testDate.filter({$0.date == self.dateFormatter.string(from: date )})
+        dates = testDate.filter({ Date(string: $0.date, formatter: .dayMonthYearHourMinute)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)})
         tableView.reloadData()
     }
-    
+    //Change Page Calendar
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         print("\(self.dateFormatter.string(from: calendar.currentPage))")
     }
     
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let count = testDate.filter({ Date(string: $0.date, formatter: .dayMonthYearHourMinute)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)}).count
+        return count
+    }
+}
+
+extension CalendarViewController {
     // MARK:- UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -96,48 +105,34 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
         return dates.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventTableViewCell
-        cell.info = dates[indexPath.row]
-        cell.count.text = String(indexPath.row)
+        let date = dates[indexPath.row]
+        cell.configure(date: date)
+        cell.count.text = String(indexPath.row +  1)
         return cell
-        
     }
-    
+
     
     // MARK:- UITableViewDelegate
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let tableViewCell = cell as? EventTableViewCell else { return }
         tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
-      
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 {
-            let scope: FSCalendarScope = (indexPath.row == 0) ? .month : .week
-            self.calendar.setScope(scope, animated: true )
-        }
+        
+        
+        self.calendar.setScope(.week, animated: true )
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 10
     }
-    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        
-        let dateString: String = self.dateFormatter.string(from: date)
-        let count = testDate.filter({$0.date == dateString }).count
-        return count
-    }
-    
-    // MARK:- Target actions
-    
-   
-    
 }
 

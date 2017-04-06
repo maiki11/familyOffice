@@ -33,6 +33,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        REF_SERVICE.valueSingleton(ref: "activityLog/\((FIRAuth.auth()?.currentUser?.uid)!)")
         REF_SERVICE.chilAdded(ref: "activityLog/\((FIRAuth.auth()?.currentUser?.uid)!)", byChild: "timestamp")
         REF_SERVICE.chilAdded(ref: "notifications/\((FIRAuth.auth()?.currentUser?.uid)!)", byChild: "timestamp")
         self.userName.text = USER_SERVICE.users[0].name
@@ -92,6 +93,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         if segmentedControl.selectedSegmentIndex == 1 {
             let activity = ACTIVITYLOG_SERVICE.activityLog[indexPath.row]
             cell.iconImage.image = #imageLiteral(resourceName: "logo")
+
             cell.config(title: activity.activity, date: UTILITY_SERVICE.getDate(date: activity.timestamp!))
             if !activity.photoURL.isEmpty {
                 cell.photo.loadImage(urlString: activity.photoURL)

@@ -93,7 +93,7 @@ class Utility {
     func getDate(date: Double) -> String{
         let xdate = NSDate(timeIntervalSince1970: abs(date) )
         let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "dd-MM-yyyy hh:mm"
+        dayTimePeriodFormatter.dateFormat = "dd MM yyyy HH:mm"
         return dayTimePeriodFormatter.string(from: xdate as Date)
     }
     
