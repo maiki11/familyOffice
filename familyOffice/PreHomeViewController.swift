@@ -25,6 +25,8 @@ class SelectCategoryViewController: UIViewController {
         let logOutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(self.logout))
         logOutButton.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
         navigationItem.rightBarButtonItems = [logOutButton]
+        let nav = self.navigationController?.navigationBar
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
         
         self.headerView.layer.borderWidth = 1
         self.headerView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
@@ -86,7 +88,7 @@ class SelectCategoryViewController: UIViewController {
         self.image.clipsToBounds = true
         self.image.layer.borderWidth = 4.0
         self.image.layer.borderColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
-        self.image.layer.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
+        //self.image.layer.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
     }
     
     @IBAction func handleBussiness(_ sender: UIButton) {

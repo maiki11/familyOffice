@@ -147,6 +147,10 @@ class RefHandle {
         case "activityLog/\(reference[1])":
             if action == "added" {
                 ACTIVITYLOG_SERVICE.add(record: Record(snapshot: snapshot))
+            }else{
+                if action == "valueS" {
+                    
+                }
             }
             break
         default:

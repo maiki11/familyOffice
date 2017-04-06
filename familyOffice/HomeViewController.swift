@@ -42,7 +42,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
 
         self.navigationItem.rightBarButtonItem = moreButton
-        let barButton = UIBarButtonItem(title: "Regresar", style: .plain, target: self, action: #selector(self.handleBack))
+        let barButton = UIBarButtonItem(title: "Atrás", style: .plain, target: self, action: #selector(self.handleBack))
         barButton.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
         self.navigationItem.leftBarButtonItem = barButton
         let nav = self.navigationController?.navigationBar
@@ -123,12 +123,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellModule", for: indexPath) as! ModuleCollectionViewCell
-        
-        cell.buttonicon.setImage(UIImage(named: icons[indexPath.item])!, for: .normal)
+        cell.buttonicon.setBackgroundImage(UIImage(named: icons[indexPath.item])!, for: .normal)
         cell.name.text = labels[indexPath.row]
         cell.buttonicon.badgeString = "8"
-        cell.buttonicon.badgeEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0)
+        cell.buttonicon.badgeEdgeInsets = UIEdgeInsetsMake(10, 10, 0, 0)
         cell.buttonicon.badgeBackgroundColor = UIColor.red
+     
         return cell
     }
     

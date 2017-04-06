@@ -22,7 +22,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         self.tableView.separatorStyle = .none
         //self.profileImage.clipsToBounds = true
-        
     }
     
     func loadData(){
@@ -75,7 +74,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if segmentedControl.selectedSegmentIndex == 1 {
+            return ACTIVITYLOG_SERVICE.activityLog.count
+        }else{
+            return 1 //NOTIFICATION_SERVICE.sections.count
+        }
     }
     
     
@@ -102,7 +105,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             if !notification.photoURL.isEmpty {
                 cell.iconImage.loadImage(urlString: notification.photoURL)
             }
-            
         }
         return cell
     }
@@ -114,15 +116,5 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             return NOTIFICATION_SERVICE.notifications.count
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

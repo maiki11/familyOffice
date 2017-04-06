@@ -25,7 +25,7 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
         // Do any additional setup after loading the view.
-        let backButton : UIBarButtonItem = UIBarButtonItem(title: "Regresar", style: UIBarButtonItemStyle.plain, target: self, action:#selector(handleBack))
+        let backButton : UIBarButtonItem = UIBarButtonItem(title: "Atrás", style: UIBarButtonItemStyle.plain, target: self, action:#selector(handleBack))
         self.navigationItem.leftBarButtonItem = backButton
         self.confirmPassTxtfield.delegate = self
     }
@@ -34,6 +34,11 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
         super.viewWillAppear(animated)
         self.navigationItem.title = "Registrar"
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        STYLES.borderbottom(textField: self.nameTxtfield, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
+        STYLES.borderbottom(textField: self.emailTxtfield, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
+        STYLES.borderbottom(textField: self.phoneTxtfield, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
+        STYLES.borderbottom(textField: self.passwordTxtfield, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
+        STYLES.borderbottom(textField: self.confirmPassTxtfield, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
     }
 
     override func didReceiveMemoryWarning() {

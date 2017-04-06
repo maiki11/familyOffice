@@ -201,7 +201,6 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
                 // show the alert
                 self.present(alert, animated: true, completion: nil)
-                
                 break
             case .ended:
                 print("termine")
