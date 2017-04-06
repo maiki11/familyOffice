@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
             application.registerForRemoteNotifications()
             connectToFcm()
         }
+        
         FIRApp.configure()
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self

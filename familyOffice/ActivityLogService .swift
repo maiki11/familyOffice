@@ -34,5 +34,4 @@ class ActivityLogService {
             NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: record)
         }
     }
-    
 }

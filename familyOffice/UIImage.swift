@@ -16,6 +16,7 @@ extension UIImageView {
     
         //check if image exist in cache
         if let cacheImage = imageCache.object(forKey: urlString as AnyObject) {
+            self.image = nil
             self.image = cacheImage as? UIImage
             return
         }
