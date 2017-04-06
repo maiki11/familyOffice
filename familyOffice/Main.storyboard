@@ -397,7 +397,7 @@
             <objects>
                 <navigationController id="xBb-2B-CJp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Inicio" image="Home" id="rI5-tj-9Ev"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r7p-lP-FCi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r7p-lP-FCi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -711,7 +711,7 @@
             <objects>
                 <navigationController id="vo7-HH-trf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Inicio" image="Home" selectedImage="Home" id="qNc-2W-dbA"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ajE-bd-LBM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ajE-bd-LBM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -822,7 +822,7 @@
         <scene sceneID="9Am-e1-fmx">
             <objects>
                 <navigationController storyboardIdentifier="mainView" id="kMC-B3-l3W" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RyQ-kR-bXX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RyQ-kR-bXX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -865,12 +865,20 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xtH-p2-Jmo">
                                         <rect key="frame" x="0.0" y="25" width="359" height="180"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+<<<<<<< HEAD
                                         <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="eAv-xk-9et">
                                             <size key="itemSize" width="160" height="160"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+=======
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="10" id="eAv-xk-9et">
+                                            <size key="itemSize" width="160" height="160"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+>>>>>>> Mainsb
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="W4z-DM-anp" customClass="FamiliesPreCollectionViewCell" customModule="familyOffice" customModuleProvider="target">
@@ -1111,20 +1119,20 @@
             </objects>
             <point key="canvasLocation" x="-2602.4000000000001" y="440.32983508245883"/>
         </scene>
-        <!--UINavigationController-Tqu-os-SXE-->
+        <!--Settings-->
         <scene sceneID="bQh-xv-0n0">
             <objects>
-                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="UINavigationController-Tqu-os-SXE" id="MS8-ae-UGa" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="UINavigationController-Tqu-os-SXE" id="MS8-ae-UGa" userLabel="Settings" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="EfE-C0-tT1"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7vL-y0-lpz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2480" y="707"/>
+            <point key="canvasLocation" x="2478" y="706"/>
         </scene>
-        <!--UINavigationController-8do-t3-D3z-->
+        <!--Families-->
         <scene sceneID="4F4-m2-L9U">
             <objects>
-                <viewControllerPlaceholder storyboardName="Families" referencedIdentifier="UINavigationController-8do-t3-D3z" id="OCO-WY-xl7" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Families" referencedIdentifier="UINavigationController-8do-t3-D3z" id="OCO-WY-xl7" userLabel="Families" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="F0W-Fq-fUK"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3XW-Hv-UCW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1168,7 +1176,7 @@
             <objects>
                 <navigationController storyboardIdentifier="StartView" automaticallyAdjustsScrollViewInsets="NO" id="Kip-84-qVL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xTp-qL-h7S">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xTp-qL-h7S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -34,6 +34,7 @@ class ActivityLogService {
             NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: record)
         }
     }
+<<<<<<< HEAD
     
     func all(){
         /*var sections = []
@@ -47,4 +48,6 @@ class ActivityLogService {
         return sections*/
     }
     
+=======
+>>>>>>> Mainsb
 }
