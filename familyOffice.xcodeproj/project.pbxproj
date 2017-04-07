@@ -493,13 +493,12 @@
 		027213991E84457A001A144B /* calendar */ = {
 			isa = PBXGroup;
 			children = (
-				027391871E94736200426331 /* AddEvent */,
 				027391701E946CA100426331 /* cell */,
+				027391871E94736200426331 /* AddEvent */,
 				0272139E1E84478F001A144B /* CalendarViewController.swift */,
 				027FC2441E8D830500450EFB /* EventTableViewCell.swift */,
 				027FC2461E8D89C000450EFB /* memberCollection-CalendarExtension.swift */,
 				027FC2481E8DCF3E00450EFB /* MemberCollectionViewCell.swift */,
-				0273916E1E943B8400426331 /* AddEventViewController.swift */,
 			);
 			name = calendar;
 			sourceTree = "<group>";
@@ -536,6 +535,7 @@
 		027391871E94736200426331 /* AddEvent */ = {
 			isa = PBXGroup;
 			children = (
+				0273916E1E943B8400426331 /* AddEventViewController.swift */,
 				027391881E94737F00426331 /* AddEventTableViewController.swift */,
 			);
 			name = AddEvent;

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Leonardo Durazo. All rights reserved.
 //
 
-import Foundation
+import UIKit
 struct DateModel {
     
     static let kTitle = "title"
@@ -44,7 +44,72 @@ struct DateModel {
     }
     
     
+    
+    
 }
 
+protocol DateModelBindable: AnyObject {
+    var dateModel: DateModel? { get set }
+    
+    var dateLabel: UILabel! {get}
+    var endDateLabel: UILabel! {get}
+    var locationLabel: UILabel! {get}
+    var titleLabel: UILabel! {get}
+    
+}
+
+extension DateModelBindable {
+    // Make the views optionals
+    
+    var dateLabel: UILabel! {
+        return nil
+    }
+    
+    var endDateLabel: UILabel! {
+        return nil
+    }
+    
+    var locationLabel: UILabel! {
+        return nil
+    }
+    var titleLabel: UILabel! {
+        return nil
+    }
+    
+    var collectionView: UICollectionView! {
+        return nil
+    }
+    
+    // Bind
+    
+    func bind(dateModel: DateModel) {
+        self.dateModel = dateModel
+        bind()
+    }
+    
+    func bind() {
+        
+        guard let dateModel = self.dateModel else {
+            return
+        }
+        
+        if let locationLabel = self.locationLabel {
+            locationLabel.text = "Sin ubicación"
+        }
+        
+        if let endDateLabel = self.endDateLabel {
+            endDateLabel.text = Date(string: dateModel.endDate, formatter: .dayMonthYearHourMinute)?.string(with: .hourAndMin)
+        }
+        
+        if let titleLabel = self.titleLabel {
+            titleLabel.text = dateModel.title
+        }
+        
+        if let dateLabel = self.dateLabel {
+            dateLabel.text =  Date(string: dateModel.date, formatter: .dayMonthYearHourMinute)?.string(with: .hourAndMin)
+        }
+        
+    }
+}
 
 

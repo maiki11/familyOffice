@@ -12,6 +12,7 @@ import FirebaseAuth
 
 class ActivityLogService {
     public var activityLog : [Record] = []
+    
     var handle: UInt!
     private init() {
     }

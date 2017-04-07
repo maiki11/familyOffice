@@ -60,6 +60,8 @@ class chatCollectionViewController: UICollectionViewController, UICollectionView
     
     let menuBar: MenuBar = {
         let mb = MenuBar()
+        mb.array = ["CHAT","GRUPOS","MIEMBROS"]
+        mb.setupHorizontalBar()
         return mb
     }()
     private func setupMenuBar() {

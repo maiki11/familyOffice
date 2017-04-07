@@ -11,7 +11,7 @@ import UIKit
 class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
    
     var chatController : chatCollectionViewController!
-    
+    var array : [String]!
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -21,19 +21,22 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         return cv
     }()
     
-    let cellId = "cellId"
-    let array = ["CHATS", "GRUPOS", "MIEMBROS"]
+    let cellId = "cellMenuId"
+
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor.black
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellId)
         addSubview(collectionView)
-        
         addContraintWithFormat(format: "H:|[v0]|", views: collectionView)
         addContraintWithFormat(format: "V:|[v0]|", views: collectionView)
-        let selectedIndexPath = IndexPath(item: 0, section: 0)
-        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .centeredHorizontally )
-        setupHorizontalBar()
+        if array != nil {
+            let selectedIndexPath = IndexPath(item: 0, section: 0)
+            collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .centeredHorizontally )
+        }
     }
+  
+    
     var horizontalBarLeftAnchorContraint: NSLayoutConstraint?
     func setupHorizontalBar() -> Void {
         let horizontalView = UIView()
@@ -43,8 +46,9 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         horizontalBarLeftAnchorContraint =  horizontalView.leftAnchor.constraint(equalTo: self.leftAnchor)
         horizontalBarLeftAnchorContraint?.isActive = true
         horizontalView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        horizontalView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3).isActive = true
+        horizontalView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: CGFloat(1/array.count)).isActive = true
         horizontalView.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        self.collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -54,9 +58,9 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         }, completion: nil)
         chatController.scrollMenuIndex(menuIndex: indexPath.item)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return array != nil ? array.count : 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,13 +69,13 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width/3, height: frame.height)
+        let count = CGFloat(Int32(array.count))
+        return CGSize(width: frame.width/count, height: frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-   
    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) No ha sido implementado")

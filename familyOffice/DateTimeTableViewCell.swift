@@ -26,7 +26,7 @@ class DateTimeTableViewCell: UITableViewCell {
     
     @IBAction func handleChange(_ sender: UIDatePicker) {
         if addEventClass != nil {
-            addEventClass.setDateValue(date: String(describing: sender.date))
+            addEventClass.setDateValue(date: sender.date.string(with: .dayMonthYearHourMinute), tag: self.tag)
         }
     }
     

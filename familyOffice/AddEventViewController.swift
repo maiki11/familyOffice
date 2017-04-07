@@ -35,7 +35,6 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
             flowlayout.scrollDirection = .horizontal
             flowlayout.minimumLineSpacing = 0
         }
-        collectionView?.backgroundColor = UIColor.white
         self.collectionView!.register(AddEventTableViewController.self, forCellWithReuseIdentifier: "cellId")
         self.collectionView!.contentInset = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)
         self.collectionView!.scrollIndicatorInsets = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)
@@ -43,8 +42,10 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
         collectionView?.isPagingEnabled = true
     }
     
-   /*  let menuBar: MenuBar = {
+    let menuBar: MenuBar = {
         let mb = MenuBar()
+        mb.array = ["INFO","MAPA"]
+        mb.setupHorizontalBar()
         return mb
     }()
     private func setupMenuBar() {
@@ -52,20 +53,9 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
         self.view.addSubview(menuBar)
         self.view.addContraintWithFormat(format: "H:|[v0]|", views: menuBar)
         self.view.addContraintWithFormat(format: "V:|[v0(50)]|", views: menuBar)
-        menuBar.chatController = self
         menuBar.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor).isActive = true
-    }*/
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    }
+
     // MARK: UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -81,7 +71,6 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! AddEventTableViewController
-            
             return cell
     }
     
@@ -108,36 +97,5 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
         self.navigationController?.navigationBar.isTranslucent = true
         
     }
-    // MARK: UICollectionViewDelegate
-    
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
-    
 }
 

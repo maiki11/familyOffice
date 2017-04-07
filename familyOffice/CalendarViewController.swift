@@ -111,7 +111,7 @@ extension CalendarViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventTableViewCell
         let date = dates[indexPath.row]
-        cell.configure(date: date)
+        cell.bind(dateModel: date)
         cell.count.text = String(indexPath.row +  1)
         return cell
     }

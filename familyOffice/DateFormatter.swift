@@ -14,6 +14,13 @@ extension DateFormatter {
         return formatter
     }()
     
+    
+    @nonobjc static let hourAndMin: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "H:mm a"
+        return formatter
+    }()
+    
     @nonobjc static let localeMediumStyle: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
