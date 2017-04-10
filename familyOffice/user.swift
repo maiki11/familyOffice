@@ -41,7 +41,7 @@ struct User {
     var tokens: NSDictionary? = nil
     var health: Health
     
-    init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String, health: NSDictionary) {
+    init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String, health: NSArray) {
         self.id = id
         self.name = name
         self.phone = phone
@@ -55,7 +55,7 @@ struct User {
         self.address = address
         self.bloodtype = bloodtype
         self.tokens = nil
-        self.health = Health(health: health ?? [:])
+        self.health = Health(array: health)
     }
     
     init(snapshot: FIRDataSnapshot) {

@@ -1,36 +1,23 @@
 //
-//  NewOperationTableViewController.swift
+//  EditHealthTableViewController.swift
 //  familyOffice
 //
-//  Created by Nan Montaño on 24/mar/17.
+//  Created by Nan Montaño on 07/abr/17.
 //  Copyright © 2017 Leonardo Durazo. All rights reserved.
 //
 
 import UIKit
 
-class NewOperationTableViewController: UITableViewController {
+class EditHealthTableViewController: UITableViewController {
 
-    
-    @IBOutlet weak var operationDescriptionText: UITextView!
-    @IBOutlet weak var operationDatePicker: UIDatePicker!
-    
-    var userIndex : Int = 0
-    var editIndex : Int?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        operationDatePicker.maximumDate = Date()
-        
-        let saveButton = UIBarButtonItem(title: "Guardar", style: .plain, target: self, action: #selector(save(sender:)))
-        self.navigationItem.rightBarButtonItem = saveButton
-        
-        if let opIndex = editIndex {
-            let user = USER_SERVICE.users[userIndex]
-            let op = user.health.operations[opIndex]
-            operationDescriptionText.text = op.description
-            operationDatePicker.date = op.date
-        }
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,12 +29,16 @@ class NewOperationTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 4
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "segueNew", sender: indexPath)
     }
 
     /*
@@ -95,37 +86,16 @@ class NewOperationTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    */
-    
-    func save(sender: UIBarButtonItem){
-        let desc = operationDescriptionText.text
-        let date = operationDatePicker.date
-        
-        var user = USER_SERVICE.users[userIndex]
-        
-        if desc == nil || desc?.characters.count == 0 {
-            ANIMATIONS.shakeTextField(txt: operationDescriptionText)
-        }else  {
-            let op = Health.Operation(description: desc!, date: date)
-            
-            if let opIndex = editIndex {
-                user.health.operations[opIndex] = op
-            }else {
-                user.health.operations.append(op)
-            }
-            USER_SERVICE.updateUser(user: user)
-            
-            self.navigationController!.popViewController(animated: true)
-
-        }
+        guard let ctrl = segue.destination as? NewHealthElementViewController else { return }
+        guard let indexPath =  sender as? IndexPath else { return }
+        ctrl.healthType = indexPath.row
     }
 
 }
