@@ -29,7 +29,7 @@ class StorageService  {
                 }
                 DispatchQueue.main.async {
                     self.storage.setValue(data , forKey: url)
-                    NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: url)
+                    NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: url)
                 }
             }).resume()
           

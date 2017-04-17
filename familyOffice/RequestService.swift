@@ -24,33 +24,33 @@ class RequestService {
     func insert(value: NSDictionary, ref: String) -> Void{
 
         //proccess.append(Proccess(text: "Insertando", status: "En Proceso", type: "Insertando"))
-        REF.child(ref).setValue(value, withCompletionBlock: {(error, reference) in
+        Constants.FirDatabase.REF.child(ref).setValue(value, withCompletionBlock: {(error, reference) in
           
             if error != nil {
            
-                NotificationCenter.default.post(name: ERROR_NOTIFICATION, object: nil)
+                NotificationCenter.default.post(name: Constants.NotificationCenter.ERROR_NOTIFICATION, object: nil)
             }
-            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: value)
+            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: value)
            
 
         })
     }
     
     func delete(ref: String) -> Void {
-        REF.child(ref).removeValue(completionBlock: {(error, reference) in
+        Constants.FirDatabase.REF.child(ref).removeValue(completionBlock: {(error, reference) in
             if error != nil {
-                NotificationCenter.default.post(name: ERROR_NOTIFICATION, object: nil)
+                NotificationCenter.default.post(name: Constants.NotificationCenter.ERROR_NOTIFICATION, object: nil)
             }
-            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: ref.characters.split(separator: "/").last )
+            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: ref.characters.split(separator: "/").last )
         })
     }
     
     func update(value:  [AnyHashable : Any], ref: String) -> Void {
-        REF.child(ref).updateChildValues(value, withCompletionBlock: {(error, ref) in
+        Constants.FirDatabase.REF.child(ref).updateChildValues(value, withCompletionBlock: {(error, ref) in
             if error != nil {
-                NotificationCenter.default.post(name: ERROR_NOTIFICATION, object: nil)
+                NotificationCenter.default.post(name: Constants.NotificationCenter.ERROR_NOTIFICATION, object: nil)
             }
-            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: nil )
+            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: nil )
 
         })
     }

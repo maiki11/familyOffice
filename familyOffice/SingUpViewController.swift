@@ -45,20 +45,20 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
         var er: String?
         if(nameTxtfield.text==""){
             er = "Nombre debe ser capturado"
-            ANIMATIONS.shakeTextField(txt: nameTxtfield)
+            Constants.Services.ANIMATIONS.shakeTextField(txt: nameTxtfield)
         }else{
             if(emailTxtfield.text==""){
                 er = "Correo electrónico debe ser capturado"
-                ANIMATIONS.shakeTextField(txt: emailTxtfield)
+                Constants.Services.ANIMATIONS.shakeTextField(txt: emailTxtfield)
             }else{
                 if(phoneTxtfield.text==""){
                     er = "Celular debe ser capturado"
-                    ANIMATIONS.shakeTextField(txt: phoneTxtfield)
+                    Constants.Services.ANIMATIONS.shakeTextField(txt: phoneTxtfield)
                 }else{
                     if(passwordTxtfield.text=="" || confirmPassTxtfield.text==""){
                         er = "La contraseña y confirmación de contraseña deben ser capturadas"
-                        ANIMATIONS.shakeTextField(txt: passwordTxtfield)
-                        ANIMATIONS.shakeTextField(txt: confirmPassTxtfield)
+                        Constants.Services.ANIMATIONS.shakeTextField(txt: passwordTxtfield)
+                        Constants.Services.ANIMATIONS.shakeTextField(txt: confirmPassTxtfield)
                     }else{
                         if(passwordTxtfield.text! == confirmPassTxtfield.text!){
                             FIRAuth.auth()?.createUser(withEmail: emailTxtfield.text!, password: passwordTxtfield.text!) { (user, error) in
@@ -82,8 +82,8 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
                             }
                         }else{
                             er = "Las contraseñas deben de coincidir"
-                            ANIMATIONS.shakeTextField(txt: passwordTxtfield)
-                            ANIMATIONS.shakeTextField(txt: confirmPassTxtfield)
+                            Constants.Services.ANIMATIONS.shakeTextField(txt: passwordTxtfield)
+                            Constants.Services.ANIMATIONS.shakeTextField(txt: confirmPassTxtfield)
                         }
                     }
                 }
@@ -97,14 +97,14 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
         }
     }
     @IBAction func handleBack(_ sender: UIButton) {
-        UTILITY_SERVICE.gotoView(view: "StartView", context: self)
+        Constants.Services.UTILITY_SERVICE.gotoView(view: "StartView", context: self)
     }
   
     func createAccount(uid: String){
         let userModel = ["name" : self.nameTxtfield.text!,
                          "phone": self.phoneTxtfield.text!]
-        REF_USERS.child(uid).setValue(userModel)
-        UTILITY_SERVICE.gotoView(view: "StartView", context: self)
+        Constants.FirDatabase.REF_USERS.child(uid).setValue(userModel)
+        Constants.Services.UTILITY_SERVICE.gotoView(view: "StartView", context: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

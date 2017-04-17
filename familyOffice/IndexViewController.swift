@@ -19,7 +19,7 @@ class IndexViewController: UIViewController {
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
     }
     override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateFlag), name: BACKGROUND_NOTIFICATION, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateFlag), name: Constants.NotificationCenter.BACKGROUND_NOTIFICATION, object: nil)
         
         verify()
     }
@@ -35,7 +35,7 @@ class IndexViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         flag = false
-        NotificationCenter.default.removeObserver(self, name: BACKGROUND_NOTIFICATION, object: nil);
+        NotificationCenter.default.removeObserver(self, name: Constants.NotificationCenter.BACKGROUND_NOTIFICATION, object: nil);
     }
 
     override func didReceiveMemoryWarning() {

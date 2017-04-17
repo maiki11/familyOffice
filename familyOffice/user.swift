@@ -57,19 +57,19 @@ struct User {
     
     init(snapshot: FIRDataSnapshot) {
         let snapshotValue = snapshot.value as! NSDictionary
-        self.name = UTILITY_SERVICE.exist(field: User.kUserNameKey, dictionary: snapshotValue)
+        self.name = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserNameKey, dictionary: snapshotValue)
         self.id = snapshot.key
-        self.photoURL = UTILITY_SERVICE.exist(field: User.kUserPhotoUrlKey, dictionary: snapshotValue)
-        self.familyActive = UTILITY_SERVICE.exist(field: User.kUserFamilyActiveKey, dictionary: snapshotValue)
-        self.address = UTILITY_SERVICE.exist(field: User.kUserAddressKey, dictionary: snapshotValue )
-        self.birthday = UTILITY_SERVICE.exist(field: User.kUserBirthdayKey, dictionary: snapshotValue )
-        self.curp = UTILITY_SERVICE.exist(field: User.kUserCurpKey, dictionary: snapshotValue)
-        self.rfc = UTILITY_SERVICE.exist(field: User.kUserRFCKey, dictionary: snapshotValue)
-        self.nss = UTILITY_SERVICE.exist(field: User.kUserNSSKey, dictionary: snapshotValue)
-        self.bloodtype = UTILITY_SERVICE.exist(field: User.kUserBloodTypeKey, dictionary: snapshotValue)
-        self.families = UTILITY_SERVICE.existNSDictionary(field: User.kUserFamiliesKey, dictionary: snapshotValue)
-        self.phone = UTILITY_SERVICE.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
-        self.tokens = UTILITY_SERVICE.existNSDictionary(field: User.kUserTokensFCMeKey, dictionary: snapshotValue)
+        self.photoURL = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserPhotoUrlKey, dictionary: snapshotValue)
+        self.familyActive = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserFamilyActiveKey, dictionary: snapshotValue)
+        self.address = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserAddressKey, dictionary: snapshotValue )
+        self.birthday = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserBirthdayKey, dictionary: snapshotValue )
+        self.curp = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserCurpKey, dictionary: snapshotValue)
+        self.rfc = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserRFCKey, dictionary: snapshotValue)
+        self.nss = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserNSSKey, dictionary: snapshotValue)
+        self.bloodtype = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserBloodTypeKey, dictionary: snapshotValue)
+        self.families = Constants.Services.UTILITY_SERVICE.existNSDictionary(field: User.kUserFamiliesKey, dictionary: snapshotValue)
+        self.phone = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
+        self.tokens = Constants.Services.UTILITY_SERVICE.existNSDictionary(field: User.kUserTokensFCMeKey, dictionary: snapshotValue)
     }
     
     func toDictionary() -> NSDictionary {

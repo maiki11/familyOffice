@@ -30,8 +30,8 @@ extension ProfileUserViewController : UICollectionViewDelegate, UICollectionView
     func setFamiliesInComun() -> Void {
         
         if index > 0 {
-            for familyId in (USER_SERVICE.users[index].families?.allKeys)! {
-                if let family : Family = FAMILY_SERVICE.families.first(where: {$0.id == familyId as! String}){
+            for familyId in (Constants.Services.USER_SERVICE.users[index].families?.allKeys)! {
+                if let family : Family = Constants.Services.FAMILY_SERVICE.families.first(where: {$0.id == familyId as! String}){
                     if !self.families.contains(where: {$0.id == familyId as! String}){
                         
                         self.families.append(family)                    }

@@ -24,15 +24,15 @@ class NotificationService {
     func saveToken() -> Void {
         if let refreshedToken = FIRInstanceID.instanceID().token() {
             print("InstanceID token: \(refreshedToken)")
-            NOTIFICATION_SERVICE.token = refreshedToken
+            Constants.Services.NOTIFICATION_SERVICE.token = refreshedToken
         }
-        REF_USERS.child("\((USER_SERVICE.users[0].id)!)/\(User.kUserTokensFCMeKey)").updateChildValues([self.token: true])
+        Constants.FirDatabase.REF_USERS.child("\((Constants.Services.USER_SERVICE.users[0].id)!)/\(User.kUserTokensFCMeKey)").updateChildValues([self.token: true])
     }
     func verifyDuplicateCode() -> Void {
         
     }
     func send(title: String, message: String, to: String) -> Void {
-        if let user = USER_SERVICE.users.first(where: {$0.id == to}) {
+        if let user = Constants.Services.USER_SERVICE.users.first(where: {$0.id == to}) {
             for token in (user.tokens?.allKeys)! {
                 sendNotification(title: title, message: message, to: token as! String)
             }
@@ -41,7 +41,7 @@ class NotificationService {
     func sendNotification(title: String, message: String, to: String){
         let headers = [
             "Content-Type" : "application/json",
-            "Authorization": "key=\(SERVERKEY)"
+            "Authorization": "key=\(Constants.ServerApi.SERVERKEY)"
         ]
         let _notification: Parameters? =
             [
@@ -52,7 +52,7 @@ class NotificationService {
                 ]
         ]
         
-        Alamofire.request(NOTIFICATION_URL, method: .post, parameters: _notification, encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler: {
+        Alamofire.request(Constants.ServerApi.NOTIFICATION_URL, method: .post, parameters: _notification, encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler: {
             (res) in
             print(res)
             
@@ -62,23 +62,23 @@ class NotificationService {
     func add(notification: NotificationModel) -> Void {
         if !self.notifications.contains(where: {$0.id == notification.id}){
             self.notifications.append(notification)
-            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: notification)
+            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: notification)
         }
     }
     
     func saveNotification(id: String, title: String, photo:String) -> Void {
-        let key = REF_NOTIFICATION.child(id).childByAutoId().key
+        let key = Constants.FirDatabase.REF_NOTIFICATION.child(id).childByAutoId().key
         let notification = NotificationModel(id: key, title: title, timestamp: Utility.Instance().getDate(), photoURL: photo)
-        REF_NOTIFICATION.child("\(id)/\(key)").setValue(notification.toDictionary())
+        Constants.FirDatabase.REF_NOTIFICATION.child("\(id)/\(key)").setValue(notification.toDictionary())
         
     }
     func seenNotification(index: Int) -> Void {
         self.notifications[index].seen = true
-        REF_NOTIFICATION.child(USER_SERVICE.users[0].id).child(self.notifications[index].id!).updateChildValues(self.notifications[index].toDictionary() as! [AnyHashable : Any])
+        Constants.FirDatabase.REF_NOTIFICATION.child(Constants.Services.USER_SERVICE.users[0].id).child(self.notifications[index].id!).updateChildValues(self.notifications[index].toDictionary() as! [AnyHashable : Any])
     }
     
     func deleteToken(token: String, id: String) -> Void {
-        REF_USERS.child("\(id)/\(User.kUserTokensFCMeKey)/\(token)").removeValue()
+        Constants.FirDatabase.REF_USERS.child("\(id)/\(User.kUserTokensFCMeKey)/\(token)").removeValue()
     }
     
 }

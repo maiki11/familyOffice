@@ -91,19 +91,19 @@ class Utility {
     }
     
     func getDate(date: Double) -> String{
-        let xdate = NSDate(timeIntervalSince1970: abs(date) )
+        let xdate = Date(timeIntervalSince1970: abs(date) )
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "dd MM yyyy HH:mm"
         return dayTimePeriodFormatter.string(from: xdate as Date)
     }
     
     func clearObservers(){
-        REF.removeAllObservers()
-        REF_USERS.removeAllObservers()
-        REF_FAMILIES.removeAllObservers()
-        REF_ACTIVITY.removeAllObservers()
-        REF_NOTIFICATION.removeAllObservers()
-        NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
+        Constants.FirDatabase.REF.removeAllObservers()
+        Constants.FirDatabase.REF_USERS.removeAllObservers()
+        Constants.FirDatabase.REF_FAMILIES.removeAllObservers()
+        Constants.FirDatabase.REF_ACTIVITY.removeAllObservers()
+        Constants.FirDatabase.REF_NOTIFICATION.removeAllObservers()
+        NotificationCenter.default.removeObserver(Constants.NotificationCenter.NOFAMILIES_NOTIFICATION)
     }
     
     func exist(field: String, dictionary:NSDictionary) -> String! {

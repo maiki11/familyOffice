@@ -121,10 +121,10 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         return imageView
     }
     override func viewWillDisappear(_ animated: Bool) {
-        UTILITY_SERVICE.enabledView()
+        Constants.Services.UTILITY_SERVICE.enabledView()
         selected = []
         center.removeObserver(self.localeChangeObserver)
-        REF_USERS.removeAllObservers()
+        Constants.FirDatabase.REF_USERS.removeAllObservers()
         super.viewDidDisappear(animated)
     }
     
@@ -132,7 +132,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         save()
     }
     func save() -> Void {
-        let key = REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
+        let key = Constants.FirDatabase.REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
         UIGraphicsBeginImageContextWithOptions(scrollView.bounds.size, true, UIScreen.main.scale)
         let offset = scrollView.contentOffset
         
@@ -144,14 +144,14 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         //Add validations
         if(imageView.image != nil && nameTxtField.text != nil){
             self.view.makeToastActivity(.center)
-            selected.append(USER_SERVICE.users[0])
-            FAMILY_SERVICE.createFamily(key: key, image: image!, name: nameTxtField.text!, users: selected, view: self.self)
+            selected.append(Constants.Services.USER_SERVICE.users[0])
+            Constants.Services.FAMILY_SERVICE.createFamily(key: key, image: image!, name: nameTxtField.text!, users: selected, view: self.self)
             //UTILITY_SERVICE.loading(view: self.view)
-            UTILITY_SERVICE.disabledView()
+            Constants.Services.UTILITY_SERVICE.disabledView()
         }else{
             let alert = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            ANIMATIONS.shakeTextField(txt: nameTxtField)
+            Constants.Services.ANIMATIONS.shakeTextField(txt: nameTxtField)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
         }
@@ -183,7 +183,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     }
     
     func logout(_ sender: Any){
-        AUTH_SERVICE.logOut()
+        Constants.Services.AUTH_SERVICE.logOut()
         Utility.Instance().gotoView(view: "StartView", context: self)
     }
 }

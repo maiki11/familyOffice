@@ -11,6 +11,8 @@ import UIKit
 class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
    
     var chatController : chatCollectionViewController!
+    var addEventController : AddEventViewController!
+    
     var array : [String]!
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -47,7 +49,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         horizontalBarLeftAnchorContraint?.isActive = true
         horizontalView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         horizontalView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: CGFloat(1/array.count)).isActive = true
-        horizontalView.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        horizontalView.heightAnchor.constraint(equalToConstant: 20).isActive = true
         self.collectionView.reloadData()
     }
     
@@ -56,7 +58,13 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
-        chatController.scrollMenuIndex(menuIndex: indexPath.item)
+        if chatController != nil {
+            chatController.scrollMenuIndex(menuIndex: indexPath.item)
+        }
+        if addEventController != nil {
+            addEventController.scrollMenuIndex(menuIndex: indexPath.item)
+        }
+        
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

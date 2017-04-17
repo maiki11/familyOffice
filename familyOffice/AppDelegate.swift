@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         let authentication = user.authentication
         let credential = FIRGoogleAuthProvider.credential(withIDToken: (authentication?.idToken)!,
                                                           accessToken: (authentication?.accessToken)!)
-        AUTH_SERVICE.login(credential: credential)
+        Constants.Services.AUTH_SERVICE.login(credential: credential)
     }
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         
@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        NotificationCenter.default.post(name: BACKGROUND_NOTIFICATION, object: nil)
+        NotificationCenter.default.post(name: Constants.NotificationCenter.BACKGROUND_NOTIFICATION, object: nil)
         FIRMessaging.messaging().disconnect()
         print("Disconnected from FCM.")
     }
@@ -107,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
     func tokenRefreshNotification(_ notification: NSNotification) {
         if let refreshedToken = FIRInstanceID.instanceID().token() {
             print("InstanceID token: \(refreshedToken)")
-            NOTIFICATION_SERVICE.token = refreshedToken
+            Constants.Services.NOTIFICATION_SERVICE.token = refreshedToken
         }
         
         // Connect to FCM since connection may have failed when attempted before having a token.
@@ -117,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
     func connectToFcm() {
         FIRMessaging.messaging().connect { (error) in
             if (error != nil) {
-                print("Unable to connect with FCM. \(error)")
+                print("Unable to connect with FCM. \(String(describing: error))")
             } else {
                 print("Connected to FCM.")
             }

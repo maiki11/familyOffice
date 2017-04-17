@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     private var family : Family?
     
 
-    let user = USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
+    let user = Constants.Services.USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
     var families : [String]! = []
 
    
@@ -58,7 +58,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     func handleBack()  {
-        UTILITY_SERVICE.gotoView(view: "mainView", context: self)
+        Constants.Services.UTILITY_SERVICE.gotoView(view: "mainView", context: self)
     
     }
     
@@ -66,18 +66,18 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         reloadFamily()
         
        
-        if let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
-            self.navigationItem.title = FAMILY_SERVICE.families[index].name
+        if let index = Constants.Services.FAMILY_SERVICE.families.index(where: {$0.id == Constants.Services.USER_SERVICE.users[0].familyActive}) {
+            self.navigationItem.title = Constants.Services.FAMILY_SERVICE.families[index].name
         }
      
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
+        NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
             return
         }
-        NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){_ in
+        NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: nil){_ in
             self.reloadFamily()
         }
-        NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
+        NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
             self.reloadFamily()
             //FAMILY_SERVICE.verifyFamilyActive(family: family.object as! Family)
         }
@@ -89,14 +89,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(USER_NOTIFICATION)
-        NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
-        NotificationCenter.default.removeObserver(FAMILYADDED_NOTIFICATION)
+        NotificationCenter.default.removeObserver(Constants.NotificationCenter.USER_NOTIFICATION)
+        NotificationCenter.default.removeObserver(Constants.NotificationCenter.NOFAMILIES_NOTIFICATION)
+        NotificationCenter.default.removeObserver(Constants.NotificationCenter.FAMILYADDED_NOTIFICATION)
     }
     
     func reloadFamily() -> Void {
-        if USER_SERVICE.users.count > 0, let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
-            let family = FAMILY_SERVICE.families[index]
+        if Constants.Services.USER_SERVICE.users.count > 0, let index = Constants.Services.FAMILY_SERVICE.families.index(where: {$0.id == Constants.Services.USER_SERVICE.users[0].familyActive}) {
+            let family = Constants.Services.FAMILY_SERVICE.families[index]
             self.navigationItem.title = family.name
         }
     }

@@ -40,7 +40,7 @@ UINavigationControllerDelegate  {
         self.profileImage.layer.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
     }
     override func viewWillAppear(_ animated: Bool) {
-        user = USER_SERVICE.users[0]
+        user = Constants.Services.USER_SERVICE.users[0]
         if !user.photoURL.isEmpty {
             profileImage.loadImage(urlString: user.photoURL)
         }

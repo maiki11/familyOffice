@@ -17,7 +17,7 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
         // self.clearsSelectionOnViewWillAppear = false
         
         // Register cell classes
-        //setupMenuBar()
+        setupMenuBar()
         setupCollectionView()
         
         let logOutButton = UIBarButtonItem(title: "Guardar", style: .plain, target: self, action:nil)
@@ -36,6 +36,8 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
             flowlayout.minimumLineSpacing = 0
         }
         self.collectionView!.register(AddEventTableViewController.self, forCellWithReuseIdentifier: "cellId")
+        self.collectionView!.register(MapAddEventTable.self, forCellWithReuseIdentifier: "mapcell")
+        
         self.collectionView!.contentInset = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)
         self.collectionView!.scrollIndicatorInsets = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)
         
@@ -70,15 +72,21 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! AddEventTableViewController
             return cell
+        }else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mapcell", for: indexPath) as! MapAddEventTable
+            return cell
+        }
     }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-       // menuBar.horizontalBarLeftAnchorContraint?.constant = scrollView.contentOffset.x / 3
+        menuBar.horizontalBarLeftAnchorContraint?.constant = scrollView.contentOffset.x / CGFloat(menuBar.array.count)
     }
     
     func scrollMenuIndex(menuIndex: Int) -> Void {
@@ -87,10 +95,9 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        _ = targetContentOffset.pointee.x / view.frame.width
-        //let indexPath = IndexPath(item: Int(index), section: 0)
-        //menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-        
+        let index = targetContentOffset.pointee.x / view.frame.width
+        let indexPath = IndexPath(item: Int(index), section: 0)
+        menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

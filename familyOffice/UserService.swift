@@ -27,7 +27,7 @@ class UserService {
     }
     
     func getUser(uid: String) -> Void {
-        REF.child("/users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
+        Constants.FirDatabase.REF.child("/users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
             if(snapshot.exists()){
                 self.addUser(user:  User(snapshot: snapshot))
             }
@@ -36,7 +36,7 @@ class UserService {
         }
     }
     func getUser(email: String) -> Void {
-        REF.child("/users/").queryOrderedByValue().queryEqual(toValue: email).observeSingleEvent(of: .value, with: { (snapshot) in
+        Constants.FirDatabase.REF.child("/users/").queryOrderedByValue().queryEqual(toValue: email).observeSingleEvent(of: .value, with: { (snapshot) in
             if(snapshot.exists()){
                 self.addUser(user:  User(snapshot: snapshot))
             }
@@ -45,10 +45,10 @@ class UserService {
         }
     }
     func getUser(phone: String) -> Void {
-        REF_USERS.queryOrdered(byChild: "phone").queryStarting(atValue: "\(phone)").queryEnding(atValue: "\(phone)").observe(.childAdded, with: { (snapshot) -> Void in
+        Constants.FirDatabase.REF_USERS.queryOrdered(byChild: "phone").queryStarting(atValue: "\(phone)").queryEnding(atValue: "\(phone)").observe(.childAdded, with: { (snapshot) -> Void in
             if(snapshot.exists()){
                 self.addUser(user:  User(snapshot: snapshot))
-                REF_USERS.removeAllObservers()
+                Constants.FirDatabase.REF_USERS.removeAllObservers()
                 return
             }
             
@@ -58,17 +58,17 @@ class UserService {
         let user = FIRAuth.auth()?.currentUser
         FIRAuth.auth()?.signIn(withEmail: (user?.email)!, password: oldPass) { (user, error) in
             if((error) != nil){
-                ALERT_SERVICE.alertMessage(context: context, title: "Error en contraseña", msg: "La contraseña anterior no es válida")
+                Constants.Services.ALERT_SERVICE.alertMessage(context: context, title: "Error en contraseña", msg: "La contraseña anterior no es válida")
                 //print(error.debugDescription)
             }else{
                 user?.updatePassword(newPass) { error in
                     if let error = error {
-                        NotificationCenter.default.post(name: ERROR_NOTIFICATION, object: nil)
+                        NotificationCenter.default.post(name: Constants.NotificationCenter.ERROR_NOTIFICATION, object: nil)
                         print(error.localizedDescription)
                     } else {
                         
-                        ACTIVITYLOG_SERVICE.create(id: self.users[0].id, activity: "Se cambio contraseña", photo: self.users[0].photoURL, type: "personalInfo")
-                        NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: nil)
+                        Constants.Services.ACTIVITYLOG_SERVICE.create(id: self.users[0].id, activity: "Se cambio contraseña", photo: self.users[0].photoURL, type: "personalInfo")
+                        NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: nil)
                     }
                 }
             }
@@ -77,13 +77,13 @@ class UserService {
     func updated(snapshot: FIRDataSnapshot, uid: String) -> Void {
         if let index = self.users.index(where: { $0.id == uid }){
             self.users[index].update(snapshot: snapshot)
-            NotificationCenter.default.post(name: USERUPDATED_NOTIFICATION, object: self.users[index].id)
+            NotificationCenter.default.post(name: Constants.NotificationCenter.USERUPDATED_NOTIFICATION, object: self.users[index].id)
         }
     }
     
     func updateUser(user: User) -> Void {
-        REF_USERS.child(user.id).updateChildValues(user.toDictionary() as! [AnyHashable : Any])
-        ACTIVITYLOG_SERVICE.create(id: (self.users[0].id)!, activity: "Se actualizo información personal", photo: (self.users[0].photoURL)!, type: "personalInfo")
+        Constants.FirDatabase.REF_USERS.child(user.id).updateChildValues(user.toDictionary() as! [AnyHashable : Any])
+        Constants.Services.ACTIVITYLOG_SERVICE.create(id: (self.users[0].id)!, activity: "Se actualizo información personal", photo: (self.users[0].photoURL)!, type: "personalInfo")
         self.users[0] = user
     }
     
@@ -101,23 +101,23 @@ class UserService {
         if !self.users.contains(where: {$0.id == user.id}) {
             self.users.append(user)
             if FIRAuth.auth()?.currentUser?.uid == user.id {
-                NOTIFICATION_SERVICE.saveToken()
+                Constants.Services.NOTIFICATION_SERVICE.saveToken()
                 if let families = user.families?.allKeys {
                     for id in families {
-                        REF_SERVICE.valueSingleton(ref: "families/\((id))")
+                        Constants.Services.REF_SERVICE.valueSingleton(ref: "families/\((id))")
                     }
                 }
-                REF_SERVICE.chilAdded(ref: "users/\((FIRAuth.auth()?.currentUser?.uid)!)/families")
-                REF_SERVICE.chilRemoved(ref: "users/\((FIRAuth.auth()?.currentUser?.uid)!)/families")
+                Constants.Services.REF_SERVICE.chilAdded(ref: "users/\((FIRAuth.auth()?.currentUser?.uid)!)/families")
+                Constants.Services.REF_SERVICE.chilRemoved(ref: "users/\((FIRAuth.auth()?.currentUser?.uid)!)/families")
                 if(self.users[0].families?.count == 0 ){
-                    NotificationCenter.default.post(name: NOFAMILIES_NOTIFICATION, object: nil)
+                    NotificationCenter.default.post(name: Constants.NotificationCenter.NOFAMILIES_NOTIFICATION, object: nil)
                 }
             }
-            NotificationCenter.default.post(name: USER_NOTIFICATION, object: user)
+            NotificationCenter.default.post(name: Constants.NotificationCenter.USER_NOTIFICATION, object: user)
         }else{
             if let index = self.users.index(where: {$0.id == user.id}) {
                 self.users[index] = user
-                NotificationCenter.default.post(name: USER_NOTIFICATION, object: user)
+                NotificationCenter.default.post(name: Constants.NotificationCenter.USER_NOTIFICATION, object: user)
             }
         }
     }

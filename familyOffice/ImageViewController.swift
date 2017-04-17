@@ -61,10 +61,10 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         //Add validations
         if(imageView.image != nil){
             self.view.makeToastActivity(.center)
-            UTILITY_SERVICE.disabledView()
+            Constants.Services.UTILITY_SERVICE.disabledView()
             let imageName = NSUUID().uuidString
             if let uploadData = UIImagePNGRepresentation(image!){
-                _ = STORAGEREF.child("users/\(USER_SERVICE.users[0].id!)").child("images/\(imageName).png").put(uploadData, metadata: nil) { metadata, error in
+                _ = Constants.FirStorage.STORAGEREF.child("users/\(Constants.Services.USER_SERVICE.users[0].id!)").child("images/\(imageName).png").put(uploadData, metadata: nil) { metadata, error in
                     if (error != nil) {
                         // Uh-oh, an error occurred!
                         print(error.debugDescription)
@@ -72,10 +72,10 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
                         // Metadata contains file metadata such as size, content-type, and download URL.
                         if let downloadURL = metadata?.downloadURL()?.absoluteURL {
                             StorageService.Instance().save(url: downloadURL.absoluteString, data: uploadData)
-                            USER_SERVICE.users[0].photoURL = downloadURL.absoluteString
-                            REQUEST_SERVICE.update(value: ["photoUrl": downloadURL.absoluteString ], ref: "users/\(USER_SERVICE.users[0].id!)")
+                            Constants.Services.USER_SERVICE.users[0].photoURL = downloadURL.absoluteString
+                            Constants.Services.REQUEST_SERVICE.update(value: ["photoUrl": downloadURL.absoluteString ], ref: "users/\(Constants.Services.USER_SERVICE.users[0].id!)")
                             self.imageView.image = nil
-                            UTILITY_SERVICE.enabledView()
+                            Constants.Services.UTILITY_SERVICE.enabledView()
                             _ = self.navigationController?.popViewController(animated: true)
                         }
                         
@@ -83,7 +83,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
                 }
             }
             
-            //UTILITY_SERVICE.loading(view: self.view)
+            //Constants.Services.UTILITY_SERVICE.loading(view: self.view)
             
         }else{
             let alert = UIAlertController(title: "Error", message: "Agregue una imagen y un nombre", preferredStyle: .alert)

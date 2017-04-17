@@ -15,7 +15,7 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
         // Initialization code
     }
     override func viewWillAppear(_ animated: Bool) {
-        localeChangeObserver.append( NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){ obj in
+        localeChangeObserver.append( NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: nil){ obj in
             self.tableView.reloadData()
         })
     }
@@ -38,12 +38,12 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
             cell.image.image = #imageLiteral(resourceName: "profile_default")
             let id: String = dates[collectionView.tag].members[indexPath.item]
             if !id.isEmpty {
-                if let user = USER_SERVICE.users.filter({$0.id == id}).first {
+                if let user = Constants.Services.USER_SERVICE.users.filter({$0.id == id}).first {
                     if !user.photoURL.isEmpty {
                         cell.image.loadImage(urlString: user.photoURL)
                     }
                 }else{
-                    REF_SERVICE.valueSingleton(ref: "users/\(id)")
+                    Constants.Services.REF_SERVICE.valueSingleton(ref: "users/\(id)")
                 }
             }
             return cell

@@ -32,7 +32,7 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
             }
             cell.check.isHidden = true
             cell.name.textColor = #colorLiteral(red: 0.6941176471, green: 0.6941176471, blue: 0.6941176471, alpha: 1)
-            if family.id == USER_SERVICE.users[0].familyActive {
+            if family.id == Constants.Services.USER_SERVICE.users[0].familyActive {
                 cell.check.isHidden = false
                 cell.name.textColor = #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)
             }
@@ -85,17 +85,17 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if(indexPath.row == FAMILY_SERVICE.families.count){
+        if(indexPath.row == Constants.Services.FAMILY_SERVICE.families.count){
             self.performSegue(withIdentifier: "registerFamilySegue", sender: nil)
         }else{
-            let family = FAMILY_SERVICE.families[(indexPath.row)]
+            let family = Constants.Services.FAMILY_SERVICE.families[(indexPath.row)]
             self.toggleSelect(family: family)
             self.familiesCollection.reloadData()
             
         }
     }
     func toggleSelect(family: Family){
-        FAMILY_SERVICE.selectFamily(family: family)
+        Constants.Services.FAMILY_SERVICE.selectFamily(family: family)
     }
     
 }

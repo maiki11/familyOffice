@@ -24,15 +24,15 @@ class ActivityLogService {
     private static let instance : ActivityLogService = ActivityLogService()
     
     func create(id: String, activity: String, photo:String, type: String ) -> Void {
-        let key = REF_ACTIVITY.child(id).childByAutoId().key
+        let key = Constants.FirDatabase.REF_ACTIVITY.child(id).childByAutoId().key
         let record = Record(id: key, activity: activity, timestamp: Utility.Instance().getDate(), type: type, photoURL: photo)
-        REF_ACTIVITY.child("\(id)/\(key)").setValue(record.toDictionary())
+        Constants.FirDatabase.REF_ACTIVITY.child("\(id)/\(key)").setValue(record.toDictionary())
         activityLog.append(record)
     }
     func add(record: Record) -> Void {
         if !self.activityLog.contains(where: {$0.id == record.id}){
             self.activityLog.append(record)
-            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: record)
+            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: record)
         }
     }
 }

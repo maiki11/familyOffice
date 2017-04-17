@@ -31,7 +31,7 @@ extension RegisterFamilyViewController: UITableViewDelegate, UITableViewDataSour
         self.tableView.reloadData()
         
         let mainQueue = OperationQueue.main
-        self.localeChangeObserver =  center.addObserver(forName: USER_NOTIFICATION, object: nil, queue: mainQueue){user in
+        self.localeChangeObserver =  center.addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: mainQueue){user in
             if let user : User = user.object as? User {
                 self.addMember(phone: user.phone)
             }
@@ -68,7 +68,7 @@ extension RegisterFamilyViewController: UITableViewDelegate, UITableViewDataSour
         self.users = []
         for item in contacts {
             for phone in item.phoneNumbers {
-                if phone.value.value(forKey: "digits") as? String  != USER_SERVICE.users[0].phone{
+                if phone.value.value(forKey: "digits") as? String  != Constants.Services.USER_SERVICE.users[0].phone{
                     self.addMember(phone: phone.value.value(forKey: "digits") as! String )
                 }
                 
@@ -77,13 +77,13 @@ extension RegisterFamilyViewController: UITableViewDelegate, UITableViewDataSour
     }
     func addMember(phone: String) -> Void {
         
-        if let user = USER_SERVICE.users.filter({$0.phone == phone}).first {
+        if let user = Constants.Services.USER_SERVICE.users.filter({$0.phone == phone}).first {
             if !self.users.contains(where: {$0.id == user.id}) {
                 self.users.append(user)
                 self.tableView.insertRows(at: [NSIndexPath(row: self.users.count-1, section: 0) as IndexPath], with: .fade)
             }
         }else{
-            USER_SERVICE.getUser(phone: phone)
+            Constants.Services.USER_SERVICE.getUser(phone: phone)
         }
     }
 }

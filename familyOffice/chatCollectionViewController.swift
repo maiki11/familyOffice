@@ -118,7 +118,7 @@ class chatCollectionViewController: UICollectionViewController, UICollectionView
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        menuBar.horizontalBarLeftAnchorContraint?.constant = scrollView.contentOffset.x / 3
+        menuBar.horizontalBarLeftAnchorContraint?.constant = scrollView.contentOffset.x / CGFloat(menuBar.array.count)
     }
     
     func scrollMenuIndex(menuIndex: Int) -> Void {

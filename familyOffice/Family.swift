@@ -56,8 +56,8 @@ struct Family  {
         let snapshotValue = snapshot.value as! [String: Any]
         self.name = snapshotValue[Family.kFamilyNameKey] as! String
         self.id = snapshot.key
-        self.imageProfilePath = UTILITY_SERVICE.exist(field: Family.kFamilyImagePathKey, dictionary: snapshotValue as NSDictionary)
-        self.photoURL = snapshotValue[Family.kFamilyPhotoUrlKey] as! String
+        self.imageProfilePath = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyImagePathKey, dictionary: snapshotValue as NSDictionary)
+        self.photoURL = snapshotValue[Family.kFamilyPhotoUrlKey] as? String
         if let members = snapshotValue[Family.kFamilyMembersKey] {
             self.totalMembers = UInt((members as AnyObject).count)
             self.members = members as? NSDictionary
@@ -89,7 +89,7 @@ struct Family  {
             self.members = snapshot.value as? NSDictionary
             break
         case Family.kFamilyPhotoUrlKey:
-            self.photoURL = snapshot.value as! String
+            self.photoURL = snapshot.value as? String
             break
         default:
             break
