@@ -33,13 +33,13 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
     private func setupCollectionView() {
         if let flowlayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowlayout.scrollDirection = .horizontal
-            flowlayout.minimumLineSpacing = 0
+            flowlayout.minimumLineSpacing = 20
         }
         self.collectionView!.register(AddEventTableViewController.self, forCellWithReuseIdentifier: "cellId")
         self.collectionView!.register(MapAddEventTable.self, forCellWithReuseIdentifier: "mapcell")
         
-        self.collectionView!.contentInset = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)
-        self.collectionView!.scrollIndicatorInsets = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)
+        self.collectionView!.contentInset = UIEdgeInsets(top: 150, left: 10, bottom: 100, right: 10)
+        self.collectionView!.scrollIndicatorInsets = UIEdgeInsets(top: 150, left: 10, bottom: 100, right: 10)
         
         collectionView?.isPagingEnabled = true
     }
@@ -47,12 +47,14 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
     let menuBar: MenuBar = {
         let mb = MenuBar()
         mb.array = ["INFO","MAPA"]
+      
         mb.setupHorizontalBar()
         return mb
     }()
     private func setupMenuBar() {
-        
+        menuBar.addEventController = self
         self.view.addSubview(menuBar)
+        
         self.view.addContraintWithFormat(format: "H:|[v0]|", views: menuBar)
         self.view.addContraintWithFormat(format: "V:|[v0(50)]|", views: menuBar)
         menuBar.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor).isActive = true
@@ -80,10 +82,9 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
             return cell
         }
     }
-
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
+        return CGSize(width: view.frame.width-20, height: view.frame.height-150)
     }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         menuBar.horizontalBarLeftAnchorContraint?.constant = scrollView.contentOffset.x / CGFloat(menuBar.array.count)
@@ -100,9 +101,13 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
         menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+       
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.navigationBar.isTranslucent = true
-        
+    
     }
 }
 

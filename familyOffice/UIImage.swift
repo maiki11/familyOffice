@@ -10,14 +10,15 @@ let imageCache = NSCache<AnyObject, AnyObject>()
 
 extension UIImageView {
     
-    func loadImage(urlString: String) -> Void {
+    func loadImage(urlString: String, filter: String = "") -> Void {
         
         let url = URL(string: urlString)
-    
+        
         //check if image exist in cache
         if let cacheImage = imageCache.object(forKey: urlString as AnyObject) {
             self.image = nil
             self.image = cacheImage as? UIImage
+            self.verifyFilter(filter: filter)
             return
         }
         
@@ -31,9 +32,34 @@ extension UIImageView {
                     imageCache.setObject(downloadImage, forKey: urlString as AnyObject)
                     self.image = nil
                     self.image = downloadImage
+                    
+                    self.verifyFilter(filter: filter)
                 }
             }
         }).resume()
-
+        
     }
+    func verifyFilter(filter: String) -> Void {
+        switch filter {
+        case "blackwhite":
+            self.blackwhite()
+            break
+        default:
+            break
+        }
+    }
+    
+    func blackwhite() {
+        if self.image != nil {
+            let context = CIContext(options: nil)
+            let currentFilter = CIFilter(name: "CIPhotoEffectNoir")
+            currentFilter!.setValue(CIImage(image: self.image!), forKey: kCIInputImageKey)
+            let output = currentFilter!.outputImage
+            let cgimg = context.createCGImage(output!,from: output!.extent)
+            let processedImage = UIImage(cgImage: cgimg!)
+            self.image = processedImage
+        }
+        
+    }
+    
 }

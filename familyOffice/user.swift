@@ -99,6 +99,54 @@ struct User {
             break
         }
     }
-    
+}
+
+protocol UserModelBindable: AnyObject {
+    var userModel: User? { get set }
+    var filter: String! { get set }
+    var nameLabel: UILabel! {get}
+    var profileImage: UIImageView! {get}
     
 }
+
+extension UserModelBindable {
+    // Make the views optionals
+    
+    var nameLabel: UILabel! {
+        return nil
+    }
+    
+    var profileImage: UIImageView! {
+        return nil
+    }
+    
+  
+    
+    // Bind
+    
+    func bind(userModel: User, filter: String = "") {
+        self.userModel = userModel
+        self.filter = filter
+        bind()
+    }
+    
+    func bind() {
+        
+        guard let userModel = self.userModel else {
+            return
+        }
+        
+        if let nameLabel = self.nameLabel {
+            nameLabel.text = userModel.name
+        }
+        
+        if let profileImage = self.profileImage {
+            if !userModel.photoURL.isEmpty {
+                profileImage.loadImage(urlString: userModel.photoURL, filter: filter)
+            }
+        }
+        
+        
+    }
+}
+

@@ -47,6 +47,7 @@ class AddEventTableViewController: BaseCell, UITableViewDelegate, UITableViewDat
             }
             return 165.0
         }
+        
         return 80.0
     }
     func numberOfSections(in tableView: UITableView) -> Int {

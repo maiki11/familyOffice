@@ -23,6 +23,7 @@ struct Constants {
     struct FirStorage {
         static let STORAGEREF = FIRStorage.storage().reference(forURL: "gs://familyoffice-6017a.appspot.com")
     }
+    
     struct Services {
         static let ACTIVITYLOG_SERVICE = ActivityLogService.Instance()
         static let UTILITY_SERVICE = Utility.Instance()
@@ -50,8 +51,7 @@ struct Constants {
         static let ERROR_NOTIFICATION  = Notification.Name("ErrorNotification")
         static let BACKGROUND_NOTIFICATION = Notification.Name("BackgroundNotification")
     }
-    
-   
+
     struct ServerApi {
         static let SERVERKEY =  "AIzaSyAkiqHhHKI0xcXrYF9eq-D6PzhUl-mPOls"
         static let NOTIFICATION_URL = "https://fcm.googleapis.com/fcm/send"

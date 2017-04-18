@@ -8,11 +8,21 @@
 
 import UIKit
 
-class MemberInviteCollectionViewCell: UICollectionViewCell {
+class MemberInviteCollectionViewCell: UICollectionViewCell, UserModelBindable {
+    var filter: String!
+    var userModel: User?
 
+    @IBOutlet weak var check: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
+        profileImage.clipsToBounds = true
+        profileImage.blackwhite()
         // Initialization code
     }
-
+  
+    
+   
 }

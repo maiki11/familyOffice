@@ -12,6 +12,7 @@ class MapAddEventTable: BaseCell, UITableViewDelegate, UITableViewDataSource  {
     
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero)
+        table.backgroundColor = UIColor.clear
         table.delegate = self
         table.dataSource = self
         return table
@@ -23,15 +24,13 @@ class MapAddEventTable: BaseCell, UITableViewDelegate, UITableViewDataSource  {
         addContraintWithFormat(format: "H:|[v0]|", views: tableView)
         addContraintWithFormat(format: "V:|[v0]|", views: tableView)
         tableView.register(UINib(nibName: "MapTableViewCell", bundle: nil), forCellReuseIdentifier: "cellId")
+        tableView.register(UINib(nibName: "memberCollectionTableViewCell", bundle: nil),forCellReuseIdentifier: "cellId2")
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0  {
-           
-            return self.frame.height/3
-        }
-        return self.frame.height/3 * 2
+        return self.frame.height/2
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -40,14 +39,19 @@ class MapAddEventTable: BaseCell, UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 2
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
+        if indexPath.row < 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! MapTableViewCell
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellId2", for: indexPath) as! memberCollectionTableViewCell
+            cell.layer.backgroundColor = UIColor.clear.cgColor
+            return cell
+        }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! MapTableViewCell
-        return cell
         
     }
 
