@@ -120,6 +120,21 @@ class Utility {
             return 0.0
         }
     }
+    func exist(field: String, dictionary:NSDictionary) -> Int! {
+        if let value = dictionary[field] {
+            return value as! Int
+        }else {
+            return 0
+        }
+    }
+    func exist(field: String, dictionary:NSDictionary ) -> [String]! {
+        if let value = dictionary[field] {
+            let v = value as! NSDictionary
+            return v.allKeys as! [String]
+        }else {
+            return []
+        }
+    }
     func existData(field: String, dictionary: NSDictionary) -> Data? {
         if let value = dictionary[field] {
             return (value as! Data)
@@ -134,7 +149,7 @@ class Utility {
             return []
         }
     }
-    func existNSDictionary(field: String, dictionary:NSDictionary) -> NSDictionary {
+    func exist(field: String, dictionary:NSDictionary) -> NSDictionary {
         if let value = dictionary[field] {
             return value as! NSDictionary
         }else {

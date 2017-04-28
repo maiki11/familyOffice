@@ -9,7 +9,7 @@
 import UIKit
 
 class SelectCategoryViewController: UIViewController {
-    var families : [Family]! = []
+    
     var imageSelect : UIImage!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var headerView: UIView!
@@ -52,19 +52,18 @@ class SelectCategoryViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     override func viewWillAppear(_ animated: Bool) {
+       
         self.familiesCollection.reloadData()
         if Constants.Services.USER_SERVICE.users.count > 0 {
             loadImage()
         }
-        
-        families = Constants.Services.FAMILY_SERVICE.families
+       
         localeChangeObserver.append( NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: nil){_ in
             self.loadImage()
         })
         localeChangeObserver.append(NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
             if let family : Family = family.object as? Family {
                 self.addFamily(family: family)
-
             }
         })
 

@@ -15,6 +15,7 @@ struct User {
     static let kUserIdKey = "id"
     static let kUserPhotoUrlKey = "photoUrl"
     static let kUserFamiliesKey = "families"
+    static let kEventKey = "events"
     static let kUserFamilyActiveKey = "familyActive"
     static let kUserPhoneKey = "phone"
     static let kUserCurpKey = "curp"
@@ -38,6 +39,7 @@ struct User {
     var address : String!
     var bloodtype: String!
     var tokens: NSDictionary? = nil
+    var events: [String]? = []
     
     init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String) {
         self.id = id
@@ -67,9 +69,10 @@ struct User {
         self.rfc = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserRFCKey, dictionary: snapshotValue)
         self.nss = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserNSSKey, dictionary: snapshotValue)
         self.bloodtype = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserBloodTypeKey, dictionary: snapshotValue)
-        self.families = Constants.Services.UTILITY_SERVICE.existNSDictionary(field: User.kUserFamiliesKey, dictionary: snapshotValue)
+        self.families = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserFamiliesKey, dictionary: snapshotValue)
         self.phone = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
-        self.tokens = Constants.Services.UTILITY_SERVICE.existNSDictionary(field: User.kUserTokensFCMeKey, dictionary: snapshotValue)
+        self.tokens = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserTokensFCMeKey, dictionary: snapshotValue)
+        self.events = Constants.Services.UTILITY_SERVICE.exist(field: User.kEventKey, dictionary: snapshotValue)
     }
     
     func toDictionary() -> NSDictionary {

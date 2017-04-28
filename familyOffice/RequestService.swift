@@ -9,51 +9,19 @@
 import Foundation
 import Toast_Swift
 
-class RequestService {
-    
-    var proccess : [Proccess] = []
+protocol RequestService {
     
     
-    private static let instance : RequestService = RequestService()
-    private init(){
-    }
-    public static func Instance() -> RequestService {
-        return instance
-    }
     
-    func insert(value: NSDictionary, ref: String) -> Void{
-
-        //proccess.append(Proccess(text: "Insertando", status: "En Proceso", type: "Insertando"))
-        Constants.FirDatabase.REF.child(ref).setValue(value, withCompletionBlock: {(error, reference) in
-          
-            if error != nil {
-           
-                NotificationCenter.default.post(name: Constants.NotificationCenter.ERROR_NOTIFICATION, object: nil)
-            }
-            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: value)
-           
-
-        })
-    }
     
-    func delete(ref: String) -> Void {
-        Constants.FirDatabase.REF.child(ref).removeValue(completionBlock: {(error, reference) in
-            if error != nil {
-                NotificationCenter.default.post(name: Constants.NotificationCenter.ERROR_NOTIFICATION, object: nil)
-            }
-            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: ref.characters.split(separator: "/").last )
-        })
-    }
-    
-    func update(value:  [AnyHashable : Any], ref: String) -> Void {
-        Constants.FirDatabase.REF.child(ref).updateChildValues(value, withCompletionBlock: {(error, ref) in
-            if error != nil {
-                NotificationCenter.default.post(name: Constants.NotificationCenter.ERROR_NOTIFICATION, object: nil)
-            }
-            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: nil )
-
-        })
-    }
-    
+//    private static let instance : RequestService = RequestService()
+//    private init(){
+//    }
+//    public static func Instance() -> RequestService {
+//        return instance
+//    }
+    func insert(_ ref: String, value: Any, callback: @escaping ((_ results: Any) -> Void))
+    func delete(_ ref: String, callback: @escaping ((_ results: Any) -> Void))
+    func update(_ ref: String,value:  [AnyHashable : Any], callback: @escaping ((_ results: Any) -> Void))
     
 }

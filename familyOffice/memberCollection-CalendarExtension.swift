@@ -14,29 +14,34 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
         super.awakeFromNib()
         // Initialization code
     }
-    override func viewWillAppear(_ animated: Bool) {
-        localeChangeObserver.append( NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: nil){ obj in
-            self.tableView.reloadData()
-        })
+    
+    
+    func searchEvent(eid: String) -> Void {
+        if !Constants.Services.EVENT_SERVICE.events.contains(where: {$0.id == eid}) {
+            Constants.Services.REF_SERVICE.valueSingleton(ref: "events/\(eid)")
+        }else{
+            self.dates = Constants.Services.EVENT_SERVICE.events
+            self.calendar.reloadData()
+        }
     }
    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let cant: Int! = dates[collectionView.tag].members.count
+        let cant: Int! = dates[collectionView.tag].members!.count
         return cant > 0 ? cant < 5 ? cant : 5 : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cant: Int! = dates[collectionView.tag].members.count
+        let cant: Int! = dates[collectionView.tag].members!.count
         if cant == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nomemberCell", for: indexPath)
             return cell
         }else if indexPath.item < 4 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! MemberCollectionViewCell
             cell.image.image = #imageLiteral(resourceName: "profile_default")
-            let id: String = dates[collectionView.tag].members[indexPath.item]
+            let id: String = dates[collectionView.tag].members[indexPath.row]
             if !id.isEmpty {
                 if let user = Constants.Services.USER_SERVICE.users.filter({$0.id == id}).first {
                     if !user.photoURL.isEmpty {
@@ -61,7 +66,7 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cant: Int! = dates[collectionView.tag].members.count
+        let cant: Int! = dates[collectionView.tag].members!.count
         if cant == 0 {
             return CGSize(width: collectionView.frame.width, height: 30)
         }

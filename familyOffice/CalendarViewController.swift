@@ -9,8 +9,8 @@ import UIKit
 import FSCalendar
 
 class CalendarViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate {
-    let testDate : [DateModel] = testFile().testDate()
-    var dates: [DateModel] = []
+
+    var dates: [Event] = []
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
     var localeChangeObserver : [NSObjectProtocol] = []
@@ -36,7 +36,9 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         if UIDevice.current.model.hasPrefix("iPad") {
             self.calendarHeightConstraint.constant = 400
         }
-        
+        for item in Constants.Services.USER_SERVICE.users[0].events! {
+            searchEvent(eid: item)
+        }
         self.calendar.select(Date())
         
         self.view.addGestureRecognizer(self.scopeGesture)
@@ -49,6 +51,26 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+        for item in Constants.Services.USER_SERVICE.users[0].events! {
+            searchEvent(eid: item)
+        }
+        
+        localeChangeObserver.append( NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: nil, queue: nil){ obj in
+            if let _ = obj as? String {
+                self.dates = Constants.Services.EVENT_SERVICE.events
+                self.calendar.reloadData()
+            }
+        })
+        localeChangeObserver.append( NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: nil){ obj in
+            self.tableView.reloadData()
+        })
+    }
+    
+
     deinit {
         print("\(#function)")
     }
@@ -83,7 +105,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         if monthPosition == .next || monthPosition == .previous {
             calendar.setCurrentPage(date, animated: true)
         }
-        dates = testDate.filter({ Date(string: $0.date, formatter: .dayMonthYearHourMinute)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)})
+        dates = Constants.Services.EVENT_SERVICE.events.filter({ Date(string: $0.date, formatter: .dayMonthYearHourMinute)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)})
         tableView.reloadData()
     }
     //Change Page Calendar
@@ -92,7 +114,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let count = testDate.filter({ Date(string: $0.date, formatter: .dayMonthYearHourMinute)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)}).count
+        let count = Constants.Services.EVENT_SERVICE.events.filter({ Date(string: $0.date, formatter: .dayMonthYearHourMinute)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)}).count
         return count
     }
 }
@@ -111,7 +133,7 @@ extension CalendarViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventTableViewCell
         let date = dates[indexPath.row]
-        cell.bind(dateModel: date)
+        cell.bind(event: date)
         cell.count.text = String(indexPath.row +  1)
         return cell
     }
@@ -125,10 +147,8 @@ extension CalendarViewController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        
         self.calendar.setScope(.week, animated: true )
-        
+        self.calendar.reloadData()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -149,6 +149,9 @@ class RefHandle {
                 Constants.Services.ACTIVITYLOG_SERVICE.add(record: Record(snapshot: snapshot))
             }
             break
+        case "events/\(reference[1])":
+            Constants.Services.EVENT_SERVICE.addEventlocal(snapshot: snapshot)
+            break
         default:
             break
         }

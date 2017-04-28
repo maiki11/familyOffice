@@ -8,7 +8,10 @@
 
 import UIKit
 
+
 class MapAddEventTable: BaseCell, UITableViewDelegate, UITableViewDataSource  {
+   
+    weak var shareEventDelegate : ShareEvent!
     
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero)
@@ -21,11 +24,13 @@ class MapAddEventTable: BaseCell, UITableViewDelegate, UITableViewDataSource  {
     override func setupViews() {
         super.setupViews()
         addSubview(tableView)
+        
         addContraintWithFormat(format: "H:|[v0]|", views: tableView)
         addContraintWithFormat(format: "V:|[v0]|", views: tableView)
-        tableView.register(UINib(nibName: "MapTableViewCell", bundle: nil), forCellReuseIdentifier: "cellId")
+        tableView.register(UINib(nibName: "MapTableViewCell", bundle: nil), forCellReuseIdentifier: "mapCellId")
         tableView.register(UINib(nibName: "memberCollectionTableViewCell", bundle: nil),forCellReuseIdentifier: "cellId2")
         tableView.reloadData()
+        
     }
     
     // MARK: - Table view data source
@@ -44,10 +49,12 @@ class MapAddEventTable: BaseCell, UITableViewDelegate, UITableViewDataSource  {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! MapTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mapCellId", for: indexPath) as! MapTableViewCell
+            cell.shareEventDelegate = shareEventDelegate
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellId2", for: indexPath) as! memberCollectionTableViewCell
+            cell.shareEventDelegate = shareEventDelegate
             cell.layer.backgroundColor = UIColor.clear.cgColor
             return cell
         }

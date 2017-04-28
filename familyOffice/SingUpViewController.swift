@@ -43,6 +43,17 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
 
     @IBAction func handleSingUp(_ sender: UIButton) {
         var er: String?
+        
+        guard (!(nameTxtfield.text?.isEmpty)!) else {
+            Constants.Services.ANIMATIONS.shakeTextField(txt: nameTxtfield)
+            return
+        }
+        
+        guard let pass :String = passwordTxtfield.text, !pass.isEmpty,  pass == confirmPassTxtfield.text, (passwordTxtfield.text?.characters.count)! > 5 else{
+            Constants.Services.ANIMATIONS.shakeTextField(txt: passwordTxtfield)
+            return
+        }
+        
         if(nameTxtfield.text==""){
             er = "Nombre debe ser capturado"
             Constants.Services.ANIMATIONS.shakeTextField(txt: nameTxtfield)

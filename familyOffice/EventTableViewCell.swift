@@ -8,9 +8,8 @@
 
 import UIKit
 
-class EventTableViewCell: UITableViewCell, DateModelBindable {
-   
-    var dateModel: DateModel?
+class EventTableViewCell: UITableViewCell, EventBindable {
+    var event: Event?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,6 +20,7 @@ class EventTableViewCell: UITableViewCell, DateModelBindable {
     @IBOutlet weak var endDateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    
     
     @IBOutlet weak var count: UILabel!
     @IBOutlet weak var locationIcon: UIImageView!

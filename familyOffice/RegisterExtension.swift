@@ -128,11 +128,8 @@ extension RegisterFamilyViewController: UICollectionViewDataSource, UICollection
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let selUser = users[indexPath.row]
         let index = IndexPath(item: selected.index(where: {$0.id == selUser.id})!, section: 0)
-        
         selected.remove(at: selected.index(where: {$0.id == selUser.id})!)
         self.collectionView.deleteItems(at: [index])
-       
-        
     }
    
     

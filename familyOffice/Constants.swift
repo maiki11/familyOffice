@@ -35,7 +35,8 @@ struct Constants {
         static let NOTIFICATION_SERVICE = NotificationService.Instance()
         static let ALERT_SERVICE = AlertService.Instance()
         static let REF_SERVICE = RefHandle.Instance()
-        static let REQUEST_SERVICE = RequestService.Instance()
+       // static let REQUEST_SERVICE = RequestService.Instance()
+        static let EVENT_SERVICE = EventService.Instance()
     }
     
     struct NotificationCenter {

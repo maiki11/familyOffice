@@ -9,6 +9,8 @@
 import UIKit
 
 class memberCollectionTableViewCell: UITableViewCell {
+    var userNotification: NSObjectProtocol!
+    weak var shareEventDelegate : ShareEvent!
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -22,7 +24,7 @@ class memberCollectionTableViewCell: UITableViewCell {
         
         return cv
     }()
-    
+   
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,8 +33,32 @@ class memberCollectionTableViewCell: UITableViewCell {
         addContraintWithFormat(format: "V:|[v0]|", views: collectionView)
         collectionView.register(UINib(nibName: "MemberInviteCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cellMember")
         collectionView.register(UINib(nibName: "headerCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+        
+        for item in Constants.Services.FAMILY_SERVICE.families {
+            for uid in (item.members?.allKeys)!{
+                if uid as? String != Constants.Services.USER_SERVICE.users[0].id {
+                    self.addMember(id: uid as! String)
+                }
+            }
+        }
+        
+        userNotification =  NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.USERS_NOTIFICATION, object: nil, queue: nil){ obj in
+            if let user : User = obj.object as? User {
+                self.addMember(id: user.id)
+            }
+        }
+        
     }
-    
+    deinit {
+        NotificationCenter.default.removeObserver(userNotification)
+    }
+    func addMember(id: String) -> Void {
+        if Constants.Services.USER_SERVICE.users.index(where: {$0.id == id}) != nil{
+            self.collectionView.reloadData()
+        }else{
+            Constants.Services.REF_SERVICE.valueSingleton(ref: "users/\(id)")
+        }
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -54,6 +80,7 @@ class memberCollectionTableViewCell: UITableViewCell {
         
         if Constants.Services.USER_SERVICE.users.count > 1 {
             cell.bind(userModel: Constants.Services.USER_SERVICE.users[indexPath.row+1], filter: "blackwhite")
+            
         }
         
         // Configure the cell
@@ -77,10 +104,15 @@ extension memberCollectionTableViewCell: UICollectionViewDelegate, UICollectionV
         cell.check.isHidden = !cell.check.isHidden
         if !cell.check.isHidden {
             cell.profileImage.loadImage(urlString: (cell.userModel?.photoURL)!)
+            
+            shareEventDelegate.event.members.append((cell.userModel?.id)!)
         }else{
-            cell.profileImage.blackwhite()
+            cell.profileImage.blackwhite(urlString: (cell.userModel?.photoURL)!)
+            if let index = shareEventDelegate.event.members.index(where: {$0 == cell.userModel?.id }){
+                shareEventDelegate.event.members.remove(at: index)
+            }
         }
-        
+        print(shareEventDelegate.event)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -11,9 +11,16 @@ import FirebaseAuth
 import FirebaseDatabase
 import UIKit
 
-class FamilyService: repository {
+class FamilyService: repository, RequestService {
     
+    func delete(_ ref: String, callback: @escaping ((Any) -> Void)) {
+        
+    }
 
+    func update(_ ref: String, value: [AnyHashable : Any], callback: @escaping ((Any) -> Void)) {
+        
+    }
+    
     private static let instance : FamilyService = FamilyService()
     var families: [Family] = []
     
@@ -26,7 +33,7 @@ class FamilyService: repository {
     
     func added(snapshot: FIRDataSnapshot) {
         let family : Family = Family(snapshot: snapshot)
-
+        
         if !self.families.contains(where: { $0.id == family.id }) {
             self.families.append(family)
             NotificationCenter.default.post(name: Constants.NotificationCenter.FAMILYADDED_NOTIFICATION, object: family)
@@ -83,42 +90,21 @@ class FamilyService: repository {
         Constants.Services.ACTIVITYLOG_SERVICE.create(id: (Constants.Services.USER_SERVICE.users[0].id)!, activity: "Se elimino la familia \((family.name)!)", photo: (family.photoURL)!, type: "deleteFamily")
     }
     
-    func createFamily(key: String, image: UIImage, name: String, users: [User], view: UIViewController){
-        let membersDict : [String: Bool] = {
-            var dic: [String:Bool] = [:]
-            for user in users {
-                dic[user.id] = true
-            }
-            return dic
-        }()
+    
+    func insert(_ ref: String, value: Any, callback: @escaping ((Any) -> Void)) {
         
-        
-        let imageName = NSUUID().uuidString
-        if let uploadData = UIImagePNGRepresentation(image){
-            _ = Constants.FirStorage.STORAGEREF.child("families/\(name)\(key)").child("images/\(imageName).png").put(uploadData, metadata: nil) { metadata, error in
-                if (error != nil) {
-                    // Uh-oh, an error occurred!
-                    print(error.debugDescription)
-                } else {
-                    // Metadata contains file metadata such as size, content-type, and download URL.
-                    if let downloadURL = metadata?.downloadURL()?.absoluteURL {
-                        StorageService.Instance().save(url: downloadURL.absoluteString, data: uploadData)
-                        let family = Family(name:   name, photoURL: downloadURL.absoluteString, members: membersDict as NSDictionary, admin: (FIRAuth.auth()?.currentUser?.uid)! , id: name+key, imageProfilePath: metadata?.name)
-                        Constants.Services.REQUEST_SERVICE.insert(value: family.toDictionary() as! NSDictionary, ref: "families/\((family.id)!)")
-                        // REF_FAMILIES.child(family.id).setValue(family.toDictionary())
-                        Constants.FirDatabase.REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").updateChildValues([family.id : true])
-                        //Set family for app
-                        self.selectFamily(family: family)
-                        
-                        Constants.Services.ACTIVITYLOG_SERVICE.create(id: (Constants.Services.USER_SERVICE.users[0].id)!,
-                                                                      activity: "Se creo la familia  \((family.name)!)", photo: downloadURL.absoluteString, type: "addFamily")
-                        //Go to Home
-                        Utility.Instance().gotoView(view: "mainView", context: view.self)
-                    }
-                    
+        Constants.FirDatabase.REF.child(ref).setValue(value, withCompletionBlock: {(error, ref) in
+            
+            if error != nil {
+                print(error.debugDescription)
+            }else{
+                DispatchQueue.main.async {
+                    print("Callback: \(ref.key)")
+                    callback(ref.key)
                 }
             }
-        }
+        })
+        
     }
     
     func exitFamily(family: Family, uid:String) -> Void {
@@ -178,7 +164,7 @@ extension FamilyService {
         }
     }
     func addMember(uid: String, fid: String) -> Void {
-      
+        
         if let index = self.families.index(where: {$0.id == fid}) {
             var memberDict : [String:Bool]  = self.families[index].members as! [String : Bool]
             memberDict[uid] = true

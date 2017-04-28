@@ -73,7 +73,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
                         if let downloadURL = metadata?.downloadURL()?.absoluteURL {
                             StorageService.Instance().save(url: downloadURL.absoluteString, data: uploadData)
                             Constants.Services.USER_SERVICE.users[0].photoURL = downloadURL.absoluteString
-                            Constants.Services.REQUEST_SERVICE.update(value: ["photoUrl": downloadURL.absoluteString ], ref: "users/\(Constants.Services.USER_SERVICE.users[0].id!)")
+                            Constants.FirDatabase.REF.child( "users/\(Constants.Services.USER_SERVICE.users[0].id!)").updateChildValues(["photoUrl": downloadURL.absoluteString])
                             self.imageView.image = nil
                             Constants.Services.UTILITY_SERVICE.enabledView()
                             _ = self.navigationController?.popViewController(animated: true)

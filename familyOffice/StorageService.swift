@@ -6,10 +6,10 @@
 //  Copyright © 2017 Leonardo Durazo. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
-class StorageService  {
+class StorageService: RequestService  {
     public var storage : NSMutableDictionary = [:]
     
     private init() {
@@ -43,6 +43,31 @@ class StorageService  {
             return nil
         }
         return storage.object(forKey: url) as! Data?
+    }
+    func insert(_ ref: String, value: Any, callback: @escaping ((Any) -> Void)) {
+        
+        
+        if let uploadData = UIImagePNGRepresentation(value as! UIImage){
+           
+            _ = Constants.FirStorage.STORAGEREF.child(ref).put(uploadData, metadata: nil) { metadata, error in
+                if (error != nil) {
+                    print(error.debugDescription)
+                } else if let downloadURL = metadata?.downloadURL()?.absoluteString {
+                    self.save(url: downloadURL, data: uploadData)
+                    
+                    DispatchQueue.main.async {
+                        callback(metadata!)
+                    }
+
+                }
+                
+            }
+            
+        }
+    }
+    func delete(_ ref: String, callback: @escaping ((Any) -> Void)) {
+    }
+    func update(_ ref: String, value: [AnyHashable : Any], callback: @escaping ((Any) -> Void)) {
     }
     
     

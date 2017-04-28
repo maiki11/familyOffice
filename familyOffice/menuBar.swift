@@ -12,7 +12,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
    
     var chatController : chatCollectionViewController!
     var addEventController : AddEventViewController!
-    
+    weak var handleMapSearchDelegate: HandleMenuBar?
     var array : [String]!
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -32,24 +32,26 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         addSubview(collectionView)
         addContraintWithFormat(format: "H:|[v0]|", views: collectionView)
         addContraintWithFormat(format: "V:|[v0]|", views: collectionView)
-        if array != nil {
-            let selectedIndexPath = IndexPath(item: 0, section: 0)
-            collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .centeredHorizontally )
-        }
+        
     }
   
     
     var horizontalBarLeftAnchorContraint: NSLayoutConstraint?
     func setupHorizontalBar() -> Void {
+        if array != nil {
+            let selectedIndexPath = IndexPath(item: 0, section: 0)
+            collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .centeredHorizontally )
+        }
         let horizontalView = UIView()
         horizontalView.backgroundColor = #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
-        horizontalView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(horizontalView)
+        horizontalView.translatesAutoresizingMaskIntoConstraints = true
+        collectionView.addSubview(horizontalView)
         horizontalBarLeftAnchorContraint =  horizontalView.leftAnchor.constraint(equalTo: self.leftAnchor)
         horizontalBarLeftAnchorContraint?.isActive = true
         horizontalView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         horizontalView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: CGFloat(1/array.count)).isActive = true
         horizontalView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
         self.collectionView.reloadData()
     }
     
@@ -58,12 +60,9 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
-        if chatController != nil {
-            chatController.scrollMenuIndex(menuIndex: indexPath.item)
-        }
-        if addEventController != nil {
-            addEventController.scrollMenuIndex(menuIndex: indexPath.item)
-        }
+       
+        handleMapSearchDelegate?.scrollMenuIndex(indexPath.item)
+        
         
     }
 
@@ -93,19 +92,20 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
 class MenuCell: BaseCell {
     let label: UILabel = {
         let lb = UILabel()
-        lb.font = lb.font.withSize(12)
-        lb.tintColor =  #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
+        lb.font = UIFont.boldSystemFont(ofSize: 14)
+        lb.textColor =  #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         return lb
     }()
     
     override var isHighlighted: Bool {
         didSet {
-            label.textColor = isHighlighted ? #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1) : #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
+            label.textColor = isHighlighted ? #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1) : #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+            
         }
     }
     override var isSelected: Bool {
         didSet {
-            label.textColor = isSelected ? #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1) : #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
+            label.textColor = isSelected ? #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1) : #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         }
     }
     
