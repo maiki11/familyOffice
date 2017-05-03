@@ -39,7 +39,7 @@ class RefHandle {
             print(error.localizedDescription)
         })
         listeners[String(NSDate().timeIntervalSince1970)+"+"+ref] = handle
-        print(ref , handle)
+        //print(ref , handle)
     }
     
     func chilRemoved(ref: String) -> Void {
@@ -147,10 +147,6 @@ class RefHandle {
         case "activityLog/\(reference[1])":
             if action == "added" {
                 ACTIVITYLOG_SERVICE.add(record: Record(snapshot: snapshot))
-            }else{
-                if action == "valueS" {
-                    
-                }
             }
             break
         default:

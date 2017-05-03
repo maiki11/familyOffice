@@ -86,7 +86,7 @@ extension FamilyCollectionViewController {
         if ( indexPath.row < FAMILY_SERVICE.families.count){
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FamiliesPreCollectionViewCell
-            
+            cell.layer.position.y = cell.layer.position.y-60
             let family = FAMILY_SERVICE.families[indexPath.row]
             cell.check.layer.cornerRadius = 15
             cell.check.layer.borderWidth = 2
@@ -109,7 +109,7 @@ extension FamilyCollectionViewController {
         }
         //Add Cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addCell", for: indexPath) as! addCell
-
+        cell.layer.position.y = cell.layer.position.y-60
         return cell
     }
     

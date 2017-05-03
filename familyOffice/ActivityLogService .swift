@@ -12,7 +12,7 @@ import FirebaseAuth
 
 class ActivityLogService {
     public var activityLog : [Record] = []
-    public var sections : [Record] = []
+    public var sec : [Section] = []
     var handle: UInt!
     private init() {
     }
@@ -30,18 +30,15 @@ class ActivityLogService {
         activityLog.append(record)
     }
     func add(record: Record) -> Void {
-        if !self.activityLog.contains(where: {$0.id == record.id}){
-            self.activityLog.append(record)
-            NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: record)
+        if !self.sec.contains(where: {$0.date == Date(timeIntervalSince1970: abs(record.timestamp)).monthYearLabel}){
+            sec.append(Section(date: Date(timeIntervalSince1970: abs(record.timestamp)).monthYearLabel, record: [record]))
+        }else{
+            if !self.sec.contains(where: {$0.record.contains(where: {$0.id == record.id}) }) {
+                sec[sec.count-1].record.append(record)
+            }
+            //sec[sec.count-1].record.append(record)
         }
+        NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: record)
     }
     
-    func getSections(){
-        for item in self.activityLog {
-            print(item.timestamp)
-            /*if (item.timestamp != dateFormatter.date(from: self.activityLog[i].timestamp)){
-                sections.append(dateFormatter.date(from: self.activityLog[i].timestamp))
-            }*/
-        }
-    }
 }

@@ -44,7 +44,7 @@ extension DateFormatter {
     
     @nonobjc static let monthAndYear: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.setLocalizedDateFormatFromTemplate("MM-yyyy")
+        formatter.setLocalizedDateFormatFromTemplate("MM yyyy")
         return formatter
     }()
 }
@@ -59,5 +59,11 @@ extension Date {
     init?(string: String, formatter: DateFormatter) {
         guard let date = formatter.date(from: string) else { return nil }
         self.init(timeIntervalSince1970: date.timeIntervalSince1970)
+    }
+    
+    var monthYearLabel: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM yyyy"
+        return dateFormatter.string(from: self)
     }
 }
