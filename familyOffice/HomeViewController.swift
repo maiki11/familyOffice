@@ -13,8 +13,8 @@ import MIBadgeButton_Swift
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate{
 
-    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property"]
-    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles"]
+    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health"]
+    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud"]
     
 
     private var family : Family?
@@ -62,9 +62,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     }
     
+    /** ESTA FUNCION NOMAS PONE OBSERVERS */
     override func viewWillAppear(_ animated: Bool) {
         reloadFamily()
-        
        
         if let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
             self.navigationItem.title = FAMILY_SERVICE.families[index].name
@@ -83,11 +83,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //heightImg = familyImage.frame.size.height
     }
     
+
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(USER_NOTIFICATION)
         NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
@@ -97,6 +99,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func reloadFamily() -> Void {
         if USER_SERVICE.users.count > 0, let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
             let family = FAMILY_SERVICE.families[index]
+
             self.navigationItem.title = family.name
         }
     }
@@ -162,6 +165,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         case 4:
             self.performSegue(withIdentifier: "safeBoxSegue", sender: nil)
 
+        case 8:
+            self.performSegue(withIdentifier: "healthSegue", sender: nil)
         default:
             break
         }

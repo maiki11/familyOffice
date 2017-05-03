@@ -27,6 +27,11 @@ let SUCCESS_NOTIFICATION  = Notification.Name("SuccessNotification")
 let ERROR_NOTIFICATION  = Notification.Name("ErrorNotification")
 
 let BACKGROUND_NOTIFICATION = Notification.Name("BackgroundNotification")
+
+let HEALTHELEMENT_ADDED = Notification.Name("ElementAddedNotification")
+let HEALTHELEMENT_UPDATED = Notification.Name("ElementUpdatedNotification")
+let HEALTHELEMENT_REMOVED = Notification.Name("ElementRemovedNotification")
+
 //Firebase References
 
 let REF = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
@@ -47,6 +52,7 @@ let ANIMATIONS = Animations.instance
 let STORAGE_SERVICE = StorageService.Instance()
 let FAMILY_SERVICE = FamilyService.Instance()
 let USER_SERVICE = UserService.Instance()
+let HEALTH_SERVICE = HealthService.Instance()
 let NOTIFICATION_SERVICE = NotificationService.Instance()
 let ALERT_SERVICE = AlertService.Instance()
 let REF_SERVICE = RefHandle.Instance()

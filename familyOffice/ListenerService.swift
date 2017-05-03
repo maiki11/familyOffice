@@ -149,6 +149,20 @@ class RefHandle {
                 ACTIVITYLOG_SERVICE.add(record: Record(snapshot: snapshot))
             }
             break
+        case "users/\(reference[1])/health":
+            switch action {
+            case "added":
+                HEALTH_SERVICE.addedElement(snapshot: snapshot, uid: reference[1])
+                break
+            case "changed":
+                HEALTH_SERVICE.updatedElement(snapshot: snapshot, uid: reference[1])
+                break
+            case "removed":
+                HEALTH_SERVICE.removedElement(snapshot: snapshot, uid: reference[1])
+                break;
+            default: break;
+            }
+            break
         default:
             break
         }
