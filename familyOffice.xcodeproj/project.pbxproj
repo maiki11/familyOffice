@@ -121,7 +121,7 @@
 		A47F14B11E8B27DB00285CA8 /* Health.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A47F14B01E8B27DB00285CA8 /* Health.storyboard */; };
 		A4D585B81E8C8468005B8F1F /* HealthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D585B71E8C8468005B8F1F /* HealthService.swift */; };
 		A4EABA2A1E9551EA00D0D54E /* HealthOmniViewController_Members.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EABA291E9551EA00D0D54E /* HealthOmniViewController_Members.swift */; };
-		A4EABA2C1E95626500D0D54E /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EABA2B1E95626500D0D54E /* MemberCollectionViewCell.swift */; };
+		A4EABA2C1E95626500D0D54E /* HealthMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EABA2B1E95626500D0D54E /* HealthMemberCollectionViewCell.swift */; };
 		A4F0C0EE1E96FC8D00395F20 /* HealthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F0C0ED1E96FC8D00395F20 /* HealthCollectionViewCell.swift */; };
 		A4F65A271E97F05100831BFD /* EditHealthTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F65A261E97F05100831BFD /* EditHealthTableViewController.swift */; };
 		A4F65A291E97F06800831BFD /* NewHealthElementTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F65A281E97F06800831BFD /* NewHealthElementTableViewController.swift */; };
@@ -272,7 +272,7 @@
 		A47F14B01E8B27DB00285CA8 /* Health.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Health.storyboard; sourceTree = "<group>"; };
 		A4D585B71E8C8468005B8F1F /* HealthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthService.swift; sourceTree = "<group>"; };
 		A4EABA291E9551EA00D0D54E /* HealthOmniViewController_Members.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthOmniViewController_Members.swift; sourceTree = "<group>"; };
-		A4EABA2B1E95626500D0D54E /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		A4EABA2B1E95626500D0D54E /* HealthMemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4F0C0ED1E96FC8D00395F20 /* HealthCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4F65A261E97F05100831BFD /* EditHealthTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditHealthTableViewController.swift; sourceTree = "<group>"; };
 		A4F65A281E97F06800831BFD /* NewHealthElementTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewHealthElementTableViewController.swift; sourceTree = "<group>"; };
@@ -728,7 +728,7 @@
 		A4A23F731E7CADFF0011D471 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				A4EABA2B1E95626500D0D54E /* MemberCollectionViewCell.swift */,
+				A4EABA2B1E95626500D0D54E /* HealthMemberCollectionViewCell.swift */,
 				A4F0C0ED1E96FC8D00395F20 /* HealthCollectionViewCell.swift */,
 			);
 			name = Cells;
@@ -1102,7 +1102,7 @@
 				027391851E94718D00426331 /* Type2TableViewCell.swift in Sources */,
 				025A89981E7A06000032C3C0 /* familyCollection.swift in Sources */,
 				025A89921E79B5F40032C3C0 /* PreHomeViewController.swift in Sources */,
-				A4EABA2C1E95626500D0D54E /* MemberCollectionViewCell.swift in Sources */,
+				A4EABA2C1E95626500D0D54E /* HealthMemberCollectionViewCell.swift in Sources */,
 				024BCA831E6F237900736F1A /* Proccess.swift in Sources */,
 				0271DD4F1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift in Sources */,
 				02C414BF1E95C70A00045459 /* DateFormatter.swift in Sources */,

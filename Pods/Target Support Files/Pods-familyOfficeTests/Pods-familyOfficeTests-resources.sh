@@ -21,12 +21,9 @@ case "${TARGETED_DEVICE_FAMILY}" in
   3)
     TARGET_DEVICE_ARGS="--target-device tv"
     ;;
-<<<<<<< HEAD
   4)
     TARGET_DEVICE_ARGS="--target-device watch"
     ;;
-=======
->>>>>>> nancio
   *)
     TARGET_DEVICE_ARGS="--target-device mac"
     ;;

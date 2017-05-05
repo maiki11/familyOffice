@@ -54,7 +54,7 @@ extension HealthOmniViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = membersCollectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! MemberCollectionViewCell
+        let cell = membersCollectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! HealthMemberCollectionViewCell
         let user = USER_SERVICE.users.first(where: { $0.id == membersId[indexPath.row] })
         
         if user != nil && !(user!.photoURL.isEmpty) {
@@ -67,7 +67,7 @@ extension HealthOmniViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! MemberCollectionViewCell
+        let cell = collectionView.cellForItem(at: indexPath) as! HealthMemberCollectionViewCell
         cell.selectedMember.alpha = 1
         userIndex = USER_SERVICE.users.index(where: { $0.id! == membersId[indexPath.row] })!
         elems = USER_SERVICE.users[userIndex].health.elements.filter({ $0.type == categorySelected })
@@ -75,7 +75,7 @@ extension HealthOmniViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! MemberCollectionViewCell
+        let cell = collectionView.cellForItem(at: indexPath) as! HealthMemberCollectionViewCell
         cell.selectedMember.alpha = 0
     }
     

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,7 +24,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
                         <color key="tintColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </simulatedTabBarMetrics>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="IEN-hF-NIq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IEN-hF-NIq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -199,15 +199,18 @@
                                                     <color key="textColor" red="0.69411764705882351" green="0.69411764705882351" blue="0.69411764705882351" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logout" translatesAutoresizingMaskIntoConstraints="NO" id="SQY-Vd-Cwq">
-                                                    <rect key="frame" x="305" y="6" width="30" height="30"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logout-red" translatesAutoresizingMaskIntoConstraints="NO" id="SQY-Vd-Cwq">
+                                                    <rect key="frame" x="339" y="6" width="30" height="30"/>
                                                     <color key="tintColor" red="0.69411764705882351" green="0.69411764705882351" blue="0.69411764705882351" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="6PL-lX-DMm"/>
+                                                        <constraint firstAttribute="width" constant="30" id="O2x-63-oaF"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="SQY-Vd-Cwq" secondAttribute="bottom" constant="7" id="3Ns-im-5ng"/>
-                                                <constraint firstItem="SQY-Vd-Cwq" firstAttribute="top" secondItem="J2f-Pf-i82" secondAttribute="top" constant="6" id="NsV-1R-LIr"/>
-                                                <constraint firstAttribute="trailing" secondItem="SQY-Vd-Cwq" secondAttribute="trailing" constant="8" id="gCY-mo-Ais"/>
+                                                <constraint firstAttribute="trailing" secondItem="SQY-Vd-Cwq" secondAttribute="trailing" constant="6" id="mvx-BL-VxS"/>
+                                                <constraint firstItem="SQY-Vd-Cwq" firstAttribute="top" secondItem="J2f-Pf-i82" secondAttribute="top" constant="6" id="omU-t0-0iV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -500,12 +503,7 @@
     </scenes>
     <resources>
         <image name="Setting" width="29" height="29"/>
-<<<<<<< HEAD
-        <image name="logout" width="25" height="25"/>
-=======
-        <image name="camera_2x" width="76" height="76"/>
-        <image name="logout" width="50" height="50"/>
->>>>>>> nancio
+        <image name="logout-red" width="37" height="37"/>
         <image name="profile_default" width="626" height="626"/>
     </resources>
 </document>
