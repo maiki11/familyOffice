@@ -28,7 +28,7 @@ class NewHealthElementViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = saveButton
         
         if let index = healthIndex {
-            let med = USER_SERVICE.users[0].health.elements[index]
+            let med = Constants.Services.USER_SERVICE.users[0].health.elements[index]
             nameField.text = med.name
             descriptionField.text = med.description
         }
@@ -69,24 +69,24 @@ class NewHealthElementViewController: UITableViewController {
     func save(sender: UIBarButtonItem){
         let name : String! = nameField.text
         if name == nil || name.isEmpty {
-        	ANIMATIONS.shakeTextField(txt: nameField)
+        	Constants.Services.ANIMATIONS.shakeTextField(txt: nameField)
             return
         }
         
         let description : String! = descriptionField.text
         if description == nil || description.isEmpty {
-            ANIMATIONS.shakeTextField(txt: descriptionField)
+            Constants.Services.ANIMATIONS.shakeTextField(txt: descriptionField)
             return
         }
         
         let element = Health.Element(name: name, type: healthType, description: description)
-        var user = USER_SERVICE.users[0]
+        var user = Constants.Services.USER_SERVICE.users[0]
         if let index = healthIndex {
             user.health.elements[index] = element
         } else {
             user.health.elements.append(element)
         }
-        USER_SERVICE.updateUser(user: user)
+        Constants.Services.USER_SERVICE.updateUser(user: user)
         navigationController!.popViewController(animated: true)
         
     }

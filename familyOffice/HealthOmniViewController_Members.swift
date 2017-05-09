@@ -16,15 +16,15 @@ extension HealthOmniViewController: UICollectionViewDelegate, UICollectionViewDa
         membersCollectionView.dataSource = self
         membersCollectionView.layer.cornerRadius = 2
         
-        let user = USER_SERVICE.users[0]
-        fam = FAMILY_SERVICE.families.first(where: { $0.id == user.familyActive })
-        membersId = fam!.members!.allKeys as! [String]
+        let user = Constants.Services.USER_SERVICE.users[0]
+        fam = Constants.Services.FAMILY_SERVICE.families.first(where: { $0.id == user.familyActive })
+        membersId = fam!.members
         let myIdIndex = membersId.index(where: { $0 == user.id! })
         membersId.remove(at: myIdIndex!)
         membersId.insert(user.id!, at: 0)
         
         for id in membersId {
-            USER_SERVICE.getUser(uid: id)
+            Constants.Services.USER_SERVICE.getUser(uid: id)
         }
 //        let indexPath = IndexPath(item: 0, section: 0)
 //        membersCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
@@ -40,7 +40,7 @@ extension HealthOmniViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func membersWillAppear(){
         membersObserver = NotificationCenter.default
-            .addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil, using: {_ in
+            .addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: nil, using: {_ in
             	self.membersCollectionView.reloadData()
             })
     }
@@ -59,7 +59,7 @@ extension HealthOmniViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = membersCollectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! HealthMemberCollectionViewCell
-        let user = USER_SERVICE.users.first(where: { $0.id == membersId[indexPath.row] })
+        let user = Constants.Services.USER_SERVICE.users.first(where: { $0.id == membersId[indexPath.row] })
         
         if user != nil && !(user!.photoURL.isEmpty) {
             cell.image.loadImage(urlString: user!.photoURL)
@@ -83,8 +83,8 @@ extension HealthOmniViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! HealthMemberCollectionViewCell
         cell.selectedMember.isHidden = false
-        userIndex = USER_SERVICE.users.index(where: { $0.id! == membersId[indexPath.row] })!
-        elems = USER_SERVICE.users[userIndex].health.elements.filter({ $0.type == categorySelected })
+        userIndex = Constants.Services.USER_SERVICE.users.index(where: { $0.id! == membersId[indexPath.row] })!
+        elems = Constants.Services.USER_SERVICE.users[userIndex].health.elements.filter({ $0.type == categorySelected })
         categoryTableView.reloadData()
         print("----IMAGE--------------")
         print(cell.image)

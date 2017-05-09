@@ -64,7 +64,7 @@ class HealthOmniViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if let index = sender as? Int, let ctrl = segue.destination as? NewHealthElementViewController {
-            let elem = USER_SERVICE.users[0].health.elements[index]
+            let elem = Constants.Services.USER_SERVICE.users[0].health.elements[index]
             ctrl.healthIndex = index
             ctrl.healthType = elem.type
         }

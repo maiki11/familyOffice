@@ -63,10 +63,8 @@
 		026AE1061E3A93A9003B75BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026AE1051E3A93A9003B75BD /* User.swift */; };
 		0271DD4F1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */; };
 		0272139F1E84478F001A144B /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0272139E1E84478F001A144B /* CalendarViewController.swift */; };
-		027213A91E848509001A144B /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027213A81E848509001A144B /* Event.swift */; };
 		027213AB1E84865F001A144B /* testFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027213AA1E84865F001A144B /* testFile.swift */; };
 		027213B11E84B38C001A144B /* HomeBussinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027213B01E84B38C001A144B /* HomeBussinessViewController.swift */; };
-		0273916F1E943B8400426331 /* MainAddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273916E1E943B8400426331 /* MainAddEventViewController.swift */; };
 		027FC2451E8D830500450EFB /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2441E8D830500450EFB /* EventTableViewCell.swift */; };
 		027FC2471E8D89C000450EFB /* memberCollection-CalendarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2461E8D89C000450EFB /* memberCollection-CalendarExtension.swift */; };
 		027FC2491E8DCF3E00450EFB /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2481E8DCF3E00450EFB /* MemberCollectionViewCell.swift */; };
@@ -99,6 +97,8 @@
 		02D2C0D11E6747AE007A6798 /* References.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D2C0D01E6747AE007A6798 /* References.swift */; };
 		02D956331E41220A007BAC66 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D956321E41220A007BAC66 /* DatePickerTableViewCell.swift */; };
 		02DB30731E26A44F00A8FF1C /* FamilyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB30721E26A44F00A8FF1C /* FamilyService.swift */; };
+		02DFD5581EC2810300DA7486 /* MainAddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273916E1E943B8400426331 /* MainAddEventViewController.swift */; };
+		02DFD5591EC2810300DA7486 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027213A81E848509001A144B /* Event.swift */; };
 		02E33A641EBA71D0003BF787 /* ShowEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E33A631EBA71D0003BF787 /* ShowEventViewController.swift */; };
 		02E7E5EC1E78806D00D8360B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02E7E5EB1E78806D00D8360B /* Main.storyboard */; };
 		02E7E5EE1E7883E700D8360B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02E7E5ED1E7883E700D8360B /* Assets.xcassets */; };
@@ -697,13 +697,10 @@
 				02C17D281E424F6A00EE7CFA /* Record.swift */,
 				020540961E552A13000741CC /* Notification.swift */,
 				024BCA821E6F237900736F1A /* Proccess.swift */,
-				027213A81E848509001A144B /* Event.swift */,
-				02F15BB61E85ECE2008C26F8 /* chatModel.swift */,
-				027213AA1E84865F001A144B /* testFile.swift */,
 				023DFBBA1EBBACBD000BEFFB /* Location.swift */,
 				023D2B4F1EC22A5100CA19FE /* Value.swift */,
 				A46316B11E78C69E00E3F72C /* Health.swift */,
-				027213A81E848509001A144B /* DatesModel.swift */,
+				027213A81E848509001A144B /* Event.swift */,
 				02F15BB61E85ECE2008C26F8 /* chatModel.swift */,
 				027213AA1E84865F001A144B /* testFile.swift */,
 				84D51B1C1EA6ACE3006829F7 /* Section.swift */,
@@ -735,7 +732,6 @@
 				02B876441E1C677C005E5473 /* SingUpViewController.swift */,
 				849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */,
 				02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */,
-				024CA7911E871A6700E2B7FC /* RegisterExtension.swift */,
 				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
 				022D50FF1E2036390073F0EF /* ProfileViewController.swift */,
 				A44ACF691E70DB1800A5CA84 /* homeExtension.swift */,
@@ -1137,9 +1133,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				02C17D2B1E42796700EE7CFA /* recordTableViewCell.swift in Sources */,
-				0273916F1E943B8400426331 /* MainAddEventViewController.swift in Sources */,
+				02DFD5581EC2810300DA7486 /* MainAddEventViewController.swift in Sources */,
 				84E9C9B91E93269100905A10 /* SetPersonalDataViewController.swift in Sources */,
-				0273916F1E943B8400426331 /* AddEventViewController.swift in Sources */,
 				8450EFC61E64A1E500A51C09 /* AlertService.swift in Sources */,
 				02AD814B1E4B87520030B3DD /* AddMembersTableViewController.swift in Sources */,
 				023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */,
@@ -1180,8 +1175,7 @@
 				020A64FD1E81EE1A00F473A0 /* chatCollectionViewController.swift in Sources */,
 				022ED0011EA55653005E295A /* headerCollectionReusableView.swift in Sources */,
 				02002BF71E820589007191CC /* GroupsTableViewCell.swift in Sources */,
-				027213A91E848509001A144B /* Event.swift in Sources */,
-				027213A91E848509001A144B /* DatesModel.swift in Sources */,
+				02DFD5591EC2810300DA7486 /* Event.swift in Sources */,
 				A44D91AF1E947F2700880D50 /* HealthOmniViewController.swift in Sources */,
 				0215F4E81E3FBCCD00AC01D3 /* PasswordChangeViewController.swift in Sources */,
 				020A30951E2DA4440024B1FB /* FamilyViewController.swift in Sources */,

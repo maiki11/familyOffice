@@ -12,11 +12,7 @@ import FirebaseAuth
 
 class ActivityLogService {
     public var activityLog : [Record] = []
-<<<<<<< HEAD
-    
-=======
     public var sec : [Section] = []
->>>>>>> maiki11
     var handle: UInt!
     private init() {
     }
@@ -34,11 +30,6 @@ class ActivityLogService {
         activityLog.append(record)
     }
     func add(record: Record) -> Void {
-<<<<<<< HEAD
-        if !self.activityLog.contains(where: {$0.id == record.id}){
-            self.activityLog.append(record)
-            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: record)
-=======
         if !self.sec.contains(where: {$0.date == Date(timeIntervalSince1970: abs(record.timestamp)).monthYearLabel}){
             sec.append(Section(date: Date(timeIntervalSince1970: abs(record.timestamp)).monthYearLabel, record: [record]))
         }else{
@@ -46,9 +37,9 @@ class ActivityLogService {
                 sec[sec.count-1].record.append(record)
             }
             //sec[sec.count-1].record.append(record)
->>>>>>> maiki11
+
         }
-        NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: record)
+        NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: record)
     }
     
 }

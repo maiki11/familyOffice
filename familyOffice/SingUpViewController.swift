@@ -113,13 +113,9 @@ class SingUpViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDe
             self.present(alert, animated: true, completion: nil)
         }
     }
-<<<<<<< HEAD
     @IBAction func handleBack(_ sender: UIButton) {
         Constants.Services.UTILITY_SERVICE.gotoView(view: "StartView", context: self)
-=======
-    func handleBack() {
-        UTILITY_SERVICE.gotoView(view: "StartView", context: self)
->>>>>>> maiki11
+
     }
   
     func createAccount(uid: String){

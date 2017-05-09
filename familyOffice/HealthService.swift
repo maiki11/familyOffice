@@ -19,33 +19,33 @@ class HealthService {
     
     public func addedElement(snapshot: FIRDataSnapshot, uid: String){
         let model = Health.Element(snapshot: snapshot)
-        if let userIndex = USER_SERVICE.users.index(where: {$0.id == uid}) {
+        if let userIndex = Constants.Services.USER_SERVICE.users.index(where: {$0.id == uid}) {
             let modelIndex = Int(snapshot.key)
-            if modelIndex! >= USER_SERVICE.users[userIndex].health.elements.count {
-                USER_SERVICE.users[userIndex].health.elements.append(model)
+            if modelIndex! >= Constants.Services.USER_SERVICE.users[userIndex].health.elements.count {
+                Constants.Services.USER_SERVICE.users[userIndex].health.elements.append(model)
             }else{
-                USER_SERVICE.users[userIndex].health.elements[modelIndex!] = model
+                Constants.Services.USER_SERVICE.users[userIndex].health.elements[modelIndex!] = model
             }
-            NotificationCenter.default.post(name: HEALTHELEMENT_ADDED, object: model)
+            NotificationCenter.default.post(name: Constants.NotificationCenter.HEALTHELEMENT_ADDED, object: model)
         }
     }
     
     public func updatedElement(snapshot: FIRDataSnapshot, uid: String){
         let model = Health.Element(snapshot: snapshot)
-        if let userIndex = USER_SERVICE.users.index(where: {$0.id == uid}) {
+        if let userIndex = Constants.Services.USER_SERVICE.users.index(where: {$0.id == uid}) {
             let index = Int(snapshot.key)
-            USER_SERVICE.users[userIndex].health.elements[index!] = model
-            NotificationCenter.default.post(name: HEALTHELEMENT_UPDATED, object: model)
+            Constants.Services.USER_SERVICE.users[userIndex].health.elements[index!] = model
+            NotificationCenter.default.post(name: Constants.NotificationCenter.HEALTHELEMENT_UPDATED, object: model)
         }
     }
     
     public func removedElement(snapshot: FIRDataSnapshot, uid: String){
-        if let userIndex = USER_SERVICE.users.index(where: {$0.id == uid}) {
+        if let userIndex = Constants.Services.USER_SERVICE.users.index(where: {$0.id == uid}) {
             let index = Int(snapshot.key)
-            if index! < USER_SERVICE.users[userIndex].health.elements.count {
-                USER_SERVICE.users[userIndex].health.elements.remove(at: index!)
+            if index! < Constants.Services.USER_SERVICE.users[userIndex].health.elements.count {
+                Constants.Services.USER_SERVICE.users[userIndex].health.elements.remove(at: index!)
             }
-            NotificationCenter.default.post(name: HEALTHELEMENT_REMOVED, object: index)
+            NotificationCenter.default.post(name: Constants.NotificationCenter.HEALTHELEMENT_REMOVED, object: index)
         }
     }
     

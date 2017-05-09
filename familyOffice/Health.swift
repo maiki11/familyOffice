@@ -51,10 +51,10 @@ struct Health {
         }
         
         init(dic: NSDictionary){
-            self.name = UTILITY_SERVICE.exist(field: Element.kElementName, dictionary: dic)
+            self.name = Constants.Services.UTILITY_SERVICE.exist(field: Element.kElementName, dictionary: dic)
             
             self.type = dic[Element.kElementType] as? Int ?? 0
-            self.description = UTILITY_SERVICE.exist(field: Element.kElementDescription, dictionary: dic)
+            self.description = Constants.Services.UTILITY_SERVICE.exist(field: Element.kElementDescription, dictionary: dic)
         }
         
         init(snapshot: FIRDataSnapshot){

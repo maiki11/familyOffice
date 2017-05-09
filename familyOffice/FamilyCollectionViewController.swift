@@ -86,13 +86,9 @@ extension FamilyCollectionViewController {
         if ( indexPath.row < Constants.Services.FAMILY_SERVICE.families.count){
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FamiliesPreCollectionViewCell
-<<<<<<< HEAD
-            
-            let family = Constants.Services.FAMILY_SERVICE.families[indexPath.row]
-=======
+
             cell.layer.position.y = cell.layer.position.y-60
-            let family = FAMILY_SERVICE.families[indexPath.row]
->>>>>>> maiki11
+            let family = Constants.Services.FAMILY_SERVICE.families[indexPath.row]
             cell.check.layer.cornerRadius = 15
             cell.check.layer.borderWidth = 2
             cell.check.layer.borderColor = UIColor(red: 255.0/255, green: 255.0/255, blue: 255.0/255, alpha: 1).cgColor

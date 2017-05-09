@@ -39,7 +39,7 @@ PODS:
   - FirebaseStorage (1.1.0):
     - FirebaseAnalytics (~> 3.7)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FSCalendar (2.7.4)
+  - FSCalendar (2.7.5)
   - GoogleSignIn (4.0.2):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
@@ -67,15 +67,10 @@ PODS:
   - JVFloatLabeledTextField (1.1.1)
   - MGSwipeTableCell (1.5.6)
   - MIBadgeButton-Swift (0.5)
-<<<<<<< HEAD
   - MultiAutoCompleteTextSwift (0.1.1)
-  - Protobuf (3.2.1)
-  - SearchTextField (1.1.0)
-  - SmileLock (2.0.1)
-=======
   - Protobuf (3.3.0)
+  - SearchTextField (1.1.0)
   - SmileLock (2.0.2)
->>>>>>> maiki11
   - Toast-Swift (2.0.0)
 
 DEPENDENCIES:
@@ -116,7 +111,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   FirebaseMessaging: 753d05a925e9eb8eadd09a0ffc9b808578b72fac
   FirebaseStorage: a5c55b23741a49a72af8f30f95b3bb5ddbeda12d
-  FSCalendar: e95995a746acae531c4a7dd636b8393233125ec5
+  FSCalendar: f58e734dd98e4b563ec8e4f20612199a32120889
   GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
@@ -124,20 +119,12 @@ SPEC CHECKSUMS:
   JVFloatLabeledTextField: 0e5524b097f102036214dd8279edc8ecf08b5e18
   MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
   MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
-<<<<<<< HEAD
   MultiAutoCompleteTextSwift: d5631e77b48413af5795e14a1ae6d72054fe2d1e
-  Protobuf: 2ccbaf193f6c65adc67745453ca0c13234c32796
-  SearchTextField: 5daab6cecfd90e06f9b08b2814593656c0c99f3d
-  SmileLock: 120a7579bae4b15e214603c1460eff6cf23db6fb
-  Toast-Swift: 5b2f8f720f7e78e48511f693df1f9c9a6e38a25a
-
-PODFILE CHECKSUM: 1baa067e80b5c182d05fa421d8068018e2928e18
-=======
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
+  SearchTextField: 5daab6cecfd90e06f9b08b2814593656c0c99f3d
   SmileLock: 7ae1e174b4697c0a33882dab838fc0bea94432f4
   Toast-Swift: 5b2f8f720f7e78e48511f693df1f9c9a6e38a25a
 
-PODFILE CHECKSUM: 9119f2da56f5723b1a8f764444524ea1ee17602b
->>>>>>> maiki11
+PODFILE CHECKSUM: db9b8058c8db9a12dd1564d040a7adc6946ea574
 
 COCOAPODS: 1.2.1.rc.1

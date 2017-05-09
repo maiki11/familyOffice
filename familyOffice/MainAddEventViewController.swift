@@ -12,6 +12,7 @@ import MapKit
 protocol HandleMenuBar: class {
     func scrollMenuIndex(_ menuIndex: Int)
 }
+
 protocol ShareEvent: class {
     var event: Event! { get set }
     

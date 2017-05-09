@@ -32,14 +32,11 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
             }
             cell.check.isHidden = true
             cell.name.textColor = #colorLiteral(red: 0.6941176471, green: 0.6941176471, blue: 0.6941176471, alpha: 1)
-<<<<<<< HEAD
-            if family.id == Constants.Services.USER_SERVICE.users[0].familyActive {
-=======
+
             cell.image.layer.borderWidth = 1
             cell.image.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
             cell.image.layer.cornerRadius = 5
-            if family.id == USER_SERVICE.users[0].familyActive {
->>>>>>> maiki11
+            if family.id == Constants.Services.USER_SERVICE.users[0].familyActive {
                 cell.check.isHidden = false
                 cell.name.textColor = #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)
             }

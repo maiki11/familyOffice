@@ -47,13 +47,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
         let valueButton = UIBarButtonItem(image: #imageLiteral(resourceName: "value"), style: .plain, target: self, action:  #selector(self.handleShowModal(_:)))
 
-<<<<<<< HEAD
         self.navigationItem.rightBarButtonItems = [ moreButton,valueButton]
         let barButton = UIBarButtonItem(title: "Regresar", style: .plain, target: self, action: #selector(self.handleBack))
-=======
-        self.navigationItem.rightBarButtonItem = moreButton
-        let barButton = UIBarButtonItem(title: "Atrás", style: .plain, target: self, action: #selector(self.handleBack))
->>>>>>> maiki11
+
         barButton.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
         self.navigationItem.leftBarButtonItem = barButton
         let nav = self.navigationController?.navigationBar
@@ -130,14 +126,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func reloadFamily() -> Void {
-<<<<<<< HEAD
         if Constants.Services.USER_SERVICE.users.count > 0, let index = Constants.Services.FAMILY_SERVICE.families.index(where: {$0.id == Constants.Services.USER_SERVICE.users[0].familyActive}) {
             let family = Constants.Services.FAMILY_SERVICE.families[index]
-=======
-        if USER_SERVICE.users.count > 0, let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
-            let family = FAMILY_SERVICE.families[index]
 
->>>>>>> maiki11
             self.navigationItem.title = family.name
         }
     }
