@@ -12,13 +12,13 @@ import Toast_Swift
 private let reuseIdentifier = "cell"
 
 class FamilyCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate  {
+    @IBOutlet weak var mainView: UIView!
     //Internal var
     var indexP : IndexPath? = nil
     var family : Family?
     var longPressTarget: (cell: UICollectionViewCell, indexPath: IndexPath)?
     //UI
     @IBOutlet var familyCollection: UICollectionView!
-    @IBOutlet weak var container: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +31,9 @@ class FamilyCollectionViewController: UIViewController, UICollectionViewDelegate
 
         self.familyCollection.layer.cornerRadius = 8
         self.familyCollection.clipsToBounds = true
-        self.container.layer.cornerRadius = 8
-        self.container.clipsToBounds = true
+        self.mainView.layer.cornerRadius = 5
+        self.mainView.layer.borderWidth = 1
+        self.mainView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,14 +86,18 @@ extension FamilyCollectionViewController {
         if ( indexPath.row < Constants.Services.FAMILY_SERVICE.families.count){
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FamiliesPreCollectionViewCell
-            
+
+            cell.layer.position.y = cell.layer.position.y-60
             let family = Constants.Services.FAMILY_SERVICE.families[indexPath.row]
             cell.check.layer.cornerRadius = 15
-            cell.check.layer.borderWidth = 5
+            cell.check.layer.borderWidth = 2
             cell.check.layer.borderColor = UIColor(red: 255.0/255, green: 255.0/255, blue: 255.0/255, alpha: 1).cgColor
             // Bounce back to the main thread to update the UI
             if !(family.photoURL?.isEmpty)! {
                 cell.image.loadImage(urlString: (family.photoURL)!)
+                cell.image.layer.borderWidth = 1.0
+                cell.image.layer.borderColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
+                
             }
             cell.name.text = family.name
             cell.check.isHidden = true
@@ -104,8 +109,8 @@ extension FamilyCollectionViewController {
             return cell
         }
         //Add Cell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addCell", for: indexPath)
-
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addCell", for: indexPath) as! addCell
+        cell.layer.position.y = cell.layer.position.y-60
         return cell
     }
     

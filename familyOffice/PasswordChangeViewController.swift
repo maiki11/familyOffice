@@ -12,6 +12,7 @@ class PasswordChangeViewController: UIViewController {
     @IBOutlet weak var oldPassword: UITextField!
     @IBOutlet weak var newPassword: UITextField!
     @IBOutlet weak var repeatPass: UITextField!
+    @IBOutlet weak var viewContainer: UIView!
     
     override func viewDidLoad() {
         let homeButton : UIBarButtonItem = UIBarButtonItem(title: "Atras", style: .plain, target: self, action: #selector(back(sender:)))
@@ -23,6 +24,9 @@ class PasswordChangeViewController: UIViewController {
         STYLES.borderbottom(textField: oldPassword, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
         STYLES.borderbottom(textField: newPassword, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
         STYLES.borderbottom(textField: repeatPass, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
+        self.viewContainer.layer.borderWidth = 1
+        self.viewContainer.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
+        self.viewContainer.layer.cornerRadius = 5
         // Do any additional setup after loading the view.
     }
    

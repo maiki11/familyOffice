@@ -13,6 +13,7 @@ import Firebase
 class NotificationService {
     var token = ""
     public var notifications : [NotificationModel] = []
+    public var sections : [SectionNotification] = []
     private init(){
     }
     public static func Instance() -> NotificationService {
@@ -60,10 +61,14 @@ class NotificationService {
     }
     
     func add(notification: NotificationModel) -> Void {
-        if !self.notifications.contains(where: {$0.id == notification.id}){
-            self.notifications.append(notification)
-            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: notification)
+
+        if !self.sections.contains(where: {$0.date == Date(timeIntervalSince1970: abs(notification.timestamp)).monthYearLabel}){
+            sections.append(SectionNotification(date: Date(timeIntervalSince1970: abs(notification.timestamp)).monthYearLabel, record: [notification]))
+        }else{
+            if !self.sections.contains(where: {$0.record.contains(where: {$0.id == notification.id}) }) {                sections[sections.count-1].record.append(notification)
+            }
         }
+        NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: notification)
     }
     
     func saveNotification(id: String, title: String, photo:String) -> Void {
@@ -73,8 +78,10 @@ class NotificationService {
         
     }
     func seenNotification(index: Int) -> Void {
+
         self.notifications[index].seen = true
         Constants.FirDatabase.REF_NOTIFICATION.child(Constants.Services.USER_SERVICE.users[0].id).child(self.notifications[index].id!).updateChildValues(self.notifications[index].toDictionary() as! [AnyHashable : Any])
+
     }
     
     func deleteToken(token: String, id: String) -> Void {

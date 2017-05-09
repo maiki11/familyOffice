@@ -48,4 +48,6 @@ struct NotificationModel {
         ]
     }
     
+    
+    
 }

@@ -63,6 +63,7 @@ class AuthService {
         let url = user.photoURL
         let data = NSData(contentsOf:url!! as URL)
         if let uploadData = UIImagePNGRepresentation(UIImage(data: data! as Data)!){
+
             Constants.FirStorage.STORAGEREF.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
                 if (error != nil) {
                     // Uh-oh, an error occurred!
@@ -94,6 +95,7 @@ class AuthService {
 
     func isAuth(view: UIViewController, name: String)  {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            
             self.uid = user?.uid
             if (user != nil) {
                 self.checkUserAgainstDatabase(completion: {(success, error ) in

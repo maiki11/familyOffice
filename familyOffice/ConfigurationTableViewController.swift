@@ -26,8 +26,10 @@ class ConfigurationTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if(indexPath.row == 3){
-            Constants.Services.AUTH_SERVICE.logOut()
+
+        if(indexPath.row == 4){
+             Constants.Services.AUTH_SERVICE.logOut()
+
             Utility.Instance().gotoView(view: "StartView", context: self)
         }
     }

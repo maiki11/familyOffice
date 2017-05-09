@@ -35,7 +35,7 @@ struct Constants {
         static let NOTIFICATION_SERVICE = NotificationService.Instance()
         static let ALERT_SERVICE = AlertService.Instance()
         static let REF_SERVICE = RefHandle.Instance()
-       // static let REQUEST_SERVICE = RequestService.Instance()
+        static let HEALTH_SERVICE = HealthService.Instance()
         static let EVENT_SERVICE = EventService.Instance()
     }
     
@@ -51,6 +51,10 @@ struct Constants {
         static let SUCCESS_NOTIFICATION  = Notification.Name("SuccessNotification")
         static let ERROR_NOTIFICATION  = Notification.Name("ErrorNotification")
         static let BACKGROUND_NOTIFICATION = Notification.Name("BackgroundNotification")
+        static let HEALTHELEMENT_ADDED = Notification.Name("ElementAddedNotification")
+        static let HEALTHELEMENT_UPDATED = Notification.Name("ElementUpdatedNotification")
+        static let HEALTHELEMENT_REMOVED = Notification.Name("ElementRemovedNotification")
+
     }
 
     struct ServerApi {
@@ -61,21 +65,6 @@ struct Constants {
 
 let modelName = UIDevice.current.modelName
 //Notification Center
-
-//Firebase References
-
-//let REF = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
-//let REF_FAMILIES = REF.child("families")
-//let REF_USERS = REF.child("users")
-//let REF_ACTIVITY = REF.child("activityLog")
-//let REF_NOTIFICATION = REF.child("notifications")
-
-
-//Storage Reference
-
-
-//Service
-
 
 //Styles
 let STYLES = Styles.Instance()

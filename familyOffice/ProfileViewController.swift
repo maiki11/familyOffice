@@ -17,56 +17,54 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet var userName: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
+    public var x = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle = .none
-        //self.profileImage.clipsToBounds = true
-        
     }
-    
-    func loadData(){
-        self.tableView.refreshControl?.endRefreshing()
-        self.tableView.reloadData()
-        //
-    }
+   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+
         Constants.Services.REF_SERVICE.valueSingleton(ref: "activityLog/\((FIRAuth.auth()?.currentUser?.uid)!)")
         Constants.Services.REF_SERVICE.chilAdded(ref: "activityLog/\((FIRAuth.auth()?.currentUser?.uid)!)", byChild: "timestamp")
         Constants.Services.REF_SERVICE.chilAdded(ref: "notifications/\((FIRAuth.auth()?.currentUser?.uid)!)", byChild: "timestamp")
         self.userName.text = Constants.Services.USER_SERVICE.users[0].name
         if !Constants.Services.USER_SERVICE.users[0].photoURL.isEmpty, let url = Constants.Services.USER_SERVICE.users[0].photoURL {
+
             self.profileImage.loadImage(urlString: url)
         }
+        //Constants.Services.ACTIVITYLOG_SERVICE.getSections()
         self.tableView.reloadData()
+
         localeChangeObserver = center.addObserver(forName: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
-            if self.segmentedControl.selectedSegmentIndex == 0 {
-                if let noti : NotificationModel = notification.object as? NotificationModel {
-                    let indexPath =  IndexPath(row: Constants.Services.NOTIFICATION_SERVICE.notifications.count-1, section: 0)
-                    self.tableView.insertRows(at: [indexPath], with: .fade)
-                    if !noti.seen {
-                        self.tableView.selectRow(at:indexPath, animated: true, scrollPosition: UITableViewScrollPosition.middle)
+            if self.segmentedControl.selectedSegmentIndex == 1 {
+                print(Constants.Services.ACTIVITYLOG_SERVICE.sec)
+                if let _ : SectionNotification = notification.object as?  SectionNotification {
+                    if self.tableView.numberOfSections != Constants.Services.ACTIVITYLOG_SERVICE.sec.count {
+                        //TODO: insert Section
+                        let indexSet = IndexSet(integer: Constants.Services.ACTIVITYLOG_SERVICE.sec.count)
+                        self.tableView.insertSections(indexSet, with: .fade)
                     }
-                    Constants.Services.NOTIFICATION_SERVICE.notifications.sort(by: {$0.timestamp < $1.timestamp})
+                    let indexPath = IndexPath(row:  Constants.Services.ACTIVITYLOG_SERVICE.sec[Constants.Services.ACTIVITYLOG_SERVICE.sec.count-1].record.count-1, section: Constants.Services.ACTIVITYLOG_SERVICE.sec.count-1)
+                    self.tableView.insertRows(at: [indexPath], with: .fade)
                 }
             }else{
-                if let _ : Record = notification.object as?  Record {
-                    self.tableView.insertRows(at: [IndexPath(row: Constants.Services.ACTIVITYLOG_SERVICE.activityLog.count-1, section: 0) ], with: .fade)
-                    Constants.Services.ACTIVITYLOG_SERVICE.activityLog.sort(by: {$0.timestamp < $1.timestamp})
+                if let _ : NotificationModel = notification.object as? NotificationModel {
+                    self.tableView.reloadData()
                 }
             }
-            //self.loadData()
         }
     }
+    
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
         self.tableView.reloadData()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         center.removeObserver(localeChangeObserver)
-        
         Constants.Services.REF_SERVICE.remove(ref:  "activityLog/\((FIRAuth.auth()?.currentUser?.uid)!)")
         Constants.Services.REF_SERVICE.remove(ref: "notifications/\((FIRAuth.auth()?.currentUser?.uid)!)")
     }
@@ -76,9 +74,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if segmentedControl.selectedSegmentIndex == 1 {
+            return Constants.Services.ACTIVITYLOG_SERVICE.sec.count
+        }
+        return Constants.Services.NOTIFICATION_SERVICE.sections.count
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if segmentedControl.selectedSegmentIndex == 0 && (self.tableView.cellForRow(at: indexPath)?.isSelected)! {
@@ -86,45 +86,73 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
         }
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! recordTableViewCell
         cell.iconImage.image = nil
         cell.photo.image = nil
+//        print("-------Noti------------------------------")
+//        print(NOTIFICATION_SERVICE.sections)
+//        print("-----------EndNoti--------------------------")
         if segmentedControl.selectedSegmentIndex == 1 {
-            let activity = Constants.Services.ACTIVITYLOG_SERVICE.activityLog[indexPath.row]
-            cell.iconImage.image = #imageLiteral(resourceName: "logo")
 
-            cell.config(title: activity.activity, date: Constants.Services.UTILITY_SERVICE.getDate(date: activity.timestamp!))
-            if !activity.photoURL.isEmpty {
-                cell.photo.loadImage(urlString: activity.photoURL)
+            let item = Constants.Services.ACTIVITYLOG_SERVICE.sec[indexPath.section].record[indexPath.row]
+            cell.iconImage.image = #imageLiteral(resourceName: "logo")
+            cell.config(title: item.activity, date: Constants.Services.UTILITY_SERVICE.getDate(date: item.timestamp!))
+            if !item.photoURL.isEmpty {
+                cell.photo.loadImage(urlString: item.photoURL)
             }
         }else{
-            let notification = Constants.Services.NOTIFICATION_SERVICE.notifications[indexPath.row]
+            //print("porque: ",x)
+            self.x += 1
+            let notification = Constants.Services.NOTIFICATION_SERVICE.sections[indexPath.section].record[indexPath.row]
             cell.config(title: notification.title, date: Constants.Services.UTILITY_SERVICE.getDate(date: notification.timestamp))
             if !notification.photoURL.isEmpty {
                 cell.iconImage.loadImage(urlString: notification.photoURL)
             }
-            
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentedControl.selectedSegmentIndex == 1 {
-            return Constants.Services.ACTIVITYLOG_SERVICE.activityLog.count
-        }else{
-            return Constants.Services.NOTIFICATION_SERVICE.notifications.count
+            return Constants.Services.ACTIVITYLOG_SERVICE.sec[section].record.count
         }
+        print("-------Rows------------------------------")
+        print(Constants.Services.NOTIFICATION_SERVICE.sections[section].record.count)
+        print("-----------EndRows--------------------------")
+        return Constants.Services.NOTIFICATION_SERVICE.sections[section].record.count
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if segmentedControl.selectedSegmentIndex == 1 {
+            if(Constants.Services.ACTIVITYLOG_SERVICE.sec.count>0){
+                return Constants.Services.ACTIVITYLOG_SERVICE.sec[section].date
+            }
+        }else{
+            if(Constants.Services.NOTIFICATION_SERVICE.sections.count>0){
+                return Constants.Services.NOTIFICATION_SERVICE.sections[section].date
+            }
+        }
+        return ""
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 22))
+        returnedView.backgroundColor = #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
+        let label = UILabel(frame: CGRect(x: 10, y: 3, width: returnedView.frame.width, height: 22))
+        label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        if segmentedControl.selectedSegmentIndex == 1 {
+            if(Constants.Services.ACTIVITYLOG_SERVICE.sec.count>0){
+                label.text = Constants.Services.ACTIVITYLOG_SERVICE.sec[section].date
+            }
+        }else{
+            if(Constants.Services.NOTIFICATION_SERVICE.sections.count>0){
+                label.text = Constants.Services.NOTIFICATION_SERVICE.sections[section].date
+            }
+        }
+        returnedView.addSubview(label)
+        return returnedView
+    }
     
 }
