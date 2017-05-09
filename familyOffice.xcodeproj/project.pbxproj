@@ -33,6 +33,8 @@
 		02382F171E1C210C0036FFC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02382F151E1C210C0036FFC9 /* LaunchScreen.storyboard */; };
 		02382F2D1E1C210C0036FFC9 /* familyOfficeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02382F2C1E1C210C0036FFC9 /* familyOfficeUITests.swift */; };
 		02382F3B1E1C2E1D0036FFC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */; };
+		023D2B501EC22A5100CA19FE /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D2B4F1EC22A5100CA19FE /* Value.swift */; };
+		023D2B581EC259E600CA19FE /* valueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D2B571EC259E600CA19FE /* valueView.swift */; };
 		023DE7431E7720D9002F6A4E /* infoextension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DE7421E7720D9002F6A4E /* infoextension.swift */; };
 		023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DE7441E7720FE002F6A4E /* familiesExtension.swift */; };
 		023DFBBB1EBBACBD000BEFFB /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DFBBA1EBBACBD000BEFFB /* Location.swift */; };
@@ -176,6 +178,8 @@
 		02382F2C1E1C210C0036FFC9 /* familyOfficeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = familyOfficeUITests.swift; sourceTree = "<group>"; };
 		02382F2E1E1C210C0036FFC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		023D2B4F1EC22A5100CA19FE /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
+		023D2B571EC259E600CA19FE /* valueView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = valueView.swift; sourceTree = "<group>"; };
 		023DE7421E7720D9002F6A4E /* infoextension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = infoextension.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		023DE7441E7720FE002F6A4E /* familiesExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = familiesExtension.swift; sourceTree = "<group>"; };
 		023DFBBA1EBBACBD000BEFFB /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -601,6 +605,7 @@
 		029059211E78B9D8005F760C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				023D2B571EC259E600CA19FE /* valueView.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -661,6 +666,7 @@
 				02F15BB61E85ECE2008C26F8 /* chatModel.swift */,
 				027213AA1E84865F001A144B /* testFile.swift */,
 				023DFBBA1EBBACBD000BEFFB /* Location.swift */,
+				023D2B4F1EC22A5100CA19FE /* Value.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1055,6 +1061,7 @@
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
 				023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */,
 				02B7E7FA1E7C614A0082BAE7 /* settingLauncher.swift in Sources */,
+				023D2B581EC259E600CA19FE /* valueView.swift in Sources */,
 				02ABAC421E6E02B5003780AB /* Device.swift in Sources */,
 				025C70FE1E38229D004A4A5B /* Constants.swift in Sources */,
 				02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */,
@@ -1083,6 +1090,7 @@
 				024EF9A71E83412700F5B4DF /* SafeBoxViewController.swift in Sources */,
 				02FA70641E707BAB0080AAEB /* ToastService.swift in Sources */,
 				02F15BB71E85ECE2008C26F8 /* chatModel.swift in Sources */,
+				023D2B501EC22A5100CA19FE /* Value.swift in Sources */,
 				027FC2451E8D830500450EFB /* EventTableViewCell.swift in Sources */,
 				02002BFE1E8208C2007191CC /* sectionChatCollectionViewController.swift in Sources */,
 				02002BF91E820631007191CC /* MemberTableViewCell.swift in Sources */,

@@ -18,14 +18,18 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
 
     private var family : Family?
-    
 
     let user = Constants.Services.USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
     var families : [String]! = []
 
    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var centerPopupConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var valueModal: UIView!
+    @IBOutlet weak var backgroundButton: UIButton!
 
 
     var navigationBarOriginalOffset : CGFloat?
@@ -34,14 +38,16 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewDidLoad()
 
         //USER_SERVICE.observers()
+        valueModal.layer.cornerRadius = 10
         
         let lpgr = UILongPressGestureRecognizer(target: self, action:#selector(handleLongPress(gestureReconizer:)))
         lpgr.minimumPressDuration = 0
         lpgr.delaysTouchesBegan = true
         self.collectionView.addGestureRecognizer(lpgr)
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
+        let valueButton = UIBarButtonItem(image: #imageLiteral(resourceName: "value"), style: .plain, target: self, action:  #selector(self.handleShowModal(_:)))
 
-        self.navigationItem.rightBarButtonItem = moreButton
+        self.navigationItem.rightBarButtonItems = [ moreButton,valueButton]
         let barButton = UIBarButtonItem(title: "Regresar", style: .plain, target: self, action: #selector(self.handleBack))
         barButton.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
         self.navigationItem.leftBarButtonItem = barButton
@@ -55,16 +61,37 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         settingLauncher.setView(view: self)
         settingLauncher.showSetting()
     }
+    func handleShowModal(_ sender: Any) -> Void {
     
+        centerPopupConstraint.constant = 0
+        self.backgroundButton.backgroundColor = UIColor.black
+        
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        UIView.animate(withDuration: 0.2, animations: {
+            self.backgroundButton.alpha = 0.65
+        })
+    }
+    
+    @IBAction func handleCloseModal(_ sender: UIButton) {
+        centerPopupConstraint.constant = -370
+        UIView.animate(withDuration: 0.1, animations: {
+          self.view.layoutIfNeeded()
+          self.backgroundButton.alpha = 0
+        })
+        
+    }
     
     func handleBack()  {
         Constants.Services.UTILITY_SERVICE.gotoView(view: "mainView", context: self)
+        
     
     }
     
     override func viewWillAppear(_ animated: Bool) {
         reloadFamily()
-        
+       
        
         if let index = Constants.Services.FAMILY_SERVICE.families.index(where: {$0.id == Constants.Services.USER_SERVICE.users[0].familyActive}) {
             self.navigationItem.title = Constants.Services.FAMILY_SERVICE.families[index].name
