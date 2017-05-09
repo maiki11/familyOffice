@@ -95,6 +95,7 @@ class AuthService {
 
     func isAuth(view: UIViewController, name: String)  {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            
             self.uid = user?.uid
             if (user != nil) {
                 self.checkUserAgainstDatabase(completion: {(success, error ) in

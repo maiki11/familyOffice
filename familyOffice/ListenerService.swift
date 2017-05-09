@@ -39,7 +39,7 @@ class RefHandle {
             print(error.localizedDescription)
         })
         listeners[String(NSDate().timeIntervalSince1970)+"+"+ref] = handle
-        print(ref , handle)
+        //print(ref , handle)
     }
     
     func chilRemoved(ref: String) -> Void {
@@ -149,8 +149,24 @@ class RefHandle {
                 Constants.Services.ACTIVITYLOG_SERVICE.add(record: Record(snapshot: snapshot))
             }
             break
+<<<<<<< HEAD
         case "events/\(reference[1])":
             Constants.Services.EVENT_SERVICE.addEventlocal(snapshot: snapshot)
+=======
+        case "users/\(reference[1])/health":
+            switch action {
+            case "added":
+                HEALTH_SERVICE.addedElement(snapshot: snapshot, uid: reference[1])
+                break
+            case "changed":
+                HEALTH_SERVICE.updatedElement(snapshot: snapshot, uid: reference[1])
+                break
+            case "removed":
+                HEALTH_SERVICE.removedElement(snapshot: snapshot, uid: reference[1])
+                break;
+            default: break;
+            }
+>>>>>>> maiki11
             break
         default:
             break

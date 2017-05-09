@@ -13,8 +13,8 @@ import MIBadgeButton_Swift
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate{
 
-    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property"]
-    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles"]
+    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple"]
+    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros"]
     
 
     private var family : Family?
@@ -47,8 +47,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
         let valueButton = UIBarButtonItem(image: #imageLiteral(resourceName: "value"), style: .plain, target: self, action:  #selector(self.handleShowModal(_:)))
 
+<<<<<<< HEAD
         self.navigationItem.rightBarButtonItems = [ moreButton,valueButton]
         let barButton = UIBarButtonItem(title: "Regresar", style: .plain, target: self, action: #selector(self.handleBack))
+=======
+        self.navigationItem.rightBarButtonItem = moreButton
+        let barButton = UIBarButtonItem(title: "Atrás", style: .plain, target: self, action: #selector(self.handleBack))
+>>>>>>> maiki11
         barButton.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
         self.navigationItem.leftBarButtonItem = barButton
         let nav = self.navigationController?.navigationBar
@@ -89,6 +94,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     }
     
+    /** ESTA FUNCION NOMAS PONE OBSERVERS */
     override func viewWillAppear(_ animated: Bool) {
         reloadFamily()
        
@@ -110,11 +116,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //heightImg = familyImage.frame.size.height
     }
     
+
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(Constants.NotificationCenter.USER_NOTIFICATION)
         NotificationCenter.default.removeObserver(Constants.NotificationCenter.NOFAMILIES_NOTIFICATION)
@@ -122,8 +130,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func reloadFamily() -> Void {
+<<<<<<< HEAD
         if Constants.Services.USER_SERVICE.users.count > 0, let index = Constants.Services.FAMILY_SERVICE.families.index(where: {$0.id == Constants.Services.USER_SERVICE.users[0].familyActive}) {
             let family = Constants.Services.FAMILY_SERVICE.families[index]
+=======
+        if USER_SERVICE.users.count > 0, let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
+            let family = FAMILY_SERVICE.families[index]
+
+>>>>>>> maiki11
             self.navigationItem.title = family.name
         }
     }
@@ -150,12 +164,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellModule", for: indexPath) as! ModuleCollectionViewCell
-        
-        cell.buttonicon.setImage(UIImage(named: icons[indexPath.item])!, for: .normal)
+        cell.buttonicon.setBackgroundImage(UIImage(named: icons[indexPath.item])!, for: .normal)
         cell.name.text = labels[indexPath.row]
         cell.buttonicon.badgeString = "8"
-        cell.buttonicon.badgeEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0)
+        cell.buttonicon.badgeEdgeInsets = UIEdgeInsetsMake(10, 10, 0, 0)
         cell.buttonicon.badgeBackgroundColor = UIColor.red
+     
         return cell
     }
     
@@ -189,6 +203,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         case 4:
             self.performSegue(withIdentifier: "safeBoxSegue", sender: nil)
 
+        case 8:
+            self.performSegue(withIdentifier: "healthSegue", sender: nil)
         default:
             break
         }

@@ -1,0 +1,10 @@
+framework module SmileLock {
+  umbrella header "SmileLock-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module SmileLock.Swift {
+    header "SmileLock-Swift.h"
+}

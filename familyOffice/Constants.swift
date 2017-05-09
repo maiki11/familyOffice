@@ -62,6 +62,15 @@ struct Constants {
 let modelName = UIDevice.current.modelName
 //Notification Center
 
+<<<<<<< HEAD
+=======
+let BACKGROUND_NOTIFICATION = Notification.Name("BackgroundNotification")
+
+let HEALTHELEMENT_ADDED = Notification.Name("ElementAddedNotification")
+let HEALTHELEMENT_UPDATED = Notification.Name("ElementUpdatedNotification")
+let HEALTHELEMENT_REMOVED = Notification.Name("ElementRemovedNotification")
+
+>>>>>>> maiki11
 //Firebase References
 
 //let REF = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
@@ -75,7 +84,22 @@ let modelName = UIDevice.current.modelName
 
 
 //Service
+<<<<<<< HEAD
 
+=======
+let ACTIVITYLOG_SERVICE = ActivityLogService.Instance()
+let UTILITY_SERVICE = Utility.Instance()
+let AUTH_SERVICE = AuthService.Instance()
+let ANIMATIONS = Animations.instance
+let STORAGE_SERVICE = StorageService.Instance()
+let FAMILY_SERVICE = FamilyService.Instance()
+let USER_SERVICE = UserService.Instance()
+let HEALTH_SERVICE = HealthService.Instance()
+let NOTIFICATION_SERVICE = NotificationService.Instance()
+let ALERT_SERVICE = AlertService.Instance()
+let REF_SERVICE = RefHandle.Instance()
+let REQUEST_SERVICE = RequestService.Instance()
+>>>>>>> maiki11
 
 //Styles
 let STYLES = Styles.Instance()

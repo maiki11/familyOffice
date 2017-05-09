@@ -111,11 +111,12 @@
 		02FA70641E707BAB0080AAEB /* ToastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA70631E707BAB0080AAEB /* ToastService.swift */; };
 		02FA70661E7092ED0080AAEB /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA70651E7092ED0080AAEB /* ImageViewController.swift */; };
 		0B865800BAEDBF5C9736A410 /* Pods_familyOfficeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BEF645D6ACC3C21FFD1530 /* Pods_familyOfficeUITests.framework */; };
-		567E4D54E8A68D2FE5C08EE6 /* Pods_familyOffice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0DB8FD178D3D2D96269556 /* Pods_familyOffice.framework */; };
+		567E4D54E8A68D2FE5C08EE6 /* Pods_familyOffice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0DB8FD178D3D2D96269556 /* Pods_familyOffice.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		8421167A1E28124600C6BD80 /* background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 842116791E28124600C6BD80 /* background.mp4 */; };
 		8421167C1E2860C000C6BD80 /* textFieldStyleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421167B1E2860C000C6BD80 /* textFieldStyleController.swift */; };
 		8450EFC61E64A1E500A51C09 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450EFC51E64A1E500A51C09 /* AlertService.swift */; };
 		8452F5AB1E5F4F550064A964 /* ModuleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452F5AA1E5F4F540064A964 /* ModuleCollectionViewCell.swift */; };
+		8460D6541EAE598A007767CE /* SectionNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460D6531EAE598A007767CE /* SectionNotification.swift */; };
 		8471A2521E2D8C5100EC9FD7 /* ConfigProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8471A2511E2D8C5100EC9FD7 /* ConfigProfile.swift */; };
 		848130161E85ECAD008B08B8 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848130151E85ECAD008B08B8 /* Styles.swift */; };
 		8488E1681E41728700045646 /* Gotham-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8488E1671E41728700045646 /* Gotham-Book.ttf */; };
@@ -124,6 +125,20 @@
 		849C4A921E6DEA5D0065CFBD /* HeaderHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C4A911E6DEA5D0065CFBD /* HeaderHomeView.swift */; };
 		849C81C71E1D6D2F00FF3EE7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */; };
 		84AEA8A41E3BE32C002B2D43 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AEA8A31E3BE32C002B2D43 /* Animations.swift */; };
+		84D51B1D1EA6ACE3006829F7 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D51B1C1EA6ACE3006829F7 /* Section.swift */; };
+		84E9C9B51E92B78E00905A10 /* addCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9C9B41E92B78E00905A10 /* addCell.swift */; };
+		84E9C9B91E93269100905A10 /* SetPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9C9B81E93269100905A10 /* SetPersonalDataViewController.swift */; };
+		A44ACF6A1E70DB1800A5CA84 /* homeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44ACF691E70DB1800A5CA84 /* homeExtension.swift */; };
+		A44D91AF1E947F2700880D50 /* HealthOmniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44D91AE1E947F2700880D50 /* HealthOmniViewController.swift */; };
+		A46316B21E78C69E00E3F72C /* Health.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46316B11E78C69E00E3F72C /* Health.swift */; };
+		A47F14B11E8B27DB00285CA8 /* Health.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A47F14B01E8B27DB00285CA8 /* Health.storyboard */; };
+		A4D585B81E8C8468005B8F1F /* HealthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D585B71E8C8468005B8F1F /* HealthService.swift */; };
+		A4EABA2A1E9551EA00D0D54E /* HealthOmniViewController_Members.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EABA291E9551EA00D0D54E /* HealthOmniViewController_Members.swift */; };
+		A4EABA2C1E95626500D0D54E /* HealthMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EABA2B1E95626500D0D54E /* HealthMemberCollectionViewCell.swift */; };
+		A4F0C0EE1E96FC8D00395F20 /* HealthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F0C0ED1E96FC8D00395F20 /* HealthCollectionViewCell.swift */; };
+		A4F65A271E97F05100831BFD /* EditHealthTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F65A261E97F05100831BFD /* EditHealthTableViewController.swift */; };
+		A4F65A291E97F06800831BFD /* NewHealthElementTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F65A281E97F06800831BFD /* NewHealthElementTableViewController.swift */; };
+		A4F65A2B1E985A4E00831BFD /* HealthOmniViewController_Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F65A2A1E985A4E00831BFD /* HealthOmniViewController_Categories.swift */; };
 		DBC61BF3F1B28E8FA0CCC6AA /* Pods_familyOfficeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9F185A83D04F89C69B99A9 /* Pods_familyOfficeTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -266,12 +281,28 @@
 		8421167B1E2860C000C6BD80 /* textFieldStyleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = textFieldStyleController.swift; sourceTree = "<group>"; };
 		8450EFC51E64A1E500A51C09 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		8452F5AA1E5F4F540064A964 /* ModuleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleCollectionViewCell.swift; sourceTree = "<group>"; };
+		8460D6531EAE598A007767CE /* SectionNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionNotification.swift; sourceTree = "<group>"; };
 		8471A2511E2D8C5100EC9FD7 /* ConfigProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigProfile.swift; sourceTree = "<group>"; };
 		848130151E85ECAD008B08B8 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		8488E1671E41728700045646 /* Gotham-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.ttf"; sourceTree = "<group>"; };
 		849C4A911E6DEA5D0065CFBD /* HeaderHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderHomeView.swift; sourceTree = "<group>"; };
 		849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		84AEA8A31E3BE32C002B2D43 /* Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		84B95C7D1E98124D00FFC672 /* Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Pods/Alamofire/Source/Alamofire.swift; sourceTree = "<group>"; };
+		84D51B1C1EA6ACE3006829F7 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		84E9C9B41E92B78E00905A10 /* addCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addCell.swift; sourceTree = "<group>"; };
+		84E9C9B81E93269100905A10 /* SetPersonalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPersonalDataViewController.swift; sourceTree = "<group>"; };
+		A44ACF691E70DB1800A5CA84 /* homeExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeExtension.swift; sourceTree = "<group>"; };
+		A44D91AE1E947F2700880D50 /* HealthOmniViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthOmniViewController.swift; sourceTree = "<group>"; };
+		A46316B11E78C69E00E3F72C /* Health.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Health.swift; sourceTree = "<group>"; };
+		A47F14B01E8B27DB00285CA8 /* Health.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Health.storyboard; sourceTree = "<group>"; };
+		A4D585B71E8C8468005B8F1F /* HealthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthService.swift; sourceTree = "<group>"; };
+		A4EABA291E9551EA00D0D54E /* HealthOmniViewController_Members.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthOmniViewController_Members.swift; sourceTree = "<group>"; };
+		A4EABA2B1E95626500D0D54E /* HealthMemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthMemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		A4F0C0ED1E96FC8D00395F20 /* HealthCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthCollectionViewCell.swift; sourceTree = "<group>"; };
+		A4F65A261E97F05100831BFD /* EditHealthTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditHealthTableViewController.swift; sourceTree = "<group>"; };
+		A4F65A281E97F06800831BFD /* NewHealthElementTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewHealthElementTableViewController.swift; sourceTree = "<group>"; };
+		A4F65A2A1E985A4E00831BFD /* HealthOmniViewController_Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthOmniViewController_Categories.swift; sourceTree = "<group>"; };
 		D09E6D98CC40D45676606902 /* Pods-familyOfficeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-familyOfficeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-familyOfficeUITests/Pods-familyOfficeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD0DB8FD178D3D2D96269556 /* Pods_familyOffice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_familyOffice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F79F8707321AB6D245679BFF /* Pods-familyOfficeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-familyOfficeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-familyOfficeUITests/Pods-familyOfficeUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -347,6 +378,7 @@
 				0215F4E21E3FA97C00AC01D3 /* PersonalDataTableViewController.swift */,
 				0215F4E71E3FBCCD00AC01D3 /* PasswordChangeViewController.swift */,
 				02FA70651E7092ED0080AAEB /* ImageViewController.swift */,
+				84E9C9B81E93269100905A10 /* SetPersonalDataViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -417,6 +449,8 @@
 				02B82AC21E8AE4D800E41E32 /* SafeBox.storyboard */,
 				02B82AC01E8AE4A100E41E32 /* Families.storyboard */,
 				02B82ABE1E8AE3CF00E41E32 /* Settings.storyboard */,
+				A47F14B01E8B27DB00285CA8 /* Health.storyboard */,
+				024CA7911E871A6700E2B7FC /* RegisterExtension.swift */,
 				02382F151E1C210C0036FFC9 /* LaunchScreen.storyboard */,
 				02382F181E1C210C0036FFC9 /* Info.plist */,
 				02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */,
@@ -458,6 +492,7 @@
 				0218B5B21E66522A00025EBB /* ListenerService.swift */,
 				024BCA801E6F1E2D00736F1A /* RequestService.swift */,
 				02FA70631E707BAB0080AAEB /* ToastService.swift */,
+				A4D585B71E8C8468005B8F1F /* HealthService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -487,8 +522,8 @@
 		024104851E6F40A5002B8E1C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				02AD814F1E4B94250030B3DD /* AddMember+CollectionView.swift */,
 				024104861E6F40C4002B8E1C /* FamilyCollectionExtension.swift */,
+				02AD814F1E4B94250030B3DD /* AddMember+CollectionView.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -524,6 +559,7 @@
 			isa = PBXGroup;
 			children = (
 				025A89951E7A04AF0032C3C0 /* FamiliesPreCollectionViewCell.swift */,
+				84E9C9B41E92B78E00905A10 /* addCell.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -593,11 +629,11 @@
 		0290591F1E78B9AA005F760C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				A4FA7DE01E7A0CE400C10B1D /* Health */,
 				027213991E84457A001A144B /* calendar */,
 				024EF9A81E83413200F5B4DF /* safeBox */,
 				020A64F41E81A77E00F473A0 /* chat */,
 				029059211E78B9D8005F760C /* Cells */,
-				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -627,7 +663,6 @@
 		029059231E78BA29005F760C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				022D50FF1E2036390073F0EF /* ProfileViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -667,6 +702,12 @@
 				027213AA1E84865F001A144B /* testFile.swift */,
 				023DFBBA1EBBACBD000BEFFB /* Location.swift */,
 				023D2B4F1EC22A5100CA19FE /* Value.swift */,
+				A46316B11E78C69E00E3F72C /* Health.swift */,
+				027213A81E848509001A144B /* DatesModel.swift */,
+				02F15BB61E85ECE2008C26F8 /* chatModel.swift */,
+				027213AA1E84865F001A144B /* testFile.swift */,
+				84D51B1C1EA6ACE3006829F7 /* Section.swift */,
+				8460D6531EAE598A007767CE /* SectionNotification.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -695,6 +736,9 @@
 				849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */,
 				02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */,
 				024CA7911E871A6700E2B7FC /* RegisterExtension.swift */,
+				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
+				022D50FF1E2036390073F0EF /* ProfileViewController.swift */,
+				A44ACF691E70DB1800A5CA84 /* homeExtension.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -702,6 +746,7 @@
 		05E149F1567526CC82C0C089 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84B95C7D1E98124D00FFC672 /* Alamofire.swift */,
 				DD0DB8FD178D3D2D96269556 /* Pods_familyOffice.framework */,
 				2D9F185A83D04F89C69B99A9 /* Pods_familyOfficeTests.framework */,
 				18BEF645D6ACC3C21FFD1530 /* Pods_familyOfficeUITests.framework */,
@@ -739,7 +784,47 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		A4A23F731E7CADFF0011D471 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A4EABA2B1E95626500D0D54E /* HealthMemberCollectionViewCell.swift */,
+				A4F0C0ED1E96FC8D00395F20 /* HealthCollectionViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		A4EABA281E95517B00D0D54E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A4EABA291E9551EA00D0D54E /* HealthOmniViewController_Members.swift */,
+				A4F65A2A1E985A4E00831BFD /* HealthOmniViewController_Categories.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		A4FA7DE01E7A0CE400C10B1D /* Health */ = {
+			isa = PBXGroup;
+			children = (
+				A4EABA281E95517B00D0D54E /* Extensions */,
+				A4A23F731E7CADFF0011D471 /* Cells */,
+				A44D91AE1E947F2700880D50 /* HealthOmniViewController.swift */,
+				A4F65A261E97F05100831BFD /* EditHealthTableViewController.swift */,
+				A4F65A281E97F06800831BFD /* NewHealthElementTableViewController.swift */,
+			);
+			name = Health;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		84B95C7C1E98120200FFC672 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		02382F081E1C210C0036FFC9 /* familyOffice */ = {
@@ -752,6 +837,7 @@
 				02382F071E1C210C0036FFC9 /* Resources */,
 				E273517E19F964C9EE33DE23 /* [CP] Embed Pods Frameworks */,
 				1EB369D6AFDB2F9F8B9C0AA6 /* [CP] Copy Pods Resources */,
+				84B95C7C1E98120200FFC672 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -810,6 +896,9 @@
 		02382F011E1C210C0036FFC9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					123,
+				);
 				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Leonardo Durazo";
@@ -875,6 +964,7 @@
 				022ED0021EA55653005E295A /* headerCollectionReusableView.xib in Resources */,
 				0242D7B21E9C24630039D378 /* MemberInviteCollectionViewCell.xib in Resources */,
 				8421167A1E28124600C6BD80 /* background.mp4 in Resources */,
+				A47F14B11E8B27DB00285CA8 /* Health.storyboard in Resources */,
 				02B82AC31E8AE4D800E41E32 /* SafeBox.storyboard in Resources */,
 				8488E1681E41728700045646 /* Gotham-Book.ttf in Resources */,
 				02F15BB51E85E99D008C26F8 /* ChatCell.xib in Resources */,
@@ -1048,6 +1138,8 @@
 			files = (
 				02C17D2B1E42796700EE7CFA /* recordTableViewCell.swift in Sources */,
 				0273916F1E943B8400426331 /* MainAddEventViewController.swift in Sources */,
+				84E9C9B91E93269100905A10 /* SetPersonalDataViewController.swift in Sources */,
+				0273916F1E943B8400426331 /* AddEventViewController.swift in Sources */,
 				8450EFC61E64A1E500A51C09 /* AlertService.swift in Sources */,
 				02AD814B1E4B87520030B3DD /* AddMembersTableViewController.swift in Sources */,
 				023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */,
@@ -1059,11 +1151,15 @@
 				0242D7B11E9C24630039D378 /* MemberInviteCollectionViewCell.swift in Sources */,
 				02E33A641EBA71D0003BF787 /* ShowEventViewController.swift in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
+				A46316B21E78C69E00E3F72C /* Health.swift in Sources */,
 				023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */,
 				02B7E7FA1E7C614A0082BAE7 /* settingLauncher.swift in Sources */,
 				023D2B581EC259E600CA19FE /* valueView.swift in Sources */,
+				A4D585B81E8C8468005B8F1F /* HealthService.swift in Sources */,
 				02ABAC421E6E02B5003780AB /* Device.swift in Sources */,
 				025C70FE1E38229D004A4A5B /* Constants.swift in Sources */,
+				8460D6541EAE598A007767CE /* SectionNotification.swift in Sources */,
+				A44ACF6A1E70DB1800A5CA84 /* homeExtension.swift in Sources */,
 				02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */,
 				02BD2D191E1F130900A61A84 /* UserService.swift in Sources */,
 				02B7E7FC1E7C7A0E0082BAE7 /* UIView.swift in Sources */,
@@ -1074,6 +1170,7 @@
 				0218B5B31E66522A00025EBB /* ListenerService.swift in Sources */,
 				025A89981E7A06000032C3C0 /* familyCollection.swift in Sources */,
 				025A89921E79B5F40032C3C0 /* PreHomeViewController.swift in Sources */,
+				A4EABA2C1E95626500D0D54E /* HealthMemberCollectionViewCell.swift in Sources */,
 				024BCA831E6F237900736F1A /* Proccess.swift in Sources */,
 				0271DD4F1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift in Sources */,
 				02C414BF1E95C70A00045459 /* DateFormatter.swift in Sources */,
@@ -1084,6 +1181,8 @@
 				022ED0011EA55653005E295A /* headerCollectionReusableView.swift in Sources */,
 				02002BF71E820589007191CC /* GroupsTableViewCell.swift in Sources */,
 				027213A91E848509001A144B /* Event.swift in Sources */,
+				027213A91E848509001A144B /* DatesModel.swift in Sources */,
+				A44D91AF1E947F2700880D50 /* HealthOmniViewController.swift in Sources */,
 				0215F4E81E3FBCCD00AC01D3 /* PasswordChangeViewController.swift in Sources */,
 				020A30951E2DA4440024B1FB /* FamilyViewController.swift in Sources */,
 				025C93C91EB1281100C13D16 /* datePickerPopOver.swift in Sources */,
@@ -1092,10 +1191,12 @@
 				02F15BB71E85ECE2008C26F8 /* chatModel.swift in Sources */,
 				023D2B501EC22A5100CA19FE /* Value.swift in Sources */,
 				027FC2451E8D830500450EFB /* EventTableViewCell.swift in Sources */,
+				A4F0C0EE1E96FC8D00395F20 /* HealthCollectionViewCell.swift in Sources */,
 				02002BFE1E8208C2007191CC /* sectionChatCollectionViewController.swift in Sources */,
 				02002BF91E820631007191CC /* MemberTableViewCell.swift in Sources */,
 				025A89961E7A04AF0032C3C0 /* FamiliesPreCollectionViewCell.swift in Sources */,
 				02D956331E41220A007BAC66 /* DatePickerTableViewCell.swift in Sources */,
+				84E9C9B51E92B78E00905A10 /* addCell.swift in Sources */,
 				0272139F1E84478F001A144B /* CalendarViewController.swift in Sources */,
 				020540971E552A13000741CC /* Notification.swift in Sources */,
 				029732ED1EB10A1500BC9955 /* infoEvent.swift in Sources */,
@@ -1116,12 +1217,14 @@
 				02AD814D1E4B90B10030B3DD /* SelectedTableViewCell.swift in Sources */,
 				020A64F91E81A8AF00F473A0 /* menuBar.swift in Sources */,
 				0215F4E31E3FA97C00AC01D3 /* PersonalDataTableViewController.swift in Sources */,
+				A4F65A271E97F05100831BFD /* EditHealthTableViewController.swift in Sources */,
 				02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */,
 				027213AB1E84865F001A144B /* testFile.swift in Sources */,
 				02C17D271E424AD400EE7CFA /* ActivityLogService .swift in Sources */,
 				0215F4EA1E3FCDD400AC01D3 /* PersonalDataTableViewCell.swift in Sources */,
 				0226C8E21E3C217D007968BA /* ConfigurationViewController.swift in Sources */,
 				02382F0D1E1C210C0036FFC9 /* AppDelegate.swift in Sources */,
+				A4F65A2B1E985A4E00831BFD /* HealthOmniViewController_Categories.swift in Sources */,
 				02EABF571E312AE8008A7CA9 /* FamilyCollectionViewController.swift in Sources */,
 				024104871E6F40C4002B8E1C /* FamilyCollectionExtension.swift in Sources */,
 				02F15BBA1E85F37A008C26F8 /* chatCellTableViewCell.swift in Sources */,
@@ -1129,6 +1232,8 @@
 				0249F3361E43C1E6000872CD /* StorageService.swift in Sources */,
 				028E20FF1EC0F1D1004D83B0 /* UILabel.swift in Sources */,
 				022D600F1E71DECD0082586E /* ProfileUserViewController.swift in Sources */,
+				A4EABA2A1E9551EA00D0D54E /* HealthOmniViewController_Members.swift in Sources */,
+				A4F65A291E97F06800831BFD /* NewHealthElementTableViewController.swift in Sources */,
 				848130161E85ECAD008B08B8 /* Styles.swift in Sources */,
 				02EABF591E312B67008A7CA9 /* FamilyCollectionViewCell.swift in Sources */,
 				023DE7431E7720D9002F6A4E /* infoextension.swift in Sources */,
@@ -1137,6 +1242,7 @@
 				025C93C51EB1270000C13D16 /* addEventView.swift in Sources */,
 				849C4A921E6DEA5D0065CFBD /* HeaderHomeView.swift in Sources */,
 				022ECFF91EA54589005E295A /* memberCollectionTableViewCell.swift in Sources */,
+				84D51B1D1EA6ACE3006829F7 /* Section.swift in Sources */,
 				0241048C1E6F4F23002B8E1C /* RepositoryClass.swift in Sources */,
 				026AE1061E3A93A9003B75BD /* User.swift in Sources */,
 			);
@@ -1224,7 +1330,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1268,8 +1374,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1288,7 +1395,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XSFS8X2N87;
 				INFOPLIST_FILE = familyOffice/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cotecnologias.familyOffice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1308,7 +1415,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos10.2]" = "iPhone Developer: Juan Pedro Atondo (5A5ENQB5UH)";
 				DEVELOPMENT_TEAM = XSFS8X2N87;
 				INFOPLIST_FILE = familyOffice/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cotecnologias.familyOffice;
 				PRODUCT_NAME = "$(TARGET_NAME)";

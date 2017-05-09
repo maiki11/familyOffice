@@ -25,6 +25,7 @@ struct User {
     static let kUserNSSKey = "nss"
     static let kUserBloodTypeKey = "bloodType"
     static let kUserTokensFCMeKey = "tokensFCM"
+    static let kUserHealthKey = "health"
     
     let id: String!
     var name : String!
@@ -39,9 +40,13 @@ struct User {
     var address : String!
     var bloodtype: String!
     var tokens: NSDictionary? = nil
+<<<<<<< HEAD
     var events: [String]? = []
+=======
+    var health: Health
+>>>>>>> maiki11
     
-    init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String) {
+    init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String, health: NSArray) {
         self.id = id
         self.name = name
         self.phone = phone
@@ -55,12 +60,14 @@ struct User {
         self.address = address
         self.bloodtype = bloodtype
         self.tokens = nil
+        self.health = Health(array: health)
     }
     
     init(snapshot: FIRDataSnapshot) {
         let snapshotValue = snapshot.value as! NSDictionary
         self.name = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserNameKey, dictionary: snapshotValue)
         self.id = snapshot.key
+<<<<<<< HEAD
         self.photoURL = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserPhotoUrlKey, dictionary: snapshotValue)
         self.familyActive = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserFamilyActiveKey, dictionary: snapshotValue)
         self.address = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserAddressKey, dictionary: snapshotValue )
@@ -73,6 +80,20 @@ struct User {
         self.phone = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
         self.tokens = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserTokensFCMeKey, dictionary: snapshotValue)
         self.events = Constants.Services.UTILITY_SERVICE.exist(field: User.kEventKey, dictionary: snapshotValue)
+=======
+        self.photoURL = UTILITY_SERVICE.exist(field: User.kUserPhotoUrlKey, dictionary: snapshotValue)
+        self.familyActive = UTILITY_SERVICE.exist(field: User.kUserFamilyActiveKey, dictionary: snapshotValue)
+        self.address = UTILITY_SERVICE.exist(field: User.kUserAddressKey, dictionary: snapshotValue )
+        self.birthday = UTILITY_SERVICE.exist(field: User.kUserBirthdayKey, dictionary: snapshotValue )
+        self.curp = UTILITY_SERVICE.exist(field: User.kUserCurpKey, dictionary: snapshotValue)
+        self.rfc = UTILITY_SERVICE.exist(field: User.kUserRFCKey, dictionary: snapshotValue)
+        self.nss = UTILITY_SERVICE.exist(field: User.kUserNSSKey, dictionary: snapshotValue)
+        self.bloodtype = UTILITY_SERVICE.exist(field: User.kUserBloodTypeKey, dictionary: snapshotValue)
+        self.families = UTILITY_SERVICE.existNSDictionary(field: User.kUserFamiliesKey, dictionary: snapshotValue)
+        self.phone = UTILITY_SERVICE.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
+        self.tokens = UTILITY_SERVICE.existNSDictionary(field: User.kUserTokensFCMeKey, dictionary: snapshotValue)
+        self.health = Health(snapshot: snapshot.childSnapshot(forPath: "health"))
+>>>>>>> maiki11
     }
     
     func toDictionary() -> NSDictionary {
@@ -86,7 +107,8 @@ struct User {
             User.kUserNSSKey: self.nss!,
             User.kUserBloodTypeKey: self.bloodtype!,
             User.kUserPhoneKey : self.phone!,
-            User.kUserBirthdayKey : self.birthday!
+            User.kUserBirthdayKey : self.birthday!,
+            User.kUserHealthKey : self.health.toDictionary()
         ]
     }
     
@@ -98,6 +120,8 @@ struct User {
         case User.kUserFamiliesKey:
             self.families = snapshot.value! as? NSDictionary
             break
+        case User.kUserHealthKey:
+            self.health = Health(snapshot: snapshot)
         default:
             break
         }
