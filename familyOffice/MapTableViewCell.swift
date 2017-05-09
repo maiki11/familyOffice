@@ -23,9 +23,12 @@ class MapTableViewCell: UITableViewCell {
     var selectedPin: MKPlacemark?
     var timeZone: TimeZone!
     let storyboard: UIStoryboard = UIStoryboard(name: "Calendar", bundle: nil)
-
+    
     let locationManager = CLLocationManager()
     
+    func setupLocation() -> Void {
+        dropPinZoomIn(event: shareEventDelegate.event)
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -33,34 +36,32 @@ class MapTableViewCell: UITableViewCell {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
-        let uilgr = UILongPressGestureRecognizer(target: self, action: #selector(self.addAnnotation(gestureRecognizer:)))
-        uilgr.minimumPressDuration = 2.0
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action:(#selector(self.addAnnotation(gestureRecognizer:))))
+        gestureRecognizer.minimumPressDuration = 2.0
+        gestureRecognizer.delegate = self
+        mapView.addGestureRecognizer(gestureRecognizer)
         
-        //IOS 9
-        mapView.addGestureRecognizer(uilgr)
-      
         searchTextField.onSelect = {[weak self] str, indexPath in
             guard let selectedItem = self?.matchingItems[(indexPath as NSIndexPath).row].placemark else {
                 return
             }
-            self?.searchTextField.text = selectedItem.name
+            self?.searchTextField.text = str
             self?.dropPinZoomIn(selectedItem)
             
         }
         
         searchTextField.onTextChange = {[weak self] text in
             if text.characters.count > 1 {
-                    self?.updateSearchResults(text) { results in
-                        self?.searchTextField.autoCompleteTokens.removeAll()
-                        results.forEach {
-                            self?.searchTextField.autoCompleteTokens.append($0)
-                        }
+                self?.updateSearchResults(text) { results in
+                    self?.searchTextField.autoCompleteTokens.removeAll()
+                    results.forEach {
+                        self?.searchTextField.autoCompleteTokens.append($0)
                     }
                 }
+            }
         }
-        
-        
     }
+    
     func addAnnotation(gestureRecognizer:UIGestureRecognizer){
         if gestureRecognizer.state == UIGestureRecognizerState.began {
             let touchPoint = gestureRecognizer.location(in: mapView)
@@ -75,15 +76,17 @@ class MapTableViewCell: UITableViewCell {
                 }
                 
                 if (placemarks?.count)! > 0 {
+                    self.mapView.removeAnnotations(self.mapView.annotations)
                     let pm = placemarks?[0]
                     annotation.title = (pm?.thoroughfare!)! + ", " + (pm?.subThoroughfare)!
                     annotation.subtitle = pm?.subLocality
                     self.mapView.addAnnotation(annotation)
+                    self.shareEventDelegate.event.location = Location(title: annotation.title!, subtitle: annotation.subtitle!, latitude: (pm?.location?.coordinate.latitude)!, longitude: (pm?.location?.coordinate.longitude)!)
                 }
             })
         }
     }
-   
+    
     fileprivate func updateSearchResults(_ place: String, callback: @escaping ((_ results: [MultiAutoCompleteToken]) -> Void)) {
         
         let request = MKLocalSearchRequest()
@@ -146,7 +149,6 @@ class MapTableViewCell: UITableViewCell {
         
         return addressLine
     }
-
     
 }
 extension MapTableViewCell : CLLocationManagerDelegate {
@@ -190,7 +192,30 @@ extension MapTableViewCell: HandleMapSearch {
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         mapView.setRegion(region, animated: true)
         timeZone = placemark.timeZone
-        shareEventDelegate.event.location = parseAddress(placemark)
+        shareEventDelegate.event.location = Location(title: annotation.title!, subtitle: annotation.subtitle!, latitude: placemark.coordinate.latitude, longitude: placemark.coordinate.longitude)
+       
+    }
+    
+    func dropPinZoomIn(event: Event){
+        
+        if event.location != nil {
+            
+            guard let coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (event.location?.latitude)!, longitude: (event.location?.longitude)!) as? CLLocationCoordinate2D else{
+                print("Algo salio mal al buscar la coordenada")
+                return
+            }
+            
+            mapView.removeAnnotations(mapView.annotations)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = event.location?.title
+            annotation.subtitle = event.location?.subtitle
+            
+            mapView.addAnnotation(annotation)
+            let span = MKCoordinateSpanMake(0.05, 0.05)
+            let region = MKCoordinateRegionMake(annotation.coordinate, span)
+            mapView.setRegion(region, animated: true)}
+        
     }
 }
 

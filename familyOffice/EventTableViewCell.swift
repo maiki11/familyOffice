@@ -10,10 +10,11 @@ import UIKit
 
 class EventTableViewCell: UITableViewCell, EventBindable {
     var event: Event?
-    
+    weak var delegate : CalendarViewController!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    
     }
     //Binding DateModelBindable
     @IBOutlet weak var dateLabel: UILabel!
@@ -25,6 +26,10 @@ class EventTableViewCell: UITableViewCell, EventBindable {
     @IBOutlet weak var count: UILabel!
     @IBOutlet weak var locationIcon: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    func tapFunction(sender:UITapGestureRecognizer) {
+        delegate.gotoView(event: event!, segue: "showEventSegue")
+    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -43,5 +48,6 @@ class EventTableViewCell: UITableViewCell, EventBindable {
         collectionView.reloadData()
     
     }
+    
    
 }

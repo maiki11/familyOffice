@@ -12,6 +12,22 @@ import FirebaseDatabase
 import UIKit
 
 class FamilyService: repository, RequestService {
+    var families: [Family] = []
+    
+    func insert(_ ref: String, value: Any, callback: @escaping ((Any) -> Void)) {
+        
+        Constants.FirDatabase.REF.child(ref).setValue(value, withCompletionBlock: {(error, ref) in
+            
+            if error != nil {
+                print(error.debugDescription)
+            }else{
+                DispatchQueue.main.async {
+                    print("Callback: \(ref.key)")
+                    callback(ref.key)
+                }
+            }
+        })
+    }
     
     func delete(_ ref: String, callback: @escaping ((Any) -> Void)) {
         
@@ -22,7 +38,7 @@ class FamilyService: repository, RequestService {
     }
     
     private static let instance : FamilyService = FamilyService()
-    var families: [Family] = []
+    
     
     private init() {
     }
@@ -71,39 +87,12 @@ class FamilyService: repository, RequestService {
     
     func updated(snapshot: FIRDataSnapshot, id: Any) {
         if let index = Constants.Services.FAMILY_SERVICE.families.index(where: { $0.id == id as! String }){
-            //let familyMirror = type(of: Mirror(reflecting: self.families[index] ).children.first(where: {$0.label == snapshot.key})?.value)
             self.families[index].update(snapshot: snapshot)
             NotificationCenter.default.post(name: Constants.NotificationCenter.FAMILYUPDATED_NOTIFICATION, object: index)
         }
     }
     
     func delete(family : Family) {
-        for item in (family.members?.allKeys)! {
-            Constants.FirDatabase.REF_USERS.child(item as! String).child("families/\((family.id)!)").removeValue()
-        }
-        Constants.FirStorage.STORAGEREF.child("families/\((family.id)!)/images/\((family.imageProfilePath)!)").delete(completion: { (error) -> Void in
-            if (error != nil){
-                print(error.debugDescription)
-            }
-        })
-        Constants.FirDatabase.REF_FAMILIES.child(family.id!).removeValue()
-        Constants.Services.ACTIVITYLOG_SERVICE.create(id: (Constants.Services.USER_SERVICE.users[0].id)!, activity: "Se elimino la familia \((family.name)!)", photo: (family.photoURL)!, type: "deleteFamily")
-    }
-    
-    
-    func insert(_ ref: String, value: Any, callback: @escaping ((Any) -> Void)) {
-        
-        Constants.FirDatabase.REF.child(ref).setValue(value, withCompletionBlock: {(error, ref) in
-            
-            if error != nil {
-                print(error.debugDescription)
-            }else{
-                DispatchQueue.main.async {
-                    print("Callback: \(ref.key)")
-                    callback(ref.key)
-                }
-            }
-        })
         
     }
     
@@ -120,7 +109,7 @@ class FamilyService: repository, RequestService {
             self.families[index].admin = uid
         }else{
             if (self.families[index].members?.count)! > 1 {
-                for item in (self.families[index].members?.allKeys)! as! [String] {
+                for item in self.families[index].members {
                     if(Constants.Services.USER_SERVICE.users[0].id != item){
                         self.families[index].admin = item
                         Constants.FirDatabase.REF_FAMILIES.child(self.families[index].id).updateChildValues(["admin": item])
@@ -155,9 +144,7 @@ extension FamilyService {
         let familyID = id
         let memberID = snapshot.key
         if let index = self.families.index(where: {$0.id == familyID}) {
-            var memberDict : [String:Bool]  = self.families[index].members as! [String : Bool]
-            memberDict[memberID] = true
-            self.families[index].members = memberDict as NSDictionary?
+            self.families[index].members.append(memberID)
             Constants.FirDatabase.REF_FAMILIES.child("\(familyID)/members").updateChildValues([memberID: true])
             Constants.FirDatabase.REF_USERS.child("\(memberID)/families").updateChildValues([familyID:true])
             NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: [memberID:"added"])
@@ -166,9 +153,8 @@ extension FamilyService {
     func addMember(uid: String, fid: String) -> Void {
         
         if let index = self.families.index(where: {$0.id == fid}) {
-            var memberDict : [String:Bool]  = self.families[index].members as! [String : Bool]
-            memberDict[uid] = true
-            self.families[index].members = memberDict as NSDictionary?
+           
+            self.families[index].members.append(uid)
             Constants.FirDatabase.REF_FAMILIES.child("\(fid)/members").updateChildValues([uid : true])
             Constants.FirDatabase.REF_USERS.child("\(uid)/families").updateChildValues([fid:true])
             Constants.Services.NOTIFICATION_SERVICE.send(title: "Agregado a: ", message: self.families[index].name!, to: uid)
@@ -182,17 +168,19 @@ extension FamilyService {
         let familyID = id as! String
         let memberID = snapshot as! String
         if let index = self.families.index(where: {$0.id == familyID})  {
-            let filter = self.families[index].members?.filter({$0.key as? String != memberID})
-            var members : [String: Bool] = [:]
-            for result in filter! {
-                members[result.key as! String] = (result.value as! Bool)
+            guard let memberIndex = self.families[index].members.index(where: {$0 ==  memberID}) else {
+                print("usuario no encontrado")
+                return
             }
-            self.families[index].members = members as NSDictionary
-            if (self.families[index].members?[Constants.Services.USER_SERVICE.users[0].id] == nil ){
+            
+            self.families[index].members.remove(at: memberIndex)
+            
+            if !self.families[index].members.contains(memberID){
                 self.families.remove(at: index)
             }
             Constants.FirDatabase.REF_USERS.child("\((memberID))/families/\((familyID))").removeValue()
             Constants.FirDatabase.REF_FAMILIES.child("\(familyID)/members/\(memberID)").removeValue()
+
             NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: [memberID : "removed"])
         }
     }

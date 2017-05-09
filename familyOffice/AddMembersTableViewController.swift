@@ -129,7 +129,7 @@ class AddMembersTableViewController: UITableViewController {
     func addMember(phone: String) -> Void {
         
         if let user = Constants.Services.USER_SERVICE.users.filter({$0.phone == phone}).first {
-            if !self.users.contains(where: {$0.id == user.id}) && self.family.members?[user.id] == nil{
+            if !self.users.contains(where: {$0.id == user.id}) && !self.family.members.contains(where: {$0 == user.id}){
                 self.users.append(user)
                 self.tableView.insertRows(at: [NSIndexPath(row: self.users.count-1, section: 1) as IndexPath], with: .fade)
             }

@@ -29,7 +29,7 @@ struct Event {
     var priority: Int!
     var reminder: String?
     var members: [String]!
-    var location: String?
+    var location: Location? = nil
     var creator: String!
     
     init(id: String, title: String, description: String, date: String, endDate: String, priority: Int, members: [String], reminder: String = "") {
@@ -54,27 +54,21 @@ struct Event {
         self.priority = Constants.Services.UTILITY_SERVICE.exist(field: Event.kPriority, dictionary: snapshotValue )
         self.reminder = Constants.Services.UTILITY_SERVICE.exist(field: Event.kreminder, dictionary: snapshotValue)
         self.members = Constants.Services.UTILITY_SERVICE.exist(field: Event.kMembers, dictionary: snapshotValue)
-        self.location = Constants.Services.UTILITY_SERVICE.exist(field: Event.klocation, dictionary: snapshotValue)
+        self.location = Location(snapshot: Constants.Services.UTILITY_SERVICE.exist(field: Event.klocation, dictionary: snapshotValue))
         self.creator = Constants.Services.UTILITY_SERVICE.exist(field: Event.kcreator, dictionary: snapshotValue)
     }
  
     func toDictionary() -> NSDictionary {
-        let dictionary: NSDictionary = {
-            var d : [String: Bool] = [:]
-            for item in self.members {
-                d[item] = true
-            }
-            return d as NSDictionary
-        }()
+        
         return [
             Event.kTitle : self.title,
             Event.kDescription : self.description,
             Event.kEndDate : self.endDate,
             Event.kDate : self.date,
             Event.kPriority : self.priority,
-            Event.kMembers : dictionary,
+            Event.kMembers : Constants.Services.UTILITY_SERVICE.toDictionary(array: self.members),
             Event.kreminder : self.reminder ?? "",
-            Event.klocation : self.location ?? "",
+            Event.klocation : self.location?.toDictionary() ?? "",
             Event.kcreator : self.creator
         ]
     }
@@ -86,7 +80,7 @@ struct Event {
 
 protocol EventBindable: AnyObject {
     var event: Event? { get set }
-    
+    var descriptionLabel: UILabel! {get}
     var dateLabel: UILabel! {get}
     var endDateLabel: UILabel! {get}
     var locationLabel: UILabel! {get}
@@ -111,8 +105,7 @@ extension EventBindable {
     var titleLabel: UILabel! {
         return nil
     }
-    
-    var collectionView: UICollectionView! {
+    var descriptionLabel: UILabel! {
         return nil
     }
     
@@ -130,7 +123,7 @@ extension EventBindable {
         }
         
         if let locationLabel = self.locationLabel {
-            locationLabel.text =  (event.location?.isEmpty)! ?  "Sin ubicación" : event.location
+            locationLabel.text =  (event.location?.title.isEmpty)! ?  "Sin ubicación" : "\(event.location?.title ?? ""), \(event.location?.subtitle ?? "")"
         }
         
         if let endDateLabel = self.endDateLabel {
@@ -139,6 +132,9 @@ extension EventBindable {
         
         if let titleLabel = self.titleLabel {
             titleLabel.text = event.title
+        }
+        if let descriptionLabel = self.descriptionLabel {
+            descriptionLabel.text = event.description
         }
         
         if let dateLabel = self.dateLabel {

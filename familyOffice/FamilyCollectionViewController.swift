@@ -72,7 +72,7 @@ extension FamilyCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         for item in Constants.Services.FAMILY_SERVICE.families {
-            if item.members?[(FIRAuth.auth()?.currentUser?.uid)!] == nil {
+            if !item.members.contains(where: {$0 == FIRAuth.auth()?.currentUser?.uid}) {
                 Constants.Services.FAMILY_SERVICE.families.remove(at:  Constants.Services.FAMILY_SERVICE.families.index(where: {$0.id == item.id})!)
             }
         }

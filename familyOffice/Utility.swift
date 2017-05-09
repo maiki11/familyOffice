@@ -150,11 +150,21 @@ class Utility {
         }
     }
     func exist(field: String, dictionary:NSDictionary) -> NSDictionary {
-        if let value = dictionary[field] {
-            return value as! NSDictionary
-        }else {
+        guard let value : NSDictionary = dictionary[field] as? NSDictionary else {
             return [:]
         }
+        return value
+    }
+    
+    func toDictionary(array: [String]!) -> NSDictionary {
+        let dictionary: NSDictionary = {
+            var d : [String: Bool] = [:]
+            for item in array{
+                d[item] = true
+            }
+            return d as NSDictionary
+        }()
+        return dictionary
     }
    
     func moveTextField(textField: UITextField, moveDistance: Int, up: Bool, context: UIViewController){

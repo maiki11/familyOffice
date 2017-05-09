@@ -94,10 +94,9 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     func verifyMembersOffLine() -> Void {
-        for item in (Constants.Services.FAMILY_SERVICE.families.first(where: {$0.id == family?.id})?.members!.allKeys)! {
-            
-            addMember(id: item as! String)
-            
+        let family = (Constants.Services.FAMILY_SERVICE.families.first(where: {$0.id == self.family?.id})?.members)!
+        for item in family{
+            addMember(id: item )
         }
     }
     
@@ -216,15 +215,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         Constants.Services.UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
        
     }
-    //Agrega miembro a la familia
-    func addMembers(user: User){
-        if let index = Constants.Services.FAMILY_SERVICE.families.index(where: {$0.id == self.family?.id}) {
-            let memberDict : [String:Bool] = Constants.Services.FAMILY_SERVICE.families[index].members as! [String : Bool]
-            Constants.Services.FAMILY_SERVICE.families[index].members = memberDict as NSDictionary?
-            self.family?.members = memberDict as NSDictionary?
-        }
-    }
-    
+ 
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

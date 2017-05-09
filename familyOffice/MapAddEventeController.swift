@@ -51,11 +51,13 @@ class MapAddEventTable: BaseCell, UITableViewDelegate, UITableViewDataSource  {
         if indexPath.row < 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "mapCellId", for: indexPath) as! MapTableViewCell
             cell.shareEventDelegate = shareEventDelegate
+            cell.setupLocation()
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellId2", for: indexPath) as! memberCollectionTableViewCell
             cell.shareEventDelegate = shareEventDelegate
             cell.layer.backgroundColor = UIColor.clear.cgColor
+            cell.willAppear()
             return cell
         }
         

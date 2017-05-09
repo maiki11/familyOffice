@@ -8,22 +8,43 @@
 
 import UIKit
 import Firebase
-class EventService: RequestService {
+
+class EventService{
     public var events: [Event] = []
-    
+   
     private init(){
     }
+    
     public static func Instance() -> EventService {
         return instance
     }
-    
+    func test() -> Void {
+        
+    }
     private static let instance : EventService = EventService()
     
     
+    func addEventlocal(snapshot: FIRDataSnapshot) -> Void {
+        let event = Event.init(snapshot: snapshot)
+        
+        if !events.contains(where: {$0.id == event.id}){
+            events.append(event)
+            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: event.id)
+        }
+    }
+    func addEventToMember(uid: String, eid: String)-> Void {
+        Constants.FirDatabase.REF_USERS.child("\(uid)/events").updateChildValues([eid:true])
+    }
+    
+   
+}
+
+extension EventService : RequestService  {
+    
+    
     func insert(_ ref: String, value: Any, callback: @escaping ((Any) -> Void)) {
+        
         Constants.FirDatabase.REF.child(ref).setValue(value as! NSDictionary, withCompletionBlock: {(error, ref) in
-       
-            
             if error != nil {
                 print(error.debugDescription)
             }else {
@@ -33,27 +54,21 @@ class EventService: RequestService {
                     callback(ref.key)
                 }
             }
-            
-           
         })
-        
     }
-    func addEventlocal(snapshot: FIRDataSnapshot) -> Void {
-        let event = Event.init(snapshot: snapshot)
-        if !events.contains(where: {$0.id == event.id}){
-            events.append(event)
-            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: event.id)
-        }
-    }
-    func addEventToMember(uid: String, eid: String) {
-        Constants.FirDatabase.REF_USERS.child("\(uid)/events").updateChildValues([eid:true])
-    }
-    
     func delete(_ ref: String, callback: @escaping ((Any) -> Void)) {
         
     }
     
     func update(_ ref: String, value: [AnyHashable : Any], callback: @escaping ((Any) -> Void)) {
-        
+        Constants.FirDatabase.REF.child(ref).updateChildValues(value, withCompletionBlock: {(error, ref) in
+            if error != nil {
+                print(error.debugDescription)
+            }else {
+                DispatchQueue.main.async {
+                    callback(ref.key)
+                }
+            }
+        })
     }
 }

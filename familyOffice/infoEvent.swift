@@ -23,6 +23,10 @@ class addEvent: BaseCell {
     func addView() -> Void {
         xib.shareEventDelegate = shareEventDelegate
         self.addSubview(xib)
+        xib.dateStartTxtField.text = shareEventDelegate.event.date
+        xib.endDateTxtField.text = shareEventDelegate.event.endDate
+        xib.descriptionTextField.text = shareEventDelegate.event.description
+        xib.titleTextField.text = shareEventDelegate.event.title
     }
   
     

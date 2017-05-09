@@ -35,6 +35,7 @@
 		02382F3B1E1C2E1D0036FFC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */; };
 		023DE7431E7720D9002F6A4E /* infoextension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DE7421E7720D9002F6A4E /* infoextension.swift */; };
 		023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DE7441E7720FE002F6A4E /* familiesExtension.swift */; };
+		023DFBBB1EBBACBD000BEFFB /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DFBBA1EBBACBD000BEFFB /* Location.swift */; };
 		023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F9CEE1E1C39D300420217 /* AuthService.swift */; };
 		024104871E6F40C4002B8E1C /* FamilyCollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024104861E6F40C4002B8E1C /* FamilyCollectionExtension.swift */; };
 		0241048C1E6F4F23002B8E1C /* RepositoryClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0241048B1E6F4F23002B8E1C /* RepositoryClass.swift */; };
@@ -67,6 +68,7 @@
 		027FC2451E8D830500450EFB /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2441E8D830500450EFB /* EventTableViewCell.swift */; };
 		027FC2471E8D89C000450EFB /* memberCollection-CalendarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2461E8D89C000450EFB /* memberCollection-CalendarExtension.swift */; };
 		027FC2491E8DCF3E00450EFB /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2481E8DCF3E00450EFB /* MemberCollectionViewCell.swift */; };
+		028E20FF1EC0F1D1004D83B0 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028E20FE1EC0F1D1004D83B0 /* UILabel.swift */; };
 		029732ED1EB10A1500BC9955 /* infoEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029732EC1EB10A1500BC9955 /* infoEvent.swift */; };
 		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
 		02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC3F1E6DE73A003780AB /* UIImage.swift */; };
@@ -95,6 +97,7 @@
 		02D2C0D11E6747AE007A6798 /* References.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D2C0D01E6747AE007A6798 /* References.swift */; };
 		02D956331E41220A007BAC66 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D956321E41220A007BAC66 /* DatePickerTableViewCell.swift */; };
 		02DB30731E26A44F00A8FF1C /* FamilyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB30721E26A44F00A8FF1C /* FamilyService.swift */; };
+		02E33A641EBA71D0003BF787 /* ShowEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E33A631EBA71D0003BF787 /* ShowEventViewController.swift */; };
 		02E7E5EC1E78806D00D8360B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02E7E5EB1E78806D00D8360B /* Main.storyboard */; };
 		02E7E5EE1E7883E700D8360B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02E7E5ED1E7883E700D8360B /* Assets.xcassets */; };
 		02EABF571E312AE8008A7CA9 /* FamilyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EABF561E312AE8008A7CA9 /* FamilyCollectionViewController.swift */; };
@@ -175,6 +178,7 @@
 		02382F3A1E1C2E1D0036FFC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		023DE7421E7720D9002F6A4E /* infoextension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = infoextension.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		023DE7441E7720FE002F6A4E /* familiesExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = familiesExtension.swift; sourceTree = "<group>"; };
+		023DFBBA1EBBACBD000BEFFB /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		023F9CEE1E1C39D300420217 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		024104861E6F40C4002B8E1C /* FamilyCollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyCollectionExtension.swift; sourceTree = "<group>"; };
 		0241048B1E6F4F23002B8E1C /* RepositoryClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryClass.swift; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 		027FC2441E8D830500450EFB /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		027FC2461E8D89C000450EFB /* memberCollection-CalendarExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "memberCollection-CalendarExtension.swift"; sourceTree = "<group>"; };
 		027FC2481E8DCF3E00450EFB /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		028E20FE1EC0F1D1004D83B0 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		029732EC1EB10A1500BC9955 /* infoEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = infoEvent.swift; sourceTree = "<group>"; };
 		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		02ABAC3F1E6DE73A003780AB /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -236,6 +241,7 @@
 		02D2C0D01E6747AE007A6798 /* References.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = References.swift; sourceTree = "<group>"; };
 		02D956321E41220A007BAC66 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		02DB30721E26A44F00A8FF1C /* FamilyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyService.swift; sourceTree = "<group>"; };
+		02E33A631EBA71D0003BF787 /* ShowEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEventViewController.swift; sourceTree = "<group>"; };
 		02E7E5EB1E78806D00D8360B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		02E7E5ED1E7883E700D8360B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = familyOffice/Assets.xcassets; sourceTree = "<group>"; };
 		02EABF561E312AE8008A7CA9 /* FamilyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyCollectionViewController.swift; sourceTree = "<group>"; };
@@ -534,6 +540,7 @@
 				027391871E94736200426331 /* AddEvent */,
 				0272139E1E84478F001A144B /* CalendarViewController.swift */,
 				027FC2461E8D89C000450EFB /* memberCollection-CalendarExtension.swift */,
+				02E33A631EBA71D0003BF787 /* ShowEventViewController.swift */,
 			);
 			name = calendar;
 			sourceTree = "<group>";
@@ -627,6 +634,7 @@
 				02ABAC411E6E02B5003780AB /* Device.swift */,
 				02B7E7FB1E7C7A0E0082BAE7 /* UIView.swift */,
 				02C414BE1E95C70A00045459 /* DateFormatter.swift */,
+				028E20FE1EC0F1D1004D83B0 /* UILabel.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -652,6 +660,7 @@
 				027213A81E848509001A144B /* Event.swift */,
 				02F15BB61E85ECE2008C26F8 /* chatModel.swift */,
 				027213AA1E84865F001A144B /* testFile.swift */,
+				023DFBBA1EBBACBD000BEFFB /* Location.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1042,6 +1051,7 @@
 				02CF79AB1EAEC4B200E13056 /* EventService.swift in Sources */,
 				02D2C0D11E6747AE007A6798 /* References.swift in Sources */,
 				0242D7B11E9C24630039D378 /* MemberInviteCollectionViewCell.swift in Sources */,
+				02E33A641EBA71D0003BF787 /* ShowEventViewController.swift in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
 				023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */,
 				02B7E7FA1E7C614A0082BAE7 /* settingLauncher.swift in Sources */,
@@ -1052,6 +1062,7 @@
 				02B7E7FC1E7C7A0E0082BAE7 /* UIView.swift in Sources */,
 				027FC2491E8DCF3E00450EFB /* MemberCollectionViewCell.swift in Sources */,
 				8471A2521E2D8C5100EC9FD7 /* ConfigProfile.swift in Sources */,
+				023DFBBB1EBBACBD000BEFFB /* Location.swift in Sources */,
 				022EC1D21E20078C0096A18B /* Family.swift in Sources */,
 				0218B5B31E66522A00025EBB /* ListenerService.swift in Sources */,
 				025A89981E7A06000032C3C0 /* familyCollection.swift in Sources */,
@@ -1108,6 +1119,7 @@
 				02F15BBA1E85F37A008C26F8 /* chatCellTableViewCell.swift in Sources */,
 				849C81C71E1D6D2F00FF3EE7 /* StartViewController.swift in Sources */,
 				0249F3361E43C1E6000872CD /* StorageService.swift in Sources */,
+				028E20FF1EC0F1D1004D83B0 /* UILabel.swift in Sources */,
 				022D600F1E71DECD0082586E /* ProfileUserViewController.swift in Sources */,
 				848130161E85ECAD008B08B8 /* Styles.swift in Sources */,
 				02EABF591E312B67008A7CA9 /* FamilyCollectionViewCell.swift in Sources */,

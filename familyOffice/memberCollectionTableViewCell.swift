@@ -35,9 +35,9 @@ class memberCollectionTableViewCell: UITableViewCell {
         collectionView.register(UINib(nibName: "headerCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
         
         for item in Constants.Services.FAMILY_SERVICE.families {
-            for uid in (item.members?.allKeys)!{
-                if uid as? String != Constants.Services.USER_SERVICE.users[0].id {
-                    self.addMember(id: uid as! String)
+            for uid in item.members! {
+                if uid == Constants.Services.USER_SERVICE.users[0].id {
+                    self.addMember(id: uid )
                 }
             }
         }
@@ -48,6 +48,14 @@ class memberCollectionTableViewCell: UITableViewCell {
             }
         }
         
+    }
+    
+    func willAppear() {
+        for family in Constants.Services.FAMILY_SERVICE.families {
+            for uid in family.members {
+                addMember(id: uid)
+            }
+        }
     }
     deinit {
         NotificationCenter.default.removeObserver(userNotification)
@@ -79,8 +87,12 @@ class memberCollectionTableViewCell: UITableViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellMember", for: indexPath) as! MemberInviteCollectionViewCell
         
         if Constants.Services.USER_SERVICE.users.count > 1 {
-            cell.bind(userModel: Constants.Services.USER_SERVICE.users[indexPath.row+1], filter: "blackwhite")
-            
+            let user = Constants.Services.USER_SERVICE.users[indexPath.row+1]
+            if shareEventDelegate.event.members.contains( where: {$0 == user.id}) {
+                cell.bind(userModel: user)
+            }else{
+                cell.bind(userModel: user , filter: "blackwhite")
+            }
         }
         
         // Configure the cell
@@ -104,8 +116,9 @@ extension memberCollectionTableViewCell: UICollectionViewDelegate, UICollectionV
         cell.check.isHidden = !cell.check.isHidden
         if !cell.check.isHidden {
             cell.profileImage.loadImage(urlString: (cell.userModel?.photoURL)!)
-            
-            shareEventDelegate.event.members.append((cell.userModel?.id)!)
+            if !shareEventDelegate.event.members.contains(where: {$0 == cell.userModel?.id}){
+                shareEventDelegate.event.members.append((cell.userModel?.id)!)
+            }
         }else{
             cell.profileImage.blackwhite(urlString: (cell.userModel?.photoURL)!)
             if let index = shareEventDelegate.event.members.index(where: {$0 == cell.userModel?.id }){

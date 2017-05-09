@@ -6,20 +6,11 @@
 //  Copyright © 2017 Leonardo Durazo. All rights reserved.
 //
 
-import Foundation
 import Toast_Swift
 
 protocol RequestService {
     
-    
-    
-    
-//    private static let instance : RequestService = RequestService()
-//    private init(){
-//    }
-//    public static func Instance() -> RequestService {
-//        return instance
-//    }
+
     func insert(_ ref: String, value: Any, callback: @escaping ((_ results: Any) -> Void))
     func delete(_ ref: String, callback: @escaping ((_ results: Any) -> Void))
     func update(_ ref: String,value:  [AnyHashable : Any], callback: @escaping ((_ results: Any) -> Void))

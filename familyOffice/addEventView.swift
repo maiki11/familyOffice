@@ -12,7 +12,7 @@ protocol datepickerSelection: class {
     func cancel() -> Void
 }
 
-class addEventView: UIView{
+class addEventView: UIView {
     var txtfieldselected: Int!
     weak var shareEventDelegate : ShareEvent!
     //OUTLETS
@@ -20,7 +20,14 @@ class addEventView: UIView{
     @IBOutlet weak var titleTextField: textFieldStyleController!
     @IBOutlet weak var descriptionTextField: textFieldStyleController!
     @IBOutlet weak var endDateTxtField: UITextField!
-    
+    override func awakeFromNib() {
+        
+    }
+    override func addSubview(_ view: UIView) {
+        super.addSubview(view)
+        
+        
+    }
     let blackView = UIView()
     let xib = Bundle.main.loadNibNamed("datePickerPopOver", owner: self, options: nil)?[0] as! datePickerPopOver
 
@@ -38,6 +45,10 @@ class addEventView: UIView{
         txtfieldselected = 1
         showSetting()
         
+    }
+    @IBAction func handleChangeEndDate(_ sender: UITextField) {
+        txtfieldselected = 2
+        showSetting()
     }
     
     @IBAction func handleTouchDownEDate(_ sender: UITextField) {
@@ -91,12 +102,26 @@ extension addEventView :  datepickerSelection  {
             shareEventDelegate.event.date = text
             
         }else{
-            endDateTxtField.text = text
-            shareEventDelegate.event.endDate = text
+            if !verifyEndDate(text) {
+                endDateTxtField.removeAttribute()
+                endDateTxtField.text = text
+                shareEventDelegate.event.endDate = text
+            }else{
+                shareEventDelegate.event.endDate = ""
+            }
         }
         self.handleDismiss()
     }
     func cancel() {
         self.handleDismiss()
+    }
+    func verifyEndDate(_ endDate: String) -> Bool {
+        if Date(string: shareEventDelegate.event.date, formatter: .dayMonthYearHourMinute)! >  Date(string: endDate, formatter: .dayMonthYearHourMinute)!{
+            endDateTxtField.text = endDate
+            endDateTxtField.strikeText()
+            return true
+        }else{
+            return false
+        }
     }
 }

@@ -154,7 +154,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
             Constants.Services.STORAGE_SERVICE.insert("families/\(nameTxtField.text ?? "")\(key)images/\(imageName).png", value: imageView.image ?? "", callback: {(response) in
                 
                 if let metadata = response as? FIRStorageMetadata {
-                    let family: Family! = Family(name: self.nameTxtField.text!, photoURL: (metadata.downloadURL()?.absoluteString)!, members: [:], admin: (FIRAuth.auth()?.currentUser?.uid)! ,id: self.nameTxtField.text!+key, imageProfilePath: metadata.name)
+                    let family: Family! = Family(name: self.nameTxtField.text!, photoURL: (metadata.downloadURL()?.absoluteString)!, members: [], admin: (FIRAuth.auth()?.currentUser?.uid)! ,id: self.nameTxtField.text!+key, imageProfilePath: metadata.name)
                     self.insertFamily(family: family, key: key)
                 }else{
                     self.error()
