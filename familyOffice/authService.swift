@@ -63,11 +63,8 @@ class AuthService {
         let url = user.photoURL
         let data = NSData(contentsOf:url!! as URL)
         if let uploadData = UIImagePNGRepresentation(UIImage(data: data! as Data)!){
-<<<<<<< HEAD
-            STORAGEREF.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
-=======
+
             Constants.FirStorage.STORAGEREF.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
->>>>>>> Leonardo
                 if (error != nil) {
                     // Uh-oh, an error occurred!
                     print(error.debugDescription)

@@ -397,11 +397,7 @@
         <scene sceneID="ka7-OV-p2W">
             <objects>
                 <collectionViewController id="RDf-zh-80e" customClass="AddEventViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
-<<<<<<< HEAD
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="YH0-bj-ILm">
-=======
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" dataMode="prototypes" id="YH0-bj-ILm">
->>>>>>> Leonardo
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96862745098039216" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
