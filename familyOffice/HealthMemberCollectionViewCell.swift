@@ -17,10 +17,8 @@ class HealthMemberCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         self.image.layer.cornerRadius = self.image.frame.width/2
         self.image.clipsToBounds = true
-        
         selectedMember.layer.cornerRadius = selectedMember.frame.width/2
         selectedMember.clipsToBounds = true
-        selectedMember.alpha = 0
     }
     
 }

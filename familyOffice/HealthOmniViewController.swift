@@ -35,6 +35,7 @@ class HealthOmniViewController: UIViewController {
         
         initElements()
         initMembers()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
