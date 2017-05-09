@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kip-84-qVL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kip-84-qVL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -506,6 +506,59 @@
                                     <outlet property="delegate" destination="vtu-qR-ECs" id="7RA-58-wXT"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ujr-Q1-Eg8">
+                                <rect key="frame" x="0.0" y="28" width="375" height="610"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="handleCloseModal:" destination="vtu-qR-ECs" eventType="touchUpInside" id="aJS-8H-mKU"/>
+                                </connections>
+                            </button>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ra7-Ei-Hgg">
+                                <rect key="frame" x="-354" y="208" width="343" height="250"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1XQ-V3-Tdu">
+                                        <rect key="frame" x="305" y="8" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="2N4-Iq-xfG"/>
+                                            <constraint firstAttribute="height" constant="30" id="l8r-T2-vGG"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="Cancel"/>
+                                        <connections>
+                                            <action selector="handleCloseModal:" destination="vtu-qR-ECs" eventType="touchUpInside" id="PzH-E8-Z2u"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RESPETO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0s-N9-nuw">
+                                        <rect key="frame" x="71" y="17" width="200" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="dfW-4m-rEG"/>
+                                            <constraint firstAttribute="width" constant="200" id="juT-Fq-Bev"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7x-y2-dCA">
+                                        <rect key="frame" x="4" y="47" width="335" height="156"/>
+                                        <string key="text">El respeto incluye miramiento, consideración y deferencia. El respeto es un valor que permite que el hombre pueda reconocer, aceptar, apreciar y valorar las cualidades del prójimo y sus derechos. Es decir, el respeto es el reconocimiento del valor propio y de los derechos de los individuos y de la sociedad.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="97Z-hu-xoo"/>
+                                    <constraint firstItem="o7x-y2-dCA" firstAttribute="top" secondItem="Z0s-N9-nuw" secondAttribute="bottom" constant="9" id="Anc-3l-04K"/>
+                                    <constraint firstItem="Z0s-N9-nuw" firstAttribute="centerX" secondItem="ra7-Ei-Hgg" secondAttribute="centerX" id="CQZ-hU-pnI"/>
+                                    <constraint firstAttribute="height" constant="250" id="FoC-TN-pMm"/>
+                                    <constraint firstItem="1XQ-V3-Tdu" firstAttribute="top" secondItem="ra7-Ei-Hgg" secondAttribute="topMargin" id="HfP-9c-rmb"/>
+                                    <constraint firstAttribute="trailing" secondItem="o7x-y2-dCA" secondAttribute="trailing" constant="4" id="YWU-iO-Xfy"/>
+                                    <constraint firstItem="1XQ-V3-Tdu" firstAttribute="trailing" secondItem="ra7-Ei-Hgg" secondAttribute="trailingMargin" id="dCh-qI-Aat"/>
+                                    <constraint firstItem="Z0s-N9-nuw" firstAttribute="top" secondItem="ra7-Ei-Hgg" secondAttribute="top" constant="17" id="eC5-Fj-T5B"/>
+                                    <constraint firstItem="o7x-y2-dCA" firstAttribute="leading" secondItem="ra7-Ei-Hgg" secondAttribute="leadingMargin" constant="-4" id="yy9-Qg-GL0"/>
+                                    <constraint firstAttribute="bottom" secondItem="o7x-y2-dCA" secondAttribute="bottom" constant="47" id="zwq-LS-NbM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -517,6 +570,8 @@
                             <constraint firstItem="pdm-7Z-TPb" firstAttribute="top" secondItem="T93-d6-7Lq" secondAttribute="bottom" constant="519" id="K0l-p7-5Bm"/>
                             <constraint firstAttribute="trailing" secondItem="wMk-Nw-1AJ" secondAttribute="trailing" id="dg4-JL-gBB"/>
                             <constraint firstItem="T93-d6-7Lq" firstAttribute="top" secondItem="0ik-yb-Voo" secondAttribute="topMargin" constant="30" id="eBx-SQ-oEn"/>
+                            <constraint firstItem="ra7-Ei-Hgg" firstAttribute="centerY" secondItem="0ik-yb-Voo" secondAttribute="centerY" id="fVk-4n-3L6"/>
+                            <constraint firstItem="ra7-Ei-Hgg" firstAttribute="centerX" secondItem="0ik-yb-Voo" secondAttribute="centerX" constant="-370" id="ltJ-6x-Cp7"/>
                             <constraint firstItem="T93-d6-7Lq" firstAttribute="trailing" secondItem="wMk-Nw-1AJ" secondAttribute="trailing" id="yAm-qr-1y4"/>
                         </constraints>
                         <connections>
@@ -530,7 +585,12 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="backgroundButton" destination="Ujr-Q1-Eg8" id="Zu1-fS-KTB"/>
+                        <outlet property="centerPopupConstraint" destination="ltJ-6x-Cp7" id="jvj-mO-eni"/>
                         <outlet property="collectionView" destination="wMk-Nw-1AJ" id="QGM-GJ-5KY"/>
+                        <outlet property="descriptionLabel" destination="o7x-y2-dCA" id="Cmt-cM-2Jy"/>
+                        <outlet property="titleLabel" destination="Z0s-N9-nuw" id="OUC-rJ-0my"/>
+                        <outlet property="valueModal" destination="ra7-Ei-Hgg" id="bLK-i7-0JB"/>
                         <segue destination="FyI-zj-JMa" kind="show" identifier="chatSegue" id="Q6n-dk-5JG"/>
                         <segue destination="ASy-U0-j3b" kind="show" identifier="safeBoxSegue" id="uFk-Ey-kgf"/>
                         <segue destination="c5f-M5-x9f" kind="show" identifier="calendarSegue" id="Yte-sM-Pdc"/>
@@ -593,7 +653,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hn0-PB-zQG" id="yId-L5-g7w">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WjC-sX-ofn">
@@ -1213,6 +1273,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Cancel" width="50" height="50"/>
         <image name="Home" width="20" height="20"/>
         <image name="User" width="29" height="29"/>
         <image name="add" width="114" height="114"/>

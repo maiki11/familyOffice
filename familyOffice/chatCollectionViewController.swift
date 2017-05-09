@@ -12,7 +12,7 @@ private let chatIndentifier = "CellChat"
 private let groupIndentifier = "CellGroup"
 private let memberIndentifier = "CellMember"
 
-class chatCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class chatCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HandleMenuBar {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +60,8 @@ class chatCollectionViewController: UICollectionViewController, UICollectionView
     
     let menuBar: MenuBar = {
         let mb = MenuBar()
+        mb.array = ["CHAT","GRUPOS","MIEMBROS"]
+        mb.setupHorizontalBar()
         return mb
     }()
     private func setupMenuBar() {
@@ -67,7 +69,7 @@ class chatCollectionViewController: UICollectionViewController, UICollectionView
         self.view.addSubview(menuBar)
         self.view.addContraintWithFormat(format: "H:|[v0]|", views: menuBar)
         self.view.addContraintWithFormat(format: "V:|[v0(50)]|", views: menuBar)
-        menuBar.chatController = self
+        menuBar.handleMapSearchDelegate = self
         menuBar.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor).isActive = true
     }
 
@@ -116,10 +118,10 @@ class chatCollectionViewController: UICollectionViewController, UICollectionView
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        menuBar.horizontalBarLeftAnchorContraint?.constant = scrollView.contentOffset.x / 3
+        menuBar.horizontalBarLeftAnchorContraint?.constant = scrollView.contentOffset.x / CGFloat(menuBar.array.count)
     }
     
-    func scrollMenuIndex(menuIndex: Int) -> Void {
+    func scrollMenuIndex(_ menuIndex: Int) -> Void {
         let indexPath = IndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }

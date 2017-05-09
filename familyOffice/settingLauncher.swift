@@ -55,12 +55,12 @@ class SettingLauncher: NSObject, UICollectionViewDelegateFlowLayout, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return FAMILY_SERVICE.families.count
+        return Constants.Services.FAMILY_SERVICE.families.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! familySettingCell
-        let family = FAMILY_SERVICE.families[indexPath.row]
+        let family = Constants.Services.FAMILY_SERVICE.families[indexPath.row]
         cell.image.layer.cornerRadius = cell.image.frame.size.width/2
         cell.image.clipsToBounds = true
         if !(family.photoURL?.isEmpty)! {
@@ -74,11 +74,11 @@ class SettingLauncher: NSObject, UICollectionViewDelegateFlowLayout, UICollectio
         return CGSize(width: collectionView.frame.width, height: 80)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        FAMILY_SERVICE.selectFamily(family: FAMILY_SERVICE.families[indexPath.row])
+        Constants.Services.FAMILY_SERVICE.selectFamily(family: Constants.Services.FAMILY_SERVICE.families[indexPath.row])
         handleDismiss()
         if view != nil {
             self.view.reloadFamily()
-            self.view.tabBarController?.navigationItem.title = FAMILY_SERVICE.families[indexPath.row].name
+            self.view.tabBarController?.navigationItem.title = Constants.Services.FAMILY_SERVICE.families[indexPath.row].name
         }
        
     }

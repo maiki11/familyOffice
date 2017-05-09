@@ -121,10 +121,10 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         return imageView
     }
     override func viewWillDisappear(_ animated: Bool) {
-        UTILITY_SERVICE.enabledView()
+        Constants.Services.UTILITY_SERVICE.enabledView()
         selected = []
         center.removeObserver(self.localeChangeObserver)
-        REF_USERS.removeAllObservers()
+        Constants.FirDatabase.REF_USERS.removeAllObservers()
         super.viewDidDisappear(animated)
     }
     
@@ -132,29 +132,74 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         save()
     }
     func save() -> Void {
-        let key = REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").childByAutoId().key
+       
+        let imageName = NSUUID().uuidString
+        let key = Constants.FirDatabase.REF.child("families").childByAutoId().key
         UIGraphicsBeginImageContextWithOptions(scrollView.bounds.size, true, UIScreen.main.scale)
         let offset = scrollView.contentOffset
         
         UIGraphicsGetCurrentContext()?.translateBy(x: -offset.x, y: -offset.y)
+        
         scrollView.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        
         UIGraphicsEndImageContext()
         
         //Add validations
-        if(imageView.image != nil && nameTxtField.text != nil){
+        if(imageView.image != nil && !(nameTxtField.text?.isEmpty)!){
             self.view.makeToastActivity(.center)
-            selected.append(USER_SERVICE.users[0])
-            FAMILY_SERVICE.createFamily(key: key, image: image!, name: nameTxtField.text!, users: selected, view: self.self)
-            //UTILITY_SERVICE.loading(view: self.view)
-            UTILITY_SERVICE.disabledView()
+            Constants.Services.UTILITY_SERVICE.disabledView()
+            
+            selected.append(Constants.Services.USER_SERVICE.users[0])
+            
+            Constants.Services.STORAGE_SERVICE.insert("families/\(nameTxtField.text ?? "")\(key)images/\(imageName).png", value: imageView.image ?? "", callback: {(response) in
+                
+                if let metadata = response as? FIRStorageMetadata {
+                    let family: Family! = Family(name: self.nameTxtField.text!, photoURL: (metadata.downloadURL()?.absoluteString)!, members: [], admin: (FIRAuth.auth()?.currentUser?.uid)! ,id: self.nameTxtField.text!+key, imageProfilePath: metadata.name)
+                    self.insertFamily(family: family, key: key)
+                }else{
+                    self.error()
+                }
+                
+                
+            })
+            
         }else{
-            let alert = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            ANIMATIONS.shakeTextField(txt: nameTxtField)
-            alert.addAction(okAction)
-            self.present(alert, animated: true, completion: nil)
+          error()
         }
+    }
+    func insertFamily(family: Family, key: String) {
+        let ref = "families/\(nameTxtField.text!)\(key)"
+        Constants.Services.FAMILY_SERVICE.insert(ref, value: family.toDictionary(), callback: { (response) in
+            
+            if response is String {
+                self.view.hideToastActivity()
+                Constants.FirDatabase.REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").updateChildValues([family.id : true])
+                
+                Constants.Services.FAMILY_SERVICE.families.append(family)
+                
+                Constants.Services.FAMILY_SERVICE.selectFamily(family: family)
+                
+                Constants.Services.ACTIVITYLOG_SERVICE.create(id: (Constants.Services.USER_SERVICE.users[0].id)!,
+                                                              activity: "Se creo la familia  \((family.name)!)", photo: family.photoURL!, type: "addFamily")
+                for uid in self.selected {
+                    Constants.Services.FAMILY_SERVICE.addMember(uid: uid.id, fid: family.id)
+                }
+                
+                Constants.Services.UTILITY_SERVICE.enabledView()
+                 _ = self.navigationController?.popViewController(animated: true)
+            }else{
+                self.error()
+            }
+            
+        })
+    }
+    func error() -> Void {
+        Constants.Services.UTILITY_SERVICE.enabledView()
+        self.view.hideToastActivity()
+        let alert = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func chooseImage(_ sender: Any) {
@@ -183,7 +228,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     }
     
     func logout(_ sender: Any){
-        AUTH_SERVICE.logOut()
+        Constants.Services.AUTH_SERVICE.logOut()
         Utility.Instance().gotoView(view: "StartView", context: self)
     }
 }

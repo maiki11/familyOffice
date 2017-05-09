@@ -18,6 +18,8 @@ target 'familyOffice' do
   pod 'Alamofire'
   pod 'FSCalendar'
   pod 'Toast-Swift', '~> 2.0.0'
+  pod 'SearchTextField'
+  pod 'MultiAutoCompleteTextSwift'
 pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
   target 'familyOfficeTests' do
     inherit! :search_paths

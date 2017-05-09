@@ -11,7 +11,9 @@ import UIKit
 class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
    
     var chatController : chatCollectionViewController!
-    
+    var addEventController : AddEventViewController!
+    weak var handleMapSearchDelegate: HandleMenuBar?
+    var array : [String]!
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -21,30 +23,36 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         return cv
     }()
     
-    let cellId = "cellId"
-    let array = ["CHATS", "GRUPOS", "MIEMBROS"]
+    let cellId = "cellMenuId"
+
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor.black
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellId)
         addSubview(collectionView)
-        
         addContraintWithFormat(format: "H:|[v0]|", views: collectionView)
         addContraintWithFormat(format: "V:|[v0]|", views: collectionView)
-        let selectedIndexPath = IndexPath(item: 0, section: 0)
-        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .centeredHorizontally )
-        setupHorizontalBar()
+        
     }
+  
+    
     var horizontalBarLeftAnchorContraint: NSLayoutConstraint?
     func setupHorizontalBar() -> Void {
+        if array != nil {
+            let selectedIndexPath = IndexPath(item: 0, section: 0)
+            collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .centeredHorizontally )
+        }
         let horizontalView = UIView()
         horizontalView.backgroundColor = #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
-        horizontalView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(horizontalView)
+        horizontalView.translatesAutoresizingMaskIntoConstraints = true
+        collectionView.addSubview(horizontalView)
         horizontalBarLeftAnchorContraint =  horizontalView.leftAnchor.constraint(equalTo: self.leftAnchor)
         horizontalBarLeftAnchorContraint?.isActive = true
         horizontalView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        horizontalView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3).isActive = true
-        horizontalView.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        horizontalView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: CGFloat(1/array.count)).isActive = true
+        horizontalView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        self.collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -52,11 +60,14 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
-        chatController.scrollMenuIndex(menuIndex: indexPath.item)
+       
+        handleMapSearchDelegate?.scrollMenuIndex(indexPath.item)
+        
+        
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return array != nil ? array.count : 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,13 +76,13 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width/3, height: frame.height)
+        let count = CGFloat(Int32(array.count))
+        return CGSize(width: frame.width/count, height: frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-   
    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) No ha sido implementado")
@@ -81,19 +92,20 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
 class MenuCell: BaseCell {
     let label: UILabel = {
         let lb = UILabel()
-        lb.font = lb.font.withSize(12)
-        lb.tintColor =  #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
+        lb.font = UIFont.boldSystemFont(ofSize: 14)
+        lb.textColor =  #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         return lb
     }()
     
     override var isHighlighted: Bool {
         didSet {
-            label.textColor = isHighlighted ? #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1) : #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
+            label.textColor = isHighlighted ? #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1) : #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+            
         }
     }
     override var isSelected: Bool {
         didSet {
-            label.textColor = isSelected ? #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1) : #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
+            label.textColor = isSelected ? #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1) : #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         }
     }
     

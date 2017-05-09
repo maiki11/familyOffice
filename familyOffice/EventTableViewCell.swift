@@ -8,35 +8,36 @@
 
 import UIKit
 
-class EventTableViewCell: UITableViewCell {
-
-    
-    var delegate :UICollectionViewDelegate!
-    var dataSource : UICollectionViewDataSource!
-    var info: DateModel!
+class EventTableViewCell: UITableViewCell, EventBindable {
+    var event: Event?
+    weak var delegate : CalendarViewController!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    
     }
-
+    //Binding DateModelBindable
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var endDateLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    
     @IBOutlet weak var count: UILabel!
-    @IBOutlet weak var time: UILabel!
-    @IBOutlet weak var hour: UILabel!
     @IBOutlet weak var locationIcon: UIImageView!
-    @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var title: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    func tapFunction(sender:UITapGestureRecognizer) {
+        delegate.gotoView(event: event!, segue: "showEventSegue")
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         count.layer.cornerRadius = count.frame.width/2
         count.clipsToBounds = true
         // Configure the view for the selected state
     }
-    func configure(date: DateModel) {
-        self.info = date
-        self.hour.text = Date(string: date.date, formatter: .dayMonthYearHourMinute)?.string(with: .localeMediumStyle)
-        self.title.text = date.title
-    }
+
     func  setCollectionViewDataSourceDelegate
         <D: UICollectionViewDataSource & UICollectionViewDelegate>
         (dataSourceDelegate: D, forRow row: Int) {
@@ -47,5 +48,6 @@ class EventTableViewCell: UITableViewCell {
         collectionView.reloadData()
     
     }
+    
    
 }

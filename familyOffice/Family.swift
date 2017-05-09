@@ -24,7 +24,7 @@ struct Family  {
     var imageProfilePath : String?
     var totalMembers : UInt? = 0
     var admin : String? = ""
-    var members : NSDictionary?
+    var members : [String]!
     let firebaseReference: FIRDatabaseReference?
 
     /* Initializer for instantiating a new object in code.
@@ -39,7 +39,7 @@ struct Family  {
         self.members = nil
     }
     
-    init(name: String, photoURL: String, members: NSDictionary, admin: String, id: String, imageProfilePath: String? ){
+    init(name: String, photoURL: String, members: [String], admin: String, id: String, imageProfilePath: String? ){
         self.name = name
         self.photoURL = photoURL
         self.admin = admin
@@ -53,43 +53,44 @@ struct Family  {
     /* Initializer for instantiating an object received from Firebase.
      */
     init(snapshot: FIRDataSnapshot) {
-        let snapshotValue = snapshot.value as! [String: Any]
-        self.name = snapshotValue[Family.kFamilyNameKey] as! String
+        let snapshotValue = snapshot.value as! NSDictionary
         self.id = snapshot.key
-        self.imageProfilePath = UTILITY_SERVICE.exist(field: Family.kFamilyImagePathKey, dictionary: snapshotValue as NSDictionary)
-        self.photoURL = snapshotValue[Family.kFamilyPhotoUrlKey] as! String
-        if let members = snapshotValue[Family.kFamilyMembersKey] {
-            self.totalMembers = UInt((members as AnyObject).count)
-            self.members = members as? NSDictionary
-        }
-        if let admin = snapshotValue[Family.kFamilyAdminKey]  {
-            self.admin = admin as? String
-        }
+        self.name = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyNameKey, dictionary: snapshotValue)
+        self.imageProfilePath = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyImagePathKey, dictionary: snapshotValue)
+        self.photoURL = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyPhotoUrlKey, dictionary: snapshotValue)
+        self.members = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyMembersKey, dictionary: snapshotValue)
+        self.admin = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyAdminKey, dictionary: snapshotValue)
         self.firebaseReference = snapshot.ref
     }
     
     /* Method to help updating values of an existing object.
      */
     func toDictionary() -> Any {
+        
+        
         return [
             Family.kFamilyNameKey: self.name,
             Family.kFamilyPhotoUrlKey: self.photoURL!,
-            Family.kFamilyMembersKey : self.members!,
+            Family.kFamilyMembersKey : Constants.Services.UTILITY_SERVICE.toDictionary(array: self.members),
             Family.kFamilyAdminKey : self.admin ?? "",
             Family.kFamilyImagePathKey: self.imageProfilePath!
         ]
     }
     
     mutating func update(snapshot: FIRDataSnapshot){
+        guard let value = snapshot.value! as? NSDictionary else {
+            return
+        }
+
         switch snapshot.key {
         case  Family.kFamilyNameKey:
             self.name =  snapshot.value! as! String
             break
         case Family.kFamilyMembersKey:
-            self.members = snapshot.value as? NSDictionary
+                        self.members = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyMembersKey, dictionary: value)
             break
         case Family.kFamilyPhotoUrlKey:
-            self.photoURL = snapshot.value as! String
+            self.photoURL = snapshot.value as? String
             break
         default:
             break
