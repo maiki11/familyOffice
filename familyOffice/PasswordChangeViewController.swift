@@ -12,6 +12,7 @@ class PasswordChangeViewController: UIViewController {
     @IBOutlet weak var oldPassword: UITextField!
     @IBOutlet weak var newPassword: UITextField!
     @IBOutlet weak var repeatPass: UITextField!
+    @IBOutlet weak var viewContainer: UIView!
     
     override func viewDidLoad() {
         let homeButton : UIBarButtonItem = UIBarButtonItem(title: "Atras", style: .plain, target: self, action: #selector(back(sender:)))
@@ -20,16 +21,21 @@ class PasswordChangeViewController: UIViewController {
         self.navigationItem.backBarButtonItem = homeButton
         self.navigationItem.rightBarButtonItem = doneButton
         super.viewDidLoad()
-        
+        STYLES.borderbottom(textField: oldPassword, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
+        STYLES.borderbottom(textField: newPassword, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
+        STYLES.borderbottom(textField: repeatPass, color: UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), width: 1.0)
+        self.viewContainer.layer.borderWidth = 1
+        self.viewContainer.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
+        self.viewContainer.layer.cornerRadius = 5
         // Do any additional setup after loading the view.
     }
    
     override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(forName: SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
-             UTILITY_SERVICE.stopLoading(view: self.view)
+        NotificationCenter.default.addObserver(forName:  Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: nil, queue: nil){ notification in
+              Constants.Services.UTILITY_SERVICE.stopLoading(view: self.view)
         }
-        NotificationCenter.default.addObserver(forName: ERROR_NOTIFICATION, object: nil, queue: nil){_ in
-             UTILITY_SERVICE.stopLoading(view: self.view)
+        NotificationCenter.default.addObserver(forName:  Constants.NotificationCenter.ERROR_NOTIFICATION, object: nil, queue: nil){_ in
+              Constants.Services.UTILITY_SERVICE.stopLoading(view: self.view)
            
         }
         
@@ -39,8 +45,8 @@ class PasswordChangeViewController: UIViewController {
         changePassword(sender: nil)
     }
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(SUCCESS_NOTIFICATION)
-        NotificationCenter.default.removeObserver(ERROR_NOTIFICATION)
+        NotificationCenter.default.removeObserver( Constants.NotificationCenter.SUCCESS_NOTIFICATION)
+        NotificationCenter.default.removeObserver( Constants.NotificationCenter.ERROR_NOTIFICATION)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -51,40 +57,40 @@ class PasswordChangeViewController: UIViewController {
     }
     
     func changePassword(sender: UIBarButtonItem?) -> Void {
-        UTILITY_SERVICE.loading(view: self.view)
+        Constants.Services.UTILITY_SERVICE.loading(view: self.view)
         if(oldPassword.text! == ""){
-            ANIMATIONS.shakeTextField(txt: oldPassword)
-            ALERT_SERVICE.alertMessage(context: self, title: "Campo vacío", msg: "El campo Contraseña actual no puede estar vacío")
+             Constants.Services.ANIMATIONS.shakeTextField(txt: oldPassword)
+             Constants.Services.ALERT_SERVICE.alertMessage(context: self, title: "Campo vacío", msg: "El campo Contraseña actual no puede estar vacío")
         }else{
             if(newPassword.text == ""){
-                ANIMATIONS.shakeTextField(txt: newPassword)
-                ALERT_SERVICE.alertMessage(context: self, title: "Campo vacío", msg: "El campo Contraseña nueva no puede estar vacío")
+                 Constants.Services.ANIMATIONS.shakeTextField(txt: newPassword)
+                Constants.Services.ALERT_SERVICE.alertMessage(context: self, title: "Campo vacío", msg: "El campo Contraseña nueva no puede estar vacío")
             }else{
                 if((newPassword.text?.characters.count)! < 6){
-                    ANIMATIONS.shakeTextField(txt: newPassword)
-                    ALERT_SERVICE.alertMessage(context: self, title: "Mínimo de caracteres", msg: "El campo Contraseña nueva tiene que tener al menos 6 caracteres")
+                     Constants.Services.ANIMATIONS.shakeTextField(txt: newPassword)
+                     Constants.Services.ALERT_SERVICE.alertMessage(context: self, title: "Mínimo de caracteres", msg: "El campo Contraseña nueva tiene que tener al menos 6 caracteres")
                 }else{
                     if(repeatPass.text == ""){
-                        ANIMATIONS.shakeTextField(txt: repeatPass)
-                        ALERT_SERVICE.alertMessage(context: self, title: "Campo vacío", msg: "El campo Repetir contraseña no puede estar vacío")
+                         Constants.Services.ANIMATIONS.shakeTextField(txt: repeatPass)
+                         Constants.Services.ALERT_SERVICE.alertMessage(context: self, title: "Campo vacío", msg: "El campo Repetir contraseña no puede estar vacío")
                     }else{
                         if((repeatPass.text?.characters.count)! < 6){
-                            ANIMATIONS.shakeTextField(txt: repeatPass)
-                            ALERT_SERVICE.alertMessage(context: self, title: "Mínimo de caracteres", msg: "El campo Confirmar contraseña tiene que tener al menos 6 caracteres")
+                             Constants.Services.ANIMATIONS.shakeTextField(txt: repeatPass)
+                             Constants.Services.ALERT_SERVICE.alertMessage(context: self, title: "Mínimo de caracteres", msg: "El campo Confirmar contraseña tiene que tener al menos 6 caracteres")
                         }else{
                             if(newPassword.text == repeatPass.text ){
-                                USER_SERVICE.changePassword(oldPass: oldPassword.text!, newPass: newPassword.text!, context: self)
+                                Constants.Services.USER_SERVICE.changePassword(oldPass: oldPassword.text!, newPass: newPassword.text!, context: self)
                             }else{
-                                ANIMATIONS.shakeTextField(txt: newPassword)
-                                ANIMATIONS.shakeTextField(txt: repeatPass)
-                                ALERT_SERVICE.alertMessage(context: self, title: "Contraseña distinta", msg: "La contraseña nueva y  confirmar contraseña no coinciden")
+                                 Constants.Services.ANIMATIONS.shakeTextField(txt: newPassword)
+                                 Constants.Services.ANIMATIONS.shakeTextField(txt: repeatPass)
+                                 Constants.Services.ALERT_SERVICE.alertMessage(context: self, title: "Contraseña distinta", msg: "La contraseña nueva y  confirmar contraseña no coinciden")
                             }
                         }
                     }
                 }
             }
         }
-        UTILITY_SERVICE.stopLoading(view: self.view)
+         Constants.Services.UTILITY_SERVICE.stopLoading(view: self.view)
     }
     /*
     // MARK: - Navigation
@@ -97,11 +103,11 @@ class PasswordChangeViewController: UIViewController {
     */
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: true, context: self)
+         Constants.Services.UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: true, context: self)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: false, context: self)
+         Constants.Services.UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: false, context: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

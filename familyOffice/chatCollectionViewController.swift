@@ -12,7 +12,7 @@ private let chatIndentifier = "CellChat"
 private let groupIndentifier = "CellGroup"
 private let memberIndentifier = "CellMember"
 
-class chatCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class chatCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HandleMenuBar {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +24,21 @@ class chatCollectionViewController: UICollectionViewController, UICollectionView
         setupMenuBar()
         setupCollectionView()
         
+        let logOutButton = UIBarButtonItem(title: "Nuevo", style: .plain, target: self, action:nil)
+        logOutButton.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
+        navigationItem.rightBarButtonItems = [logOutButton]
+        let nav = self.navigationController?.navigationBar
+        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
+        self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.1757333279, blue: 0.2568904757, alpha: 1)
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
+        
         
 
         // Do any additional setup after loading the view.
     }
-
+    func handleBack()  {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -50,6 +60,8 @@ class chatCollectionViewController: UICollectionViewController, UICollectionView
     
     let menuBar: MenuBar = {
         let mb = MenuBar()
+        mb.array = ["CHAT","GRUPOS","MIEMBROS"]
+        mb.setupHorizontalBar()
         return mb
     }()
     private func setupMenuBar() {
@@ -57,7 +69,7 @@ class chatCollectionViewController: UICollectionViewController, UICollectionView
         self.view.addSubview(menuBar)
         self.view.addContraintWithFormat(format: "H:|[v0]|", views: menuBar)
         self.view.addContraintWithFormat(format: "V:|[v0(50)]|", views: menuBar)
-        menuBar.chatController = self
+        menuBar.handleMapSearchDelegate = self
         menuBar.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor).isActive = true
     }
 
@@ -106,10 +118,10 @@ class chatCollectionViewController: UICollectionViewController, UICollectionView
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        menuBar.horizontalBarLeftAnchorContraint?.constant = scrollView.contentOffset.x / 3
+        menuBar.horizontalBarLeftAnchorContraint?.constant = scrollView.contentOffset.x / CGFloat(menuBar.array.count)
     }
     
-    func scrollMenuIndex(menuIndex: Int) -> Void {
+    func scrollMenuIndex(_ menuIndex: Int) -> Void {
         let indexPath = IndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }

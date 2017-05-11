@@ -13,6 +13,7 @@ class ConfigurationViewController: UIViewController, UIImagePickerControllerDele
 UINavigationControllerDelegate  {
     var user: User!
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var containerView: ConfigurationView!
     let picker = UIImagePickerController()
     var chosenImage: UIImage!
     
@@ -21,11 +22,17 @@ UINavigationControllerDelegate  {
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         self.profileImage.clipsToBounds = true
         picker.delegate = self
-       
+        let nav = self.navigationController?.navigationBar
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
         // Do any additional setup after loading the view.
+        self.containerView.layer.borderWidth = 1
+        self.containerView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
+        self.profileImage.layer.borderWidth = 4.0
+        self.profileImage.layer.borderColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
+        self.profileImage.layer.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
     }
     override func viewWillAppear(_ animated: Bool) {
-        user = USER_SERVICE.users[0]
+        user = Constants.Services.USER_SERVICE.users[0]
         if !user.photoURL.isEmpty {
             profileImage.loadImage(urlString: user.photoURL)
         }

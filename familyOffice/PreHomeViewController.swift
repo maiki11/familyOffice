@@ -9,7 +9,7 @@
 import UIKit
 
 class SelectCategoryViewController: UIViewController {
-    var families : [Family]! = []
+    
     var imageSelect : UIImage!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var headerView: UIView!
@@ -27,24 +27,25 @@ class SelectCategoryViewController: UIViewController {
         navigationItem.rightBarButtonItems = [logOutButton]
         let nav = self.navigationController?.navigationBar
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
+        
         self.headerView.layer.borderWidth = 1
-        self.headerView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.headerView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
         self.familiasView.layer.borderWidth = 1
-        self.familiasView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.familiasView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
         self.familiasView.layer.cornerRadius = 5
         self.categoriasView.layer.borderWidth = 1
-        self.categoriasView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.categoriasView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
         self.categoriasView.layer.cornerRadius = 5
         self.socialView.layer.borderWidth = 1
-        self.socialView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.socialView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
         self.socialView.layer.cornerRadius = 5
         self.empresarialView.layer.borderWidth = 1
-        self.empresarialView.layer.borderColor = UIColor( red: 177/255, green: 177/255, blue:177.0/255, alpha: 1.0 ).cgColor
+        self.empresarialView.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
         self.empresarialView.layer.cornerRadius = 5
     }
     @IBAction func handlePressSocial(_ sender: UIButton) {
-        if FAMILY_SERVICE.families.count > 0 && FAMILY_SERVICE.families.contains(where: {$0.id == USER_SERVICE.users[0].familyActive}){
-            UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
+        if Constants.Services.FAMILY_SERVICE.families.count > 0 && Constants.Services.FAMILY_SERVICE.families.contains(where: {$0.id == Constants.Services.USER_SERVICE.users[0].familyActive}){
+            Constants.Services.UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
         }
     }
 
@@ -53,19 +54,18 @@ class SelectCategoryViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     override func viewWillAppear(_ animated: Bool) {
+       
         self.familiesCollection.reloadData()
-        if USER_SERVICE.users.count > 0 {
+        if Constants.Services.USER_SERVICE.users.count > 0 {
             loadImage()
         }
-        
-        families = FAMILY_SERVICE.families
-        localeChangeObserver.append( NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){_ in
+       
+        localeChangeObserver.append( NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: nil){_ in
             self.loadImage()
         })
-        localeChangeObserver.append(NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
+        localeChangeObserver.append(NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
             if let family : Family = family.object as? Family {
                 self.addFamily(family: family)
-                self.familiesCollection.reloadData()
             }
         })
 
@@ -75,25 +75,24 @@ class SelectCategoryViewController: UIViewController {
             NotificationCenter.default.removeObserver(obs)
         }
         self.localeChangeObserver.removeAll()
-        
     }
     func loadImage() -> Void {
-        if !USER_SERVICE.users[0].photoURL.isEmpty {
-            image.loadImage(urlString: USER_SERVICE.users[0].photoURL)
+        if !Constants.Services.USER_SERVICE.users[0].photoURL.isEmpty {
+            image.loadImage(urlString: Constants.Services.USER_SERVICE.users[0].photoURL)
         }else{
             image.image = #imageLiteral(resourceName: "profile_default")
         }
-        self.name.text = USER_SERVICE.users[0].name
+        self.name.text = Constants.Services.USER_SERVICE.users[0].name
         self.image.layer.cornerRadius = self.image.frame.size.width/2
         self.image.clipsToBounds = true
         self.image.layer.borderWidth = 4.0
         self.image.layer.borderColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
-        self.image.layer.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
+        //self.image.layer.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
     }
     
     @IBAction func handleBussiness(_ sender: UIButton) {
-        if FAMILY_SERVICE.families.count > 0 && FAMILY_SERVICE.families.contains(where: {$0.id == USER_SERVICE.users[0].familyActive}){
-            UTILITY_SERVICE.gotoView(view: "HomeBussiness", context: self)
+        if Constants.Services.FAMILY_SERVICE.families.count > 0 && Constants.Services.FAMILY_SERVICE.families.contains(where: {$0.id == Constants.Services.USER_SERVICE.users[0].familyActive}){
+            Constants.Services.UTILITY_SERVICE.gotoView(view: "HomeBussiness", context: self)
         }
         
     }
@@ -105,8 +104,8 @@ class SelectCategoryViewController: UIViewController {
     }
     
     func logout(){
-        AUTH_SERVICE.logOut()
-        Utility.Instance().gotoView(view: "StartView", context: self)
+        Constants.Services.AUTH_SERVICE.logOut()
+        //Utility.Instance().gotoView(view: "StartView", context: self)
     }
     
 }

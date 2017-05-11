@@ -10,48 +10,65 @@ import Foundation
 import Firebase
 
 
+struct Constants {
+    struct FirDatabase {
+        static let REF = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
+        static let REF_FAMILIES = REF.child("families")
+        static let REF_USERS = REF.child("users")
+        static let REF_ACTIVITY = REF.child("activityLog")
+        static let REF_NOTIFICATION = REF.child("notifications")
+
+    }
+    
+    struct FirStorage {
+        static let STORAGEREF = FIRStorage.storage().reference(forURL: "gs://familyoffice-6017a.appspot.com")
+    }
+    
+    struct Services {
+        static let ACTIVITYLOG_SERVICE = ActivityLogService.Instance()
+        static let UTILITY_SERVICE = Utility.Instance()
+        static let AUTH_SERVICE = AuthService.Instance()
+        static let ANIMATIONS = Animations.instance
+        static let STORAGE_SERVICE = StorageService.Instance()
+        static let FAMILY_SERVICE = FamilyService.Instance()
+        static let USER_SERVICE = UserService.Instance()
+        static let NOTIFICATION_SERVICE = NotificationService.Instance()
+        static let ALERT_SERVICE = AlertService.Instance()
+        static let REF_SERVICE = RefHandle.Instance()
+        static let HEALTH_SERVICE = HealthService.Instance()
+        static let EVENT_SERVICE = EventService.Instance()
+    }
+    
+    struct NotificationCenter {
+        static let USER_NOTIFICATION = Notification.Name("UserNotification")
+        static let NOFAMILIES_NOTIFICATION = Notification.Name("NoFamiliesNotification")
+        static let LOGINERROR = Notification.Name("LoginNotification")
+        static let USERS_NOTIFICATION = Notification.Name("UserNotification")
+        static let FAMILYUPDATED_NOTIFICATION = Notification.Name("FamilyUpdatedNotification")
+        static let FAMILYADDED_NOTIFICATION = Notification.Name("FamilyAddedNotification")
+        static let FAMILYREMOVED_NOTIFICATION = Notification.Name("FamilyRemovedNotification")
+        static let USERUPDATED_NOTIFICATION = Notification.Name("UserUpdatedNotification")
+        static let SUCCESS_NOTIFICATION  = Notification.Name("SuccessNotification")
+        static let ERROR_NOTIFICATION  = Notification.Name("ErrorNotification")
+        static let BACKGROUND_NOTIFICATION = Notification.Name("BackgroundNotification")
+        static let HEALTHELEMENT_ADDED = Notification.Name("ElementAddedNotification")
+        static let HEALTHELEMENT_UPDATED = Notification.Name("ElementUpdatedNotification")
+        static let HEALTHELEMENT_REMOVED = Notification.Name("ElementRemovedNotification")
+
+    }
+
+    struct ServerApi {
+        static let SERVERKEY =  "AIzaSyAkiqHhHKI0xcXrYF9eq-D6PzhUl-mPOls"
+        static let NOTIFICATION_URL = "https://fcm.googleapis.com/fcm/send"
+    }
+}
+
 let modelName = UIDevice.current.modelName
 //Notification Center
-let USER_NOTIFICATION = Notification.Name("UserNotification")
-let NOFAMILIES_NOTIFICATION = Notification.Name("NoFamiliesNotification")
-let LOGINERROR = Notification.Name("LoginNotification")
-let USERS_NOTIFICATION = Notification.Name("UserNotification")
 
-let FAMILYUPDATED_NOTIFICATION = Notification.Name("FamilyUpdatedNotification")
-let FAMILYADDED_NOTIFICATION = Notification.Name("FamilyAddedNotification")
-let FAMILYREMOVED_NOTIFICATION = Notification.Name("FamilyRemovedNotification")
-
-let USERUPDATED_NOTIFICATION = Notification.Name("UserUpdatedNotification")
-
-let SUCCESS_NOTIFICATION  = Notification.Name("SuccessNotification")
-let ERROR_NOTIFICATION  = Notification.Name("ErrorNotification")
-
-let BACKGROUND_NOTIFICATION = Notification.Name("BackgroundNotification")
-//Firebase References
-
-let REF = FIRDatabase.database().reference(fromURL: "https://familyoffice-6017a.firebaseio.com/")
-let REF_FAMILIES = REF.child("families")
-let REF_USERS = REF.child("users")
-let REF_ACTIVITY = REF.child("activityLog")
-let REF_NOTIFICATION = REF.child("notifications")
-
-
-//Storage Reference
-let STORAGEREF = FIRStorage.storage().reference(forURL: "gs://familyoffice-6017a.appspot.com")
-
-//Service
-let ACTIVITYLOG_SERVICE = ActivityLogService.Instance()
-let UTILITY_SERVICE = Utility.Instance()
-let AUTH_SERVICE = AuthService.Instance()
-let ANIMATIONS = Animations.instance
-let STORAGE_SERVICE = StorageService.Instance()
-let FAMILY_SERVICE = FamilyService.Instance()
-let USER_SERVICE = UserService.Instance()
-let NOTIFICATION_SERVICE = NotificationService.Instance()
-let ALERT_SERVICE = AlertService.Instance()
-let REF_SERVICE = RefHandle.Instance()
-let REQUEST_SERVICE = RequestService.Instance()
+//Styles
+let STYLES = Styles.Instance()
 
 //Others
-let SERVERKEY =  "AIzaSyAkiqHhHKI0xcXrYF9eq-D6PzhUl-mPOls"
-let NOTIFICATION_URL = "https://fcm.googleapis.com/fcm/send"
+
+

@@ -25,9 +25,11 @@ class SafeBoxViewController: UIViewController {
         passwordContainerView.delegate = self
         
         //customize password UI
-        passwordContainerView.tintColor = UIColor.black
-        passwordContainerView.highlightedColor = UIColor.brown
+        passwordContainerView.tintColor = #colorLiteral(red: 0.5215686275, green: 0.5215686275, blue: 0.5215686275, alpha: 1)
+        passwordContainerView.highlightedColor = #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)
         self.navigationItem.title = "Caja Fuerte"
+        let nav = self.navigationController?.navigationBar
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
 
     }
     
@@ -40,8 +42,7 @@ class SafeBoxViewController: UIViewController {
 }
 
 extension SafeBoxViewController: PasswordInputCompleteProtocol {
-    
-    public func touchAuthenticationComplete(_ passwordContainerView: PasswordContainerView, success: Bool, error: NSError?) {
+    func touchAuthenticationComplete(_ passwordContainerView: PasswordContainerView, success: Bool, error: Error?) {
         if success {
             self.validationSuccess()
         }else{

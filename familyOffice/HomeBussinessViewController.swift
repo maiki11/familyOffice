@@ -17,7 +17,7 @@ class HomeBussinessViewController: UIViewController, UICollectionViewDelegate, U
     private var family : Family?
     
     
-    let user = USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
+    let user = Constants.Services.USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
     var families : [String]! = []
     
    
@@ -37,8 +37,10 @@ class HomeBussinessViewController: UIViewController, UICollectionViewDelegate, U
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
         
         self.navigationItem.rightBarButtonItem = moreButton
-        let barButton = UIBarButtonItem(title: "Atras", style: .plain, target: self, action: #selector(self.handleBack))
+        let barButton = UIBarButtonItem(title: "Atrás", style: .plain, target: self, action: #selector(self.handleBack))
         self.navigationItem.leftBarButtonItem = barButton
+        let nav = self.navigationController?.navigationBar
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
         
     }
     
@@ -50,7 +52,7 @@ class HomeBussinessViewController: UIViewController, UICollectionViewDelegate, U
     
     
     func handleBack()  {
-        UTILITY_SERVICE.gotoView(view: "mainView", context: self)
+        Constants.Services.UTILITY_SERVICE.gotoView(view: "mainView", context: self)
         
     }
     
@@ -58,19 +60,19 @@ class HomeBussinessViewController: UIViewController, UICollectionViewDelegate, U
         reloadFamily()
         
         
-        if let index = FAMILY_SERVICE.families.index(where: {$0.id == USER_SERVICE.users[0].familyActive}) {
-            self.navigationItem.title = FAMILY_SERVICE.families[index].name
+        if let index = Constants.Services.FAMILY_SERVICE.families.index(where: {$0.id == Constants.Services.USER_SERVICE.users[0].familyActive}) {
+            self.navigationItem.title = Constants.Services.FAMILY_SERVICE.families[index].name
         }
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        NotificationCenter.default.addObserver(forName: NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
+        NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
       
             return
         }
-        NotificationCenter.default.addObserver(forName: USER_NOTIFICATION, object: nil, queue: nil){_ in
+        NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: nil){_ in
             self.reloadFamily()
         }
-        NotificationCenter.default.addObserver(forName: FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
+        NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
             self.reloadFamily()
             //FAMILY_SERVICE.verifyFamilyActive(family: family.object as! Family)
         }
@@ -82,9 +84,9 @@ class HomeBussinessViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(USER_NOTIFICATION)
-        NotificationCenter.default.removeObserver(NOFAMILIES_NOTIFICATION)
-        NotificationCenter.default.removeObserver(FAMILYADDED_NOTIFICATION)
+        NotificationCenter.default.removeObserver(Constants.NotificationCenter.USER_NOTIFICATION)
+        NotificationCenter.default.removeObserver(Constants.NotificationCenter.NOFAMILIES_NOTIFICATION)
+        NotificationCenter.default.removeObserver(Constants.NotificationCenter.FAMILYADDED_NOTIFICATION)
     }
     
     func reloadFamily() -> Void {
@@ -114,7 +116,7 @@ class HomeBussinessViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellModule", for: indexPath) as! ModuleCollectionViewCell
         
-        cell.buttonicon.setImage(UIImage(named: icons[indexPath.item])!, for: .normal)
+        cell.buttonicon.setBackgroundImage(UIImage(named: icons[indexPath.item])!, for: .normal)
         cell.name.text = labels[indexPath.row]
         cell.buttonicon.badgeString = "8"
         cell.buttonicon.badgeEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0)

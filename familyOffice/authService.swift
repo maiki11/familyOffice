@@ -27,33 +27,33 @@ class AuthService {
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
             if((error) != nil){
                 print(error.debugDescription)
-                NotificationCenter.default.post(name: LOGINERROR, object: nil)
+                NotificationCenter.default.post(name: Constants.NotificationCenter.LOGINERROR, object: nil)
             }else{
-                ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
+                Constants.Services.ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
             }
         }
     }
     func userStatus(state: String) -> Void {
-        REF_USERS.child(self.uid!).updateChildValues(["online": state])
+        Constants.FirDatabase.REF_USERS.child(self.uid!).updateChildValues(["online": state])
     }
     func login(credential:FIRAuthCredential){
         FIRAuth.auth()?.signIn(with: credential ) { (user, error) in
             print("Usuario autentificado con google")
-            ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
+            Constants.Services.ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
         }
     }
     func logOut(){
         if let uid = FIRAuth.auth()?.currentUser?.uid {
-            NOTIFICATION_SERVICE.deleteToken(token: NOTIFICATION_SERVICE.token, id: uid)
+            Constants.Services.NOTIFICATION_SERVICE.deleteToken(token: Constants.Services.NOTIFICATION_SERVICE.token, id: uid)
             self.userStatus(state: "Offline")
         }
         
         try! FIRAuth.auth()!.signOut()
-        USER_SERVICE.users.removeAll()
-        UTILITY_SERVICE.clearObservers()
-        NOTIFICATION_SERVICE.notifications.removeAll()
-        ACTIVITYLOG_SERVICE.activityLog.removeAll()
-        FAMILY_SERVICE.families.removeAll()
+        Constants.Services.USER_SERVICE.users.removeAll()
+        Constants.Services.UTILITY_SERVICE.clearObservers()
+        Constants.Services.NOTIFICATION_SERVICE.notifications.removeAll()
+        Constants.Services.ACTIVITYLOG_SERVICE.activityLog.removeAll()
+        Constants.Services.FAMILY_SERVICE.families.removeAll()
         imageCache.removeAllObjects()
     }
 
@@ -62,8 +62,9 @@ class AuthService {
         let imageName = NSUUID().uuidString
         let url = user.photoURL
         let data = NSData(contentsOf:url!! as URL)
-        if let uploadData = UIImagePNGRepresentation(UIImage(data: data as! Data)!){
-            STORAGEREF.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
+        if let uploadData = UIImagePNGRepresentation(UIImage(data: data! as Data)!){
+
+            Constants.FirStorage.STORAGEREF.child("users").child(user.uid).child("images").child("\(imageName).jpg").put(uploadData, metadata: nil) { metadata, error in
                 if (error != nil) {
                     // Uh-oh, an error occurred!
                     print(error.debugDescription)
@@ -72,8 +73,8 @@ class AuthService {
                     if let downloadURL = metadata?.downloadURL()?.absoluteString {
                         let xuserModel = ["name" : user.displayName!,
                                           "photoUrl": downloadURL] as [String : Any]
-                        REF_USERS.child(user.uid).setValue(xuserModel)
-                        ACTIVITYLOG_SERVICE.create(id: user.uid, activity: "Se creo la cuenta", photo: downloadURL, type: "sesion")
+                        Constants.FirDatabase.REF_USERS.child(user.uid).setValue(xuserModel)
+                        Constants.Services.ACTIVITYLOG_SERVICE.create(id: user.uid, activity: "Se creo la cuenta", photo: downloadURL, type: "sesion")
                         //self.userStatus(state: "Online")
                     }
                 }
@@ -94,12 +95,13 @@ class AuthService {
 
     func isAuth(view: UIViewController, name: String)  {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            
             self.uid = user?.uid
             if (user != nil) {
                 self.checkUserAgainstDatabase(completion: {(success, error ) in
                     if success {
-                        REF_SERVICE.value(ref: ref_users(uid: (user?.uid)!))
-                        UTILITY_SERVICE.gotoView(view: name, context: view)
+                        Constants.Services.REF_SERVICE.value(ref: ref_users(uid: (user?.uid)!))
+                        Constants.Services.UTILITY_SERVICE.gotoView(view: name, context: view)
                     }else{
                        self.logOut()
                     }

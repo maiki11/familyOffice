@@ -25,3 +25,7 @@ class AlertService  {
         context.present(alert, animated: true, completion: nil)
     }
 }
+
+extension AlertService {
+    
+}

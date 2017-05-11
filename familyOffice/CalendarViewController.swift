@@ -6,256 +6,215 @@
 //  Copyright © 2017 Leonardo Durazo. All rights reserved.
 //
 import UIKit
-import JTAppleCalendar
+import FSCalendar
 
-class CalendarViewController: UIViewController {
-    var dates: [DateModel]! = []
-    var dateActiveInSelected : [DateModel]! = []
-    @IBOutlet weak var calendarView: JTAppleCalendarView!
-    @IBOutlet weak var monthLabel: UILabel!
-    
+class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
+    var event: Event!
+    var dates: [Event] = []
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var calendar: FSCalendar!
+    var localeChangeObserver : [NSObjectProtocol] = []
+    @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
     
-    var numberOfRows = 6
-    let formatter = DateFormatter()
-    var testCalendar = Calendar.current
-    var generateInDates: InDateCellGeneration = .forAllMonths
-    var generateOutDates: OutDateCellGeneration = .tillEndOfGrid
-    var hasStrictBoundaries = true
-    let firstDayOfWeek: DaysOfWeek = .sunday
-    let disabledColor = UIColor.lightGray
-    let enabledColor = UIColor.blue
-    let dateCellSize: CGFloat? = nil
-    
-    let red = UIColor.red
-    let white = UIColor.white
-    let black = UIColor.black
-    let gray = UIColor.gray
-    let shade = UIColor.darkText
-    
+    fileprivate lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy MM dd"
+        return formatter
+    }()
+    fileprivate lazy var scopeGesture: UIPanGestureRecognizer = {
+        [unowned self] in
+        let panGesture = UIPanGestureRecognizer(target: self.calendar, action: #selector(self.calendar.handleScopeGesture(_:)))
+        panGesture.delegate = self
+        panGesture.minimumNumberOfTouches = 1
+        panGesture.maximumNumberOfTouches = 2
+        return panGesture
+        }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dates = testFile().testDate()
-        formatter.dateFormat = "yyyy MM dd"
-        formatter.timeZone = testCalendar.timeZone
-        formatter.locale = testCalendar.locale
+    
+        if UIDevice.current.model.hasPrefix("iPad") {
+            self.calendarHeightConstraint.constant = 400
+        }
+        for item in Constants.Services.USER_SERVICE.users[0].events! {
+            searchEvent(eid: item)
+        }
+       
         
-        // Setting up your dataSource and delegate is manditory
-        // ___________________________________________________________________
-        calendarView.delegate = self
-        calendarView.dataSource = self
+        self.view.addGestureRecognizer(self.scopeGesture)
+        self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
+        self.calendar.scope = .week
+        let barButton = UIBarButtonItem(title: "Nuevo", style: .plain, target: self, action: #selector(self.handleNewEvent))
+        self.navigationItem.rightBarButtonItem = barButton
+        // For UITest
+        self.calendar.accessibilityIdentifier = "calendar"
         
+    }
+    func tapFunction(sender: UILabel) {
+        let center = sender.center
+        let point = sender.superview!.convert(center, to:self.tableView)
+        let indexPath = self.tableView.indexPathForRow(at: point)
+        let cell = self.tableView.cellForRow(at: indexPath!) as! EventTableViewCell
+        self.event = cell.event!
+        self.performSegue(withIdentifier: "showEventSegue", sender: nil)
         
-        // ___________________________________________________________________
-        // Registering your cells is manditory
-        // ___________________________________________________________________
-        calendarView.registerCellViewXib(file: "CellView")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
-        // ___________________________________________________________________
-        // Registering header cells is optional
-        //calendarView.registerHeaderView(xibFileNames: ["PinkSectionHeaderView", "WhiteSectionHeaderView"])
-        // ___________________________________________________________________
-        
-        
-        calendarView.cellInset = CGPoint(x: 0, y: 0)
-        
-        calendarView.visibleDates { (visibleDates: DateSegmentInfo) in
-            self.setupViewsOfCalendar(from: visibleDates)
+        self.calendar.select(Date())
+        self.tableView.reloadData()
+        for item in Constants.Services.USER_SERVICE.users[0].events! {
+            searchEvent(eid: item)
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.observerSuccess(obj:)), name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.observeActions), name: Constants.NotificationCenter.USER_NOTIFICATION, object: nil)
+    }
+    func observeActions() -> Void {
+        self.tableView.reloadData()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    func observerSuccess(obj: Any) -> Void {
+        if let _ = obj as? String {
+            self.dates = Constants.Services.EVENT_SERVICE.events
+            self.calendar.reloadData()
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    @IBAction func reloadCalendar(_ sender: UIButton) {
-        calendarView.reloadData()
-    }
-    
-    @IBAction func next(_ sender: UIButton) {
-        self.calendarView.scrollToSegment(.next) {
-            self.calendarView.visibleDates({ (visibleDates: DateSegmentInfo) in
-                self.setupViewsOfCalendar(from: visibleDates)
-            })
-        }
-    }
-    
-    @IBAction func previous(_ sender: UIButton) {
-        self.calendarView.scrollToSegment(.previous) {
-            self.calendarView.visibleDates({ (visibleDates: DateSegmentInfo) in
-                self.setupViewsOfCalendar(from: visibleDates)
-            })
-        }
-    }
-    
-    func setupViewsOfCalendar(from visibleDates: DateSegmentInfo) {
-        guard let startDate = visibleDates.monthDates.first else {
-            return
-        }
-        let month = testCalendar.dateComponents([.month], from: startDate).month!
-        let monthName = DateFormatter().monthSymbols[(month-1) % 12]
-        // 0 indexed array
-        let year = testCalendar.component(.year, from: startDate)
-        monthLabel.text = monthName + " " + String(year)
-    }
-    
-    // Function to handle the text color of the calendar
-    func handleCellTextColor(view: JTAppleDayCellView?, cellState: CellState) {
-        guard let myCustomCell = view as? CellView  else {
-            return
-        }
+    func gotoView(event: Event, segue: String){
+        self.event = event
         
-        if cellState.isSelected {
-            myCustomCell.dayLabel.textColor = UIColor.white
-        } else {
-            if cellState.dateBelongsTo == .thisMonth {
-                myCustomCell.dayLabel.textColor = UIColor.black
-            } else {
-                myCustomCell.dayLabel.textColor = UIColor.gray
+    }
+    deinit {
+        print("\(#function)")
+    }
+    
+    func handleNewEvent() -> Void {
+        self.event = Event(id: "",title: "", description: "", date: Date().string(with: .dayMonthYearHourMinute), endDate: Date().addingTimeInterval(60 * 60).string(with: .dayMonthYearHourMinute) , priority: 0, members: [], reminder: Date().addingTimeInterval(60*60*(-1)).string(with: .dayMonthYearHourMinute))
+        self.performSegue(withIdentifier: "addEventSegue", sender: nil)
+    }
+    // MARK:- UIGestureRecognizerDelegate
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let shouldBegin = self.tableView.contentOffset.y <= -self.tableView.contentInset.top
+        if shouldBegin {
+            let velocity = self.scopeGesture.velocity(in: self.view)
+            switch self.calendar.scope {
+            case .month:
+                return velocity.y < 0
+            case .week:
+                return velocity.y > 0
             }
         }
+        return shouldBegin
     }
     
-    // Function to handle the calendar selection
-    func handleCellSelection(view: JTAppleDayCellView?, cellState: CellState) {
-        guard let myCustomCell = view as? CellView  else {
-            return
-        }
-        verifyDAtes(date: formatter.string(from: cellState.date))
-        if cellState.isSelected {
-            myCustomCell.selectedView.layer.cornerRadius = 25
-            myCustomCell.selectedView.isHidden = false
-        } else {
-            myCustomCell.selectedView.isHidden = true
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier=="showEventSegue" {
+            let viewController = segue.destination as! ShowEventViewController
+            viewController.bind(event: self.event)
+        }else if segue.identifier == "addEventSegue" {
+             let viewController = segue.destination as! AddEventViewController
+             viewController.bind(event: self.event)
         }
     }
     
-    func verifyDAtes(date: String) -> Void  {
-        dateActiveInSelected.removeAll()
-        for item in dates {
-            if(item.date == date) {
-                dateActiveInSelected.append(item)
-            }
-        }
-        tableView.reloadData()
-    }
+    
 }
-extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
+
+extension CalendarViewController : UITableViewDataSource, UITableViewDelegate {
+    // MARK:- UITableViewDataSource
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dateActiveInSelected.count
+        return dates.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DateTableViewCell
-        let date = dateActiveInSelected[indexPath.row]
-        cell.Hour.text = date.hour
-        cell.Title.text  = date.title
-        cell.Description.text = date.description
-        switch date.priority {
-        case 1:
-            cell.Priority.backgroundColor = UIColor.gray
-        case 2:
-            cell.Priority.backgroundColor = UIColor.orange
-        case 3:
-            cell.Priority.backgroundColor = UIColor.red
-        default:
-            break
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventTableViewCell
+        let date = dates[indexPath.row]
+        cell.bind(event: date)
+        cell.count.text = String(indexPath.row +  1)
         return cell
     }
-   
+
+    
+    // MARK:- UITableViewDelegate
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let tableViewCell = cell as? EventTableViewCell else { return }
+        
+        tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        self.calendar.setScope(.week, animated: true )
+        self.calendar.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        let cell = tableView.cellForRow(at: editActionsForRowAt) as! EventTableViewCell
+        self.event = cell.event
+        let more = UITableViewRowAction(style: .normal, title: "Ver mas") { action, index in
+            
+            self.performSegue(withIdentifier: "showEventSegue", sender: nil)
+        }
+        more.backgroundColor = .lightGray
+        
+        let favorite = UITableViewRowAction(style: .normal, title: "Editar") { action, index in
+       
+            self.performSegue(withIdentifier: "addEventSegue", sender: nil)
+            print("favorite button tapped")
+        }
+        favorite.backgroundColor = .orange
+        
+        let share = UITableViewRowAction(style: .normal, title: "Eliminar") { action, index in
+            print("share button tapped")
+        }
+        share.backgroundColor = .blue
+        
+        return [share, favorite, more]
+    }
+    
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
 }
-// MARK : JTAppleCalendarDelegate
-extension CalendarViewController: JTAppleCalendarViewDelegate, JTAppleCalendarViewDataSource {
-    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-        
-        calendar.backgroundColor = UIColor.white
-        
-        let parameters = ConfigurationParameters(startDate: Date(),
-                                                 endDate: formatter.date(from: "2030 12 31")!,
-                                                 numberOfRows: numberOfRows,
-                                                 calendar: testCalendar,
-                                                 generateInDates: generateInDates,
-                                                 generateOutDates: generateOutDates,
-                                                 firstDayOfWeek: firstDayOfWeek,
-                                                 hasStrictBoundaries: hasStrictBoundaries)
-        
-        return parameters
+extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate {
+    // MARK:- UITableViewDataSource
+    
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        self.calendarHeightConstraint.constant = bounds.height
+        self.view.layoutIfNeeded()
     }
-    func calendar(_ calendar: JTAppleCalendarView, willDisplayCell cell: JTAppleDayCellView, date: Date, cellState: CellState) {
-        
-        let myCustomCell = cell as! CellView
-        myCustomCell.dayLabel.text = cellState.text
-        formatter.dateFormat = "yyyy MM dd"
-        print(formatter.string(from: date) )
-        
-        if testCalendar.isDateInToday(date) {
-            myCustomCell.backgroundColor = UIColor.red
-        } else {
-            myCustomCell.backgroundColor = UIColor.white
+    //Select cell of Calendar
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        print("did select date \(date.string(with: .dayMonthAndYear))")
+        let selectedDates = calendar.selectedDates.map({self.dateFormatter.string(from: $0)})
+        print("selected dates is \(selectedDates)")
+        if monthPosition == .next || monthPosition == .previous {
+            calendar.setCurrentPage(date, animated: true)
         }
-        
-        handleCellSelection(view: cell, cellState: cellState)
-        handleCellTextColor(view: cell, cellState: cellState)
+        dates = Constants.Services.EVENT_SERVICE.events.filter({ Date(string: $0.date, formatter: .dayMonthYearHourMinute)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)})
+        tableView.reloadData()
+    }
+    //Change Page Calendar
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        print("\(self.dateFormatter.string(from: calendar.currentPage))")
     }
     
-    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
-        handleCellSelection(view: cell, cellState: cellState)
-        handleCellTextColor(view: cell, cellState: cellState)
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let count = Constants.Services.EVENT_SERVICE.events.filter({ Date(string: $0.date, formatter: .dayMonthYearHourMinute)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)}).count
+        return count
     }
     
-    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
-        handleCellSelection(view: cell, cellState: cellState)
-        handleCellTextColor(view: cell, cellState: cellState)
-    }
-    
-    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
-        self.setupViewsOfCalendar(from: visibleDates)
-    }
-    
-    func scrollDidEndDecelerating(for calendar: JTAppleCalendarView) {
-        self.setupViewsOfCalendar(from: calendarView.visibleDates())
-        calendarView.reloadData()
-    }
-    /*
-    func calendar(_ calendar: JTAppleCalendarView, sectionHeaderIdentifierFor range: (start: Date, end: Date), belongingTo month: Int) -> String {
-        if month % 2 > 0 {
-            return "WhiteSectionHeaderView"
-        }
-        return "PinkSectionHeaderView"
-    }
-    
-    func calendar(_ calendar: JTAppleCalendarView, sectionHeaderSizeFor range: (start: Date, end: Date), belongingTo month: Int) -> CGSize {
-        if month % 2 > 0 {
-            return CGSize(width: 200, height: 50)
-        } else {
-            // Yes you can have different size headers
-            return CGSize(width: 200, height: 100)
-        }
-    }
-    
-    func calendar(_ calendar: JTAppleCalendarView, willDisplaySectionHeader header: JTAppleHeaderView, range: (start: Date, end: Date), identifier: String) {
-        switch identifier {
-        case "WhiteSectionHeaderView":
-            let headerCell = header as? WhiteSectionHeaderView
-            headerCell?.title.text = "Design multiple headers"
-        default:
-            let headerCell = header as? PinkSectionHeaderView
-            headerCell?.title.text = "In any color or size you want"
-        }
-    }*/
 }
 
-extension UIColor {
-    convenience init(colorWithHexValue value: Int, alpha:CGFloat = 1.0){
-        self.init(
-            red: CGFloat((value & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((value & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(value & 0x0000FF) / 255.0,
-            alpha: alpha
-        )
-    }
-}

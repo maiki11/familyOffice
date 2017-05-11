@@ -1,4 +1,4 @@
-//
+ //
 //  animations.swift
 //  familyOffice
 //
@@ -22,6 +22,16 @@ class Animations {
     var state = 0
     
     func shakeTextField(txt: UITextField){
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: txt.center.x - 10, y: txt.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: txt.center.x + 10, y: txt.center.y))
+        txt.layer.add(animation, forKey: "position")
+    }
+    
+    func shakeTextField(txt: UITextView){
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.07
         animation.repeatCount = 4

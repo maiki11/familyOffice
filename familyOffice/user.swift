@@ -15,6 +15,7 @@ struct User {
     static let kUserIdKey = "id"
     static let kUserPhotoUrlKey = "photoUrl"
     static let kUserFamiliesKey = "families"
+    static let kEventKey = "events"
     static let kUserFamilyActiveKey = "familyActive"
     static let kUserPhoneKey = "phone"
     static let kUserCurpKey = "curp"
@@ -24,6 +25,7 @@ struct User {
     static let kUserNSSKey = "nss"
     static let kUserBloodTypeKey = "bloodType"
     static let kUserTokensFCMeKey = "tokensFCM"
+    static let kUserHealthKey = "health"
     
     let id: String!
     var name : String!
@@ -38,8 +40,11 @@ struct User {
     var address : String!
     var bloodtype: String!
     var tokens: NSDictionary? = nil
+    var events: [String]? = []
+    var health: Health
+
     
-    init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String) {
+    init(id: String, name: String, phone: String,  photoURL: String, families: NSDictionary, familyActive: String, rfc: String, nss: String, curp: String, birth: String, address: String, bloodtype: String, health: NSArray) {
         self.id = id
         self.name = name
         self.phone = phone
@@ -53,23 +58,27 @@ struct User {
         self.address = address
         self.bloodtype = bloodtype
         self.tokens = nil
+        self.health = Health(array: health)
     }
     
     init(snapshot: FIRDataSnapshot) {
         let snapshotValue = snapshot.value as! NSDictionary
-        self.name = UTILITY_SERVICE.exist(field: User.kUserNameKey, dictionary: snapshotValue)
+        self.name = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserNameKey, dictionary: snapshotValue)
         self.id = snapshot.key
-        self.photoURL = UTILITY_SERVICE.exist(field: User.kUserPhotoUrlKey, dictionary: snapshotValue)
-        self.familyActive = UTILITY_SERVICE.exist(field: User.kUserFamilyActiveKey, dictionary: snapshotValue)
-        self.address = UTILITY_SERVICE.exist(field: User.kUserAddressKey, dictionary: snapshotValue )
-        self.birthday = UTILITY_SERVICE.exist(field: User.kUserBirthdayKey, dictionary: snapshotValue )
-        self.curp = UTILITY_SERVICE.exist(field: User.kUserCurpKey, dictionary: snapshotValue)
-        self.rfc = UTILITY_SERVICE.exist(field: User.kUserRFCKey, dictionary: snapshotValue)
-        self.nss = UTILITY_SERVICE.exist(field: User.kUserNSSKey, dictionary: snapshotValue)
-        self.bloodtype = UTILITY_SERVICE.exist(field: User.kUserBloodTypeKey, dictionary: snapshotValue)
-        self.families = UTILITY_SERVICE.existNSDictionary(field: User.kUserFamiliesKey, dictionary: snapshotValue)
-        self.phone = UTILITY_SERVICE.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
-        self.tokens = UTILITY_SERVICE.existNSDictionary(field: User.kUserTokensFCMeKey, dictionary: snapshotValue)
+        self.photoURL = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserPhotoUrlKey, dictionary: snapshotValue)
+        self.familyActive = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserFamilyActiveKey, dictionary: snapshotValue)
+        self.address = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserAddressKey, dictionary: snapshotValue )
+        self.birthday = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserBirthdayKey, dictionary: snapshotValue )
+        self.curp = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserCurpKey, dictionary: snapshotValue)
+        self.rfc = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserRFCKey, dictionary: snapshotValue)
+        self.nss = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserNSSKey, dictionary: snapshotValue)
+        self.bloodtype = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserBloodTypeKey, dictionary: snapshotValue)
+        self.families = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserFamiliesKey, dictionary: snapshotValue)
+        self.phone = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserPhoneKey, dictionary: snapshotValue)
+        self.tokens = Constants.Services.UTILITY_SERVICE.exist(field: User.kUserTokensFCMeKey, dictionary: snapshotValue)
+        self.events = Constants.Services.UTILITY_SERVICE.exist(field: User.kEventKey, dictionary: snapshotValue)
+        self.health = Health(snapshot: snapshot.childSnapshot(forPath: "health"))
+
     }
     
     func toDictionary() -> NSDictionary {
@@ -83,7 +92,8 @@ struct User {
             User.kUserNSSKey: self.nss!,
             User.kUserBloodTypeKey: self.bloodtype!,
             User.kUserPhoneKey : self.phone!,
-            User.kUserBirthdayKey : self.birthday!
+            User.kUserBirthdayKey : self.birthday!,
+            User.kUserHealthKey : self.health.toDictionary()
         ]
     }
     
@@ -95,10 +105,62 @@ struct User {
         case User.kUserFamiliesKey:
             self.families = snapshot.value! as? NSDictionary
             break
+        case User.kUserHealthKey:
+            self.health = Health(snapshot: snapshot)
         default:
             break
         }
     }
-    
+}
+
+protocol UserModelBindable: AnyObject {
+    var userModel: User? { get set }
+    var filter: String! { get set}
+    var nameLabel: UILabel! {get}
+    var profileImage: UIImageView! {get}
     
 }
+
+extension UserModelBindable {
+    // Make the views optionals
+    
+    var nameLabel: UILabel! {
+        return nil
+    }
+    
+    var profileImage: UIImageView! {
+        return nil
+    }
+    
+  
+    
+    // Bind
+    
+    func bind(userModel: User, filter: String = "") {
+        self.userModel = userModel
+        self.filter = filter
+        bind()
+    }
+    
+    func bind() {
+        
+        guard let userModel = self.userModel else {
+            return
+        }
+        
+        if let nameLabel = self.nameLabel {
+            nameLabel.text = userModel.name
+        }
+        
+        if let profileImage = self.profileImage {
+            if !userModel.photoURL.isEmpty {
+                profileImage.loadImage(urlString: userModel.photoURL, filter: filter)
+            }else{
+                profileImage.image = #imageLiteral(resourceName: "profile_default")
+            }
+        }
+        
+        
+    }
+}
+

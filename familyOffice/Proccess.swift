@@ -18,6 +18,6 @@ struct Proccess {
         self.text = text
         self.status = status
         self.type = type
-        self.timestap = UTILITY_SERVICE.getDate()
+        self.timestap = Constants.Services.UTILITY_SERVICE.getDate()
     }
 }
