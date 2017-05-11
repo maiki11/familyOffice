@@ -56,13 +56,9 @@ class HealthOmniViewController: UIViewController {
     func edit(sender: UIBarButtonItem) {
         performSegue(withIdentifier: "editSegue", sender: self)
     }
-
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         if let index = sender as? Int, let ctrl = segue.destination as? NewHealthElementViewController {
             let elem = Constants.Services.USER_SERVICE.users[0].health.elements[index]
             ctrl.healthIndex = index

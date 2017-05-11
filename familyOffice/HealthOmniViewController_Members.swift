@@ -19,12 +19,14 @@ extension HealthOmniViewController: UICollectionViewDelegate, UICollectionViewDa
         let user = Constants.Services.USER_SERVICE.users[0]
         fam = Constants.Services.FAMILY_SERVICE.families.first(where: { $0.id == user.familyActive })
         membersId = fam!.members
-        let myIdIndex = membersId.index(where: { $0 == user.id! })
-        membersId.remove(at: myIdIndex!)
-        membersId.insert(user.id!, at: 0)
+//        let myIdIndex = membersId.index(where: { $0 == user.id! })
+//        membersId.remove(at: myIdIndex!)
+//        membersId.insert(user.id!, at: 0)
         
         for id in membersId {
-            Constants.Services.USER_SERVICE.getUser(uid: id)
+            if !Constants.Services.USER_SERVICE.users.contains(where: {$0.id == id}) {
+                Constants.Services.USER_SERVICE.getUser(uid: id)
+            }
         }
 //        let indexPath = IndexPath(item: 0, section: 0)
 //        membersCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
@@ -39,12 +41,15 @@ extension HealthOmniViewController: UICollectionViewDelegate, UICollectionViewDa
 //    }
     
     func membersWillAppear(){
+        
         membersObserver = NotificationCenter.default
             .addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: nil, using: {_ in
             	self.membersCollectionView.reloadData()
             })
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        membersCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+    }
     func membersWillDisappear(){
         NotificationCenter.default.removeObserver(membersObserver!)
     }
@@ -54,27 +59,19 @@ extension HealthOmniViewController: UICollectionViewDelegate, UICollectionViewDa
     }
   
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return membersId.count
+        let count = zip(Constants.Services.USER_SERVICE.users, membersId).map({$0.0.id == $0.1}).count
+        return count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = membersCollectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! HealthMemberCollectionViewCell
-        let user = Constants.Services.USER_SERVICE.users.first(where: { $0.id == membersId[indexPath.row] })
-        
-        if user != nil && !(user!.photoURL.isEmpty) {
-            cell.image.loadImage(urlString: user!.photoURL)
-        }else{
-            cell.image.image = #imageLiteral(resourceName: "profile_default")
+        let user = Constants.Services.USER_SERVICE.users.first(where: { $0.id == membersId[indexPath.item] })
+
+        if user != nil{
+            cell.bind(userModel: user!, filter: "blackwhite")
         }
-        
-        if (indexPath.item == 0){
-//            self.collectionView(membersCollectionView, didSelectItemAt: IndexPath.init(row: 0, section: 0))
-//            collectionView.selectItem(at: IndexPath.init(row: 0, section: 0), animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
-            print("----ITEM--------------")
-            print(indexPath.item)
-            print("------------------")
-            cell.selectedMember.isHidden = false
-        }
+      
         
         return cell
     }
@@ -83,17 +80,16 @@ extension HealthOmniViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! HealthMemberCollectionViewCell
         cell.selectedMember.isHidden = false
+        cell.profileImage.loadImage(urlString: (cell.userModel?.photoURL)!)
         userIndex = Constants.Services.USER_SERVICE.users.index(where: { $0.id! == membersId[indexPath.row] })!
         elems = Constants.Services.USER_SERVICE.users[userIndex].health.elements.filter({ $0.type == categorySelected })
         categoryTableView.reloadData()
-        print("----IMAGE--------------")
-        print(cell.image)
-        print("------------------")
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! HealthMemberCollectionViewCell
         cell.selectedMember.isHidden = true
+        cell.profileImage.loadImage(urlString: (cell.userModel?.photoURL)!,filter: "blackwhite")
     }
     
 }

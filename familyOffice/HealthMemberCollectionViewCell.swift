@@ -8,15 +8,17 @@
 
 import UIKit
 
-class HealthMemberCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var image: UIImageView!
+class HealthMemberCollectionViewCell: UICollectionViewCell, UserModelBindable {
+    var filter: String!
+
+    var userModel: User?
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var selectedMember: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.image.layer.cornerRadius = self.image.frame.width/2
-        self.image.clipsToBounds = true
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
+        self.profileImage.clipsToBounds = true
         selectedMember.layer.cornerRadius = selectedMember.frame.width/2
         selectedMember.clipsToBounds = true
     }

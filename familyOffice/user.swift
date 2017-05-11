@@ -115,7 +115,7 @@ struct User {
 
 protocol UserModelBindable: AnyObject {
     var userModel: User? { get set }
-    var filter: String! { get set }
+    var filter: String! { get set}
     var nameLabel: UILabel! {get}
     var profileImage: UIImageView! {get}
     
@@ -155,6 +155,8 @@ extension UserModelBindable {
         if let profileImage = self.profileImage {
             if !userModel.photoURL.isEmpty {
                 profileImage.loadImage(urlString: userModel.photoURL, filter: filter)
+            }else{
+                profileImage.image = #imageLiteral(resourceName: "profile_default")
             }
         }
         

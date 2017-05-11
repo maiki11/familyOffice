@@ -94,9 +94,6 @@ class memberCollectionTableViewCell: UITableViewCell {
                 cell.bind(userModel: user , filter: "blackwhite")
             }
         }
-        
-        // Configure the cell
-        
         return cell
     }
     
