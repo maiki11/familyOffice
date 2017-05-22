@@ -21,7 +21,7 @@ class EventTableViewCell: UITableViewCell, EventBindable {
     @IBOutlet weak var endDateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
-    
+    var remimberLabel: UILabel!
     
     @IBOutlet weak var count: UILabel!
     @IBOutlet weak var locationIcon: UIImageView!

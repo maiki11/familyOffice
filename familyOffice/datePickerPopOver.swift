@@ -13,7 +13,7 @@ class datePickerPopOver: UIView {
     @IBOutlet weak var datepicker: UIDatePicker!
     
     @IBAction func handleSelect(_ sender: UIButton) {
-        let date =  datepicker.date.string(with: .dayMonthYearHourMinute)
+        let date =  datepicker.date.string(with: .InternationalFormat)
         datepickerSelectionDelegate.dateSelected(text:  date)
     }
  

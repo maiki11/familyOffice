@@ -85,6 +85,7 @@ protocol EventBindable: AnyObject {
     var endDateLabel: UILabel! {get}
     var locationLabel: UILabel! {get}
     var titleLabel: UILabel! {get}
+    var remimberLabel: UILabel! {get}
     
 }
 
@@ -109,6 +110,10 @@ extension EventBindable {
         return nil
     }
     
+    var reminderLabel: UILabel! {
+        return nil
+    }
+    
     // Bind
     
     func bind(event: Event) {
@@ -127,7 +132,7 @@ extension EventBindable {
         }
         
         if let endDateLabel = self.endDateLabel {
-            endDateLabel.text = Date(string: event.endDate, formatter: .dayMonthYearHourMinute)?.string(with: .hourAndMin)
+            endDateLabel.text = Date(string: event.endDate, formatter: .InternationalFormat)?.string(with: .hourAndMin)
         }
         
         if let titleLabel = self.titleLabel {
@@ -138,7 +143,10 @@ extension EventBindable {
         }
         
         if let dateLabel = self.dateLabel {
-            dateLabel.text =  Date(string: event.date, formatter: .dayMonthYearHourMinute)?.string(with: .hourAndMin)
+            dateLabel.text =  Date(string: event.date, formatter: .InternationalFormat)?.string(with: .hourAndMin)
+        }
+        if let reminderLabel = self.remimberLabel {
+            reminderLabel.text = event.reminder
         }
         
     }

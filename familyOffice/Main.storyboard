@@ -398,7 +398,7 @@
             <objects>
                 <navigationController id="xBb-2B-CJp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Inicio" image="Home" id="rI5-tj-9Ev"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r7p-lP-FCi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r7p-lP-FCi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -450,7 +450,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="zxczxczx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In8-Hp-FA4">
-                                                    <rect key="frame" x="33.5" y="120" width="54.5" height="11"/>
+                                                    <rect key="frame" x="33" y="120" width="54.5" height="11"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="12"/>
                                                     <color key="textColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -625,7 +625,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hn0-PB-zQG" id="yId-L5-g7w">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WjC-sX-ofn">
@@ -775,7 +775,7 @@
             <objects>
                 <navigationController id="vo7-HH-trf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Inicio" image="Home" selectedImage="Home" id="qNc-2W-dbA"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ajE-bd-LBM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ajE-bd-LBM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.93333333333333335" green="0.27058823529411763" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -886,7 +886,7 @@
         <scene sceneID="9Am-e1-fmx">
             <objects>
                 <navigationController storyboardIdentifier="mainView" id="kMC-B3-l3W" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RyQ-kR-bXX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RyQ-kR-bXX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1240,7 +1240,7 @@
             <objects>
                 <navigationController storyboardIdentifier="StartView" automaticallyAdjustsScrollViewInsets="NO" id="Kip-84-qVL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xTp-qL-h7S">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xTp-qL-h7S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
