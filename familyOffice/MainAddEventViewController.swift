@@ -104,10 +104,6 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
         Constants.Services.EVENT_SERVICE.insert("events/\(key)", value: event.toDictionary(), callback: { response in
             if response is String {
                 Constants.Services.EVENT_SERVICE.events.append(self.event)
-                for uid in self.event.members {
-                    Constants.Services.EVENT_SERVICE.addEventToMember(uid: uid, eid: response as! String)
-                    _ = self.navigationController?.popViewController(animated: true)
-                }
             }
         })
     }

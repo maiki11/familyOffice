@@ -44,7 +44,6 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         verifyMembersOffLine()
         
         Constants.Services.REF_SERVICE.valueSingleton(ref: "families/\((family?.id)!)")
-        
         Constants.Services.REF_SERVICE.chilRemoved(ref: "families/\((family?.id)!)/members")
         Constants.Services.REF_SERVICE.chilAdded(ref: "families/\((family?.id)!)/members")
         

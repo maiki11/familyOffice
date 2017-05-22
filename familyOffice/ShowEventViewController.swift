@@ -18,7 +18,7 @@ class ShowEventViewController: UIViewController, EventBindable {
     let locationManager = CLLocationManager()
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mapView: MKMapView!
-    
+    var remimberLabel: UILabel!
     var protocolNotification: NSObjectProtocol!
     
     override func viewDidLoad() {
