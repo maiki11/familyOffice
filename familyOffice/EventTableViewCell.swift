@@ -14,7 +14,7 @@ class EventTableViewCell: UITableViewCell, EventBindable {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    
+        bar.backgroundColor = .random()
     }
     //Binding DateModelBindable
     @IBOutlet weak var dateLabel: UILabel!
@@ -23,7 +23,9 @@ class EventTableViewCell: UITableViewCell, EventBindable {
     @IBOutlet weak var locationLabel: UILabel!
     var remimberLabel: UILabel!
     
-    @IBOutlet weak var count: UILabel!
+    @IBOutlet weak var dateSelected: UILabel!
+    @IBOutlet weak var bar: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var locationIcon: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -33,8 +35,6 @@ class EventTableViewCell: UITableViewCell, EventBindable {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        count.layer.cornerRadius = count.frame.width/2
-        count.clipsToBounds = true
         // Configure the view for the selected state
     }
 

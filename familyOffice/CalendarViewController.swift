@@ -121,7 +121,7 @@ extension CalendarViewController : UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventTableViewCell
         let date = dates[indexPath.row]
         cell.bind(event: date)
-        cell.count.text = String(indexPath.row +  1)
+        cell.dateSelected.text = Date(string: date.date, formatter: .InternationalFormat)?.string(with: .dayMonthAndYear2)
         return cell
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -145,19 +145,16 @@ extension CalendarViewController : UITableViewDataSource, UITableViewDelegate {
             
             self.performSegue(withIdentifier: "showEventSegue", sender: nil)
         }
-        more.backgroundColor = .lightGray
-        
-        let favorite = UITableViewRowAction(style: .normal, title: "Editar") { action, index in
+      
+        let favorite = UITableViewRowAction(style: .default, title: "Editar") { action, index in
        
             self.performSegue(withIdentifier: "addEventSegue", sender: nil)
             print("favorite button tapped")
         }
-        favorite.backgroundColor = .orange
         
-        let share = UITableViewRowAction(style: .normal, title: "Eliminar") { action, index in
+        let share = UITableViewRowAction(style: .destructive, title: "Eliminar") { action, index in
             print("share button tapped")
         }
-        share.backgroundColor = .blue
         
         return [share, favorite, more]
     }

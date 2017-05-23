@@ -107,6 +107,8 @@
 		02F15BB71E85ECE2008C26F8 /* chatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F15BB61E85ECE2008C26F8 /* chatModel.swift */; };
 		02F15BBA1E85F37A008C26F8 /* chatCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F15BB81E85F37A008C26F8 /* chatCellTableViewCell.swift */; };
 		02F15BBB1E85F37A008C26F8 /* chatCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02F15BB91E85F37A008C26F8 /* chatCellTableViewCell.xib */; };
+		02F5EDC21ED4B8A600BCDF84 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F5EDC11ED4B8A600BCDF84 /* UIColor.swift */; };
+		02F5EDC41ED4B9F500BCDF84 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F5EDC31ED4B9F500BCDF84 /* CGFloat.swift */; };
 		02FA70641E707BAB0080AAEB /* ToastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA70631E707BAB0080AAEB /* ToastService.swift */; };
 		02FA70661E7092ED0080AAEB /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA70651E7092ED0080AAEB /* ImageViewController.swift */; };
 		0B865800BAEDBF5C9736A410 /* Pods_familyOfficeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BEF645D6ACC3C21FFD1530 /* Pods_familyOfficeUITests.framework */; };
@@ -267,6 +269,8 @@
 		02F15BB61E85ECE2008C26F8 /* chatModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatModel.swift; sourceTree = "<group>"; };
 		02F15BB81E85F37A008C26F8 /* chatCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatCellTableViewCell.swift; sourceTree = "<group>"; };
 		02F15BB91E85F37A008C26F8 /* chatCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatCellTableViewCell.xib; sourceTree = "<group>"; };
+		02F5EDC11ED4B8A600BCDF84 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		02F5EDC31ED4B9F500BCDF84 /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		02FA70631E707BAB0080AAEB /* ToastService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastService.swift; sourceTree = "<group>"; };
 		02FA70651E7092ED0080AAEB /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18BEF645D6ACC3C21FFD1530 /* Pods_familyOfficeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_familyOfficeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -672,6 +676,8 @@
 				02B7E7FB1E7C7A0E0082BAE7 /* UIView.swift */,
 				02C414BE1E95C70A00045459 /* DateFormatter.swift */,
 				028E20FE1EC0F1D1004D83B0 /* UILabel.swift */,
+				02F5EDC11ED4B8A600BCDF84 /* UIColor.swift */,
+				02F5EDC31ED4B9F500BCDF84 /* CGFloat.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1165,7 +1171,9 @@
 				024BCA831E6F237900736F1A /* Proccess.swift in Sources */,
 				0271DD4F1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift in Sources */,
 				02C414BF1E95C70A00045459 /* DateFormatter.swift in Sources */,
+				02F5EDC41ED4B9F500BCDF84 /* CGFloat.swift in Sources */,
 				02AD81501E4B94250030B3DD /* AddMember+CollectionView.swift in Sources */,
+				02F5EDC21ED4B8A600BCDF84 /* UIColor.swift in Sources */,
 				02AD81521E4B963C0030B3DD /* memberSelectedCollectionViewCell.swift in Sources */,
 				0226C8E61E3C267B007968BA /* ConfigurationTableViewController.swift in Sources */,
 				020A64FD1E81EE1A00F473A0 /* chatCollectionViewController.swift in Sources */,

@@ -48,6 +48,11 @@ extension DateFormatter {
         formatter.dateFormat = "dd MM yyyy"
         return formatter
     }()
+    @nonobjc static let dayMonthAndYear2: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy"
+        return formatter
+    }()
     
     @nonobjc static let yearMonthAndDay: DateFormatter = {
         let formatter = DateFormatter()
