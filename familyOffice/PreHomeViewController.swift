@@ -105,7 +105,7 @@ class SelectCategoryViewController: UIViewController {
     
     func logout(){
         Constants.Services.AUTH_SERVICE.logOut()
-        //Utility.Instance().gotoView(view: "StartView", context: self)
+        Utility.Instance().gotoView(view: "StartView", context: self)
     }
     
 }

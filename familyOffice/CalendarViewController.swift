@@ -57,9 +57,8 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         
         self.calendar.select(Date())
         self.tableView.reloadData()
-        for item in Constants.Services.USER_SERVICE.users[0].events! {
-            searchEvent(eid: item)
-        }
+        Constants.Services.REF_SERVICE.chilAdded(ref: "users/\(Constants.Services.USER_SERVICE.users[0].id!)/events")
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.observerSuccess(obj:)), name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.observeActions), name: Constants.NotificationCenter.USER_NOTIFICATION, object: nil)
     }
@@ -68,6 +67,7 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
+        Constants.Services.REF_SERVICE.remove(ref: "users/\(Constants.Services.USER_SERVICE.users[0].id)/events")
     }
     func observerSuccess(obj: Any) -> Void {
         if let _ = obj as? String {
@@ -81,6 +81,7 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
     deinit {
         print("\(#function)")
     }
+    
     
     func handleNewEvent() -> Void {
         self.event = Event(id: "",title: "", description: "", date: Date().string(with: .InternationalFormat), endDate: Date().addingTimeInterval(60 * 60).string(with: .InternationalFormat) , priority: 0, members: [], reminder: Date().addingTimeInterval(60*60*(-1)).string(with: .InternationalFormat))
