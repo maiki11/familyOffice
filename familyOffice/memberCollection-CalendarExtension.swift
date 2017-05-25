@@ -41,7 +41,7 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
         }else if indexPath.item < 4 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! MemberCollectionViewCell
             cell.image.image = #imageLiteral(resourceName: "profile_default")
-            let id: String = dates[collectionView.tag].members[indexPath.row]
+            let id: String = dates[collectionView.tag].members[indexPath.row].id
             if !id.isEmpty {
                 if let user = Constants.Services.USER_SERVICE.users.filter({$0.id == id}).first {
                     if !user.photoURL.isEmpty {
