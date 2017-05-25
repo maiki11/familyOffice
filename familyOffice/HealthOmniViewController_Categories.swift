@@ -43,11 +43,11 @@ extension HealthOmniViewController : UITableViewDelegate, UITableViewDataSource 
     
     func elementsWillAppear(){
         
-        categoryTableView.reloadData()
+        
         
         let user = Constants.Services.USER_SERVICE.users[userIndex]
         let url = "users/\(user.id!)/health"
-        
+        categoryTableView.reloadData()
         Constants.Services.REF_SERVICE.chilAdded(ref: url)
         Constants.Services.REF_SERVICE.childChanged(ref: url)
         Constants.Services.REF_SERVICE.chilRemoved(ref: url)

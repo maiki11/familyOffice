@@ -126,6 +126,8 @@
 		849C4A921E6DEA5D0065CFBD /* HeaderHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C4A911E6DEA5D0065CFBD /* HeaderHomeView.swift */; };
 		849C81C71E1D6D2F00FF3EE7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */; };
 		84AEA8A41E3BE32C002B2D43 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AEA8A31E3BE32C002B2D43 /* Animations.swift */; };
+		84C721211ED7502700381FB7 /* AddHealthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C721201ED7502700381FB7 /* AddHealthViewController.swift */; };
+		84C721231ED7697200381FB7 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C721221ED7697200381FB7 /* AddViewController.swift */; };
 		84D51B1D1EA6ACE3006829F7 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D51B1C1EA6ACE3006829F7 /* Section.swift */; };
 		84E9C9B51E92B78E00905A10 /* addCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9C9B41E92B78E00905A10 /* addCell.swift */; };
 		84E9C9B91E93269100905A10 /* SetPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9C9B81E93269100905A10 /* SetPersonalDataViewController.swift */; };
@@ -291,6 +293,8 @@
 		849C81C61E1D6D2F00FF3EE7 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		84AEA8A31E3BE32C002B2D43 /* Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		84B95C7D1E98124D00FFC672 /* Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Pods/Alamofire/Source/Alamofire.swift; sourceTree = "<group>"; };
+		84C721201ED7502700381FB7 /* AddHealthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddHealthViewController.swift; sourceTree = "<group>"; };
+		84C721221ED7697200381FB7 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		84D51B1C1EA6ACE3006829F7 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		84E9C9B41E92B78E00905A10 /* addCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addCell.swift; sourceTree = "<group>"; };
 		84E9C9B81E93269100905A10 /* SetPersonalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPersonalDataViewController.swift; sourceTree = "<group>"; };
@@ -809,6 +813,8 @@
 				A44D91AE1E947F2700880D50 /* HealthOmniViewController.swift */,
 				A4F65A261E97F05100831BFD /* EditHealthTableViewController.swift */,
 				A4F65A281E97F06800831BFD /* NewHealthElementTableViewController.swift */,
+				84C721201ED7502700381FB7 /* AddHealthViewController.swift */,
+				84C721221ED7697200381FB7 /* AddViewController.swift */,
 			);
 			name = Health;
 			sourceTree = "<group>";
@@ -1170,6 +1176,7 @@
 				A4EABA2C1E95626500D0D54E /* HealthMemberCollectionViewCell.swift in Sources */,
 				024BCA831E6F237900736F1A /* Proccess.swift in Sources */,
 				0271DD4F1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift in Sources */,
+				84C721211ED7502700381FB7 /* AddHealthViewController.swift in Sources */,
 				02C414BF1E95C70A00045459 /* DateFormatter.swift in Sources */,
 				02F5EDC41ED4B9F500BCDF84 /* CGFloat.swift in Sources */,
 				02AD81501E4B94250030B3DD /* AddMember+CollectionView.swift in Sources */,
@@ -1232,6 +1239,7 @@
 				022D600F1E71DECD0082586E /* ProfileUserViewController.swift in Sources */,
 				A4EABA2A1E9551EA00D0D54E /* HealthOmniViewController_Members.swift in Sources */,
 				A4F65A291E97F06800831BFD /* NewHealthElementTableViewController.swift in Sources */,
+				84C721231ED7697200381FB7 /* AddViewController.swift in Sources */,
 				848130161E85ECAD008B08B8 /* Styles.swift in Sources */,
 				02EABF591E312B67008A7CA9 /* FamilyCollectionViewCell.swift in Sources */,
 				023DE7431E7720D9002F6A4E /* infoextension.swift in Sources */,

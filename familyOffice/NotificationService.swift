@@ -78,9 +78,9 @@ class NotificationService {
         
     }
     func seenNotification(index: Int) -> Void {
-
+        /*
         self.notifications[index].seen = true
-        Constants.FirDatabase.REF_NOTIFICATION.child(Constants.Services.USER_SERVICE.users[0].id).child(self.notifications[index].id!).updateChildValues(self.notifications[index].toDictionary() as! [AnyHashable : Any])
+        Constants.FirDatabase.REF_NOTIFICATION.child(Constants.Services.USER_SERVICE.users[0].id).child(self.notifications[index].id!).updateChildValues(self.notifications[index].toDictionary() as! [AnyHashable : Any])*/
 
     }
     
