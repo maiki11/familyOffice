@@ -50,7 +50,6 @@ class MapTableViewCell: UITableViewCell {
             }
             self?.searchTextField.text = str
             self?.dropPinZoomIn(selectedItem)
-            
         }
         
         searchTextField.onTextChange = {[weak self] text in
@@ -193,7 +192,6 @@ extension MapTableViewCell: HandleMapSearch {
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         mapView.setRegion(region, animated: true)
         shareEventDelegate.event.location = Location(title: annotation.title!, subtitle: annotation.subtitle!, latitude: placemark.coordinate.latitude, longitude: placemark.coordinate.longitude)
-        
     }
     
     func dropPinZoomIn(event: Event){

@@ -19,6 +19,8 @@ class MemberInviteCollectionViewCell: UICollectionViewCell, UserModelBindable {
         super.awakeFromNib()
         profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
         profileImage.clipsToBounds = true
+        check.layer.cornerRadius = self.check.frame.size.width / 2
+        check.clipsToBounds = true
         // Initialization code
     }
   

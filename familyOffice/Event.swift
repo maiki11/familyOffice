@@ -33,6 +33,23 @@ struct memberEvent {
             memberEvent.kReminder : self.reminder
         ]
     }
+    
+    func statusImage() -> UIImage {
+        var image : UIImage!
+        switch self.status {
+        case "Pendiente":
+            image = #imageLiteral(resourceName: "pendiente")
+            break
+        case "Aceptada":
+            image = #imageLiteral(resourceName: "Accept")
+            break
+        default:
+            image = #imageLiteral(resourceName: "Cancel")
+            break
+        }
+        
+        return image
+    }
 }
 
 struct Event {
