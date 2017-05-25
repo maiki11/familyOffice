@@ -27,7 +27,10 @@ class MapTableViewCell: UITableViewCell {
     let locationManager = CLLocationManager()
     
     func setupLocation() -> Void {
-        dropPinZoomIn(event: shareEventDelegate.event)
+        if shareEventDelegate.event?.location != nil {
+            dropPinZoomIn(event: shareEventDelegate.event)
+        }
+        
     }
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -181,30 +184,22 @@ extension MapTableViewCell: HandleMapSearch {
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
-        
         if let city = placemark.locality,
             let state = placemark.administrativeArea {
             annotation.subtitle = "\(city) \(state)"
         }
-        
         mapView.addAnnotation(annotation)
         let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         mapView.setRegion(region, animated: true)
-        timeZone = placemark.timeZone
         shareEventDelegate.event.location = Location(title: annotation.title!, subtitle: annotation.subtitle!, latitude: placemark.coordinate.latitude, longitude: placemark.coordinate.longitude)
-       
+        
     }
     
     func dropPinZoomIn(event: Event){
         
         if event.location != nil {
-            
-            guard let coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (event.location?.latitude)!, longitude: (event.location?.longitude)!) as? CLLocationCoordinate2D else{
-                print("Algo salio mal al buscar la coordenada")
-                return
-            }
-            
+            let coordinate = CLLocationCoordinate2D(latitude: (event.location?.latitude)!, longitude: (event.location?.longitude)!)
             mapView.removeAnnotations(mapView.annotations)
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
@@ -215,7 +210,7 @@ extension MapTableViewCell: HandleMapSearch {
             let span = MKCoordinateSpanMake(0.05, 0.05)
             let region = MKCoordinateRegionMake(annotation.coordinate, span)
             mapView.setRegion(region, animated: true)}
-        
+
     }
 }
 

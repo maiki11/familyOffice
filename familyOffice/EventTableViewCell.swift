@@ -14,7 +14,7 @@ class EventTableViewCell: UITableViewCell, EventBindable {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        bar.backgroundColor = .random()
+        //bar.backgroundColor = .random()
     }
     //Binding DateModelBindable
     @IBOutlet weak var dateLabel: UILabel!

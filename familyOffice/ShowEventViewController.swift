@@ -9,6 +9,9 @@
 import UIKit
 import MapKit
 class ShowEventViewController: UIViewController, EventBindable {
+
+    
+
     var event: Event?
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -20,6 +23,8 @@ class ShowEventViewController: UIViewController, EventBindable {
     @IBOutlet weak var mapView: MKMapView!
     var remimberLabel: UILabel!
     var protocolNotification: NSObjectProtocol!
+    @IBOutlet weak var startDatelabel: UILabel!
+    @IBOutlet weak var imageTime: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +53,10 @@ class ShowEventViewController: UIViewController, EventBindable {
          self.collectionView.reloadData()
     }
     override func viewDidAppear(_ animated: Bool) {
-        dropPinZoomIn()
+        if event?.location != nil {
+            dropPinZoomIn()
+        }
+        
         self.collectionView.reloadData()
     }
     override func didReceiveMemoryWarning() {
@@ -96,7 +104,8 @@ extension ShowEventViewController: UICollectionViewDelegate, UICollectionViewDat
   
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! MemberInviteCollectionViewCell
-        let id : String = (event?.members[indexPath.row])!
+        let member = (event?.members[indexPath.row])!
+        let id : String = member.id
         if let user = Constants.Services.USER_SERVICE.users.filter({$0.id == id }).first {
             cell.bind(userModel: user)
         }else{
