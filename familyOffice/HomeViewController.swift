@@ -12,41 +12,48 @@ import FirebaseAuth
 import MIBadgeButton_Swift
 
 class HomeViewController: UIViewController,  UIGestureRecognizerDelegate{
-
+    
     let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple"]
     let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros"]
     
-
+    
     private var family : Family?
-
+    
     let user = Constants.Services.USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
     var families : [String]! = []
-
-   
+    
+    
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var centerPopupConstraint: NSLayoutConstraint!
-    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var modalAlert: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var valueModal: UIView!
     @IBOutlet weak var backgroundButton: UIButton!
-
-
+    
+    
     var navigationBarOriginalOffset : CGFloat?
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.backgroundButton.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        self.titleLabel.textColor = #colorLiteral(red: 0.934861362, green: 0.2710093558, blue: 0.2898308635, alpha: 1)
+        self.titleLabel.textAlignment = .left
+        descriptionLabel.textColor = #colorLiteral(red: 0.2941176471, green: 0.1764705882, blue: 0.5019607843, alpha: 1)
         setupConfigurationNavBar()
     }
     
     let settingLauncher = SettingLauncher()
-
+    
     @IBAction func handleCloseModal(_ sender: UIButton) {
-        centerPopupConstraint.constant = -370
-        UIView.animate(withDuration: 0.1, animations: {
-          self.view.layoutIfNeeded()
-          self.backgroundButton.alpha = 0
-        })
+        //UIView.animate(withDuration: 0.1, animations: {
+            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.4,delay: 0.1, animations: {
+                self.modalAlert.layer.position.x = 0 - self.modalAlert.frame.width/2
+            })
+            UIView.animate(withDuration: 0.4, delay: 0.4, animations: {
+                //self.modalAlert.layer.position.x = self.modalAlert.layer.position.x * (-2)
+                self.backgroundButton.alpha = 0
+            })
+        //})
         
     }
     
@@ -69,24 +76,24 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(Constants.NotificationCenter.USER_NOTIFICATION)
         NotificationCenter.default.removeObserver(Constants.NotificationCenter.NOFAMILIES_NOTIFICATION)
         NotificationCenter.default.removeObserver(Constants.NotificationCenter.FAMILYADDED_NOTIFICATION)
     }
     
-
+    
 }
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource{
-   
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.alpha = 0
         UIView.animate(withDuration: 0.5, delay: 0.2, options: UIViewAnimationOptions.curveEaseInOut,animations: {
             cell.alpha = 1
         })
     }
-   
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -116,7 +123,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
 }
 extension HomeViewController {
-   
+    
     func createObservers() -> Void {
         if let index = Constants.Services.FAMILY_SERVICE.families.index(where: {$0.id == Constants.Services.USER_SERVICE.users[0].familyActive}) {
             self.navigationItem.title = Constants.Services.FAMILY_SERVICE.families[index].name
@@ -155,15 +162,14 @@ extension HomeViewController {
         settingLauncher.showSetting()
     }
     func handleShowModal(_ sender: Any) -> Void {
-        centerPopupConstraint.constant = 0
         self.backgroundButton.backgroundColor = UIColor.black
-        
-        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.3,delay: 0.3, animations: {
             self.backgroundButton.alpha = 0.65
         })
+        UIView.animate(withDuration: 0.5,delay: 0.3, options: .curveEaseOut, animations: {
+            //self.view.layoutIfNeeded()
+            self.modalAlert.layer.position.x = self.view.frame.width/2
+        }, completion: nil)
     }
     
     func gotoModule(index: Int) -> Void {
@@ -186,8 +192,6 @@ extension HomeViewController {
     }
     func setupConfigurationNavBar() -> Void {
         //USER_SERVICE.observers()
-        valueModal.layer.cornerRadius = 10
-        
         let lpgr = UILongPressGestureRecognizer(target: self, action:#selector(handleLongPress(gestureReconizer:)))
         lpgr.minimumPressDuration = 0
         lpgr.delaysTouchesBegan = true

@@ -25,7 +25,7 @@ class HealthOmniViewController: UIViewController {
     var elementAddedObserver : NSObjectProtocol?
     var elementUpdatedObserver : NSObjectProtocol?
     var elementDeletedObserver : NSObjectProtocol?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +47,7 @@ class HealthOmniViewController: UIViewController {
         membersWillDisappear()
         elementsWillDisappear()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -65,5 +65,5 @@ class HealthOmniViewController: UIViewController {
             ctrl.healthType = elem.type
         }
     }
-
+    
 }
