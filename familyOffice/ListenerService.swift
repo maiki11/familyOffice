@@ -116,6 +116,13 @@ class RefHandle {
                 Constants.Services.FAMILY_SERVICE.removed(snapshot: snapshot)
             }
             break
+        case "users/\((FIRAuth.auth()?.currentUser?.uid)!)/events":
+            if action == "added" {
+                self.valueSingleton(ref: "events/\(snapshot.key)")
+            }else if action == "removed" {
+                //Constants.Services.FAMILY_SERVICE.removed(snapshot: snapshot)
+            }
+            break
         case "families/\(reference[1])":
             switch action {
             case "value":

@@ -47,14 +47,18 @@ class AuthService {
             Constants.Services.NOTIFICATION_SERVICE.deleteToken(token: Constants.Services.NOTIFICATION_SERVICE.token, id: uid)
             self.userStatus(state: "Offline")
         }
-        
-        try! FIRAuth.auth()!.signOut()
         Constants.Services.USER_SERVICE.users.removeAll()
         Constants.Services.UTILITY_SERVICE.clearObservers()
         Constants.Services.NOTIFICATION_SERVICE.notifications.removeAll()
         Constants.Services.ACTIVITYLOG_SERVICE.activityLog.removeAll()
         Constants.Services.FAMILY_SERVICE.families.removeAll()
         imageCache.removeAllObjects()
+        try! FIRAuth.auth()!.signOut()
+      
+      
+          
+        
+
     }
 
     //Create account with federate entiies like Facebook Twitter Google  etc
