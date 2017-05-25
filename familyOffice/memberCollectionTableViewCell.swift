@@ -88,7 +88,7 @@ class memberCollectionTableViewCell: UITableViewCell {
         
         if Constants.Services.USER_SERVICE.users.count > 1 {
             let user = Constants.Services.USER_SERVICE.users[indexPath.row+1]
-            if shareEventDelegate.event.members.contains( where: {$0 == user.id}) {
+            if shareEventDelegate.event.members.contains( where: {$0.id == user.id}) {
                 cell.bind(userModel: user)
             }else{
                 cell.bind(userModel: user , filter: "blackwhite")
@@ -113,12 +113,13 @@ extension memberCollectionTableViewCell: UICollectionViewDelegate, UICollectionV
         cell.check.isHidden = !cell.check.isHidden
         if !cell.check.isHidden {
             cell.profileImage.loadImage(urlString: (cell.userModel?.photoURL)!)
-            if !shareEventDelegate.event.members.contains(where: {$0 == cell.userModel?.id}){
-                shareEventDelegate.event.members.append((cell.userModel?.id)!)
+            if !shareEventDelegate.event.members.contains(where: {$0.id == cell.userModel?.id}){
+                let member = memberEvent(id: (cell.userModel?.id)!, reminder: "undefined", status: "Pendiente")
+                shareEventDelegate.event.members.append(member)
             }
         }else{
             cell.profileImage.blackwhite(urlString: (cell.userModel?.photoURL)!)
-            if let index = shareEventDelegate.event.members.index(where: {$0 == cell.userModel?.id }){
+            if let index = shareEventDelegate.event.members.index(where: {$0.id == cell.userModel?.id }){
                 shareEventDelegate.event.members.remove(at: index)
             }
         }

@@ -8,21 +8,7 @@
 
 
 class testFile {
-    
-    func testDate() -> [Event] {
-        var dateArray : [Event] = []
-        dateArray.append(Event(id: "", title: "Reunión con el licenciado", description: "Lic. Gutierrez", date: "06 04 2017 07:00", endDate: "06 04 2017 10:00", priority: 2, members: []))
-        dateArray.append(Event(id: "",title: "Junta Familiar", description: "Ninguna", date: "24 03 2017 12:45", endDate: "24 03 2017 13:00", priority: 3, members: ["weNFXUj0WUOVzA5cglccb9TpvPA2","wJO9STJUBDfLmIyVfZ013EUwRe83","8CqVuy5NviNEIA3heInjqRB19qY2","EuzrwwzkZbW4mgxFfUwrD7qgRv53","mN2e5hhvk3aRL1kEZDOBfuevb952"]))
-//        dateArray.append(DateModel(title: "Tomar Pastilla", description: "Paracetamol", date: "2017 03 23", endDate: "10:00", priority: 2, members: ["yZVtibNd8xZWiiUx7rEr4g3WGNl2"]))
-//        dateArray.append(DateModel(title: "Tomar Pastilla", description: "Paracetamol", date: "2017 03 24", endDate: "10:00", priority: 2, members: ["ySl0uVDQyZWZegBebbOwblspmdu1"]))
-//        dateArray.append(DateModel(title: "Tomar Pastilla", description: "Paracetamol", date: "2017 03 25", endDate: "10:00", priority: 2, members: ["weNFXUj0WUOVzA5cglccb9TpvPA2", "wJO9STJUBDfLmIyVfZ013EUwRe83"]))
-//        dateArray.append(DateModel(title: "Tomar Pastilla", description: "Paracetamol", date: "2017 03 26", endDate: "10:00", priority: 2, members: []))
-//        dateArray.append(DateModel(title: "Tomar Pastilla", description: "Paracetamol", date: "2017 03 27", endDate: "10:00", priority: 2, members: []))
-//        dateArray.append(DateModel(title: "Tomar Pastilla", description: "Paracetamol", date: "2017 03 28", endDate: "10:00", priority: 2, members: []))
-//        dateArray.append(DateModel(title: "Tomar Pastilla", description: "Paracetamol", date: "2017 03 29", endDate: "10:00", priority: 2, members: []))
-        
-        return dateArray
-    }
+
     //Gustavo, Ricardo, Carlos, Diego, Graciela, Yolanda
     func testChatConversations() -> [chatModel] {
         var chatArray: [chatModel] = []

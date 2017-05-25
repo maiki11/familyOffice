@@ -107,8 +107,8 @@ class Utility {
     }
     
     func exist(field: String, dictionary:NSDictionary) -> String! {
-        if let value = dictionary[field] {
-            return value as! String
+        if let value = dictionary[field] as?  String {
+            return value 
         }else {
             return ""
         }
@@ -150,7 +150,7 @@ class Utility {
         }
     }
     func exist(field: String, dictionary:NSDictionary) -> NSDictionary {
-        guard let value : NSDictionary = dictionary[field] as? NSDictionary else {
+        guard let value = dictionary[field] as? NSDictionary else {
             return [:]
         }
         return value

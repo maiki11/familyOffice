@@ -27,7 +27,7 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
     var resultSearchController: UISearchController!
     
     var event: Event!
-    var members: [String]! = nil
+    var members: [memberEvent]! = []
     
     
     override func viewDidLoad() {
@@ -79,12 +79,12 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
                 if let index = Constants.Services.EVENT_SERVICE.events.index(where: {$0.id == self.event.id}){
                     Constants.Services.EVENT_SERVICE.events[index] = self.event
                     //Verifica y hace match si los miembros que se actualizaron estan o no con los viejos para eliminarles o no el evento.
-                    for uid in self.members {
-                        if !self.event.members.contains(where: {$0 == uid}) {
-                            //Crear metodo para remover evento de usuario
-                            Constants.FirDatabase.REF_USERS.child("\(uid)/events/\(self.event.id!)").removeValue()
-                        }
-                    }
+//                    for member in self.members {
+//                        if !self.event.members.contains(where: {$0.id == member.id}) {
+//                            //Crear metodo para remover evento de usuario
+//                            Constants.FirDatabase.REF_USERS.child("\(member.id)/events/\(self.event.id!)").removeValue()
+//                        }
+//                    }
                      _ = self.navigationController?.popViewController(animated: true)
                 }
                 
@@ -100,10 +100,11 @@ class AddEventViewController: UICollectionViewController, UICollectionViewDelega
         let key = Constants.FirDatabase.REF.childByAutoId().key
         event.id = key
        
-        event.members.append(Constants.Services.USER_SERVICE.users[0].id)
+        event.members.append(memberEvent(id: Constants.Services.USER_SERVICE.users[0].id, reminder: event.reminder!, status: "Aceptada"))
         Constants.Services.EVENT_SERVICE.insert("events/\(key)", value: event.toDictionary(), callback: { response in
             if response is String {
                 Constants.Services.EVENT_SERVICE.events.append(self.event)
+                 _ = self.navigationController?.popViewController(animated: true)
             }
         })
     }
