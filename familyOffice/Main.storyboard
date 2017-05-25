@@ -8,7 +8,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Unknown constraint types" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -424,7 +423,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wMk-Nw-1AJ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="583"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Xdr-2f-HXW">
@@ -450,7 +449,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="zxczxczx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In8-Hp-FA4">
-                                                    <rect key="frame" x="33" y="120" width="54.5" height="11"/>
+                                                    <rect key="frame" x="33.5" y="120" width="54.5" height="11"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="12"/>
                                                     <color key="textColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -496,10 +495,10 @@
                                 </connections>
                             </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ra7-Ei-Hgg">
-                                <rect key="frame" x="-354" y="208" width="343" height="250"/>
+                                <rect key="frame" x="-352.5" y="208" width="340" height="250"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1XQ-V3-Tdu">
-                                        <rect key="frame" x="305" y="8" width="30" height="30"/>
+                                        <rect key="frame" x="302" y="8" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="2N4-Iq-xfG"/>
                                             <constraint firstAttribute="height" constant="30" id="l8r-T2-vGG"/>
@@ -510,17 +509,17 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RESPETO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0s-N9-nuw">
-                                        <rect key="frame" x="71" y="17" width="200" height="21"/>
+                                        <rect key="frame" x="20" y="17" width="300" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="dfW-4m-rEG"/>
-                                            <constraint firstAttribute="width" constant="200" id="juT-Fq-Bev"/>
+                                            <constraint firstAttribute="width" constant="300" id="juT-Fq-Bev"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7x-y2-dCA">
-                                        <rect key="frame" x="4" y="47" width="335" height="156"/>
+                                        <rect key="frame" x="4" y="47" width="332" height="156"/>
                                         <string key="text">El respeto incluye miramiento, consideración y deferencia. El respeto es un valor que permite que el hombre pueda reconocer, aceptar, apreciar y valorar las cualidades del prójimo y sus derechos. Es decir, el respeto es el reconocimiento del valor propio y de los derechos de los individuos y de la sociedad.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
@@ -529,7 +528,7 @@
                                 </subviews>
                                 <color key="backgroundColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="343" id="97Z-hu-xoo"/>
+                                    <constraint firstAttribute="width" constant="340" id="97Z-hu-xoo"/>
                                     <constraint firstItem="o7x-y2-dCA" firstAttribute="top" secondItem="Z0s-N9-nuw" secondAttribute="bottom" constant="9" id="Anc-3l-04K"/>
                                     <constraint firstItem="Z0s-N9-nuw" firstAttribute="centerX" secondItem="ra7-Ei-Hgg" secondAttribute="centerX" id="CQZ-hU-pnI"/>
                                     <constraint firstAttribute="height" constant="250" id="FoC-TN-pMm"/>
@@ -547,10 +546,9 @@
                         <constraints>
                             <constraint firstAttribute="leading" secondItem="wMk-Nw-1AJ" secondAttribute="leading" id="8I2-uF-hB5"/>
                             <constraint firstItem="pdm-7Z-TPb" firstAttribute="top" secondItem="wMk-Nw-1AJ" secondAttribute="bottom" constant="-29" id="BHJ-wJ-Lhh"/>
-                            <constraint firstItem="wMk-Nw-1AJ" firstAttribute="top" secondItem="0ik-yb-Voo" secondAttribute="top" constant="64" id="D1e-E9-gXU"/>
+                            <constraint firstItem="wMk-Nw-1AJ" firstAttribute="top" secondItem="0ik-yb-Voo" secondAttribute="top" id="D1e-E9-gXU"/>
                             <constraint firstItem="wMk-Nw-1AJ" firstAttribute="leading" secondItem="0ik-yb-Voo" secondAttribute="leading" id="Hh6-6O-xlN"/>
                             <constraint firstAttribute="trailing" secondItem="wMk-Nw-1AJ" secondAttribute="trailing" id="dg4-JL-gBB"/>
-                            <constraint firstAttribute="top" secondItem="0ik-yb-Voo" secondAttribute="topMargin" constant="30" id="eBx-SQ-oEn"/>
                             <constraint firstItem="ra7-Ei-Hgg" firstAttribute="centerY" secondItem="0ik-yb-Voo" secondAttribute="centerY" id="fVk-4n-3L6"/>
                             <constraint firstItem="ra7-Ei-Hgg" firstAttribute="centerX" secondItem="0ik-yb-Voo" secondAttribute="centerX" constant="-370" id="ltJ-6x-Cp7"/>
                             <constraint firstAttribute="trailing" secondItem="wMk-Nw-1AJ" secondAttribute="trailing" id="yAm-qr-1y4"/>
@@ -567,11 +565,10 @@
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="backgroundButton" destination="Ujr-Q1-Eg8" id="Zu1-fS-KTB"/>
-                        <outlet property="centerPopupConstraint" destination="ltJ-6x-Cp7" id="jvj-mO-eni"/>
                         <outlet property="collectionView" destination="wMk-Nw-1AJ" id="QGM-GJ-5KY"/>
                         <outlet property="descriptionLabel" destination="o7x-y2-dCA" id="Cmt-cM-2Jy"/>
+                        <outlet property="modalAlert" destination="ra7-Ei-Hgg" id="s7f-ET-wkT"/>
                         <outlet property="titleLabel" destination="Z0s-N9-nuw" id="OUC-rJ-0my"/>
-                        <outlet property="valueModal" destination="ra7-Ei-Hgg" id="bLK-i7-0JB"/>
                         <segue destination="FyI-zj-JMa" kind="show" identifier="chatSegue" id="Q6n-dk-5JG"/>
                         <segue destination="ASy-U0-j3b" kind="show" identifier="safeBoxSegue" id="uFk-Ey-kgf"/>
                         <segue destination="c5f-M5-x9f" kind="show" identifier="calendarSegue" id="Yte-sM-Pdc"/>
