@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 class ShowEventViewController: UIViewController, EventBindable {
 
-    
 
     var event: Event?
     @IBOutlet weak var titleLabel: UILabel!
@@ -33,11 +32,15 @@ class ShowEventViewController: UIViewController, EventBindable {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         self.collectionView.register(UINib(nibName: "MemberInviteCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "memberCell")
-       
+        let configurationButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Setting"), style: .plain, target: self, action:  #selector(self.handleConfiguration(_:)))
+        
+        self.navigationItem.rightBarButtonItems = [ configurationButton]
         // Do any additional setup after loading the view.
       
     }
-    
+    func handleConfiguration(_ sender: Any) {
+        self.performSegue(withIdentifier: "confEventSegue", sender: nil)
+    }
     override func viewWillAppear(_ animated: Bool) {
         self.bind(event: event!)
         
@@ -63,15 +66,19 @@ class ShowEventViewController: UIViewController, EventBindable {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "confEventSegue" {
+            let viewController = segue.destination as! ConfigurationEventTableViewController
+            viewController.event = self.event!
+        }
     }
-    */
+    
     func dropPinZoomIn(){
         
         guard let coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (event?.location?.latitude)!, longitude: (event?.location?.longitude)!) as? CLLocationCoordinate2D else{
@@ -108,6 +115,10 @@ extension ShowEventViewController: UICollectionViewDelegate, UICollectionViewDat
         let id : String = member.id
         if let user = Constants.Services.USER_SERVICE.users.filter({$0.id == id }).first {
             cell.bind(userModel: user)
+            cell.check.isHidden = false
+            cell.check.image = member.statusImage()
+            cell.check.layer.borderWidth = 2
+            cell.check.layer.borderColor = UIColor.white.cgColor
         }else{
             Constants.Services.REF_SERVICE.valueSingleton(ref: "users/\(id)")
         }

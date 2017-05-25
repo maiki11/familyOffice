@@ -92,6 +92,7 @@
 		02C17D291E424F6A00EE7CFA /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C17D281E424F6A00EE7CFA /* Record.swift */; };
 		02C17D2B1E42796700EE7CFA /* recordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C17D2A1E42796700EE7CFA /* recordTableViewCell.swift */; };
 		02C414BF1E95C70A00045459 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C414BE1E95C70A00045459 /* DateFormatter.swift */; };
+		02C808801ED76979005BB8B1 /* ConfigurationEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C8087F1ED76979005BB8B1 /* ConfigurationEventTableViewController.swift */; };
 		02CF79AB1EAEC4B200E13056 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CF79AA1EAEC4B200E13056 /* EventService.swift */; };
 		02D2C0D11E6747AE007A6798 /* References.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D2C0D01E6747AE007A6798 /* References.swift */; };
 		02D956331E41220A007BAC66 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D956321E41220A007BAC66 /* DatePickerTableViewCell.swift */; };
@@ -258,6 +259,7 @@
 		02C17D281E424F6A00EE7CFA /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		02C17D2A1E42796700EE7CFA /* recordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recordTableViewCell.swift; sourceTree = "<group>"; };
 		02C414BE1E95C70A00045459 /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		02C8087F1ED76979005BB8B1 /* ConfigurationEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationEventTableViewController.swift; sourceTree = "<group>"; };
 		02CF79AA1EAEC4B200E13056 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		02D2C0D01E6747AE007A6798 /* References.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = References.swift; sourceTree = "<group>"; };
 		02D956321E41220A007BAC66 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -586,6 +588,7 @@
 				0272139E1E84478F001A144B /* CalendarViewController.swift */,
 				027FC2461E8D89C000450EFB /* memberCollection-CalendarExtension.swift */,
 				02E33A631EBA71D0003BF787 /* ShowEventViewController.swift */,
+				02C8087F1ED76979005BB8B1 /* ConfigurationEventTableViewController.swift */,
 			);
 			name = calendar;
 			sourceTree = "<group>";
@@ -1224,6 +1227,7 @@
 				0215F4E31E3FA97C00AC01D3 /* PersonalDataTableViewController.swift in Sources */,
 				A4F65A271E97F05100831BFD /* EditHealthTableViewController.swift in Sources */,
 				02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */,
+				02C808801ED76979005BB8B1 /* ConfigurationEventTableViewController.swift in Sources */,
 				027213AB1E84865F001A144B /* testFile.swift in Sources */,
 				02C17D271E424AD400EE7CFA /* ActivityLogService .swift in Sources */,
 				0215F4EA1E3FCDD400AC01D3 /* PersonalDataTableViewCell.swift in Sources */,
