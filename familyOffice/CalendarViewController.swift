@@ -37,9 +37,9 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
         self.calendar.scope = .week
-        let barButton = UIBarButtonItem(title: "Nuevo", style: .plain, target: self, action: #selector(self.handleNewEvent))
-        self.navigationItem.rightBarButtonItem = barButton
-        // For UITest
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.handleNew))
+        addButton.tintColor = #colorLiteral(red: 1, green: 0.2793949573, blue: 0.1788432287, alpha: 1)
+        self.navigationItem.rightBarButtonItem = addButton
         self.calendar.accessibilityIdentifier = "calendar"
         
     }
@@ -51,6 +51,10 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         self.event = cell.event!
         self.performSegue(withIdentifier: "showEventSegue", sender: nil)
         
+    }
+    func handleNew() {
+        self.event =  Event()
+        self.performSegue(withIdentifier: "addSegue", sender: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,11 +86,6 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         print("\(#function)")
     }
     
-    
-    func handleNewEvent() -> Void {
-        self.event = Event(id: "",title: "", description: "", date: Date().string(with: .InternationalFormat), endDate: Date().addingTimeInterval(60 * 60).string(with: .InternationalFormat) , priority: 0, members: [], reminder: Date().addingTimeInterval(60*60*(-1)).string(with: .InternationalFormat))
-        self.performSegue(withIdentifier: "addEventSegue", sender: nil)
-    }
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         let shouldBegin = self.tableView.contentOffset.y <= -self.tableView.contentInset.top
         if shouldBegin {
@@ -104,9 +103,9 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         if segue.identifier=="showEventSegue" {
             let viewController = segue.destination as! ShowEventViewController
             viewController.bind(event: self.event)
-        }else if segue.identifier == "addEventSegue" {
-             let viewController = segue.destination as! AddEventViewController
-             viewController.bind(event: self.event)
+        }else if segue.identifier == "addSegue" {
+             let viewController = segue.destination as! addEventTableViewController
+             viewController.bind(event)
         }
     }
 }

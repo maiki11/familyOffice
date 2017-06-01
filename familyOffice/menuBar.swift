@@ -10,8 +10,7 @@ import UIKit
 
 class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
    
-    var chatController : chatCollectionViewController!
-    var addEventController : AddEventViewController!
+    
     weak var handleMapSearchDelegate: HandleMenuBar?
     var array : [String]!
     lazy var collectionView: UICollectionView = {

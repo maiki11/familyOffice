@@ -76,6 +76,18 @@ struct Event {
     var location: Location? = nil
     var creator: String!
     
+    init() {
+        self.id = ""
+        self.title = ""
+        self.description = ""
+        self.date = Date().string(with: .InternationalFormat)
+        self.endDate = Date().addingTimeInterval(60 * 60).string(with: .InternationalFormat)
+        self.priority = 0
+        self.members = []
+        self.reminder = Date().addingTimeInterval(60*60*(-1)).string(with: .InternationalFormat)
+        self.creator = Constants.Services.USER_SERVICE.users[0].id
+    }
+    
     init(id: String, title: String, description: String, date: String, endDate: String, priority: Int, members: [memberEvent], reminder: String = "") {
         self.id = id
         self.title = title
