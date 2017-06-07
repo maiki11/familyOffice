@@ -20,7 +20,7 @@ extension HealthOmniViewController : UITableViewDelegate, UITableViewDataSource 
         })
         categoryButtons[categorySelected].isEnabled = false
         
-        elems = Constants.Services.USER_SERVICE.users[userIndex].health.elements.filter({
+        elems = service.USER_SERVICE.users[userIndex].health.elements.filter({
             $0.type == categorySelected
         })
     }
@@ -33,7 +33,7 @@ extension HealthOmniViewController : UITableViewDelegate, UITableViewDataSource 
         sender.isEnabled = false
         
         categorySelected = index!
-        elems = Constants.Services.USER_SERVICE.users[userIndex].health.elements.filter({
+        elems = service.USER_SERVICE.users[userIndex].health.elements.filter({
             $0.type == categorySelected
         })
         categoryTableView.reloadData()
@@ -45,17 +45,17 @@ extension HealthOmniViewController : UITableViewDelegate, UITableViewDataSource 
         
         categoryTableView.reloadData()
         
-        let user = Constants.Services.USER_SERVICE.users[userIndex]
+        let user = service.USER_SERVICE.users[userIndex]
         let url = "users/\(user.id!)/health"
         
-        Constants.Services.REF_SERVICE.chilAdded(ref: url)
-        Constants.Services.REF_SERVICE.childChanged(ref: url)
-        Constants.Services.REF_SERVICE.chilRemoved(ref: url)
+        service.REF_SERVICE.chilAdded(ref: url)
+        service.REF_SERVICE.childChanged(ref: url)
+        service.REF_SERVICE.chilRemoved(ref: url)
         
         elementAddedObserver = NotificationCenter.default
-            .addObserver(forName: Constants.NotificationCenter.HEALTHELEMENT_ADDED, object: nil, queue: nil, using: {noti in
+            .addObserver(forName: notCenter.HEALTHELEMENT_ADDED, object: nil, queue: nil, using: {noti in
                 if let elem = noti.object as? Health.Element, elem.type == self.categorySelected {
-                    self.elems = Constants.Services.USER_SERVICE.users[self.userIndex].health.elements.filter({
+                    self.elems = service.USER_SERVICE.users[self.userIndex].health.elements.filter({
                         $0.type == self.categorySelected
                     })
                 }
@@ -63,9 +63,9 @@ extension HealthOmniViewController : UITableViewDelegate, UITableViewDataSource 
         	})
         
         elementUpdatedObserver = NotificationCenter.default
-            .addObserver(forName: Constants.NotificationCenter.HEALTHELEMENT_UPDATED, object: nil, queue: nil, using: {noti in
+            .addObserver(forName: notCenter.HEALTHELEMENT_UPDATED, object: nil, queue: nil, using: {noti in
                 if let elem = noti.object as? Health.Element, elem.type == self.categorySelected {
-                    self.elems = Constants.Services.USER_SERVICE.users[self.userIndex].health.elements.filter({
+                    self.elems = service.USER_SERVICE.users[self.userIndex].health.elements.filter({
                         $0.type == self.categorySelected
                     })
                 }
@@ -73,9 +73,9 @@ extension HealthOmniViewController : UITableViewDelegate, UITableViewDataSource 
             })
         
         elementDeletedObserver = NotificationCenter.default
-            .addObserver(forName: Constants.NotificationCenter.HEALTHELEMENT_REMOVED, object: nil, queue: nil, using: {noti in
+            .addObserver(forName: notCenter.HEALTHELEMENT_REMOVED, object: nil, queue: nil, using: {noti in
                 if let elem = noti.object as? Health.Element, elem.type == self.categorySelected {
-                    self.elems = Constants.Services.USER_SERVICE.users[self.userIndex].health.elements.filter({
+                    self.elems = service.USER_SERVICE.users[self.userIndex].health.elements.filter({
                         $0.type == self.categorySelected
                     })
                 }
@@ -108,7 +108,7 @@ extension HealthOmniViewController : UITableViewDelegate, UITableViewDataSource 
 
         let editAction = UITableViewRowAction(style: .normal, title: "Editar", handler: { _ in
             var count = -1
-            let elemIndex = Constants.Services.USER_SERVICE.users[0].health.elements.index(where: { e in
+            let elemIndex = service.USER_SERVICE.users[0].health.elements.index(where: { e in
                 if e.type == self.categorySelected {
                     count += 1
                 }
@@ -122,9 +122,9 @@ extension HealthOmniViewController : UITableViewDelegate, UITableViewDataSource 
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Eliminar", handler: { _ in
         	let alert = UIAlertController(title: "Eliminar", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: {_ in
-            	var user = Constants.Services.USER_SERVICE.users[self.userIndex]
+            	var user = service.USER_SERVICE.users[self.userIndex]
                 user.health.elements.remove(at: indexPath.row)
-                Constants.Services.USER_SERVICE.updateUser(user: user)
+                service.USER_SERVICE.updateUser(user: user)
             }))
             self.present(alert, animated: true, completion: nil)
         })

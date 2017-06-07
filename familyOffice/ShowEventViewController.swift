@@ -45,7 +45,7 @@ class ShowEventViewController: UIViewController, EventBindable {
         self.bind(event: event!)
         
         self.collectionView.reloadData()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.observeActions), name: Constants.NotificationCenter.USER_NOTIFICATION, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.observeActions), name: notCenter.USER_NOTIFICATION, object: nil)
     }
 
     deinit {
@@ -113,14 +113,14 @@ extension ShowEventViewController: UICollectionViewDelegate, UICollectionViewDat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memberCell", for: indexPath) as! MemberInviteCollectionViewCell
         let member = (event?.members[indexPath.row])!
         let id : String = member.id
-        if let user = Constants.Services.USER_SERVICE.users.filter({$0.id == id }).first {
+        if let user = service.USER_SERVICE.users.filter({$0.id == id }).first {
             cell.bind(userModel: user)
             cell.check.isHidden = false
             cell.check.image = member.statusImage()
             cell.check.layer.borderWidth = 2
             cell.check.layer.borderColor = UIColor.white.cgColor
         }else{
-            Constants.Services.REF_SERVICE.valueSingleton(ref: "users/\(id)")
+            service.REF_SERVICE.valueSingleton(ref: "users/\(id)")
         }
         return cell
     }

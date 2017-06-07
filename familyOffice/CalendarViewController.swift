@@ -30,7 +30,7 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         if UIDevice.current.model.hasPrefix("iPad") {
             self.calendarHeightConstraint.constant = 400
         }
-        for item in Constants.Services.USER_SERVICE.users[0].events! {
+        for item in service.USER_SERVICE.users[0].events! {
             searchEvent(eid: item)
         }
     
@@ -61,21 +61,21 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         
         self.calendar.select(Date())
         self.tableView.reloadData()
-        Constants.Services.REF_SERVICE.chilAdded(ref: "users/\(Constants.Services.USER_SERVICE.users[0].id!)/events")
+        service.REF_SERVICE.chilAdded(ref: "users/\(service.USER_SERVICE.users[0].id!)/events")
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.observerSuccess(obj:)), name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.observeActions), name: Constants.NotificationCenter.USER_NOTIFICATION, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.observerSuccess(obj:)), name: notCenter.SUCCESS_NOTIFICATION, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.observeActions), name: notCenter.USER_NOTIFICATION, object: nil)
     }
     func observeActions() -> Void {
         self.tableView.reloadData()
     }
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
-        Constants.Services.REF_SERVICE.remove(ref: "users/\(Constants.Services.USER_SERVICE.users[0].id)/events")
+        service.REF_SERVICE.remove(ref: "users/\(service.USER_SERVICE.users[0].id)/events")
     }
     func observerSuccess(obj: Any) -> Void {
         if let _ = obj as? String {
-            self.dates = Constants.Services.EVENT_SERVICE.events
+            self.dates = service.EVENT_SERVICE.events
             self.calendar.reloadData()
         }
     }
@@ -174,14 +174,14 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate {
         if monthPosition == .next || monthPosition == .previous {
             calendar.setCurrentPage(date, animated: true)
         }
-        dates = Constants.Services.EVENT_SERVICE.events.filter({ Date(string: $0.date, formatter: .InternationalFormat)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)})
+        dates = service.EVENT_SERVICE.events.filter({ Date(string: $0.date, formatter: .InternationalFormat)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)})
         tableView.reloadData()
     }
     //Change Page Calendar
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
     }
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let count = Constants.Services.EVENT_SERVICE.events.filter({ Date(string: $0.date, formatter: .InternationalFormat)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)}).count
+        let count = service.EVENT_SERVICE.events.filter({ Date(string: $0.date, formatter: .InternationalFormat)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)}).count
         return count
     }
     

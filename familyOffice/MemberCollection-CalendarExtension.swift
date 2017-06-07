@@ -17,10 +17,11 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
     
     
     func searchEvent(eid: String) -> Void {
-        if !Constants.Services.EVENT_SERVICE.events.contains(where: {$0.id == eid}) {
-            Constants.Services.REF_SERVICE.valueSingleton(ref: "events/\(eid)")
+        
+        if !service.EVENT_SERVICE.events.contains(where: {$0.id == eid}) {
+            service.REF_SERVICE.valueSingleton(ref: "events/\(eid)")
         }else{
-            self.dates = Constants.Services.EVENT_SERVICE.events
+            self.dates = service.EVENT_SERVICE.events
             self.calendar.reloadData()
         }
     }
@@ -43,12 +44,12 @@ extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDe
             cell.image.image = #imageLiteral(resourceName: "profile_default")
             let id: String = dates[collectionView.tag].members[indexPath.row].id
             if !id.isEmpty {
-                if let user = Constants.Services.USER_SERVICE.users.filter({$0.id == id}).first {
+                if let user = service.USER_SERVICE.users.filter({$0.id == id}).first {
                     if !user.photoURL.isEmpty {
                         cell.image.loadImage(urlString: user.photoURL)
                     }
                 }else{
-                    Constants.Services.REF_SERVICE.valueSingleton(ref: "users/\(id)")
+                    service.REF_SERVICE.valueSingleton(ref: "users/\(id)")
                 }
             }
             return cell

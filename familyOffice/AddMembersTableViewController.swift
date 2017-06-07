@@ -58,14 +58,14 @@ class AddMembersTableViewController: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         users = []
-        if let index = Constants.Services.FAMILY_SERVICE.families.index(where: {$0.id == self.family.id}) {
-            self.family = Constants.Services.FAMILY_SERVICE.families[index]
+        if let index = service.FAMILY_SERVICE.families.index(where: {$0.id == self.family.id}) {
+            self.family = service.FAMILY_SERVICE.families[index]
         }
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         
         let mainQueue = OperationQueue.main
-        self.localeChangeObserver =  center.addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: mainQueue){user in
+        self.localeChangeObserver =  center.addObserver(forName: notCenter.USER_NOTIFICATION, object: nil, queue: mainQueue){user in
             if let user : User = user.object as? User {
                 self.addMember(phone: user.phone)
             }
@@ -128,19 +128,19 @@ class AddMembersTableViewController: UITableViewController {
     }
     func addMember(phone: String) -> Void {
         
-        if let user = Constants.Services.USER_SERVICE.users.filter({$0.phone == phone}).first {
+        if let user = service.USER_SERVICE.users.filter({$0.phone == phone}).first {
             if !self.users.contains(where: {$0.id == user.id}) && !self.family.members.contains(where: {$0 == user.id}){
                 self.users.append(user)
                 self.tableView.insertRows(at: [NSIndexPath(row: self.users.count-1, section: 1) as IndexPath], with: .fade)
             }
         }else{
-            Constants.Services.USER_SERVICE.getUser(phone: phone)
+            service.USER_SERVICE.getUser(phone: phone)
         }
     }
     func save(sender: UIBarButtonItem) -> Void {
         self.view.makeToastActivity(.center)
         for user in selected {
-            Constants.Services.FAMILY_SERVICE.addMember(uid: user.id, fid: family.id)
+            service.FAMILY_SERVICE.addMember(uid: user.id, fid: family.id)
         }
         _ = self.navigationController?.popViewController(animated: true)
         

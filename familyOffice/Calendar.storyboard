@@ -842,6 +842,9 @@
                                                         <!--2037-12-31 11:00:00 +0000-->
                                                     </date>
                                                     <locale key="locale" localeIdentifier="es_MX"/>
+                                                    <connections>
+                                                        <action selector="handleChangeSDate:" destination="XCc-Ue-QbS" eventType="valueChanged" id="aAq-ZR-m8I"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -890,6 +893,9 @@
                                                         <!--2037-12-31 11:00:00 +0000-->
                                                     </date>
                                                     <locale key="locale" localeIdentifier="es_MX"/>
+                                                    <connections>
+                                                        <action selector="handleChangeEDate:" destination="XCc-Ue-QbS" eventType="valueChanged" id="fne-rF-bvh"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -1057,7 +1063,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
+                        <outlet property="endDatepicker" destination="2A8-4g-4zQ" id="11u-5L-sA9"/>
+                        <outlet property="endateTxtField" destination="YRF-Yw-znZ" id="JNz-wN-FZ8"/>
                         <outlet property="numberSelected" destination="m5K-N4-ZAq" id="Lse-yL-7iQ"/>
+                        <outlet property="startDateTxtfield" destination="WNV-n3-7cs" id="RaJ-Hl-0bg"/>
+                        <outlet property="startDatepicker" destination="ALm-fF-Ws2" id="Gui-fp-OUG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TVx-gy-Qon" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1137,7 +1147,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uok-1v-iGG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2441" y="3134"/>
+            <point key="canvasLocation" x="2441" y="3130"/>
         </scene>
         <!--Agregar miembros-->
         <scene sceneID="FJe-Re-gQt">
@@ -1192,7 +1202,11 @@
                                 <action selector="handleCancel:" destination="c37-cR-mfL" id="x1E-yM-XMI"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Listo" id="LrE-jK-L8U"/>
+                        <barButtonItem key="rightBarButtonItem" title="Listo" id="LrE-jK-L8U">
+                            <connections>
+                                <action selector="handleDone:" destination="c37-cR-mfL" id="rPX-Jz-Vfe"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wgQ-Jm-ELR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1323,14 +1337,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bIc-fQ-4LA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1326" y="1522"/>
+            <point key="canvasLocation" x="2441" y="1156"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tWj-bv-Sa3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vIv-OO-BIT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ogs-AB-9Tk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ogs-AB-9Tk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1341,7 +1355,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hji-uB-BmJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2441" y="2494"/>
+            <point key="canvasLocation" x="2441" y="2476"/>
         </scene>
     </scenes>
     <resources>

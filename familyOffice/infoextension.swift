@@ -31,11 +31,11 @@ extension ProfileUserViewController : UITableViewDelegate, UITableViewDataSource
         return cell
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        Constants.Services.UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: true, context: self)
+        service.UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: true, context: self)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        Constants.Services.UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: false, context: self)
+        service.UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: false, context: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

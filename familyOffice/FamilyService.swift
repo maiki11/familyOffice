@@ -52,13 +52,13 @@ class FamilyService: repository, RequestService {
         
         if !self.families.contains(where: { $0.id == family.id }) {
             self.families.append(family)
-            NotificationCenter.default.post(name: Constants.NotificationCenter.FAMILYADDED_NOTIFICATION, object: family)
+            NotificationCenter.default.post(name: notCenter.FAMILYADDED_NOTIFICATION, object: family)
             ToastService.getTopViewControllerAndShowToast(text: "Fam. agregada: \(family.name!)")
         }else{
             if let index = self.families.index(where: {$0.id == family.id}){
                 self.families[index] = family
                 ToastService.getTopViewControllerAndShowToast(text: "Familia actualizada: \(family.name!)")
-                NotificationCenter.default.post(name: Constants.NotificationCenter.FAMILYUPDATED_NOTIFICATION, object: index)
+                NotificationCenter.default.post(name: notCenter.FAMILYUPDATED_NOTIFICATION, object: index)
             }
         }
         
@@ -67,13 +67,13 @@ class FamilyService: repository, RequestService {
     func removed(snapshot: FIRDataSnapshot) -> Void {
         let key : String = snapshot.key
         //Actualizo la información de familias al usuario logeado
-        if let index = Constants.Services.USER_SERVICE.users.index(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})  {
-            let filter =  Constants.Services.USER_SERVICE.users[index].families?.filter({$0.key as? String != key})
+        if let index = service.USER_SERVICE.users.index(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})  {
+            let filter =  service.USER_SERVICE.users[index].families?.filter({$0.key as? String != key})
             var families : [String: Bool] = [:]
             for result in filter! {
                 families[result.key as! String] = (result.value as! Bool)
             }
-            Constants.Services.USER_SERVICE.users[index].families = families as NSDictionary
+            service.USER_SERVICE.users[index].families = families as NSDictionary
         }
         //Elimino la familia localmente
         if let index = self.families.index(where: {$0.id == key}){
@@ -81,14 +81,14 @@ class FamilyService: repository, RequestService {
             self.families.remove(at: index)
             verifyFamilyActive(family: family)
             ToastService.getTopViewControllerAndShowToast(text: "Familia eliminada: \(family.name!)")
-            NotificationCenter.default.post(name: Constants.NotificationCenter.FAMILYREMOVED_NOTIFICATION, object: index)
+            NotificationCenter.default.post(name: notCenter.FAMILYREMOVED_NOTIFICATION, object: index)
         }
     }
     
     func updated(snapshot: FIRDataSnapshot, id: Any) {
-        if let index = Constants.Services.FAMILY_SERVICE.families.index(where: { $0.id == id as! String }){
+        if let index = service.FAMILY_SERVICE.families.index(where: { $0.id == id as! String }){
             self.families[index].update(snapshot: snapshot)
-            NotificationCenter.default.post(name: Constants.NotificationCenter.FAMILYUPDATED_NOTIFICATION, object: index)
+            NotificationCenter.default.post(name: notCenter.FAMILYUPDATED_NOTIFICATION, object: index)
         }
     }
     
@@ -99,7 +99,7 @@ class FamilyService: repository, RequestService {
     func exitFamily(family: Family, uid:String) -> Void {
         Constants.FirDatabase.REF_USERS.child("/\(uid)/families/\((family.id)!)").removeValue()
         Constants.FirDatabase.REF_FAMILIES.child("/\((family.id)!)/members/\(uid)").removeValue()
-        if(family.admin == Constants.Services.USER_SERVICE.users[0].id){
+        if(family.admin == service.USER_SERVICE.users[0].id){
             self.addAdmin(index: self.families.index(where: {$0.id == family.id})!, uid: nil)
         }
     }
@@ -110,7 +110,7 @@ class FamilyService: repository, RequestService {
         }else{
             if (self.families[index].members?.count)! > 1 {
                 for item in self.families[index].members {
-                    if(Constants.Services.USER_SERVICE.users[0].id != item){
+                    if(service.USER_SERVICE.users[0].id != item){
                         self.families[index].admin = item
                         Constants.FirDatabase.REF_FAMILIES.child(self.families[index].id).updateChildValues(["admin": item])
                         break
@@ -123,18 +123,18 @@ class FamilyService: repository, RequestService {
     }
     
     func verifyFamilyActive(family: Family) -> Void {
-        if(family.id == Constants.Services.USER_SERVICE.users[0].familyActive){
+        if(family.id == service.USER_SERVICE.users[0].familyActive){
             if(self.families.count > 0){
                 self.selectFamily(family: self.families[0])
             }else{
-                NotificationCenter.default.post(name: Constants.NotificationCenter.NOFAMILIES_NOTIFICATION, object: nil)
+                NotificationCenter.default.post(name: notCenter.NOFAMILIES_NOTIFICATION, object: nil)
             }
         }
     }
     
     func selectFamily(family: Family) -> Void {
         Constants.FirDatabase.REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["familyActive" : family.id])
-        Constants.Services.USER_SERVICE.setFamily(family: family)
+        service.USER_SERVICE.setFamily(family: family)
     }
 }
 
@@ -147,7 +147,7 @@ extension FamilyService {
             self.families[index].members.append(memberID)
             Constants.FirDatabase.REF_FAMILIES.child("\(familyID)/members").updateChildValues([memberID: true])
             Constants.FirDatabase.REF_USERS.child("\(memberID)/families").updateChildValues([familyID:true])
-            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: [memberID:"added"])
+            NotificationCenter.default.post(name: notCenter.SUCCESS_NOTIFICATION, object: [memberID:"added"])
         }
     }
     func addMember(uid: String, fid: String) -> Void {
@@ -157,9 +157,9 @@ extension FamilyService {
             self.families[index].members.append(uid)
             Constants.FirDatabase.REF_FAMILIES.child("\(fid)/members").updateChildValues([uid : true])
             Constants.FirDatabase.REF_USERS.child("\(uid)/families").updateChildValues([fid:true])
-            Constants.Services.NOTIFICATION_SERVICE.send(title: "Agregado a: ", message: self.families[index].name!, to: uid)
-            Constants.Services.NOTIFICATION_SERVICE.saveNotification(id: uid, title: "Agregado a: \(self.families[index].name!)", photo: self.families[index].photoURL!)
-            ToastService.getTopViewControllerAndShowToast(text: "Miembro \((Constants.Services.USER_SERVICE.users.first(where: {$0.id == uid})?.name).unsafelyUnwrapped) Agregado")
+            service.NOTIFICATION_SERVICE.send(title: "Agregado a: ", message: self.families[index].name!, to: uid)
+            service.NOTIFICATION_SERVICE.saveNotification(id: uid, title: "Agregado a: \(self.families[index].name!)", photo: self.families[index].photoURL!)
+            ToastService.getTopViewControllerAndShowToast(text: "Miembro \((service.USER_SERVICE.users.first(where: {$0.id == uid})?.name).unsafelyUnwrapped) Agregado")
             //NotificationCenter.default.post(name: SUCCESS_NOTIFICATION, object: [uid:"added"])
         }
     }
@@ -181,7 +181,7 @@ extension FamilyService {
             Constants.FirDatabase.REF_USERS.child("\((memberID))/families/\((familyID))").removeValue()
             Constants.FirDatabase.REF_FAMILIES.child("\(familyID)/members/\(memberID)").removeValue()
 
-            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: [memberID : "removed"])
+            NotificationCenter.default.post(name: notCenter.SUCCESS_NOTIFICATION, object: [memberID : "removed"])
         }
     }
 }

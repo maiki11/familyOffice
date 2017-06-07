@@ -27,9 +27,9 @@ class AuthService {
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
             if((error) != nil){
                 print(error.debugDescription)
-                NotificationCenter.default.post(name: Constants.NotificationCenter.LOGINERROR, object: nil)
+                NotificationCenter.default.post(name: notCenter.LOGINERROR, object: nil)
             }else{
-                Constants.Services.ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
+                service.ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
             }
         }
     }
@@ -39,19 +39,19 @@ class AuthService {
     func login(credential:FIRAuthCredential){
         FIRAuth.auth()?.signIn(with: credential ) { (user, error) in
             print("Usuario autentificado con google")
-            Constants.Services.ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
+            service.ACTIVITYLOG_SERVICE.create(id: user!.uid, activity: "Se inicio sesión", photo: "", type: "sesion")
         }
     }
     func logOut(){
         if let uid = FIRAuth.auth()?.currentUser?.uid {
-            Constants.Services.NOTIFICATION_SERVICE.deleteToken(token: Constants.Services.NOTIFICATION_SERVICE.token, id: uid)
+            service.NOTIFICATION_SERVICE.deleteToken(token: service.NOTIFICATION_SERVICE.token, id: uid)
             self.userStatus(state: "Offline")
         }
-        Constants.Services.USER_SERVICE.users.removeAll()
-        Constants.Services.UTILITY_SERVICE.clearObservers()
-        Constants.Services.NOTIFICATION_SERVICE.notifications.removeAll()
-        Constants.Services.ACTIVITYLOG_SERVICE.activityLog.removeAll()
-        Constants.Services.FAMILY_SERVICE.families.removeAll()
+        service.USER_SERVICE.users.removeAll()
+        service.UTILITY_SERVICE.clearObservers()
+        service.NOTIFICATION_SERVICE.notifications.removeAll()
+        service.ACTIVITYLOG_SERVICE.activityLog.removeAll()
+        service.FAMILY_SERVICE.families.removeAll()
         imageCache.removeAllObjects()
         try! FIRAuth.auth()!.signOut()
       
@@ -78,7 +78,7 @@ class AuthService {
                         let xuserModel = ["name" : user.displayName!,
                                           "photoUrl": downloadURL] as [String : Any]
                         Constants.FirDatabase.REF_USERS.child(user.uid).setValue(xuserModel)
-                        Constants.Services.ACTIVITYLOG_SERVICE.create(id: user.uid, activity: "Se creo la cuenta", photo: downloadURL, type: "sesion")
+                        service.ACTIVITYLOG_SERVICE.create(id: user.uid, activity: "Se creo la cuenta", photo: downloadURL, type: "sesion")
                         //self.userStatus(state: "Online")
                     }
                 }
@@ -104,8 +104,8 @@ class AuthService {
             if (user != nil) {
                 self.checkUserAgainstDatabase(completion: {(success, error ) in
                     if success {
-                        Constants.Services.REF_SERVICE.value(ref: ref_users(uid: (user?.uid)!))
-                        Constants.Services.UTILITY_SERVICE.gotoView(view: name, context: view)
+                        service.REF_SERVICE.value(ref: ref_users(uid: (user?.uid)!))
+                        service.UTILITY_SERVICE.gotoView(view: name, context: view)
                     }else{
                        self.logOut()
                     }

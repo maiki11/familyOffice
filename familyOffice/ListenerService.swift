@@ -71,7 +71,7 @@ class RefHandle {
             if snapshot.exists(){
                 self.handle(snapshot: snapshot, action: "value", ref: ref)
             }else if ref == "users/\(reference[1])" {
-                Constants.Services.AUTH_SERVICE.createAccount(user: (FIRAuth.auth()?.currentUser)!)
+                service.AUTH_SERVICE.createAccount(user: (FIRAuth.auth()?.currentUser)!)
             }
         }, withCancel: {(error) in
             print(error.localizedDescription)
@@ -97,14 +97,14 @@ class RefHandle {
         case "users/\(reference[1])":
             switch action {
             case "value":
-                Constants.Services.USER_SERVICE.addUser(user: User(snapshot: snapshot))
+                service.USER_SERVICE.addUser(user: User(snapshot: snapshot))
                 remove(ref: ref)
                 break
             case "valueS":
-                Constants.Services.USER_SERVICE.addUser(user: User(snapshot: snapshot))
+                service.USER_SERVICE.addUser(user: User(snapshot: snapshot))
                 break
             case "changed":
-                Constants.Services.USER_SERVICE.updated(snapshot: snapshot, uid: reference[1])
+                service.USER_SERVICE.updated(snapshot: snapshot, uid: reference[1])
                 break
             default: break
             }
@@ -113,27 +113,27 @@ class RefHandle {
             if action == "added" {
                 self.valueSingleton(ref: "families/\(snapshot.key)")
             }else if action == "removed" {
-                Constants.Services.FAMILY_SERVICE.removed(snapshot: snapshot)
+                service.FAMILY_SERVICE.removed(snapshot: snapshot)
             }
             break
         case "users/\((FIRAuth.auth()?.currentUser?.uid)!)/events":
             if action == "added" {
                 self.valueSingleton(ref: "events/\(snapshot.key)")
             }else if action == "removed" {
-                //Constants.Services.FAMILY_SERVICE.removed(snapshot: snapshot)
+                //service.FAMILY_SERVICE.removed(snapshot: snapshot)
             }
             break
         case "families/\(reference[1])":
             switch action {
             case "value":
-                Constants.Services.FAMILY_SERVICE.added(snapshot: snapshot)
+                service.FAMILY_SERVICE.added(snapshot: snapshot)
                 remove(ref: ref)
                 break
             case "valueS":
-                Constants.Services.FAMILY_SERVICE.added(snapshot: snapshot)
+                service.FAMILY_SERVICE.added(snapshot: snapshot)
                 break
             case "changed":
-                Constants.Services.FAMILY_SERVICE.updated(snapshot: snapshot, id: reference[1])
+                service.FAMILY_SERVICE.updated(snapshot: snapshot, id: reference[1])
                 break
             //self.valueSingleton(ref: ref)
             default: break
@@ -141,35 +141,35 @@ class RefHandle {
             break
         case "families/\(reference[1])/members":
             if action == "added" {
-                Constants.Services.FAMILY_SERVICE.added(snapshot: snapshot, id: reference[1])
+                service.FAMILY_SERVICE.added(snapshot: snapshot, id: reference[1])
             }else if action == "removed" {
-                Constants.Services.FAMILY_SERVICE.remove(snapshot: snapshot.key, id: reference[1])
+                service.FAMILY_SERVICE.remove(snapshot: snapshot.key, id: reference[1])
             }
             break
         case "notifications/\(reference[1])":
             if action == "added" {
-                Constants.Services.NOTIFICATION_SERVICE.add(notification: NotificationModel(snapshot: snapshot))
+                service.NOTIFICATION_SERVICE.add(notification: NotificationModel(snapshot: snapshot))
             }
             break
         case "activityLog/\(reference[1])":
             if action == "added" {
-                Constants.Services.ACTIVITYLOG_SERVICE.add(record: Record(snapshot: snapshot))
+                service.ACTIVITYLOG_SERVICE.add(record: Record(snapshot: snapshot))
             }
             break
 
         case "events/\(reference[1])":
-            Constants.Services.EVENT_SERVICE.addEventlocal(snapshot: snapshot)
+            service.EVENT_SERVICE.addEventlocal(snapshot: snapshot)
             break
         case "users/\(reference[1])/health":
             switch action {
             case "added":
-                Constants.Services.HEALTH_SERVICE.addedElement(snapshot: snapshot, uid: reference[1])
+                service.HEALTH_SERVICE.addedElement(snapshot: snapshot, uid: reference[1])
                 break
             case "changed":
-                Constants.Services.HEALTH_SERVICE.updatedElement(snapshot: snapshot, uid: reference[1])
+                service.HEALTH_SERVICE.updatedElement(snapshot: snapshot, uid: reference[1])
                 break
             case "removed":
-                Constants.Services.HEALTH_SERVICE.removedElement(snapshot: snapshot, uid: reference[1])
+                service.HEALTH_SERVICE.removedElement(snapshot: snapshot, uid: reference[1])
                 break
             default:
                 break

@@ -23,8 +23,8 @@ struct memberEvent {
     }
     init(snapshot: NSDictionary, id: String) {
         self.id = id
-        self.status = Constants.Services.UTILITY_SERVICE.exist(field: memberEvent.kStatus, dictionary: snapshot)
-        self.reminder = Constants.Services.UTILITY_SERVICE.exist(field: memberEvent.kReminder, dictionary: snapshot)
+        self.status = service.UTILITY_SERVICE.exist(field: memberEvent.kStatus, dictionary: snapshot)
+        self.reminder = service.UTILITY_SERVICE.exist(field: memberEvent.kReminder, dictionary: snapshot)
     }
     func toDictionary() -> NSDictionary {
         
@@ -85,7 +85,7 @@ struct Event {
         self.priority = 0
         self.members = []
         self.reminder = Date().addingTimeInterval(60*60*(-1)).string(with: .InternationalFormat)
-        self.creator = Constants.Services.USER_SERVICE.users[0].id
+        self.creator = service.USER_SERVICE.users[0].id
     }
     
     init(id: String, title: String, description: String, date: String, endDate: String, priority: Int, members: [memberEvent], reminder: String = "") {
@@ -97,18 +97,18 @@ struct Event {
         self.priority = priority
         self.members = members
         self.reminder = reminder
-        self.creator = Constants.Services.USER_SERVICE.users[0].id
+        self.creator = service.USER_SERVICE.users[0].id
     }
     
     init(snapshot: FIRDataSnapshot) {
         let snapshotValue = snapshot.value as! NSDictionary
-        self.title = Constants.Services.UTILITY_SERVICE.exist(field: Event.kTitle, dictionary: snapshotValue)
+        self.title = service.UTILITY_SERVICE.exist(field: Event.kTitle, dictionary: snapshotValue)
         self.id = snapshot.key
-        self.description = Constants.Services.UTILITY_SERVICE.exist(field: Event.kDescription, dictionary: snapshotValue)
-        self.date = Constants.Services.UTILITY_SERVICE.exist(field: Event.kDate, dictionary: snapshotValue)
-        self.endDate = Constants.Services.UTILITY_SERVICE.exist(field: Event.kEndDate, dictionary: snapshotValue )
-        self.priority = Constants.Services.UTILITY_SERVICE.exist(field: Event.kPriority, dictionary: snapshotValue )
-        self.reminder = Constants.Services.UTILITY_SERVICE.exist(field: Event.kreminder, dictionary: snapshotValue)
+        self.description = service.UTILITY_SERVICE.exist(field: Event.kDescription, dictionary: snapshotValue)
+        self.date = service.UTILITY_SERVICE.exist(field: Event.kDate, dictionary: snapshotValue)
+        self.endDate = service.UTILITY_SERVICE.exist(field: Event.kEndDate, dictionary: snapshotValue )
+        self.priority = service.UTILITY_SERVICE.exist(field: Event.kPriority, dictionary: snapshotValue )
+        self.reminder = service.UTILITY_SERVICE.exist(field: Event.kreminder, dictionary: snapshotValue)
         
         if let members = snapshotValue[Event.kMembers] as? NSDictionary {
             for item in members {
@@ -120,7 +120,7 @@ struct Event {
             self.location = Location(snapshot:xlocation)
         }
         
-        self.creator = Constants.Services.UTILITY_SERVICE.exist(field: Event.kcreator, dictionary: snapshotValue)
+        self.creator = service.UTILITY_SERVICE.exist(field: Event.kcreator, dictionary: snapshotValue)
     }
     
     func toDictionary() -> NSDictionary {

@@ -121,7 +121,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         return imageView
     }
     override func viewWillDisappear(_ animated: Bool) {
-        Constants.Services.UTILITY_SERVICE.enabledView()
+        service.UTILITY_SERVICE.enabledView()
         selected = []
         center.removeObserver(self.localeChangeObserver)
         Constants.FirDatabase.REF_USERS.removeAllObservers()
@@ -147,11 +147,11 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         //Add validations
         if(imageView.image != nil && !(nameTxtField.text?.isEmpty)!){
             self.view.makeToastActivity(.center)
-            Constants.Services.UTILITY_SERVICE.disabledView()
+            service.UTILITY_SERVICE.disabledView()
             
-            selected.append(Constants.Services.USER_SERVICE.users[0])
+            selected.append(service.USER_SERVICE.users[0])
             
-            Constants.Services.STORAGE_SERVICE.insert("families/\(nameTxtField.text ?? "")\(key)images/\(imageName).png", value: imageView.image ?? "", callback: {(response) in
+            service.STORAGE_SERVICE.insert("families/\(nameTxtField.text ?? "")\(key)images/\(imageName).png", value: imageView.image ?? "", callback: {(response) in
                 
                 if let metadata = response as? FIRStorageMetadata {
                     let family: Family! = Family(name: self.nameTxtField.text!, photoURL: (metadata.downloadURL()?.absoluteString)!, members: [], admin: (FIRAuth.auth()?.currentUser?.uid)! ,id: self.nameTxtField.text!+key, imageProfilePath: metadata.name)
@@ -169,23 +169,23 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     }
     func insertFamily(family: Family, key: String) {
         let ref = "families/\(nameTxtField.text!)\(key)"
-        Constants.Services.FAMILY_SERVICE.insert(ref, value: family.toDictionary(), callback: { (response) in
+        service.FAMILY_SERVICE.insert(ref, value: family.toDictionary(), callback: { (response) in
             
             if response is String {
                 self.view.hideToastActivity()
                 Constants.FirDatabase.REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).child("families").updateChildValues([family.id : true])
                 
-                Constants.Services.FAMILY_SERVICE.families.append(family)
+                service.FAMILY_SERVICE.families.append(family)
                 
-                Constants.Services.FAMILY_SERVICE.selectFamily(family: family)
+                service.FAMILY_SERVICE.selectFamily(family: family)
                 
-                Constants.Services.ACTIVITYLOG_SERVICE.create(id: (Constants.Services.USER_SERVICE.users[0].id)!,
+                service.ACTIVITYLOG_SERVICE.create(id: (service.USER_SERVICE.users[0].id)!,
                                                               activity: "Se creo la familia  \((family.name)!)", photo: family.photoURL!, type: "addFamily")
                 for uid in self.selected {
-                    Constants.Services.FAMILY_SERVICE.addMember(uid: uid.id, fid: family.id)
+                    service.FAMILY_SERVICE.addMember(uid: uid.id, fid: family.id)
                 }
                 
-                Constants.Services.UTILITY_SERVICE.enabledView()
+                service.UTILITY_SERVICE.enabledView()
                  _ = self.navigationController?.popViewController(animated: true)
             }else{
                 self.error()
@@ -194,7 +194,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
         })
     }
     func error() -> Void {
-        Constants.Services.UTILITY_SERVICE.enabledView()
+        service.UTILITY_SERVICE.enabledView()
         self.view.hideToastActivity()
         let alert = UIAlertController(title: "Error", message: "", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -228,7 +228,7 @@ class RegisterFamilyViewController: UIViewController, UIImagePickerControllerDel
     }
     
     func logout(_ sender: Any){
-        Constants.Services.AUTH_SERVICE.logOut()
+        service.AUTH_SERVICE.logOut()
         Utility.Instance().gotoView(view: "StartView", context: self)
     }
 }

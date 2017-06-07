@@ -44,8 +44,8 @@ class SelectCategoryViewController: UIViewController {
         self.empresarialView.layer.cornerRadius = 5
     }
     @IBAction func handlePressSocial(_ sender: UIButton) {
-        if Constants.Services.FAMILY_SERVICE.families.count > 0 && Constants.Services.FAMILY_SERVICE.families.contains(where: {$0.id == Constants.Services.USER_SERVICE.users[0].familyActive}){
-            Constants.Services.UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
+        if service.FAMILY_SERVICE.families.count > 0 && service.FAMILY_SERVICE.families.contains(where: {$0.id == service.USER_SERVICE.users[0].familyActive}){
+            service.UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
         }
     }
 
@@ -56,14 +56,14 @@ class SelectCategoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
        
         self.familiesCollection.reloadData()
-        if Constants.Services.USER_SERVICE.users.count > 0 {
+        if service.USER_SERVICE.users.count > 0 {
             loadImage()
         }
        
-        localeChangeObserver.append( NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: nil){_ in
+        localeChangeObserver.append( NotificationCenter.default.addObserver(forName: notCenter.USER_NOTIFICATION, object: nil, queue: nil){_ in
             self.loadImage()
         })
-        localeChangeObserver.append(NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
+        localeChangeObserver.append(NotificationCenter.default.addObserver(forName: notCenter.FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
             if let family : Family = family.object as? Family {
                 self.addFamily(family: family)
             }
@@ -77,12 +77,12 @@ class SelectCategoryViewController: UIViewController {
         self.localeChangeObserver.removeAll()
     }
     func loadImage() -> Void {
-        if !Constants.Services.USER_SERVICE.users[0].photoURL.isEmpty {
-            image.loadImage(urlString: Constants.Services.USER_SERVICE.users[0].photoURL)
+        if !service.USER_SERVICE.users[0].photoURL.isEmpty {
+            image.loadImage(urlString: service.USER_SERVICE.users[0].photoURL)
         }else{
             image.image = #imageLiteral(resourceName: "profile_default")
         }
-        self.name.text = Constants.Services.USER_SERVICE.users[0].name
+        self.name.text = service.USER_SERVICE.users[0].name
         self.image.layer.cornerRadius = self.image.frame.size.width/2
         self.image.clipsToBounds = true
         self.image.layer.borderWidth = 4.0
@@ -91,8 +91,8 @@ class SelectCategoryViewController: UIViewController {
     }
     
     @IBAction func handleBussiness(_ sender: UIButton) {
-        if Constants.Services.FAMILY_SERVICE.families.count > 0 && Constants.Services.FAMILY_SERVICE.families.contains(where: {$0.id == Constants.Services.USER_SERVICE.users[0].familyActive}){
-            Constants.Services.UTILITY_SERVICE.gotoView(view: "HomeBussiness", context: self)
+        if service.FAMILY_SERVICE.families.count > 0 && service.FAMILY_SERVICE.families.contains(where: {$0.id == service.USER_SERVICE.users[0].familyActive}){
+            service.UTILITY_SERVICE.gotoView(view: "HomeBussiness", context: self)
         }
         
     }
@@ -104,7 +104,7 @@ class SelectCategoryViewController: UIViewController {
     }
     
     func logout(){
-        Constants.Services.AUTH_SERVICE.logOut()
+        service.AUTH_SERVICE.logOut()
         Utility.Instance().gotoView(view: "StartView", context: self)
     }
     

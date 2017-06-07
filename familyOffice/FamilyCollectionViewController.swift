@@ -62,33 +62,33 @@ extension FamilyCollectionViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if(indexPath.row == Constants.Services.FAMILY_SERVICE.families.count){
+        if(indexPath.row == service.FAMILY_SERVICE.families.count){
             self.performSegue(withIdentifier: "registerSegue", sender: nil)
         }else{
-            self.family = Constants.Services.FAMILY_SERVICE.families[indexPath.row]
+            self.family = service.FAMILY_SERVICE.families[indexPath.row]
             self.performSegue(withIdentifier: "changeScreen", sender: nil)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        for item in Constants.Services.FAMILY_SERVICE.families {
+        for item in service.FAMILY_SERVICE.families {
             if !item.members.contains(where: {$0 == FIRAuth.auth()?.currentUser?.uid}) {
-                Constants.Services.FAMILY_SERVICE.families.remove(at:  Constants.Services.FAMILY_SERVICE.families.index(where: {$0.id == item.id})!)
+                service.FAMILY_SERVICE.families.remove(at:  service.FAMILY_SERVICE.families.index(where: {$0.id == item.id})!)
             }
         }
         
-        return Constants.Services.FAMILY_SERVICE.families.count + 1
+        return service.FAMILY_SERVICE.families.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //Family Cell
-        if ( indexPath.row < Constants.Services.FAMILY_SERVICE.families.count){
+        if ( indexPath.row < service.FAMILY_SERVICE.families.count){
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FamiliesPreCollectionViewCell
 
             cell.layer.position.y = cell.layer.position.y-60
-            let family = Constants.Services.FAMILY_SERVICE.families[indexPath.row]
+            let family = service.FAMILY_SERVICE.families[indexPath.row]
             cell.check.layer.cornerRadius = 15
             cell.check.layer.borderWidth = 2
             cell.check.layer.borderColor = UIColor(red: 255.0/255, green: 255.0/255, blue: 255.0/255, alpha: 1).cgColor
@@ -102,7 +102,7 @@ extension FamilyCollectionViewController {
             cell.name.text = family.name
             cell.check.isHidden = true
             cell.name.textColor = #colorLiteral(red: 0.6941176471, green: 0.6941176471, blue: 0.6941176471, alpha: 1)
-            if family.id == Constants.Services.USER_SERVICE.users[0].familyActive {
+            if family.id == service.USER_SERVICE.users[0].familyActive {
                 cell.check.isHidden = false
                 cell.name.textColor = #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)
             }

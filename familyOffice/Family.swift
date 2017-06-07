@@ -55,11 +55,11 @@ struct Family  {
     init(snapshot: FIRDataSnapshot) {
         let snapshotValue = snapshot.value as! NSDictionary
         self.id = snapshot.key
-        self.name = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyNameKey, dictionary: snapshotValue)
-        self.imageProfilePath = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyImagePathKey, dictionary: snapshotValue)
-        self.photoURL = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyPhotoUrlKey, dictionary: snapshotValue)
-        self.members = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyMembersKey, dictionary: snapshotValue)
-        self.admin = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyAdminKey, dictionary: snapshotValue)
+        self.name = service.UTILITY_SERVICE.exist(field: Family.kFamilyNameKey, dictionary: snapshotValue)
+        self.imageProfilePath = service.UTILITY_SERVICE.exist(field: Family.kFamilyImagePathKey, dictionary: snapshotValue)
+        self.photoURL = service.UTILITY_SERVICE.exist(field: Family.kFamilyPhotoUrlKey, dictionary: snapshotValue)
+        self.members = service.UTILITY_SERVICE.exist(field: Family.kFamilyMembersKey, dictionary: snapshotValue)
+        self.admin = service.UTILITY_SERVICE.exist(field: Family.kFamilyAdminKey, dictionary: snapshotValue)
         self.firebaseReference = snapshot.ref
     }
     
@@ -71,7 +71,7 @@ struct Family  {
         return [
             Family.kFamilyNameKey: self.name,
             Family.kFamilyPhotoUrlKey: self.photoURL!,
-            Family.kFamilyMembersKey : Constants.Services.UTILITY_SERVICE.toDictionary(array: self.members),
+            Family.kFamilyMembersKey : service.UTILITY_SERVICE.toDictionary(array: self.members),
             Family.kFamilyAdminKey : self.admin ?? "",
             Family.kFamilyImagePathKey: self.imageProfilePath!
         ]
@@ -87,7 +87,7 @@ struct Family  {
             self.name =  snapshot.value! as! String
             break
         case Family.kFamilyMembersKey:
-                        self.members = Constants.Services.UTILITY_SERVICE.exist(field: Family.kFamilyMembersKey, dictionary: value)
+                        self.members = service.UTILITY_SERVICE.exist(field: Family.kFamilyMembersKey, dictionary: value)
             break
         case Family.kFamilyPhotoUrlKey:
             self.photoURL = snapshot.value as? String

@@ -22,6 +22,10 @@ class addEventTableViewController: UITableViewController, ShareEvent {
     var event: Event!
     var startActivate = false
     var endActivate = false
+    @IBOutlet weak var endDatepicker: UIDatePicker!
+    @IBOutlet weak var startDateTxtfield: UILabel!
+    @IBOutlet weak var endateTxtField: UILabel!
+    @IBOutlet weak var startDatepicker: UIDatePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,13 +33,33 @@ class addEventTableViewController: UITableViewController, ShareEvent {
     }
     override func viewWillAppear(_ animated: Bool) {
         self.bind(event!)
-       
+        let date =  Date(string: event.date, formatter: .InternationalFormat)!
+        let enddate = Date(string: event.endDate, formatter: .InternationalFormat)!
+        
+        numberSelected.text = String(event.members.count)
+        startDatepicker.date = date
+        startDateTxtfield.text = date.string(with: .dayMonthYearHourMinute)
+        endDatepicker.date = enddate
+        endateTxtField.text = enddate.string(with: .dayMonthYearHourMinute)
+        
         if !event.id.isEmpty {
             
         }else{
           
         }
     }
+    @IBAction func handleChangeSDate(_ sender: UIDatePicker) {
+        event.date = sender.date.string(with: .InternationalFormat)
+        let date = Date(string: event.date, formatter: .InternationalFormat)!
+        
+        startDateTxtfield.text = date.string(with: .dayMonthYearHourMinute)
+    }
+    
+    @IBAction func handleChangeEDate(_ sender: UIDatePicker) {
+        let date = Date(string: event.date, formatter: .InternationalFormat)!
+        endateTxtField.text = date.string(with: .dayMonthYearHourMinute)
+    }
+   
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -94,11 +118,11 @@ extension addEventTableViewController {
         guard validation() else {
             return
         }
-    Constants.Services.EVENT_SERVICE.update("events/\(event.id!)", value: event.toDictionary() as! [AnyHashable : Any], callback: { response in
+    service.EVENT_SERVICE.update("events/\(event.id!)", value: event.toDictionary() as! [AnyHashable : Any], callback: { response in
             if response is String {
                 //Actualización local del evento que se acaba de modificar
-                if let index = Constants.Services.EVENT_SERVICE.events.index(where: {$0.id == self.event.id}){
-                    Constants.Services.EVENT_SERVICE.events[index] = self.event
+                if let index = service.EVENT_SERVICE.events.index(where: {$0.id == self.event.id}){
+                    service.EVENT_SERVICE.events[index] = self.event
                     _ = self.navigationController?.popViewController(animated: true)
                 }
             }
@@ -112,10 +136,10 @@ extension addEventTableViewController {
         let key = Constants.FirDatabase.REF.childByAutoId().key
         event.id = key
         
-        event.members.append(memberEvent(id: Constants.Services.USER_SERVICE.users[0].id, reminder: event.reminder!, status: "Aceptada"))
-        Constants.Services.EVENT_SERVICE.insert("events/\(key)", value: event.toDictionary(), callback: { response in
+        event.members.append(memberEvent(id: service.USER_SERVICE.users[0].id, reminder: event.reminder!, status: "Aceptada"))
+        service.EVENT_SERVICE.insert("events/\(key)", value: event.toDictionary(), callback: { response in
             if response is String {
-                Constants.Services.EVENT_SERVICE.events.append(self.event)
+                service.EVENT_SERVICE.events.append(self.event)
                 _ = self.navigationController?.popViewController(animated: true)
             }
         })

@@ -70,5 +70,6 @@ let modelName = UIDevice.current.modelName
 let STYLES = Styles.Instance()
 
 //Others
-
+typealias service = Constants.Services
+typealias notCenter = Constants.NotificationCenter
 
