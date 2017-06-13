@@ -9,48 +9,6 @@
 import UIKit
 import Firebase
 
-struct memberEvent {
-    static let kId = "Id"
-    static let kStatus = "status"
-    static let kReminder = "reminder"
-    var id: String!
-    var status: String!
-    var reminder: String!
-    init(id:String, reminder: String, status: String) {
-        self.id = id
-        self.status = status
-        self.reminder = reminder
-    }
-    init(snapshot: NSDictionary, id: String) {
-        self.id = id
-        self.status = service.UTILITY_SERVICE.exist(field: memberEvent.kStatus, dictionary: snapshot)
-        self.reminder = service.UTILITY_SERVICE.exist(field: memberEvent.kReminder, dictionary: snapshot)
-    }
-    func toDictionary() -> NSDictionary {
-        
-        return [
-            memberEvent.kStatus : self.status,
-            memberEvent.kReminder : self.reminder
-        ]
-    }
-    
-    func statusImage() -> UIImage {
-        var image : UIImage!
-        switch self.status {
-        case "Pendiente":
-            image = #imageLiteral(resourceName: "pendiente")
-            break
-        case "Aceptada":
-            image = #imageLiteral(resourceName: "Accept")
-            break
-        default:
-            image = #imageLiteral(resourceName: "Cancel")
-            break
-        }
-        
-        return image
-    }
-}
 
 struct Event {
     
@@ -64,6 +22,8 @@ struct Event {
     static let kreminder = "reminder"
     static let klocation = "location"
     static let kcreator = "creator"
+    static let ktype = "type"
+    static let kRepeat = "repeat"
     
     var id: String!
     var title: String!
@@ -75,6 +35,8 @@ struct Event {
     var members: [memberEvent]! = []
     var location: Location? = nil
     var creator: String!
+    var type: String! = "Home"
+    var repeatmodel : repeatModel! = nil
     
     init() {
         self.id = ""
@@ -86,6 +48,7 @@ struct Event {
         self.members = []
         self.reminder = Date().addingTimeInterval(60*60*(-1)).string(with: .InternationalFormat)
         self.creator = service.USER_SERVICE.users[0].id
+        self.repeatmodel = repeatModel(each: "Nunca", end:"Nunca")
     }
     
     init(id: String, title: String, description: String, date: String, endDate: String, priority: Int, members: [memberEvent], reminder: String = "") {
@@ -124,30 +87,22 @@ struct Event {
     }
     
     func toDictionary() -> NSDictionary {
-        let memberDict : NSDictionary = {
-            var dic : [String: NSDictionary] = [:]
-            for member in self.members {
-                dic[member.id] = member.toDictionary()
-            }
-            return dic as NSDictionary
-        }()
-        
+
         return [
             Event.kTitle : self.title,
             Event.kDescription : self.description,
             Event.kEndDate : self.endDate,
             Event.kDate : self.date,
             Event.kPriority : self.priority,
-            Event.kMembers : memberDict,
+            Event.kMembers : NSDictionary(objects: self.members.map({$0.toDictionary()}), forKeys: self.members.map({$0.id}) as! [NSCopying]),
             Event.kreminder : self.reminder ?? "",
             Event.klocation : self.location?.toDictionary() ?? "",
-            Event.kcreator : self.creator
+            Event.kcreator : self.creator,
+            Event.ktype : self.type,
+            Event.kRepeat : self.repeatmodel.toDictionary(),
+            
         ]
     }
-    
-    
-    
-    
 }
 
 protocol EventBindable: AnyObject {

@@ -76,6 +76,7 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
     func observerSuccess(obj: Any) -> Void {
         if let _ = obj as? String {
             self.dates = service.EVENT_SERVICE.events
+            
             self.calendar.reloadData()
         }
     }
@@ -100,13 +101,22 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         return shouldBegin
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier=="showEventSegue" {
+        guard let segueString = segue.identifier else {
+            return
+        }
+        switch segueString {
+        case "showEventSegue":
             let viewController = segue.destination as! ShowEventViewController
             viewController.bind(event: self.event)
-        }else if segue.identifier == "addSegue" {
-             let viewController = segue.destination as! addEventTableViewController
-             viewController.bind(event)
+            break
+        case "addSegue":
+            let viewController = segue.destination as! addEventTableViewController
+            viewController.bind(event)
+            break
+        default: break
+            
         }
+       
     }
 }
 
@@ -117,6 +127,7 @@ extension CalendarViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dates.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventTableViewCell
         let date = dates[indexPath.row]
@@ -124,9 +135,9 @@ extension CalendarViewController : UITableViewDataSource, UITableViewDelegate {
         cell.dateSelected.text = Date(string: date.date, formatter: .InternationalFormat)?.string(with: .dayMonthAndYear2)
         return cell
     }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let tableViewCell = cell as? EventTableViewCell else { return }
-        
         tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -141,6 +152,7 @@ extension CalendarViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let cell = tableView.cellForRow(at: editActionsForRowAt) as! EventTableViewCell
         self.event = cell.event
+       
         let more = UITableViewRowAction(style: .normal, title: "Ver mas") { action, index in
             
             self.performSegue(withIdentifier: "showEventSegue", sender: nil)
