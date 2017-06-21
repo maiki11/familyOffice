@@ -39,8 +39,6 @@ class EventService {
         Constants.FirDatabase.REF_USERS.child("\(uid)/events").updateChildValues([eid:true])
     }
     
-    
-   
 }
 
 extension EventService : RequestService  {
