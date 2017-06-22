@@ -7,20 +7,18 @@
 //
 
 import UIKit
-import CVCalendar
 
 class AddGoalViewController: UIViewController{
-
+    var types = [("Deportivo","sport"),("Escolar","school"),("Alimentación","eat"),("Salud","health-1"),("Negocios","business-1"),("Religión","religion")]
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
        
         // Do any additional setup after loading the view.
     }
-    override func awakeFromNib() {
 
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -39,6 +37,7 @@ class AddGoalViewController: UIViewController{
 
 }
 extension AddGoalViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -47,8 +46,10 @@ extension AddGoalViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        
+        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! typeiconCollectionViewCell
+        let obj = types[indexPath.row]
+        cell.titleLbl.text = obj.0
+        cell.photo.image = UIImage(named: obj.1)
         return cell
     }
 }

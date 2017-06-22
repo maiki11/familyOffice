@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 protocol ShareEvent: class {
     var event: Event! {get set}
 }
@@ -191,7 +191,7 @@ extension addEventTableViewController {
         
         event.members.append(memberEvent(id: service.USER_SERVICE.users[0].id, reminder: event.reminder!, status: "Aceptada"))
         service.EVENT_SERVICE.insert("events/\(key)", value: event.toDictionary(), callback: { response in
-            if response is String {
+            if response is FIRDatabaseReference {
                 service.EVENT_SERVICE.events.append(self.event)
                 self.dismissPopover()
             }

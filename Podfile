@@ -17,7 +17,6 @@ target 'familyOffice' do
   pod 'MGSwipeTableCell'
   pod 'Alamofire'
   pod 'FSCalendar'
-  pod 'CVCalendar', '~> 1.5.0'
   pod 'Toast-Swift', '~> 2.0.0'
   pod 'SearchTextField'
   pod 'MultiAutoCompleteTextSwift'
