@@ -103,7 +103,7 @@ class Utility {
         Constants.FirDatabase.REF_FAMILIES.removeAllObservers()
         Constants.FirDatabase.REF_ACTIVITY.removeAllObservers()
         Constants.FirDatabase.REF_NOTIFICATION.removeAllObservers()
-        NotificationCenter.default.removeObserver(Constants.NotificationCenter.NOFAMILIES_NOTIFICATION)
+        NotificationCenter.default.removeObserver(notCenter.NOFAMILIES_NOTIFICATION)
     }
     
     func exist(field: String, dictionary:NSDictionary) -> String! {

@@ -35,10 +35,10 @@ struct Record {
     init(snapshot: FIRDataSnapshot) {
         let snapshotValue = snapshot.value as! NSDictionary
         self.id = snapshot.key
-        self.activity = Constants.Services.UTILITY_SERVICE.exist(field: Record.kRecordActivykey, dictionary: snapshotValue)
-        self.timestamp = Constants.Services.UTILITY_SERVICE.exist(field: Record.kRecordDatekey, dictionary: snapshotValue)
-        self.type = Constants.Services.UTILITY_SERVICE.exist(field: Record.kRecordTypekey, dictionary: snapshotValue)
-        self.photoURL = Constants.Services.UTILITY_SERVICE.exist(field: Record.kRecordPhotokey, dictionary: snapshotValue)
+        self.activity = service.UTILITY_SERVICE.exist(field: Record.kRecordActivykey, dictionary: snapshotValue)
+        self.timestamp = service.UTILITY_SERVICE.exist(field: Record.kRecordDatekey, dictionary: snapshotValue)
+        self.type = service.UTILITY_SERVICE.exist(field: Record.kRecordTypekey, dictionary: snapshotValue)
+        self.photoURL = service.UTILITY_SERVICE.exist(field: Record.kRecordPhotokey, dictionary: snapshotValue)
 
     }
     func toDictionary() -> NSDictionary {

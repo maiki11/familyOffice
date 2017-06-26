@@ -8,11 +8,15 @@
 
 import UIKit
 import Firebase
+struct Events {
+    var events: [Event]
+}
 
-class EventService{
-    public var events: [Event] = []
-   
-    private init(){
+class EventService {
+    public var events: [Event]
+    
+    private init(events: [Event]){
+        self.events = events
     }
     
     public static func Instance() -> EventService {
@@ -21,41 +25,29 @@ class EventService{
     func test() -> Void {
         
     }
-    private static let instance : EventService = EventService()
-    
+    private static let instance : EventService = EventService(events: [])
     
     func addEventlocal(snapshot: FIRDataSnapshot) -> Void {
         let event = Event.init(snapshot: snapshot)
         
         if !events.contains(where: {$0.id == event.id}){
             events.append(event)
-            NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: event.id)
+            NotificationCenter.default.post(name: notCenter.SUCCESS_NOTIFICATION, object: event.id)
         }
     }
     func addEventToMember(uid: String, eid: String)-> Void {
         Constants.FirDatabase.REF_USERS.child("\(uid)/events").updateChildValues([eid:true])
     }
     
-   
 }
 
 extension EventService : RequestService  {
     
-    
-    func insert(_ ref: String, value: Any, callback: @escaping ((Any) -> Void)) {
-        
-        Constants.FirDatabase.REF.child(ref).setValue(value as! NSDictionary, withCompletionBlock: {(error, ref) in
-            if error != nil {
-                print(error.debugDescription)
-            }else {
-                DispatchQueue.main.async {
-                    Constants.Services.USER_SERVICE.users[0].events?.append(ref.key)
-                    self.addEventToMember(uid: Constants.Services.USER_SERVICE.users[0].id, eid: ref.key)
-                    callback(ref.key)
-                }
-            }
-        })
+    func inserted(ref: FIRDatabaseReference){
+        service.USER_SERVICE.users[0].events?.append(ref.key)
+        self.addEventToMember(uid: service.USER_SERVICE.users[0].id, eid: ref.key)
     }
+    
     func delete(_ ref: String, callback: @escaping ((Any) -> Void)) {
         
     }

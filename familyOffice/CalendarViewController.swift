@@ -30,16 +30,16 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         if UIDevice.current.model.hasPrefix("iPad") {
             self.calendarHeightConstraint.constant = 400
         }
-        for item in Constants.Services.USER_SERVICE.users[0].events! {
+        for item in service.USER_SERVICE.users[0].events! {
             searchEvent(eid: item)
         }
     
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
         self.calendar.scope = .week
-        let barButton = UIBarButtonItem(title: "Nuevo", style: .plain, target: self, action: #selector(self.handleNewEvent))
-        self.navigationItem.rightBarButtonItem = barButton
-        // For UITest
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.handleNew))
+        addButton.tintColor = #colorLiteral(red: 1, green: 0.2793949573, blue: 0.1788432287, alpha: 1)
+        self.navigationItem.rightBarButtonItem = addButton
         self.calendar.accessibilityIdentifier = "calendar"
         
     }
@@ -52,26 +52,31 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         self.performSegue(withIdentifier: "showEventSegue", sender: nil)
         
     }
+    func handleNew() {
+        self.event =  Event()
+        self.performSegue(withIdentifier: "addSegue", sender: nil)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         
         self.calendar.select(Date())
         self.tableView.reloadData()
-        Constants.Services.REF_SERVICE.chilAdded(ref: "users/\(Constants.Services.USER_SERVICE.users[0].id!)/events")
+        service.REF_SERVICE.chilAdded(ref: "users/\(service.USER_SERVICE.users[0].id!)/events")
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.observerSuccess(obj:)), name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.observeActions), name: Constants.NotificationCenter.USER_NOTIFICATION, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.observerSuccess(obj:)), name: notCenter.SUCCESS_NOTIFICATION, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.observeActions), name: notCenter.USER_NOTIFICATION, object: nil)
     }
     func observeActions() -> Void {
         self.tableView.reloadData()
     }
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
-        Constants.Services.REF_SERVICE.remove(ref: "users/\(Constants.Services.USER_SERVICE.users[0].id)/events")
+        service.REF_SERVICE.remove(ref: "users/\(service.USER_SERVICE.users[0].id)/events")
     }
     func observerSuccess(obj: Any) -> Void {
         if let _ = obj as? String {
-            self.dates = Constants.Services.EVENT_SERVICE.events
+            self.dates = service.EVENT_SERVICE.events
+            
             self.calendar.reloadData()
         }
     }
@@ -82,11 +87,6 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         print("\(#function)")
     }
     
-    
-    func handleNewEvent() -> Void {
-        self.event = Event(id: "",title: "", description: "", date: Date().string(with: .InternationalFormat), endDate: Date().addingTimeInterval(60 * 60).string(with: .InternationalFormat) , priority: 0, members: [], reminder: Date().addingTimeInterval(60*60*(-1)).string(with: .InternationalFormat))
-        self.performSegue(withIdentifier: "addEventSegue", sender: nil)
-    }
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         let shouldBegin = self.tableView.contentOffset.y <= -self.tableView.contentInset.top
         if shouldBegin {
@@ -101,13 +101,22 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         return shouldBegin
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier=="showEventSegue" {
+        guard let segueString = segue.identifier else {
+            return
+        }
+        switch segueString {
+        case "showEventSegue":
             let viewController = segue.destination as! ShowEventViewController
             viewController.bind(event: self.event)
-        }else if segue.identifier == "addEventSegue" {
-             let viewController = segue.destination as! AddEventViewController
-             viewController.bind(event: self.event)
+            break
+        case "addSegue":
+            let viewController = segue.destination as! addEventTableViewController
+            viewController.bind(event)
+            break
+        default: break
+            
         }
+       
     }
 }
 
@@ -118,6 +127,7 @@ extension CalendarViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dates.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventTableViewCell
         let date = dates[indexPath.row]
@@ -125,9 +135,9 @@ extension CalendarViewController : UITableViewDataSource, UITableViewDelegate {
         cell.dateSelected.text = Date(string: date.date, formatter: .InternationalFormat)?.string(with: .dayMonthAndYear2)
         return cell
     }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let tableViewCell = cell as? EventTableViewCell else { return }
-        
         tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -142,7 +152,7 @@ extension CalendarViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let cell = tableView.cellForRow(at: editActionsForRowAt) as! EventTableViewCell
         self.event = cell.event
-        let more = UITableViewRowAction(style: .normal, title: "Ver más") { action, index in
+        let more = UITableViewRowAction(style: .normal, title: "Ver mas") { action, index in
             
             self.performSegue(withIdentifier: "showEventSegue", sender: nil)
         }
@@ -177,14 +187,14 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate {
         if monthPosition == .next || monthPosition == .previous {
             calendar.setCurrentPage(date, animated: true)
         }
-        dates = Constants.Services.EVENT_SERVICE.events.filter({ Date(string: $0.date, formatter: .InternationalFormat)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)})
+        dates = service.EVENT_SERVICE.events.filter({ Date(string: $0.date, formatter: .InternationalFormat)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)})
         tableView.reloadData()
     }
     //Change Page Calendar
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
     }
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let count = Constants.Services.EVENT_SERVICE.events.filter({ Date(string: $0.date, formatter: .InternationalFormat)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)}).count
+        let count = service.EVENT_SERVICE.events.filter({ Date(string: $0.date, formatter: .InternationalFormat)?.string(with: .dayMonthAndYear) == date.string(with: .dayMonthAndYear)}).count
         return count
     }
     

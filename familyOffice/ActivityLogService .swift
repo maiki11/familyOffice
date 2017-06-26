@@ -39,7 +39,7 @@ class ActivityLogService {
             //sec[sec.count-1].record.append(record)
 
         }
-        NotificationCenter.default.post(name: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: record)
+        NotificationCenter.default.post(name: notCenter.SUCCESS_NOTIFICATION, object: record)
     }
     
 }

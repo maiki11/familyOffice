@@ -28,18 +28,18 @@ class ProfileUserViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     override func viewWillAppear(_ animated: Bool) {
-        Constants.Services.REF_SERVICE.valueSingleton(ref: "users/\(Constants.Services.USER_SERVICE.users[index].id!)")
-        if !(Constants.Services.USER_SERVICE.users[index].photoURL.isEmpty) {
-            profileImage.loadImage(urlString: Constants.Services.USER_SERVICE.users[index].photoURL)
+        service.REF_SERVICE.valueSingleton(ref: "users/\(service.USER_SERVICE.users[index].id!)")
+        if !(service.USER_SERVICE.users[index].photoURL.isEmpty) {
+            profileImage.loadImage(urlString: service.USER_SERVICE.users[index].photoURL)
             
         }else{
             profileImage.image = #imageLiteral(resourceName: "profile_default")
         }
-        name.text = Constants.Services.USER_SERVICE.users[index].name
-        userDic = Constants.Services.USER_SERVICE.users[index].toDictionary()
+        name.text = service.USER_SERVICE.users[index].name
+        userDic = service.USER_SERVICE.users[index].toDictionary()
         
-        NotificationCenter.default.addObserver(forName: Constants.NotificationCenter.USER_NOTIFICATION, object: nil, queue: nil){_ in
-            self.userDic = Constants.Services.USER_SERVICE.users[self.index].toDictionary()
+        NotificationCenter.default.addObserver(forName: notCenter.USER_NOTIFICATION, object: nil, queue: nil){_ in
+            self.userDic = service.USER_SERVICE.users[self.index].toDictionary()
             self.setFamiliesInComun()
             
             self.familiesCollection.reloadData()

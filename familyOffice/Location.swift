@@ -29,10 +29,10 @@ struct Location {
     }
     
     init(snapshot: NSDictionary) {
-        self.title = Constants.Services.UTILITY_SERVICE.exist(field: Location.ktitle, dictionary: snapshot)
-        self.subtitle = Constants.Services.UTILITY_SERVICE.exist(field: Location.ksubtitle, dictionary: snapshot)
-        self.latitude = Constants.Services.UTILITY_SERVICE.exist(field: Location.klatitude, dictionary: snapshot)
-        self.longitude = Constants.Services.UTILITY_SERVICE.exist(field: Location.klongitude, dictionary: snapshot)
+        self.title = service.UTILITY_SERVICE.exist(field: Location.ktitle, dictionary: snapshot)
+        self.subtitle = service.UTILITY_SERVICE.exist(field: Location.ksubtitle, dictionary: snapshot)
+        self.latitude = service.UTILITY_SERVICE.exist(field: Location.klatitude, dictionary: snapshot)
+        self.longitude = service.UTILITY_SERVICE.exist(field: Location.klongitude, dictionary: snapshot)
         
     }
     

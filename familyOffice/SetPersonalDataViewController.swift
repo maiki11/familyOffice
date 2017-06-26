@@ -34,7 +34,7 @@ class SetPersonalDataViewController: UIViewController, UITableViewDelegate, UITa
         //loadInfo()
     }
     override func viewWillAppear(_ animated: Bool) {
-        userDictionary =  Constants.Services.USER_SERVICE.users[0].toDictionary()
+        userDictionary =  service.USER_SERVICE.users[0].toDictionary()
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,8 +103,8 @@ class SetPersonalDataViewController: UIViewController, UITableViewDelegate, UITa
     
     //Private methods
     func setDate() -> Void {
-        Constants.Services.USER_SERVICE.users[0].birthday = date
-        userDictionary = Constants.Services.USER_SERVICE.users[0].toDictionary()
+        service.USER_SERVICE.users[0].birthday = date
+        userDictionary = service.USER_SERVICE.users[0].toDictionary()
         self.tableView.reloadData()
     }
     func save(sender: UINavigationBar) -> Void {
@@ -118,37 +118,37 @@ class SetPersonalDataViewController: UIViewController, UITableViewDelegate, UITa
                 switch  aboutkeys[indexPath.row] {
                 case "name":
                     if(value?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)==""){
-                        Constants.Services.ALERT_SERVICE.alertMessage(context: self, title: "Campo Vacío", msg: "El campo Nombre no puede quedar vacío")
-                        Constants.Services.ANIMATIONS.shakeTextField(txt: (cell?.myTextField)!)
+                        service.ALERT_SERVICE.alertMessage(context: self, title: "Campo Vacío", msg: "El campo Nombre no puede quedar vacío")
+                        service.ANIMATIONS.shakeTextField(txt: (cell?.myTextField)!)
                     }else{
-                        Constants.Services.USER_SERVICE.users[0].name = value
+                        service.USER_SERVICE.users[0].name = value
                     }
                     break
                 case "phone":
                     if(value?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)==""){
-                        Constants.Services.ALERT_SERVICE.alertMessage(context: self, title: "Campo Vacío", msg: "El campo Teléfono no puede quedar vacío")
-                        Constants.Services.ANIMATIONS.shakeTextField(txt: (cell?.myTextField)!)
+                        service.ALERT_SERVICE.alertMessage(context: self, title: "Campo Vacío", msg: "El campo Teléfono no puede quedar vacío")
+                        service.ANIMATIONS.shakeTextField(txt: (cell?.myTextField)!)
                     }else{
-                        Constants.Services.USER_SERVICE.users[0].phone = value
+                        service.USER_SERVICE.users[0].phone = value
                     }
                     break
                 case "address":
-                    Constants.Services.USER_SERVICE.users[0].address = value
+                    service.USER_SERVICE.users[0].address = value
                     break
                 case "rfc":
-                    Constants.Services.USER_SERVICE.users[0].rfc = value
+                    service.USER_SERVICE.users[0].rfc = value
                     break
                 case "curp":
-                    Constants.Services.USER_SERVICE.users[0].curp = value
+                    service.USER_SERVICE.users[0].curp = value
                     break
                 case "birthday":
-                    Constants.Services.USER_SERVICE.users[0].birthday = value
+                    service.USER_SERVICE.users[0].birthday = value
                     break
                 case "nss":
-                    Constants.Services.USER_SERVICE.users[0].nss = value
+                    service.USER_SERVICE.users[0].nss = value
                     break
                 case "bloodType":
-                    Constants.Services.USER_SERVICE.users[0].bloodtype = value
+                    service.USER_SERVICE.users[0].bloodtype = value
                     break
                 default:
                     break
@@ -156,17 +156,17 @@ class SetPersonalDataViewController: UIViewController, UITableViewDelegate, UITa
             }
             index += 1
         }
-        Constants.Services.USER_SERVICE.updateUser(user: Constants.Services.USER_SERVICE.users[0])
+        service.USER_SERVICE.updateUser(user: service.USER_SERVICE.users[0])
         _ =  navigationController?.popViewController(animated: true)
         //UTILITY_SERVICE.gotoView(view: "ConfiguracionScene", context: self)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        Constants.Services.UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: true, context: self)
+        service.UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: true, context: self)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        Constants.Services.UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: false, context: self)
+        service.UTILITY_SERVICE.moveTextField(textField: textField, moveDistance: -200, up: false, context: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

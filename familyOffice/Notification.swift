@@ -33,10 +33,10 @@ struct NotificationModel {
     init(snapshot: FIRDataSnapshot) {
         let snapshotValue = snapshot.value as! NSDictionary
         self.id = snapshot.key
-        self.title = Constants.Services.UTILITY_SERVICE.exist(field: NotificationModel.kNotificationTitlekey, dictionary: snapshotValue)
-        self.timestamp = Constants.Services.UTILITY_SERVICE.exist(field: NotificationModel.kNotificationDatekey, dictionary: snapshotValue)
+        self.title = service.UTILITY_SERVICE.exist(field: NotificationModel.kNotificationTitlekey, dictionary: snapshotValue)
+        self.timestamp = service.UTILITY_SERVICE.exist(field: NotificationModel.kNotificationDatekey, dictionary: snapshotValue)
         self.seen = snapshotValue.object(forKey: "seen") as! Bool
-        self.photoURL = Constants.Services.UTILITY_SERVICE.exist(field: NotificationModel.kNotificationPhotokey, dictionary: snapshotValue)
+        self.photoURL = service.UTILITY_SERVICE.exist(field: NotificationModel.kNotificationPhotokey, dictionary: snapshotValue)
         
     }
     func toDictionary() -> NSDictionary {

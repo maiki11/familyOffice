@@ -37,6 +37,12 @@ extension DateFormatter {
         return formatter
     }()
     
+    @nonobjc static let MonthDayYearHourMinute: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM, dd yyyy HH:mm"
+        return formatter
+    }()
+    
     @nonobjc static let InternationalFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM dd yyyy HH:mm"
@@ -44,6 +50,11 @@ extension DateFormatter {
     }()
     
     @nonobjc static let dayMonthAndYear: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MM yyyy"
+        return formatter
+    }()
+    @nonobjc static let MonthdayAndYear: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MM yyyy"
         return formatter
@@ -71,6 +82,10 @@ extension Date {
     /// Prints a string representation for the date with the given formatter
     func string(with format: DateFormatter) -> String {
         return format.string(from: self as Date)
+    }
+    
+    func MonthDayYearHourMinute() -> String {
+        return DateFormatter.MonthDayYearHourMinute.string(from: self as Date)
     }
     
     /// Creates an `NSDate` from the given string and formatter. Nil if the string couldn't be parsed

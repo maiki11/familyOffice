@@ -43,29 +43,29 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.membersTable.reloadData()
         verifyMembersOffLine()
         
-        Constants.Services.REF_SERVICE.valueSingleton(ref: "families/\((family?.id)!)")
-        Constants.Services.REF_SERVICE.chilRemoved(ref: "families/\((family?.id)!)/members")
-        Constants.Services.REF_SERVICE.chilAdded(ref: "families/\((family?.id)!)/members")
+        service.REF_SERVICE.valueSingleton(ref: "families/\((family?.id)!)")
+        service.REF_SERVICE.chilRemoved(ref: "families/\((family?.id)!)/members")
+        service.REF_SERVICE.chilAdded(ref: "families/\((family?.id)!)/members")
         
         
-        localeChangeObserver.append( center.addObserver(forName: Constants.NotificationCenter.USERS_NOTIFICATION, object: nil, queue: nil){ obj in
+        localeChangeObserver.append( center.addObserver(forName: notCenter.USERS_NOTIFICATION, object: nil, queue: nil){ obj in
             if let user : User = obj.object as? User {
                 self.addMember(id: user.id)
             }
         })
-         localeChangeObserver.append(center.addObserver(forName: Constants.NotificationCenter.USERUPDATED_NOTIFICATION, object: nil, queue: nil){ obj in
+         localeChangeObserver.append(center.addObserver(forName: notCenter.USERUPDATED_NOTIFICATION, object: nil, queue: nil){ obj in
             if let id : String = obj.object as? String {
                 if let index = self.members.index(where: {$0.id == id }) {
-                    self.members[index] = Constants.Services.USER_SERVICE.users.first(where: {$0.id == id})!
+                    self.members[index] = service.USER_SERVICE.users.first(where: {$0.id == id})!
                     self.membersTable.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
                 }
             }
         })
-        localeChangeObserver.append(center.addObserver(forName: Constants.NotificationCenter.FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){index in
+        localeChangeObserver.append(center.addObserver(forName: notCenter.FAMILYREMOVED_NOTIFICATION, object: nil, queue: nil){index in
             _ = self.navigationController?.popViewController(animated: true)
         })
         
-         localeChangeObserver.append(center.addObserver(forName: Constants.NotificationCenter.SUCCESS_NOTIFICATION, object: nil, queue: nil){ obj in
+         localeChangeObserver.append(center.addObserver(forName: notCenter.SUCCESS_NOTIFICATION, object: nil, queue: nil){ obj in
             if let user : [String:String] = obj.object as? [String:String] {
                 if user.first?.value == "removed"{
                     
@@ -75,9 +75,9 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
         })
-         localeChangeObserver.append(center.addObserver(forName: Constants.NotificationCenter.FAMILYUPDATED_NOTIFICATION, object: nil, queue: nil){ notification in
+         localeChangeObserver.append(center.addObserver(forName: notCenter.FAMILYUPDATED_NOTIFICATION, object: nil, queue: nil){ notification in
             if let index : Int = notification.object as? Int {
-                self.family = Constants.Services.FAMILY_SERVICE.families[index]
+                self.family = service.FAMILY_SERVICE.families[index]
                 self.imageFamily.loadImage(urlString: (self.family?.photoURL)!)
                 self.navigationItem.title = self.family?.name
             
@@ -88,27 +88,27 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func removeMembers(key: String) -> Void {
         if let index = self.members.index(where: {$0.id == key}) {
             self.members.remove(at: index)
-            Constants.Services.REF_SERVICE.remove(ref: "users/\(key)")
+            service.REF_SERVICE.remove(ref: "users/\(key)")
             self.membersTable.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.top)
         }
     }
     func verifyMembersOffLine() -> Void {
-        let family = (Constants.Services.FAMILY_SERVICE.families.first(where: {$0.id == self.family?.id})?.members)!
+        let family = (service.FAMILY_SERVICE.families.first(where: {$0.id == self.family?.id})?.members)!
         for item in family{
             addMember(id: item )
         }
     }
     
     func addMember(id: String) -> Void {
-        if let user = Constants.Services.USER_SERVICE.users.filter({$0.id == id}).first {
+        if let user = service.USER_SERVICE.users.filter({$0.id == id}).first {
            if !self.members.contains(where: {$0.id == user.id}){
                 self.members.append(user)
-                Constants.Services.REF_SERVICE.childChanged(ref: "users/\(id)")
+                service.REF_SERVICE.childChanged(ref: "users/\(id)")
                 self.membersTable.insertRows(at: [NSIndexPath(row: self.members.count-1, section: 0) as IndexPath], with: .fade)
             }
             //self.addMembers(user: user)
         }else{
-            Constants.Services.REF_SERVICE.valueSingleton(ref: "users/\(id)")
+            service.REF_SERVICE.valueSingleton(ref: "users/\(id)")
         }
     }
     
@@ -120,10 +120,10 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewWillDisappear(animated)
         
         for item in self.members {
-            Constants.Services.REF_SERVICE.remove(ref: "users/\((item.id)!)")
+            service.REF_SERVICE.remove(ref: "users/\((item.id)!)")
         }
         members = []
-        Constants.Services.REF_SERVICE.remove(ref: "families/\((family?.id)!)/members")
+        service.REF_SERVICE.remove(ref: "families/\((family?.id)!)/members")
         for observer in localeChangeObserver {
             center.removeObserver(observer)
         }
@@ -153,7 +153,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.phone.text = member.phone
         
-        if(Constants.Services.FAMILY_SERVICE.families.filter({$0.id == family?.id}).first?.admin == member.id){
+        if(service.FAMILY_SERVICE.families.filter({$0.id == family?.id}).first?.admin == member.id){
             cell.adminlabel.isHidden = false
         }else{
             cell.adminlabel.isHidden = true
@@ -181,7 +181,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 // add the actions (buttons)
                 alert.addAction(UIAlertAction(title: "Ver Perfil", style: UIAlertActionStyle.default, handler: {action in
                     
-                    if let index = Constants.Services.USER_SERVICE.users.index(where: {$0.id == user.id}) {
+                    if let index = service.USER_SERVICE.users.index(where: {$0.id == user.id}) {
                         self.index = index
                         self.performSegue(withIdentifier: "ProfileSegue", sender: nil)
 
@@ -193,7 +193,7 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     alert.addAction(UIAlertAction(title: "Remover de la familia", style: UIAlertActionStyle.destructive, handler:  { action in
                         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                             //ELiminar usuario de la familia
-                            Constants.Services.FAMILY_SERVICE.remove(snapshot: user.id, id: (self.family?.id!)!)
+                            service.FAMILY_SERVICE.remove(snapshot: user.id, id: (self.family?.id!)!)
                         }
                     }))
                 }
@@ -209,8 +209,8 @@ class FamilyViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     @IBAction func handleExitFamily(_ sender: UIButton) {
-        Constants.Services.FAMILY_SERVICE.exitFamily(family: family!, uid: (FIRAuth.auth()?.currentUser?.uid)!)
-        Constants.Services.UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
+        service.FAMILY_SERVICE.exitFamily(family: family!, uid: (FIRAuth.auth()?.currentUser?.uid)!)
+        service.UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
        
     }
  

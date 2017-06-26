@@ -10,7 +10,7 @@ import UIKit
 
 class ConfigurationEventTableViewController: UITableViewController {
     var event: Event!
-    let myID = Constants.Services.USER_SERVICE.users[0].id
+    let myID = service.USER_SERVICE.users[0].id
     @IBOutlet weak var alerLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     override func viewDidLoad() {

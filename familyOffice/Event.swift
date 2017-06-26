@@ -9,48 +9,6 @@
 import UIKit
 import Firebase
 
-struct memberEvent {
-    static let kId = "Id"
-    static let kStatus = "status"
-    static let kReminder = "reminder"
-    var id: String!
-    var status: String!
-    var reminder: String!
-    init(id:String, reminder: String, status: String) {
-        self.id = id
-        self.status = status
-        self.reminder = reminder
-    }
-    init(snapshot: NSDictionary, id: String) {
-        self.id = id
-        self.status = Constants.Services.UTILITY_SERVICE.exist(field: memberEvent.kStatus, dictionary: snapshot)
-        self.reminder = Constants.Services.UTILITY_SERVICE.exist(field: memberEvent.kReminder, dictionary: snapshot)
-    }
-    func toDictionary() -> NSDictionary {
-        
-        return [
-            memberEvent.kStatus : self.status,
-            memberEvent.kReminder : self.reminder
-        ]
-    }
-    
-    func statusImage() -> UIImage {
-        var image : UIImage!
-        switch self.status {
-        case "Pendiente":
-            image = #imageLiteral(resourceName: "pendiente")
-            break
-        case "Aceptada":
-            image = #imageLiteral(resourceName: "Accept")
-            break
-        default:
-            image = #imageLiteral(resourceName: "Cancel")
-            break
-        }
-        
-        return image
-    }
-}
 
 struct Event {
     
@@ -64,6 +22,8 @@ struct Event {
     static let kreminder = "reminder"
     static let klocation = "location"
     static let kcreator = "creator"
+    static let ktype = "type"
+    static let kRepeat = "repeat"
     
     var id: String!
     var title: String!
@@ -75,6 +35,21 @@ struct Event {
     var members: [memberEvent]! = []
     var location: Location? = nil
     var creator: String!
+    var type: String! = "Home"
+    var repeatmodel : repeatModel! = nil
+    
+    init() {
+        self.id = ""
+        self.title = ""
+        self.description = ""
+        self.date = Date().string(with: .InternationalFormat)
+        self.endDate = Date().addingTimeInterval(60 * 60).string(with: .InternationalFormat)
+        self.priority = 0
+        self.members = []
+        self.reminder = Date().addingTimeInterval(60*60*(-1)).string(with: .InternationalFormat)
+        self.creator = service.USER_SERVICE.users[0].id
+        self.repeatmodel = repeatModel(each: "Nunca", end:"Nunca")
+    }
     
     init(id: String, title: String, description: String, date: String, endDate: String, priority: Int, members: [memberEvent], reminder: String = "") {
         self.id = id
@@ -85,18 +60,18 @@ struct Event {
         self.priority = priority
         self.members = members
         self.reminder = reminder
-        self.creator = Constants.Services.USER_SERVICE.users[0].id
+        self.creator = service.USER_SERVICE.users[0].id
     }
     
     init(snapshot: FIRDataSnapshot) {
         let snapshotValue = snapshot.value as! NSDictionary
-        self.title = Constants.Services.UTILITY_SERVICE.exist(field: Event.kTitle, dictionary: snapshotValue)
+        self.title = service.UTILITY_SERVICE.exist(field: Event.kTitle, dictionary: snapshotValue)
         self.id = snapshot.key
-        self.description = Constants.Services.UTILITY_SERVICE.exist(field: Event.kDescription, dictionary: snapshotValue)
-        self.date = Constants.Services.UTILITY_SERVICE.exist(field: Event.kDate, dictionary: snapshotValue)
-        self.endDate = Constants.Services.UTILITY_SERVICE.exist(field: Event.kEndDate, dictionary: snapshotValue )
-        self.priority = Constants.Services.UTILITY_SERVICE.exist(field: Event.kPriority, dictionary: snapshotValue )
-        self.reminder = Constants.Services.UTILITY_SERVICE.exist(field: Event.kreminder, dictionary: snapshotValue)
+        self.description = service.UTILITY_SERVICE.exist(field: Event.kDescription, dictionary: snapshotValue)
+        self.date = service.UTILITY_SERVICE.exist(field: Event.kDate, dictionary: snapshotValue)
+        self.endDate = service.UTILITY_SERVICE.exist(field: Event.kEndDate, dictionary: snapshotValue )
+        self.priority = service.UTILITY_SERVICE.exist(field: Event.kPriority, dictionary: snapshotValue )
+        self.reminder = service.UTILITY_SERVICE.exist(field: Event.kreminder, dictionary: snapshotValue)
         
         if let members = snapshotValue[Event.kMembers] as? NSDictionary {
             for item in members {
@@ -108,34 +83,26 @@ struct Event {
             self.location = Location(snapshot:xlocation)
         }
         
-        self.creator = Constants.Services.UTILITY_SERVICE.exist(field: Event.kcreator, dictionary: snapshotValue)
+        self.creator = service.UTILITY_SERVICE.exist(field: Event.kcreator, dictionary: snapshotValue)
     }
     
     func toDictionary() -> NSDictionary {
-        let memberDict : NSDictionary = {
-            var dic : [String: NSDictionary] = [:]
-            for member in self.members {
-                dic[member.id] = member.toDictionary()
-            }
-            return dic as NSDictionary
-        }()
-        
+
         return [
             Event.kTitle : self.title,
             Event.kDescription : self.description,
             Event.kEndDate : self.endDate,
             Event.kDate : self.date,
             Event.kPriority : self.priority,
-            Event.kMembers : memberDict,
+            Event.kMembers : NSDictionary(objects: self.members.map({$0.toDictionary()}), forKeys: self.members.map({$0.id}) as! [NSCopying]),
             Event.kreminder : self.reminder ?? "",
             Event.klocation : self.location?.toDictionary() ?? "",
-            Event.kcreator : self.creator
+            Event.kcreator : self.creator,
+            Event.ktype : self.type,
+            Event.kRepeat : self.repeatmodel.toDictionary(),
+            
         ]
     }
-    
-    
-    
-    
 }
 
 protocol EventBindable: AnyObject {
