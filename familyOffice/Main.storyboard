@@ -449,7 +449,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="zxczxczx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In8-Hp-FA4">
-                                                    <rect key="frame" x="33" y="120" width="54.5" height="11"/>
+                                                    <rect key="frame" x="33.5" y="120" width="54.5" height="11"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="12"/>
                                                     <color key="textColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -574,6 +574,7 @@
                         <segue destination="c5f-M5-x9f" kind="show" identifier="calendarSegue" id="Yte-sM-Pdc"/>
                         <segue destination="Xe7-NB-MEv" kind="show" identifier="healthSegue" id="UMc-ep-tL1"/>
                         <segue destination="wrq-DB-nSA" kind="show" identifier="goalSegue" id="ttz-Tk-RRT"/>
+                        <segue destination="dYT-SO-A5l" kind="show" identifier="gallerySegue" id="4kv-1D-vwd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNJ-R1-TZ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1208,6 +1209,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DHx-7U-HkL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-397" y="2306"/>
+        </scene>
+        <!--MainGallery-->
+        <scene sceneID="Qk3-5Z-JSA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Gallery" referencedIdentifier="MainGallery" id="dYT-SO-A5l" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="16g-HW-5Jn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="461" y="2364"/>
         </scene>
         <!--calendarView-->
         <scene sceneID="NTC-YU-Ym1">

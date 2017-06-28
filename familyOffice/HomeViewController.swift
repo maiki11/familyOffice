@@ -182,6 +182,8 @@ extension HomeViewController {
         case 2:
             self.performSegue(withIdentifier: "goalSegue", sender: nil)
             break
+        case 3:
+            self.performSegue(withIdentifier: "gallerySegue", sender: nil)
             
         case 4:
             self.performSegue(withIdentifier: "safeBoxSegue", sender: nil)
