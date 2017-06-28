@@ -11,9 +11,6 @@ import UIKit
 private let chatIndentifier = "CellChat"
 private let groupIndentifier = "CellGroup"
 private let memberIndentifier = "CellMember"
-protocol HandleMenuBar : class {
-    func scrollMenuIndex(_ menuIndex: Int) -> Void
-}
 
 class chatCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HandleMenuBar {
 

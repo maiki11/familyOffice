@@ -436,7 +436,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4xn-Bz-KPy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="501.60000000000002" y="3970.1649175412299"/>
+            <point key="canvasLocation" x="502" y="3969"/>
         </scene>
         <!--Configuration Event Table View Controller-->
         <scene sceneID="gFO-bw-Isn">
@@ -853,7 +853,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ALm-fF-Ws2">
-                                                    <rect key="frame" x="-6" y="-7" width="374" height="127"/>
+                                                    <rect key="frame" x="-7" y="-7" width="374" height="127"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="517777554.71049601">
                                                         <!--2017-05-29 19:05:54 +0000-->
@@ -904,7 +904,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="2A8-4g-4zQ">
-                                                    <rect key="frame" x="-6" y="-7" width="374" height="127"/>
+                                                    <rect key="frame" x="-7" y="-7" width="374" height="127"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="517777554.71049601">
                                                         <!--2017-05-29 19:05:54 +0000-->
@@ -1151,7 +1151,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="gyN-nR-cf7">
-                                                    <rect key="frame" x="-6" y="0.0" width="374" height="200"/>
+                                                    <rect key="frame" x="-7" y="0.0" width="374" height="200"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="517799385.03348702">
                                                         <!--2017-05-30 01:09:45 +0000-->
@@ -1465,7 +1465,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kfm-Y3-Jjk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1262" y="700"/>
+            <point key="canvasLocation" x="1369" y="1605"/>
         </scene>
     </scenes>
     <resources>

@@ -14,7 +14,7 @@ struct Events {
 
 class EventService {
     public var events: [Event]
-    
+    var handles: [(String,UInt)] = []
     private init(events: [Event]){
         self.events = events
     }
@@ -42,22 +42,22 @@ class EventService {
 }
 
 extension EventService : RequestService  {
-    
-    
-    func insert(_ ref: String, value: Any, callback: @escaping ((Any) -> Void)) {
+    func addHandle(_ handle: UInt, ref: String) {
         
-        Constants.FirDatabase.REF.child(ref).setValue(value as! NSDictionary, withCompletionBlock: {(error, ref) in
-            if error != nil {
-                print(error.debugDescription)
-            }else {
-                DispatchQueue.main.async {
-                    service.USER_SERVICE.users[0].events?.append(ref.key)
-                    self.addEventToMember(uid: service.USER_SERVICE.users[0].id, eid: ref.key)
-                    callback(ref.key)
-                }
-            }
-        })
     }
+
+    func removeHandles() {
+    }
+
+    func routing(snapshot: FIRDataSnapshot, action: FIRDataEventType, ref: String) {
+    }
+
+
+    func inserted(ref: FIRDatabaseReference){
+        service.USER_SERVICE.users[0].events?.append(ref.key)
+        self.addEventToMember(uid: service.USER_SERVICE.users[0].id, eid: ref.key)
+    }
+    
     func delete(_ ref: String, callback: @escaping ((Any) -> Void)) {
         
     }

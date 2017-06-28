@@ -8,9 +8,10 @@
 
 import UIKit
 
-class Type1_GoalCollectionViewCell: UICollectionViewCell {
+class Type1_GoalCollectionViewCell: UICollectionViewCell, GoalBindable {
+    var goal: Goal!
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var descriptionLbl: UILabel!
+    @IBOutlet weak var endDateLbl: UILabel!
     @IBOutlet weak var priorityLbl: UILabel!
     @IBOutlet weak var photo: UIImageView!
     override func awakeFromNib() {

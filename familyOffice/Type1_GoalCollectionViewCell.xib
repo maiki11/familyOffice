@@ -32,40 +32,28 @@
                             <constraint firstAttribute="height" constant="60" id="jfR-G0-6gp"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Descripción" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7k4-kf-dxB">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7k4-kf-dxB">
                         <rect key="frame" x="76" y="39" width="204" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                         <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="prioridad" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTc-Yx-zAO">
-                        <rect key="frame" x="77" y="58" width="70" height="12"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="70" id="WSg-86-KRH"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
-                        <color key="textColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
             </view>
             <color key="backgroundColor" red="1" green="0.33015050502149201" blue="0.29154765210588129" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="RTc-Yx-zAO" firstAttribute="top" secondItem="ERC-8m-O9Z" secondAttribute="bottom" constant="17" id="0Y9-KX-EBc"/>
                 <constraint firstItem="ERC-8m-O9Z" firstAttribute="leading" secondItem="LI6-PV-5xv" secondAttribute="trailing" constant="8" id="2BE-nb-kbZ"/>
                 <constraint firstItem="LI6-PV-5xv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="7" id="Cjm-sJ-Gmh"/>
                 <constraint firstAttribute="bottom" secondItem="LI6-PV-5xv" secondAttribute="bottom" constant="15" id="MhJ-3a-9YD"/>
                 <constraint firstItem="ERC-8m-O9Z" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="Rt3-XI-9Eo"/>
                 <constraint firstAttribute="trailing" secondItem="ERC-8m-O9Z" secondAttribute="trailing" constant="20" id="Yh1-Az-h7z"/>
                 <constraint firstItem="LI6-PV-5xv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="gUL-aR-eg4"/>
-                <constraint firstItem="RTc-Yx-zAO" firstAttribute="leading" secondItem="LI6-PV-5xv" secondAttribute="trailing" constant="10" id="rpS-8o-tbP"/>
             </constraints>
             <size key="customSize" width="341" height="79"/>
             <connections>
-                <outlet property="descriptionLbl" destination="7k4-kf-dxB" id="IMj-Ud-x9t"/>
+                <outlet property="endDateLbl" destination="7k4-kf-dxB" id="Eck-mw-gAW"/>
                 <outlet property="photo" destination="LI6-PV-5xv" id="kTc-D3-kAx"/>
-                <outlet property="priorityLbl" destination="RTc-Yx-zAO" id="4Ho-AL-ry4"/>
                 <outlet property="titleLbl" destination="ERC-8m-O9Z" id="0oD-dN-mKk"/>
             </connections>
             <point key="canvasLocation" x="182" y="68"/>

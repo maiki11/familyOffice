@@ -96,7 +96,6 @@ class AuthService {
             }
         }
     }
-
     func isAuth(view: UIViewController, name: String)  {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             

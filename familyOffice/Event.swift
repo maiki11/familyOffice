@@ -87,7 +87,7 @@ struct Event {
     }
     
     func toDictionary() -> NSDictionary {
-
+        
         return [
             Event.kTitle : self.title,
             Event.kDescription : self.description,

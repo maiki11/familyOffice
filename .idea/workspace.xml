@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e704aa5-8c05-4b89-8f84-2bd09fa05c68" name="Default" comment="">
+<<<<<<< HEAD
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/familyOffice/Assets.xcassets/album_default.imageset/album default.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/familyOffice/Assets.xcassets/notfound.imageset/file.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/familyOffice/AlbumModel.swift" />
@@ -21,6 +22,34 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/HomeViewController.swift" afterPath="$PROJECT_DIR$/familyOffice/HomeViewController.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/Main.storyboard" afterPath="$PROJECT_DIR$/familyOffice/Main.storyboard" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/UIColor.swift" afterPath="$PROJECT_DIR$/familyOffice/UIColor.swift" />
+=======
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/familyOffice/Goal-Extension.swift" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/familyOffice/Goal.swift" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/familyOffice/GoalService.swift" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/familyOffice/homeExtension.swift" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ldurazo.xcuserdatad/xcschemes/xcschememanagement.plist" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ldurazo.xcuserdatad/xcschemes/xcschememanagement.plist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/familyOffice.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice.xcworkspace/xcuserdata/ldurazo.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" afterPath="$PROJECT_DIR$/familyOffice.xcworkspace/xcuserdata/ldurazo.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/AddGoalViewController.swift" afterPath="$PROJECT_DIR$/familyOffice/AddGoalViewController.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/Calendar.storyboard" afterPath="$PROJECT_DIR$/familyOffice/Calendar.storyboard" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/Constants.swift" afterPath="$PROJECT_DIR$/familyOffice/Constants.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/Event.swift" afterPath="$PROJECT_DIR$/familyOffice/Event.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/EventService.swift" afterPath="$PROJECT_DIR$/familyOffice/EventService.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/FamilyService.swift" afterPath="$PROJECT_DIR$/familyOffice/FamilyService.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/ListenerService.swift" afterPath="$PROJECT_DIR$/familyOffice/ListenerService.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/Main.storyboard" afterPath="$PROJECT_DIR$/familyOffice/Main.storyboard" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/Objectives.storyboard" afterPath="$PROJECT_DIR$/familyOffice/Objectives.storyboard" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/PersonalGoalsCollectionViewController.swift" afterPath="$PROJECT_DIR$/familyOffice/PersonalGoalsCollectionViewController.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/RequestService.swift" afterPath="$PROJECT_DIR$/familyOffice/RequestService.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/ShowEventViewController.swift" afterPath="$PROJECT_DIR$/familyOffice/ShowEventViewController.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/StorageService.swift" afterPath="$PROJECT_DIR$/familyOffice/StorageService.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/Type1_GoalCollectionViewCell.swift" afterPath="$PROJECT_DIR$/familyOffice/Type1_GoalCollectionViewCell.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/Type1_GoalCollectionViewCell.xib" afterPath="$PROJECT_DIR$/familyOffice/Type1_GoalCollectionViewCell.xib" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/Utility.swift" afterPath="$PROJECT_DIR$/familyOffice/Utility.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/authService.swift" afterPath="$PROJECT_DIR$/familyOffice/authService.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/familyOffice/typeiconCollectionViewCell.swift" afterPath="$PROJECT_DIR$/familyOffice/typeiconCollectionViewCell.swift" />
+>>>>>>> Leonardo
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,6 +58,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulatoriPhone_6_Plus_10.3_x86_64_1" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -126,7 +156,144 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
               <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+=======
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulatoriPhone_7_10.3_x86_64_1" />
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="CalendarViewController.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/familyOffice/CalendarViewController.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+>>>>>>> Leonardo
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Goal-Extension.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/familyOffice/Goal-Extension.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="454">
+              <caret line="59" column="58" lean-forward="false" selection-start-line="59" selection-start-column="58" selection-end-line="59" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PersonalGoalsCollectionViewController.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/familyOffice/PersonalGoalsCollectionViewController.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding>
+                <marker date="1498596133000" expanded="true" signature="2900:2963" ph="{...}" />
+                <marker date="1498596133000" expanded="true" signature="3139:3520" ph="{...}" />
+                <marker date="1498596133000" expanded="true" signature="3565:3823" ph="/*...*/" />
+                <marker date="1498596133000" expanded="true" signature="3829:4065" ph="/*...*/" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="typeiconCollectionViewCell.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/familyOffice/typeiconCollectionViewCell.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GroupsTableViewCell.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/familyOffice/GroupsTableViewCell.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EventTableViewCell.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/familyOffice/EventTableViewCell.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestService.swift" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/familyOffice/RequestService.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="411">
+              <caret line="42" column="10" lean-forward="true" selection-start-line="42" selection-start-column="10" selection-end-line="42" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FamilyService.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/familyOffice/FamilyService.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2265">
+              <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+              <folding>
+                <marker date="1498592584000" expanded="true" signature="278:5537" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="509:856" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="930:946" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="1044:1060" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="1161:1168" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="1225:1256" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="1304:2072" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="2130:3182" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="3241:3518" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="3557:3573" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="3635:4002" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="4060:4685" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="4743:5065" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="5117:5310" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="5347:5354" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="5381:5388" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="5435:5442" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="5527:5534" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="5647:6188" ph="{...}" />
+                <marker date="1498592584000" expanded="true" signature="6242:7142" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EventService.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/familyOffice/EventService.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="795">
+              <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+              <folding>
+                <marker date="1498592486000" expanded="true" signature="237:288" ph="{...}" />
+                <marker date="1498592486000" expanded="true" signature="1180:1186" ph="{...}" />
+                <marker date="1498592486000" expanded="true" signature="1180:2040" ph="{...}" />
+                <marker date="1498592486000" expanded="true" signature="1213:1220" ph="{...}" />
+                <marker date="1498592486000" expanded="true" signature="1305:1312" ph="{...}" />
+                <marker date="1498592486000" expanded="true" signature="1359:1511" ph="{...}" />
+                <marker date="1498592486000" expanded="true" signature="1585:1601" ph="{...}" />
+                <marker date="1498592486000" expanded="true" signature="1703:2038" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Goal.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/familyOffice/Goal.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="537">
+              <caret line="88" column="34" lean-forward="false" selection-start-line="88" selection-start-column="34" selection-end-line="88" selection-end-column="34" />
+              <folding>
+                <marker date="1498590128000" expanded="true" signature="1109:1124" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -140,10 +307,20 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/familyOffice/CalendarViewController.swift" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/familyOffice/HomeGalleryViewController.swift" />
         <option value="$PROJECT_DIR$/familyOffice/ImageModel.swift" />
         <option value="$PROJECT_DIR$/familyOffice/AlbumModel.swift" />
         <option value="$PROJECT_DIR$/familyOffice/GalleryService.swift" />
+=======
+        <option value="$PROJECT_DIR$/familyOffice/GoalService.swift" />
+        <option value="$PROJECT_DIR$/familyOffice/FamilyService.swift" />
+        <option value="$PROJECT_DIR$/familyOffice/EventService.swift" />
+        <option value="$PROJECT_DIR$/familyOffice/Goal.swift" />
+        <option value="$PROJECT_DIR$/familyOffice/Goal-Extension.swift" />
+        <option value="$PROJECT_DIR$/familyOffice/PersonalGoalsCollectionViewController.swift" />
+        <option value="$PROJECT_DIR$/familyOffice/RequestService.swift" />
+>>>>>>> Leonardo
       </list>
     </option>
   </component>
@@ -155,8 +332,13 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
+<<<<<<< HEAD
     <option name="width" value="1280" />
     <option name="height" value="709" />
+=======
+    <option name="width" value="1440" />
+    <option name="height" value="811" />
+>>>>>>> Leonardo
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -232,6 +414,32 @@
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< HEAD
+              <option name="myItemId" value="Model" />
+=======
+              <option name="myItemId" value="Service" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Protocols" />
+>>>>>>> Leonardo
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="familyOffice" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="familyOffice" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Model" />
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
             </PATH_ELEMENT>
@@ -249,10 +457,6 @@
               <option name="myItemId" value="familyOffice" />
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -264,11 +468,19 @@
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< HEAD
               <option name="myItemId" value="familyOffice" />
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Constants" />
+=======
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Goal" />
+>>>>>>> Leonardo
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -367,12 +579,19 @@
       <option name="presentableId" value="Default" />
       <updated>1496883347726</updated>
       <workItem from="1496883353058" duration="317000" />
+<<<<<<< HEAD
       <workItem from="1498245037151" duration="6264000" />
       <workItem from="1498494433643" duration="25873000" />
+=======
+      <workItem from="1498239758957" duration="4561000" />
+      <workItem from="1498500948686" duration="3736000" />
+      <workItem from="1498590089172" duration="771000" />
+>>>>>>> Leonardo
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="32454000" />
   </component>
   <component name="ToolWindowManager">
@@ -392,6 +611,27 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+=======
+    <option name="totallyTimeSpent" value="9385000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="811" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24305555" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32884097" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> Leonardo
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -428,7 +668,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -473,6 +715,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/familyOffice/CalendarViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="180">
           <caret line="13" column="46" lean-forward="false" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
         </state>
@@ -482,56 +725,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/familyOffice/UIColor.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/familyOffice/GalleryCollectionViewCell.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="4" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-          <folding>
-            <marker date="1498605995000" expanded="true" signature="222:653" ph="{...}" />
-            <marker date="1498605995000" expanded="true" signature="378:651" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/familyOffice/Type1_GoalCollectionViewCell.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/familyOffice/Family.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-760">
+=======
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#162#179#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/familyOffice/HomeGalleryViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="81" column="90" lean-forward="false" selection-start-line="81" selection-start-column="90" selection-end-line="81" selection-end-column="90" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/familyOffice/Constants.swift">
+    <entry file="file://$PROJECT_DIR$/familyOffice/Goal-Extension.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="76" column="29" lean-forward="false" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/familyOffice/typeiconCollectionViewCell.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/familyOffice/GroupsTableViewCell.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -539,6 +756,236 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/familyOffice/EventTableViewCell.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/familyOffice/RequestService.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="45" column="4" lean-forward="true" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/familyOffice/FamilyService.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2265">
+          <caret line="154" column="0" lean-forward="false" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
+          <folding>
+            <marker date="1498592584000" expanded="true" signature="278:5537" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="509:856" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="930:946" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="1044:1060" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="1161:1168" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="1225:1256" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="1304:2072" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="2130:3182" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="3241:3518" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="3557:3573" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="3635:4002" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="4060:4685" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="4743:5065" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="5117:5310" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="5347:5354" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="5381:5388" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="5435:5442" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="5527:5534" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="5647:6188" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="6242:7142" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/familyOffice/EventService.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding>
+            <marker date="1498592486000" expanded="true" signature="237:288" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1180:1186" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1180:2040" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1213:1220" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1305:1312" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1359:1511" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1585:1601" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1703:2038" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/familyOffice/CalendarViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/familyOffice/Goal-Extension.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1170">
+          <caret line="78" column="32" lean-forward="false" selection-start-line="78" selection-start-column="32" selection-end-line="78" selection-end-column="32" />
+>>>>>>> Leonardo
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/familyOffice/UIColor.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+=======
+    <entry file="file://$PROJECT_DIR$/familyOffice/RequestService.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="39" column="45" lean-forward="false" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
+>>>>>>> Leonardo
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/familyOffice/GalleryCollectionViewCell.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="4" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+          <folding>
+            <marker date="1498605995000" expanded="true" signature="222:653" ph="{...}" />
+            <marker date="1498605995000" expanded="true" signature="378:651" ph="{...}" />
+=======
+    <entry file="file://$PROJECT_DIR$/familyOffice/Goal.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1050">
+          <caret line="70" column="22" lean-forward="false" selection-start-line="70" selection-start-column="22" selection-end-line="70" selection-end-column="22" />
+          <folding>
+            <marker date="1498590128000" expanded="true" signature="1109:1124" ph="{...}" />
+>>>>>>> Leonardo
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/familyOffice/Type1_GoalCollectionViewCell.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+=======
+    <entry file="file://$PROJECT_DIR$/familyOffice/CalendarViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/familyOffice/CalendarViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+>>>>>>> Leonardo
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/familyOffice/Family.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-760">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#162#179#0" expanded="false" />
+=======
+    <entry file="file://$PROJECT_DIR$/familyOffice/GoalService.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="45" column="5" lean-forward="true" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+          <folding>
+            <element signature="e#152#169#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/familyOffice/EventService.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding>
+            <marker date="1498592486000" expanded="true" signature="237:288" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1180:1186" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1180:2040" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1213:1220" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1305:1312" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1359:1511" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1585:1601" ph="{...}" />
+            <marker date="1498592486000" expanded="true" signature="1703:2038" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/familyOffice/FamilyService.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2265">
+          <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+          <folding>
+            <marker date="1498592584000" expanded="true" signature="278:5537" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="509:856" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="930:946" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="1044:1060" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="1161:1168" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="1225:1256" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="1304:2072" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="2130:3182" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="3241:3518" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="3557:3573" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="3635:4002" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="4060:4685" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="4743:5065" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="5117:5310" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="5347:5354" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="5381:5388" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="5435:5442" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="5527:5534" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="5647:6188" ph="{...}" />
+            <marker date="1498592584000" expanded="true" signature="6242:7142" ph="{...}" />
+>>>>>>> Leonardo
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/familyOffice/HomeGalleryViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="81" column="90" lean-forward="false" selection-start-line="81" selection-start-column="90" selection-end-line="81" selection-end-column="90" />
+=======
+    <entry file="file://$PROJECT_DIR$/familyOffice/typeiconCollectionViewCell.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+>>>>>>> Leonardo
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/familyOffice/Constants.swift">
+=======
+    <entry file="file://$PROJECT_DIR$/familyOffice/GroupsTableViewCell.swift">
+>>>>>>> Leonardo
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/familyOffice/Event.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
@@ -565,32 +1012,74 @@
             <marker date="1498609134000" expanded="true" signature="1758:1784" ph="{...}" />
             <marker date="1498609134000" expanded="true" signature="1829:1878" ph="{...}" />
             <marker date="1498609134000" expanded="true" signature="1895:2476" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/familyOffice/user.swift">
+=======
+    <entry file="file://$PROJECT_DIR$/familyOffice/EventTableViewCell.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="13" column="27" lean-forward="false" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+        <state relative-caret-position="210">
+          <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/familyOffice/Goal.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="88" column="34" lean-forward="false" selection-start-line="88" selection-start-column="34" selection-end-line="88" selection-end-column="34" />
+          <folding>
+            <marker date="1498590128000" expanded="true" signature="1109:1124" ph="{...}" />
+>>>>>>> Leonardo
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/familyOffice/user.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="13" column="27" lean-forward="false" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+=======
+    <entry file="file://$PROJECT_DIR$/familyOffice/Goal-Extension.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="59" column="58" lean-forward="false" selection-start-line="59" selection-start-column="58" selection-end-line="59" selection-end-column="58" />
+>>>>>>> Leonardo
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/familyOffice/ImageModel.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="74">
           <caret line="24" column="11" lean-forward="true" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
           <folding>
             <element signature="e#107#124#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/familyOffice/PersonalGoalsCollectionViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <marker date="1498596133000" expanded="true" signature="2900:2963" ph="{...}" />
+            <marker date="1498596133000" expanded="true" signature="3139:3520" ph="{...}" />
+            <marker date="1498596133000" expanded="true" signature="3565:3823" ph="/*...*/" />
+            <marker date="1498596133000" expanded="true" signature="3829:4065" ph="/*...*/" />
+>>>>>>> Leonardo
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/familyOffice/GalleryService.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/familyOffice/RequestService.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="42" column="10" lean-forward="true" selection-start-line="42" selection-start-column="10" selection-end-line="42" selection-end-column="10" />
+>>>>>>> Leonardo
           <folding />
         </state>
       </provider>

@@ -8,18 +8,20 @@ import Foundation
 public class GalleryService {
 
 
-    var albums = [Album]
+    var albums: [Album] = []
 
 
 
 
-    func getImages(album: Album) {
+    func getImages(album: Album) -> [ImageAlbum] {
+        var returnImages: [ImageAlbum] = []
         if album.images.count > 0 {
-            self.images.forEach({ imageId in
+            album.images.forEach({ imageId in
                 Constants.FirDatabase.REF.child("images/\(imageId)").observeSingleEvent(of: .value, with: {snapshot in
-                    album.ObjImages.append(ImageAlbum(snap: snapshot))
+                     returnImages.append(ImageAlbum(snap: snapshot))
                 })
             })
         }
+        return returnImages
     }
 }

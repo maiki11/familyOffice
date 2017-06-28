@@ -12,7 +12,15 @@ import FirebaseDatabase
 import UIKit
 
 class FamilyService: repository, RequestService {
+    
+    func addHandle(_ handle: UInt, ref: String) {
+        
+    }
+
+    var handles: [(String, UInt)] = []
+
     var families: [Family] = []
+
     
     func insert(_ ref: String, value: Any, callback: @escaping ((Any) -> Void)) {
         
@@ -22,7 +30,6 @@ class FamilyService: repository, RequestService {
                 print(error.debugDescription)
             }else{
                 DispatchQueue.main.async {
-                    print("Callback: \(ref.key)")
                     callback(ref.key)
                 }
             }
@@ -136,6 +143,19 @@ class FamilyService: repository, RequestService {
         Constants.FirDatabase.REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["familyActive" : family.id])
         service.USER_SERVICE.setFamily(family: family)
     }
+
+    func addHandle(_ handle: UInt) {
+    }
+
+    func removeHandles() {
+    }
+
+    func inserted(ref: FIRDatabaseReference) {
+    }
+
+    func routing(snapshot: FIRDataSnapshot, action: FIRDataEventType, ref: String) {
+    }
+
 }
 
 extension FamilyService {

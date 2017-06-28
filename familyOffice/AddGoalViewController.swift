@@ -7,26 +7,50 @@
 //
 
 import UIKit
-import CVCalendar
-
-class AddGoalViewController: UIViewController{
-
+import Toast_Swift
+import Firebase
+class AddGoalViewController: UIViewController, GoalBindable{
+    var types = [("Deportivo","sport"),("Religión","religion"),("Escolar","school"),("Negocios","business-1"),("Alimentación","eat"),("Salud","health-1")]
+    var goal: Goal!
+    @IBOutlet weak var titleLbl: UITextField!
+    @IBOutlet weak var endDateDP: UIDatePicker!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.save))
+        self.navigationItem.rightBarButtonItem = addButton
         // Do any additional setup after loading the view.
     }
-    override func awakeFromNib() {
 
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func save() -> Void {
+        
+        guard let title = titleLbl.text, !title.isEmpty else {
+            return
+        }
 
+        goal.title = title
+        goal.endDate = endDateDP.date.string(with: .InternationalFormat)
+        
+        self.view.makeToastActivity(.center)
+        service.UTILITY_SERVICE.disabledView()
+        
+        let key = Constants.FirDatabase.REF.childByAutoId().key
+        goal.id = key
+        service.GOAL_SERVICE.insert("goals/\(service.USER_SERVICE.users[0].id!)/\(key)", value: goal.toDictionary(), callback: {ref in
+            if ref is FIRDatabaseReference {
+                
+            }
+            self.view.hideToastActivity()
+            service.UTILITY_SERVICE.enabledView()
+        })
+    }
     /*
     // MARK: - Navigation
 
@@ -39,6 +63,7 @@ class AddGoalViewController: UIViewController{
 
 }
 extension AddGoalViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -47,10 +72,23 @@ extension AddGoalViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        
+        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! typeiconCollectionViewCell
+        let obj = types[indexPath.row]
+        cell.titleLbl.text = obj.0
+        if goal.type == indexPath.item {
+            cell.checkimage.isHidden = false
+        }else{
+            cell.checkimage.isHidden = true
+        }
+        cell.photo.image = UIImage(named: obj.1)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        goal.type = indexPath.item
+        collectionView.reloadData()
+    }
+    
 }
 
 
