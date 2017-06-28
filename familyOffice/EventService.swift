@@ -14,7 +14,7 @@ struct Events {
 
 class EventService {
     public var events: [Event]
-    
+    var handles: [(String,UInt)] = []
     private init(events: [Event]){
         self.events = events
     }
@@ -42,7 +42,17 @@ class EventService {
 }
 
 extension EventService : RequestService  {
-    
+    func addHandle(_ handle: UInt, ref: String) {
+        
+    }
+
+    func removeHandles() {
+    }
+
+    func routing(snapshot: FIRDataSnapshot, action: FIRDataEventType, ref: String) {
+    }
+
+
     func inserted(ref: FIRDatabaseReference){
         service.USER_SERVICE.users[0].events?.append(ref.key)
         self.addEventToMember(uid: service.USER_SERVICE.users[0].id, eid: ref.key)

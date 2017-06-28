@@ -24,8 +24,7 @@ class StorageService  {
             self.storage.setValue(data, forKey: url)
         }else{
             URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {(data, response, error) in
-                if error != nil {
-                    print(error?.localizedDescription as Any)
+                if error != nil {                    print(error?.localizedDescription as Any)
                 }
                 DispatchQueue.main.async {
                     self.storage.setValue(data , forKey: url)

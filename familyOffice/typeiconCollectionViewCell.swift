@@ -11,9 +11,13 @@ import UIKit
 class typeiconCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var checkimage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         //Initialize your code here
+        self.checkimage.layer.borderWidth = 1
+        self.checkimage.layer.borderColor = UIColor.white.cgColor
+        
     }
 }

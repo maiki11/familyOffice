@@ -80,11 +80,14 @@ class ShowEventViewController: UIViewController, EventBindable {
     }
     
     func dropPinZoomIn(){
-        
-        guard let coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (event?.location?.latitude)!, longitude: (event?.location?.longitude)!) as? CLLocationCoordinate2D else{
-            print("Algo salio mal al buscar la coordenada")
+        guard let latitude: CLLocationDegrees = event?.location?.latitude else{
             return
         }
+        guard let longitude: CLLocationDegrees = event?.location?.longitude else{
+            return
+        }
+        
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
  
         mapView.removeAnnotations(mapView.annotations)
         let annotation = MKPointAnnotation()
