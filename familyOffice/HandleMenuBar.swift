@@ -11,3 +11,6 @@ import Foundation
 protocol HandleMenuBar : class {
     func scrollMenuIndex(_ menuIndex: Int) -> Void
 }
+protocol HandleFamilySelected : class {
+    func selectFamily() -> Void
+}

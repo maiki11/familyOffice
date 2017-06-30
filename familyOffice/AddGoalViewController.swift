@@ -43,7 +43,8 @@ class AddGoalViewController: UIViewController, GoalBindable{
         
         let key = Constants.FirDatabase.REF.childByAutoId().key
         goal.id = key
-        service.GOAL_SERVICE.insert("goals/\(service.USER_SERVICE.users[0].id!)/\(key)", value: goal.toDictionary(), callback: {ref in
+        let ref = "goals/\(service.USER_SERVICE.users[0].id!)/\(key)"
+        service.GOAL_SERVICE.insert(ref, value: goal.toDictionary(), callback: {ref in
             if ref is FIRDatabaseReference {
                 
             }

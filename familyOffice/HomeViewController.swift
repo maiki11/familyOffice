@@ -11,7 +11,9 @@ import FirebaseDatabase
 import FirebaseAuth
 import MIBadgeButton_Swift
 
-class HomeViewController: UIViewController,  UIGestureRecognizerDelegate{
+class HomeViewController: UIViewController,  UIGestureRecognizerDelegate, HandleFamilySelected{
+    
+
     
     let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple"]
     let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros"]
@@ -84,6 +86,8 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate{
     }
     
     
+    
+    
 }
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource{
     
@@ -124,6 +128,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 }
 extension HomeViewController {
     
+    func selectFamily() -> Void {
+        self.reloadFamily()
+    }
+    
     func createObservers() -> Void {
         if let index = service.FAMILY_SERVICE.families.index(where: {$0.id == service.USER_SERVICE.users[0].familyActive}) {
             self.navigationItem.title = service.FAMILY_SERVICE.families[index].name
@@ -137,7 +145,6 @@ extension HomeViewController {
         }
         NotificationCenter.default.addObserver(forName: notCenter.FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
             self.reloadFamily()
-            //FAMILY_SERVICE.verifyFamilyActive(family: family.object as! Family)
         }
     }
     
@@ -158,7 +165,7 @@ extension HomeViewController {
         }
     }
     func handleMore(_ sender: Any) {
-        settingLauncher.setView(view: self)
+        settingLauncher.handleFamily = self
         settingLauncher.showSetting()
     }
     func handleShowModal(_ sender: Any) -> Void {
