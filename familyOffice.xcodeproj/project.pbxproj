@@ -136,6 +136,8 @@
 		84E9C9B51E92B78E00905A10 /* addCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9C9B41E92B78E00905A10 /* addCell.swift */; };
 		84E9C9B91E93269100905A10 /* SetPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9C9B81E93269100905A10 /* SetPersonalDataViewController.swift */; };
 		A44ACF6A1E70DB1800A5CA84 /* homeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44ACF691E70DB1800A5CA84 /* homeExtension.swift */; };
+		A44D4E5E1F0481CD00323B87 /* Budget.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44D4E5D1F0481CD00323B87 /* Budget.storyboard */; };
+		A44D4E611F04824B00323B87 /* BudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44D4E601F04824B00323B87 /* BudgetViewController.swift */; };
 		A44D91AF1E947F2700880D50 /* HealthOmniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44D91AE1E947F2700880D50 /* HealthOmniViewController.swift */; };
 		A46316B21E78C69E00E3F72C /* Health.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46316B11E78C69E00E3F72C /* Health.swift */; };
 		A47F14B11E8B27DB00285CA8 /* Health.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A47F14B01E8B27DB00285CA8 /* Health.storyboard */; };
@@ -307,6 +309,8 @@
 		84E9C9B41E92B78E00905A10 /* addCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addCell.swift; sourceTree = "<group>"; };
 		84E9C9B81E93269100905A10 /* SetPersonalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPersonalDataViewController.swift; sourceTree = "<group>"; };
 		A44ACF691E70DB1800A5CA84 /* homeExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeExtension.swift; sourceTree = "<group>"; };
+		A44D4E5D1F0481CD00323B87 /* Budget.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Budget.storyboard; sourceTree = "<group>"; };
+		A44D4E601F04824B00323B87 /* BudgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetViewController.swift; sourceTree = "<group>"; };
 		A44D91AE1E947F2700880D50 /* HealthOmniViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthOmniViewController.swift; sourceTree = "<group>"; };
 		A46316B11E78C69E00E3F72C /* Health.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Health.swift; sourceTree = "<group>"; };
 		A47F14B01E8B27DB00285CA8 /* Health.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Health.storyboard; sourceTree = "<group>"; };
@@ -446,6 +450,7 @@
 				02F5E35A1E1C322500A9FBFA /* Controllers */,
 				02382F0C1E1C210C0036FFC9 /* AppDelegate.swift */,
 				02E7E5EB1E78806D00D8360B /* Main.storyboard */,
+				A44D4E5D1F0481CD00323B87 /* Budget.storyboard */,
 				02B82AC61E8AE52600E41E32 /* Chat.storyboard */,
 				02B82AC41E8AE50B00E41E32 /* Calendar.storyboard */,
 				02B82AC21E8AE4D800E41E32 /* SafeBox.storyboard */,
@@ -652,6 +657,7 @@
 		0290591F1E78B9AA005F760C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				A44D4E5F1F04821E00323B87 /* Budget */,
 				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
 				022CC44E1EF9EDB0009FA79C /* goals */,
 				A4FA7DE01E7A0CE400C10B1D /* Health */,
@@ -815,6 +821,14 @@
 				8488E1671E41728700045646 /* Gotham-Book.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		A44D4E5F1F04821E00323B87 /* Budget */ = {
+			isa = PBXGroup;
+			children = (
+				A44D4E601F04824B00323B87 /* BudgetViewController.swift */,
+			);
+			name = Budget;
 			sourceTree = "<group>";
 		};
 		A4A23F731E7CADFF0011D471 /* Cells */ = {
@@ -996,6 +1010,7 @@
 				A47F14B11E8B27DB00285CA8 /* Health.storyboard in Resources */,
 				02B82AC31E8AE4D800E41E32 /* SafeBox.storyboard in Resources */,
 				8488E1681E41728700045646 /* Gotham-Book.ttf in Resources */,
+				A44D4E5E1F0481CD00323B87 /* Budget.storyboard in Resources */,
 				022CC44D1EF9C3F3009FA79C /* Objectives.storyboard in Resources */,
 				02F15BB51E85E99D008C26F8 /* ChatCell.xib in Resources */,
 				02E7E5EE1E7883E700D8360B /* Assets.xcassets in Resources */,
@@ -1036,7 +1051,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		1EB369D6AFDB2F9F8B9C0AA6 /* [CP] Copy Pods Resources */ = {
@@ -1066,7 +1081,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		7A50935BC7FAC6FF6448A24B /* [CP] Copy Pods Resources */ = {
@@ -1141,7 +1156,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F3E211A139E878212C12AAE8 /* [CP] Embed Pods Frameworks */ = {
@@ -1179,6 +1194,7 @@
 				02CF79AB1EAEC4B200E13056 /* EventService.swift in Sources */,
 				02D2C0D11E6747AE007A6798 /* References.swift in Sources */,
 				02E33A641EBA71D0003BF787 /* ShowEventViewController.swift in Sources */,
+				A44D4E611F04824B00323B87 /* BudgetViewController.swift in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
 				A46316B21E78C69E00E3F72C /* Health.swift in Sources */,
 				023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */,
