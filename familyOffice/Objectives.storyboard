@@ -196,7 +196,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="co7-GP-1Kb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1244" y="-555"/>
+            <point key="canvasLocation" x="-1833" y="-415"/>
         </scene>
         <!--Item-->
         <scene sceneID="im9-po-Kzb">
@@ -204,7 +204,7 @@
                 <navigationController storyboardIdentifier="mainobjective" automaticallyAdjustsScrollViewInsets="NO" id="1Af-WX-zIQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="XlL-DR-Mkw"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vO1-Tr-bWf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vO1-Tr-bWf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
