@@ -26,7 +26,6 @@
 		022D51001E2036390073F0EF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022D50FF1E2036390073F0EF /* ProfileViewController.swift */; };
 		022D600F1E71DECD0082586E /* ProfileUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022D600E1E71DECD0082586E /* ProfileUserViewController.swift */; };
 		022EC1D21E20078C0096A18B /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EC1D11E20078C0096A18B /* Family.swift */; };
-		022F986B1F05C47F0018E643 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F986A1F05C47F0018E643 /* GoalViewController.swift */; };
 		0233A4F71EFD8A5A00D01F5C /* Goal-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0233A4F61EFD8A5A00D01F5C /* Goal-Extension.swift */; };
 		0233A4F91EFDA33600D01F5C /* GoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0233A4F81EFDA33600D01F5C /* GoalService.swift */; };
 		02382F0D1E1C210C0036FFC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02382F0C1E1C210C0036FFC9 /* AppDelegate.swift */; };
@@ -63,6 +62,7 @@
 		027FC2471E8D89C000450EFB /* MemberCollection-CalendarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2461E8D89C000450EFB /* MemberCollection-CalendarExtension.swift */; };
 		027FC2491E8DCF3E00450EFB /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FC2481E8DCF3E00450EFB /* MemberCollectionViewCell.swift */; };
 		02802DFF1EFC36A900E12A84 /* HandleMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02802DFE1EFC36A900E12A84 /* HandleMenuBar.swift */; };
+		02811B331F06AE9E004231BE /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02811B321F06AE9E004231BE /* GoalViewController.swift */; };
 		028CD3671EFAF98C00DEC001 /* AddGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028CD3661EFAF98C00DEC001 /* AddGoalViewController.swift */; };
 		028CD36B1EFB447600DEC001 /* typeiconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028CD36A1EFB447600DEC001 /* typeiconCollectionViewCell.swift */; };
 		028E0E311EDF3F0700D5205B /* memberEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028E0E301EDF3F0700D5205B /* memberEventTableViewCell.swift */; };
@@ -188,7 +188,6 @@
 		022D50FF1E2036390073F0EF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		022D600E1E71DECD0082586E /* ProfileUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileUserViewController.swift; sourceTree = "<group>"; };
 		022EC1D11E20078C0096A18B /* Family.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Family.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		022F986A1F05C47F0018E643 /* GoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		0233A4F61EFD8A5A00D01F5C /* Goal-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Goal-Extension.swift"; sourceTree = "<group>"; };
 		0233A4F81EFDA33600D01F5C /* GoalService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalService.swift; sourceTree = "<group>"; };
 		02382F091E1C210C0036FFC9 /* familyOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = familyOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,6 +232,7 @@
 		027FC2461E8D89C000450EFB /* MemberCollection-CalendarExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MemberCollection-CalendarExtension.swift"; sourceTree = "<group>"; };
 		027FC2481E8DCF3E00450EFB /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		02802DFE1EFC36A900E12A84 /* HandleMenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandleMenuBar.swift; sourceTree = "<group>"; };
+		02811B321F06AE9E004231BE /* GoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		028CD3661EFAF98C00DEC001 /* AddGoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGoalViewController.swift; sourceTree = "<group>"; };
 		028CD36A1EFB447600DEC001 /* typeiconCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = typeiconCollectionViewCell.swift; sourceTree = "<group>"; };
 		028E0E301EDF3F0700D5205B /* memberEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = memberEventTableViewCell.swift; sourceTree = "<group>"; };
@@ -407,7 +407,7 @@
 				022CC44C1EF9C3F3009FA79C /* Objectives.storyboard */,
 				022CC4531EF9F352009FA79C /* PersonalGoalsCollectionViewController.swift */,
 				028CD3661EFAF98C00DEC001 /* AddGoalViewController.swift */,
-				022F986A1F05C47F0018E643 /* GoalViewController.swift */,
+				02811B321F06AE9E004231BE /* GoalViewController.swift */,
 			);
 			name = goals;
 			sourceTree = "<group>";
@@ -1188,7 +1188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				022F986B1F05C47F0018E643 /* GoalViewController.swift in Sources */,
+				02811B331F06AE9E004231BE /* GoalViewController.swift in Sources */,
 				02C17D2B1E42796700EE7CFA /* recordTableViewCell.swift in Sources */,
 				84E9C9B91E93269100905A10 /* SetPersonalDataViewController.swift in Sources */,
 				0266454C1EFC50920034D434 /* RequestStorageSvc.swift in Sources */,

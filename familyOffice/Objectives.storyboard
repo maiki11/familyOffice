@@ -55,71 +55,6 @@
             </objects>
             <point key="canvasLocation" x="-2564" y="-415.14242878560725"/>
         </scene>
-        <!--Personal Goals Collection View Controller-->
-        <scene sceneID="6y7-5r-K7n">
-            <objects>
-                <collectionViewController id="7p8-zy-OSW" customClass="PersonalGoalsCollectionViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="xN9-Zt-6rG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.87979596853256226" green="0.87698239088058472" blue="0.87989670038223267" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="CxN-vs-uOD">
-                            <size key="itemSize" width="300" height="90"/>
-                            <size key="headerReferenceSize" width="50" height="50"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="6RN-3k-5EG">
-                                <rect key="frame" x="37.5" y="50" width="300" height="90"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="90"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionViewHeader" id="ndE-jI-5k3">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <subviews>
-                                <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="C6v-gI-MD9">
-                                    <rect key="frame" x="20" y="8" width="334" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </searchBar>
-                            </subviews>
-                        </collectionReusableView>
-                        <connections>
-                            <outlet property="dataSource" destination="7p8-zy-OSW" id="sFx-GG-CEk"/>
-                            <outlet property="delegate" destination="7p8-zy-OSW" id="zAd-lf-XGi"/>
-                        </connections>
-                    </collectionView>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="OWP-Rk-xS1" id="meh-vB-GAh"/>
-                        <segue destination="s7g-s9-Qg0" kind="show" identifier="addSegue" id="APo-Td-52p"/>
-                    </connections>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fQR-W3-LS5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="zk0-ds-80G">
-                    <connections>
-                        <outlet property="delegate" destination="7p8-zy-OSW" id="fDl-vP-QeA"/>
-                        <outlet property="searchContentsController" destination="7p8-zy-OSW" id="Akb-kf-19Z"/>
-                        <outlet property="searchResultsDataSource" destination="7p8-zy-OSW" id="mRL-br-jIb"/>
-                        <outlet property="searchResultsDelegate" destination="7p8-zy-OSW" id="NG1-MT-6D7"/>
-                    </connections>
-                </searchDisplayController>
-                <searchDisplayController id="OWP-Rk-xS1">
-                    <connections>
-                        <outlet property="delegate" destination="7p8-zy-OSW" id="npW-HV-kHX"/>
-                        <outlet property="searchContentsController" destination="7p8-zy-OSW" id="Bk0-OR-BHK"/>
-                        <outlet property="searchResultsDataSource" destination="7p8-zy-OSW" id="lUN-WC-FtM"/>
-                        <outlet property="searchResultsDelegate" destination="7p8-zy-OSW" id="8zu-s3-vpr"/>
-                    </connections>
-                </searchDisplayController>
-            </objects>
-            <point key="canvasLocation" x="-1797.5999999999999" y="-654.42278860569718"/>
-        </scene>
         <!--Add Goal View Controller-->
         <scene sceneID="q24-Ml-cKp">
             <objects>
@@ -261,7 +196,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="co7-GP-1Kb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-984.79999999999995" y="-653.52323838080963"/>
+            <point key="canvasLocation" x="-1244" y="-555"/>
         </scene>
         <!--Item-->
         <scene sceneID="im9-po-Kzb">
@@ -269,7 +204,7 @@
                 <navigationController storyboardIdentifier="mainobjective" automaticallyAdjustsScrollViewInsets="NO" id="1Af-WX-zIQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="XlL-DR-Mkw"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vO1-Tr-bWf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vO1-Tr-bWf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
