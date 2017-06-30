@@ -15,8 +15,8 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate, Handle
     
 
     
-    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple"]
-    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros"]
+    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple", "presupuesto"]
+    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros", "Presupuesto"]
     
     
     private var family : Family?
@@ -192,9 +192,12 @@ extension HomeViewController {
             
         case 4:
             self.performSegue(withIdentifier: "safeBoxSegue", sender: nil)
-            
+            break
         case 8:
             self.performSegue(withIdentifier: "healthSegue", sender: nil)
+            break
+        case 10:
+            self.performSegue(withIdentifier: "budgetSegue", sender: nil)
         default:
             break
         }
