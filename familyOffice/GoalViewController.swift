@@ -1,5 +1,5 @@
 //
-//  GoalViewController.swift
+//  GoalViewContro/Users/ldurazo/Documents/proyectos/familyOffice/familyOffice/GoalViewController.swiftller.swift
 //  familyOffice
 //
 //  Created by Leonardo Durazo on 30/06/17.
