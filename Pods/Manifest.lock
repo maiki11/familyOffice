@@ -1,5 +1,11 @@
 PODS:
   - Alamofire (4.4.0)
+  - Charts (3.0.2):
+    - Charts/Core (= 3.0.2)
+  - Charts/Core (3.0.2)
+  - ChartsRealm (3.0.2):
+    - Charts (~> 3.0.2)
+    - RealmSwift (~> 2.4)
   - Firebase (3.17.0):
     - Firebase/Core (= 3.17.0)
   - Firebase/Auth (3.17.0):
@@ -69,12 +75,24 @@ PODS:
   - MIBadgeButton-Swift (0.5)
   - MultiAutoCompleteTextSwift (0.1.1)
   - Protobuf (3.3.0)
+  - Realm (2.8.2):
+    - Realm/Headers (= 2.8.2)
+  - Realm/Headers (2.8.2)
+  - RealmSwift (2.8.2):
+    - Realm (= 2.8.2)
+  - ReSwift (3.0.0)
+  - ReSwiftRecorder (0.4.0):
+    - ReSwift (~> 3.0)
+  - ReSwiftRouter (0.5.1):
+    - ReSwift (~> 3.0.0)
   - SearchTextField (1.1.0)
   - SmileLock (2.0.2)
   - Toast-Swift (2.0.0)
 
 DEPENDENCIES:
   - Alamofire
+  - Charts (~> 3.0)
+  - ChartsRealm
   - Firebase
   - Firebase/Auth
   - Firebase/Core
@@ -87,6 +105,9 @@ DEPENDENCIES:
   - MGSwipeTableCell
   - MIBadgeButton-Swift (from `https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git`, branch `master`)
   - MultiAutoCompleteTextSwift
+  - ReSwift
+  - ReSwiftRecorder
+  - ReSwiftRouter
   - SearchTextField
   - SmileLock
   - Toast-Swift (~> 2.0.0)
@@ -103,6 +124,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
+  ChartsRealm: ed0332fd409298188a2b71e9548604165c987d42
   Firebase: 4b66b5b59c43edac745b87f0c87e42cdd0279c13
   FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
   FirebaseAuth: cc8a1824170adbd351edb7f994490a3fb5c18be6
@@ -121,10 +144,15 @@ SPEC CHECKSUMS:
   MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
   MultiAutoCompleteTextSwift: d5631e77b48413af5795e14a1ae6d72054fe2d1e
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
+  Realm: 0e262abf087c7054013e00579274f7e070486d4a
+  RealmSwift: 73565e91bc403c1149e4acf31ff9de506b2f9459
+  ReSwift: f0255f4b4f2dacd12c5d97d34d13fc5dad6d6371
+  ReSwiftRecorder: f37a363425ad61c7ddc2172e14ab7799b6b27483
+  ReSwiftRouter: c620138bf94b57c068f789d51c0bd23efc42bf68
   SearchTextField: 5daab6cecfd90e06f9b08b2814593656c0c99f3d
   SmileLock: 7ae1e174b4697c0a33882dab838fc0bea94432f4
   Toast-Swift: 5b2f8f720f7e78e48511f693df1f9c9a6e38a25a
 
-PODFILE CHECKSUM: 1baa067e80b5c182d05fa421d8068018e2928e18
+PODFILE CHECKSUM: a68e6bbb5a135ccdd03c903431daa60baead245a
 
 COCOAPODS: 1.2.1

@@ -59,6 +59,7 @@ class FamilyService: repository, RequestService {
         
         if !self.families.contains(where: { $0.id == family.id }) {
             self.families.append(family)
+            store.state.FamilyState.families.append(family)
             NotificationCenter.default.post(name: notCenter.FAMILYADDED_NOTIFICATION, object: family)
             ToastService.getTopViewControllerAndShowToast(text: "Fam. agregada: \(family.name!)")
         }else{

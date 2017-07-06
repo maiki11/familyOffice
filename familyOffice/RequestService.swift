@@ -16,7 +16,6 @@ protocol RequestService {
     func inserted(ref: FIRDatabaseReference) -> Void
     func routing(snapshot: FIRDataSnapshot, action: FIRDataEventType, ref: String) -> Void
     func delete(_ ref: String, callback: @escaping ((_ results: Any) -> Void))
-    func update(_ ref: String,value:  [AnyHashable : Any], callback: @escaping ((_ results: Any) -> Void))
     
 }
 extension RequestService {
@@ -27,6 +26,17 @@ extension RequestService {
             }else {
                 DispatchQueue.main.async {
                     self.inserted(ref: ref)
+                    callback(ref as FIRDatabaseReference)
+                }
+            }
+        })
+    }
+    func update(_ ref: String, value: [AnyHashable : Any], callback: @escaping ((Any) -> Void)) {
+        Constants.FirDatabase.REF.child(ref).updateChildValues(value, withCompletionBlock: {(error, ref) in
+            if error != nil {
+                print(error.debugDescription)
+            }else {
+                DispatchQueue.main.async {
                     callback(ref as FIRDatabaseReference)
                 }
             }

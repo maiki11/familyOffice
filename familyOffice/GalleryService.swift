@@ -16,9 +16,9 @@ public class GalleryService : RequestService {
 
     var albums: [Album] = []
     var saveAlbums: [String:[Album]] = [:]
-    var activeAlbum: String
+    var activeAlbum: String!
 
-    private init(){}
+    private init() {}
 
     static private let instance = GalleryService()
 
