@@ -122,9 +122,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fmt-lD-xiX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<point key="
-
-MacBook Pro mf839e/acanvasLocation" x="-2564" y="-415.14242878560725"/>
         </scene>
         <!--Add Goal View Controller-->
         <scene sceneID="q24-Ml-cKp">
@@ -249,7 +246,7 @@ MacBook Pro mf839e/acanvasLocation" x="-2564" y="-415.14242878560725"/>
                                     <constraint firstAttribute="bottom" secondItem="hQs-Rf-gff" secondAttribute="bottom" id="gFm-r7-6E4"/>
                                     <constraint firstItem="CtU-A7-CqB" firstAttribute="top" secondItem="Jtl-Pw-qMv" secondAttribute="bottom" constant="20" id="giI-zj-omS"/>
                                     <constraint firstItem="hQs-Rf-gff" firstAttribute="leading" secondItem="ZkM-8g-deo" secondAttribute="leading" id="hZV-6x-6Ua"/>
-                                    <constraint firstItem="CtU-A7-CqB" firstAttribute="top" secondItem ="YIc-8Q-F2z" secondAttribute="bottom" id="p1W-xd-Nkh"/>
+                                    <constraint firstItem="CtU-A7-CqB" firstAttribute="top" secondItem="YIc-8Q-F2z" secondAttribute="bottom" id="p1W-xd-Nkh"/>
                                     <constraint firstItem="Jtl-Pw-qMv" firstAttribute="top" secondItem="diF-KN-Yf6" secondAttribute="bottom" id="sVT-ye-S9Y"/>
                                 </constraints>
                             </stackView>
@@ -275,7 +272,7 @@ MacBook Pro mf839e/acanvasLocation" x="-2564" y="-415.14242878560725"/>
                 <navigationController storyboardIdentifier="mainobjective" automaticallyAdjustsScrollViewInsets="NO" id="1Af-WX-zIQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="XlL-DR-Mkw"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vO1-Tr-bWf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vO1-Tr-bWf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
