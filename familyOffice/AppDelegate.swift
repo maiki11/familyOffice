@@ -11,6 +11,9 @@ import Firebase
 import FirebaseMessaging
 import GoogleSignIn
 import UserNotifications
+import ReSwift
+
+let store = Store<AppState>(reducer: AppReducer(), state: AppState(GoalsState: GoalState(goals: [:], status: Result.finished), FamilyState:  FamilyState(families: [], status: Result.finished)))
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
@@ -140,8 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
             }
         }
     }
-    
-    
+
     
 }
 

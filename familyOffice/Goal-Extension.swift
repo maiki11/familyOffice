@@ -32,6 +32,9 @@ extension GoalBindable {
     var noteLbl: UILabel! {
         return nil
     }
+    var titleTxt: UITextField! {
+        return nil
+    }
     
     func bind(goal: Goal) {
         self.goal = goal
@@ -47,13 +50,17 @@ extension GoalBindable {
         if let titleLbl = self.titleLbl {
             titleLbl.text = goal.title
         }
+    
+        if let titleTxt = self.titleTxt {
+            titleTxt.text = goal.title
+        }
         
         if let endDateDP  = self.endDateDP {
             endDateDP.date = Date(string: goal.endDate, formatter: .InternationalFormat)!
         }
 
         if let endDateLbl  = self.endDateLbl {
-            endDateLbl.text = Date(string: goal.endDate, formatter: .InternationalFormat)!.string(with: .MonthdayAndYear)
+            endDateLbl.text = goal.endDate != "" ? Date(string: goal.endDate, formatter: .InternationalFormat)!.string(with: .MonthdayAndYear) : "Sin fecha"
         }
 
         if let dateCreatedLbl = self.dateCreatedLbl {
@@ -73,7 +80,7 @@ extension GoalBindable {
         
         if let typeicon = self.typeicon {
             var ximage :UIImage!
-            if let value = GoalType(rawValue: goal.type){
+            if let value = GoalCategory(rawValue: goal.category){
                 switch value {
                 case .sport:
                     ximage = #imageLiteral(resourceName: "sport")
