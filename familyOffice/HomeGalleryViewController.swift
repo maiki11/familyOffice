@@ -7,13 +7,24 @@
 //
 
 import UIKit
-
+import FirebaseStorage.FIRStorageMetadata
 class HomeGalleryViewController: UIViewController {
-    let personal = [2,3,4,5,6]
+    var personal:[Album] = []
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var selectionSegmentcontrol: UISegmentedControl!
-    let familiar = [9,9,9,7,6,5,4,3,2,1]
+    var familiar:[Family] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let key: String = service.USER_SERVICE.users[0].id
+        self.familiar = service.FAMILY_SERVICE.families
+        service.GALLERY_SERVICE.fillAlbums(reference: key, callback: { bool in
+            if bool{
+                self.personal = service.GALLERY_SERVICE.albums
+                self.collectionView.reloadData()
+            }
+        })
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.AddAlbum))
@@ -50,7 +61,7 @@ class HomeGalleryViewController: UIViewController {
     }
     */
     func AddAlbum() {
-
+        self.performSegue(withIdentifier: "AddAlbumSegue", sender: nil)
     }
 
 }
@@ -62,13 +73,29 @@ extension HomeGalleryViewController : UICollectionViewDelegate, UICollectionView
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
-        
+        if self.selectionSegmentcontrol.selectedSegmentIndex == 0 {
+            return self.personal.count
+        }else{
+            return self.familiar.count
+        }
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! GalleryCollectionViewCell
-        return cell
+        
+        switch selectionSegmentcontrol.selectedSegmentIndex {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! GalleryCollectionViewCell
+            let album = service.GALLERY_SERVICE.albums[indexPath.item]
+            cell.bind(album: album)
+            collectionView.reloadItems(at: [indexPath])
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! FamilyGalleryCollectionViewCell
+            let family = service.FAMILY_SERVICE.families[indexPath.item]
+            cell.bind(fam: family)
+            collectionView.reloadItems(at: [indexPath])
+            return cell
+        }
     }
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if(selectionSegmentcontrol.selectedSegmentIndex == 0){
@@ -79,14 +106,17 @@ extension HomeGalleryViewController : UICollectionViewDelegate, UICollectionView
     }
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! GalleryCollectionViewCell
+        switch selectionSegmentcontrol.selectedSegmentIndex{
+        case 0: break
+        default: break
+        }
+        
     }
 
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 
         collectionView.reloadItems(at: [indexPath])
     }
-    
 
 
 }

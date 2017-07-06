@@ -53,15 +53,15 @@ struct Album {
     }
 }
 protocol AlbumBindable: AnyObject {
-    var album: Album? {get set}
-    var titleLabel: UIKit.UILabel! {get}
-    var imageBackground: UIKit.UIImageView! {get}
+    var album: Album! {get set}
+    var Title: UIKit.UILabel! {get}
+    var Image: UIKit.UIImageView! {get}
 }
 extension AlbumBindable{
-    var titleLabel: UIKit.UILabel!{
+    var Title: UIKit.UILabel!{
         return nil
     }
-    var imageBackground: UIKit.UIImageView!{
+    var Image: UIKit.UIImageView!{
         return nil
     }
     //Bind Ninja
@@ -73,17 +73,19 @@ extension AlbumBindable{
         guard let album = self.album else{
             return
         }
-        if let titleLabel = self.titleLabel{
+        if let titleLabel = self.Title{
             if album.title != nil{
                 titleLabel.text = (album.title?.isEmpty)! ? "Sin título" : album.title
             }else{
                 titleLabel.text = "Sin título"
             }
         }
-        if let imageBackground = self.imageBackground{
+        if let imageBackground = self.Image{
             if album.cover != nil{
-                if(album.cover?.isEmpty)!{
+                if(!album.cover.isEmpty){
                     imageBackground.loadImage(urlString: album.cover)
+                }else{
+                    imageBackground.image = #imageLiteral(resourceName: "album_default")
                 }
             }
         }

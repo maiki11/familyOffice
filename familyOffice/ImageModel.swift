@@ -14,6 +14,7 @@ struct ImageAlbum {
     static let kPath = "path"
     static let kComments = "comments"
     static let kReacts = "reacts"
+    static let kAlbum = "album"
 
     //Samurai Variables
 
@@ -21,18 +22,21 @@ struct ImageAlbum {
     var path: String!
     var comments: [String] = []
     var reacts: [String] = []
+    var album: String!
 
     init(){
         self.id = ""
         self.path = ""
         self.comments = []
         self.reacts = []
+        self.album = ""
     }
-    init(id: String!,path: String!,comments: [String],reacts: [String]){
+    init(id: String!,path: String!,album: String!,comments: [String],reacts: [String]){
         self.id = id
         self.path = path
         self.comments = comments
         self.reacts = reacts
+        self.album = album
     }
     init(snap: FIRDataSnapshot){
         self.id = snap.key
@@ -40,12 +44,14 @@ struct ImageAlbum {
         self.path = service.UTILITY_SERVICE.exist(field: ImageAlbum.kPath, dictionary: snapValue)
         self.comments = service.UTILITY_SERVICE.exist(field: ImageAlbum.kComments, dictionary: snapValue)
         self.reacts = service.UTILITY_SERVICE.exist(field: ImageAlbum.kReacts, dictionary: snapValue)
+        self.album = service.UTILITY_SERVICE.exist(field: ImageAlbum.kAlbum, dictionary: snapValue)
     }
     func toDictionary() -> NSDictionary {
         return [
             ImageAlbum.kPath: self.path,
             ImageAlbum.kComments: self.comments,
-            ImageAlbum.kReacts: self.reacts
+            ImageAlbum.kReacts: self.reacts,
+            ImageAlbum.kAlbum: self.album
         ]
     }
 }
