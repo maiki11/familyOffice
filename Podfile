@@ -20,7 +20,12 @@ target 'familyOffice' do
   pod 'Toast-Swift', '~> 2.0.0'
   pod 'SearchTextField'
   pod 'MultiAutoCompleteTextSwift'
-pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
+  pod 'ReSwift'
+  pod 'ReSwiftRouter'
+  pod 'ReSwiftRecorder'
+  pod 'Charts', '~> 3.0'
+  pod 'ChartsRealm'
+  pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
   target 'familyOfficeTests' do
     inherit! :search_paths
     pod 'Firebase'

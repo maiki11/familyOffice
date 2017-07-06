@@ -10,13 +10,18 @@ import Foundation
 import UIKit
 import Firebase
 
-enum GoalType: Int {
+enum GoalCategory: Int {
     case sport, religion, school, business, eat, health
+}
+
+enum GoalType: Int {
+    case personal, familiar
 }
 
 struct Goal {
     static let ktitle = "title"
     static let ktype = "type"
+    static let kcategory = "category"
     static let kphoto = "photo"
     static let kendDate = "endDate"
     static let kdone = "donde"
@@ -28,6 +33,7 @@ struct Goal {
     var id:String!
     var title: String!
     var type: Int! = 0
+    var category: Int! = 0
     var photo: String! = ""
     var endDate: String!
     var done: Bool! = false
@@ -37,7 +43,7 @@ struct Goal {
     
     
     init() {
-        self.id = ""
+        self.id =  Constants.FirDatabase.REF.childByAutoId().key
         self.title = ""
         self.endDate = Date().addingTimeInterval(60 * 60 * 24).string(with: .InternationalFormat)
         self.dateCreated =  NSDate().timeIntervalSince1970.exponent
@@ -74,7 +80,8 @@ struct Goal {
             Goal.kendDate : self.endDate,
             Goal.ktype : self.type,
             Goal.knote : self.note,
-            Goal.ktitle : self.title
+            Goal.ktitle : self.title,
+            Goal.kcategory : self.category
         ]
     }
     
@@ -84,6 +91,7 @@ struct Goal {
 protocol GoalBindable: AnyObject {
     var goal: Goal! {get set}
     var titleLbl: UILabel! {get}
+    var titleTxt: UITextField! {get}
     var dateCreatedLbl: UILabel! {get}
     var endDateDP: UIDatePicker! {get}
     var endDateLbl: UILabel! {get}

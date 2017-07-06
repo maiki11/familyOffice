@@ -12,7 +12,7 @@ let defaults = UserDefaults.standard
 class GoalService: RequestService {
     var goals: [Goal] = []
     var handles: [(String,UInt)] = []
-    let basePath = "events/\(service.USER_SERVICE.users[0].id)"
+    let basePath = "goals/\(service.USER_SERVICE.users[0].id!)"
     private init() {}
     
     static private let instance = GoalService()
@@ -31,7 +31,7 @@ class GoalService: RequestService {
             self.updated(snapshot: snapshot, id: snapshot.key)
             break
         case .value:
-            self.add(value: snapshot)
+            //self.add(value: snapshot)
             break
         default:
             break
@@ -40,7 +40,9 @@ class GoalService: RequestService {
     
     func initObserves(ref: String, actions: [FIRDataEventType]) -> Void {
         for action in actions {
-            self.child_action(ref: ref, action: action)
+            if !handles.contains(where: { $0.0 == ref}){
+                 self.child_action(ref: ref, action: action)
+            }
         }
     }
     
@@ -57,38 +59,51 @@ class GoalService: RequestService {
     
     func inserted(ref: FIRDatabaseReference) {
         Constants.FirDatabase.REF_USERS.child(service.USER_SERVICE.users[0].id!).child("goals").updateChildValues([ref.key:true])
+        
+        store.state.GoalsState.status = .finished
+        
     }
     
     func delete(_ ref: String, callback: @escaping ((Any) -> Void)) {
     }
     
-    func update(_ ref: String, value: [AnyHashable: Any], callback: @escaping ((Any) -> Void)) {
-    }
-    
-    
     
 }
 extension GoalService: repository {
-   
+    
     func added(snapshot: FirebaseDatabase.FIRDataSnapshot) {
-        if !goals.contains(where: {$0.id == snapshot.key}){
-            self.valueSingleton(ref: "goals/\(service.USER_SERVICE.users[0].id!)/\(snapshot.key)")
+        let id = snapshot.ref.description().components(separatedBy: "/")[4]
+        let goal = Goal(snapshot: snapshot)
+        
+        if (store.state.GoalsState.goals[id] == nil) {
+           store.state.GoalsState.goals[id] = []
+        }
+       
+        if !(store.state.GoalsState.goals[id]?.contains(where: {$0.id == goal.id}))!{
+            store.state.GoalsState.goals[id]?.append(goal)
         }
     }
     
-    func add(value: FIRDataSnapshot) -> Void {
-        let goal = Goal(snapshot: value)
-        goals.append(goal)
-        NotificationCenter.default.post(name: notCenter.SUCCESS_NOTIFICATION, object: goal)
+    func getPath(type: Int) -> String {
+        if type == 0 {
+            return service.USER_SERVICE.users[0].id!
+        }else{
+            return service.USER_SERVICE.users[0].familyActive!
+        }
     }
     
     func updated(snapshot: FirebaseDatabase.FIRDataSnapshot, id: Any) {
+        let id = snapshot.ref.description().components(separatedBy: "/")[4]
+        let goal = Goal(snapshot: snapshot)
+        if let index = store.state.GoalsState.goals[id]?.index(where: {$0.id == snapshot.key})  {
+            store.state.GoalsState.goals[id]?[index] = goal
+        }
     }
     
     func removed(snapshot: FirebaseDatabase.FIRDataSnapshot) {
-        if let index = goals.index(where: {$0.id == snapshot.key}){
-            self.goals.remove(at: index)
-            NotificationCenter.default.post(name: notCenter.SUCCESS_NOTIFICATION, object: nil)
+        let id = snapshot.ref.description().components(separatedBy: "/")[4]
+        if let index = store.state.GoalsState.goals[id]?.index(where: {$0.id == snapshot.key})  {
+            store.state.GoalsState.goals[id]?.remove(at: index)
         }
     }
 }

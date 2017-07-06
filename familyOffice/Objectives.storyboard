@@ -22,9 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IiU-Ag-I0i">
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IiU-Ag-I0i">
                                 <rect key="frame" x="0.0" y="618" width="375" height="49"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
                                     <tabBarItem systemItem="recents" id="bDL-rb-oBJ">
@@ -35,20 +34,90 @@
                                     <tabBarItem systemItem="downloads" id="hXO-de-XMb"/>
                                 </items>
                             </tabBar>
-                            <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0Yl-ve-k1t">
+                            <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0Yl-ve-k1t">
                                 <rect key="frame" x="16" y="72" width="343" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Personales"/>
                                     <segment title="Familiares"/>
                                 </segments>
+                                <connections>
+                                    <action selector="handleChange:" destination="m8J-Pn-hWu" eventType="valueChanged" id="qHg-ed-wqJ"/>
+                                </connections>
                             </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="s73-ty-aa1">
+                                <rect key="frame" x="16" y="108" width="343" height="167"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="167" id="zoU-aQ-J36"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="cell" textLabel="CXd-fj-GKc" detailTextLabel="MIi-SA-dhD" style="IBUITableViewCellStyleSubtitle" id="dNe-bg-Sq8" customClass="GoalTableViewCell" customModule="familyOffice" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dNe-bg-Sq8" id="RJV-BH-Xon">
+                                            <rect key="frame" x="0.0" y="0.0" width="276" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CXd-fj-GKc">
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MIi-SA-dhD">
+                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="endDateLbl" destination="MIi-SA-dhD" id="tL4-qV-P8b"/>
+                                            <outlet property="titleLbl" destination="CXd-fj-GKc" id="brD-wu-zV4"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="m8J-Pn-hWu" id="6uw-xx-6Uc"/>
+                                    <outlet property="delegate" destination="m8J-Pn-hWu" id="oCt-jL-oWL"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Teg-Xb-mUe" customClass="PieChartView" customModule="Charts">
+                                <rect key="frame" x="16" y="302" width="343" height="285"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="Ari-g1-T5j"/>
+                                    <constraint firstAttribute="height" constant="285" id="jtt-1l-0HI"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="s73-ty-aa1" firstAttribute="leading" secondItem="Teg-Xb-mUe" secondAttribute="leading" id="2yT-vH-9hr"/>
+                            <constraint firstItem="IiU-Ag-I0i" firstAttribute="bottom" secondItem="rhU-rf-Rwv" secondAttribute="top" id="8MN-OB-hBc"/>
+                            <constraint firstItem="IiU-Ag-I0i" firstAttribute="centerX" secondItem="Teg-Xb-mUe" secondAttribute="centerX" id="8Qf-mm-Kp9"/>
+                            <constraint firstItem="IiU-Ag-I0i" firstAttribute="centerX" secondItem="s73-ty-aa1" secondAttribute="centerX" id="KtH-QF-tD4"/>
+                            <constraint firstItem="IiU-Ag-I0i" firstAttribute="leading" secondItem="RfD-Yg-cUz" secondAttribute="leading" id="Mlm-dj-arT"/>
+                            <constraint firstItem="Teg-Xb-mUe" firstAttribute="leading" secondItem="RfD-Yg-cUz" secondAttribute="leadingMargin" id="RNM-04-MyY"/>
+                            <constraint firstItem="s73-ty-aa1" firstAttribute="leading" secondItem="0Yl-ve-k1t" secondAttribute="leading" id="Rl8-ky-dld"/>
+                            <constraint firstItem="Teg-Xb-mUe" firstAttribute="top" secondItem="s73-ty-aa1" secondAttribute="bottom" constant="27" id="TVY-lJ-kxh"/>
+                            <constraint firstItem="IiU-Ag-I0i" firstAttribute="centerX" secondItem="0Yl-ve-k1t" secondAttribute="centerX" id="YOC-Iv-igo"/>
+                            <constraint firstItem="Teg-Xb-mUe" firstAttribute="trailing" secondItem="RfD-Yg-cUz" secondAttribute="trailingMargin" id="duJ-Jf-BEd"/>
+                            <constraint firstItem="IiU-Ag-I0i" firstAttribute="top" secondItem="Teg-Xb-mUe" secondAttribute="bottom" constant="31" id="gqY-Ai-hki"/>
+                            <constraint firstItem="s73-ty-aa1" firstAttribute="top" secondItem="0Yl-ve-k1t" secondAttribute="bottom" constant="8" symbolic="YES" id="pPk-fj-X59"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Objetivos" id="AvK-lv-6Mj"/>
+                    <navigationItem key="navigationItem" title="Objetivos" id="AvK-lv-6Mj">
+                        <barButtonItem key="leftBarButtonItem" image="Home" id="uaZ-cy-7u4"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="segmentControl" destination="0Yl-ve-k1t" id="ukb-ae-Sbv"/>
+                        <outlet property="pieChart" destination="Teg-Xb-mUe" id="WEc-Ce-f2b"/>
+                        <outlet property="segmentControl" destination="0Yl-ve-k1t" id="hp6-l6-qpT"/>
+                        <outlet property="tableView" destination="s73-ty-aa1" id="T6J-gY-zeY"/>
+                        <segue destination="s7g-s9-Qg0" kind="show" identifier="addSegue" id="vna-Z8-jSn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fmt-lD-xiX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -58,7 +127,7 @@
         <!--Add Goal View Controller-->
         <scene sceneID="q24-Ml-cKp">
             <objects>
-                <viewController id="s7g-s9-Qg0" customClass="AddGoalViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addGoal" id="s7g-s9-Qg0" customClass="AddGoalViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6m7-FR-3Y2"/>
                         <viewControllerLayoutGuide type="bottom" id="PZu-IV-Ej3"/>
@@ -68,7 +137,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZkM-8g-deo">
-                                <rect key="frame" x="16" y="47" width="339" height="485.5"/>
+                                <rect key="frame" x="16" y="91" width="339" height="485.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¿Cuál es tú meta?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="diF-KN-Yf6">
                                         <rect key="frame" x="0.0" y="0.0" width="339" height="20.5"/>
@@ -191,12 +260,12 @@
                     </view>
                     <connections>
                         <outlet property="endDateDP" destination="CtU-A7-CqB" id="WUQ-HP-JUM"/>
-                        <outlet property="titleLbl" destination="Jtl-Pw-qMv" id="dnk-3C-a83"/>
+                        <outlet property="titleTxt" destination="Jtl-Pw-qMv" id="56g-u8-aI7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="co7-GP-1Kb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1244" y="-555"/>
+            <point key="canvasLocation" x="-1686" y="-415"/>
         </scene>
         <!--Item-->
         <scene sceneID="im9-po-Kzb">
@@ -219,6 +288,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Home" width="20" height="20"/>
         <image name="check-1" width="114" height="114"/>
     </resources>
 </document>

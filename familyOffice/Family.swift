@@ -26,7 +26,7 @@ struct Family  {
     var admin : String? = ""
     var members : [String]!
     let firebaseReference: FIRDatabaseReference?
-
+    var goals: [Goal]! = []
     /* Initializer for instantiating a new object in code.
      */
     init(name: String, photo: Data, id: String){

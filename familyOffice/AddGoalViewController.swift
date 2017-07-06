@@ -9,58 +9,91 @@
 import UIKit
 import Toast_Swift
 import Firebase
-class AddGoalViewController: UIViewController, GoalBindable{
-    var types = [("Deportivo","sport"),("Religión","religion"),("Escolar","school"),("Negocios","business-1"),("Alimentación","eat"),("Salud","health-1")]
+import ReSwift
+class AddGoalViewController: UIViewController, GoalBindable, StoreSubscriber{
+    
     var goal: Goal!
-    @IBOutlet weak var titleLbl: UITextField!
+    var type = 0
+    @IBOutlet weak var titleTxt: UITextField!
     @IBOutlet weak var endDateDP: UIDatePicker!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var types = [("Deportivo","sport"),("Religión","religion"),("Escolar","school"),("Negocios","business-1"),("Alimentación","eat"),("Salud","health-1")]
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.save))
-        self.navigationItem.rightBarButtonItem = addButton
+        self.navigationItem.title = "Crear Objetivo"
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavBar()
+        store.subscribe(self) {
+            state in
+            state.GoalsState
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        store.unsubscribe(self)
+        
+    }
+    
+    func setupNavBar(){
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.save))
+        let updateButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(self.update))
+        if goal.title != "" {
+            self.navigationItem.rightBarButtonItem = updateButton
+        }else{
+            self.navigationItem.rightBarButtonItem = addButton
+        }
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
     func save() -> Void {
         
-        guard let title = titleLbl.text, !title.isEmpty else {
+        guard let title = titleTxt.text, !title.isEmpty else {
             return
         }
-
         goal.title = title
         goal.endDate = endDateDP.date.string(with: .InternationalFormat)
+        store.dispatch(InsertGoalAction(goal: goal))
+    }
+    
+    func update() -> Void {
         
-        self.view.makeToastActivity(.center)
-        service.UTILITY_SERVICE.disabledView()
-        
-        let key = Constants.FirDatabase.REF.childByAutoId().key
-        goal.id = key
-        let ref = "goals/\(service.USER_SERVICE.users[0].id!)/\(key)"
-        service.GOAL_SERVICE.insert(ref, value: goal.toDictionary(), callback: {ref in
-            if ref is FIRDatabaseReference {
-                
-            }
+        guard let title = titleTxt.text, !title.isEmpty else {
+            return
+        }
+        goal.title = title
+        goal.endDate = endDateDP.date.string(with: .InternationalFormat)
+        store.dispatch(UpdateGoalAction(goal: goal))
+    }
+    
+    func newState(state: GoalState) {
+        switch state.status {
+        case .finished:
             self.view.hideToastActivity()
-            service.UTILITY_SERVICE.enabledView()
-        })
+            _ = self.navigationController?.popViewController(animated: true)
+            break
+        case .loading:
+            self.view.makeToastActivity(.center)
+            break
+        case .none:
+            break
+        default: break
+            
+        }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    typealias StoreSubscriberStateType = GoalState
 
 }
 extension AddGoalViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -76,7 +109,7 @@ extension AddGoalViewController: UICollectionViewDataSource, UICollectionViewDel
         let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! typeiconCollectionViewCell
         let obj = types[indexPath.row]
         cell.titleLbl.text = obj.0
-        if goal.type == indexPath.item {
+        if goal.category == indexPath.item {
             cell.checkimage.isHidden = false
         }else{
             cell.checkimage.isHidden = true
@@ -86,7 +119,7 @@ extension AddGoalViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        goal.type = indexPath.item
+        goal.category = indexPath.item
         collectionView.reloadData()
     }
     
