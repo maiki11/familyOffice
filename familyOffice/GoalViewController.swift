@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 import Charts
 import ReSwiftRouter
-class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelected, UITabBarDelegate {
+class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
     
     static let identifier = "GoalViewController"
     let settingLauncher = SettingLauncher()
@@ -27,14 +27,12 @@ class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelecte
         setupNavBar()
         tabBar.delegate = self
         pieChart.noDataText = "No hay objetivos"
-        selectFamily()
         tabBar.selectedItem = tabBar.items?[0]
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         addObservers()
-        selectFamily()
         
         store.subscribe(self) {
             subscription in
@@ -67,14 +65,6 @@ class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelecte
         self.navigationItem.leftBarButtonItem = backButton
     }
     
-    func selectFamily() {
-        if service.USER_SERVICE.users.count > 0, let index = service.FAMILY_SERVICE.families.index(where: {$0.id == service.USER_SERVICE.users[0].familyActive}) {
-            let family = service.FAMILY_SERVICE.families[index]
-            tabBar.selectedItem?.title = "Familia \(family.name!)"
-            configuration()
-        }
-        
-    }
     
     func configuration() -> Void {
         addObservers()
@@ -91,7 +81,6 @@ class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelecte
     }
     
     func handleMore(_ sender: Any) {
-        settingLauncher.handleFamily = self
         settingLauncher.showSetting()
     }
     func handleNew() -> Void {
@@ -112,8 +101,14 @@ class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelecte
             barChart.isHidden = false
             pieChart.isHidden = true
         }
-       
+        selectFamily()
         tableView.reloadData()
+    }
+    func selectFamily() -> Void {
+        if let index = store.state.FamilyState.families.index(where: {$0.id == store.state.UserState.user?.familyActive}){
+            let family = store.state.FamilyState.families[index]
+            self.navigationItem.title = family.name
+        }
     }
     func updateChartWithData() {
         var dataEntries: [BarChartDataEntry] = []

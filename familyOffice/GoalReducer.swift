@@ -17,9 +17,11 @@ struct GoalReducer: Reducer {
         var state = state ?? GoalState(goals: [:], status: .none)
         switch action {
         case let action as InsertGoalAction:
+            if action.goal == nil {
+               return state
+            }
             insertGoal(action.goal)
             state.status = .loading
-            return state
         case let action as UpdateGoalAction:
             updateGoal(action.goal)
             state.status = .loading

@@ -57,7 +57,7 @@ extension RequestService {
     func valueSingleton(ref: String) -> Void {
         Constants.FirDatabase.REF.child(ref).observeSingleEvent(of: .value, with: {(snapshot) in
             if snapshot.exists(){
-                self.routing(snapshot: snapshot, action: FIRDataEventType.value, ref: ref)
+                self.routing(snapshot: snapshot, action: .value, ref: ref)
             }
         }, withCancel: {(error) in
             print(error.localizedDescription)

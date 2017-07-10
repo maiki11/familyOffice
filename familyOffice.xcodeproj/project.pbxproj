@@ -80,6 +80,8 @@
 		02981B6D1EEB3CA400BA1BF4 /* EndRepeatEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02981B6C1EEB3CA400BA1BF4 /* EndRepeatEventTableViewController.swift */; };
 		029B7A471EDE3515006868A7 /* MembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029B7A461EDE3515006868A7 /* MembersTableViewController.swift */; };
 		029CD0611F13172C00A29CBA /* UserSvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CD0601F13172C00A29CBA /* UserSvc.swift */; };
+		029CD0631F131EBC00A29CBA /* UserReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CD0621F131EBC00A29CBA /* UserReducer.swift */; };
+		029CD0651F1327BD00A29CBA /* FamilySvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CD0641F1327BD00A29CBA /* FamilySvc.swift */; };
 		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
 		02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC3F1E6DE73A003780AB /* UIImage.swift */; };
 		02ABAC421E6E02B5003780AB /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC411E6E02B5003780AB /* Device.swift */; };
@@ -259,6 +261,8 @@
 		02981B6C1EEB3CA400BA1BF4 /* EndRepeatEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndRepeatEventTableViewController.swift; sourceTree = "<group>"; };
 		029B7A461EDE3515006868A7 /* MembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersTableViewController.swift; sourceTree = "<group>"; };
 		029CD0601F13172C00A29CBA /* UserSvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSvc.swift; sourceTree = "<group>"; };
+		029CD0621F131EBC00A29CBA /* UserReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserReducer.swift; sourceTree = "<group>"; };
+		029CD0641F1327BD00A29CBA /* FamilySvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilySvc.swift; sourceTree = "<group>"; };
 		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		02ABAC3F1E6DE73A003780AB /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		02ABAC411E6E02B5003780AB /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
@@ -543,6 +547,7 @@
 				A4D585B71E8C8468005B8F1F /* HealthService.swift */,
 				0233A4F81EFDA33600D01F5C /* GoalService.swift */,
 				029CD0601F13172C00A29CBA /* UserSvc.swift */,
+				029CD0641F1327BD00A29CBA /* FamilySvc.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -637,6 +642,7 @@
 			isa = PBXGroup;
 			children = (
 				026AF37F1F07299000EF6DCD /* AppReducer.swift */,
+				029CD0621F131EBC00A29CBA /* UserReducer.swift */,
 			);
 			name = Reducers;
 			sourceTree = "<group>";
@@ -1288,6 +1294,7 @@
 				02BD2D1C1E1F16A700A61A84 /* Utility.swift in Sources */,
 				02BD2D191E1F130900A61A84 /* UserService.swift in Sources */,
 				02B7E7FC1E7C7A0E0082BAE7 /* UIView.swift in Sources */,
+				029CD0651F1327BD00A29CBA /* FamilySvc.swift in Sources */,
 				026AF3801F07299000EF6DCD /* AppReducer.swift in Sources */,
 				026AF37E1F071F6400EF6DCD /* GoalMiddleware.swift in Sources */,
 				027FC2491E8DCF3E00450EFB /* MemberCollectionViewCell.swift in Sources */,
@@ -1361,6 +1368,7 @@
 				020DA38E1F0C1A9C000BD7E2 /* FamilyReducer.swift in Sources */,
 				02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */,
 				0233A4F71EFD8A5A00D01F5C /* Goal-Extension.swift in Sources */,
+				029CD0631F131EBC00A29CBA /* UserReducer.swift in Sources */,
 				02C808801ED76979005BB8B1 /* ConfigurationEventTableViewController.swift in Sources */,
 				027213AB1E84865F001A144B /* testFile.swift in Sources */,
 				02C17D271E424AD400EE7CFA /* ActivityLogService .swift in Sources */,

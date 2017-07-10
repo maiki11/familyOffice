@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 class UserSvc {
-    var handles: [(String, UInt, FIRDataEventType)]
+    var handles: [(String, UInt, FIRDataEventType)] = []
     
     private init(){
     }
@@ -25,6 +25,10 @@ class UserSvc {
     }
     
     private static let instance : UserSvc = UserSvc()
+    
+    func selectFamily(family: Family) -> Void {
+        Constants.FirDatabase.REF_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["familyActive" : family.id])
+    }
 }
 extension UserSvc : RequestService {
     func addHandle(_ handle: UInt, ref: String, action: FIRDataEventType) {
@@ -36,6 +40,10 @@ extension UserSvc : RequestService {
     }
     
     func routing(snapshot: FIRDataSnapshot, action: FIRDataEventType, ref: String) {
+        if ref.components(separatedBy: "/").count > 2 {
+            actionFamily(snapshot: snapshot, action: action)
+            return
+        }
         switch action {
         case .childAdded:
             self.added(snapshot: snapshot)
@@ -48,6 +56,18 @@ extension UserSvc : RequestService {
             break
         case .value:
             self.added(snapshot: snapshot)
+            break
+        default:
+            break
+        }
+    }
+    func actionFamily(snapshot: FIRDataSnapshot, action: FIRDataEventType) -> Void {
+        switch action {
+        case .childAdded:
+            service.FAMILY_SVC.valueSingleton(ref: ref_family(snapshot.key))
+            break
+        case .childRemoved:
+            service.FAMILY_SVC.removed(snapshot: snapshot)
             break
         default:
             break
@@ -71,18 +91,26 @@ extension UserSvc : repository {
     /// - Parameter snapshot: FirDataSnapshot
     func added(snapshot: FIRDataSnapshot) {
         let user = User(snapshot: snapshot)
-        if user.id == store.state.UserState.user.id || store.state.UserState.user.id != "" {
-            service.NOTIFICATION_SERVICE.saveToken()
-            //Get families
+        if user.id == FIRAuth.auth()?.currentUser?.uid {
             store.state.UserState.user = user
+            service.NOTIFICATION_SERVICE.saveToken()
+            self.initObserves(ref: "users/\(user.id!)/families", actions: [.childAdded, .childRemoved])
         }else{
             if !store.state.UserState.users.contains(where: {$0.id == user.id}) {
                 store.state.UserState.users.append(user)
             }
         }
+        self.initObserves(ref: ref_users(uid: user.id!), actions: [.childChanged])
+        store.state.UserState.status = .finished
     }
     func updated(snapshot: FIRDataSnapshot, id: Any) {
-        
+        let id = snapshot.ref.description().components(separatedBy: "/")[4]
+        if id == FIRAuth.auth()?.currentUser?.uid {
+            store.state.UserState.user?.update(snapshot: snapshot)
+        }else if let index = store.state.UserState.users.index(where: {$0.id == id})  {
+            store.state.UserState.users[index].update(snapshot: snapshot)
+            
+        }
     }
     func removed(snapshot: FIRDataSnapshot) {
         

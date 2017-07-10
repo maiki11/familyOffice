@@ -14,10 +14,10 @@ import ReSwiftRouter
 
 struct GoalState: StateType {
     var goals: [String:[Goal]] = [:]
-    var status: Result
+    var status: Result = .none
 }
 
 struct FamilyState: StateType {
-    var families: [Family] = []
-    var status: Result
+    var families = [Family]()
+    var status: Result = .none
 }

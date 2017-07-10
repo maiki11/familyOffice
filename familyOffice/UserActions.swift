@@ -10,14 +10,13 @@ import Foundation
 import ReSwift
 import ReSwiftRecorder
 
-let userActionTypeMap: TypeMap = [InsertGoalAction.type: InsertGoalAction.self,
-                                  UpdateGoalAction.type: UpdateGoalAction.self]
+let userActionTypeMap: TypeMap = [GetUserAction.type: GetUserAction.self]
 
 struct GetUserAction: StandardActionConvertible {
     static let type = "USER_ACTION_GET"
-    var refUser: String!
+    var uid: String!
     init(uid: String) {
-        self.refUser = uid
+        self.uid = uid
     }
     init(_ standardAction: StandardAction) {
     }
