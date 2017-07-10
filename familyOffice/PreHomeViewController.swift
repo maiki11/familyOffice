@@ -121,7 +121,8 @@ extension SelectCategoryViewController : StoreSubscriber {
             self.familiesCollection.reloadData()
         }
     }
-    func verifyUser(status: Result){
+    func verifyUser(status: Result<Any>){
+
         switch status {
         case .loading:
             self.view.makeToastActivity(.center)

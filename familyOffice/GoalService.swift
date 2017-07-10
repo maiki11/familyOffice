@@ -67,8 +67,8 @@ class GoalService: RequestService {
     func delete(_ ref: String, callback: @escaping ((Any) -> Void)) {
     }
     
-    
 }
+
 extension GoalService: repository {
     
     func added(snapshot: FirebaseDatabase.FIRDataSnapshot) {

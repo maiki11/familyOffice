@@ -98,3 +98,45 @@ struct Family  {
     }
     
 }
+
+//Bind Galleries
+
+protocol FamilyBindable: AnyObject {
+    var family: Family! {get set}
+    var Title: UIKit.UILabel! {get}
+    var Image: UIKit.UIImageView! {get}
+}
+extension FamilyBindable{
+    var Title: UIKit.UILabel!{
+        return nil
+    }
+    var Image: UIKit.UIImageView!{
+        return nil
+    }
+    //Bind Ninja
+    func bind(fam: Family){
+        self.family = fam
+        bind()
+    }
+    func bind() {
+        guard let family = self.family else{
+            return
+        }
+        if let titleLabel = self.Title{
+            if family.name != nil{
+                titleLabel.text = (family.name?.isEmpty)! ? "Sin título" : family.name
+            }else{
+                titleLabel.text = "Sin título"
+            }
+        }
+        if let imageBackground = self.Image{
+            if family.photoURL != nil{
+                if(!(family.photoURL?.isEmpty)!){
+                    imageBackground.loadImage(urlString: family.photoURL!)
+                }else{
+                    imageBackground.image = #imageLiteral(resourceName: "familyImage")
+                }
+            }
+        }
+    }
+}
