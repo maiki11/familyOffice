@@ -10,6 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import MIBadgeButton_Swift
+<<<<<<< HEAD
 
 class HomeViewController: UIViewController,  UIGestureRecognizerDelegate, HandleFamilySelected{
     
@@ -17,12 +18,20 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate, Handle
     
     let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple", "presupuesto"]
     let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros", "Presupuesto"]
+=======
+import ReSwift
+class HomeViewController: UIViewController,  UIGestureRecognizerDelegate {
+    
+
+    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple"]
+    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros"]
+>>>>>>> master
     
     
     private var family : Family?
     
-    let user = service.USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
-    var families : [String]! = []
+    var user = store.state.UserState.user
+    var families = [Family]()
     
     
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -65,8 +74,11 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate, Handle
     
     /** ESTA FUNCION NOMAS PONE OBSERVERS */
     override func viewWillAppear(_ animated: Bool) {
+        store.subscribe(self) {
+            state in
+            state.FamilyState
+        }
         reloadFamily()
-        createObservers()
     }
     
     override func viewDidLayoutSubviews() {
@@ -80,9 +92,7 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate, Handle
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(notCenter.USER_NOTIFICATION)
-        NotificationCenter.default.removeObserver(notCenter.NOFAMILIES_NOTIFICATION)
-        NotificationCenter.default.removeObserver(notCenter.FAMILYADDED_NOTIFICATION)
+        store.unsubscribe(self)
     }
     
     
@@ -118,9 +128,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func reloadFamily() -> Void {
-        if service.USER_SERVICE.users.count > 0, let index = service.FAMILY_SERVICE.families.index(where: {$0.id == service.USER_SERVICE.users[0].familyActive}) {
-            let family = service.FAMILY_SERVICE.families[index]
-            
+        if let index = families.index(where: {$0.id == user?.familyActive}) {
+            let family = families[index]
             self.navigationItem.title = family.name
         }
     }
@@ -128,6 +137,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 }
 extension HomeViewController {
     
+<<<<<<< HEAD
     func selectFamily() -> Void {
         self.reloadFamily()
     }
@@ -148,6 +158,8 @@ extension HomeViewController {
         }
     }
     
+=======
+>>>>>>> master
     func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
         let point: CGPoint = gestureReconizer.location(in: self.collectionView)
         let indexPath = self.collectionView?.indexPathForItem(at: point)
@@ -165,7 +177,10 @@ extension HomeViewController {
         }
     }
     func handleMore(_ sender: Any) {
+<<<<<<< HEAD
         settingLauncher.handleFamily = self
+=======
+>>>>>>> master
         settingLauncher.showSetting()
     }
     func handleShowModal(_ sender: Any) -> Void {
@@ -223,4 +238,14 @@ extension HomeViewController {
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
     }
     
+}
+
+extension HomeViewController : StoreSubscriber {
+    typealias StoreSubscriberStateType = FamilyState
+    
+    func newState(state: FamilyState) {
+        families = state.families
+        user = store.state.UserState.user
+        reloadFamily()
+    }
 }

@@ -14,6 +14,7 @@ import Firebase
 struct GoalReducer: Reducer {
     
     func handleAction(action: Action, state: GoalState?) -> GoalState {
+<<<<<<< HEAD
         switch action {
         case let action as InsertGoalAction:
             insertGoal(action.goal)
@@ -24,6 +25,23 @@ struct GoalReducer: Reducer {
         default: break
         }
         return state!
+=======
+        var state = state ?? GoalState(goals: [:], status: .none)
+        switch action {
+        case let action as InsertGoalAction:
+            if action.goal == nil {
+               return state
+            }
+            insertGoal(action.goal)
+            state.status = .loading
+        case let action as UpdateGoalAction:
+            updateGoal(action.goal)
+            state.status = .loading
+            return state
+        default: break
+        }
+        return state
+>>>>>>> master
     }
     
     func insertGoal(_ goal: Goal) -> Void {

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
 <<<<<<< HEAD
+<<<<<<< HEAD
    LastUpgradeVersion = "0700"
+=======
+   LastUpgradeVersion = "0830"
+>>>>>>> master
 =======
    LastUpgradeVersion = "0830"
 >>>>>>> master
@@ -11,6 +15,7 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
+<<<<<<< HEAD
 <<<<<<< HEAD
             buildForAnalyzing = "YES"
             buildForTesting = "YES"
@@ -24,6 +29,8 @@
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SmileLock.framework'>
 =======
+=======
+>>>>>>> master
             buildForTesting = "YES"
             buildForRunning = "YES"
             buildForProfiling = "YES"
@@ -35,6 +42,9 @@
                BuildableName = "SmileLock.framework"
                BlueprintName = "SmileLock"
                ReferencedContainer = "container:Pods.xcodeproj">
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
             </BuildableReference>
          </BuildActionEntry>
@@ -42,23 +52,33 @@
    </BuildAction>
    <TestAction
 <<<<<<< HEAD
+<<<<<<< HEAD
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
 =======
+=======
+>>>>>>> master
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      buildConfiguration = "Debug"
+>>>>>>> master
 =======
       buildConfiguration = "Debug"
 >>>>>>> master
@@ -70,9 +90,12 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
 <<<<<<< HEAD
+<<<<<<< HEAD
       buildConfiguration = "Debug"
       allowLocationSimulation = "YES">
 =======
+=======
+>>>>>>> master
       allowLocationSimulation = "YES">
       <MacroExpansion>
          <BuildableReference
@@ -83,11 +106,15 @@
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
+<<<<<<< HEAD
 <<<<<<< HEAD
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -95,6 +122,8 @@
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES">
 =======
+=======
+>>>>>>> master
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
@@ -109,6 +138,9 @@
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
    </ProfileAction>
    <AnalyzeAction

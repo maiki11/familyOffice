@@ -495,7 +495,7 @@
                                 </connections>
                             </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ra7-Ei-Hgg">
-                                <rect key="frame" x="-352.5" y="208" width="340" height="250"/>
+                                <rect key="frame" x="-353" y="208" width="340" height="250"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1XQ-V3-Tdu">
                                         <rect key="frame" x="302" y="8" width="30" height="30"/>
@@ -968,7 +968,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2yY-xM-ENH">
-                                                            <rect key="frame" x="63.5" y="138" width="33" height="15"/>
+                                                            <rect key="frame" x="64" y="138" width="33" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1060,7 +1060,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEn-wS-vI7">
-                                                <rect key="frame" x="42.5" y="90" width="35" height="15"/>
+                                                <rect key="frame" x="43" y="90" width="35" height="15"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1251,6 +1251,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dok-TG-lsz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1349" y="2299"/>
+<<<<<<< HEAD
         </scene>
         <!--Budget-->
         <scene sceneID="zfp-ef-wbC">
@@ -1259,6 +1260,8 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTn-q5-4ya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-79" y="2311"/>
+=======
+>>>>>>> master
         </scene>
         <!--Chat-->
         <scene sceneID="Uct-Yn-twt">

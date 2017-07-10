@@ -9,6 +9,7 @@
 import UIKit
 import ReSwift
 import Charts
+<<<<<<< HEAD
 class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelected {
    
 
@@ -19,10 +20,25 @@ class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelecte
     @IBOutlet weak var pieChart: PieChartView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
+=======
+import ReSwiftRouter
+class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
+    
+    static let identifier = "GoalViewController"
+    let settingLauncher = SettingLauncher()
+    typealias StoreSubscriberStateType = GoalState
+    var myGoals = [Goal]()
+    
+    @IBOutlet weak var barChart: BarChartView!
+    @IBOutlet weak var pieChart: PieChartView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tabBar: UITabBar!
+>>>>>>> master
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+<<<<<<< HEAD
         pieChart.noDataText = "No hay objetivos"
         updateChartData()
         // Do any additional setup after loading the view.
@@ -72,12 +88,27 @@ class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelecte
         super.viewWillAppear(true)
         addObservers()
         selectFamily()
+=======
+        tabBar.delegate = self
+        pieChart.noDataText = "No hay objetivos"
+        tabBar.selectedItem = tabBar.items?[0]
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        addObservers()
+        
+>>>>>>> master
         store.subscribe(self) {
             subscription in
             subscription.GoalsState
         }
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> master
     override func viewWillDisappear(_ animated: Bool) {
         store.state.GoalsState.status = .none
         store.unsubscribe(self)
@@ -86,7 +117,14 @@ class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelecte
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+<<<<<<< HEAD
         // Dispose of any resources that can be recreated.
+=======
+    }
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        configuration()
+>>>>>>> master
     }
     
     func setupNavBar(){
@@ -100,6 +138,7 @@ class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelecte
         self.navigationItem.leftBarButtonItem = backButton
     }
     
+<<<<<<< HEAD
     func selectFamily() {
         if service.USER_SERVICE.users.count > 0, let index = service.FAMILY_SERVICE.families.index(where: {$0.id == service.USER_SERVICE.users[0].familyActive}) {
             let family = service.FAMILY_SERVICE.families[index]
@@ -110,13 +149,21 @@ class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelecte
     }
     
     @IBAction func handleChange(_ sender: UISegmentedControl) {
+=======
+    
+    func configuration() -> Void {
+>>>>>>> master
         addObservers()
         newState(state: store.state.GoalsState)
         tableView.reloadData()
     }
     
     func addObservers() -> Void {
+<<<<<<< HEAD
         if segmentControl.selectedSegmentIndex == 0 {
+=======
+        if tabBar.selectedItem?.tag == 0 {
+>>>>>>> master
             service.GOAL_SERVICE.initObserves(ref: service.GOAL_SERVICE.basePath, actions: [.childAdded, .childRemoved, .childChanged])
         }else{
             service.GOAL_SERVICE.initObserves(ref: "goals/\(service.USER_SERVICE.users[0].familyActive!)", actions: [.childAdded, .childRemoved, .childChanged])
@@ -124,7 +171,10 @@ class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelecte
     }
     
     func handleMore(_ sender: Any) {
+<<<<<<< HEAD
         settingLauncher.handleFamily = self
+=======
+>>>>>>> master
         settingLauncher.showSetting()
     }
     func handleNew() -> Void {
@@ -135,6 +185,7 @@ class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelecte
     }
     
     func newState(state: GoalState) {
+<<<<<<< HEAD
         if segmentControl.selectedSegmentIndex == 0 {
             myGoals = state.goals[service.USER_SERVICE.users[0].id!] ?? []
         }else{
@@ -144,16 +195,92 @@ class GoalViewController: UIViewController, StoreSubscriber, HandleFamilySelecte
         tableView.reloadData()
     }
     
+=======
+        if tabBar.selectedItem?.tag == 0 {
+            myGoals = state.goals[service.USER_SERVICE.users[0].id!] ?? []
+            barChart.isHidden = true
+            pieChart.isHidden = false
+            updatePieChartData()
+        }else{
+            myGoals = state.goals[service.USER_SERVICE.users[0].familyActive!] ?? []
+            barChart.isHidden = false
+            pieChart.isHidden = true
+        }
+        selectFamily()
+        tableView.reloadData()
+    }
+    func selectFamily() -> Void {
+        if let index = store.state.FamilyState.families.index(where: {$0.id == store.state.UserState.user?.familyActive}){
+            let family = store.state.FamilyState.families[index]
+            self.navigationItem.title = family.name
+        }
+    }
+    func updateChartWithData() {
+        var dataEntries: [BarChartDataEntry] = []
+        
+        //
+    }
+    
+    func updatePieChartData()  {
+        
+        // 2. generate chart data entries
+        let track = ["Incompletas", "Completas"]
+        let money = [Double(myGoals.filter({!$0.done}).count), Double(myGoals.filter({$0.done}).count), ]
+        
+        var entries = [PieChartDataEntry]()
+        for (index, value) in money.enumerated() {
+            let entry = PieChartDataEntry()
+            entry.y = value
+            entry.label = track[index]
+            entries.append( entry)
+        }
+        
+        // 3. chart setup
+        let set = PieChartDataSet( values: entries, label: "Objetivos")
+        // this is custom extension method. Download the code for more details.
+        let colors: [UIColor] = [#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1),#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)]
+        
+        
+        set.colors = colors
+        let data = PieChartData(dataSet: set)
+        pieChart.data = data
+        pieChart.noDataText = "No existen objetivos"
+        // user interaction
+        pieChart.isUserInteractionEnabled = true
+        var family: Family!
+        
+        if let index = service.FAMILY_SERVICE.families.index(where: {$0.id == service.USER_SERVICE.users[0].familyActive}) {
+            family = service.FAMILY_SERVICE.families[index]
+        }
+        let text = tabBar.selectedItem?.tag == 0 ? "Personales" : "Familia \(family.name!)"
+        let d = Description()
+        d.text = text
+        pieChart.chartDescription = d
+        pieChart.centerText = "Obj."
+        pieChart.holeRadiusPercent = 0.5
+        pieChart.transparentCircleColor = UIColor.clear
+        
+    }
+>>>>>>> master
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addSegue" {
             let vc = segue.destination as! AddGoalViewController
             let goal :Goal!
             if sender is Goal {
+<<<<<<< HEAD
                 vc.bind(goal: sender as! Goal)
                 goal = sender as? Goal
             }else{
                 goal = Goal()
                 if segmentControl.selectedSegmentIndex == 1 {
+=======
+                goal = sender as? Goal
+                vc.bind(goal: goal)
+                
+            }else{
+                goal = Goal()
+                if tabBar.selectedItem?.tag  == 1 {
+>>>>>>> master
                     goal.type = 1
                 }
                 vc.bind(goal: goal )

@@ -10,8 +10,14 @@ import UIKit
 import Toast_Swift
 import Firebase
 import ReSwift
+<<<<<<< HEAD
 class AddGoalViewController: UIViewController, GoalBindable, StoreSubscriber{
     
+=======
+import ReSwiftRouter
+class AddGoalViewController: UIViewController, GoalBindable, StoreSubscriber, Routable{
+    static let identifier = "AddGoalViewController"
+>>>>>>> master
     var goal: Goal!
     var type = 0
     @IBOutlet weak var titleTxt: UITextField!
@@ -29,6 +35,10 @@ class AddGoalViewController: UIViewController, GoalBindable, StoreSubscriber{
 
     override func viewWillAppear(_ animated: Bool) {
         setupNavBar()
+<<<<<<< HEAD
+=======
+        self.bind(goal: goal)
+>>>>>>> master
         store.subscribe(self) {
             state in
             state.GoalsState

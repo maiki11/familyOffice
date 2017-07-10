@@ -10,8 +10,8 @@ import Toast_Swift
 import Firebase
 protocol RequestService {
     
-    var handles: [(String,UInt)] {get set}
-    func addHandle(_ handle: UInt, ref: String) -> Void
+    var handles: [(String,UInt,FIRDataEventType)] {get set}
+    func addHandle(_ handle: UInt, ref: String, action: FIRDataEventType) -> Void
     func removeHandles() -> Void
     func inserted(ref: FIRDatabaseReference) -> Void
     func routing(snapshot: FIRDataSnapshot, action: FIRDataEventType, ref: String) -> Void
@@ -51,13 +51,13 @@ extension RequestService {
         }, withCancel: {(error) in
             print(error.localizedDescription)
         })
-        self.addHandle(handle, ref: ref)
+        self.addHandle(handle, ref: ref, action: action)
     }
 
     func valueSingleton(ref: String) -> Void {
         Constants.FirDatabase.REF.child(ref).observeSingleEvent(of: .value, with: {(snapshot) in
             if snapshot.exists(){
-                self.routing(snapshot: snapshot, action: FIRDataEventType.value, ref: ref)
+                self.routing(snapshot: snapshot, action: .value, ref: ref)
             }
         }, withCancel: {(error) in
             print(error.localizedDescription)
