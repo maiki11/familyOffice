@@ -8,7 +8,7 @@
 
 import Foundation
 import ReSwift
-struct GallleryState: StateType {
+struct GalleryState: StateType {
     var Gallery: [String:[Album]] = [:]
-    var status: Result<String>
+    var status: Result<Any> 
 }

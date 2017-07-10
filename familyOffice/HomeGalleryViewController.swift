@@ -113,6 +113,8 @@ extension HomeGalleryViewController : UICollectionViewDelegate, UICollectionView
 }
 
 extension HomeGalleryViewController: StoreSubscriber{
+    typealias StoreSubscriberStateType = GalleryState
+
     override func viewWillAppear(_ animated: Bool) {
         
         service.GALLERY_SERVICE.initObserves(ref: "album/\(key)", actions: [.childAdded])
@@ -131,7 +133,7 @@ extension HomeGalleryViewController: StoreSubscriber{
         //            }
         //        })
     }
-    func newState(state: GallleryState) {
+    func newState(state: GalleryState) {
         personal = state.Gallery[key] ?? []
         self.collectionView?.reloadData()
     }

@@ -11,7 +11,7 @@ import ReSwift
 struct UserState {
     var users: [User] = []
     var user: User?
-    var status: Result
+    var status: Result<Any>
 }
 
 

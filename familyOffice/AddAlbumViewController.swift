@@ -104,7 +104,7 @@ extension AddAlbumViewController{
             _ = self.navigationController?.popViewController(animated: true)
         })
     }
-    func newState(state: GallleryState) {
+    func newState(state: GalleryState) {
         switch state.status{
         case .failed:
             self.view.hideToastActivity()
@@ -113,7 +113,7 @@ extension AddAlbumViewController{
         case .loading:
             self.view.makeToastActivity(.center)
             break
-        case .Finished(let messsage):
+        case .Finished(let messsage as String):
             self.view.hideToastActivity()
             self.toggleGalleryState(message: messsage)
             break

@@ -11,6 +11,8 @@ import ReSwift
 import Firebase
 
 class AlbumViewController: UIViewController, StoreSubscriber {
+    typealias StoreSubscriberStateType = GalleryState
+
     var currentAlbum: Album?
     
     override func viewDidLoad() {
@@ -56,7 +58,7 @@ extension AlbumViewController{
         store.unsubscribe(self)
         service.GALLERY_SERVICE.removeHandles()
     }
-    func newState(state: GallleryState) {
+    func newState(state: GalleryState) {
         if service.GALLERY_SERVICE.albums.contains(where: {$0.id == service.GALLERY_SERVICE.activeAlbum}){
             currentAlbum = service.GALLERY_SERVICE.albums.first(where: {$0.id == service.GALLERY_SERVICE.activeAlbum})!
         }else{

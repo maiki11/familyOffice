@@ -12,13 +12,6 @@ import FirebaseMessaging
 import GoogleSignIn
 import UserNotifications
 import ReSwift
-<<<<<<< HEAD
-
-let store = Store<AppState>(reducer: AppReducer(), state: AppState(
-    GoalsState: GoalState(goals: [:],status: Result.none),
-    FamilyState:  FamilyState(families: [], status: Result.none),
-    GalleryState: GallleryState(Gallery: [:],status: Result.none)))
-=======
 import ReSwiftRecorder
 import ReSwiftRouter
 
@@ -27,7 +20,6 @@ let store = RecordingMainStore<AppState>(
         state: nil,
         typeMaps: [userActionTypeMap,goalActionTypeMap,ReSwiftRouter.typeMap],
         recording: "recording.json")
->>>>>>> master
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
@@ -163,10 +155,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
             }
         }
     }
-
-<<<<<<< HEAD
-=======
-    
 }
 
 class RootRoutable: Routable {
@@ -191,7 +179,5 @@ class RootRoutable: Routable {
         animated: Bool,
         completionHandler: @escaping RoutingCompletionHandler) {
         completionHandler()
-    }
->>>>>>> master
-    
+    }   
 }

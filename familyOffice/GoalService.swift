@@ -11,11 +11,8 @@ import FirebaseDatabase
 let defaults = UserDefaults.standard
 class GoalService: RequestService {
     var goals: [Goal] = []
-<<<<<<< HEAD
-    var handles: [(String,UInt)] = []
-=======
+
     var handles: [(String,UInt,FIRDataEventType)] = []
->>>>>>> master
     let basePath = "goals/\(service.USER_SERVICE.users[0].id!)"
     private init() {}
     
@@ -44,11 +41,8 @@ class GoalService: RequestService {
     
     func initObserves(ref: String, actions: [FIRDataEventType]) -> Void {
         for action in actions {
-<<<<<<< HEAD
-            if !handles.contains(where: { $0.0 == ref}){
-=======
+
             if !handles.contains(where: { $0.0 == ref && $0.2 == action} ){
->>>>>>> master
                  self.child_action(ref: ref, action: action)
             }
         }
@@ -75,8 +69,8 @@ class GoalService: RequestService {
     func delete(_ ref: String, callback: @escaping ((Any) -> Void)) {
     }
     
-    
 }
+
 extension GoalService: repository {
     
     func added(snapshot: FirebaseDatabase.FIRDataSnapshot) {

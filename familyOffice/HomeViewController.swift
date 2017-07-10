@@ -10,22 +10,12 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import MIBadgeButton_Swift
-<<<<<<< HEAD
-
-class HomeViewController: UIViewController,  UIGestureRecognizerDelegate, HandleFamilySelected{
-    
-
-    
-    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple", "presupuesto"]
-    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros", "Presupuesto"]
-=======
 import ReSwift
 class HomeViewController: UIViewController,  UIGestureRecognizerDelegate {
     
 
     let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple"]
     let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros"]
->>>>>>> master
     
     
     private var family : Family?
@@ -136,30 +126,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
 }
 extension HomeViewController {
-    
-<<<<<<< HEAD
-    func selectFamily() -> Void {
-        self.reloadFamily()
-    }
-    
-    func createObservers() -> Void {
-        if let index = service.FAMILY_SERVICE.families.index(where: {$0.id == service.USER_SERVICE.users[0].familyActive}) {
-            self.navigationItem.title = service.FAMILY_SERVICE.families[index].name
-        }
-        
-        NotificationCenter.default.addObserver(forName: notCenter.NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
-            return
-        }
-        NotificationCenter.default.addObserver(forName: notCenter.USER_NOTIFICATION, object: nil, queue: nil){_ in
-            self.reloadFamily()
-        }
-        NotificationCenter.default.addObserver(forName: notCenter.FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
-            self.reloadFamily()
-        }
-    }
-    
-=======
->>>>>>> master
     func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
         let point: CGPoint = gestureReconizer.location(in: self.collectionView)
         let indexPath = self.collectionView?.indexPathForItem(at: point)
@@ -177,10 +143,6 @@ extension HomeViewController {
         }
     }
     func handleMore(_ sender: Any) {
-<<<<<<< HEAD
-        settingLauncher.handleFamily = self
-=======
->>>>>>> master
         settingLauncher.showSetting()
     }
     func handleShowModal(_ sender: Any) -> Void {

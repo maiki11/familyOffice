@@ -8,14 +8,6 @@
 
 import Foundation
 import ReSwift
-<<<<<<< HEAD
-
-struct InsertGoalAction: Action {
-    let goal: Goal
-}
-struct UpdateGoalAction: Action {
-    let goal: Goal
-=======
 import ReSwiftRecorder
 
 let goalActionTypeMap: TypeMap = [InsertGoalAction.type: InsertGoalAction.self,
@@ -45,7 +37,6 @@ struct UpdateGoalAction: StandardActionConvertible {
     func toStandardAction() -> StandardAction {
         return StandardAction(type: UpdateGoalAction.type, payload: [:], isTypedAction: true)
     }
->>>>>>> master
 }
 
 struct GetGoalsAction: Action {

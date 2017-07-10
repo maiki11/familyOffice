@@ -10,9 +10,7 @@ import FirebaseStorage.FIRStorage
 import FirebaseStorage.FIRStorageMetadata
 
 public class GalleryService : RequestService {
-
-
-    var handles: [(String, UInt)] = []
+    var handles: [(String, UInt, FIRDataEventType)] = []
 
     var albums: [Album] = []
     var saveAlbums: [String:[Album]] = [:]
@@ -51,9 +49,8 @@ public class GalleryService : RequestService {
             break
         }
     }
-
-    func addHandle(_ handle: UInt, ref: String) {
-        self.handles.append((ref,handle))
+    func addHandle(_ handle: UInt, ref: String, action: FIRDataEventType) {
+        self.handles.append((ref,handle,action))
     }
 
     func removeHandles() {
