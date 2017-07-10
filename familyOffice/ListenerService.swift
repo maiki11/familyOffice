@@ -90,7 +90,6 @@ class RefHandle {
     }
     
     func handle(snapshot: FIRDataSnapshot, action: String, ref: String) -> Void {
-        print(ref)
         print("REFERENCE COUNT ADD \(listeners.count)")
         let reference : [String] = ref.characters.split(separator: "/").map(String.init)
         switch ref {

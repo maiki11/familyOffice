@@ -13,7 +13,7 @@ class ConfigurationViewController: UIViewController, UIImagePickerControllerDele
 UINavigationControllerDelegate  {
     var user: User!
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var containerView: ConfigurationView!
+    @IBOutlet weak var containerView: UIView!
     let picker = UIImagePickerController()
     var chosenImage: UIImage!
     

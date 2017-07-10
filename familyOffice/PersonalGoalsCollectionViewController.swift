@@ -11,7 +11,6 @@ import UIKit
 private let reuseIdentifierT1 = "type1-goalCell"
 
 class PersonalGoalsCollectionViewController: UICollectionViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.handleNew))
@@ -25,6 +24,20 @@ class PersonalGoalsCollectionViewController: UICollectionViewController {
         collectionView?.register(nib_type1, forCellWithReuseIdentifier: reuseIdentifierT1)
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        service.GOAL_SERVICE.initObserves(ref: "users/\(service.USER_SERVICE.users[0].id!)/goals", actions: [.childAdded,.childChanged,.childRemoved])
+        NotificationCenter.default.addObserver(forName: notCenter.SUCCESS_NOTIFICATION, object: nil, queue: nil, using: {obj in
+                self.collectionView?.reloadData()
+            
+        })
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        service.GOAL_SERVICE.removeHandles()
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -33,33 +46,34 @@ class PersonalGoalsCollectionViewController: UICollectionViewController {
     func handleNew() -> Void {
         self.performSegue(withIdentifier: "addSegue", sender: nil)
     }
+    
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "addSegue" {
+            let vc = segue.destination as! AddGoalViewController
+            vc.bind(goal: Goal())
+        }
     }
-    */
+    
 
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 5
+        return service.GOAL_SERVICE.goals.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierT1, for: indexPath)
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierT1, for: indexPath) as! Type1_GoalCollectionViewCell
+        cell.bind(goal: service.GOAL_SERVICE.goals[indexPath.item])
         // Configure the cell
     
         return cell

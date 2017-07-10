@@ -91,7 +91,7 @@ class Utility {
     }
     
     func getDate(date: Double) -> String{
-        let xdate = NSDate(timeIntervalSince1970: abs(date))
+        let xdate = NSDate(timeIntervalSince1970: abs(date)/1000)
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "dd MM yyyy HH:mm"
         return dayTimePeriodFormatter.string(from: xdate as Date)
@@ -125,6 +125,13 @@ class Utility {
             return value as! Int
         }else {
             return 0
+        }
+    }
+    func exist(field: String, dictionary:NSDictionary) -> Bool! {
+        if let value = dictionary[field] {
+            return value as! Bool
+        }else {
+            return nil
         }
     }
     func exist(field: String, dictionary:NSDictionary ) -> [String]! {

@@ -11,8 +11,7 @@ import UIKit
 class SettingLauncher: NSObject, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
     let blackView = UIView()
-    var view: HomeViewController!
-    
+    weak var handleFamily : HandleFamilySelected!
     let collectionView = { () -> UICollectionView in
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -76,19 +75,12 @@ class SettingLauncher: NSObject, UICollectionViewDelegateFlowLayout, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         service.FAMILY_SERVICE.selectFamily(family: service.FAMILY_SERVICE.families[indexPath.row])
         handleDismiss()
-        if view != nil {
-            self.view.reloadFamily()
-            self.view.tabBarController?.navigationItem.title = service.FAMILY_SERVICE.families[indexPath.row].name
+        if handleFamily != nil {
+            handleFamily.selectFamily()
         }
        
     }
     
-    func setView(view: UIViewController) -> Void {
-        
-        if let view = view as? HomeViewController {
-            self.view = view
-        }
-    }
     override init(){
         super.init()
         collectionView.dataSource = self

@@ -449,7 +449,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="zxczxczx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In8-Hp-FA4">
-                                                    <rect key="frame" x="33" y="120" width="54.5" height="11"/>
+                                                    <rect key="frame" x="33.5" y="120" width="54.5" height="11"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="12"/>
                                                     <color key="textColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1227,10 +1227,10 @@
             </objects>
             <point key="canvasLocation" x="743" y="2306"/>
         </scene>
-        <!--mainObjectives-->
+        <!--mainobjective-->
         <scene sceneID="bYd-t6-vnC">
             <objects>
-                <viewControllerPlaceholder storyboardName="Objectives" referencedIdentifier="mainObjectives" id="wrq-DB-nSA" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Objectives" referencedIdentifier="mainobjective" id="wrq-DB-nSA" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k6Y-2k-GqR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1736" y="2227"/>
@@ -1241,7 +1241,7 @@
                 <viewControllerPlaceholder storyboardName="Health" id="Xe7-NB-MEv" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dok-TG-lsz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1495" y="2306"/>
+            <point key="canvasLocation" x="1349" y="2299"/>
         </scene>
         <!--Budget-->
         <scene sceneID="zfp-ef-wbC">
