@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import FirebaseStorage.FIRStorageMetadata
+import ReSwift
+import Firebase
 class HomeGalleryViewController: UIViewController {
     var personal:[Album] = []
 
@@ -15,16 +16,8 @@ class HomeGalleryViewController: UIViewController {
     @IBOutlet weak var selectionSegmentcontrol: UISegmentedControl!
     var familiar:[Family] = []
     
-    override func viewWillAppear(_ animated: Bool) {
-        let key: String = service.USER_SERVICE.users[0].id
-        self.familiar = service.FAMILY_SERVICE.families
-        service.GALLERY_SERVICE.fillAlbums(reference: key, callback: { bool in
-            if bool{
-                self.personal = service.GALLERY_SERVICE.albums
-                self.collectionView.reloadData()
-            }
-        })
-    }
+    let key: String = service.USER_SERVICE.users[0].id
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.AddAlbum))
@@ -85,15 +78,13 @@ extension HomeGalleryViewController : UICollectionViewDelegate, UICollectionView
         switch selectionSegmentcontrol.selectedSegmentIndex {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! GalleryCollectionViewCell
-            let album = service.GALLERY_SERVICE.albums[indexPath.item]
+            let album = personal[indexPath.item]
             cell.bind(album: album)
-            collectionView.reloadItems(at: [indexPath])
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! FamilyGalleryCollectionViewCell
             let family = service.FAMILY_SERVICE.families[indexPath.item]
             cell.bind(fam: family)
-            collectionView.reloadItems(at: [indexPath])
             return cell
         }
     }
@@ -120,16 +111,33 @@ extension HomeGalleryViewController : UICollectionViewDelegate, UICollectionView
 
 
 }
-extension CGFloat {
-    static func random() -> CGFloat {
-        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+
+extension HomeGalleryViewController: StoreSubscriber{
+    override func viewWillAppear(_ animated: Bool) {
+        
+        service.GALLERY_SERVICE.initObserves(ref: "album/\(key)", actions: [.childAdded])
+        
+        store.subscribe(self){
+            state in
+            state.GalleryState
+        }
+        
+        
+        // self.familiar = service.FAMILY_SERVICE.families
+        //        service.GALLERY_SERVICE.fillAlbums(reference: key, callback: { bool in
+        //            if bool{
+        //                self.personal = service.GALLERY_SERVICE.albums
+        //                self.collectionView.reloadData()
+        //            }
+        //        })
     }
-}
-extension UIColor {
-    static func random() -> UIColor {
-        return UIColor(red:  .random(),
-                green: .random(),
-                blue:  .random(),
-                alpha: 1.0)
+    func newState(state: GallleryState) {
+        personal = state.Gallery[key] ?? []
+        self.collectionView?.reloadData()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        store.unsubscribe(self)
+        service.GALLERY_SERVICE.removeHandles()
     }
 }

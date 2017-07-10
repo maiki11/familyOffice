@@ -13,7 +13,10 @@ import GoogleSignIn
 import UserNotifications
 import ReSwift
 
-let store = Store<AppState>(reducer: AppReducer(), state: AppState(GoalsState: GoalState(goals: [:], status: Result.finished), FamilyState:  FamilyState(families: [], status: Result.finished)))
+let store = Store<AppState>(reducer: AppReducer(), state: AppState(
+    GoalsState: GoalState(goals: [:],status: Result.none),
+    FamilyState:  FamilyState(families: [], status: Result.none),
+    GalleryState: GallleryState(Gallery: [:],status: Result.none)))
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{

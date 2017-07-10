@@ -125,6 +125,9 @@
 		02FA70661E7092ED0080AAEB /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA70651E7092ED0080AAEB /* ImageViewController.swift */; };
 		02FD90031EDCA7C300F76BA1 /* addEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FD90021EDCA7C300F76BA1 /* addEventTableViewController.swift */; };
 		042567861EFC34B8001EAC50 /* Gallery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042567851EFC34B8001EAC50 /* Gallery.storyboard */; };
+		04475B4E1F0ECCA800F257EA /* GalleryReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04475B4D1F0ECCA800F257EA /* GalleryReducer.swift */; };
+		04475B521F0ED27200F257EA /* GalleryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04475B511F0ED27200F257EA /* GalleryState.swift */; };
+		04475B541F0ED55500F257EA /* GalleryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04475B531F0ED55500F257EA /* GalleryActions.swift */; };
 		045B648F1EFDD1F600F57BBD /* HomeGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045B648E1EFDD1F600F57BBD /* HomeGalleryViewController.swift */; };
 		045F4A0F1F0DB8D000B483C9 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F4A0E1F0DB8D000B483C9 /* AlbumViewController.swift */; };
 		04AFE38B1F01DE1600D4ECA2 /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFE38A1F01DE1600D4ECA2 /* AlbumModel.swift */; };
@@ -151,7 +154,6 @@
 		84D51B1D1EA6ACE3006829F7 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D51B1C1EA6ACE3006829F7 /* Section.swift */; };
 		84E9C9B51E92B78E00905A10 /* addCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9C9B41E92B78E00905A10 /* addCell.swift */; };
 		84E9C9B91E93269100905A10 /* SetPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9C9B81E93269100905A10 /* SetPersonalDataViewController.swift */; };
-		A44ACF6A1E70DB1800A5CA84 /* homeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44ACF691E70DB1800A5CA84 /* homeExtension.swift */; };
 		A44D4E5E1F0481CD00323B87 /* Budget.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44D4E5D1F0481CD00323B87 /* Budget.storyboard */; };
 		A44D4E611F04824B00323B87 /* BudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44D4E601F04824B00323B87 /* BudgetViewController.swift */; };
 		A44D91AF1E947F2700880D50 /* HealthOmniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44D91AE1E947F2700880D50 /* HealthOmniViewController.swift */; };
@@ -311,6 +313,9 @@
 		02FA70651E7092ED0080AAEB /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		02FD90021EDCA7C300F76BA1 /* addEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = addEventTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		042567851EFC34B8001EAC50 /* Gallery.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
+		04475B4D1F0ECCA800F257EA /* GalleryReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryReducer.swift; sourceTree = "<group>"; };
+		04475B511F0ED27200F257EA /* GalleryState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryState.swift; sourceTree = "<group>"; };
+		04475B531F0ED55500F257EA /* GalleryActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryActions.swift; sourceTree = "<group>"; };
 		045B648E1EFDD1F600F57BBD /* HomeGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeGalleryViewController.swift; sourceTree = "<group>"; };
 		045F4A0E1F0DB8D000B483C9 /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		04AFE38A1F01DE1600D4ECA2 /* AlbumModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
@@ -340,7 +345,6 @@
 		84D51B1C1EA6ACE3006829F7 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		84E9C9B41E92B78E00905A10 /* addCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addCell.swift; sourceTree = "<group>"; };
 		84E9C9B81E93269100905A10 /* SetPersonalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPersonalDataViewController.swift; sourceTree = "<group>"; };
-		A44ACF691E70DB1800A5CA84 /* homeExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeExtension.swift; sourceTree = "<group>"; };
 		A44D4E5D1F0481CD00323B87 /* Budget.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Budget.storyboard; sourceTree = "<group>"; };
 		A44D4E601F04824B00323B87 /* BudgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetViewController.swift; sourceTree = "<group>"; };
 		A44D91AE1E947F2700880D50 /* HealthOmniViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthOmniViewController.swift; sourceTree = "<group>"; };
@@ -815,7 +819,6 @@
 			isa = PBXGroup;
 			children = (
 				04AFE3891F01DDD000D4ECA2 /* Gallery */,
-				026E18171F01D5AF00FF860D /* Enums */,
 				0233A4F51EFD8A4B00D01F5C /* Goal */,
 				02BC16EB1EE9C87200722689 /* Event */,
 				022EC1D11E20078C0096A18B /* Family.swift */,
@@ -874,6 +877,30 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		04475B4C1F0ECC6B00F257EA /* Reducers */ = {
+			isa = PBXGroup;
+			children = (
+				04475B4D1F0ECCA800F257EA /* GalleryReducer.swift */,
+			);
+			name = Reducers;
+			sourceTree = "<group>";
+		};
+		04475B4F1F0ECCBA00F257EA /* States */ = {
+			isa = PBXGroup;
+			children = (
+				04475B511F0ED27200F257EA /* GalleryState.swift */,
+			);
+			name = States;
+			sourceTree = "<group>";
+		};
+		04475B501F0ECCC300F257EA /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				04475B531F0ED55500F257EA /* GalleryActions.swift */,
+			);
+			name = Actions;
+			sourceTree = "<group>";
+		};
 		04AFE3891F01DDD000D4ECA2 /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
@@ -926,6 +953,9 @@
 		1A54F54BA1C4542CA24ED232 /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
+				04475B501F0ECCC300F257EA /* Actions */,
+				04475B4F1F0ECCBA00F257EA /* States */,
+				04475B4C1F0ECC6B00F257EA /* Reducers */,
 				04C4F3C61F017BEA0094CA2D /* Components */,
 				045B648E1EFDD1F600F57BBD /* HomeGalleryViewController.swift */,
 				04AFE38E1F05A0F500D4ECA2 /* AddAlbumViewController.swift */,
@@ -1365,7 +1395,9 @@
 				028CD36B1EFB447600DEC001 /* typeiconCollectionViewCell.swift in Sources */,
 				A44D91AF1E947F2700880D50 /* HealthOmniViewController.swift in Sources */,
 				0215F4E81E3FBCCD00AC01D3 /* PasswordChangeViewController.swift in Sources */,
+				04475B521F0ED27200F257EA /* GalleryState.swift in Sources */,
 				020A30951E2DA4440024B1FB /* FamilyViewController.swift in Sources */,
+				04475B4E1F0ECCA800F257EA /* GalleryReducer.swift in Sources */,
 				024EF9A71E83412700F5B4DF /* SafeBoxViewController.swift in Sources */,
 				02FA70641E707BAB0080AAEB /* ToastService.swift in Sources */,
 				02F15BB71E85ECE2008C26F8 /* chatModel.swift in Sources */,
@@ -1403,6 +1435,7 @@
 				0266454E1EFC86DD0034D434 /* Goal.swift in Sources */,
 				024EF9AA1E834B6A00F5B4DF /* IndexViewController.swift in Sources */,
 				02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */,
+				04475B541F0ED55500F257EA /* GalleryActions.swift in Sources */,
 				02AD814D1E4B90B10030B3DD /* SelectedTableViewCell.swift in Sources */,
 				020A64F91E81A8AF00F473A0 /* menuBar.swift in Sources */,
 				0215F4E31E3FA97C00AC01D3 /* PersonalDataTableViewController.swift in Sources */,

@@ -188,10 +188,10 @@
             </objects>
             <point key="canvasLocation" x="580" y="-72"/>
         </scene>
-        <!--View Controller-->
+        <!--Album View Controller-->
         <scene sceneID="Z5K-8J-bW3">
             <objects>
-                <viewController id="SCk-HI-lOe" sceneMemberID="viewController">
+                <viewController id="SCk-HI-lOe" customClass="AlbumViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Uc-hk-u6h"/>
                         <viewControllerLayoutGuide type="bottom" id="yQe-O4-K99"/>

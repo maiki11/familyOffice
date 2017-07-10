@@ -9,13 +9,14 @@
 import UIKit
 import Firebase
 import Toast_Swift
+import ReSwift
 
-class AddAlbumViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class AddAlbumViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate,StoreSubscriber {
     
     let picker = UIImagePickerController()
     let path: String = "album/" + service.USER_SERVICE.users[0].id
     var reference: FIRDatabaseReference = FIRDatabaseReference()
-    var chosenImage: UIImage!
+    var chosenImage: UIImage? = nil
     var albums: [Album] = []
 
     @IBOutlet weak var txtTitle: UITextField!
@@ -57,26 +58,14 @@ class AddAlbumViewController: UIViewController, UIImagePickerControllerDelegate,
             self.view.makeToast("Agrega un título", duration: 1.0, position: CGPoint(x: 200, y: 150))
             return
         }
-        var album:Album = Album.init(id: self.reference.key, cover: "", title: txtTitle.text!, images: [])
-        var data = NSDictionary(dictionary: [
+        let album:Album = Album.init(id: self.reference.key, cover: "", title: txtTitle.text!, images: [])
+        let data = NSDictionary(dictionary:  [
             "album": album,
             "reference": "\(self.path)/\(self.reference.key)",
             "reference-img": "albums/\(self.reference.key)/\(Constants.FirDatabase.REF.childByAutoId().key).png",
             "file": imgSelected.image ?? nil
             ])
-        service.GALLERY_SERVICE.createAlbum(data: data, callback: {Errors in
-            if let errors = Errors as? String, errors == "Guardado sin portada" {
-                self.view.makeToast(errors, duration: 0.5, position: CGPoint(x: 110.0, y: 110.0), title: "Mensaje:", image: nil, style: nil, completion: {bool in
-                    _ = self.navigationController?.popViewController(animated: true)
-                })
-            }
-            if let errors = Errors as? String, errors != "Guardado correctamente"{
-                self.view.makeToast(errors)
-            }
-            if let errors = Errors as? String, errors == "Guardado correctamente"{
-                _ = self.navigationController?.popViewController(animated: true)
-            }
-        })
+        store.dispatch(InsertGalleryAction(album: data))
     }
     
     
@@ -87,7 +76,7 @@ class AddAlbumViewController: UIViewController, UIImagePickerControllerDelegate,
         self.present(self.picker, animated: true, completion: nil)
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        self.imgSelected.image = info[UIImagePickerControllerEditedImage] as! UIImage
+        self.imgSelected.image = info[UIImagePickerControllerEditedImage] as? UIImage
         dismiss(animated: true, completion: nil)
 
     }
@@ -96,4 +85,40 @@ class AddAlbumViewController: UIViewController, UIImagePickerControllerDelegate,
         dismiss(animated: true, completion: nil)
     }
 
+}
+extension AddAlbumViewController{
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        store.subscribe(self){
+            state in
+            state.GalleryState
+        }
+       
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        store.state.GalleryState.status = .none
+        store.unsubscribe(self)
+    }
+    func toggleGalleryState(message: String) -> Void {
+        self.view.makeToast(message, duration: 0.5, position: CGPoint(x: 110.0, y: 110.0), title: "Mensaje:", image: nil, style: nil, completion: {bool in
+            _ = self.navigationController?.popViewController(animated: true)
+        })
+    }
+    func newState(state: GallleryState) {
+        switch state.status{
+        case .failed:
+            self.view.hideToastActivity()
+            self.view.makeToast("Ocurrio un error, intente más tarde.")
+            break
+        case .loading:
+            self.view.makeToastActivity(.center)
+            break
+        case .Finished(let messsage):
+            self.view.hideToastActivity()
+            self.toggleGalleryState(message: messsage)
+            break
+        default: break;
+            
+        }
+    }
 }

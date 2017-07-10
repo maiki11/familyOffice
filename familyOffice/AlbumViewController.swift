@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import ReSwift
+import Firebase
 
-class AlbumViewController: UIViewController {
+class AlbumViewController: UIViewController, StoreSubscriber {
+    var currentAlbum: Album?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addImage))
+        self.navigationItem.rightBarButtonItem = addButton
+        self.navigationItem.title = "Albums"
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,7 +27,9 @@ class AlbumViewController: UIViewController {
         // Dispose of any resources that can be recreated.
         
     }
-    
+    func addImage() {
+        self.performSegue(withIdentifier: "AddImageSegue", sender: nil)
+    }
 
     /*
     // MARK: - Navigation
@@ -33,34 +42,26 @@ class AlbumViewController: UIViewController {
     */
 
 }
-/*extension AlbumViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+extension AlbumViewController{
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        service.GALLERY_SERVICE.initObserves(ref: service.GALLERY_SERVICE.activeAlbum!, actions: [.childAdded])
+        store.subscribe(self){
+            state in
+            state.GalleryState
+        }
     }
-    
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        store.unsubscribe(self)
+        service.GALLERY_SERVICE.removeHandles()
     }
-    
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
+    func newState(state: GallleryState) {
+        if service.GALLERY_SERVICE.albums.contains(where: {$0.id == service.GALLERY_SERVICE.activeAlbum}){
+            currentAlbum = service.GALLERY_SERVICE.albums.first(where: {$0.id == service.GALLERY_SERVICE.activeAlbum})!
+        }else{
+            _ = navigationController?.popViewController(animated: true)
+        }
     }
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 310, height: 130)
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
-        collectionView.reloadItems(at: [indexPath])
-    }
-    
-    
-} */
+}
+

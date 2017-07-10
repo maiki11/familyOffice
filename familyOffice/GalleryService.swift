@@ -17,6 +17,7 @@ public class GalleryService : RequestService {
     var albums: [Album] = []
     var saveAlbums: [String:[Album]] = [:]
     var activeAlbum: String!
+    var refUserFamily: String!
 
     private init() {}
 
@@ -27,6 +28,7 @@ public class GalleryService : RequestService {
     }
 
     func initObserves(ref: String, actions: [FIRDataEventType]) -> Void {
+        refUserFamily = ref
         for action in actions {
             self.child_action(ref: ref, action: action)
         }
@@ -51,9 +53,14 @@ public class GalleryService : RequestService {
     }
 
     func addHandle(_ handle: UInt, ref: String) {
+        self.handles.append((ref,handle))
     }
 
     func removeHandles() {
+        for handle in handles {
+            Constants.FirDatabase.REF.child(handle.0).removeAllObservers()
+        }
+        self.handles.removeAll()
     }
 
     func inserted(ref: FIRDatabaseReference) {
@@ -85,17 +92,19 @@ extension GalleryService: repository {
     }
 
     func added(snapshot: FirebaseDatabase.FIRDataSnapshot) {
-        if !self.albums.contains(where: {$0.id == snapshot.key}){
-            var album = Album(snapshot: snapshot)
+        let id = snapshot.ref.description().components(separatedBy: "/")[4]
+        var album = Album(snapshot: snapshot)
+        
+        if(store.state.GalleryState.Gallery[id] == nil){
+            store.state.GalleryState.Gallery[id] = []
+        }
+        
+        if !(store.state.GalleryState.Gallery[id]?.contains(where: {$0.id == album.id}))!{
             self.getImages(album: album, callback: {images in
                 if images is [ImageAlbum]{
                     album.ObjImages = images as! [ImageAlbum]
-                    if self.albums.filter({ (Album) -> Bool in
-                        Album.id == album.id
-                    }).count == 0{
-                        self.albums.append(album)
-                    }
                 }
+                store.state.GalleryState.Gallery[id]?.append(album)
             })
         }
     }
@@ -112,9 +121,9 @@ extension GalleryService: repository {
             NotificationCenter.default.post(name: notCenter.SUCCESS_NOTIFICATION, object: nil)
         }
     }
-    func createAlbum(data: NSDictionary,callback: @escaping (Any)-> Void){
+    func createAlbum(data: NSDictionary,callback: @escaping (String)-> Void){
         var album = data.value(forKey: "album") as! Album
-        if data.value(forKey: "file") != nil {
+        if !(data.value(forKey: "file") is NSNull) {
             service.STORAGE_SERVICE.insert(data.value(forKey: "reference-img") as! String, value: data.value(forKey: "file") as Any, callback: { metadata in
                 if let meta = metadata as? FIRStorageMetadata{
                     album.cover = (meta.downloadURL()?.absoluteString)!
@@ -156,6 +165,8 @@ extension GalleryService: repository {
                     callback(returnImages as [ImageAlbum])
                 })
             })
+        }else{
+             callback(returnImages as [ImageAlbum])
         }
     }
 }
