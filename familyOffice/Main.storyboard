@@ -575,7 +575,6 @@
                         <segue destination="Xe7-NB-MEv" kind="show" identifier="healthSegue" id="UMc-ep-tL1"/>
                         <segue destination="wrq-DB-nSA" kind="show" identifier="goalSegue" id="ttz-Tk-RRT"/>
                         <segue destination="b01-wc-1ql" kind="show" id="ByB-Z0-AQm"/>
-                        <segue destination="ikv-vK-Gl5" kind="show" identifier="budgetSegue" id="esS-Zt-Rnc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNJ-R1-TZ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1242,14 +1241,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dok-TG-lsz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1349" y="2299"/>
-        </scene>
-        <!--Budget-->
-        <scene sceneID="zfp-ef-wbC">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Budget" id="ikv-vK-Gl5" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TTn-q5-4ya" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-79" y="2311"/>
         </scene>
         <!--Chat-->
         <scene sceneID="Uct-Yn-twt">
