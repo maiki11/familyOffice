@@ -1374,7 +1374,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vIv-OO-BIT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ogs-AB-9Tk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ogs-AB-9Tk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1465,7 +1465,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kfm-Y3-Jjk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1262" y="700"/>
+            <point key="canvasLocation" x="1369" y="1605"/>
         </scene>
     </scenes>
     <resources>

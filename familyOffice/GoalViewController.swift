@@ -21,6 +21,7 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
     @IBOutlet weak var pieChart: PieChartView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tabBar: UITabBar!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +34,12 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         addObservers()
-        
         store.subscribe(self) {
             subscription in
             subscription.GoalsState
         }
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         store.state.GoalsState.status = .none
         store.unsubscribe(self)
@@ -67,12 +67,14 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
     
     
     func configuration() -> Void {
+
         addObservers()
         newState(state: store.state.GoalsState)
         tableView.reloadData()
     }
     
     func addObservers() -> Void {
+
         if tabBar.selectedItem?.tag == 0 {
             service.GOAL_SERVICE.initObserves(ref: service.GOAL_SERVICE.basePath, actions: [.childAdded, .childRemoved, .childChanged])
         }else{
@@ -161,6 +163,7 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
             let vc = segue.destination as! AddGoalViewController
             let goal :Goal!
             if sender is Goal {
+
                 goal = sender as? Goal
                 vc.bind(goal: goal)
                 
