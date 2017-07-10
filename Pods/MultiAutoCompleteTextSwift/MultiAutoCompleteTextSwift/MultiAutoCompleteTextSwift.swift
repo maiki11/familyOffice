@@ -17,7 +17,7 @@ open class MultiAutoCompleteTextField:UITextField {
     /// Handles textfield's textchanged
     open var onTextChange:(String) -> Void = {_ in}
     /// Font for the text suggestions
-    open var autoCompleteTextFont = UIFont.systemFont(ofSize: 13)
+    open var autoCompleteTextFont = UIFont.systemFont(ofSize: 12)
     /// Color of the text suggestions
     open var autoCompleteTextColor = UIColor.black
     /// Used to set the height of cell for each suggestions
@@ -113,7 +113,7 @@ open class MultiAutoCompleteTextField:UITextField {
         
         view.layoutIfNeeded()
 
-        let tableView = UITableView(frame: CGRect(x: self.frame.origin.x, y:  self.frame.height*2, width: screenSize.width - self.frame.origin.x*4 , height: 30.0))
+        let tableView = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + self.frame.height + self.frame.height, width: screenSize.width - (self.frame.origin.x * 2), height: 30.0))
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = autoCompleteCellHeight
@@ -157,9 +157,8 @@ open class MultiAutoCompleteTextField:UITextField {
             return
         }
         
-        
-        onTextChange(text!)
         reload()
+        onTextChange(text!)
         DispatchQueue.main.async(execute: { () -> Void in
             self.autoCompleteTableView?.isHidden =  self.hidesWhenEmpty! ? self.text!.isEmpty : false
         })
@@ -182,13 +181,12 @@ extension MultiAutoCompleteTextField: UITableViewDataSource, UITableViewDelegate
         let cellIdentifier = "autocompleteCellIdentifier"
         var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
         if cell == nil{
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
+            cell = UITableViewCell(style: .default, reuseIdentifier: cellIdentifier)
         }
         
         cell?.textLabel?.font = autoCompleteTextFont
         cell?.textLabel?.textColor = autoCompleteTextColor
         cell?.textLabel?.text = autoCompleteEntries![(indexPath as NSIndexPath).row].topText
-        cell?.detailTextLabel?.text = autoCompleteEntries?[(indexPath as NSIndexPath).row].detailText
         
         cell?.contentView.gestureRecognizers = nil
         return cell!
@@ -247,12 +245,11 @@ extension MultiAutoCompleteTextField: UITableViewDataSource, UITableViewDelegate
 
 public protocol MultiAutoCompleteTokenComparable {
     var topText: String { get }
-    var detailText: String {get}
     func matchToken(_ searchString: String) -> Bool
 }
 
 open class MultiAutoCompleteToken: MultiAutoCompleteTokenComparable {
-    open var detailText: String
+    
     open var topText: String
     var searchOptions: NSString.CompareOptions = .caseInsensitive
     fileprivate var texts: [String] = []
@@ -260,14 +257,12 @@ open class MultiAutoCompleteToken: MultiAutoCompleteTokenComparable {
     public init(top: String, subTexts: String...){
         self.topText = top
         self.texts.append(top)
-        self.detailText = subTexts[0]
         texts += subTexts
     }
     
     public init(_ top: String){
         self.topText = top
         self.texts.append(top)
-        self.detailText = ""
     }
     
     open func matchToken(_ searchString: String) -> Bool {

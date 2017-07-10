@@ -16,12 +16,12 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return service.FAMILY_SERVICE.families.count + 1
+        return families.count + 1
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row < service.FAMILY_SERVICE.families.count {
+        if indexPath.row < families.count {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FamiliesPreCollectionViewCell
-            let family = service.FAMILY_SERVICE.families[indexPath.row]
+            let family = families[indexPath.item]
             cell.name.text = family.name
             cell.check.layer.cornerRadius = 15
             cell.check.layer.borderWidth = 3
@@ -36,7 +36,7 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
             cell.image.layer.borderWidth = 1
             cell.image.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
             cell.image.layer.cornerRadius = 5
-            if family.id == service.USER_SERVICE.users[0].familyActive {
+            if family.id == store.state.UserState.user?.familyActive {
                 cell.check.isHidden = false
                 cell.name.textColor = #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)
             }
@@ -48,13 +48,13 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
         
     }
     func addFamily(family: Family) -> Void {
-        self.familiesCollection.insertItems(at: [IndexPath(item: service.FAMILY_SERVICE.families.count-1, section: 0)])
+        self.familiesCollection.insertItems(at: [IndexPath(item: store.state.FamilyState.families.count-1, section: 0)])
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         //Where elements_count is the count of all your items in that
         //Collection view...
-        let cellCount = CGFloat(service.FAMILY_SERVICE.families.count+1)
+        let cellCount = CGFloat(families.count+1)
         
         //If the cell count is zero, no point in calculating anything.
         if cellCount > 0 {
@@ -84,17 +84,17 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if(indexPath.row == service.FAMILY_SERVICE.families.count){
+        if(indexPath.row == families.count){
             self.performSegue(withIdentifier: "registerFamilySegue", sender: nil)
         }else{
-            let family = service.FAMILY_SERVICE.families[(indexPath.row)]
+            let family = families[(indexPath.row)]
             self.toggleSelect(family: family)
             self.familiesCollection.reloadData()
             
         }
     }
     func toggleSelect(family: Family){
-        service.FAMILY_SERVICE.selectFamily(family: family)
+        service.USER_SVC.selectFamily(family: family)
     }
     
 }

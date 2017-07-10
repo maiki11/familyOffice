@@ -7,10 +7,11 @@
 //
 
 import UIKit
-
+import ReSwift
 class SelectCategoryViewController: UIViewController {
-    
+    var user: User?
     var imageSelect : UIImage!
+    var families = [Family]()
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var image: UIImageView!
@@ -44,7 +45,7 @@ class SelectCategoryViewController: UIViewController {
         self.empresarialView.layer.cornerRadius = 5
     }
     @IBAction func handlePressSocial(_ sender: UIButton) {
-        if service.FAMILY_SERVICE.families.count > 0 && service.FAMILY_SERVICE.families.contains(where: {$0.id == service.USER_SERVICE.users[0].familyActive}){
+        if families.count > 0{
             service.UTILITY_SERVICE.gotoView(view: "TabBarControllerView", context: self)
         }
     }
@@ -56,33 +57,25 @@ class SelectCategoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
        
         self.familiesCollection.reloadData()
-        if service.USER_SERVICE.users.count > 0 {
-            loadImage()
+        
+        store.subscribe(self) {
+            state in
+            state
         }
-       
-        localeChangeObserver.append( NotificationCenter.default.addObserver(forName: notCenter.USER_NOTIFICATION, object: nil, queue: nil){_ in
-            self.loadImage()
-        })
-        localeChangeObserver.append(NotificationCenter.default.addObserver(forName: notCenter.FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
-            if let family : Family = family.object as? Family {
-                self.addFamily(family: family)
-            }
-        })
-
     }
     override func viewWillDisappear(_ animated: Bool) {
-        for obs in localeChangeObserver{
-            NotificationCenter.default.removeObserver(obs)
-        }
-        self.localeChangeObserver.removeAll()
+        store.unsubscribe(self)
     }
     func loadImage() -> Void {
-        if !service.USER_SERVICE.users[0].photoURL.isEmpty {
-            image.loadImage(urlString: service.USER_SERVICE.users[0].photoURL)
+        guard user != nil else {
+            return
+        }
+        if !(user?.photoURL.isEmpty)! {
+            image.loadImage(urlString: (user?.photoURL)!)
         }else{
             image.image = #imageLiteral(resourceName: "profile_default")
         }
-        self.name.text = service.USER_SERVICE.users[0].name
+        self.name.text = user?.name
         self.image.layer.cornerRadius = self.image.frame.size.width/2
         self.image.clipsToBounds = true
         self.image.layer.borderWidth = 4.0
@@ -108,4 +101,36 @@ class SelectCategoryViewController: UIViewController {
         Utility.Instance().gotoView(view: "StartView", context: self)
     }
     
+    
+}
+extension SelectCategoryViewController : StoreSubscriber {
+    typealias StoreSubscriberStateType = AppState
+    
+    func newState(state: AppState) {
+        user = state.UserState.user
+        loadImage()
+        verifyUser(status: state.UserState.status)
+        verifyFamilies(state: state.FamilyState)
+        
+    }
+    func verifyFamilies(state: FamilyState) -> Void {
+        if families.count != state.families.count {
+            families = state.families
+            addFamily(family: state.families.last!)
+        }else{
+            self.familiesCollection.reloadData()
+        }
+    }
+    func verifyUser(status: Result){
+        switch status {
+        case .loading:
+            self.view.makeToastActivity(.center)
+            break
+        case .finished:
+            self.view.hideToastActivity()
+            break
+        default:
+            break
+        }
+    }
 }

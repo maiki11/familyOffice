@@ -27,7 +27,9 @@ class NotificationService {
             print("InstanceID token: \(refreshedToken)")
             service.NOTIFICATION_SERVICE.token = refreshedToken
         }
-        Constants.FirDatabase.REF_USERS.child("\((service.USER_SERVICE.users[0].id)!)/\(User.kUserTokensFCMeKey)").updateChildValues([self.token: true])
+        if store.state.UserState.user != nil {
+            Constants.FirDatabase.REF_USERS.child("\((store.state.UserState.user?.id)!)/\(User.kUserTokensFCMeKey)").updateChildValues([self.token: true])
+        }
     }
     func verifyDuplicateCode() -> Void {
         
@@ -61,7 +63,7 @@ class NotificationService {
     }
     
     func add(notification: NotificationModel) -> Void {
-
+        
         if !self.sections.contains(where: {$0.date == Date(timeIntervalSince1970: abs(notification.timestamp)).monthYearLabel}){
             sections.append(SectionNotification(date: Date(timeIntervalSince1970: abs(notification.timestamp)).monthYearLabel, record: [notification]))
         }else{
@@ -78,10 +80,10 @@ class NotificationService {
         
     }
     func seenNotification(index: Int) -> Void {
-
+        
         self.notifications[index].seen = true
         Constants.FirDatabase.REF_NOTIFICATION.child(service.USER_SERVICE.users[0].id).child(self.notifications[index].id!).updateChildValues(self.notifications[index].toDictionary() as! [AnyHashable : Any])
-
+        
     }
     
     func deleteToken(token: String, id: String) -> Void {

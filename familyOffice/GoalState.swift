@@ -10,23 +10,14 @@ import Foundation
 import ReSwift
 import ReSwiftRouter
 
-struct AppState: StateType {
-    var GoalsState : GoalState
-    var FamilyState: FamilyState
-}
-enum Result {
-    case loading
-    case failed
-    case finished
-    case none
-}
+
 
 struct GoalState: StateType {
     var goals: [String:[Goal]] = [:]
-    var status: Result
+    var status: Result = .none
 }
 
 struct FamilyState: StateType {
-    var families: [Family] = []
-    var status: Result
+    var families = [Family]()
+    var status: Result = .none
 }

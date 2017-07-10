@@ -24,7 +24,7 @@ struct Goal {
     static let kcategory = "category"
     static let kphoto = "photo"
     static let kendDate = "endDate"
-    static let kdone = "donde"
+    static let kdone = "done"
     static let knote = "note"
     static let kcreator = "creator"
     static let kdateCreated = "dateCreated"
