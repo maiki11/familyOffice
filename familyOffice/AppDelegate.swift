@@ -156,7 +156,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         }
     }
 
-    
 }
 
 class RootRoutable: Routable {
@@ -181,6 +180,5 @@ class RootRoutable: Routable {
         animated: Bool,
         completionHandler: @escaping RoutingCompletionHandler) {
         completionHandler()
-    }
-    
+    }   
 }

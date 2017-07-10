@@ -449,7 +449,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="zxczxczx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In8-Hp-FA4">
-                                                    <rect key="frame" x="33.5" y="120" width="54.5" height="11"/>
+                                                    <rect key="frame" x="33" y="120" width="54.5" height="11"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="12"/>
                                                     <color key="textColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -575,6 +575,8 @@
                         <segue destination="Xe7-NB-MEv" kind="show" identifier="healthSegue" id="UMc-ep-tL1"/>
                         <segue destination="wrq-DB-nSA" kind="show" identifier="goalSegue" id="ttz-Tk-RRT"/>
                         <segue destination="b01-wc-1ql" kind="show" id="ByB-Z0-AQm"/>
+                        <segue destination="pgj-Yi-X16" kind="show" identifier="gallerySegue" id="Lb5-eQ-s3P"/>
+                        <segue destination="ikv-vK-Gl5" kind="show" identifier="budgetSegue" id="esS-Zt-Rnc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNJ-R1-TZ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1209,6 +1211,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DHx-7U-HkL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-397" y="2306"/>
+        </scene>
+        <!--MainGallery-->
+        <scene sceneID="PLU-vO-g1m">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Gallery" referencedIdentifier="MainGallery" id="pgj-Yi-X16" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AY8-wI-cBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="988" y="2279"/>
         </scene>
         <!--Storyboard Reference-->
         <scene sceneID="awj-ST-AWP">

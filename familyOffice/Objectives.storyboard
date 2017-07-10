@@ -13,7 +13,9 @@
         <!--Objetivos-->
         <scene sceneID="nmB-GM-3JA">
             <objects>
+
                 <viewController storyboardIdentifier="GoalViewController" id="m8J-Pn-hWu" customClass="GoalViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
+
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3vj-DC-qrD"/>
                         <viewControllerLayoutGuide type="bottom" id="rhU-rf-Rwv"/>
@@ -116,6 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fmt-lD-xiX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+
             <point key="canvasLocation" x="-1624.8" y="-415.14242878560725"/>
         </scene>
         <!--Add Goal View Controller-->
@@ -278,6 +281,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="llg-OI-qQ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+
             <point key="canvasLocation" x="-2564" y="-415.14242878560725"/>
         </scene>
     </scenes>

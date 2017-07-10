@@ -14,10 +14,12 @@ struct AppState: StateType, HasNavigationState {
     var FamilyState: FamilyState
     var navigationState: NavigationState
     var UserState: UserState
+    var GalleryState: GalleryState
 }
-enum Result {
+enum Result<T> {
     case loading
     case failed
     case finished
+    case Finished(T)
     case none
 }

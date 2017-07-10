@@ -109,6 +109,7 @@ class GoalService: RequestService {
     }
     
 }
+
 extension GoalService: repository {
     
     func added(snapshot: FirebaseDatabase.FIRDataSnapshot) {

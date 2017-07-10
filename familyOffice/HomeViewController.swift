@@ -126,7 +126,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
 }
 extension HomeViewController {
-    
+
     func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
         let point: CGPoint = gestureReconizer.location(in: self.collectionView)
         let indexPath = self.collectionView?.indexPathForItem(at: point)
@@ -167,12 +167,17 @@ extension HomeViewController {
         case 2:
             self.performSegue(withIdentifier: "goalSegue", sender: nil)
             break
+        case 3:
+            self.performSegue(withIdentifier: "gallerySegue", sender: nil)
             
         case 4:
             self.performSegue(withIdentifier: "safeBoxSegue", sender: nil)
-            
+            break
         case 8:
             self.performSegue(withIdentifier: "healthSegue", sender: nil)
+            break
+        case 10:
+            self.performSegue(withIdentifier: "budgetSegue", sender: nil)
         default:
             break
         }
