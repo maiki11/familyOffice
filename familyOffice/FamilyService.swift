@@ -13,11 +13,11 @@ import UIKit
 
 class FamilyService: repository, RequestService {
     
-    func addHandle(_ handle: UInt, ref: String) {
+    func addHandle(_ handle: UInt, ref: String, action: FIRDataEventType) {
         
     }
 
-    var handles: [(String, UInt)] = []
+    var handles: [(String, UInt, FIRDataEventType)] = []
 
     var families: [Family] = []
 

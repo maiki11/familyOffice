@@ -38,6 +38,7 @@ struct Constants {
         static let HEALTH_SERVICE = HealthService.Instance()
         static let EVENT_SERVICE = EventService.Instance()
         static let GOAL_SERVICE = GoalService.Instance()
+        static let USER_SVC = UserSvc.Instance()
     }
     
     struct NotificationCenter {

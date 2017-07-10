@@ -11,6 +11,7 @@ import ReSwift
 
 struct FamilyReducer: Reducer {
     func handleAction(action: Action, state: FamilyState?) -> FamilyState {
-        return state!
+        let state = state ?? FamilyState(families: [], status: .none)
+        return state
     }
 }

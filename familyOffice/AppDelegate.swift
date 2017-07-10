@@ -12,13 +12,22 @@ import FirebaseMessaging
 import GoogleSignIn
 import UserNotifications
 import ReSwift
+import ReSwiftRecorder
+import ReSwiftRouter
 
-let store = Store<AppState>(reducer: AppReducer(), state: AppState(GoalsState: GoalState(goals: [:], status: Result.finished), FamilyState:  FamilyState(families: [], status: Result.finished)))
+let store = RecordingMainStore<AppState>(
+        reducer: AppReducer(),
+        state: nil,
+        typeMaps: [goalActionTypeMap, ReSwiftRouter.typeMap],
+        recording: "recording.json")
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
-    
+    var router: Router<AppState>!
     var window: UIWindow?
+    var rootViewController: Routable!
+    var AddGoalViewController: UIViewController!
+    var GoalViewController: UIViewController!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -31,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
             connectToFcm()
         }
         
+
+        
         FIRApp.configure()
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
@@ -38,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
                                                selector: #selector(tokenRefreshNotification),
                                                name: NSNotification.Name.firInstanceIDTokenRefresh,
                                                object: nil)
+    
         
         return true
     }
@@ -147,3 +159,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
     
 }
 
+class RootRoutable: Routable {
+    
+    var routable: Routable
+    
+    init(routable: Routable) {
+        self.routable = routable
+    }
+    
+    public func pushRouteSegment(
+        _ routeElementIdentifier: RouteElementIdentifier,
+        animated: Bool,
+        completionHandler: @escaping RoutingCompletionHandler
+        ) -> Routable {
+        completionHandler()
+        return self.routable
+    }
+    
+    public func popRouteSegment(
+        _ routeElementIdentifier: RouteElementIdentifier,
+        animated: Bool,
+        completionHandler: @escaping RoutingCompletionHandler) {
+        completionHandler()
+    }
+    
+}
