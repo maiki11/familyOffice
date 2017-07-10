@@ -16,7 +16,7 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
     let settingLauncher = SettingLauncher()
     typealias StoreSubscriberStateType = GoalState
     var myGoals = [Goal]()
-    
+    var user = store.state.UserState.user
     @IBOutlet weak var barChart: BarChartView!
     @IBOutlet weak var pieChart: PieChartView!
     @IBOutlet weak var tableView: UITableView!
@@ -76,7 +76,7 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
         if tabBar.selectedItem?.tag == 0 {
             service.GOAL_SERVICE.initObserves(ref: service.GOAL_SERVICE.basePath, actions: [.childAdded, .childRemoved, .childChanged])
         }else{
-            service.GOAL_SERVICE.initObserves(ref: "goals/\(service.USER_SERVICE.users[0].familyActive!)", actions: [.childAdded, .childRemoved, .childChanged])
+            service.GOAL_SERVICE.initObserves(ref: "goals/\((user?.familyActive!)!)", actions: [.childAdded, .childRemoved, .childChanged])
         }
     }
     
@@ -91,13 +91,14 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
     }
     
     func newState(state: GoalState) {
+        user = store.state.UserState.user
         if tabBar.selectedItem?.tag == 0 {
-            myGoals = state.goals[service.USER_SERVICE.users[0].id!] ?? []
+            myGoals = state.goals[(user?.id)!] ?? []
             barChart.isHidden = true
             pieChart.isHidden = false
             updatePieChartData()
         }else{
-            myGoals = state.goals[service.USER_SERVICE.users[0].familyActive!] ?? []
+            myGoals = state.goals[(user?.familyActive!)!] ?? []
             barChart.isHidden = false
             pieChart.isHidden = true
         }
@@ -111,7 +112,8 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
         }
     }
     func updateChartWithData() {
-        var dataEntries: [BarChartDataEntry] = []
+        var _: [BarChartDataEntry] = []
+        
         
         //
     }
@@ -166,7 +168,7 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
                 
             }else{
                 goal = Goal()
-                if tabBar.selectedItem?.tag  == 1 {
+                if tabBar.selectedItem?.tag == 1 {
                     goal.type = 1
                 }
                 vc.bind(goal: goal )

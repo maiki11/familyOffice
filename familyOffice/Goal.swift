@@ -28,6 +28,7 @@ struct Goal {
     static let knote = "note"
     static let kcreator = "creator"
     static let kdateCreated = "dateCreated"
+    static let kMembers = "members"
     
     
     var id:String!
@@ -40,6 +41,7 @@ struct Goal {
     var note: String! = ""
     var creator: String! = ""
     var dateCreated : Int!
+    var members = Dictionary<String,Bool>()
     
     
     init() {
@@ -71,6 +73,7 @@ struct Goal {
         self.photo = service.UTILITY_SERVICE.exist(field: Goal.kphoto, dictionary: snapshotValue)
         
         self.done = service.UTILITY_SERVICE.exist(field: Goal.kdone, dictionary: snapshotValue)
+        
     }
     func toDictionary() -> NSDictionary! {
         return [
