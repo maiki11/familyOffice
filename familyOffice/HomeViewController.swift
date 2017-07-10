@@ -10,8 +10,8 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import MIBadgeButton_Swift
-
-class HomeViewController: UIViewController,  UIGestureRecognizerDelegate, HandleFamilySelected{
+import ReSwift
+class HomeViewController: UIViewController,  UIGestureRecognizerDelegate {
     
 
     
@@ -21,8 +21,8 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate, Handle
     
     private var family : Family?
     
-    let user = service.USER_SERVICE.users.first(where: {$0.id == FIRAuth.auth()?.currentUser?.uid})
-    var families : [String]! = []
+    var user = store.state.UserState.user
+    var families = [Family]()
     
     
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -65,8 +65,11 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate, Handle
     
     /** ESTA FUNCION NOMAS PONE OBSERVERS */
     override func viewWillAppear(_ animated: Bool) {
+        store.subscribe(self) {
+            state in
+            state.FamilyState
+        }
         reloadFamily()
-        createObservers()
     }
     
     override func viewDidLayoutSubviews() {
@@ -80,9 +83,7 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate, Handle
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(notCenter.USER_NOTIFICATION)
-        NotificationCenter.default.removeObserver(notCenter.NOFAMILIES_NOTIFICATION)
-        NotificationCenter.default.removeObserver(notCenter.FAMILYADDED_NOTIFICATION)
+        store.unsubscribe(self)
     }
     
     
@@ -118,35 +119,14 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func reloadFamily() -> Void {
-        if service.USER_SERVICE.users.count > 0, let index = service.FAMILY_SERVICE.families.index(where: {$0.id == service.USER_SERVICE.users[0].familyActive}) {
-            let family = service.FAMILY_SERVICE.families[index]
-            
+        if let index = families.index(where: {$0.id == user?.familyActive}) {
+            let family = families[index]
             self.navigationItem.title = family.name
         }
     }
     
 }
 extension HomeViewController {
-    
-    func selectFamily() -> Void {
-        self.reloadFamily()
-    }
-    
-    func createObservers() -> Void {
-        if let index = service.FAMILY_SERVICE.families.index(where: {$0.id == service.USER_SERVICE.users[0].familyActive}) {
-            self.navigationItem.title = service.FAMILY_SERVICE.families[index].name
-        }
-        
-        NotificationCenter.default.addObserver(forName: notCenter.NOFAMILIES_NOTIFICATION, object: nil, queue: nil){ notification in
-            return
-        }
-        NotificationCenter.default.addObserver(forName: notCenter.USER_NOTIFICATION, object: nil, queue: nil){_ in
-            self.reloadFamily()
-        }
-        NotificationCenter.default.addObserver(forName: notCenter.FAMILYADDED_NOTIFICATION, object: nil, queue: nil){family in
-            self.reloadFamily()
-        }
-    }
     
     func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
         let point: CGPoint = gestureReconizer.location(in: self.collectionView)
@@ -165,7 +145,6 @@ extension HomeViewController {
         }
     }
     func handleMore(_ sender: Any) {
-        settingLauncher.handleFamily = self
         settingLauncher.showSetting()
     }
     func handleShowModal(_ sender: Any) -> Void {
@@ -221,4 +200,14 @@ extension HomeViewController {
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: #colorLiteral(red: 0.3137395978, green: 0.1694342792, blue: 0.5204931498, alpha: 1)]
     }
     
+}
+
+extension HomeViewController : StoreSubscriber {
+    typealias StoreSubscriberStateType = FamilyState
+    
+    func newState(state: FamilyState) {
+        families = state.families
+        user = store.state.UserState.user
+        reloadFamily()
+    }
 }

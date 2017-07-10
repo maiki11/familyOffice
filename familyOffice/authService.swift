@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import UIKit
+import ReSwift
 class AuthService {
     var uid = FIRAuth.auth()?.currentUser?.uid
     
@@ -98,11 +99,11 @@ class AuthService {
     }
     func isAuth(view: UIViewController, name: String)  {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            
             self.uid = user?.uid
             if (user != nil) {
                 self.checkUserAgainstDatabase(completion: {(success, error ) in
                     if success {
+                        store.dispatch(GetUserAction(uid: (user?.uid)!))
                         service.REF_SERVICE.value(ref: ref_users(uid: (user?.uid)!))
                         service.UTILITY_SERVICE.gotoView(view: name, context: view)
                     }else{

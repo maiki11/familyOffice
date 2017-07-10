@@ -107,6 +107,10 @@ struct User {
             break
         case User.kUserHealthKey:
             self.health = Health(snapshot: snapshot)
+            break
+        case User.kUserFamilyActiveKey:
+            self.familyActive = snapshot.value! as! String
+            break
         default:
             break
         }
