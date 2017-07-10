@@ -12,6 +12,10 @@ import FirebaseDatabase
 import UIKit
 
 class FamilyService: repository, RequestService {
+    func inserted(ref: FIRDatabaseReference) {
+        
+    }
+
     var families: [Family] = []
     
     func insert(_ ref: String, value: Any, callback: @escaping ((Any) -> Void)) {
