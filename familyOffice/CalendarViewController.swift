@@ -152,23 +152,24 @@ extension CalendarViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let cell = tableView.cellForRow(at: editActionsForRowAt) as! EventTableViewCell
         self.event = cell.event
-       
         let more = UITableViewRowAction(style: .normal, title: "Ver mas") { action, index in
             
             self.performSegue(withIdentifier: "showEventSegue", sender: nil)
         }
       
-        let favorite = UITableViewRowAction(style: .default, title: "Editar") { action, index in
+        let edit = UITableViewRowAction(style: .default, title: "Editar") { action, index in
        
             self.performSegue(withIdentifier: "addEventSegue", sender: nil)
             print("favorite button tapped")
         }
         
+        edit.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        
         let share = UITableViewRowAction(style: .destructive, title: "Eliminar") { action, index in
             print("share button tapped")
         }
         
-        return [share, favorite, more]
+        return [share, edit, more]
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
