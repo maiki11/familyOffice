@@ -41,11 +41,11 @@ struct Goal {
     var note: String! = ""
     var creator: String! = ""
     var dateCreated : Int!
-    var members = Dictionary<String,Bool>()
+    var members = [String:Bool]()
     
     
     init() {
-        self.id =  Constants.FirDatabase.REF.childByAutoId().key
+        self.id = Constants.FirDatabase.REF.childByAutoId().key
         self.title = ""
         self.endDate = Date().addingTimeInterval(60 * 60 * 24).string(with: .InternationalFormat)
         self.dateCreated =  NSDate().timeIntervalSince1970.exponent
@@ -53,6 +53,7 @@ struct Goal {
         self.type = 0
         
     }
+    
     
     init(snapshot: FIRDataSnapshot) {
         let snapshotValue = snapshot.value as! NSDictionary
@@ -74,6 +75,8 @@ struct Goal {
         
         self.done = service.UTILITY_SERVICE.exist(field: Goal.kdone, dictionary: snapshotValue)
         
+        self.members = service.UTILITY_SERVICE.exist(field: Goal.kMembers, dictionary: snapshotValue)
+        
     }
     func toDictionary() -> NSDictionary! {
         return [
@@ -84,7 +87,8 @@ struct Goal {
             Goal.ktype : self.type,
             Goal.knote : self.note,
             Goal.ktitle : self.title,
-            Goal.kcategory : self.category
+            Goal.kcategory : self.category,
+            Goal.kMembers : self.members
         ]
     }
     
@@ -101,6 +105,7 @@ protocol GoalBindable: AnyObject {
     var photo: UIImageView! {get}
     var typeicon : UIImageView! {get}
     var creatorLbl: UILabel! {get}
-    var noteLbl: UILabel! {get} 
+    var noteLbl: UILabel! {get}
+    var doneSwitch: UISwitch! {get}
 }
 

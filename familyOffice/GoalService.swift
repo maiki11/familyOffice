@@ -64,14 +64,17 @@ class GoalService: RequestService {
         
     }
     
-    func create(_ goal: Goal) -> Void {
-        var goal = goal
+    func create(_ xgoal: Goal) -> Void {
+        var goal = xgoal
         let id = getPath(type: goal.type)
         let path = "goals/\(id)/\(goal.id!)"
         if goal.type == 1 {
             goal.members = {
                 let fid = store.state.UserState.user?.familyActive
-                let members = store.state.FamilyState.families.first(where: {$0.id == fid})?.members.flatMap({[$0 : true]})
+                var members = [String:Bool]()
+                store.state.FamilyState.families.first(where: {$0.id == fid})?.members.forEach({s in
+                    members[s] = true
+                })
                 return members
             }()
         }

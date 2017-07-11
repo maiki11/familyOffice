@@ -21,11 +21,11 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
     @IBOutlet weak var pieChart: PieChartView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tabBar: UITabBar!
-
-    
+    weak var axisFormatDelegate: IAxisValueFormatter?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+        axisFormatDelegate = self
         tabBar.delegate = self
         pieChart.noDataText = "No hay objetivos"
         tabBar.selectedItem = tabBar.items?[0]
@@ -34,10 +34,15 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         addObservers()
+        if let family = store.state.FamilyState.families.first(where: {$0.id == store.state.UserState.user?.familyActive}){
+             service.USER_SVC.selectFamily(family: family)
+        }
+       
         store.subscribe(self) {
             subscription in
             subscription.GoalsState
         }
+        
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -67,14 +72,13 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
     
     
     func configuration() -> Void {
-
         addObservers()
         newState(state: store.state.GoalsState)
         tableView.reloadData()
     }
     
     func addObservers() -> Void {
-
+        
         if tabBar.selectedItem?.tag == 0 {
             service.GOAL_SERVICE.initObserves(ref: service.GOAL_SERVICE.basePath, actions: [.childAdded, .childRemoved, .childChanged])
         }else{
@@ -103,6 +107,7 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
             myGoals = state.goals[(user?.familyActive!)!] ?? []
             barChart.isHidden = false
             pieChart.isHidden = true
+            updateChartData()
         }
         selectFamily()
         tableView.reloadData()
@@ -113,12 +118,40 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
             self.navigationItem.title = family.name
         }
     }
-    func updateChartWithData() {
-        var _: [BarChartDataEntry] = []
+    func updateChartData() {
+        var dataEntries: [BarChartDataEntry] = []
+        barChart.clear()
+        var count = 0
+        for item in (store.state.FamilyState.families.first(where: {$0.id == user?.familyActive})?.members)! {
+            
+            let dataEntry = BarChartDataEntry()
+            dataEntry.x = Double(count)
+            dataEntry.y = Double(0)
+            
+            for goal in myGoals {
+                if goal.members[item] == true {
+                    dataEntry.y+=1.0
+                }
+            }
+            dataEntries.append(dataEntry)
+            count+=1
+        }
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Metas realizadas")
+        chartDataSet.colors = ChartColorTemplates.colorful()
+        let chartData = BarChartData(dataSet: chartDataSet)
+        barChart.data = chartData
+        let limit = store.state.UserState.users.count + 1
         
-        
+        let xaxis = barChart.xAxis
+        xaxis.labelWidth = CGFloat(5.0)
+        xaxis.labelCount = limit
+        xaxis.labelPosition = .bottom
+        xaxis.labelRotationAngle = 90
+        xaxis.valueFormatter = axisFormatDelegate
+        barChart.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInOutElastic)
         //
     }
+   
     
     func updatePieChartData()  {
         
@@ -157,6 +190,7 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
         pieChart.chartDescription = d
         pieChart.centerText = "Obj."
         pieChart.holeRadiusPercent = 0.5
+        pieChart.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInBounce)
         pieChart.transparentCircleColor = UIColor.clear
         
     }
@@ -181,7 +215,7 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
     }
 }
 
-extension GoalViewController: UITableViewDelegate, UITableViewDataSource {
+extension GoalViewController: UITableViewDelegate, UITableViewDataSource, IAxisValueFormatter {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -199,5 +233,30 @@ extension GoalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let goal = myGoals[indexPath.row]
         self.performSegue(withIdentifier: "addSegue", sender: goal)
+    }
+    
+    func getUser(id: String) -> User? {
+        if let user =  store.state.UserState.users.first(where: {$0.id == id}) {
+            return user
+        }else if id == store.state.UserState.user?.id {
+            return user
+        }else{
+            store.dispatch(GetUserAction(uid: id))
+        }
+        return nil
+
+    }
+    
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        if let family = store.state.FamilyState.families.first(where: {$0.id == user?.familyActive}) {
+            let id = family.members[Int(value)]
+            if let user = getUser(id: id){
+                if user.id == store.state.UserState.user?.id {
+                    return "Yo"
+                }
+                return user.name.components(separatedBy: " ")[0]
+            }
+        }
+        return "none"
     }
 }

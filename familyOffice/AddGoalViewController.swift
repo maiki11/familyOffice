@@ -19,6 +19,8 @@ class AddGoalViewController: UIViewController, GoalBindable, StoreSubscriber, Ro
     @IBOutlet weak var endDateDP: UIDatePicker!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var finishLbl: UILabel!
+    
     var types = [("Deportivo","sport"),("Religión","religion"),("Escolar","school"),("Negocios","business-1"),("Alimentación","eat"),("Salud","health-1")]
    
     
@@ -31,6 +33,9 @@ class AddGoalViewController: UIViewController, GoalBindable, StoreSubscriber, Ro
     override func viewWillAppear(_ animated: Bool) {
         setupNavBar()
         self.bind(goal: goal)
+        if goal.title != "" {
+            finishLbl.isHidden = false
+        }
         store.subscribe(self) {
             state in
             state.GoalsState
@@ -74,6 +79,8 @@ class AddGoalViewController: UIViewController, GoalBindable, StoreSubscriber, Ro
         guard let title = titleTxt.text, !title.isEmpty else {
             return
         }
+        
+        
         goal.title = title
         goal.endDate = endDateDP.date.string(with: .InternationalFormat)
         store.dispatch(UpdateGoalAction(goal: goal))
