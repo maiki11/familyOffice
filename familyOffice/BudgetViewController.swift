@@ -9,53 +9,32 @@
 import UIKit
 import Charts
 
-class BudgetViewController: UIViewController, ChartViewDelegate, IAxisValueFormatter, IValueFormatter {
-
-    @IBOutlet weak var lineChart: LineChartView!
-    @IBOutlet weak var radarChart: RadarChartView!
-    var selectedEntry : ChartDataEntry?
-    var radarXAxisValues: [String] = []
+class BudgetViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    var values: [BudgetConcept] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configLineChart()
-        configRadarChart()
+        
         // Do any additional setup after loading the view.
+        // datos inventados
+        let conceptNames = ["Comida", "Transporte", "Alojamiento", "Entretenimiento", "Hogar", "Otros"]
+        let year2017 = Date(string: "01 01 2017", formatter: DateFormatter.dayMonthAndYear)!
+        let almostAYear : UInt32 = 60*60*24*364
+        for _ in 0..<100 {
+            values.append(BudgetConcept(
+                name: conceptNames[Int(arc4random_uniform(UInt32(conceptNames.count)))],
+                amount: Double(arc4random_uniform(10000)) - 5000,
+                date: Date(timeInterval: TimeInterval(arc4random_uniform(almostAYear)), since: year2017)
+            ))
+        }
+        values.sort(by: {(a, b) in a.date < b.date})
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // Aqui se leerian los datos de firebase para despues
         // construir los datos y llamar las funciones setData,
         // ademas de los valores para radarXAxisValues
-        radarXAxisValues = ["Comida", "Transporte", "Alojamiento", "Entretenimiento", "Hogar", "Otros"]
-        var currentBudget = Double(arc4random_uniform(30000))
-        var budget: [ChartDataEntry] = [ChartDataEntry(x: 0, y: currentBudget)]
-        var income: [ChartDataEntry] = [ChartDataEntry(x: 0, y: 0)]
-        var discharges: [ChartDataEntry] = [ChartDataEntry(x: 0, y: 0)]
-        var conceptValues: [Double] = [0,0,0,0,0,0]
-        for i in 1 ..< 12 {
-            let _in : Double = Double(arc4random_uniform(10000))
-            let _out: Double = Double(arc4random_uniform(10000))
-            income.append(ChartDataEntry(x: Double(i), y: _in))
-            discharges.append(ChartDataEntry(x: Double(i), y: _out))
-            
-            let conceptIndex : Int = i%6
-            conceptValues[conceptIndex] += _out
-            
-            currentBudget += _in - _out
-            budget.append(ChartDataEntry(x: Double(i), y: currentBudget))
-            
-        }
-        
-        var concepts: [RadarChartDataEntry] = []
-        for i in 0 ..< conceptValues.count {
-            let val = conceptValues[i]
-            concepts.append(RadarChartDataEntry(value: val))
-        }
-        print("asdbakjsbdkjasbd", concepts);
-        setData(lineChart: lineChart, budget: budget, income: income, discharges: discharges)
-        setData(radarChart: radarChart, concepts: concepts)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,86 +42,99 @@ class BudgetViewController: UIViewController, ChartViewDelegate, IAxisValueForma
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: Charts
-    
-    func configLineChart(){
-        lineChart.delegate = self
-        lineChart.dragEnabled = true
-        lineChart.pinchZoomEnabled = true
-        lineChart.drawGridBackgroundEnabled = true
-        lineChart.gridBackgroundColor = UIColor.white
-        lineChart.chartDescription?.enabled = false
-        lineChart.doubleTapToZoomEnabled = false
-        lineChart.xAxis.valueFormatter = self
-        lineChart.xAxis.granularity = 1
-        lineChart.leftAxis.valueFormatter = self
-        lineChart.rightAxis.enabled = false
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3+values.count // lineChart + radarChart + tableHeaders + values
     }
     
-    func configRadarChart(){
-        radarChart.delegate = self
-//        radarChart.rotationEnabled = false
-        radarChart.yAxis.drawLabelsEnabled = false
-        radarChart.yAxis.axisMinimum = 0
-        radarChart.chartDescription?.enabled = false
-        radarChart.xAxis.valueFormatter = self
-        radarChart.legend.enabled = false
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch(section){
+        case 0, 1: return 1
+        default: return 3
+        }
+    }
+
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! BudgetCollectionHeaderView
+        switch(indexPath.section){
+        case 0: header.label.text = "Gráfica de tendencias"; break
+        case 1: header.label.text = "Egresos por concepto"; break
+        case 2: header.label.text = "Tabla de conceptos"; break
+        default: break
+        }
+        header.label.layer.borderWidth = 1
+        header.label.layer.cornerRadius = 5
+        header.label.layer.masksToBounds = true
+        header.label.layer.borderColor = UIColor.lightGray.cgColor
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: 0, height: section < 3 ? 50 : 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch(indexPath.section){
+        case 0: return CGSize(width: 343, height: 309)
+        case 1: return CGSize(width: 343, height: 309)
+        default: return CGSize(width: 125, height: 32)
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        switch(indexPath.section){
+        case 0: /* lineChart */
+            let lineChartCell = collectionView
+                .dequeueReusableCell(withReuseIdentifier: "lineChartCell", for: indexPath) as! LineChartViewCell
+            lineChartCell.config()
+            lineChartCell.setData(concepts: values, initialBudget: Double(arc4random_uniform(30000)))
+            return lineChartCell
+            
+        case 1: /* radarChart */
+            let radarChartCell = collectionView
+                .dequeueReusableCell(withReuseIdentifier: "radarChartCell", for: indexPath) as! RadarChartViewCell
+            radarChartCell.config()
+            radarChartCell.setData(concepts: values)
+            return radarChartCell
+            
+        case 2: /* tableHeaders */
+            let tableHeader = collectionView
+                .dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! BudgetCollectionViewCell
+            tableHeader.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
+            switch(indexPath.row){
+            case 0: tableHeader.label.text = "Concepto"; break
+            case 1: tableHeader.label.text = "Cantidad"; break
+            case 2: tableHeader.label.text = "Fecha"; break
+            default: break
+            }
+            return tableHeader
+            
+        default: /* values */
+            let index = indexPath.section - 3
+            let cell = collectionView
+                .dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! BudgetCollectionViewCell
+            cell.backgroundColor = values[index].amount > 0
+                ? UIColor(red: 0, green: 1, blue: 0, alpha: 0.1)
+                : UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
+            switch(indexPath.row){
+            case 0: cell.label.text = values[index].name; break
+            case 1:
+                let money = values[index].amount as NSNumber
+                let formatter = NumberFormatter()
+                formatter.numberStyle = .currency
+                formatter.locale = Locale(identifier: "es_MX")
+                cell.label.text = formatter.string(from: money)!;
+                break
+            case 2: cell.label.text = values[index].date.string(with: DateFormatter.dayMonthAndYear2)
+            default: break
+            }
+            return cell
+        }
         
     }
     
-    func setData(lineChart: LineChartView, budget: [ChartDataEntry], income: [ChartDataEntry], discharges: [ChartDataEntry]){
-        let budgetSet = LineChartDataSet(values: budget, label: "Presupuesto")
-        let incomeSet = LineChartDataSet(values: income, label: "Ingresos")
-        let dischargesSet = LineChartDataSet(values: discharges, label: "Egresos")
-        
-        let font = UIFont.systemFont(ofSize: 12)
-        
-        budgetSet.setColor(UIColor.cyan)
-        budgetSet.circleColors = [UIColor.cyan]
-        budgetSet.mode = .horizontalBezier
-        budgetSet.valueFormatter = self
-        budgetSet.drawFilledEnabled = true
-        budgetSet.fillColor = UIColor.cyan
-        budgetSet.fillAlpha = 0.3
-        budgetSet.valueFont = font
-        
-        let green = UIColor(red: 0, green: 0.7, blue: 0, alpha: 1)
-        incomeSet.setColor(green)
-        incomeSet.circleColors = [green]
-        incomeSet.mode = .horizontalBezier
-        incomeSet.valueFormatter = self
-        incomeSet.valueFont = font
-        
-        dischargesSet.setColor(UIColor.red)
-        dischargesSet.circleColors = [UIColor.red]
-        dischargesSet.mode = .horizontalBezier
-        dischargesSet.valueFormatter = self
-        dischargesSet.valueFont = font
-        
-        lineChart.data = LineChartData(dataSets: [budgetSet, incomeSet, dischargesSet])
-    }
-    
-    func setData(radarChart: RadarChartView, concepts: [RadarChartDataEntry]){
-        
-        let conceptsSet = RadarChartDataSet(values: concepts, label: nil)
-        conceptsSet.drawFilledEnabled = true
-		conceptsSet.fillColor = UIColor.cyan
-        conceptsSet.fillAlpha = 0.3
-        conceptsSet.valueFormatter = self
-        
-        radarChart.data = RadarChartData(dataSet: conceptsSet)
-        radarChart.notifyDataSetChanged()
-    }
-    
-    // MARK: ChartViewDelegate
-    
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        selectedEntry = entry
-    }
-    
-    func chartValueNothingSelected(_ chartView: ChartViewBase) {
-        selectedEntry = nil
-    }
 
     /*
     // MARK: - Navigation
@@ -154,37 +146,36 @@ class BudgetViewController: UIViewController, ChartViewDelegate, IAxisValueForma
     }
     */
     
-    // MARK: IAxisValueFormatter
+//    func setValues(){
+//        radarXAxisValues = ["Comida", "Transporte", "Alojamiento", "Entretenimiento", "Hogar", "Otros"]
+//        var currentBudget = Double(arc4random_uniform(30000))
+//        var budget: [ChartDataEntry] = [ChartDataEntry(x: 0, y: currentBudget)]
+//        var income: [ChartDataEntry] = [ChartDataEntry(x: 0, y: 0)]
+//        var discharges: [ChartDataEntry] = [ChartDataEntry(x: 0, y: 0)]
+//        var conceptValues: [Double] = [0,0,0,0,0,0]
+//        for i in 1 ..< 12 {
+//            let _in : Double = Double(arc4random_uniform(10000))
+//            let _out: Double = Double(arc4random_uniform(10000))
+//            income.append(ChartDataEntry(x: Double(i), y: _in))
+//            discharges.append(ChartDataEntry(x: Double(i), y: _out))
+//            
+//            let conceptIndex : Int = i%6
+//            conceptValues[conceptIndex] += _out
+//            
+//            currentBudget += _in - _out
+//            budget.append(ChartDataEntry(x: Double(i), y: currentBudget))
+//            
+//        }
+//        
+//        var concepts: [RadarChartDataEntry] = []
+//        for i in 0 ..< conceptValues.count {
+//            let val = conceptValues[i]
+//            concepts.append(RadarChartDataEntry(value: val))
+//        }
+//        print("asdbakjsbdkjasbd", concepts);
+//        setData(lineChart: lineChart, budget: budget, income: income, discharges: discharges)
+//        setData(radarChart: radarChart, concepts: concepts)
+//    }
     
-    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        if(radarChart.xAxis == axis){
-        	return radarXAxisValues[Int(value) % radarXAxisValues.count]
-        }
-        if(lineChart.xAxis == axis){
-            return ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago",
-                    "Sep", "Oct", "Nov", "Dic"][Int(value) % 12]
-        }
-        if(lineChart.leftAxis == axis){
-            let money = value as NSNumber
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .currency
-            formatter.locale = Locale(identifier: "es_MX")
-            return formatter.string(from: money)!
-        }
-        return "wut"
-    }
     
-    // MARK: IValueFormatter
-    
-    func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
-        if(selectedEntry != entry) {
-            return ""
-        }
-        let money = value as NSNumber
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "es_MX")
-        return formatter.string(from: money)!
-    }
-
 }
