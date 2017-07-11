@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kip-84-qVL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kip-84-qVL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -577,7 +577,7 @@
                         <segue destination="b01-wc-1ql" kind="show" id="ByB-Z0-AQm"/>
                         <segue destination="0d3-uh-Jcd" kind="show" identifier="contactsSegue" id="sre-07-YkP"/>
                         <segue destination="pgj-Yi-X16" kind="show" identifier="gallerySegue" id="Lb5-eQ-s3P"/>
-                        <segue destination="ikv-vK-Gl5" kind="show" identifier="budgetSegue" id="esS-Zt-Rnc"/>
+                        <segue destination="CZo-yQ-ole" kind="show" identifier="budgetSegue" id="3EG-pH-dkJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNJ-R1-TZ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1260,6 +1260,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDh-33-1QG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1968" y="2093"/>
+        </scene>
+        <!--Budget-->
+        <scene sceneID="xTq-es-99M">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Budget" id="CZo-yQ-ole" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9df-oV-85V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-69" y="2308"/>
         </scene>
         <!--Chat-->
         <scene sceneID="Uct-Yn-twt">

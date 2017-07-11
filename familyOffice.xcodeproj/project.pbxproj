@@ -168,10 +168,11 @@
 		84FFCB8F1F01A74C006EDFA1 /* contactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFCB8E1F01A74C006EDFA1 /* contactTableViewController.swift */; };
 		84FFCB911F02D533006EDFA1 /* addContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFCB901F02D533006EDFA1 /* addContactTableViewController.swift */; };
 		A44D4E5E1F0481CD00323B87 /* Budget.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44D4E5D1F0481CD00323B87 /* Budget.storyboard */; };
-		A44D4E611F04824B00323B87 /* BudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44D4E601F04824B00323B87 /* BudgetViewController.swift */; };
+		A44D4E611F04824B00323B87 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A44D91AF1E947F2700880D50 /* HealthOmniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44D91AE1E947F2700880D50 /* HealthOmniViewController.swift */; };
 		A46316B21E78C69E00E3F72C /* Health.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46316B11E78C69E00E3F72C /* Health.swift */; };
 		A47F14B11E8B27DB00285CA8 /* Health.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A47F14B01E8B27DB00285CA8 /* Health.storyboard */; };
+		A48DDA1F1F1541D90059D982 /* BudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02595A381F14913E00627C46 /* BudgetViewController.swift */; };
 		A48FD6D31F141BD000832559 /* BudgetCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48FD6D21F141BD000832559 /* BudgetCollectionHeaderView.swift */; };
 		A48FD6D51F141C2C00832559 /* LineChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48FD6D41F141C2C00832559 /* LineChartViewCell.swift */; };
 		A48FD6D71F141D2100832559 /* RadarChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48FD6D61F141D2100832559 /* RadarChartViewCell.swift */; };
@@ -815,7 +816,7 @@
 		0290591F1E78B9AA005F760C /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				02595A381F14913E00627C46 /* BudgetViewController.swift */,
+				A48DDA1E1F15409E0059D982 /* Budget */,
 				84FFCB8B1F01929F006EDFA1 /* Contacts */,
 				02BD2D161E1F0D8B00A61A84 /* HomeViewController.swift */,
 				022CC44E1EF9EDB0009FA79C /* goals */,
@@ -879,7 +880,6 @@
 			children = (
 				04AFE3891F01DDD000D4ECA2 /* Gallery */,
 				A48FD6DE1F143D2700832559 /* Budget */,
-				026E18171F01D5AF00FF860D /* Enums */,
 				0233A4F51EFD8A4B00D01F5C /* Goal */,
 				02BC16EB1EE9C87200722689 /* Event */,
 				022EC1D11E20078C0096A18B /* Family.swift */,
@@ -1047,11 +1047,18 @@
 			children = (
 				84FFCB8E1F01A74C006EDFA1 /* contactTableViewController.swift */,
 				84FFCB901F02D533006EDFA1 /* addContactTableViewController.swift */,
-				A44D4E601F04824B00323B87 /* BudgetViewController.swift */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		A48DDA1E1F15409E0059D982 /* Budget */ = {
+			isa = PBXGroup;
+			children = (
 				A48FD6D21F141BD000832559 /* BudgetCollectionHeaderView.swift */,
-				A48FD6D41F141C2C00832559 /* LineChartViewCell.swift */,
+				02595A381F14913E00627C46 /* BudgetViewController.swift */,
 				A48FD6D61F141D2100832559 /* RadarChartViewCell.swift */,
 				A48FD6DA1F141E8C00832559 /* BudgetCollectionViewCell.swift */,
+				A48FD6D41F141C2C00832559 /* LineChartViewCell.swift */,
 			);
 			name = Budget;
 			sourceTree = "<group>";
@@ -1061,7 +1068,7 @@
 			children = (
 				A48FD6DC1F143D2200832559 /* Budget.swift */,
 			);
-			name = Contacts;
+			name = Budget;
 			sourceTree = "<group>";
 		};
 		A4A23F731E7CADFF0011D471 /* Cells */ = {
@@ -1432,7 +1439,7 @@
 				02D2C0D11E6747AE007A6798 /* References.swift in Sources */,
 				A48FD6DD1F143D2200832559 /* Budget.swift in Sources */,
 				02E33A641EBA71D0003BF787 /* ShowEventViewController.swift in Sources */,
-				A44D4E611F04824B00323B87 /* BudgetViewController.swift in Sources */,
+				A44D4E611F04824B00323B87 /* (null) in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
 				A46316B21E78C69E00E3F72C /* Health.swift in Sources */,
 				A48FD6D31F141BD000832559 /* BudgetCollectionHeaderView.swift in Sources */,
@@ -1547,6 +1554,7 @@
 				024104871E6F40C4002B8E1C /* FamilyCollectionExtension.swift in Sources */,
 				02F15BBA1E85F37A008C26F8 /* chatCellTableViewCell.swift in Sources */,
 				849C81C71E1D6D2F00FF3EE7 /* StartViewController.swift in Sources */,
+				A48DDA1F1F1541D90059D982 /* BudgetViewController.swift in Sources */,
 				0249F3361E43C1E6000872CD /* StorageService.swift in Sources */,
 				029CD0611F13172C00A29CBA /* UserSvc.swift in Sources */,
 				028E20FF1EC0F1D1004D83B0 /* UILabel.swift in Sources */,
