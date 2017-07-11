@@ -1271,14 +1271,46 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "familyOffice/BudgetViewController.swift"
-            timestampString = "520447587.42914"
+            filePath = "familyOffice/RadarChartViewCell.swift"
+            timestampString = "521429012.536338"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "setData(concepts:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "familyOffice.RadarChartViewCell.setData (concepts : Swift.Array&lt;familyOffice.BudgetConcept&gt;) -&gt; ()"
+                  moduleName = "familyOffice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nancio/work/familyOffice/familyOffice/RadarChartViewCell.swift"
+                  timestampString = "521425862.933475"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "familyOffice.RadarChartViewCell.(setData (concepts : Swift.Array&lt;familyOffice.BudgetConcept&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "familyOffice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nancio/work/familyOffice/familyOffice/RadarChartViewCell.swift"
+                  timestampString = "521425862.936576"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "65">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
