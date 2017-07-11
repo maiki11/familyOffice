@@ -23,6 +23,9 @@ struct GoalReducer: Reducer {
             insertGoal(action.goal)
             state.status = .loading
         case let action as UpdateGoalAction:
+            if action.goal == nil {
+                return state
+            }
             updateGoal(action.goal)
             state.status = .loading
             return state
