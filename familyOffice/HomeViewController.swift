@@ -5,7 +5,6 @@
 //  Created by Leonardo Durazo on 05/01/17.
 //  Copyright © 2017 Leonardo Durazo. All rights reserved.
 //
-
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
@@ -13,9 +12,9 @@ import MIBadgeButton_Swift
 import ReSwift
 class HomeViewController: UIViewController,  UIGestureRecognizerDelegate {
     
-
-    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple"]
-    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros"]
+    
+    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple", "presupuesto", "presupuesto"]
+    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros", "Presupuesto", "Lista ToDo"]
     
     
     private var family : Family?
@@ -46,14 +45,14 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate {
     
     @IBAction func handleCloseModal(_ sender: UIButton) {
         //UIView.animate(withDuration: 0.1, animations: {
-            self.view.layoutIfNeeded()
-            UIView.animate(withDuration: 0.4,delay: 0.1, animations: {
-                self.modalAlert.layer.position.x = 0 - self.modalAlert.frame.width/2
-            })
-            UIView.animate(withDuration: 0.4, delay: 0.4, animations: {
-                //self.modalAlert.layer.position.x = self.modalAlert.layer.position.x * (-2)
-                self.backgroundButton.alpha = 0
-            })
+        self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.4,delay: 0.1, animations: {
+            self.modalAlert.layer.position.x = 0 - self.modalAlert.frame.width/2
+        })
+        UIView.animate(withDuration: 0.4, delay: 0.4, animations: {
+            //self.modalAlert.layer.position.x = self.modalAlert.layer.position.x * (-2)
+            self.backgroundButton.alpha = 0
+        })
         //})
         
     }
@@ -126,7 +125,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
 }
 extension HomeViewController {
-
+    
     func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
         let point: CGPoint = gestureReconizer.location(in: self.collectionView)
         let indexPath = self.collectionView?.indexPathForItem(at: point)
@@ -172,12 +171,16 @@ extension HomeViewController {
             
         case 4:
             self.performSegue(withIdentifier: "safeBoxSegue", sender: nil)
-            break
+        case 5:
+            self.performSegue(withIdentifier: "contactsSegue", sender: nil)
+            
         case 8:
             self.performSegue(withIdentifier: "healthSegue", sender: nil)
             break
         case 10:
             self.performSegue(withIdentifier: "budgetSegue", sender: nil)
+        case 11:
+            self.performSegue(withIdentifier: "todolistSegue", sender: nil)
         default:
             break
         }

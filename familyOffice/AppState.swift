@@ -15,6 +15,7 @@ struct AppState: StateType, HasNavigationState {
     var navigationState: NavigationState
     var UserState: UserState
     var GalleryState: GalleryState
+    var ToDoListState: ToDoListState
 }
 enum Result<T> {
     case loading
