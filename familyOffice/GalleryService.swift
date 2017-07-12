@@ -74,8 +74,8 @@ extension GalleryService: repository {
 
     func fillAlbums(reference: String,callback: @escaping((Bool) -> Void)){
         Constants.FirDatabase.REF.child("album/\(reference)").observe(.value, with: {snapshot in
-            if let snap = snapshot as? FIRDataSnapshot, snap != nil{
-                for item in snap.children{
+            if snapshot.exists() {
+                for item in snapshot.children{
                     let albumAux: Album = Album(snapshot: item as! FIRDataSnapshot)
                     if !self.albums.contains(where: {$0.id == albumAux.id}){
                         self.albums.append(albumAux)

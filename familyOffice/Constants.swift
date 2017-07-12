@@ -41,6 +41,7 @@ struct Constants {
         static let GALLERY_SERVICE = GalleryService.Instance()
         static let USER_SVC = UserSvc.Instance()
         static let FAMILY_SVC = FamilySvc.Instance()
+        static let CONTACT_SVC = ContactService.Instance()
     }
     
     struct NotificationCenter {
