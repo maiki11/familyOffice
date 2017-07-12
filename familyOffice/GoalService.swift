@@ -10,7 +10,6 @@ import Foundation
 import FirebaseDatabase
 let defaults = UserDefaults.standard
 class GoalService: RequestService {
-    var goals: [Goal] = []
     var handles: [(String,UInt,FIRDataEventType)] = []
     let basePath = "goals/\(service.USER_SERVICE.users[0].id!)"
     private init() {}

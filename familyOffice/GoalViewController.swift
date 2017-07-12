@@ -199,7 +199,6 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate {
             let vc = segue.destination as! AddGoalViewController
             let goal :Goal!
             if sender is Goal {
-
                 goal = sender as? Goal
                 vc.bind(goal: goal)
                 

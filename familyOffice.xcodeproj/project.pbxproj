@@ -82,6 +82,12 @@
 		029CD0611F13172C00A29CBA /* UserSvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CD0601F13172C00A29CBA /* UserSvc.swift */; };
 		029CD0631F131EBC00A29CBA /* UserReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CD0621F131EBC00A29CBA /* UserReducer.swift */; };
 		029CD0651F1327BD00A29CBA /* FamilySvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CD0641F1327BD00A29CBA /* FamilySvc.swift */; };
+		029F658D1F153E8000C3A0A7 /* ContactState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F658C1F153E8000C3A0A7 /* ContactState.swift */; };
+		029F658F1F15406F00C3A0A7 /* ContactActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F658E1F15406F00C3A0A7 /* ContactActions.swift */; };
+		029F65911F1541B300C3A0A7 /* ContactReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F65901F1541B300C3A0A7 /* ContactReducer.swift */; };
+		029F65931F15446100C3A0A7 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F65921F15446100C3A0A7 /* ContactService.swift */; };
+		029F65951F15662900C3A0A7 /* contactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F65941F15662900C3A0A7 /* contactTableViewCell.swift */; };
+		029F65971F15A95700C3A0A7 /* InfoContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F65961F15A95700C3A0A7 /* InfoContactViewController.swift */; };
 		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
 		02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC3F1E6DE73A003780AB /* UIImage.swift */; };
 		02ABAC421E6E02B5003780AB /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC411E6E02B5003780AB /* Device.swift */; };
@@ -168,7 +174,7 @@
 		84FFCB8F1F01A74C006EDFA1 /* contactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFCB8E1F01A74C006EDFA1 /* contactTableViewController.swift */; };
 		84FFCB911F02D533006EDFA1 /* addContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFCB901F02D533006EDFA1 /* addContactTableViewController.swift */; };
 		A44D4E5E1F0481CD00323B87 /* Budget.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44D4E5D1F0481CD00323B87 /* Budget.storyboard */; };
-		A44D4E611F04824B00323B87 /* BudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44D4E601F04824B00323B87 /* BudgetViewController.swift */; };
+		A44D4E611F04824B00323B87 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A44D91AF1E947F2700880D50 /* HealthOmniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44D91AE1E947F2700880D50 /* HealthOmniViewController.swift */; };
 		A46316B21E78C69E00E3F72C /* Health.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46316B11E78C69E00E3F72C /* Health.swift */; };
 		A47F14B11E8B27DB00285CA8 /* Health.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A47F14B01E8B27DB00285CA8 /* Health.storyboard */; };
@@ -283,6 +289,12 @@
 		029CD0601F13172C00A29CBA /* UserSvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSvc.swift; sourceTree = "<group>"; };
 		029CD0621F131EBC00A29CBA /* UserReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserReducer.swift; sourceTree = "<group>"; };
 		029CD0641F1327BD00A29CBA /* FamilySvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilySvc.swift; sourceTree = "<group>"; };
+		029F658C1F153E8000C3A0A7 /* ContactState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactState.swift; sourceTree = "<group>"; };
+		029F658E1F15406F00C3A0A7 /* ContactActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactActions.swift; sourceTree = "<group>"; };
+		029F65901F1541B300C3A0A7 /* ContactReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactReducer.swift; sourceTree = "<group>"; };
+		029F65921F15446100C3A0A7 /* ContactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
+		029F65941F15662900C3A0A7 /* contactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = contactTableViewCell.swift; sourceTree = "<group>"; };
+		029F65961F15A95700C3A0A7 /* InfoContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoContactViewController.swift; sourceTree = "<group>"; };
 		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		02ABAC3F1E6DE73A003780AB /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		02ABAC411E6E02B5003780AB /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
@@ -590,6 +602,7 @@
 				0233A4F81EFDA33600D01F5C /* GoalService.swift */,
 				029CD0601F13172C00A29CBA /* UserSvc.swift */,
 				029CD0641F1327BD00A29CBA /* FamilySvc.swift */,
+				029F65921F15446100C3A0A7 /* ContactService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -683,6 +696,7 @@
 		02668FA81F12B5DB0052617E /* Reducers */ = {
 			isa = PBXGroup;
 			children = (
+				026AF37F1F07299000EF6DCD /* AppReducer.swift */,
 				029CD0621F131EBC00A29CBA /* UserReducer.swift */,
 			);
 			name = Reducers;
@@ -781,7 +795,6 @@
 			isa = PBXGroup;
 			children = (
 				026AF3771F06F0FC00EF6DCD /* GoalReducer.swift */,
-				026AF37F1F07299000EF6DCD /* AppReducer.swift */,
 			);
 			name = Reducers;
 			sourceTree = "<group>";
@@ -838,6 +851,30 @@
 				0215F4E91E3FCDD400AC01D3 /* PersonalDataTableViewCell.swift */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		029F65891F153C2C00C3A0A7 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				029F658C1F153E8000C3A0A7 /* ContactState.swift */,
+			);
+			name = State;
+			sourceTree = "<group>";
+		};
+		029F658A1F153C3A00C3A0A7 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				029F658E1F15406F00C3A0A7 /* ContactActions.swift */,
+			);
+			name = Actions;
+			sourceTree = "<group>";
+		};
+		029F658B1F153C4400C3A0A7 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				029F65901F1541B300C3A0A7 /* ContactReducer.swift */,
+			);
+			name = Reducer;
 			sourceTree = "<group>";
 		};
 		02AD814E1E4B92FF0030B3DD /* Extensions */ = {
@@ -1033,8 +1070,13 @@
 		84FFCB8B1F01929F006EDFA1 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				029F658B1F153C4400C3A0A7 /* Reducer */,
+				029F658A1F153C3A00C3A0A7 /* Actions */,
+				029F65891F153C2C00C3A0A7 /* State */,
 				84FFCB8E1F01A74C006EDFA1 /* contactTableViewController.swift */,
 				84FFCB901F02D533006EDFA1 /* addContactTableViewController.swift */,
+				029F65941F15662900C3A0A7 /* contactTableViewCell.swift */,
+				029F65961F15A95700C3A0A7 /* InfoContactViewController.swift */,
 			);
 			name = Contacts;
 			sourceTree = "<group>";
@@ -1403,10 +1445,13 @@
 				028E0E341EDF4DFE00D5205B /* MemberInviteCollectionViewCell.swift in Sources */,
 				028E0E311EDF3F0700D5205B /* memberEventTableViewCell.swift in Sources */,
 				02002BFB1E82074E007191CC /* BaseTableViewCell.swift in Sources */,
+				029F65931F15446100C3A0A7 /* ContactService.swift in Sources */,
 				02CF79AB1EAEC4B200E13056 /* EventService.swift in Sources */,
 				02D2C0D11E6747AE007A6798 /* References.swift in Sources */,
+				029F65911F1541B300C3A0A7 /* ContactReducer.swift in Sources */,
+				029F65971F15A95700C3A0A7 /* InfoContactViewController.swift in Sources */,
 				02E33A641EBA71D0003BF787 /* ShowEventViewController.swift in Sources */,
-				A44D4E611F04824B00323B87 /* BudgetViewController.swift in Sources */,
+				A44D4E611F04824B00323B87 /* (null) in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
 				A46316B21E78C69E00E3F72C /* Health.swift in Sources */,
 				023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */,
@@ -1426,6 +1471,8 @@
 				027FC2491E8DCF3E00450EFB /* MemberCollectionViewCell.swift in Sources */,
 				8471A2521E2D8C5100EC9FD7 /* ConfigProfile.swift in Sources */,
 				84FFCB8F1F01A74C006EDFA1 /* contactTableViewController.swift in Sources */,
+				029F65951F15662900C3A0A7 /* contactTableViewCell.swift in Sources */,
+				029F658F1F15406F00C3A0A7 /* ContactActions.swift in Sources */,
 				023DFBBB1EBBACBD000BEFFB /* Location.swift in Sources */,
 				022EC1D21E20078C0096A18B /* Family.swift in Sources */,
 				0218B5B31E66522A00025EBB /* ListenerService.swift in Sources */,
@@ -1486,6 +1533,7 @@
 				02B876451E1C677C005E5473 /* SingUpViewController.swift in Sources */,
 				02802DFF1EFC36A900E12A84 /* HandleMenuBar.swift in Sources */,
 				84AEA8A41E3BE32C002B2D43 /* Animations.swift in Sources */,
+				029F658D1F153E8000C3A0A7 /* ContactState.swift in Sources */,
 				027FC2471E8D89C000450EFB /* MemberCollection-CalendarExtension.swift in Sources */,
 				02FA70661E7092ED0080AAEB /* ImageViewController.swift in Sources */,
 				02668FAD1F12B6690052617E /* AppState.swift in Sources */,
