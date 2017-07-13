@@ -10,6 +10,8 @@ import UIKit
 
 class GoalDataofSectionTableViewCell: UITableViewCell {
     var data = [Goal]()
+    
+    weak var segueDelegate : Segue!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableviewHeight: NSLayoutConstraint!
     override func awakeFromNib() {
@@ -49,5 +51,13 @@ extension GoalDataofSectionTableViewCell: UITableViewDataSource,UITableViewDeleg
 
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let goal = data[indexPath.row]
+        if goal.type  == 1{
+             segueDelegate.selected("infoSegue", sender: goal)
+        }
+       
+    }
+    
     
 }

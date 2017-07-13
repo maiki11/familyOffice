@@ -8,6 +8,11 @@
 
 import UIKit
 import ReSwift
+
+protocol Segue: class {
+    func selected(_ segue: String, sender: Any?) -> Void
+}
+
 class GoalTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
     var types = [("Deportivo","sports-wide"),("Religión","religion-wide"),("Escolar","school-wide"),("Negocios","business-wide"),("Alimentación","nutrition-wide"),("Salud","health-wide")]
     typealias StoreSubscriberStateType = GoalState
@@ -50,17 +55,18 @@ class GoalTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row % 2 == 0 {
+            let data = getDataByIndex(indexPath)
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellSection", for: indexPath) as!  GoalSectionTableViewCell
             let obj = types[indexPath.row/2]
             cell.backgroundImage.image  = UIImage(named: obj.1)
-            cell.nameLbl.text = obj.0
-            
+            let name = data.count > 0 ? " (\(data.filter({$0.done}).count)/\(data.count))" : " No existen"
+            cell.nameLbl.text = obj.0 + name
             return cell
         }
         
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellData", for: indexPath) as! GoalDataofSectionTableViewCell
-        let index = indexPath.row > 0 ? (indexPath.row-1)/2 : 0
-        cell.data = myGoals.filter({$0.category == index})
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellData", for: indexPath) as! GoalDataofSectionTableViewCell
+        cell.data = getDataByIndex(indexPath)
+        cell.segueDelegate = self
         cell.tableView.reloadData()
         cell.chageHeight()
         return cell
@@ -71,10 +77,15 @@ class GoalTableViewController: UIViewController, UITableViewDelegate, UITableVie
             return tableView.frame.height/6 - 11
         }else{
             if indexPath.row == cellSelected {
-                return 400.0
+                let heigtht = getDataByIndex(indexPath).count * 44
+                return CGFloat(heigtht)
             }
             return 0
         }
+    }
+    func getDataByIndex(_ indexPath: IndexPath) -> [Goal] {
+        let index = indexPath.row % 2 == 0 || indexPath.row == 0 ? indexPath.row/2 : (indexPath.row-1)/2
+        return myGoals.filter({$0.category == index})
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == cellSelected - 1 {
@@ -96,7 +107,7 @@ class GoalTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
 }
-extension GoalTableViewController: StoreSubscriber {
+extension GoalTableViewController: StoreSubscriber, Segue {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         addObservers()
@@ -156,18 +167,23 @@ extension GoalTableViewController: StoreSubscriber {
         if segue.identifier == "addSegue" {
             let vc = segue.destination as! AddGoalViewController
             let goal :Goal!
-            if sender is Goal {
-                goal = sender as? Goal
-                vc.bind(goal: goal)
-                
-            }else{
+            
                 goal = Goal()
                 if tabBar.selectedItem?.tag == 1 {
                     goal.type = 1
                 }
                 vc.bind(goal: goal )
-            }
             
+            
+        }else if segue.identifier == "infoSegue" {
+            let vc = segue.destination as! GoalViewController
+            if sender is Goal {
+                vc.bind(goal: sender as! Goal)
+            }
         }
+    }
+    
+    func selected(_ segue: String, sender: Any?) {
+        self.performSegue(withIdentifier: segue, sender: sender)
     }
 }
