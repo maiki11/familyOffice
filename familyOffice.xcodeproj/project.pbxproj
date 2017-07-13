@@ -39,6 +39,11 @@
 		023F9CEF1E1C39D300420217 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F9CEE1E1C39D300420217 /* AuthService.swift */; };
 		024104871E6F40C4002B8E1C /* FamilyCollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024104861E6F40C4002B8E1C /* FamilyCollectionExtension.swift */; };
 		0241048C1E6F4F23002B8E1C /* RepositoryClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0241048B1E6F4F23002B8E1C /* RepositoryClass.swift */; };
+		02441D9A1F16A3E500EA8202 /* CalendarOpenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02441D991F16A3E500EA8202 /* CalendarOpenViewController.swift */; };
+		02441D9C1F16BECD00EA8202 /* GoalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02441D9B1F16BECD00EA8202 /* GoalTableViewController.swift */; };
+		02441D9E1F16BF4200EA8202 /* GoalSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02441D9D1F16BF4200EA8202 /* GoalSectionTableViewCell.swift */; };
+		02441DA01F16E7EF00EA8202 /* GoalDataofSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02441D9F1F16E7EF00EA8202 /* GoalDataofSectionTableViewCell.swift */; };
+		02441DA21F16FFF600EA8202 /* GoalDataForCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02441DA11F16FFF600EA8202 /* GoalDataForCategoryTableViewCell.swift */; };
 		0249F3361E43C1E6000872CD /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249F3351E43C1E6000872CD /* StorageService.swift */; };
 		024BCA811E6F1E2D00736F1A /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024BCA801E6F1E2D00736F1A /* RequestService.swift */; };
 		024BCA831E6F237900736F1A /* Proccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024BCA821E6F237900736F1A /* Proccess.swift */; };
@@ -250,6 +255,11 @@
 		023F9CEE1E1C39D300420217 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		024104861E6F40C4002B8E1C /* FamilyCollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FamilyCollectionExtension.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0241048B1E6F4F23002B8E1C /* RepositoryClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryClass.swift; sourceTree = "<group>"; };
+		02441D991F16A3E500EA8202 /* CalendarOpenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarOpenViewController.swift; sourceTree = "<group>"; };
+		02441D9B1F16BECD00EA8202 /* GoalTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalTableViewController.swift; sourceTree = "<group>"; };
+		02441D9D1F16BF4200EA8202 /* GoalSectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalSectionTableViewCell.swift; sourceTree = "<group>"; };
+		02441D9F1F16E7EF00EA8202 /* GoalDataofSectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalDataofSectionTableViewCell.swift; sourceTree = "<group>"; };
+		02441DA11F16FFF600EA8202 /* GoalDataForCategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalDataForCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		0249F3351E43C1E6000872CD /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		024BCA801E6F1E2D00736F1A /* RequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		024BCA821E6F237900736F1A /* Proccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Proccess.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -502,6 +512,8 @@
 				022CC44C1EF9C3F3009FA79C /* Objectives.storyboard */,
 				028CD3661EFAF98C00DEC001 /* AddGoalViewController.swift */,
 				02811B321F06AE9E004231BE /* GoalViewController.swift */,
+				02441D991F16A3E500EA8202 /* CalendarOpenViewController.swift */,
+				02441D9B1F16BECD00EA8202 /* GoalTableViewController.swift */,
 			);
 			name = goals;
 			sourceTree = "<group>";
@@ -761,8 +773,11 @@
 		027230AB1EFAE26F00831A1B /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				02441D9D1F16BF4200EA8202 /* GoalSectionTableViewCell.swift */,
 				028CD36A1EFB447600DEC001 /* typeiconCollectionViewCell.swift */,
 				02811B371F06D869004231BE /* GoalTableViewCell.swift */,
+				02441D9F1F16E7EF00EA8202 /* GoalDataofSectionTableViewCell.swift */,
+				02441DA11F16FFF600EA8202 /* GoalDataForCategoryTableViewCell.swift */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -1478,6 +1493,7 @@
 				028E0E311EDF3F0700D5205B /* memberEventTableViewCell.swift in Sources */,
 				02002BFB1E82074E007191CC /* BaseTableViewCell.swift in Sources */,
 				029F65931F15446100C3A0A7 /* ContactService.swift in Sources */,
+				02441D9A1F16A3E500EA8202 /* CalendarOpenViewController.swift in Sources */,
 				02CF79AB1EAEC4B200E13056 /* EventService.swift in Sources */,
 				02D2C0D11E6747AE007A6798 /* References.swift in Sources */,
 				029F65911F1541B300C3A0A7 /* ContactReducer.swift in Sources */,
@@ -1527,6 +1543,7 @@
 				02AD81521E4B963C0030B3DD /* memberSelectedCollectionViewCell.swift in Sources */,
 				0226C8E61E3C267B007968BA /* ConfigurationTableViewController.swift in Sources */,
 				020A64FD1E81EE1A00F473A0 /* chatCollectionViewController.swift in Sources */,
+				02441DA21F16FFF600EA8202 /* GoalDataForCategoryTableViewCell.swift in Sources */,
 				02002BF71E820589007191CC /* GroupsTableViewCell.swift in Sources */,
 				02DFD5591EC2810300DA7486 /* Event.swift in Sources */,
 				045F4A0F1F0DB8D000B483C9 /* AlbumViewController.swift in Sources */,
@@ -1562,6 +1579,7 @@
 				024BCA811E6F1E2D00736F1A /* RequestService.swift in Sources */,
 				02811B481F06ED44004231BE /* GoalActions.swift in Sources */,
 				02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */,
+				02441D9C1F16BECD00EA8202 /* GoalTableViewController.swift in Sources */,
 				045B648F1EFDD1F600F57BBD /* HomeGalleryViewController.swift in Sources */,
 				02FD90031EDCA7C300F76BA1 /* addEventTableViewController.swift in Sources */,
 				02981B6D1EEB3CA400BA1BF4 /* EndRepeatEventTableViewController.swift in Sources */,
@@ -1572,12 +1590,14 @@
 				84AEA8A41E3BE32C002B2D43 /* Animations.swift in Sources */,
 				029F658D1F153E8000C3A0A7 /* ContactState.swift in Sources */,
 				027FC2471E8D89C000450EFB /* MemberCollection-CalendarExtension.swift in Sources */,
+				02441DA01F16E7EF00EA8202 /* GoalDataofSectionTableViewCell.swift in Sources */,
 				02FA70661E7092ED0080AAEB /* ImageViewController.swift in Sources */,
 				02668FAD1F12B6690052617E /* AppState.swift in Sources */,
 				024CA7921E871A6700E2B7FC /* RegisterExtension.swift in Sources */,
 				0266454E1EFC86DD0034D434 /* Goal.swift in Sources */,
 				024EF9AA1E834B6A00F5B4DF /* IndexViewController.swift in Sources */,
 				02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */,
+				02441D9E1F16BF4200EA8202 /* GoalSectionTableViewCell.swift in Sources */,
 				04475B541F0ED55500F257EA /* GalleryActions.swift in Sources */,
 				02AD814D1E4B90B10030B3DD /* SelectedTableViewCell.swift in Sources */,
 				02668FAF1F12B6B80052617E /* UserActions.swift in Sources */,

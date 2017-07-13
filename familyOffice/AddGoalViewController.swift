@@ -11,30 +11,54 @@ import Toast_Swift
 import Firebase
 import ReSwift
 import ReSwiftRouter
-class AddGoalViewController: UIViewController, GoalBindable, StoreSubscriber, Routable{
+
+protocol DateProtocol: class {
+    func selectedDate(date: Date) -> Void
+}
+
+
+class AddGoalViewController: UIViewController, GoalBindable, StoreSubscriber, UIGestureRecognizerDelegate, DateProtocol{
     static let identifier = "AddGoalViewController"
     var goal: Goal!
     var type = 0
+    let padding = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 0)
     @IBOutlet weak var titleTxt: UITextField!
-    @IBOutlet weak var endDateDP: UIDatePicker!
+    @IBOutlet weak var endDateLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var finishLbl: UILabel!
-    
     var types = [("Deportivo","sport"),("Religión","religion"),("Escolar","school"),("Negocios","business-1"),("Alimentación","eat"),("Salud","health-1")]
    
+    @IBAction func handleChange(_ sender: UITextField) {
+        self.goal.title = self.titleTxt.text
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Crear Objetivo"
+        endDateLbl.layer.borderWidth = 1
+        endDateLbl.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1).cgColor
+        endDateLbl.layer.cornerRadius = 4
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
+        tap.delegate = self
+        endDateLbl.isUserInteractionEnabled = true
+        endDateLbl.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
-
+    
+    func tap(_ gestureRecognizer: UITapGestureRecognizer) -> Void {
+        self.performSegue(withIdentifier: "toDatePicker", sender: nil)
+    }
+    func selectedDate(date: Date) {
+        self.goal.endDate = date.string(with: .InternationalFormat)
+        print(goal.toDictionary())
+        self.bind(goal: goal)
+    }
     override func viewWillAppear(_ animated: Bool) {
         setupNavBar()
         self.bind(goal: goal)
-        if goal.title != "" {
-            finishLbl.isHidden = false
+        if !goal.title.isEmpty{
+             self.navigationItem.title = "Actualizar"
+        }else{
+            self.navigationItem.title = "Agregar"
         }
         store.subscribe(self) {
             state in
@@ -70,7 +94,6 @@ class AddGoalViewController: UIViewController, GoalBindable, StoreSubscriber, Ro
             return
         }
         goal.title = title
-        goal.endDate = endDateDP.date.string(with: .InternationalFormat)
         store.dispatch(InsertGoalAction(goal: goal))
     }
     
@@ -79,10 +102,7 @@ class AddGoalViewController: UIViewController, GoalBindable, StoreSubscriber, Ro
         guard let title = titleTxt.text, !title.isEmpty else {
             return
         }
-        
-        
         goal.title = title
-        goal.endDate = endDateDP.date.string(with: .InternationalFormat)
         store.dispatch(UpdateGoalAction(goal: goal))
     }
     
@@ -103,6 +123,16 @@ class AddGoalViewController: UIViewController, GoalBindable, StoreSubscriber, Ro
     }
     
     typealias StoreSubscriberStateType = GoalState
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationNavController = (segue.destination as? UINavigationController){
+            if let datePickerVC = destinationNavController.viewControllers.first as? CalendarOpenViewController{
+                datePickerVC.dateToSelect = Date(string: endDateLbl.text!, formatter: .dayMonthAndYear2)
+                datePickerVC.dateDelegate = self
+                
+            }
+        }
+    }
 
 }
 extension AddGoalViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -119,9 +149,14 @@ extension AddGoalViewController: UICollectionViewDataSource, UICollectionViewDel
         let obj = types[indexPath.row]
         cell.titleLbl.text = obj.0
         if goal.category == indexPath.item {
-            cell.checkimage.isHidden = false
+            cell.checkimage.backgroundColor = UIColor.clear
+            cell.checkimage.alpha = 1
+            cell.layer.borderWidth = 3.0
+            cell.layer.borderColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1).cgColor
         }else{
-            cell.checkimage.isHidden = true
+            cell.checkimage.backgroundColor = UIColor.black
+            cell.checkimage.alpha = 0.6
+            cell.layer.borderWidth = 0.0
         }
         cell.photo.image = UIImage(named: obj.1)
         return cell
