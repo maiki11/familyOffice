@@ -449,13 +449,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="zxczxczx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In8-Hp-FA4">
-                                                    <rect key="frame" x="33.5" y="120" width="54.5" height="11"/>
+                                                    <rect key="frame" x="36" y="120" width="49" height="14"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="12"/>
                                                     <color key="textColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Au8-WY-2gK" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
-                                                    <rect key="frame" x="45" y="46" width="30" height="28"/>
+                                                    <rect key="frame" x="45" y="44" width="30" height="32"/>
                                                     <fontDescription key="fontDescription" name="GothamBook" family="Gotham Book" pointSize="17"/>
                                                     <color key="tintColor" red="0.29411764709999999" green="0.1764705882" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <state key="normal">
@@ -576,7 +576,9 @@
                         <segue destination="Xe7-NB-MEv" kind="show" identifier="healthSegue" id="UMc-ep-tL1"/>
                         <segue destination="wrq-DB-nSA" kind="show" identifier="goalSegue" id="ttz-Tk-RRT"/>
                         <segue destination="b01-wc-1ql" kind="show" id="ByB-Z0-AQm"/>
+                        <segue destination="0d3-uh-Jcd" kind="show" identifier="contactsSegue" id="sre-07-YkP"/>
                         <segue destination="pgj-Yi-X16" kind="show" identifier="gallerySegue" id="Lb5-eQ-s3P"/>
+                        <segue destination="CZo-yQ-ole" kind="show" identifier="budgetSegue" id="3EG-pH-dkJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNJ-R1-TZ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1259,6 +1261,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fae-fk-cVy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-61" y="2302"/>
+        </scene>
+        <!--mainContacts-->
+        <scene sceneID="kFJ-C8-Vep">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Contacts" referencedIdentifier="mainContacts" id="0d3-uh-Jcd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zDh-33-1QG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1968" y="2093"/>
+        </scene>
+        <!--Budget-->
+        <scene sceneID="xTq-es-99M">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Budget" id="CZo-yQ-ole" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9df-oV-85V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-69" y="2308"/>
         </scene>
         <!--Chat-->
         <scene sceneID="Uct-Yn-twt">

@@ -15,6 +15,7 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate {
     
     let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple", "presupuesto", "presupuesto"]
     let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros", "Presupuesto", "Lista ToDo"]
+
     
     
     private var family : Family?

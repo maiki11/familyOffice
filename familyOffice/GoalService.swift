@@ -10,7 +10,6 @@ import Foundation
 import FirebaseDatabase
 let defaults = UserDefaults.standard
 class GoalService: RequestService {
-    var goals: [Goal] = []
     var handles: [(String,UInt,FIRDataEventType)] = []
     let basePath = "goals/\(service.USER_SERVICE.users[0].id!)"
     private init() {}
@@ -41,7 +40,7 @@ class GoalService: RequestService {
     func initObserves(ref: String, actions: [FIRDataEventType]) -> Void {
         for action in actions {
             if !handles.contains(where: { $0.0 == ref && $0.2 == action} ){
-                 self.child_action(ref: ref, action: action)
+                self.child_action(ref: ref, action: action)
             }
         }
     }
@@ -64,7 +63,51 @@ class GoalService: RequestService {
         
     }
     
+    func create(_ xgoal: Goal) -> Void {
+        var goal = xgoal
+        let id = getPath(type: goal.type)
+        let path = "goals/\(id)/\(goal.id!)"
+        if goal.type == 1 {
+            goal.members = {
+                let fid = store.state.UserState.user?.familyActive
+                var members = [String:Bool]()
+                store.state.FamilyState.families.first(where: {$0.id == fid})?.members.forEach({s in
+                    members[s] = true
+                })
+                return members
+            }()
+        }
+        service.GOAL_SERVICE.insert(path, value: goal.toDictionary(), callback: {ref in
+            if ref is FIRDatabaseReference {
+                store.state.GoalsState.goals[id]?.append(goal)
+            }
+        })
+    }
+    
+    func update(_ goal: Goal) -> Void {
+        let id = getPath(type: goal.type)
+        let path = "goals/\(id)/\(goal.id!)"
+        service.GOAL_SERVICE.update(path, value: goal.toDictionary() as! [AnyHashable : Any], callback: { ref in
+            if ref is FIRDatabaseReference {
+                if let index = store.state.GoalsState.goals[id]?.index(where: {$0.id == goal.id }){
+                    store.state.GoalsState.goals[id]?[index] = goal
+                    store.state.GoalsState.status = .finished
+                }
+                
+            }
+            
+        })
+    }
+    
     func delete(_ ref: String, callback: @escaping ((Any) -> Void)) {
+    }
+    
+    func getPath(type: Int) -> String {
+        if type == 0 {
+            return store.state.UserState.user!.id!
+        }else{
+            return store.state.UserState.user!.familyActive!
+        }
     }
     
 }
@@ -76,19 +119,11 @@ extension GoalService: repository {
         let goal = Goal(snapshot: snapshot)
         
         if (store.state.GoalsState.goals[id] == nil) {
-           store.state.GoalsState.goals[id] = []
+            store.state.GoalsState.goals[id] = []
         }
-       
+        
         if !(store.state.GoalsState.goals[id]?.contains(where: {$0.id == goal.id}))!{
             store.state.GoalsState.goals[id]?.append(goal)
-        }
-    }
-    
-    func getPath(type: Int) -> String {
-        if type == 0 {
-            return service.USER_SERVICE.users[0].id!
-        }else{
-            return service.USER_SERVICE.users[0].familyActive!
         }
     }
     

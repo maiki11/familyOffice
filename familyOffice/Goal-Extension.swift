@@ -35,6 +35,9 @@ extension GoalBindable {
     var titleTxt: UITextField! {
         return nil
     }
+    var doneSwitch: UISwitch! {
+        return nil
+    }
     
     func bind(goal: Goal) {
         self.goal = goal
@@ -60,7 +63,7 @@ extension GoalBindable {
         }
 
         if let endDateLbl  = self.endDateLbl {
-            endDateLbl.text = goal.endDate != "" ? Date(string: goal.endDate, formatter: .InternationalFormat)!.string(with: .MonthdayAndYear) : "Sin fecha"
+            endDateLbl.text = "  " + goal.endDate != "" ? Date(string: goal.endDate, formatter: .InternationalFormat)!.string(with: .MonthdayAndYear) : "Sin fecha"
         }
 
         if let dateCreatedLbl = self.dateCreatedLbl {
@@ -75,6 +78,14 @@ extension GoalBindable {
         }
         if let noteLbl = self.noteLbl {
             noteLbl.text = goal.note
+        }
+        
+        if let doneSwitch = self.doneSwitch {
+            if goal.type == 0 {
+                doneSwitch.isOn = goal.done
+            }else{
+                doneSwitch.isOn = goal.members[(store.state.UserState.user?.id!)!]!
+            }
         }
         
         
