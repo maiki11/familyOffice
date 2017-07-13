@@ -42,7 +42,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="title" destination="esj-lh-s24" id="A1P-gv-IgE"/>
-                                    <segue destination="pxp-1Z-Rj6" kind="show" identifier="showItemDetails" id="RbM-GJ-67r"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -53,6 +52,7 @@
                     </tableView>
                     <connections>
                         <segue destination="GKy-2K-7gt" kind="show" identifier="addSegue" id="7oy-Y1-4VP"/>
+                        <segue destination="Yis-qD-O2g" kind="show" identifier="showItemDetails" id="OmK-Ip-o5v"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LFz-Qn-PbF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -78,8 +78,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gkY-CA-CpT">
-                                <rect key="frame" x="16" y="152" width="343" height="495"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gkY-CA-CpT">
+                                <rect key="frame" x="16" y="280" width="343" height="367"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oCc-Ia-rqr">
@@ -90,6 +90,13 @@
                                     <action selector="addPhoto:" destination="GKy-2K-7gt" eventType="touchUpInside" id="QJl-ee-Fv4"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="gS9-QR-Mgk">
+                                <rect key="frame" x="0.0" y="170" width="375" height="102"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="521599996.26046801">
+                                    <!--2017-07-13 00:53:16 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -102,40 +109,49 @@
             </objects>
             <point key="canvasLocation" x="24.800000000000001" y="52.623688155922046"/>
         </scene>
-        <!--Item Detail View Controller-->
-        <scene sceneID="RH6-Lt-2rL">
+        <!--Edit Item View Controller-->
+        <scene sceneID="slu-c0-wax">
             <objects>
-                <viewController storyboardIdentifier="ItemDetailViewController" id="pxp-1Z-Rj6" customClass="ItemDetailViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditItemViewController" id="Yis-qD-O2g" customClass="EditItemViewController" customModule="familyOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ieb-1h-ree"/>
-                        <viewControllerLayoutGuide type="bottom" id="P69-L0-dM2"/>
+                        <viewControllerLayoutGuide type="top" id="HfO-f4-pf2"/>
+                        <viewControllerLayoutGuide type="bottom" id="kMY-QU-GIh"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="UqO-FZ-XbH">
+                    <view key="view" contentMode="scaleToFill" id="AVJ-JV-bpb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bu5-vg-7mq">
-                                <rect key="frame" x="16" y="108" width="343" height="551"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Título" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pMj-Kq-DZp">
+                                <rect key="frame" x="16" y="106" width="298" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OUW-Ev-lfU">
+                                <rect key="frame" x="16" y="152" width="343" height="495"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcP-vV-cgP">
-                                <rect key="frame" x="16" y="75" width="343" height="25"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbI-9R-5j8">
+                                <rect key="frame" x="314" y="92" width="54" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <state key="normal" title="AddPhoto" image="plus_1x"/>
+                                <connections>
+                                    <action selector="addPhoto:" destination="Yis-qD-O2g" eventType="touchUpInside" id="3ip-4v-cgh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="image" destination="bu5-vg-7mq" id="xVr-f1-sgi"/>
-                        <outlet property="itemTitle" destination="XcP-vV-cgP" id="8Qw-Le-foN"/>
+                        <outlet property="addPhotoButton" destination="cbI-9R-5j8" id="FUG-Jq-Bp7"/>
+                        <outlet property="photo" destination="OUW-Ev-lfU" id="go6-RQ-s7E"/>
+                        <outlet property="textFieldTitle" destination="pMj-Kq-DZp" id="aJg-fI-TNE"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S86-bQ-rzt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L6A-7h-SUt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24.800000000000001" y="779.46026986506752"/>
+            <point key="canvasLocation" x="862" y="779"/>
         </scene>
     </scenes>
     <resources>

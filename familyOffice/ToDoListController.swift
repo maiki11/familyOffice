@@ -63,6 +63,10 @@ class ToDoListController: UITableViewController,UIViewControllerPreviewingDelega
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "showItemDetails", sender: nil)
+    }
+    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let didAction = UITableViewRowAction(style: .normal, title: self.items[indexPath.row].status == "Finalizada" ? "Retomar" : "Finalizar") { (action, indexPath) in
             //Cambiar status en Farabase
@@ -85,10 +89,11 @@ class ToDoListController: UITableViewController,UIViewControllerPreviewingDelega
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(segue.identifier!)
         if segue.identifier == "showItemDetails"{
             if let indexPath = self.tableView.indexPathForSelectedRow{
                 let selectedItem = self.items[indexPath.row]
-                let detailsViewController = segue.destination as! ItemDetailViewController
+                let detailsViewController = segue.destination as! EditItemViewController
                 detailsViewController.item = selectedItem
             }
         }
@@ -102,7 +107,7 @@ class ToDoListController: UITableViewController,UIViewControllerPreviewingDelega
         
         guard let cell = tableView?.cellForRow(at: indexPath) else {return nil}
         
-        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: "ItemDetailViewController") as? ItemDetailViewController else {return nil}
+        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: "EditItemViewController") as? EditItemViewController else {return nil}
         
         let item = self.items[indexPath.row]
         detailVC.item = item

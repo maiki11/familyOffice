@@ -16,10 +16,16 @@ class ItemDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let saveButton = UIBarButtonItem(title: "Editar", style: .plain, target: self, action: #selector(handleEdit))
+        self.navigationItem.rightBarButtonItem = saveButton
 
         itemTitle.text = item.title
         image.loadImage(urlString: item.photoUrl!)
         // Do any additional setup after loading the view.
+    }
+    
+    func handleEdit() -> Void {
+        self.performSegue(withIdentifier: "editItemSegue", sender: nil)
     }
 
     override func didReceiveMemoryWarning() {
