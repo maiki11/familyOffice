@@ -70,6 +70,7 @@ PODS:
   - GTMSessionFetcher/Core (1.1.9)
   - GTMSessionFetcher/Full (1.1.9):
     - GTMSessionFetcher/Core (= 1.1.9)
+  - JBDatePicker (1.2.3)
   - JVFloatLabeledTextField (1.1.1)
   - MGSwipeTableCell (1.5.6)
   - MIBadgeButton-Swift (0.5)
@@ -87,6 +88,7 @@ PODS:
     - ReSwift (~> 3.0.0)
   - SearchTextField (1.1.0)
   - SmileLock (2.0.2)
+  - SnapKit (3.2.0)
   - Toast-Swift (2.0.0)
 
 DEPENDENCIES:
@@ -102,6 +104,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FSCalendar
   - GoogleSignIn
+  - JBDatePicker
   - JVFloatLabeledTextField
   - MGSwipeTableCell
   - MIBadgeButton-Swift (from `https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git`, branch `master`)
@@ -111,6 +114,7 @@ DEPENDENCIES:
   - ReSwiftRouter
   - SearchTextField
   - SmileLock
+  - SnapKit (~> 3.0)
   - Toast-Swift (~> 2.0.0)
 
 EXTERNAL SOURCES:
@@ -140,6 +144,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
+  JBDatePicker: 7130ca86cb2ba1e49d5050b311ba5a14968c18b9
   JVFloatLabeledTextField: 0e5524b097f102036214dd8279edc8ecf08b5e18
   MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
   MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
@@ -152,8 +157,9 @@ SPEC CHECKSUMS:
   ReSwiftRouter: c620138bf94b57c068f789d51c0bd23efc42bf68
   SearchTextField: 5daab6cecfd90e06f9b08b2814593656c0c99f3d
   SmileLock: 7ae1e174b4697c0a33882dab838fc0bea94432f4
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   Toast-Swift: 5b2f8f720f7e78e48511f693df1f9c9a6e38a25a
 
-PODFILE CHECKSUM: 6afd88ebd3f8f0a2d963e60486cd58e586634dd3
+PODFILE CHECKSUM: 10511a85c7d1bdcabb0cbc26e3c37d782dee4833
 
 COCOAPODS: 1.2.1.rc.1

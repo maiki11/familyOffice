@@ -76,6 +76,7 @@ struct Goal {
         self.done = service.UTILITY_SERVICE.exist(field: Goal.kdone, dictionary: snapshotValue)
         
         self.members = service.UTILITY_SERVICE.exist(field: Goal.kMembers, dictionary: snapshotValue)
+        self.category = service.UTILITY_SERVICE.exist(field: Goal.kcategory, dictionary: snapshotValue)
         
     }
     func toDictionary() -> NSDictionary! {

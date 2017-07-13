@@ -63,7 +63,7 @@ extension GoalBindable {
         }
 
         if let endDateLbl  = self.endDateLbl {
-            endDateLbl.text = goal.endDate != "" ? Date(string: goal.endDate, formatter: .InternationalFormat)!.string(with: .MonthdayAndYear) : "Sin fecha"
+            endDateLbl.text = "  " + goal.endDate != "" ? Date(string: goal.endDate, formatter: .InternationalFormat)!.string(with: .MonthdayAndYear) : "Sin fecha"
         }
 
         if let dateCreatedLbl = self.dateCreatedLbl {
