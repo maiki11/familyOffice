@@ -130,6 +130,7 @@
 		02FA70641E707BAB0080AAEB /* ToastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA70631E707BAB0080AAEB /* ToastService.swift */; };
 		02FA70661E7092ED0080AAEB /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA70651E7092ED0080AAEB /* ImageViewController.swift */; };
 		02FD90031EDCA7C300F76BA1 /* addEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FD90021EDCA7C300F76BA1 /* addEventTableViewController.swift */; };
+		042230DB1F1961B0005CBAC7 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042230DA1F1961B0005CBAC7 /* GalleryCollectionViewCell.swift */; };
 		042567861EFC34B8001EAC50 /* Gallery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042567851EFC34B8001EAC50 /* Gallery.storyboard */; };
 		042693011F1448EB004356D6 /* ImageAlbumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042693001F1448EB004356D6 /* ImageAlbumService.swift */; };
 		04475B4E1F0ECCA800F257EA /* GalleryReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04475B4D1F0ECCA800F257EA /* GalleryReducer.swift */; };
@@ -140,7 +141,6 @@
 		04AFE38B1F01DE1600D4ECA2 /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFE38A1F01DE1600D4ECA2 /* AlbumModel.swift */; };
 		04AFE38D1F03246000D4ECA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AFE38C1F03246000D4ECA2 /* Assets.xcassets */; };
 		04AFE38F1F05A0F500D4ECA2 /* AddAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFE38E1F05A0F500D4ECA2 /* AddAlbumViewController.swift */; };
-		04C4F3C91F017C7C0094CA2D /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C4F3C81F017C7C0094CA2D /* GalleryCollectionViewCell.swift */; };
 		1A54F2C4CFA581E377445DB2 /* GalleryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A54FA2A44BB2FC5448DD081 /* GalleryService.swift */; };
 		1A54F905E042096F2DD39EF1 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A54F16D92824170DA517ED5 /* ImageModel.swift */; };
 		2BC3C11ABAB0EF59C8FA8A68 /* Pods_familyOffice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EEEDFF57BED2506FDDB9A23 /* Pods_familyOffice.framework */; };
@@ -325,6 +325,7 @@
 		02FA70631E707BAB0080AAEB /* ToastService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastService.swift; sourceTree = "<group>"; };
 		02FA70651E7092ED0080AAEB /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		02FD90021EDCA7C300F76BA1 /* addEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = addEventTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		042230DA1F1961B0005CBAC7 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		042567851EFC34B8001EAC50 /* Gallery.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
 		042693001F1448EB004356D6 /* ImageAlbumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAlbumService.swift; sourceTree = "<group>"; };
 		04475B4D1F0ECCA800F257EA /* GalleryReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryReducer.swift; sourceTree = "<group>"; };
@@ -335,7 +336,6 @@
 		04AFE38A1F01DE1600D4ECA2 /* AlbumModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
 		04AFE38C1F03246000D4ECA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = familyOffice/Assets.xcassets; sourceTree = "<group>"; };
 		04AFE38E1F05A0F500D4ECA2 /* AddAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAlbumViewController.swift; sourceTree = "<group>"; };
-		04C4F3C81F017C7C0094CA2D /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		1A54F16D92824170DA517ED5 /* ImageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		1A54FA2A44BB2FC5448DD081 /* GalleryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryService.swift; sourceTree = "<group>"; };
 		4B3599B5B9EDF2A28C535E59 /* Pods-familyOfficeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-familyOfficeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-familyOfficeTests/Pods-familyOfficeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -958,7 +958,7 @@
 		04C4F3C71F017C390094CA2D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				04C4F3C81F017C7C0094CA2D /* GalleryCollectionViewCell.swift */,
+				042230DA1F1961B0005CBAC7 /* GalleryCollectionViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1439,6 +1439,7 @@
 				04475B4E1F0ECCA800F257EA /* GalleryReducer.swift in Sources */,
 				02668FAB1F12B5FF0052617E /* UserState.swift in Sources */,
 				024EF9A71E83412700F5B4DF /* SafeBoxViewController.swift in Sources */,
+				042230DB1F1961B0005CBAC7 /* GalleryCollectionViewCell.swift in Sources */,
 				02FA70641E707BAB0080AAEB /* ToastService.swift in Sources */,
 				02F15BB71E85ECE2008C26F8 /* chatModel.swift in Sources */,
 				02BC16F11EE9D80700722689 /* MapViewController.swift in Sources */,
@@ -1493,7 +1494,6 @@
 				0226C8E21E3C217D007968BA /* ConfigurationViewController.swift in Sources */,
 				0233A4F91EFDA33600D01F5C /* GoalService.swift in Sources */,
 				02382F0D1E1C210C0036FFC9 /* AppDelegate.swift in Sources */,
-				04C4F3C91F017C7C0094CA2D /* GalleryCollectionViewCell.swift in Sources */,
 				A4F65A2B1E985A4E00831BFD /* HealthOmniViewController_Categories.swift in Sources */,
 				02EABF571E312AE8008A7CA9 /* FamilyCollectionViewController.swift in Sources */,
 				024104871E6F40C4002B8E1C /* FamilyCollectionExtension.swift in Sources */,

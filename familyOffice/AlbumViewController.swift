@@ -26,11 +26,12 @@ class AlbumViewController: UIViewController, StoreSubscriber {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addImage))
-        self.navigationItem.rightBarButtonItem = addButton
         self.navigationItem.title = "Albums"
-        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addImage))
+        let backButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(self.back))
+        //backButton.image =
+        self.navigationItem.rightBarButtonItem = addButton
+        self.navigationItem.leftBarButtonItem = backButton
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: 2, bottom: 10, right: 2)
         layout.itemSize = CGSize(width: (self.collectionImages.contentSize.width/4)-2, height: (self.collectionImages.contentSize.width/4)-2)
@@ -39,11 +40,12 @@ class AlbumViewController: UIViewController, StoreSubscriber {
         self.collectionImages.collectionViewLayout = layout
 
     }
-
+    func back() -> Void {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-        
     }
     func addImage() {
         let picker = DKImagePickerController()

@@ -9,9 +9,10 @@
 import UIKit
 import ReSwift
 import Firebase
-class HomeGalleryViewController: UIViewController, HandleFamilySelected {
+class HomeGalleryViewController: UIViewController, UITabBarDelegate, HandleFamilySelected {
     var personal:[Album] = []
 
+    @IBOutlet weak var tabBar: UITabBar!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var selectionSegmentcontrol: UISegmentedControl!
     var familiar:[Family] = []
@@ -32,7 +33,15 @@ class HomeGalleryViewController: UIViewController, HandleFamilySelected {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.AddAlbum))
         self.navigationItem.rightBarButtonItems = [moreButton,addButton]
         self.navigationItem.title = "Albums"
+        self.tabBar.delegate = self
         // Do any additional setup after loading the view.
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.headerReferenceSize.height = 0
+        layout.itemSize = CGSize(width: (self.collectionView.frame.size.width), height: (self.collectionView.frame.size.height / 3)-2)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        self.collectionView.collectionViewLayout = layout
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,8 +53,11 @@ class HomeGalleryViewController: UIViewController, HandleFamilySelected {
     @IBAction func changeSelection(_ sender: UISegmentedControl) {
         self.ChangeSelected()
     }
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        self.ChangeSelected()
+    }
     func ChangeSelected() {
-        if(selectionSegmentcontrol.selectedSegmentIndex == 0){
+        if(tabBar.selectedItem?.tag == 0){
             self.navigationItem.title = "Albums"
             self.key = store.state.UserState.user?.id ?? ""
             service.GALLERY_SERVICE.refUserFamily = self.key
@@ -92,9 +104,9 @@ extension HomeGalleryViewController : UICollectionViewDelegate, UICollectionView
         cell.bind(album: album)
         return cell
     }
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    /*public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 150, height: 130)
-    }
+    }*/
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let keyAlbum = self.personal[indexPath[1]].id

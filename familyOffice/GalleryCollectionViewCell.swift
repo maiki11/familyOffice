@@ -12,6 +12,7 @@ class GalleryCollectionViewCell: UICollectionViewCell, AlbumBindable {
     
     var album: Album!
     @IBOutlet weak var Title: UILabel!
+    @IBOutlet weak var Total: UILabel!
     @IBOutlet weak var Image: UIImageView!
     override func layoutSubviews() {
         super.layoutSubviews()
