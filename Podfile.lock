@@ -75,11 +75,11 @@ PODS:
   - MIBadgeButton-Swift (0.5)
   - MultiAutoCompleteTextSwift (0.1.1)
   - Protobuf (3.3.0)
-  - Realm (2.8.2):
-    - Realm/Headers (= 2.8.2)
-  - Realm/Headers (2.8.2)
-  - RealmSwift (2.8.2):
-    - Realm (= 2.8.2)
+  - Realm (2.7.0):
+    - Realm/Headers (= 2.7.0)
+  - Realm/Headers (2.7.0)
+  - RealmSwift (2.7.0):
+    - Realm (= 2.7.0)
   - ReSwift (3.0.0)
   - ReSwiftRecorder (0.4.0):
     - ReSwift (~> 3.0)
@@ -91,7 +91,6 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - Charts
   - Charts (~> 3.0)
   - ChartsRealm
   - Firebase
@@ -145,8 +144,8 @@ SPEC CHECKSUMS:
   MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
   MultiAutoCompleteTextSwift: d5631e77b48413af5795e14a1ae6d72054fe2d1e
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
-  Realm: 0e262abf087c7054013e00579274f7e070486d4a
-  RealmSwift: 73565e91bc403c1149e4acf31ff9de506b2f9459
+  Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
+  RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
   ReSwift: f0255f4b4f2dacd12c5d97d34d13fc5dad6d6371
   ReSwiftRecorder: f37a363425ad61c7ddc2172e14ab7799b6b27483
   ReSwiftRouter: c620138bf94b57c068f789d51c0bd23efc42bf68
@@ -154,6 +153,6 @@ SPEC CHECKSUMS:
   SmileLock: 7ae1e174b4697c0a33882dab838fc0bea94432f4
   Toast-Swift: 5b2f8f720f7e78e48511f693df1f9c9a6e38a25a
 
-PODFILE CHECKSUM: 6afd88ebd3f8f0a2d963e60486cd58e586634dd3
+PODFILE CHECKSUM: a68e6bbb5a135ccdd03c903431daa60baead245a
 
-COCOAPODS: 1.2.1.rc.1
+COCOAPODS: 1.2.1

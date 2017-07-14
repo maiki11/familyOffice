@@ -92,6 +92,8 @@ class contactTableViewController: UITableViewController, StoreSubscriber{
         configureObservers()
         tableView.reloadData()
     }
+    
+    
 }
 extension contactTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {

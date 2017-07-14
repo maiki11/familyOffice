@@ -6,7 +6,6 @@ target 'familyOffice' do
   use_frameworks!
 
   # Pods for familyOffice
-  pod 'Charts'
   pod 'SmileLock'
   pod 'Firebase/Core'
   pod 'Firebase/Database'

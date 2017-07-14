@@ -12,6 +12,8 @@ class contactTableViewCell: UITableViewCell, ContactBindible {
     var contact: Contact!
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var jobLbl: UILabel!
+    @IBOutlet weak var callMember: UIButton!
+    @IBOutlet weak var msgMember: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
