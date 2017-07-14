@@ -19,5 +19,8 @@ struct FollowGoal {
         }
         self.date = date
     }
+    func toDictionary() -> NSDictionary {
+        return [self.date : self.members]
+    }
 
 }

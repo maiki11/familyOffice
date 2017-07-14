@@ -28,6 +28,7 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate, G
         pieChart.noDataText = "No hay objetivos"
     }
     @IBOutlet var dateForCompleate: UILabel!
+    @IBOutlet weak var doneSwitch: UISwitch!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -75,8 +76,6 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate, G
     }
     
     func addObservers() -> Void {
-        
-        
         service.GOAL_SERVICE.initObserves(ref: "goals/\((user?.familyActive!)!)", actions: [ .childChanged])
         
     }
@@ -89,14 +88,13 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate, G
     }
     
     func newState(state: GoalState) {
-        user = store.state.UserState.user
-        goal = state.goals[(user?.familyActive!)!]?.first(where: {$0.id == goal.id}) ?? nil
-  
         self.navigationItem.title = goal.title!
         switch state.status {
-        case .Finished(let t as FollowGoal):
+        case .Finished(let t as Goal):
             self.view.hideToastActivity()
-            follow = t
+            goal = t
+            verifyFollow()
+            store.state.GoalsState.status = .none
             break
         case .loading:
             self.view.makeToastActivity(.center)
@@ -104,8 +102,7 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate, G
         default:
             break
         }
-        updatePieChartData()
-        tableView.reloadData()
+        
     }
     func selectFamily() -> Void {
         if let index = store.state.FamilyState.families.index(where: {$0.id == store.state.UserState.user?.familyActive}){
@@ -116,29 +113,25 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate, G
     
     
     @IBAction func handleChange(_ sender: UISwitch) {
-
-            if follow != nil, let index = goal.follow.index(where: {$0.date == follow.date}), let uid = store.state.UserState.user?.id
-            {
-                goal.follow[index].members[uid] = sender.isOn ? Date().toMillis() : -1
-                
-                let base = service.GOAL_SERVICE.getPath(type: goal.type)
-                store.dispatch(UpdateFollowAction(follow: goal.follow[index],path: "goals/\(base)/\(goal.id!)/follow/\(follow.date!)"))
-                
-            }
-      
+        
+        if follow != nil, let index = goal.follow.index(where: {$0.date == follow.date}), let uid = store.state.UserState.user?.id
+        {
+            goal.follow[index].members[uid] = sender.isOn ? Date().toMillis() : -1
+            
+        }else{
+            goal.members[(user?.id)!] = sender.isOn ? Date().toMillis() : -1
+            
+        }
+        store.dispatch(UpdateGoalAction(goal: goal))
     }
     func updatePieChartData()  {
         self.pieChart.clear()
-        if follow == nil {
-            pieChart.noDataText = "No hay Info"
-            return
-        }
-        // 2. generate chart data entries
         let track = ["No", "Si"]
-        let goal = [Double(self.follow.members.filter({$0.value < 0}).count), Double(self.follow.members.filter({$0.value > 0}).count), ]
-        
         var entries = [PieChartDataEntry]()
-        for (index, value) in goal.enumerated() {
+        let members = follow == nil ? self.goal.members : self.follow.members
+        let goalMembers = [Double(members.filter({$0.value < 0}).count), Double(members.filter({$0.value > 0}).count) ]
+        
+        for (index, value) in goalMembers.enumerated() {
             let entry = PieChartDataEntry()
             entry.y = value
             entry.label = track[index]
@@ -149,7 +142,6 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate, G
         let set = PieChartDataSet( values: entries, label: "Cuantos la han logrado.")
         // this is custom extension method. Download the code for more details.
         let colors: [UIColor] = [#colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1),#colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)]
-        
         
         set.colors = colors
         let data = PieChartData(dataSet: set)
@@ -173,6 +165,13 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate, G
                 goal = sender as? Goal
                 vc.bind(goal: goal)
             }
+        }else if segue.identifier == "detailSegue" {
+            let vc = segue.destination as! GoalHistoryByUserViewController
+            
+            vc.bind(goal: self.goal)
+            if sender is User {
+                vc.user = sender as! User
+            }
         }
     }
 }
@@ -187,14 +186,22 @@ extension GoalViewController: UITableViewDelegate, UITableViewDataSource, IAxisV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! GoalTableViewCell
+        let members = follow == nil ? self.goal.members : self.follow.members
         
-        if follow != nil{
-            let key = Array(follow.members.keys)[indexPath.row]
-            let member = getUser(id: key)?.name ?? "Cargando..."
-            cell.titleLbl.text = member
-            cell.accessoryType = follow.members[key]! > 0 ? UITableViewCellAccessoryType.checkmark : UITableViewCellAccessoryType.none
-        }
+        let key = Array(members.keys)[indexPath.row]
+        let member = getUser(id: key) ?? nil
+        cell.titleLbl.text = member != nil ? member?.name : "Cargando..."
+        let date = follow != nil ? follow.members[key] ?? -1 : goal.members[key] ?? -1
+        cell.endDateLbl.text = date > 0 ? Date(timeIntervalSince1970: TimeInterval(date/1000)).string(with: .dayMonthAndYear2) : "Sin capturar"
+        cell.accessoryType = members[key]! > 0 ? UITableViewCellAccessoryType.checkmark : UITableViewCellAccessoryType.none
+        
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let members = follow == nil ? self.goal.members : self.follow.members
+        let key = Array(members.keys)[indexPath.row]
+        let member = getUser(id: key) ?? nil
+        self.performSegue(withIdentifier: "detailSegue", sender: member)
     }
     
     
@@ -226,16 +233,28 @@ extension GoalViewController: UITableViewDelegate, UITableViewDataSource, IAxisV
 }
 extension GoalViewController {
     func verifyFollow() -> Void {
+        
         let date = Date().toMillis()
-        for item in goal.follow {
+        let follows = goal.follow.sorted(by: {$0.date < $1.date})
+        for item in follows {
             let comp = Date(string: item.date, formatter: .ShortInternationalFormat)?.toMillis()
             if date! <= comp! {
                 follow = item
-                let string = dateForCompleate.text
-                dateForCompleate.text = string! + item.date
+                let string = "Fecha: "
+                dateForCompleate.text = string + item.date
                 break
             }
-            
         }
+        if follow != nil {
+            doneSwitch.isOn = follow.members[(user?.id!)!]! > 0 ? true : false
+        }else{
+            doneSwitch.isOn = goal.members[(user?.id!)!]! > 0 ? true : false
+            let string = "Finalizar objetivo de fecha: "
+            dateForCompleate.text = string + Date(timeIntervalSince1970: TimeInterval(goal.endDate/1000)).string(with: .dayMonthAndYear2)
+        }
+        updatePieChartData()
+        tableView.reloadData()
+        
     }
+    
 }

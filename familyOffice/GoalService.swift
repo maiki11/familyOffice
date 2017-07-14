@@ -91,7 +91,7 @@ class GoalService: RequestService {
             if ref is FIRDatabaseReference {
                 if let index = store.state.GoalsState.goals[id]?.index(where: {$0.id == goal.id }){
                     store.state.GoalsState.goals[id]?[index] = goal
-                    store.state.GoalsState.status = .finished
+                    store.state.GoalsState.status = .Finished(goal)
                 }
                 
             }
@@ -103,9 +103,19 @@ class GoalService: RequestService {
         self.update(path, value: follow.members , callback: {
             ref in
             if ref is FIRDatabaseReference {
-                    store.state.GoalsState.status = .Finished(follow)
+                let array = path.components(separatedBy: "/")
+                let fid = array[1]
+                let gid = array[2]
+                if let index = store.state.GoalsState.goals[fid]?.index(where: {$0.id == gid}) {
+                    if let indexF = store.state.GoalsState.goals[fid]?[index].follow.index(where: {$0.date == follow.date})  {
+                        store.state.GoalsState.goals[fid]?[index].follow[indexF].members = follow.members
+                        let goal = store.state.GoalsState.goals[fid]?[index]
+                        store.state.GoalsState.status = .Finished(goal!)
+                    }
+                }
+                
+                
             }
-
         })
         
     }

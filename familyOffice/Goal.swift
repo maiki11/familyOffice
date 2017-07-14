@@ -88,7 +88,6 @@ struct Goal {
             for date in snap.allKeys as! [String] {
                 self.follow.append(FollowGoal(snapshot: snap[date] as! NSDictionary, date: date ))
             }
-            print(self.follow)
         }
      
     }
@@ -103,7 +102,9 @@ struct Goal {
             Goal.ktitle : self.title,
             Goal.kcategory : self.category,
             Goal.kMembers : self.members,
-            Goal.kRepeat : self.repeatGoalModel.toDictionary()
+            Goal.kRepeat : self.repeatGoalModel.toDictionary(),
+            Goal.kFollow : NSDictionary(objects: self.follow.map({$0.members}), forKeys: self.follow.map({$0.date}) as! [NSCopying]),
+
             
         ]
     }
