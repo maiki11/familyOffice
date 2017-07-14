@@ -21,7 +21,19 @@ class GalleryCollectionViewCell: UICollectionViewCell, AlbumBindable {
         //self.Image.loadImage(urlString: service.USER_SERVICE.users[0].photoURL)
     }
 }
-
+class GalleryImageCollectionViewCell: UICollectionViewCell, ImageAlbumBindable {
+    
+    @IBOutlet weak var imageBackground: UIImageView!
+    
+    var imageAlbum: ImageAlbum?
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.imageBackground.frame.size.width = self.bounds.size.width
+        self.imageBackground.frame.size.height = self.bounds.size.height
+        //self.Image.loadImage(urlString: service.USER_SERVICE.users[0].photoURL)
+    }
+}
 
 
 class FamilyGalleryCollectionViewCell: UICollectionViewCell, FamilyBindable {

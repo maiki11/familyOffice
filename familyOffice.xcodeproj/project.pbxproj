@@ -131,6 +131,7 @@
 		02FA70661E7092ED0080AAEB /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FA70651E7092ED0080AAEB /* ImageViewController.swift */; };
 		02FD90031EDCA7C300F76BA1 /* addEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FD90021EDCA7C300F76BA1 /* addEventTableViewController.swift */; };
 		042567861EFC34B8001EAC50 /* Gallery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042567851EFC34B8001EAC50 /* Gallery.storyboard */; };
+		042693011F1448EB004356D6 /* ImageAlbumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042693001F1448EB004356D6 /* ImageAlbumService.swift */; };
 		04475B4E1F0ECCA800F257EA /* GalleryReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04475B4D1F0ECCA800F257EA /* GalleryReducer.swift */; };
 		04475B521F0ED27200F257EA /* GalleryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04475B511F0ED27200F257EA /* GalleryState.swift */; };
 		04475B541F0ED55500F257EA /* GalleryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04475B531F0ED55500F257EA /* GalleryActions.swift */; };
@@ -161,7 +162,6 @@
 		84D51B1D1EA6ACE3006829F7 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D51B1C1EA6ACE3006829F7 /* Section.swift */; };
 		84E9C9B51E92B78E00905A10 /* addCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9C9B41E92B78E00905A10 /* addCell.swift */; };
 		84E9C9B91E93269100905A10 /* SetPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9C9B81E93269100905A10 /* SetPersonalDataViewController.swift */; };
-		A44ACF6A1E70DB1800A5CA84 /* homeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44ACF691E70DB1800A5CA84 /* homeExtension.swift */; };
 		A44D4E5E1F0481CD00323B87 /* Budget.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44D4E5D1F0481CD00323B87 /* Budget.storyboard */; };
 		A44D4E611F04824B00323B87 /* BudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44D4E601F04824B00323B87 /* BudgetViewController.swift */; };
 		A44D91AF1E947F2700880D50 /* HealthOmniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44D91AE1E947F2700880D50 /* HealthOmniViewController.swift */; };
@@ -326,6 +326,7 @@
 		02FA70651E7092ED0080AAEB /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		02FD90021EDCA7C300F76BA1 /* addEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = addEventTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		042567851EFC34B8001EAC50 /* Gallery.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
+		042693001F1448EB004356D6 /* ImageAlbumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAlbumService.swift; sourceTree = "<group>"; };
 		04475B4D1F0ECCA800F257EA /* GalleryReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryReducer.swift; sourceTree = "<group>"; };
 		04475B511F0ED27200F257EA /* GalleryState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryState.swift; sourceTree = "<group>"; };
 		04475B531F0ED55500F257EA /* GalleryActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryActions.swift; sourceTree = "<group>"; };
@@ -460,10 +461,6 @@
 		022CC44E1EF9EDB0009FA79C /* goals */ = {
 			isa = PBXGroup;
 			children = (
-				026AF37C1F071F3900EF6DCD /* Middlaware */,
-				02811B431F06E997004231BE /* Actions */,
-				02811B421F06E990004231BE /* State */,
-				02811B411F06E95F004231BE /* Reducers */,
 				02811B411F06E95F004231BE /* Reducers */,
 				026AF37C1F071F3900EF6DCD /* Middlaware */,
 				02811B431F06E997004231BE /* Actions */,
@@ -582,6 +579,7 @@
 				0233A4F81EFDA33600D01F5C /* GoalService.swift */,
 				029CD0601F13172C00A29CBA /* UserSvc.swift */,
 				029CD0641F1327BD00A29CBA /* FamilySvc.swift */,
+				042693001F1448EB004356D6 /* ImageAlbumService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -675,25 +673,12 @@
 		02668FA81F12B5DB0052617E /* Reducers */ = {
 			isa = PBXGroup;
 			children = (
-				026AF37F1F07299000EF6DCD /* AppReducer.swift */,
 				029CD0621F131EBC00A29CBA /* UserReducer.swift */,
 			);
 			name = Reducers;
 			sourceTree = "<group>";
 		};
 		02668FA91F12B5E90052617E /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-				02668FAE1F12B6B80052617E /* UserActions.swift */,
-			);
-			name = Actions;
-			sourceTree = "<group>";
-		};
-		026AF37C1F071F3900EF6DCD /* Middlaware */ = {
-			isa = PBXGroup;
-			children = (
-				026AF37D1F071F6400EF6DCD /* GoalMiddleware.swift */,
-			);
 			isa = PBXGroup;
 			children = (
 				02668FAE1F12B6B80052617E /* UserActions.swift */,
@@ -1291,7 +1276,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C244A8E3599E321EEBD3E4FC /* [CP] Embed Pods Frameworks */ = {
@@ -1406,6 +1391,7 @@
 				02D2C0D11E6747AE007A6798 /* References.swift in Sources */,
 				02E33A641EBA71D0003BF787 /* ShowEventViewController.swift in Sources */,
 				A44D4E611F04824B00323B87 /* BudgetViewController.swift in Sources */,
+				042693011F1448EB004356D6 /* ImageAlbumService.swift in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
 				A46316B21E78C69E00E3F72C /* Health.swift in Sources */,
 				023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */,

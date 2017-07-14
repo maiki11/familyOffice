@@ -14,7 +14,7 @@ import ReSwift
 class AddAlbumViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate,StoreSubscriber {
     
     let picker = UIImagePickerController()
-    let path: String = "album/" + service.USER_SERVICE.users[0].id
+    let path: String = "album/" + service.GALLERY_SERVICE.refUserFamily!
     var reference: FIRDatabaseReference = FIRDatabaseReference()
     var chosenImage: UIImage? = nil
     var albums: [Album] = []
@@ -93,7 +93,7 @@ extension AddAlbumViewController{
             state in
             state.GalleryState
         }
-       
+        store.state.GalleryState.status = .none
     }
     override func viewWillDisappear(_ animated: Bool) {
         store.state.GalleryState.status = .none
@@ -117,7 +117,9 @@ extension AddAlbumViewController{
             self.view.hideToastActivity()
             self.toggleGalleryState(message: messsage)
             break
-        default: break;
+        default:
+            self.view.hideToastActivity()
+            break;
             
         }
     }

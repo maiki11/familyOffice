@@ -20,7 +20,7 @@ struct Album {
     var id: String!
     var cover: String!
     var title: String!
-    var images: [String] = []
+    var images = [String]()
     var ObjImages: [ImageAlbum] = []
 
     init(){

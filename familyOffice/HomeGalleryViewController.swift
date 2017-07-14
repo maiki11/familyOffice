@@ -9,19 +9,28 @@
 import UIKit
 import ReSwift
 import Firebase
-class HomeGalleryViewController: UIViewController {
+class HomeGalleryViewController: UIViewController, HandleFamilySelected {
     var personal:[Album] = []
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var selectionSegmentcontrol: UISegmentedControl!
     var familiar:[Family] = []
     
-    let key: String = service.USER_SERVICE.users[0].id
+    let settingLauncher = SettingLauncher()
+    func handleMore(_ sender: Any) {
+        settingLauncher.showSetting()
+        settingLauncher.handleFamily = self
+
+    }
+
+    
+    var key: String! = store.state.UserState.user?.id ?? ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.AddAlbum))
-        self.navigationItem.rightBarButtonItem = addButton
+        self.navigationItem.rightBarButtonItems = [moreButton,addButton]
         self.navigationItem.title = "Albums"
         // Do any additional setup after loading the view.
     }
@@ -33,14 +42,21 @@ class HomeGalleryViewController: UIViewController {
 
 
     @IBAction func changeSelection(_ sender: UISegmentedControl) {
-        collectionView.reloadData()
+        self.ChangeSelected()
+    }
+    func ChangeSelected() {
         if(selectionSegmentcontrol.selectedSegmentIndex == 0){
-            let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.AddAlbum))
-            self.navigationItem.rightBarButtonItem = addButton
             self.navigationItem.title = "Albums"
+            self.key = store.state.UserState.user?.id ?? ""
+            service.GALLERY_SERVICE.refUserFamily = self.key
+            self.InitObserver()
         }else{
-            self.navigationItem.rightBarButtonItem = nil
-            self.navigationItem.title = "Familias"
+            self.key = store.state.UserState.user?.familyActive ?? ""
+            if let family: Family = store.state.FamilyState.families.first(where: {$0.id == self.key}) {
+                self.navigationItem.title = "Familia: \(family.name!)"
+                service.GALLERY_SERVICE.refUserFamily = self.key
+                self.InitObserver()
+            }
         }
     }
 
@@ -54,6 +70,7 @@ class HomeGalleryViewController: UIViewController {
     }
     */
     func AddAlbum() {
+        store.state.GalleryState.status = .none
         self.performSegue(withIdentifier: "AddAlbumSegue", sender: nil)
     }
 
@@ -66,42 +83,26 @@ extension HomeGalleryViewController : UICollectionViewDelegate, UICollectionView
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.selectionSegmentcontrol.selectedSegmentIndex == 0 {
-            return self.personal.count
-        }else{
-            return self.familiar.count
-        }
+        return personal.count
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        switch selectionSegmentcontrol.selectedSegmentIndex {
-        case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! GalleryCollectionViewCell
-            let album = personal[indexPath.item]
-            cell.bind(album: album)
-            return cell
-        default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! FamilyGalleryCollectionViewCell
-            let family = service.FAMILY_SERVICE.families[indexPath.item]
-            cell.bind(fam: family)
-            return cell
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! GalleryCollectionViewCell
+        let album = personal[indexPath.item]
+        cell.bind(album: album)
+        return cell
     }
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if(selectionSegmentcontrol.selectedSegmentIndex == 0){
-            return CGSize(width: 150, height: 130)
-        }else{
-            return CGSize(width: 310, height: 130)
-        }
+        return CGSize(width: 150, height: 130)
     }
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch selectionSegmentcontrol.selectedSegmentIndex{
-        case 0: break
-        default: break
-        }
-        
+        let keyAlbum = self.personal[indexPath[1]].id
+        service.GALLERY_SERVICE.activeAlbum = keyAlbum
+        store.state.GalleryState.Album = self.personal[indexPath[1]]
+        service.GALLERY_SERVICE.initObserves(ref: "images/\(keyAlbum)", actions: [.childAdded])
+        service.GALLERY_SERVICE.refUserFamily = self.key
+        self.performSegue(withIdentifier: "AlbumDetailSegue", sender: nil)
     }
 
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -114,28 +115,52 @@ extension HomeGalleryViewController : UICollectionViewDelegate, UICollectionView
 
 extension HomeGalleryViewController: StoreSubscriber{
     typealias StoreSubscriberStateType = GalleryState
+    
+    func selectFamily() {
+       self.ChangeSelected()
+        collectionView.reloadData()
+    }
+    func InitObserver() {
+        service.GALLERY_SERVICE.initObserves(ref: "album/\(key!)", actions: [.value])
+    }
 
     override func viewWillAppear(_ animated: Bool) {
-        
-        service.GALLERY_SERVICE.initObserves(ref: "album/\(key)", actions: [.childAdded])
-        
+        self.InitObserver()
         store.subscribe(self){
             state in
             state.GalleryState
         }
-        
-        
-        // self.familiar = service.FAMILY_SERVICE.families
-        //        service.GALLERY_SERVICE.fillAlbums(reference: key, callback: { bool in
-        //            if bool{
-        //                self.personal = service.GALLERY_SERVICE.albums
-        //                self.collectionView.reloadData()
-        //            }
-        //        })
     }
     func newState(state: GalleryState) {
-        personal = state.Gallery[key] ?? []
-        self.collectionView?.reloadData()
+        switch state.status {
+        case .failed:
+            self.view.hideToastActivity()
+            personal = []
+            store.state.GalleryState.status = .none
+            self.view.makeToast("No hay albums.", duration: 1.0, position: .center)
+            break
+        case .none:
+            self.view.hideToastActivity()
+            self.key = store.state.UserState.user?.familyActive ?? ""
+            if let family: Family = store.state.FamilyState.families.first(where: {$0.id == self.key}) {
+                self.navigationItem.title = "Familia: \(family.name!)"
+                service.GALLERY_SERVICE.refUserFamily = self.key
+            }
+            break
+        case .finished:
+            self.view.hideToastActivity()
+            personal = store.state.GalleryState.Gallery[key!] ?? []
+            self.collectionView?.reloadData()
+            service.GALLERY_SERVICE.initObserves(ref: "album/\(key!)", actions: [.childAdded])
+            break
+        case .loading:
+            self.view.makeToastActivity(.center)
+            break
+        default:
+            self.view.hideToastActivity()
+            break
+        }
+        collectionView.reloadData()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
