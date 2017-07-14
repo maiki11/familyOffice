@@ -16,6 +16,7 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate, G
     let settingLauncher = SettingLauncher()
     typealias StoreSubscriberStateType = GoalState
     var goal : Goal!
+    var follow: FollowGoal!
     var user = store.state.UserState.user
     @IBOutlet weak var pieChart: PieChartView!
     @IBOutlet weak var tableView: UITableView!
@@ -26,6 +27,7 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate, G
         axisFormatDelegate = self
         pieChart.noDataText = "No hay objetivos"
     }
+    @IBOutlet var dateForCompleate: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -36,6 +38,8 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate, G
             subscription in
             subscription.GoalsState
         }
+        
+        verifyFollow()
         
     }
     
@@ -87,8 +91,20 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate, G
     func newState(state: GoalState) {
         user = store.state.UserState.user
         goal = state.goals[(user?.familyActive!)!]?.first(where: {$0.id == goal.id}) ?? nil
-        updatePieChartData()
+  
         self.navigationItem.title = goal.title!
+        switch state.status {
+        case .Finished(let t as FollowGoal):
+            self.view.hideToastActivity()
+            follow = t
+            break
+        case .loading:
+            self.view.makeToastActivity(.center)
+            break
+        default:
+            break
+        }
+        updatePieChartData()
         tableView.reloadData()
     }
     func selectFamily() -> Void {
@@ -99,11 +115,27 @@ class GoalViewController: UIViewController, StoreSubscriber, UITabBarDelegate, G
     }
     
     
+    @IBAction func handleChange(_ sender: UISwitch) {
+
+            if follow != nil, let index = goal.follow.index(where: {$0.date == follow.date}), let uid = store.state.UserState.user?.id
+            {
+                goal.follow[index].members[uid] = sender.isOn ? Date().toMillis() : -1
+                
+                let base = service.GOAL_SERVICE.getPath(type: goal.type)
+                store.dispatch(UpdateFollowAction(follow: goal.follow[index],path: "goals/\(base)/\(goal.id!)/follow/\(follow.date!)"))
+                
+            }
+      
+    }
     func updatePieChartData()  {
         self.pieChart.clear()
+        if follow == nil {
+            pieChart.noDataText = "No hay Info"
+            return
+        }
         // 2. generate chart data entries
         let track = ["No", "Si"]
-        let goal = [Double(self.goal.members.filter({!$0.value}).count), Double(self.goal.members.filter({$0.value}).count), ]
+        let goal = [Double(self.follow.members.filter({$0.value < 0}).count), Double(self.follow.members.filter({$0.value > 0}).count), ]
         
         var entries = [PieChartDataEntry]()
         for (index, value) in goal.enumerated() {
@@ -155,10 +187,13 @@ extension GoalViewController: UITableViewDelegate, UITableViewDataSource, IAxisV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! GoalTableViewCell
-        let key = Array(goal.members.keys)[indexPath.row]
-        let member = getUser(id: key)?.name ?? "Cargando..."
-        cell.titleLbl.text = member
-        cell.accessoryType = goal.members[key]! ? UITableViewCellAccessoryType.checkmark : UITableViewCellAccessoryType.none
+        
+        if follow != nil{
+            let key = Array(follow.members.keys)[indexPath.row]
+            let member = getUser(id: key)?.name ?? "Cargando..."
+            cell.titleLbl.text = member
+            cell.accessoryType = follow.members[key]! > 0 ? UITableViewCellAccessoryType.checkmark : UITableViewCellAccessoryType.none
+        }
         return cell
     }
     
@@ -187,5 +222,20 @@ extension GoalViewController: UITableViewDelegate, UITableViewDataSource, IAxisV
             }
         }
         return "none"
+    }
+}
+extension GoalViewController {
+    func verifyFollow() -> Void {
+        let date = Date().toMillis()
+        for item in goal.follow {
+            let comp = Date(string: item.date, formatter: .ShortInternationalFormat)?.toMillis()
+            if date! <= comp! {
+                follow = item
+                let string = dateForCompleate.text
+                dateForCompleate.text = string! + item.date
+                break
+            }
+            
+        }
     }
 }

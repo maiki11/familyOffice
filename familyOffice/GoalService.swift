@@ -70,9 +70,9 @@ class GoalService: RequestService {
         if goal.type == 1 {
             goal.members = {
                 let fid = store.state.UserState.user?.familyActive
-                var members = [String:Bool]()
+                var members = [String:Int]()
                 store.state.FamilyState.families.first(where: {$0.id == fid})?.members.forEach({s in
-                    members[s] = true
+                    members[s] = -1
                 })
                 return members
             }()
@@ -84,7 +84,7 @@ class GoalService: RequestService {
         })
     }
     
-    func update(_ goal: Goal) -> Void {
+    func updateGoal(_ goal: Goal) -> Void {
         let id = getPath(type: goal.type)
         let path = "goals/\(id)/\(goal.id!)"
         service.GOAL_SERVICE.update(path, value: goal.toDictionary() as! [AnyHashable : Any], callback: { ref in
@@ -97,6 +97,17 @@ class GoalService: RequestService {
             }
             
         })
+    }
+
+    func updateFollow(_ follow: FollowGoal, path: String) -> Void {
+        self.update(path, value: follow.members , callback: {
+            ref in
+            if ref is FIRDatabaseReference {
+                    store.state.GoalsState.status = .Finished(follow)
+            }
+
+        })
+        
     }
     
     func delete(_ ref: String, callback: @escaping ((Any) -> Void)) {

@@ -93,6 +93,9 @@
 		029F65931F15446100C3A0A7 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F65921F15446100C3A0A7 /* ContactService.swift */; };
 		029F65951F15662900C3A0A7 /* contactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F65941F15662900C3A0A7 /* contactTableViewCell.swift */; };
 		029F65971F15A95700C3A0A7 /* InfoContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F65961F15A95700C3A0A7 /* InfoContactViewController.swift */; };
+		02A4375C1F18043D003F10A1 /* dayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A4375B1F18043D003F10A1 /* dayCollectionViewCell.swift */; };
+		02A4375E1F183F74003F10A1 /* repeatGoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A4375D1F183F74003F10A1 /* repeatGoalModel.swift */; };
+		02A437601F183FCB003F10A1 /* FollowGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A4375F1F183FCB003F10A1 /* FollowGoal.swift */; };
 		02AB00471E1DD0AB0098411C /* RegisterFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */; };
 		02ABAC401E6DE73A003780AB /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC3F1E6DE73A003780AB /* UIImage.swift */; };
 		02ABAC421E6E02B5003780AB /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABAC411E6E02B5003780AB /* Device.swift */; };
@@ -311,6 +314,9 @@
 		029F65921F15446100C3A0A7 /* ContactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		029F65941F15662900C3A0A7 /* contactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = contactTableViewCell.swift; sourceTree = "<group>"; };
 		029F65961F15A95700C3A0A7 /* InfoContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoContactViewController.swift; sourceTree = "<group>"; };
+		02A4375B1F18043D003F10A1 /* dayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dayCollectionViewCell.swift; sourceTree = "<group>"; };
+		02A4375D1F183F74003F10A1 /* repeatGoalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = repeatGoalModel.swift; sourceTree = "<group>"; };
+		02A4375F1F183FCB003F10A1 /* FollowGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowGoal.swift; sourceTree = "<group>"; };
 		02AB00461E1DD0AB0098411C /* RegisterFamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFamilyViewController.swift; sourceTree = "<group>"; };
 		02ABAC3F1E6DE73A003780AB /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		02ABAC411E6E02B5003780AB /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
@@ -523,6 +529,8 @@
 			children = (
 				0266454D1EFC86DD0034D434 /* Goal.swift */,
 				0233A4F61EFD8A5A00D01F5C /* Goal-Extension.swift */,
+				02A4375D1F183F74003F10A1 /* repeatGoalModel.swift */,
+				02A4375F1F183FCB003F10A1 /* FollowGoal.swift */,
 			);
 			name = Goal;
 			sourceTree = "<group>";
@@ -778,6 +786,7 @@
 				02811B371F06D869004231BE /* GoalTableViewCell.swift */,
 				02441D9F1F16E7EF00EA8202 /* GoalDataofSectionTableViewCell.swift */,
 				02441DA11F16FFF600EA8202 /* GoalDataForCategoryTableViewCell.swift */,
+				02A4375B1F18043D003F10A1 /* dayCollectionViewCell.swift */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -1505,6 +1514,7 @@
 				A46316B21E78C69E00E3F72C /* Health.swift in Sources */,
 				A48FD6D31F141BD000832559 /* BudgetCollectionHeaderView.swift in Sources */,
 				023DE7451E7720FE002F6A4E /* familiesExtension.swift in Sources */,
+				02A4375C1F18043D003F10A1 /* dayCollectionViewCell.swift in Sources */,
 				02BC16F51EE9E32900722689 /* UIBarbutton.swift in Sources */,
 				02B7E7FA1E7C614A0082BAE7 /* settingLauncher.swift in Sources */,
 				A4D585B81E8C8468005B8F1F /* HealthService.swift in Sources */,
@@ -1605,6 +1615,7 @@
 				0215F4E31E3FA97C00AC01D3 /* PersonalDataTableViewController.swift in Sources */,
 				A4F65A271E97F05100831BFD /* EditHealthTableViewController.swift in Sources */,
 				020DA38E1F0C1A9C000BD7E2 /* FamilyReducer.swift in Sources */,
+				02A4375E1F183F74003F10A1 /* repeatGoalModel.swift in Sources */,
 				02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */,
 				0233A4F71EFD8A5A00D01F5C /* Goal-Extension.swift in Sources */,
 				029CD0631F131EBC00A29CBA /* UserReducer.swift in Sources */,
@@ -1617,6 +1628,7 @@
 				0233A4F91EFDA33600D01F5C /* GoalService.swift in Sources */,
 				02382F0D1E1C210C0036FFC9 /* AppDelegate.swift in Sources */,
 				04C4F3C91F017C7C0094CA2D /* GalleryCollectionViewCell.swift in Sources */,
+				02A437601F183FCB003F10A1 /* FollowGoal.swift in Sources */,
 				A4F65A2B1E985A4E00831BFD /* HealthOmniViewController_Categories.swift in Sources */,
 				02EABF571E312AE8008A7CA9 /* FamilyCollectionViewController.swift in Sources */,
 				024104871E6F40C4002B8E1C /* FamilyCollectionExtension.swift in Sources */,
