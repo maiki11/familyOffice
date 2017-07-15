@@ -18,7 +18,6 @@ extension RequestStorageSvc {
     func insert(_ ref: String, value: Any, callback: @escaping ((Any?) -> Void)) {
         
         if let uploadData = UIImagePNGRepresentation(value as! UIImage){
-            
             _ = Constants.FirStorage.STORAGEREF.child(ref).put(uploadData, metadata: nil) { metadata, error in
                 if (error != nil) {
                     print(error.debugDescription)

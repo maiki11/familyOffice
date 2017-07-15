@@ -18,7 +18,8 @@ struct AppReducer: Reducer {
             FamilyState: FamilyReducer().handleAction(action: action, state: state?.FamilyState),
             navigationState: NavigationReducer.handleAction(action, state: state?.navigationState),
             UserState: UserReducer().handleAction(action: action, state: state?.UserState),
-            GalleryState: GalleryReducer().handleAction(action: action, state: state?.GalleryState)
+            GalleryState: GalleryReducer().handleAction(action: action, state: state?.GalleryState),
+            ContactState: ContactReducer().handleAction(action: action, state: state?.ContactState)
 
         )
     }

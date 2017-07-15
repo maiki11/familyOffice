@@ -76,6 +76,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.9):
     - GTMSessionFetcher/Core (= 1.1.9)
   - Hue (2.0.1)
+  - JBDatePicker (1.2.2)
   - JVFloatLabeledTextField (1.1.1)
   - Lightbox (1.0.0):
     - Hue
@@ -83,11 +84,11 @@ PODS:
   - MIBadgeButton-Swift (0.5)
   - MultiAutoCompleteTextSwift (0.1.1)
   - Protobuf (3.3.0)
-  - Realm (2.8.2):
-    - Realm/Headers (= 2.8.2)
-  - Realm/Headers (2.8.2)
-  - RealmSwift (2.8.2):
-    - Realm (= 2.8.2)
+  - Realm (2.7.0):
+    - Realm/Headers (= 2.7.0)
+  - Realm/Headers (2.7.0)
+  - RealmSwift (2.7.0):
+    - Realm (= 2.7.0)
   - ReSwift (3.0.0)
   - ReSwiftRecorder (0.4.0):
     - ReSwift (~> 3.0)
@@ -95,6 +96,7 @@ PODS:
     - ReSwift (~> 3.0.0)
   - SearchTextField (1.1.0)
   - SmileLock (2.0.2)
+  - SnapKit (3.2.0)
   - Toast-Swift (2.0.0)
 
 DEPENDENCIES:
@@ -111,6 +113,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FSCalendar
   - GoogleSignIn
+  - JBDatePicker
   - JVFloatLabeledTextField
   - Lightbox
   - MGSwipeTableCell
@@ -121,6 +124,7 @@ DEPENDENCIES:
   - ReSwiftRouter
   - SearchTextField
   - SmileLock
+  - SnapKit (~> 3.0)
   - Toast-Swift (~> 2.0.0)
 
 EXTERNAL SOURCES:
@@ -152,20 +156,23 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
+  JBDatePicker: 4d4934ccb9dae7f0f636a44d0f4c03a159e8eb63
   JVFloatLabeledTextField: 0e5524b097f102036214dd8279edc8ecf08b5e18
   Lightbox: 13f55a0a840f7945dc5ac87931564e7fe569fca9
   MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
   MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
   MultiAutoCompleteTextSwift: d5631e77b48413af5795e14a1ae6d72054fe2d1e
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
-  Realm: 0e262abf087c7054013e00579274f7e070486d4a
-  RealmSwift: 73565e91bc403c1149e4acf31ff9de506b2f9459
+  Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
+  RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
   ReSwift: f0255f4b4f2dacd12c5d97d34d13fc5dad6d6371
   ReSwiftRecorder: f37a363425ad61c7ddc2172e14ab7799b6b27483
   ReSwiftRouter: c620138bf94b57c068f789d51c0bd23efc42bf68
   SearchTextField: 5daab6cecfd90e06f9b08b2814593656c0c99f3d
   SmileLock: 7ae1e174b4697c0a33882dab838fc0bea94432f4
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   Toast-Swift: 5b2f8f720f7e78e48511f693df1f9c9a6e38a25a
+
 
 PODFILE CHECKSUM: 115ff24ebdf2c070ea2c9f0a72d02df18eeaab51
 

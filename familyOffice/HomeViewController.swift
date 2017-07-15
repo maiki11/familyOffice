@@ -14,8 +14,8 @@ import ReSwift
 class HomeViewController: UIViewController,  UIGestureRecognizerDelegate {
     
 
-    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple"]
-    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros"]
+    let icons = ["chat", "calendar", "objetives", "gallery","safeBox", "contacts", "firstaid","property", "health","seguro-purple", "presupuesto"]
+    let labels = ["Chat", "Calendario", "Objetivos", "Galería", "Caja Fuerte", "Contactos","Botiquín","Inmuebles", "Salud", "Seguros", "Presupuesto"]
     
     
     private var family : Family?
@@ -59,7 +59,7 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate {
     }
     
     func handleBack()  {
-        service.UTILITY_SERVICE.gotoView(view: "mainView", context: self)
+        self.dismiss(animated: true, completion: nil)
     }
     
     /** ESTA FUNCION NOMAS PONE OBSERVERS */
@@ -172,7 +172,9 @@ extension HomeViewController {
             
         case 4:
             self.performSegue(withIdentifier: "safeBoxSegue", sender: nil)
-            break
+        case 5:
+            self.performSegue(withIdentifier: "contactsSegue", sender: nil)
+            
         case 8:
             self.performSegue(withIdentifier: "healthSegue", sender: nil)
             break
