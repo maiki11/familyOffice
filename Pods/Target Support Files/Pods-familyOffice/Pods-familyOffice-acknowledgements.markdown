@@ -1139,8 +1139,6 @@ Copyright 2017 Google
    limitations under the License.
 
 
-<<<<<<< HEAD
-=======
 ## Hue
 
 Licensed under the **MIT** license
@@ -1167,7 +1165,6 @@ Licensed under the **MIT** license
 > SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
->>>>>>> Enrique
 ## JBDatePicker
 
 Copyright (c) 2016 Joost van Breukelen

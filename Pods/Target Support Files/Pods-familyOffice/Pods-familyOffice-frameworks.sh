@@ -97,10 +97,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2/GTMOAuth2.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac-615f275e/GoogleToolboxForMac.framework"
-<<<<<<< HEAD
-=======
   install_framework "$BUILT_PRODUCTS_DIR/Hue/Hue.framework"
->>>>>>> Enrique
   install_framework "$BUILT_PRODUCTS_DIR/JBDatePicker/JBDatePicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JVFloatLabeledTextField/JVFloatLabeledTextField.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Lightbox/Lightbox.framework"
@@ -127,10 +124,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2/GTMOAuth2.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac-615f275e/GoogleToolboxForMac.framework"
-<<<<<<< HEAD
-=======
   install_framework "$BUILT_PRODUCTS_DIR/Hue/Hue.framework"
->>>>>>> Enrique
   install_framework "$BUILT_PRODUCTS_DIR/JBDatePicker/JBDatePicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JVFloatLabeledTextField/JVFloatLabeledTextField.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Lightbox/Lightbox.framework"
