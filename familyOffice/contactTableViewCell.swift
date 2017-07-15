@@ -13,7 +13,6 @@ class contactTableViewCell: UITableViewCell, ContactBindible {
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var jobLbl: UILabel!
     @IBOutlet weak var callMember: UIButton!
-    @IBOutlet weak var msgMember: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,4 +24,9 @@ class contactTableViewCell: UITableViewCell, ContactBindible {
         // Configure the view for the selected state
     }
 
+    @IBAction func callContact(_ sender: Any) {
+        guard let number = URL(string: "tel://" + contact.phone!) else { return }
+        UIApplication.shared.open(number)
+    }
+    
 }

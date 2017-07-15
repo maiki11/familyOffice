@@ -67,7 +67,7 @@ class contactTableViewController: UITableViewController, StoreSubscriber{
                 contact = sender as? Contact
                 vc.bind(contact: contact)
             }else{
-                contact = Contact(name: "", phone: "", job: "")
+                contact = Contact(name: "", phone: "", job: "", address: "", webpage: "", email: "")
                 vc.bind(contact: contact )
             }
             
