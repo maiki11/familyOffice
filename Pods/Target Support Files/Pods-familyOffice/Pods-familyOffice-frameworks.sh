@@ -92,12 +92,18 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Charts/Charts.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ChartsRealm/ChartsRealm.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/DKImagePickerController/DKImagePickerController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FSCalendar/FSCalendar.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2/GTMOAuth2.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac-615f275e/GoogleToolboxForMac.framework"
+<<<<<<< HEAD
+=======
+  install_framework "$BUILT_PRODUCTS_DIR/Hue/Hue.framework"
+>>>>>>> Enrique
   install_framework "$BUILT_PRODUCTS_DIR/JBDatePicker/JBDatePicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JVFloatLabeledTextField/JVFloatLabeledTextField.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Lightbox/Lightbox.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MGSwipeTableCell/MGSwipeTableCell.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MIBadgeButton-Swift/MIBadgeButton_Swift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MultiAutoCompleteTextSwift/MultiAutoCompleteTextSwift.framework"
@@ -116,12 +122,18 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Charts/Charts.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ChartsRealm/ChartsRealm.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/DKImagePickerController/DKImagePickerController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FSCalendar/FSCalendar.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2/GTMOAuth2.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac-615f275e/GoogleToolboxForMac.framework"
+<<<<<<< HEAD
+=======
+  install_framework "$BUILT_PRODUCTS_DIR/Hue/Hue.framework"
+>>>>>>> Enrique
   install_framework "$BUILT_PRODUCTS_DIR/JBDatePicker/JBDatePicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JVFloatLabeledTextField/JVFloatLabeledTextField.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Lightbox/Lightbox.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MGSwipeTableCell/MGSwipeTableCell.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MIBadgeButton-Swift/MIBadgeButton_Swift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MultiAutoCompleteTextSwift/MultiAutoCompleteTextSwift.framework"

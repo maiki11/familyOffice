@@ -19,4 +19,7 @@ struct GetGalleyAction: Action {
 }
 struct InsertImagesAlbumAction: Action {
     let image: ImageAlbum
+    init(image: ImageAlbum){
+        self.image = image
+    }
 }
