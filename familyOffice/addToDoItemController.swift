@@ -11,10 +11,12 @@ import Firebase
 import ReSwift
 import ReSwiftRouter
 
-class AddToDoItemController: UIViewController,UINavigationControllerDelegate {
+class AddToDoItemController: UIViewController,UINavigationControllerDelegate,UIGestureRecognizerDelegate,DateProtocol {
     var item:ToDoList.ToDoItem!
+    var endDate: String!
     var imagePicker: UIImagePickerController!
 
+    @IBOutlet var endDateLbl: UILabel!
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var photo: UIImageView?
     
@@ -25,10 +27,20 @@ class AddToDoItemController: UIViewController,UINavigationControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(user)
+        endDateLbl.layer.borderWidth = 1
+        endDateLbl.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1).cgColor
+        endDateLbl.layer.cornerRadius = 4
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
+        tap.delegate = self
+        endDateLbl.isUserInteractionEnabled = true
+        endDateLbl.addGestureRecognizer(tap)
         let saveButton = UIBarButtonItem(title: "Guardar", style: .plain, target: self, action: #selector(save(sender:)))
         self.navigationItem.rightBarButtonItem = saveButton
         // Do any additional setup after loading the view.
+    }
+    
+    func tap(_ gestureRecognizer: UITapGestureRecognizer) -> Void {
+        self.performSegue(withIdentifier: "toDatePicker", sender: nil)
     }
     
     func resizeImage(image: UIImage, scale: CGFloat) -> UIImage {
@@ -42,6 +54,22 @@ class AddToDoItemController: UIViewController,UINavigationControllerDelegate {
         UIGraphicsEndImageContext()
         
         return newImage!
+    }
+    
+    func selectedDate(date: Date) {
+        let newDate = date.string(with: .InternationalFormat)
+        self.endDate = newDate
+        endDateLbl.text = "  " + newDate != "" ? Date(string: newDate, formatter: .InternationalFormat)!.string(with: .MonthdayAndYear) : "Sin fecha"
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationNavController = (segue.destination as? UINavigationController){
+            if let datePickerVC = destinationNavController.viewControllers.first as? CalendarOpenViewController{
+                datePickerVC.dateToSelect = Date(string: endDateLbl.text!, formatter: .dayMonthAndYear2)
+                datePickerVC.dateDelegate = self
+                
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,13 +117,13 @@ class AddToDoItemController: UIViewController,UINavigationControllerDelegate {
                         StorageService.Instance().save(url: downloadUrl, data: uploadData)
                         photoUrl = downloadUrl
                         
-                        let item = ToDoList.ToDoItem(title: title, photoUrl: photoUrl, status: "Pendiente")
+                        let item = ToDoList.ToDoItem(title: title, photoUrl: photoUrl, status: "Pendiente",endDate:Date(string: self.endDate, formatter: .InternationalFormat)!.string(with: .MonthdayAndYear))
                         store.dispatch(InsertToDoListItemAction(item:item))
                     }
                 }
             }
         }else{
-            let item = ToDoList.ToDoItem(title: title, photoUrl: "", status: "Pendiente")
+            let item = ToDoList.ToDoItem(title: title, photoUrl: "", status: "Pendiente",endDate:Date(string: self.endDate, formatter: .InternationalFormat)!.string(with: .MonthdayAndYear))
             store.dispatch(InsertToDoListItemAction(item:item))
         }
         

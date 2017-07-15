@@ -11,25 +11,90 @@ import Firebase
 import ReSwift
 import ReSwiftRouter
 
-class EditItemViewController: UIViewController {
-    var item:ToDoList.ToDoItem!
+class EditItemViewController: UIViewController,UINavigationControllerDelegate,UIGestureRecognizerDelegate,DateProtocol {
+    var item:ToDoList.ToDoItem = ToDoList.ToDoItem(title: "", photoUrl: "", status: "Pendiente", endDate: "")
     var imagePicker: UIImagePickerController!
+    var endDate: String?
     var initialPhoto: String!
     var tookPhoto:Bool = false
+    var isNewItem:Bool = false
     
-    @IBOutlet var textFieldTitle: UITextField!
+    @IBOutlet var stateWrapper: UIView!
+    
+    @IBOutlet var stateLabel: UILabel!
+    
+    @IBOutlet var takePhotoButton: UIButton!
+    @IBOutlet var endDateLabel: UILabel!
+    @IBOutlet var stateSwitch: UISwitch!
+    
+    @IBOutlet var textFieldTitle: UITextView!
     @IBOutlet var photo: UIImageView!
-    @IBOutlet var addPhotoButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let saveButton = UIBarButtonItem(title: "Editar", style: .plain, target: self, action: #selector(save(sender:)))
+        if item.title == "" {
+            isNewItem = true
+            self.stateWrapper.isHidden = true
+            self.stateSwitch.isHidden = true
+            self.stateLabel.isHidden = true
+        }
+        
+        let saveButton = UIBarButtonItem(title:isNewItem ? "Guardar" : "Editar", style: .plain, target: self, action: #selector(save(sender:)))
+        saveButton.tintColor = #colorLiteral(red: 1, green: 0.2793949573, blue: 0.1788432287, alpha: 1)
         self.navigationItem.rightBarButtonItem = saveButton
+        self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.2793949573, blue: 0.1788432287, alpha: 1)
+        
         textFieldTitle.text = item.title
         photo.loadImage(urlString: item.photoUrl!)
+        
+        self.textFieldTitle.layer.borderWidth = 1
+        self.textFieldTitle.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
+        self.textFieldTitle.layer.cornerRadius = 5
+        
+        self.stateWrapper.layer.borderWidth = 1
+        self.stateWrapper.layer.borderColor = UIColor( red: 204/255, green: 204/255, blue:204.0/255, alpha: 1.0 ).cgColor
+        self.stateWrapper.layer.cornerRadius = 5
+        
+        self.stateLabel.text = item.status
+        self.stateSwitch.isOn = item.status == "Finalizada"
+        
+        self.endDateLabel.layer.borderWidth = 1
+        self.endDateLabel.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1).cgColor
+        self.endDateLabel.layer.cornerRadius = 5
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
+        tap.delegate = self
+        self.endDateLabel.isUserInteractionEnabled = true
+        self.endDateLabel.addGestureRecognizer(tap)
+        
+        self.endDateLabel.text = item.endDate
+        
+        
         initialPhoto = item.photoUrl!
         // Do any additional setup after loading the view.
+    }
+    
+    func tap(_ gestureRecognizer: UITapGestureRecognizer) -> Void {
+        self.performSegue(withIdentifier: "toPickingDate", sender: nil)
+    }
+    
+    func selectedDate(date: Date) {
+        print(date)
+        let newDate = date.string(with: .InternationalFormat)
+        self.endDate = newDate
+        print(newDate)
+        self.endDateLabel.text = Date(string: newDate, formatter: .InternationalFormat)!.string(with: .MonthdayAndYear)
+        self.item.endDate = self.endDateLabel.text
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationNavController = (segue.destination as? UINavigationController){
+            if let datePickerVC = destinationNavController.viewControllers.first as? CalendarOpenViewController{
+                datePickerVC.dateToSelect = Date(string: endDateLabel.text!, formatter: .dayMonthAndYear2)
+                datePickerVC.dateDelegate = self
+                
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,12 +141,20 @@ class EditItemViewController: UIViewController {
                         StorageService.Instance().save(url: downloadUrl, data: uploadData)
                         photoUrl = downloadUrl
                         self.item.photoUrl = photoUrl
-                        store.dispatch(UpdateToDoListItemAction(item:self.item))
+                        if self.isNewItem {
+                            store.dispatch(InsertToDoListItemAction(item:self.item))
+                        } else {
+                            store.dispatch(UpdateToDoListItemAction(item:self.item))
+                        }
                     }
                 }
             }
         }else{
-            store.dispatch(UpdateToDoListItemAction(item:self.item))
+            if self.isNewItem {
+                store.dispatch(InsertToDoListItemAction(item:self.item))
+            } else {
+                store.dispatch(UpdateToDoListItemAction(item:self.item))
+            }
         }
     }
     
@@ -92,6 +165,27 @@ class EditItemViewController: UIViewController {
     }
     
 
+    @IBAction func takePhoto(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Imagen de la tarea", message: "¿Cómo quiere elegir la imagen?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camara", style: .default , handler: { (action) in
+            self.imagePicker =  UIImagePickerController()
+            self.imagePicker.delegate = self
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Galería", style: .default , handler: { (action) in
+            self.imagePicker =  UIImagePickerController()
+            self.imagePicker.delegate = self
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        alert.modalPresentationStyle = UIModalPresentationStyle.currentContext
+        
+        present(alert, animated: true) {
+            
+        }
+    }
     /*
     // MARK: - Navigation
 

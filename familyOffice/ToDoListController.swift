@@ -6,21 +6,32 @@
 //  Copyright © 2017 Leonardo Durazo. All rights reserved.
 //
 
+
 import UIKit
 import ReSwift
 import Firebase
+import M13Checkbox
 
 class ToDoListController: UITableViewController,UIViewControllerPreviewingDelegate {
     
+    
     var items : [ToDoList.ToDoItem] = []
     var userId = service.USER_SERVICE.users[0].id!
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(service.USER_SERVICE.users[0])
+        
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        tableView.tableHeaderView = searchController.searchBar
+        
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.handleNew))
         addButton.tintColor = #colorLiteral(red: 1, green: 0.2793949573, blue: 0.1788432287, alpha: 1)
         self.navigationItem.rightBarButtonItem = addButton
+        let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Home"), style: .plain, target: self, action: #selector(self.back))
+        self.navigationItem.leftBarButtonItem = backButton
         
         // Do any additional setup after loading the view.
     
@@ -29,6 +40,10 @@ class ToDoListController: UITableViewController,UIViewControllerPreviewingDelega
             registerForPreviewing(with: self, sourceView: view)
         }
     }
+    
+    func back() -> Void {
+        self.dismiss(animated: true, completion: nil)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -36,7 +51,7 @@ class ToDoListController: UITableViewController,UIViewControllerPreviewingDelega
     }
     
     func handleNew() -> Void {
-        self.performSegue(withIdentifier: "addSegue", sender: nil)
+        self.performSegue(withIdentifier: "showItemDetails", sender: "new")
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,50 +69,63 @@ class ToDoListController: UITableViewController,UIViewControllerPreviewingDelega
         
         cell.title.text = item.title
         
+        cell.countLabel.text = "\(indexPath.row + 1)"
+        cell.countLabel.layer.cornerRadius = 0.5 * cell.countLabel.bounds.size.width
+        
+        cell.checkFinished.boxType = .square
+        cell.checkFinished.markType = .checkmark
+        
         if item.status == "Pendiente" {
-            cell.accessoryType = .none
+            cell.checkFinished.checkState = .unchecked
         } else {
-            cell.accessoryType = .checkmark
+            cell.checkFinished.checkState = .checked
         }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "showItemDetails", sender: nil)
+        self.performSegue(withIdentifier: "showItemDetails", sender: "List")
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let didAction = UITableViewRowAction(style: .normal, title: self.items[indexPath.row].status == "Finalizada" ? "Retomar" : "Finalizar") { (action, indexPath) in
-            //Cambiar status en Farabase
-            self.items[indexPath.row].status = self.items[indexPath.row].status == "Pendiente" ? "Finalizada" : "Pendiente"
-            
-            store.dispatch(UpdateToDoListItemAction(item:self.items[indexPath.row]))
-            
-        }
-        
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Eliminar") { (action, indexPath) in
             store.dispatch(DeleteToDoListItemAction(item: self.items[indexPath.row]))
-//            let alert = UIAlertController(title: "Eliminar", message: "", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: {_ in
-//                
-//            }))
-//            self.present(alert, animated: true, completion: nil)
         }
         
-        return [didAction, deleteAction]
+        return [deleteAction]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print(segue.identifier!)
+        let str = "\(sender!)"
         if segue.identifier == "showItemDetails"{
-            if let indexPath = self.tableView.indexPathForSelectedRow{
-                let selectedItem = self.items[indexPath.row]
-                let detailsViewController = segue.destination as! EditItemViewController
-                detailsViewController.item = selectedItem
+            if str == "List"{
+                if let indexPath = self.tableView.indexPathForSelectedRow{
+                    let selectedItem = self.items[indexPath.row]
+                    let detailsViewController = segue.destination as! EditItemViewController
+                    detailsViewController.item = selectedItem
+                }
             }
         }
+        searchController.isActive = false
     }
+    // MARK: - Checkbox
+    @IBAction func checkboxPressed(_ sender: M13Checkbox) {
+        
+        let checkbox = sender.convert(CGPoint.zero, to: self.tableView)
+        let indexPath = self.tableView.indexPathForRow(at: checkbox)
+        var currentItem = self.items[(indexPath?.row)!]
+        print(currentItem)
+        if sender.checkState == .checked{
+            currentItem.status = "Finalizada"
+        } else {
+            currentItem.status = "Pendiente"
+        }
+        store.dispatch(UpdateToDoListItemAction(item:currentItem))
+    }
+    
+    
     
     // MARK: - PreviewingDeleate.
     // 3D touch en cada elemento de la tabla
@@ -145,10 +173,24 @@ extension ToDoListController: StoreSubscriber{
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
+//        super.viewWillDisappear(true)
+//        self.searchController.isActive = false
         store.state.ToDoListState.status = .none
         store.unsubscribe(self)
         service.TODO_SERVICE.removeHandles()
+        
+    }
+}
+
+extension ToDoListController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let user = store.state.UserState.user?.id!
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty{
+            self.items = self.items.filter({$0.title.lowercased().contains(searchText.lowercased())})
+        }else{
+            self.items = store.state.ToDoListState.items[user!] ?? []
+        }
+        tableView.reloadData()
     }
 }
 

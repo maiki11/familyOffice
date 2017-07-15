@@ -33,17 +33,20 @@ struct ToDoList{
         static let itemKey = "id"
         static let titleKey = "title"
         static let photoUrlKey = "photoUrl"
+        static let endDateKey = "endDate"
         static let statusKey = "status"
         
         var id: String?
         var title: String!
+        var endDate: String!
         var photoUrl: String?
         var status: String!
         
-        init(title: String, photoUrl: String, status: String){
+        init(title: String, photoUrl: String, status: String, endDate: String){
             self.title = title
             self.photoUrl = photoUrl
             self.status = status
+            self.endDate = endDate
             self.id = Constants.FirDatabase.REF.childByAutoId().key
         }
         
@@ -58,12 +61,14 @@ struct ToDoList{
             self.title = service.UTILITY_SERVICE.exist(field: ToDoItem.titleKey, dictionary: dic)
             self.photoUrl = service.UTILITY_SERVICE.exist(field: ToDoItem.photoUrlKey, dictionary: dic)
             self.status = service.UTILITY_SERVICE.exist(field: ToDoItem.statusKey, dictionary: dic)
+            self.endDate = service.UTILITY_SERVICE.exist(field: ToDoItem.endDateKey, dictionary: dic)
         }
         
         func toDictionary() -> NSDictionary {
             return [
                 ToDoItem.titleKey: self.title,
                 ToDoItem.photoUrlKey: self.photoUrl,
+                ToDoItem.endDateKey: self.endDate,
                 ToDoItem.statusKey: self.status
             ]
         }
