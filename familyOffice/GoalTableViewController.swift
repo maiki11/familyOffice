@@ -180,6 +180,12 @@ extension GoalTableViewController: StoreSubscriber, Segue {
             if sender is Goal {
                 vc.bind(goal: sender as! Goal)
             }
+        }else if segue.identifier == "detailSegue" {
+            let vc = segue.destination as! GoalHistoryByUserViewController
+            if sender is Goal {
+                vc.bind(goal: sender as! Goal)
+                vc.user = user
+            }
         }
     }
     

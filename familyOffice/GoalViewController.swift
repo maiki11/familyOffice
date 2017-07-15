@@ -201,7 +201,10 @@ extension GoalViewController: UITableViewDelegate, UITableViewDataSource, IAxisV
         let members = follow == nil ? self.goal.members : self.follow.members
         let key = Array(members.keys)[indexPath.row]
         let member = getUser(id: key) ?? nil
-        self.performSegue(withIdentifier: "detailSegue", sender: member)
+        if follow != nil {
+            self.performSegue(withIdentifier: "detailSegue", sender: member)
+        }
+        
     }
     
     

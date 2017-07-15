@@ -70,6 +70,7 @@ class GoalHistoryByUserViewController: UIViewController, GoalBindable {
         pieChart.centerText = "Obj."
         pieChart.holeRadiusPercent = 0.5
         pieChart.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInCirc)
+        pieChart.legend.enabled = false
         pieChart.transparentCircleColor = UIColor.clear
         
     }
