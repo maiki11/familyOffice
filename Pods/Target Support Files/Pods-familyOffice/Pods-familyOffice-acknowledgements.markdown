@@ -1238,8 +1238,6 @@ Licensed under the **MIT** license
 > SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-<<<<<<< HEAD
-=======
 ## M13Checkbox
 
 Copyright (c) 2016 Brandon McQuilkin
@@ -1252,7 +1250,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 
->>>>>>> Ernesto
 ## MGSwipeTableCell
 
 The MIT License (MIT)

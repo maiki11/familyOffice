@@ -101,10 +101,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/JBDatePicker/JBDatePicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JVFloatLabeledTextField/JVFloatLabeledTextField.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Lightbox/Lightbox.framework"
-<<<<<<< HEAD
-=======
   install_framework "$BUILT_PRODUCTS_DIR/M13Checkbox/M13Checkbox.framework"
->>>>>>> Ernesto
   install_framework "$BUILT_PRODUCTS_DIR/MGSwipeTableCell/MGSwipeTableCell.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MIBadgeButton-Swift/MIBadgeButton_Swift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MultiAutoCompleteTextSwift/MultiAutoCompleteTextSwift.framework"
@@ -132,10 +129,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/JBDatePicker/JBDatePicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JVFloatLabeledTextField/JVFloatLabeledTextField.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Lightbox/Lightbox.framework"
-<<<<<<< HEAD
-=======
   install_framework "$BUILT_PRODUCTS_DIR/M13Checkbox/M13Checkbox.framework"
->>>>>>> Ernesto
   install_framework "$BUILT_PRODUCTS_DIR/MGSwipeTableCell/MGSwipeTableCell.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MIBadgeButton-Swift/MIBadgeButton_Swift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MultiAutoCompleteTextSwift/MultiAutoCompleteTextSwift.framework"
