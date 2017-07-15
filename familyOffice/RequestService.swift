@@ -32,6 +32,13 @@ extension RequestService {
             }
         })
     }
+    func delete(_ ref: String, callback: @escaping ((Any) -> Void)) {
+        Constants.FirDatabase.REF.child(ref).removeValue(completionBlock: { error, ref in
+            if error != nil {
+                print(error.debugDescription)
+            }
+        })
+    }
     func update(_ ref: String, value: [AnyHashable : Any], callback: @escaping ((Any) -> Void)) {
         Constants.FirDatabase.REF.child(ref).updateChildValues(value, withCompletionBlock: {(error, ref) in
             if error != nil {

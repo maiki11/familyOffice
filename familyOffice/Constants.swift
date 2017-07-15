@@ -42,7 +42,9 @@ struct Constants {
         static let IMAGEALBUM_SERVICE = ImageAlbumService.Instance()
         static let USER_SVC = UserSvc.Instance()
         static let FAMILY_SVC = FamilySvc.Instance()
+        static let TODO_SERVICE = ToDoListService.Instance()
         static let CONTACT_SVC = ContactService.Instance()
+
     }
     
     struct NotificationCenter {
