@@ -10,16 +10,24 @@ import Foundation
 import ReSwift
 struct GalleryReducer: Reducer {
     func handleAction(action: Action, state: GalleryState?) -> GalleryState {
-        var stateAux = state ?? GalleryState(Gallery: [:], status: .none)
+        var stateAux = state ?? GalleryState(Gallery: [:], Album: Album(), status: .none)
         switch action {
         case let action as InsertGalleryAction:
             insert(album: action.album)
             stateAux.status = .loading
             return stateAux
+        case let action as InsertImagesAlbumAction:
+            addImage(image: action.image)
+            stateAux.status = .none
+            return stateAux
         default:
             break
         }
         return stateAux
+    }
+    func addImage(image: ImageAlbum) {
+        service.IMAGEALBUM_SERVICE.InsertImage(image: image)
+        return
     }
     func insert(album: NSDictionary){
         service.GALLERY_SERVICE.createAlbum(data: album, callback: {errors in

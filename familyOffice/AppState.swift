@@ -22,6 +22,7 @@ struct AppState: StateType, HasNavigationState {
 enum Result<T> {
     case loading
     case failed
+    case Failed(T)
     case finished
     case Finished(T)
     case none

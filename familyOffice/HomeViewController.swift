@@ -59,7 +59,7 @@ class HomeViewController: UIViewController,  UIGestureRecognizerDelegate {
     }
     
     func handleBack()  {
-        service.UTILITY_SERVICE.gotoView(view: "mainView", context: self)
+        self.dismiss(animated: true, completion: nil)
     }
     
     /** ESTA FUNCION NOMAS PONE OBSERVERS */

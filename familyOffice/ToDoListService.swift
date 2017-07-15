@@ -10,6 +10,10 @@ import Foundation
 import FirebaseDatabase
 
 class ToDoListService: RequestService{
+    func notExistSnapshot() {
+        
+    }
+
     var items: [ToDoList.ToDoItem] = []
     var handles: [(String, UInt, FIRDataEventType)] = []
     let basePath = "todolist/\(service.USER_SERVICE.users[0].id!)"
