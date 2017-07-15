@@ -32,6 +32,8 @@ class HomeGalleryViewController: UIViewController, UITabBarDelegate, HandleFamil
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "nav_bar_more_button"), style: .plain, target: self, action:  #selector(self.handleMore(_:)))
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.AddAlbum))
         self.navigationItem.rightBarButtonItems = [moreButton,addButton]
+        let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "LeftChevron"), style: .plain, target: self, action: #selector(self.back))
+        self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.title = "Albums"
         self.tabBar.delegate = self
         // Do any additional setup after loading the view.
@@ -42,6 +44,9 @@ class HomeGalleryViewController: UIViewController, UITabBarDelegate, HandleFamil
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         self.collectionView.collectionViewLayout = layout
+    }
+    func back() -> Void {
+        
     }
 
     override func didReceiveMemoryWarning() {

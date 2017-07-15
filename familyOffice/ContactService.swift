@@ -74,6 +74,10 @@ class ContactService {
     }
 }
 extension ContactService : RequestService {
+    func notExistSnapshot() {
+        
+    }
+
     func initObserves(ref: String, actions: [FIRDataEventType]) -> Void {
         for action in actions {
             if !handles.contains(where: { $0.0 == ref && $0.2 == action} ){

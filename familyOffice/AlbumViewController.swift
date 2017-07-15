@@ -28,9 +28,8 @@ class AlbumViewController: UIViewController, StoreSubscriber {
         // Do any additional setup after loading the view.
         self.navigationItem.title = "Albums"
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addImage))
-        let backButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(self.back))
-        //backButton.image =
         self.navigationItem.rightBarButtonItem = addButton
+        let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "LeftChevron"), style: .plain, target: self, action: #selector(self.back))
         self.navigationItem.leftBarButtonItem = backButton
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: 2, bottom: 10, right: 2)

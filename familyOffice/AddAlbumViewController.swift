@@ -34,7 +34,14 @@ class AddAlbumViewController: UIViewController, UIImagePickerControllerDelegate,
         self.picker.delegate = self
         self.picker.allowsEditing = true
         
+        let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "LeftChevron"), style: .plain, target: self, action: #selector(self.back))
+        self.navigationItem.leftBarButtonItem = backButton
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Guardar", style: .done, target: self, action: #selector(createAlbum))
+    }
+    
+    func back() -> Void {
+        _ = self.navigationController?.popViewController(animated: true)
     }
 
     override func didReceiveMemoryWarning() {

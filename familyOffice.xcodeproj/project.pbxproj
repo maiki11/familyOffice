@@ -63,7 +63,6 @@
 		026AF3781F06F0FC00EF6DCD /* GoalReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026AF3771F06F0FC00EF6DCD /* GoalReducer.swift */; };
 		026AF37B1F071AFD00EF6DCD /* RootRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026AF37A1F071AFD00EF6DCD /* RootRoutable.swift */; };
 		026AF37E1F071F6400EF6DCD /* GoalMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026AF37D1F071F6400EF6DCD /* GoalMiddleware.swift */; };
-		026AF3801F07299000EF6DCD /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026AF37F1F07299000EF6DCD /* AppReducer.swift */; };
 		0271DD4F1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */; };
 		0272139F1E84478F001A144B /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0272139E1E84478F001A144B /* CalendarViewController.swift */; };
 		027213AB1E84865F001A144B /* testFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027213AA1E84865F001A144B /* testFile.swift */; };
@@ -152,6 +151,7 @@
 		04AFE38B1F01DE1600D4ECA2 /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFE38A1F01DE1600D4ECA2 /* AlbumModel.swift */; };
 		04AFE38D1F03246000D4ECA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AFE38C1F03246000D4ECA2 /* Assets.xcassets */; };
 		04AFE38F1F05A0F500D4ECA2 /* AddAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFE38E1F05A0F500D4ECA2 /* AddAlbumViewController.swift */; };
+		04BDB2851F19A2F6006D3A62 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDB2841F19A2F6006D3A62 /* AppReducer.swift */; };
 		1A54F2C4CFA581E377445DB2 /* GalleryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A54FA2A44BB2FC5448DD081 /* GalleryService.swift */; };
 		1A54F905E042096F2DD39EF1 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A54F16D92824170DA517ED5 /* ImageModel.swift */; };
 		2BC3C11ABAB0EF59C8FA8A68 /* Pods_familyOffice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EEEDFF57BED2506FDDB9A23 /* Pods_familyOffice.framework */; };
@@ -281,7 +281,6 @@
 		026AF3771F06F0FC00EF6DCD /* GoalReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalReducer.swift; sourceTree = "<group>"; };
 		026AF37A1F071AFD00EF6DCD /* RootRoutable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootRoutable.swift; sourceTree = "<group>"; };
 		026AF37D1F071F6400EF6DCD /* GoalMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalMiddleware.swift; sourceTree = "<group>"; };
-		026AF37F1F07299000EF6DCD /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		0271DD4E1E2EB1FB002C101B /* FamilyMemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyMemberTableViewCell.swift; sourceTree = "<group>"; };
 		0272139E1E84478F001A144B /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		027213A81E848509001A144B /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Event.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -371,6 +370,7 @@
 		04AFE38A1F01DE1600D4ECA2 /* AlbumModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
 		04AFE38C1F03246000D4ECA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = familyOffice/Assets.xcassets; sourceTree = "<group>"; };
 		04AFE38E1F05A0F500D4ECA2 /* AddAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAlbumViewController.swift; sourceTree = "<group>"; };
+		04BDB2841F19A2F6006D3A62 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		1A54F16D92824170DA517ED5 /* ImageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		1A54FA2A44BB2FC5448DD081 /* GalleryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryService.swift; sourceTree = "<group>"; };
 		4B3599B5B9EDF2A28C535E59 /* Pods-familyOfficeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-familyOfficeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-familyOfficeTests/Pods-familyOfficeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -723,6 +723,7 @@
 			isa = PBXGroup;
 			children = (
 				029CD0621F131EBC00A29CBA /* UserReducer.swift */,
+				04BDB2841F19A2F6006D3A62 /* AppReducer.swift */,
 			);
 			name = Reducers;
 			sourceTree = "<group>";
@@ -1502,7 +1503,7 @@
 				029F65971F15A95700C3A0A7 /* InfoContactViewController.swift in Sources */,
 				A48FD6DD1F143D2200832559 /* Budget.swift in Sources */,
 				02E33A641EBA71D0003BF787 /* ShowEventViewController.swift in Sources */,
-				A44D4E611F04824B00323B87 /* BudgetViewController.swift in Sources */,
+				A44D4E611F04824B00323B87 /* (null) in Sources */,
 				042693011F1448EB004356D6 /* ImageAlbumService.swift in Sources */,
 				A44D4E611F04824B00323B87 /* (null) in Sources */,
 				02B46A341E52908200CC7511 /* NotificationService.swift in Sources */,
@@ -1520,7 +1521,6 @@
 				02BD2D191E1F130900A61A84 /* UserService.swift in Sources */,
 				02B7E7FC1E7C7A0E0082BAE7 /* UIView.swift in Sources */,
 				029CD0651F1327BD00A29CBA /* FamilySvc.swift in Sources */,
-				026AF3801F07299000EF6DCD /* AppReducer.swift in Sources */,
 				026AF37E1F071F6400EF6DCD /* GoalMiddleware.swift in Sources */,
 				027FC2491E8DCF3E00450EFB /* MemberCollectionViewCell.swift in Sources */,
 				8471A2521E2D8C5100EC9FD7 /* ConfigProfile.swift in Sources */,
@@ -1612,6 +1612,7 @@
 				020DA38E1F0C1A9C000BD7E2 /* FamilyReducer.swift in Sources */,
 				02BD2D171E1F0D8B00A61A84 /* HomeViewController.swift in Sources */,
 				0233A4F71EFD8A5A00D01F5C /* Goal-Extension.swift in Sources */,
+				04BDB2851F19A2F6006D3A62 /* AppReducer.swift in Sources */,
 				029CD0631F131EBC00A29CBA /* UserReducer.swift in Sources */,
 				02C808801ED76979005BB8B1 /* ConfigurationEventTableViewController.swift in Sources */,
 				843956D51F0B1BF4009E95FE /* Contact.swift in Sources */,

@@ -20,7 +20,7 @@ struct AppReducer: Reducer {
             UserState: UserReducer().handleAction(action: action, state: state?.UserState),
             GalleryState: GalleryReducer().handleAction(action: action, state: state?.GalleryState),
             ContactState: ContactReducer().handleAction(action: action, state: state?.ContactState)
-
+            
         )
     }
     
